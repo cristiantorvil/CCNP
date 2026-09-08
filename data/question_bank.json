@@ -1,6 +1,6 @@
 {
  "version": "2026-09-08_v4",
- "total": 861,
+ "total": 885,
  "questions": [
   {
    "id": "trustsec_01",
@@ -12055,6 +12055,342 @@
    },
    "correct": "A",
    "explanation_es": "'Retry-After' provee una indicación explícita (ya sea como una cantidad de segundos o una fecha/hora específica) diciéndole al cliente cuánto debería esperar antes de hacer otro intento, dándole al cliente una guía concreta provista por el servidor en lugar de tener que adivinar un retraso de reintento apropiado por su cuenta."
+  },
+  {
+   "id": "b6_6.6_06",
+   "subtopic": "6.6",
+   "name": "EEM applets",
+   "question": "What is the general difference between an EEM 'applet' (configured directly via CLI) and an EEM 'script' (typically written in Tcl)?",
+   "options": {
+    "A": "An applet is a relatively simple event-action pairing configured directly through CLI commands, suitable for straightforward automation logic, whereas a Tcl script allows for more complex programmatic logic (loops, conditionals, more elaborate data processing) than what's practical to express using only the applet CLI syntax, at the cost of requiring familiarity with the Tcl scripting language itself",
+    "B": "EEM applets and EEM Tcl scripts are functionally and syntactically completely identical, with 'applet' and 'script' being simply two different names for exactly the same underlying configuration mechanism with no distinction in capability or complexity",
+    "C": "An EEM applet can only ever detect events, with absolutely no capability to specify any action to take in response, while a Tcl script is required for any actual response action to be defined",
+    "D": "Tcl scripts can only ever be used to detect events, while applets are the only mechanism capable of specifying the actual response action, the reverse of their actual respective typical roles and capabilities"
+   },
+   "correct": "A",
+   "explanation_es": "Un applet es un emparejamiento evento-acción relativamente simple configurado directamente vía comandos CLI, adecuado para lógica de automatización directa, mientras que un script Tcl permite lógica programática más compleja (loops, condicionales, procesamiento de datos más elaborado) de lo que es práctico expresar usando solo la sintaxis CLI de applet, a costa de requerir familiaridad con el propio lenguaje de scripting Tcl."
+  },
+  {
+   "id": "b6_6.6_07",
+   "subtopic": "6.6",
+   "name": "EEM applets",
+   "question": "What does the EEM 'event interface' detector allow an applet to trigger on, as distinct from 'event syslog'?",
+   "options": {
+    "A": "'event interface' triggers based on a specific interface-level counter or condition (such as an interface's error rate or utilization crossing a defined threshold) being monitored directly, rather than waiting for that same underlying condition to happen to also generate a matching syslog message that 'event syslog' would need to pattern-match against",
+    "B": "'event interface' and 'event syslog' are functionally and technically identical event detectors, triggering under exactly the same conditions with no meaningful distinction in what each one actually monitors",
+    "C": "The 'event interface' detector can only ever be used to detect a VLAN configuration change, and has no relationship whatsoever to any interface-level counter or threshold condition",
+    "D": "'event interface' requires that a corresponding syslog message must have already been generated first before this event detector can ever trigger, making it entirely dependent on and secondary to 'event syslog' rather than an independent monitoring mechanism"
+   },
+   "correct": "A",
+   "explanation_es": "'event interface' dispara basándose en un contador o condición a nivel de interfaz específico (como la tasa de errores o utilización de una interfaz cruzando un umbral definido) monitoreado directamente, en lugar de esperar a que esa misma condición subyacente también genere un mensaje de syslog coincidente contra el cual 'event syslog' necesitaría hacer pattern-matching."
+  },
+  {
+   "id": "b6_6.6_08",
+   "subtopic": "6.6",
+   "name": "EEM applets",
+   "question": "What is the purpose of the 'action X mail' EEM applet action, and in what scenario might it be particularly useful?",
+   "options": {
+    "A": "The 'mail' action allows an EEM applet to automatically send an email notification (via a configured SMTP server) when the applet's triggering event occurs, which is useful for alerting an administrator about a significant condition (like a critical interface going down) even if that administrator isn't actively watching the device's console or a centralized monitoring dashboard at that moment",
+    "B": "'action X mail' has no relationship whatsoever to sending an email notification, and instead exclusively triggers a physical printed mail delivery request to a postal address configured on the device",
+    "C": "The mail action can only ever be used in combination with the 'event none' event detector, and is technically incompatible with being triggered by any other event detector like 'event syslog' or 'event cli'",
+    "D": "Configuring a mail action within an EEM applet always and immediately reboots the device the moment that applet's triggering event occurs, in addition to attempting to send the configured email"
+   },
+   "correct": "A",
+   "explanation_es": "La acción 'mail' le permite a un applet de EEM enviar automáticamente una notificación por correo electrónico (vía un servidor SMTP configurado) cuando ocurre el evento disparador del applet, lo cual es útil para alertar a un administrador sobre una condición significativa (como una interfaz crítica que cae) aunque ese administrador no esté observando activamente la consola del dispositivo o un dashboard de monitoreo centralizado en ese momento."
+  },
+  {
+   "id": "b6_6.6_09",
+   "subtopic": "6.6",
+   "name": "EEM applets",
+   "question": "Why might an EEM applet be used to automatically execute a remediation command (like re-enabling a port that was err-disabled) rather than requiring an administrator to manually intervene every single time that specific, well-understood condition occurs?",
+   "options": {
+    "A": "For a condition with a well-understood, predictable, and safe remediation (such as automatically re-enabling a port after a defined cooldown period, similar to what err-disable auto-recovery already does natively), an EEM applet can reduce the operational burden on administrators and reduce the time-to-resolution compared to waiting for a human to notice the condition and manually apply the same well-known fix",
+    "B": "EEM applets are technically incapable of executing any actual configuration-changing command as a response action, and can only ever generate a passive log message or send an email notification without ever being able to directly remediate a condition",
+    "C": "Using an EEM applet for automated remediation always and completely eliminates any need whatsoever for human oversight of the device going forward, making ongoing human monitoring entirely unnecessary for any condition once any EEM applet has been configured on that device",
+    "D": "Automated remediation via EEM applet is considered a universally poor practice with no legitimate use case whatsoever, and manual intervention by an administrator is always strictly preferred over any automated applet-driven response for every possible condition"
+   },
+   "correct": "A",
+   "explanation_es": "Para una condición con una remediación bien entendida, predecible y segura (como volver a habilitar automáticamente un puerto después de un período de enfriamiento definido, similar a lo que ya hace nativamente la recuperación automática de err-disable), un applet de EEM puede reducir la carga operativa sobre los administradores y reducir el tiempo de resolución comparado con esperar a que un humano note la condición y aplique manualmente ese mismo arreglo bien conocido."
+  },
+  {
+   "id": "b6_6.6_10",
+   "subtopic": "6.6",
+   "name": "EEM applets",
+   "question": "What does the 'maxrun' parameter configured on an EEM applet control?",
+   "options": {
+    "A": "'maxrun' sets a maximum execution time limit for the applet's action(s), after which the applet is forcibly terminated if it hasn't completed, helping prevent a misbehaving or unexpectedly long-running applet action from consuming excessive device resources or hanging indefinitely",
+    "B": "'maxrun' has no relationship whatsoever to limiting an applet's execution time, and instead exclusively controls the maximum number of distinct event detectors that a single applet is permitted to define",
+    "C": "Configuring 'maxrun' always and completely prevents the applet from ever actually executing at all, regardless of whether its triggering event condition has actually occurred",
+    "D": "'maxrun' can only ever be configured with a value of zero, making any meaningful execution time limit technically impossible to define for any EEM applet"
+   },
+   "correct": "A",
+   "explanation_es": "'maxrun' fija un límite máximo de tiempo de ejecución para la(s) acción(es) del applet, tras el cual el applet se termina forzosamente si no ha terminado, ayudando a prevenir que una acción de applet mal comportada o inesperadamente larga consuma recursos excesivos del dispositivo o quede colgada indefinidamente."
+  },
+  {
+   "id": "b6_6.6_11",
+   "subtopic": "6.6",
+   "name": "EEM applets",
+   "question": "What is the purpose of EEM's 'event counter' detector, and how might it be used to trigger an applet based on a custom, script-maintained value rather than a built-in device metric?",
+   "options": {
+    "A": "An 'event counter' detector triggers when a named counter variable (which other applets or external processes can increment/set/read) crosses a defined threshold, allowing an administrator to build custom automation logic around an arbitrary, self-defined condition (tracked via that counter) rather than being limited only to the built-in event detectors tied directly to native device metrics like CPU or specific syslog messages",
+    "B": "'event counter' can only ever be triggered by a hard-coded, built-in device metric like CPU utilization, with no capability whatsoever to be driven by a custom, administrator-defined counter value",
+    "C": "Counter-based event detection has no relationship whatsoever to triggering an EEM applet, and instead exclusively controls how many total EEM applets are permitted to be configured simultaneously on a single device",
+    "D": "Once an 'event counter' detector triggers an applet a single time, that same counter-based detector is permanently and irreversibly disabled from ever triggering again for the remainder of the device's uptime"
+   },
+   "correct": "A",
+   "explanation_es": "Un detector 'event counter' dispara cuando una variable de contador nombrada (que otros applets o procesos externos pueden incrementar/fijar/leer) cruza un umbral definido, permitiendo que un administrador construya lógica de automatización personalizada alrededor de una condición arbitraria autodefinida (rastreada vía ese contador) en lugar de estar limitado solo a los detectores de evento integrados atados directamente a métricas nativas del dispositivo como CPU o mensajes de syslog específicos."
+  },
+  {
+   "id": "b6_6.6_12",
+   "subtopic": "6.6",
+   "name": "EEM applets",
+   "question": "Why might an organization use an EEM applet as a lightweight, device-local alternative to a full external automation/orchestration platform for certain narrow, self-contained automation tasks?",
+   "options": {
+    "A": "An EEM applet runs directly on the device itself, requiring no external system, network connectivity to a controller, or additional infrastructure to detect and react to a local condition, making it well suited for simple, device-local automation tasks (like automatically restarting a specific process on a CPU spike) where the overhead of involving an external orchestration platform wouldn't be justified for that narrow, self-contained use case",
+    "B": "EEM applets require a persistent, always-available connection to an external cloud-based orchestration platform in order to function at all, making them entirely unsuitable as any kind of lightweight, self-contained, device-local automation alternative",
+    "C": "There is no meaningful difference whatsoever in complexity, infrastructure requirements, or appropriate use case between an EEM applet and a full external automation/orchestration platform; both approaches are always equally appropriate for literally every automation scenario",
+    "D": "EEM applets can only ever be used for tasks that span and coordinate actions across many different devices simultaneously, and are technically incapable of performing any automation task confined to just the single local device on which they're configured"
+   },
+   "correct": "A",
+   "explanation_es": "Un applet de EEM corre directamente en el propio dispositivo, sin requerir ningún sistema externo, conectividad de red a un controlador, ni infraestructura adicional para detectar y reaccionar a una condición local, haciéndolo adecuado para tareas de automatización simples y locales al dispositivo (como reiniciar automáticamente un proceso específico ante un pico de CPU) donde el overhead de involucrar una plataforma de orquestación externa no se justificaría para ese caso de uso específico y autocontenido."
+  },
+  {
+   "id": "b6_6.6_13",
+   "subtopic": "6.6",
+   "name": "EEM applets",
+   "question": "What risk should be carefully considered before configuring an EEM applet whose action includes automatically reloading/rebooting the device under certain detected conditions?",
+   "options": {
+    "A": "An overly broad or incorrectly tuned triggering condition could cause the device to reload unexpectedly and disruptively (for example, if the condition is met more often than genuinely intended, or during a legitimate but temporary spike that doesn't actually represent the failure scenario the applet was designed to address), so such an impactful action warrants careful, conservative testing and tuning of the triggering condition before deploying it broadly in production",
+    "B": "There is no meaningful risk whatsoever in configuring an automatic-reload EEM applet, since the triggering condition specified in any applet is always guaranteed to be perfectly and permanently accurate with zero possibility of an unintended or overly broad match ever occurring",
+    "C": "An EEM applet configured with a reload action is technically incapable of ever actually causing the device to reload under any circumstances, regardless of how the triggering condition is defined or how often it's actually met",
+    "D": "Automatic-reload EEM applets can only ever be triggered by a hard-coded, permanently fixed condition that Cisco itself defines, with no ability for an administrator to configure or adjust that triggering condition themselves in any way"
+   },
+   "correct": "A",
+   "explanation_es": "Una condición disparadora demasiado amplia o mal ajustada podría causar que el dispositivo se reinicie de forma inesperada y disruptiva (por ejemplo, si la condición se cumple más seguido de lo genuinamente pretendido, o durante un pico legítimo pero temporal que en realidad no representa el escenario de falla que el applet fue diseñado para abordar), así que una acción tan impactante amerita pruebas y ajuste cuidadosos y conservadores de la condición disparadora antes de desplegarla ampliamente en producción."
+  },
+  {
+   "id": "b6_6.6_14",
+   "subtopic": "6.6",
+   "name": "EEM applets",
+   "question": "What does the EEM 'event track' detector allow an applet to be triggered by, leveraging the same object-tracking mechanism used elsewhere (such as with FHRP or PBR)?",
+   "options": {
+    "A": "'event track' triggers an applet based on a change in the state of a tracked object (such as an IP SLA-monitored path becoming unreachable, or an interface's tracked line-protocol state changing), allowing EEM automation to react to the exact same kind of condition changes that features like HSRP interface tracking or PBR route tracking also rely on, reusing that common tracking infrastructure rather than needing a completely separate, EEM-specific mechanism to detect the same kind of condition",
+    "B": "'event track' has no relationship whatsoever to the object-tracking mechanism used by features like FHRP or PBR, and instead exclusively monitors how many total physical cables are currently connected to the device",
+    "C": "The 'event track' detector can only ever be used in combination with EIGRP-specific events, and is technically incompatible with being associated with any IP SLA-based or interface-based tracked object",
+    "D": "Configuring 'event track' on an EEM applet always and immediately disables every other tracked object configured anywhere else on the device, such as any tracked object referenced by an HSRP group or a PBR route-map"
+   },
+   "correct": "A",
+   "explanation_es": "'event track' dispara un applet basándose en un cambio de estado de un objeto rastreado (como un camino monitoreado por IP SLA que se vuelve inalcanzable, o el estado de line-protocol rastreado de una interfaz cambiando), permitiendo que la automatización de EEM reaccione al mismo tipo de cambios de condición de los que también dependen funciones como el tracking de interfaz de HSRP o el tracking de ruta de PBR, reutilizando esa infraestructura de tracking común en lugar de necesitar un mecanismo completamente separado y específico de EEM para detectar el mismo tipo de condición."
+  },
+  {
+   "id": "b6_6.6_15",
+   "subtopic": "6.6",
+   "name": "EEM applets",
+   "question": "Why is it generally recommended to thoroughly test an EEM applet in a lab or non-production environment before deploying it to a production network device, particularly one with an action that modifies configuration or restarts a process?",
+   "options": {
+    "A": "An EEM applet with an incorrectly defined event condition, a bug in its action logic, or an unanticipated edge case could trigger unintended behavior on a production device, potentially causing an outage or other disruption; testing in a controlled lab environment first allows these issues to be identified and corrected before the applet has any opportunity to affect live production traffic or services",
+    "B": "Testing an EEM applet in a lab environment has no practical value whatsoever compared to deploying it directly to production immediately, since an applet's behavior is always guaranteed to be identical and equally safe in both lab and production environments regardless of any testing performed beforehand",
+    "C": "EEM applets are technically incapable of causing any negative impact on a production device under any circumstances, no matter how their event condition or action logic happens to be configured, making pre-production testing entirely unnecessary as a risk-mitigation practice",
+    "D": "Lab testing of an EEM applet is only relevant if that applet's action includes sending an email notification, and provides no meaningful risk-reduction value whatsoever for any applet whose action instead modifies configuration or restarts a process"
+   },
+   "correct": "A",
+   "explanation_es": "Un applet de EEM con una condición de evento incorrectamente definida, un error en la lógica de su acción, o un caso extremo no anticipado podría disparar comportamiento no deseado en un dispositivo de producción, potencialmente causando una interrupción u otra disrupción; probarlo primero en un entorno de laboratorio controlado permite identificar y corregir estos problemas antes de que el applet tenga alguna oportunidad de afectar el tráfico o los servicios de producción en vivo."
+  },
+  {
+   "id": "b6_6.6_16",
+   "subtopic": "6.6",
+   "name": "EEM applets",
+   "question": "What is the purpose of the 'action X syslog' command within an EEM applet, and how might it be used together with an external centralized syslog server to extend visibility beyond just the local device?",
+   "options": {
+    "A": "The 'action X syslog' command generates a custom syslog message when the applet's action executes, and since that syslog message can be forwarded to an external centralized syslog server (like any other syslog message the device generates), it allows EEM-driven automation events to become visible in the same centralized logging/monitoring system administrators already use for other device events, rather than that automation activity only being observable locally on the device itself",
+    "B": "'action X syslog' has no relationship whatsoever to generating any syslog message, and instead exclusively controls the physical serial console baud rate setting on the device",
+    "C": "Syslog messages generated by an EEM applet's 'action X syslog' command can only ever be viewed locally on that same device's own console, and are technically incapable of ever being forwarded to or observed by any external centralized syslog server",
+    "D": "Configuring an 'action X syslog' command within an EEM applet always and completely disables that same device's ability to generate any other, non-EEM-triggered syslog message for the remainder of its uptime"
+   },
+   "correct": "A",
+   "explanation_es": "El comando 'action X syslog' genera un mensaje de syslog personalizado cuando se ejecuta la acción del applet, y como ese mensaje de syslog se puede reenviar a un servidor de syslog centralizado externo (como cualquier otro mensaje de syslog que genere el dispositivo), permite que los eventos de automatización impulsados por EEM se vuelvan visibles en el mismo sistema de logging/monitoreo centralizado que los administradores ya usan para otros eventos del dispositivo, en lugar de que esa actividad de automatización solo sea observable localmente en el propio dispositivo."
+  },
+  {
+   "id": "b6_6.6_17",
+   "subtopic": "6.6",
+   "name": "EEM applets",
+   "question": "What does the EEM applet 'event manager applet <name> authorization bypass' (or a similarly configured authorization setting) generally relate to, in terms of the permission level under which an applet's actions execute?",
+   "options": {
+    "A": "By default, an applet's configured actions may be subject to the same authorization checks (such as AAA command authorization) that would apply if an administrator manually typed those same commands; an authorization-related setting can control whether the applet's automated actions bypass that per-command authorization check, which is a security-relevant consideration since it affects whether an applet's automated commands are subject to the same access control as manually typed commands",
+    "B": "This setting has no relationship whatsoever to command authorization or permission levels, and instead exclusively controls how frequently the applet's underlying event detector re-evaluates its triggering condition",
+    "C": "Every single EEM applet, regardless of any authorization-related configuration, is always executed with the exact same fixed, unconfigurable permission level with no ability whatsoever to adjust or bypass any authorization check",
+    "D": "Configuring an authorization-related setting on an EEM applet always and completely disables that applet's ability to execute any action whatsoever, regardless of whether its triggering event condition has occurred"
+   },
+   "correct": "A",
+   "explanation_es": "Por defecto, las acciones configuradas de un applet pueden estar sujetas a las mismas verificaciones de autorización (como la autorización de comandos de AAA) que aplicarían si un administrador escribiera manualmente esos mismos comandos; un ajuste relacionado con autorización puede controlar si las acciones automatizadas del applet se saltan esa verificación de autorización por comando, lo cual es una consideración relevante para la seguridad ya que afecta si los comandos automatizados de un applet están sujetos al mismo control de acceso que los comandos escritos manualmente."
+  },
+  {
+   "id": "b6_6.7_06",
+   "subtopic": "6.7",
+   "name": "Orquestación agent vs agentless",
+   "question": "What does it mean for an agentless automation tool like Ansible to use a 'push' model of configuration management, as opposed to a 'pull' model some agent-based tools use?",
+   "options": {
+    "A": "In a push model, the central control node (running Ansible) initiates a connection to each managed device and pushes the desired configuration/commands to it on demand, whereas in a pull model, an agent running persistently on the managed node periodically reaches out to a central server on its own schedule to pull down and apply any pending configuration changes",
+    "B": "Push and pull models are functionally and technically identical approaches to configuration management, with no meaningful distinction in which side (the controller or the managed node) actually initiates the connection or determines when a configuration change is applied",
+    "C": "A push model requires the managed node itself to have a persistently installed agent, while a pull model requires no persistent software on the managed node at all, the reverse of how push and pull models are actually typically characterized",
+    "D": "Push-model tools like Ansible can only ever manage a single device at a time and are technically incapable of pushing the same configuration change to multiple devices within one automation run"
+   },
+   "correct": "A",
+   "explanation_es": "En un modelo push, el nodo de control central (corriendo Ansible) inicia una conexión hacia cada dispositivo gestionado y empuja la configuración/comandos deseados a él bajo demanda, mientras que en un modelo pull, un agente corriendo persistentemente en el nodo gestionado contacta periódicamente a un servidor central según su propio horario para bajar y aplicar cualquier cambio de configuración pendiente."
+  },
+  {
+   "id": "b6_6.7_07",
+   "subtopic": "6.7",
+   "name": "Orquestación agent vs agentless",
+   "question": "What is the purpose of an 'inventory' file in Ansible, and how does it relate to the agentless nature of the tool?",
+   "options": {
+    "A": "The inventory file lists the managed nodes (hosts/devices) that Ansible can target, along with connection details and grouping information; since Ansible doesn't require an agent to already be registered on each device, the inventory file is how the control node knows which devices exist and how to reach them, rather than devices announcing/registering their own presence to a central agent-management server",
+    "B": "An Ansible inventory file has no relationship whatsoever to identifying which devices Ansible can manage, and instead exclusively stores a historical log of every previous configuration change ever applied to any device",
+    "C": "Ansible does not actually require any inventory file or equivalent mechanism at all; the tool is assumed to automatically discover and manage every single device on the entire network with zero explicit device list or targeting configuration needed",
+    "D": "The inventory file can only ever list a single specific device, making it technically impossible for one Ansible inventory to reference and target more than one managed node at a time"
+   },
+   "correct": "A",
+   "explanation_es": "El archivo de inventario lista los nodos gestionados (hosts/dispositivos) que Ansible puede apuntar, junto con detalles de conexión e información de agrupación; como Ansible no requiere que ya haya un agente registrado en cada dispositivo, el archivo de inventario es cómo el nodo de control sabe qué dispositivos existen y cómo alcanzarlos, en lugar de que los dispositivos anuncien/registren su propia presencia ante un servidor central de gestión de agentes."
+  },
+  {
+   "id": "b6_6.7_08",
+   "subtopic": "6.7",
+   "name": "Orquestación agent vs agentless",
+   "question": "What does the concept of 'idempotency' mean in the context of an automation tool like Ansible applying a configuration task repeatedly?",
+   "options": {
+    "A": "An idempotent task, when run multiple times against the same target with the same parameters, produces the same end result and only makes changes if the target's actual current state differs from the desired state — meaning running the same idempotent playbook repeatedly against a device already in the desired state should report 'no change' rather than repeatedly reapplying (and potentially disrupting) configuration that's already correctly in place",
+    "B": "Idempotency means a task must always make a change to the target device every single time it's executed, regardless of whether the target's current state already matches the desired state described by that task",
+    "C": "Idempotency has no relationship whatsoever to whether repeatedly running the same automation task produces a consistent, predictable outcome, and instead refers exclusively to how quickly a task executes on average",
+    "D": "An idempotent automation tool is fundamentally incapable of ever being run more than a single time against any given target device, making the concept of 'repeatedly applying the same task' technically inapplicable to any idempotent tool"
+   },
+   "correct": "A",
+   "explanation_es": "Una tarea idempotente, al correrse múltiples veces contra el mismo destino con los mismos parámetros, produce el mismo resultado final y solo hace cambios si el estado actual real del destino difiere del estado deseado — lo que significa que correr repetidamente el mismo playbook idempotente contra un dispositivo ya en el estado deseado debería reportar 'sin cambios' en lugar de reaplicar repetidamente (y potencialmente interrumpir) una configuración que ya está correctamente en su lugar."
+  },
+  {
+   "id": "b6_6.7_09",
+   "subtopic": "6.7",
+   "name": "Orquestación agent vs agentless",
+   "question": "What is the purpose of an Ansible 'playbook', as the primary unit of automation logic in the tool?",
+   "options": {
+    "A": "A playbook is a YAML-formatted file that defines an ordered set of tasks to be executed against a specified set of hosts, describing the desired configuration/state to achieve, serving as the declarative or procedural definition of 'what should happen' that Ansible then executes against the targeted managed nodes",
+    "B": "A playbook has no relationship whatsoever to defining automation tasks, and instead exclusively refers to a physical binder used to store printed network diagrams for reference during a maintenance window",
+    "C": "Playbooks in Ansible must always be written in a compiled programming language like C++ or Java, rather than in the YAML-based syntax the tool actually uses",
+    "D": "An Ansible playbook can only ever define a single individual task, making it technically impossible to define more than one ordered task within the same playbook file"
+   },
+   "correct": "A",
+   "explanation_es": "Un playbook es un archivo con formato YAML que define un conjunto ordenado de tareas a ejecutar contra un conjunto especificado de hosts, describiendo la configuración/estado deseado a lograr, sirviendo como la definición declarativa o procedimental de 'qué debería pasar' que Ansible luego ejecuta contra los nodos gestionados apuntados."
+  },
+  {
+   "id": "b6_6.7_10",
+   "subtopic": "6.7",
+   "name": "Orquestación agent vs agentless",
+   "question": "Why does Ansible's use of standard SSH (for network devices, often combined with a network-specific connection plugin) as its primary transport mechanism contribute to its agentless nature?",
+   "options": {
+    "A": "Because most network devices already support SSH natively as a standard management access method, Ansible can connect to and manage them using that same existing, already-present access mechanism, without needing any additional custom agent software to be separately installed on the device beforehand — the device's built-in SSH server effectively serves as the 'entry point' Ansible needs, rather than a purpose-built agent",
+    "B": "Ansible's use of SSH has no relationship whatsoever to its agentless characteristic, and the tool would be equally agentless or equally agent-based regardless of whether it used SSH, a proprietary agent protocol, or any other transport mechanism",
+    "C": "SSH access requires installing a dedicated Ansible-specific agent on the target device before any SSH-based connection can succeed, making Ansible's use of SSH fundamentally no different from an agent-based approach in terms of what must be installed on the managed device",
+    "D": "Network devices are technically incapable of running an SSH server of any kind, which is actually why Ansible instead must rely exclusively on a dedicated, purpose-built agent to manage any network device"
+   },
+   "correct": "A",
+   "explanation_es": "Como la mayoría de los dispositivos de red ya soportan SSH nativamente como método estándar de acceso de gestión, Ansible puede conectarse y gestionarlos usando ese mismo mecanismo de acceso ya existente, sin necesitar que se instale por separado ningún software de agente adicional personalizado en el dispositivo de antemano — el servidor SSH integrado del dispositivo efectivamente sirve como el 'punto de entrada' que Ansible necesita, en lugar de un agente construido específicamente para ese propósito."
+  },
+  {
+   "id": "b6_6.7_11",
+   "subtopic": "6.7",
+   "name": "Orquestación agent vs agentless",
+   "question": "What is the purpose of an Ansible 'module' (such as the 'ios_config' or 'ios_command' modules used for Cisco IOS devices)?",
+   "options": {
+    "A": "A module is a reusable unit of Ansible functionality designed to perform a specific, well-defined task (such as applying a specific configuration change, or running a specific command) against a target, abstracting the underlying platform-specific implementation details away from the playbook author, who can simply invoke the module with the relevant parameters rather than needing to write low-level connection/command logic themselves for every single task",
+    "B": "An Ansible module has no relationship whatsoever to performing a specific automation task against a target device, and instead exclusively refers to a physical expansion card that must be installed into the Ansible control node's own server chassis",
+    "C": "Modules in Ansible can only ever be used to manage Linux servers, and are technically incapable of interacting with or being applied to any network device such as a Cisco IOS router or switch",
+    "D": "Once an Ansible module is invoked within a playbook, it always and unconditionally applies the exact same fixed configuration to every target device, with no ability whatsoever to pass different parameters to customize its behavior per device or per invocation"
+   },
+   "correct": "A",
+   "explanation_es": "Un módulo es una unidad reutilizable de funcionalidad de Ansible diseñada para realizar una tarea específica y bien definida (como aplicar un cambio de configuración específico, o correr un comando específico) contra un destino, abstrayendo los detalles de implementación específicos de la plataforma subyacente para el autor del playbook, quien puede simplemente invocar el módulo con los parámetros relevantes en lugar de necesitar escribir lógica de conexión/comando de bajo nivel por su cuenta para cada tarea individual."
+  },
+  {
+   "id": "b6_6.7_12",
+   "subtopic": "6.7",
+   "name": "Orquestación agent vs agentless",
+   "question": "Why might an agent-based configuration management tool (like Puppet or Chef) be particularly well suited for managing a large fleet of general-purpose Linux/Windows servers, even though that same agent-based model is less commonly applied to network devices?",
+   "options": {
+    "A": "General-purpose servers can readily run arbitrary third-party software (including a persistent management agent), and the ongoing local presence of that agent allows it to continuously enforce desired state locally without needing a fresh remote connection initiated from a central controller for every single check/enforcement cycle, which is a natural fit for platforms designed to run general-purpose software — a capability many embedded network device operating systems traditionally don't offer to the same extent, making the agentless model more practical for network device management specifically",
+    "B": "Agent-based tools are equally well suited to both general-purpose servers and network devices in every respect, with no meaningful difference in why one category of infrastructure might favor an agent-based versus agentless model over the other",
+    "C": "General-purpose servers are technically incapable of running any third-party software of any kind, including a management agent, making agent-based tools entirely unusable for managing servers and only viable for network devices instead",
+    "D": "The suitability of agent-based versus agentless tooling has no relationship whatsoever to a target platform's capability to run persistent third-party software; the choice between the two models is purely an arbitrary, historical naming convention with no underlying technical rationale"
+   },
+   "correct": "A",
+   "explanation_es": "Los servidores de propósito general pueden correr fácilmente software de terceros arbitrario (incluyendo un agente de gestión persistente), y la presencia local continua de ese agente le permite aplicar el estado deseado de forma continua sin necesitar una conexión remota fresca iniciada desde un controlador central para cada ciclo de verificación/aplicación, algo que se adapta naturalmente a plataformas diseñadas para correr software de propósito general — una capacidad que muchos sistemas operativos embebidos de dispositivos de red tradicionalmente no ofrecen en la misma medida, haciendo que el modelo agentless sea más práctico específicamente para la gestión de dispositivos de red."
+  },
+  {
+   "id": "b6_6.7_13",
+   "subtopic": "6.7",
+   "name": "Orquestación agent vs agentless",
+   "question": "What does 'orchestration' typically add on top of what basic configuration management alone (whether agent-based or agentless) provides?",
+   "options": {
+    "A": "Orchestration typically coordinates a sequence of multiple, potentially interdependent tasks — often across multiple different systems or device types — in a defined order (such as first updating a firewall rule, then deploying an application, then verifying its health), going beyond simply pushing a configuration state to individual devices in isolation to instead managing a broader, multi-step, multi-system workflow",
+    "B": "Orchestration and configuration management are simply two different names for exactly the same single concept, with no meaningful distinction between coordinating a multi-step, multi-system workflow versus applying a configuration state to an individual device or set of devices",
+    "C": "Orchestration can only ever apply to a single individual device at a time, making it functionally more limited in scope than configuration management rather than typically representing a broader, higher-level coordination capability",
+    "D": "Orchestration exclusively refers to the physical arrangement and cable routing of devices within a data center rack, with no relationship whatsoever to software-based automation of any kind"
+   },
+   "correct": "A",
+   "explanation_es": "La orquestación típicamente coordina una secuencia de múltiples tareas potencialmente interdependientes — a menudo a través de múltiples sistemas o tipos de dispositivo distintos — en un orden definido (como primero actualizar una regla de firewall, luego desplegar una aplicación, luego verificar su salud), yendo más allá de simplemente empujar un estado de configuración a dispositivos individuales de forma aislada para en cambio gestionar un flujo de trabajo más amplio, de múltiples pasos y múltiples sistemas."
+  },
+  {
+   "id": "b6_6.7_14",
+   "subtopic": "6.7",
+   "name": "Orquestación agent vs agentless",
+   "question": "Why might 'agent sprawl' (having many different vendor-specific or tool-specific agents installed across an estate of devices) become an operational burden over time?",
+   "options": {
+    "A": "Each installed agent needs to be individually deployed, updated, monitored for its own health, and potentially licensed, and if an organization ends up running several different agents from different tools for different purposes across its device fleet, that cumulative overhead (patching multiple agent versions, troubleshooting agent-specific issues, managing multiple agent-specific credentials/certificates) can become a significant, growing operational burden compared to relying on fewer, more centralized/agentless mechanisms where practical",
+    "B": "Agent sprawl has no meaningful operational burden of any kind, since every installed agent, regardless of how many different ones are deployed across an estate, is assumed to always update, monitor, and manage itself automatically with zero ongoing administrative overhead",
+    "C": "An organization can only ever install a maximum of exactly one single agent total across its entire device estate, making the scenario of 'agent sprawl' (many different agents) technically impossible to occur in practice",
+    "D": "Agent sprawl exclusively refers to a physical cabling problem in a data center rack, with no relationship whatsoever to the operational overhead of managing multiple different software agents across a device fleet"
+   },
+   "correct": "A",
+   "explanation_es": "Cada agente instalado necesita desplegarse, actualizarse, y monitorearse individualmente por su propia salud, y potencialmente licenciarse, y si una organización termina corriendo varios agentes distintos de distintas herramientas para distintos propósitos en toda su flota de dispositivos, ese overhead acumulado (parchear múltiples versiones de agente, resolver problemas específicos de cada agente, gestionar múltiples credenciales/certificados específicos de agente) puede convertirse en una carga operativa significativa y creciente comparado con depender de menos mecanismos, más centralizados/agentless donde sea práctico."
+  },
+  {
+   "id": "b6_6.7_15",
+   "subtopic": "6.7",
+   "name": "Orquestación agent vs agentless",
+   "question": "What is a practical limitation of an agentless approach when the target device is completely unreachable over the network (such as during an initial zero-touch bootstrap before any IP connectivity has been established)?",
+   "options": {
+    "A": "An agentless tool generally still needs some form of network reachability (SSH, an API, or another remote management protocol) to the target device to actually connect and apply configuration; for a device with no network connectivity at all yet (like one still at factory defaults with no IP address configured), a different bootstrapping mechanism (such as DHCP-based zero-touch provisioning, or an initial console-based configuration step) is typically needed to first establish that basic reachability, before an agentless tool like Ansible could then take over for further ongoing configuration",
+    "B": "Agentless tools have no reachability requirement whatsoever and can fully configure any device from a completely blank, network-unreachable factory-default state with zero prior connectivity or bootstrapping of any kind ever needed",
+    "C": "This limitation applies exclusively to agent-based tools and has no relevance whatsoever to any agentless tool, since agentless tools are assumed to always have some alternative, non-network-based mechanism available to reach and configure any device regardless of its current connectivity state",
+    "D": "A completely network-unreachable device can never be configured by any means whatsoever, whether agent-based, agentless, or via any manual method, making this scenario an unsolvable operational dead-end in every case"
+   },
+   "correct": "A",
+   "explanation_es": "Una herramienta agentless generalmente igual necesita alguna forma de alcanzabilidad de red (SSH, una API, u otro protocolo de gestión remota) hacia el dispositivo destino para realmente conectarse y aplicar configuración; para un dispositivo sin ninguna conectividad de red todavía (como uno aún en valores de fábrica sin dirección IP configurada), típicamente se necesita un mecanismo de arranque distinto (como aprovisionamiento sin intervención basado en DHCP, o un paso inicial de configuración vía consola) para establecer primero esa alcanzabilidad básica, antes de que una herramienta agentless como Ansible pudiera entonces tomar el control para la configuración continua posterior."
+  },
+  {
+   "id": "b6_6.7_16",
+   "subtopic": "6.7",
+   "name": "Orquestación agent vs agentless",
+   "question": "Why might a network automation team choose to combine an agentless tool like Ansible with a source control system (like Git) storing the playbooks/configuration templates, rather than only running ad-hoc, one-off automation commands?",
+   "options": {
+    "A": "Storing playbooks and configuration templates in source control provides version history, change tracking, peer review capability (via pull requests), and a documented, repeatable source of truth for what automation logic exists and how it has evolved over time, supporting a more disciplined, auditable 'infrastructure as code' practice compared to running undocumented, one-off ad-hoc commands with no persistent record of what was actually done",
+    "B": "Combining Ansible with a source control system provides no practical benefit whatsoever compared to running only undocumented, ad-hoc automation commands with no persistent record, version history, or change-tracking capability",
+    "C": "Ansible playbooks are technically incapable of being stored in any source control system like Git, restricting them exclusively to being defined as one-time, non-persistent, interactively typed commands with no file-based, storable representation of any kind",
+    "D": "Using source control alongside Ansible always and completely prevents any playbook from ever actually being executed against a real device, restricting Git-stored playbooks to a purely theoretical, non-functional documentation role"
+   },
+   "correct": "A",
+   "explanation_es": "Almacenar playbooks y plantillas de configuración en control de versiones da historial de versiones, rastreo de cambios, capacidad de revisión por pares (vía pull requests), y una fuente de verdad documentada y repetible de qué lógica de automatización existe y cómo evolucionó a lo largo del tiempo, apoyando una práctica de 'infraestructura como código' más disciplinada y auditable comparado con correr comandos ad-hoc no documentados sin registro persistente de qué se hizo realmente."
+  },
+  {
+   "id": "b6_6.7_17",
+   "subtopic": "6.7",
+   "name": "Orquestación agent vs agentless",
+   "question": "What consideration around credential management is particularly important for an agentless tool that connects to many devices using centrally-stored SSH credentials or API tokens?",
+   "options": {
+    "A": "Since the agentless controller typically stores or has access to the credentials needed to connect to every managed device, that central credential store becomes a high-value target — protecting those credentials (through encryption at rest, a dedicated secrets/vault management system, and strict access control to the controller itself) is critical, since a compromise of the controller's credential store could potentially expose access to the entire managed device fleet at once",
+    "B": "Credential management has no meaningful security relevance whatsoever in an agentless automation architecture, since agentless tools are assumed to never actually need to store or handle any credential of any kind in order to connect to a managed device",
+    "C": "Every single managed device automatically and independently generates its own unique credentials with zero centralized storage of any kind ever required by the agentless controller, eliminating any possibility of a centralized credential-related risk",
+    "D": "This credential-management consideration is unique and exclusive to agent-based tools, and has no relevance whatsoever to any agentless automation architecture like Ansible"
+   },
+   "correct": "A",
+   "explanation_es": "Como el controlador agentless típicamente almacena o tiene acceso a las credenciales necesarias para conectarse a cada dispositivo gestionado, ese almacén central de credenciales se convierte en un objetivo de alto valor — proteger esas credenciales (mediante cifrado en reposo, un sistema dedicado de gestión de secretos/vault, y control de acceso estricto al propio controlador) es crítico, ya que un compromiso del almacén de credenciales del controlador podría potencialmente exponer el acceso a toda la flota de dispositivos gestionados de una vez."
   }
  ]
 }
