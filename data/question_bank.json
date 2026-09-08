@@ -1,6 +1,6 @@
 {
  "version": "2026-09-08_v4",
- "total": 836,
+ "total": 861,
  "questions": [
   {
    "id": "trustsec_01",
@@ -11705,6 +11705,356 @@
    },
    "correct": "A",
    "explanation_es": "Muchas APIs REST validan estrictamente el tipo de dato esperado de cada campo según su propio esquema/modelo de datos, así que enviar un valor en un tipo inesperado (por ejemplo, el string \"10\" en lugar del número 10 para un campo que espera un tipo numérico) puede causar que la API rechace la solicitud como inválida, aunque el valor pueda parecerle conceptualmente equivalente a un humano que lo lee."
+  },
+  {
+   "id": "b6_6.3_11",
+   "subtopic": "6.3",
+   "name": "YANG",
+   "question": "What is the purpose of a YANG 'leaf' statement, as the most basic building block of a YANG data model?",
+   "options": {
+    "A": "A leaf defines a single scalar data node with a specific type (such as string, integer, or boolean) and represents one individual piece of configuration or operational state data, serving as the fundamental unit that containers, lists, and other structures are ultimately built from",
+    "B": "A 'leaf' statement has no relationship whatsoever to defining a single data value, and instead exclusively defines the physical color scheme used when a YANG-modeled device is displayed in a network management GUI",
+    "C": "A leaf can only ever be used to represent an entire complex object containing multiple child nodes, making it functionally identical to a container rather than a single scalar value",
+    "D": "Every single leaf statement in a YANG model must always be of the exact same data type (string), with no ability to define a leaf as an integer, boolean, or any other specific type"
+   },
+   "correct": "A",
+   "explanation_es": "Un leaf define un nodo de dato escalar único con un tipo específico (como string, entero, o booleano) y representa una pieza individual de datos de configuración o de estado operativo, sirviendo como la unidad fundamental a partir de la cual se construyen en última instancia los contenedores, listas, y otras estructuras."
+  },
+  {
+   "id": "b6_6.3_12",
+   "subtopic": "6.3",
+   "name": "YANG",
+   "question": "What does the YANG 'mandatory' statement (applied to a leaf or other data node) enforce?",
+   "options": {
+    "A": "It specifies that a value for that particular data node must be present/configured for the containing configuration to be considered valid, causing validation to fail if that mandatory node is left unconfigured, ensuring critical configuration elements are never accidentally omitted",
+    "B": "'mandatory' has no relationship whatsoever to configuration validation and instead only controls the display order in which fields appear within a management GUI",
+    "C": "Marking a node as 'mandatory' means that node can never actually be configured with any value at all under any circumstances, the reverse of requiring it to always have a value present",
+    "D": "'mandatory' can only be applied to an entire YANG module as a whole, and cannot be applied to an individual leaf or other specific data node within that module"
+   },
+   "correct": "A",
+   "explanation_es": "Especifica que debe estar presente/configurado un valor para ese nodo de dato en particular para que la configuración que lo contiene se considere válida, haciendo que la validación falle si ese nodo obligatorio queda sin configurar, asegurando que nunca se omitan accidentalmente elementos de configuración críticos."
+  },
+  {
+   "id": "b6_6.3_13",
+   "subtopic": "6.3",
+   "name": "YANG",
+   "question": "What is the purpose of a YANG 'grouping' statement, and how does it typically improve the maintainability of a YANG model?",
+   "options": {
+    "A": "A grouping defines a reusable collection of data nodes that can be referenced ('used') in multiple places within the same model (or even imported into other models), avoiding the need to repeatedly redefine the same set of nodes in every location where that same structure is needed, similar in spirit to a reusable function or template in general programming",
+    "B": "A grouping has no relationship whatsoever to reusability and instead exclusively defines a fixed, one-time-use set of nodes that can only ever be referenced in exactly one single location within the entire model",
+    "C": "YANG groupings can only ever contain a single leaf node each, making them functionally equivalent to a plain leaf statement rather than a reusable collection of multiple nodes",
+    "D": "Once a grouping is defined, it is automatically and immediately instantiated everywhere in the model with no need for an explicit 'uses' statement to actually reference it anywhere"
+   },
+   "correct": "A",
+   "explanation_es": "Un grouping define una colección reutilizable de nodos de dato que se puede referenciar ('usar') en múltiples lugares dentro del mismo modelo (o incluso importar en otros modelos), evitando la necesidad de redefinir repetidamente el mismo conjunto de nodos en cada lugar donde se necesite esa misma estructura, de forma conceptualmente similar a una función o plantilla reutilizable en programación general."
+  },
+  {
+   "id": "b6_6.3_14",
+   "subtopic": "6.3",
+   "name": "YANG",
+   "question": "What does the YANG 'augment' statement allow a module to do to an existing data model defined elsewhere?",
+   "options": {
+    "A": "Augment allows one YANG module to add new data nodes into a specific location within a data model tree defined by a different module, extending that existing model without needing to modify the original module's own source definition, which is commonly used by vendor-specific modules to add proprietary extensions onto a standard/open model like an IETF or OpenConfig module",
+    "B": "'augment' has no relationship whatsoever to extending an existing data model, and instead exclusively controls how often a YANG-modeled device sends periodic telemetry updates",
+    "C": "Augment can only ever be used to completely delete an entire existing data model, removing every node originally defined by another module rather than adding any new nodes to it",
+    "D": "Once a module uses 'augment' to extend another model, the original module being augmented becomes permanently and completely unusable/inaccessible by any other module or client going forward"
+   },
+   "correct": "A",
+   "explanation_es": "Augment le permite a un módulo agregar nuevos nodos de dato en una ubicación específica dentro del árbol de un modelo de datos definido por otro módulo, extendiendo ese modelo existente sin necesitar modificar la definición fuente original del módulo, algo comúnmente usado por módulos específicos de vendor para agregar extensiones propietarias sobre un modelo estándar/abierto como un módulo del IETF o de OpenConfig."
+  },
+  {
+   "id": "b6_6.3_15",
+   "subtopic": "6.3",
+   "name": "YANG",
+   "question": "What is the purpose of a YANG 'typedef' statement, and how does it help enforce consistency across a data model?",
+   "options": {
+    "A": "A typedef defines a custom, reusable data type (potentially with its own constraints, like a specific numeric range or pattern) that can then be referenced by name wherever that same type is needed throughout the model, ensuring that every leaf using that typedef consistently enforces the exact same validation rules, rather than each individual leaf needing to redefine those same constraints separately and potentially inconsistently",
+    "B": "'typedef' has no relationship whatsoever to defining custom data types, and instead exclusively controls which transport protocol (NETCONF vs. RESTCONF) a given YANG module can be accessed through",
+    "C": "A typedef can only ever be used to define the exact same built-in types YANG already provides natively (like plain string or integer), with no capability whatsoever to add any additional constraint or customization on top of those built-in types",
+    "D": "Once a typedef is defined, it can only ever be referenced by a single specific leaf in the entire model, making it functionally no different from simply defining that same type inline within that one leaf directly"
+   },
+   "correct": "A",
+   "explanation_es": "Un typedef define un tipo de dato personalizado y reutilizable (potencialmente con sus propias restricciones, como un rango numérico o patrón específico) que luego se puede referenciar por nombre donde sea que se necesite ese mismo tipo en todo el modelo, asegurando que cada leaf que use ese typedef aplique consistentemente las mismas reglas de validación, en lugar de que cada leaf individual necesite redefinir esas mismas restricciones por separado y potencialmente de forma inconsistente."
+  },
+  {
+   "id": "b6_6.3_16",
+   "subtopic": "6.3",
+   "name": "YANG",
+   "question": "What does a YANG 'choice' statement allow a model to express, and what practical configuration constraint does it enforce?",
+   "options": {
+    "A": "A choice statement defines a set of mutually exclusive alternative branches ('case' statements), where exactly one (and only one) of those alternatives can actually be configured at a time, which is useful for modeling configuration scenarios where selecting one option inherently excludes the others (for example, choosing between two mutually exclusive authentication methods)",
+    "B": "A 'choice' statement has no relationship whatsoever to expressing mutually exclusive configuration alternatives, and instead exclusively defines a YANG module's version/revision history",
+    "C": "A choice statement requires that every single one of its defined case alternatives always be configured simultaneously, rather than enforcing that only one alternative may be selected at a time",
+    "D": "Once a choice statement is defined in a model, it becomes technically impossible to configure any of its case alternatives at all, effectively disabling that entire portion of the configuration"
+   },
+   "correct": "A",
+   "explanation_es": "Una sentencia choice define un conjunto de ramas alternativas mutuamente excluyentes (sentencias 'case'), donde exactamente una (y solo una) de esas alternativas puede realmente configurarse a la vez, lo cual es útil para modelar escenarios de configuración donde elegir una opción inherentemente excluye a las demás (por ejemplo, elegir entre dos métodos de autenticación mutuamente excluyentes)."
+  },
+  {
+   "id": "b6_6.3_17",
+   "subtopic": "6.3",
+   "name": "YANG",
+   "question": "Why do 'native' (vendor-specific) YANG models and 'open' (IETF/OpenConfig) YANG models sometimes model the exact same underlying feature (like interface configuration) differently from each other?",
+   "options": {
+    "A": "Native models are typically designed to closely mirror a specific vendor's own existing CLI configuration structure and feature set, while open/standard models are designed independently (often by a standards body or industry consortium) to provide a common, vendor-neutral abstraction intended to work consistently across multiple vendors' equipment, so the two design philosophies naturally lead to different structural choices for representing conceptually similar configuration",
+    "B": "Native and open YANG models are always required by the YANG language specification itself to be byte-for-byte structurally identical to each other, making any structural difference between them a violation of the YANG standard rather than an expected, intentional design difference",
+    "C": "There is no meaningful difference whatsoever in how native and open YANG models represent the same underlying feature; both categories of model are always guaranteed to use identical node names, structure, and semantics for any given feature across every vendor",
+    "D": "Open/standard YANG models are actually designed to be vendor-specific and proprietary, while native models are designed to be vendor-neutral and standardized, the reverse of their actual typical design intent and origin"
+   },
+   "correct": "A",
+   "explanation_es": "Los modelos nativos típicamente están diseñados para reflejar de cerca la estructura de configuración CLI y el conjunto de funciones propios de un vendor específico, mientras que los modelos abiertos/estándar están diseñados de forma independiente (a menudo por un organismo de estándares o consorcio de la industria) para dar una abstracción común y neutral respecto al vendor, pensada para funcionar de forma consistente entre equipos de múltiples fabricantes, así que ambas filosofías de diseño naturalmente llevan a decisiones estructurales distintas para representar configuración conceptualmente similar."
+  },
+  {
+   "id": "b6_6.4_11",
+   "subtopic": "6.4",
+   "name": "APIs Catalyst Center",
+   "question": "Why does an automation script interacting with the Catalyst Center Intent API typically need to poll a task status endpoint after submitting an operation like a template deployment?",
+   "options": {
+    "A": "Many Catalyst Center Intent API operations are asynchronous — the initial API call returns immediately with a task ID (often with a 202 Accepted status) rather than waiting for the potentially lengthy underlying operation (like pushing configuration to a device) to actually finish, so the script must separately poll the task status endpoint using that task ID to determine when the operation has actually completed and whether it succeeded or failed",
+    "B": "Every single Catalyst Center Intent API call is always fully synchronous, completing and returning a definitive final result immediately with no possibility of needing to poll any separate task status endpoint afterward",
+    "C": "Polling a task status endpoint has no relationship whatsoever to determining whether a submitted operation succeeded or failed, and instead only retrieves an unrelated list of every device currently in Catalyst Center's inventory",
+    "D": "Task status polling can only ever be used for read-only GET requests, and is technically inapplicable to any operation that actually deploys or changes configuration on a device"
+   },
+   "correct": "A",
+   "explanation_es": "Muchas operaciones de la Intent API de Catalyst Center son asíncronas — la llamada inicial a la API retorna de inmediato con un task ID (a menudo con un estado 202 Accepted) en lugar de esperar a que termine la operación subyacente potencialmente larga (como empujar configuración a un dispositivo), así que el script debe consultar por separado el endpoint de estado de la tarea usando ese task ID para determinar cuándo realmente terminó la operación y si tuvo éxito o falló."
+  },
+  {
+   "id": "b6_6.4_12",
+   "subtopic": "6.4",
+   "name": "APIs Catalyst Center",
+   "question": "What is the general purpose of Catalyst Center's 'Sites' API category, in terms of what it allows an automation script to programmatically manage?",
+   "options": {
+    "A": "The Sites API allows a script to programmatically create, read, update, or delete the hierarchical site structure (areas, buildings, floors) that Catalyst Center uses to organize devices and configuration, enabling automation of site hierarchy management rather than requiring an administrator to manually build that structure through the GUI every time",
+    "B": "The Sites API has no relationship whatsoever to managing site hierarchy, and instead exclusively controls user authentication credentials for logging into the Catalyst Center GUI",
+    "C": "Catalyst Center's site hierarchy can only ever be created and managed manually through the graphical user interface, with the platform's API providing no programmatic capability whatsoever to manage sites",
+    "D": "The Sites API can only retrieve a read-only list of existing sites, with absolutely no capability to create, update, or delete any site through the API"
+   },
+   "correct": "A",
+   "explanation_es": "La API de Sites le permite a un script crear, leer, actualizar, o eliminar programáticamente la estructura jerárquica de sitios (áreas, edificios, pisos) que Catalyst Center usa para organizar dispositivos y configuración, habilitando la automatización de la gestión de jerarquía de sitios en lugar de requerir que un administrador construya manualmente esa estructura a través de la GUI cada vez."
+  },
+  {
+   "id": "b6_6.4_13",
+   "subtopic": "6.4",
+   "name": "APIs Catalyst Center",
+   "question": "Why might a script calling the Catalyst Center API need to handle API versioning (such as a version number embedded in the URI path, like '/dna/intent/api/v1/...')?",
+   "options": {
+    "A": "As Catalyst Center's software evolves across releases, the API itself can change (new endpoints added, existing endpoint behavior modified); versioning the API path allows the platform to introduce changes in a newer API version while potentially still supporting an older version for a transition period, and a script needs to be aware of which version it's targeting to correctly interpret the expected request/response format for that version",
+    "B": "API versioning has no relationship whatsoever to how the platform's API might change over time across software releases, and instead exclusively refers to which physical hardware model the Catalyst Center appliance is running on",
+    "C": "Every single Catalyst Center API endpoint has been permanently frozen at version 1 since the product's very first release, with no possibility of any future version ever being introduced or needing to be handled by a script",
+    "D": "A script is technically incapable of specifying which API version it wants to target; Catalyst Center itself always automatically selects whichever version it considers most appropriate, with no version information ever needing to appear in the request URI"
+   },
+   "correct": "A",
+   "explanation_es": "A medida que el software de Catalyst Center evoluciona entre versiones, la propia API puede cambiar (se agregan nuevos endpoints, se modifica el comportamiento de endpoints existentes); versionar la ruta de la API le permite a la plataforma introducir cambios en una versión más nueva de la API mientras potencialmente sigue soportando una versión anterior durante un período de transición, y un script necesita saber qué versión está apuntando para interpretar correctamente el formato de solicitud/respuesta esperado para esa versión."
+  },
+  {
+   "id": "b6_6.4_14",
+   "subtopic": "6.4",
+   "name": "APIs Catalyst Center",
+   "question": "What is the purpose of Catalyst Center's 'Event' and 'Notification' related APIs, in terms of how an external system might integrate with Catalyst Center's Assurance capability?",
+   "options": {
+    "A": "These APIs allow an external system (such as a ticketing platform or a custom automation script) to programmatically subscribe to and receive notifications about specific events detected by Catalyst Center (such as a device going down, or an Assurance issue being flagged), enabling integrations where an external workflow (like automatically opening a support ticket) can be triggered based on events happening within Catalyst Center, rather than requiring a human to be actively watching the Catalyst Center dashboard at all times",
+    "B": "Event and Notification APIs have no relationship whatsoever to integrating external systems with Catalyst Center's Assurance capability, and instead exclusively control which color scheme is applied to Assurance dashboard graphs",
+    "C": "These APIs can only ever be used to permanently delete every previously logged event and notification, with no capability whatsoever to subscribe to or retrieve information about newly occurring events",
+    "D": "Integrating an external system with Catalyst Center's event notifications is technically impossible through any API mechanism, and can only ever be accomplished by having a human manually copy information from the Catalyst Center GUI into the external system"
+   },
+   "correct": "A",
+   "explanation_es": "Estas APIs le permiten a un sistema externo (como una plataforma de tickets o un script de automatización personalizado) suscribirse y recibir notificaciones programáticamente sobre eventos específicos detectados por Catalyst Center (como que un dispositivo caiga, o que se marque un problema de Assurance), habilitando integraciones donde un flujo de trabajo externo (como abrir automáticamente un ticket de soporte) pueda dispararse en base a eventos que ocurren dentro de Catalyst Center, en lugar de requerir que un humano esté observando activamente el dashboard de Catalyst Center en todo momento."
+  },
+  {
+   "id": "b6_6.4_15",
+   "subtopic": "6.4",
+   "name": "APIs Catalyst Center",
+   "question": "Why might a network automation pipeline call the Catalyst Center API to retrieve the current compliance status of devices as part of a broader CI/CD-style workflow, before making any additional configuration change?",
+   "options": {
+    "A": "Checking compliance status programmatically before making a further change allows the pipeline to verify the starting state is as expected (or flag any pre-existing drift/non-compliance) before proceeding, helping catch a potential problem earlier (before compounding it with an additional automated change) rather than blindly applying new configuration on top of a device that might already be in an unexpected or non-compliant state",
+    "B": "Compliance status has no relationship whatsoever to whether it makes sense to proceed with an additional automated configuration change, and checking it programmatically provides no meaningful value within any automated pipeline",
+    "C": "The Catalyst Center API is technically incapable of exposing any compliance-related information whatsoever, making this entire use case of checking compliance status via API impossible to implement in practice",
+    "D": "Checking compliance status via API always and automatically applies a remediation configuration change to any non-compliant device found, rather than simply reporting that device's current compliance state back to the calling script"
+   },
+   "correct": "A",
+   "explanation_es": "Verificar el estado de cumplimiento programáticamente antes de hacer un cambio adicional le permite al pipeline confirmar que el estado inicial es el esperado (o marcar cualquier desviación/incumplimiento preexistente) antes de continuar, ayudando a detectar un problema potencial más temprano (antes de agravarlo con un cambio automatizado adicional) en lugar de aplicar ciegamente configuración nueva sobre un dispositivo que ya podría estar en un estado inesperado o no conforme."
+  },
+  {
+   "id": "b6_6.4_16",
+   "subtopic": "6.4",
+   "name": "APIs Catalyst Center",
+   "question": "What is a practical reason an automation script would use the Catalyst Center API's pagination parameters (such as 'offset' and 'limit') when retrieving a list of devices from a large inventory, rather than requesting the entire device list in a single call?",
+   "options": {
+    "A": "For a very large device inventory, requesting the entire list in a single response could result in a very large payload that's slow to transfer/process and potentially exceeds practical response-size limits; pagination lets the script retrieve the result set in smaller, manageable chunks (pages), processing each page before requesting the next, which is more efficient and reliable for large datasets",
+    "B": "Pagination parameters have no relationship whatsoever to managing the size of a large result set, and instead exclusively control which specific network interface on a device is included in the API response",
+    "C": "The Catalyst Center Inventory API is fundamentally incapable of returning more than a single device per API call under any circumstances, making pagination parameters entirely unnecessary since only one device could ever be returned regardless of how they're configured",
+    "D": "Using pagination parameters always and completely disables the ability to retrieve any device information at all, restricting the API response to containing zero actual device entries"
+   },
+   "correct": "A",
+   "explanation_es": "Para un inventario de dispositivos muy grande, solicitar toda la lista en una sola respuesta podría resultar en un payload muy grande que sea lento de transferir/procesar y potencialmente exceda límites prácticos de tamaño de respuesta; la paginación le permite al script obtener el conjunto de resultados en fragmentos (páginas) más pequeños y manejables, procesando cada página antes de solicitar la siguiente, lo cual es más eficiente y confiable para conjuntos de datos grandes."
+  },
+  {
+   "id": "b6_6.5_06",
+   "subtopic": "6.5",
+   "name": "Códigos de respuesta REST API",
+   "question": "What does an HTTP 400 Bad Request status code typically indicate about an API request?",
+   "options": {
+    "A": "The server could not process the request because the client sent something the server considers malformed or invalid (such as invalid JSON syntax, a missing required field, or a value that fails validation), indicating a problem with how the client constructed the request itself rather than a server-side failure",
+    "B": "HTTP 400 always indicates that the request succeeded completely and the server is simply confirming successful processing, identical in meaning to a 200 OK response",
+    "C": "A 400 status code always indicates that the requested resource does not exist on the server, which is actually the meaning associated with a different status code (404) rather than 400",
+    "D": "400 status codes are always caused exclusively by a server-side hardware failure, with the client's own request always assumed to have been perfectly well-formed regardless of what a 400 response indicates"
+   },
+   "correct": "A",
+   "explanation_es": "El servidor no pudo procesar la solicitud porque el cliente envió algo que el servidor considera malformado o inválido (como sintaxis JSON inválida, un campo requerido faltante, o un valor que falla la validación), indicando un problema con cómo el cliente construyó la solicitud en sí en lugar de una falla del lado del servidor."
+  },
+  {
+   "id": "b6_6.5_07",
+   "subtopic": "6.5",
+   "name": "Códigos de respuesta REST API",
+   "question": "What is the difference between an HTTP 500 (Internal Server Error) and a 503 (Service Unavailable) response, both of which fall in the 5xx server-error range?",
+   "options": {
+    "A": "A 500 generally indicates an unexpected error occurred on the server while processing the request (often an unhandled exception in the server's own code), while a 503 more specifically indicates the server is temporarily unable to handle the request (such as being overloaded or undergoing maintenance), which can sometimes include a 'Retry-After' hint suggesting the client should retry later, rather than the request being fundamentally invalid or permanently failing",
+    "B": "500 and 503 status codes are simply two different numeric labels for exactly the same condition, with no meaningful distinction in what each one specifically indicates about the nature of the server-side problem",
+    "C": "A 500 status code indicates a client-side problem with how the request was formatted, identical in meaning to a 400 Bad Request, rather than indicating any server-side error condition",
+    "D": "503 always indicates a permanent, unrecoverable failure that will never succeed no matter how many times the request is retried, while 500 always indicates a temporary condition that's guaranteed to resolve itself automatically"
+   },
+   "correct": "A",
+   "explanation_es": "Un 500 generalmente indica que ocurrió un error inesperado en el servidor al procesar la solicitud (a menudo una excepción no manejada en el propio código del servidor), mientras que un 503 indica más específicamente que el servidor está temporalmente incapaz de manejar la solicitud (como estar sobrecargado o en mantenimiento), lo cual a veces puede incluir una indicación 'Retry-After' sugiriendo que el cliente reintente más tarde, en lugar de que la solicitud sea fundamentalmente inválida o falle permanentemente."
+  },
+  {
+   "id": "b6_6.5_08",
+   "subtopic": "6.5",
+   "name": "Códigos de respuesta REST API",
+   "question": "Why is it generally considered good client-side practice for an automation script to programmatically check the HTTP status code of every API response, rather than simply assuming every call succeeded and proceeding to parse the response body?",
+   "options": {
+    "A": "An API call can fail for many reasons (invalid input, authentication failure, server error, and so on), and blindly attempting to parse a response body that doesn't actually represent successful data (such as an error message body returned alongside a 4xx/5xx status) can cause the script to behave incorrectly or crash with a confusing, hard-to-diagnose error, whereas explicitly checking the status code first allows the script to handle failures gracefully and with a clearer, more direct error message",
+    "B": "Checking the HTTP status code has no practical benefit whatsoever compared to always assuming success, since every single API response — regardless of its actual status code — is guaranteed to contain identically structured, always-parseable success data in its body",
+    "C": "HTTP status codes are only relevant for browser-based web traffic and have no meaningful relevance whatsoever to a script making programmatic API calls using a library like Python's requests",
+    "D": "A script is technically incapable of accessing or reading the HTTP status code of an API response through any common programming language's HTTP client library, making this practice literally impossible to implement regardless of whether it would be desirable"
+   },
+   "correct": "A",
+   "explanation_es": "Una llamada a la API puede fallar por muchas razones (entrada inválida, falla de autenticación, error del servidor, etc.), y intentar ciegamente parsear un cuerpo de respuesta que en realidad no representa datos exitosos (como un cuerpo de mensaje de error devuelto junto a un estado 4xx/5xx) puede hacer que el script se comporte incorrectamente o falle con un error confuso y difícil de diagnosticar, mientras que verificar explícitamente el código de estado primero le permite al script manejar fallas de forma controlada y con un mensaje de error más claro y directo."
+  },
+  {
+   "id": "b6_6.5_09",
+   "subtopic": "6.5",
+   "name": "Códigos de respuesta REST API",
+   "question": "What does an HTTP 409 Conflict status code typically indicate about the state of the targeted resource relative to the request being made?",
+   "options": {
+    "A": "The request could not be completed because it conflicts with the current state of the target resource (for example, attempting to create a resource with a name/identifier that already exists, or a concurrent modification conflict), indicating the client may need to retrieve the current state and resolve the conflict before retrying",
+    "B": "A 409 status code always indicates the request succeeded completely with no issue whatsoever, functioning identically in meaning to a 200 OK or 201 Created response",
+    "C": "409 indicates that the client lacks valid authentication credentials entirely, which is actually the meaning more specifically associated with a 401 Unauthorized response rather than 409",
+    "D": "A 409 response always indicates a problem entirely unrelated to the state of any resource, and instead exclusively signals that the requested URL path does not exist on the server at all"
+   },
+   "correct": "A",
+   "explanation_es": "La solicitud no pudo completarse porque entra en conflicto con el estado actual del recurso destino (por ejemplo, intentar crear un recurso con un nombre/identificador que ya existe, o un conflicto de modificación concurrente), indicando que el cliente podría necesitar obtener el estado actual y resolver el conflicto antes de reintentar."
+  },
+  {
+   "id": "b6_6.5_10",
+   "subtopic": "6.5",
+   "name": "Códigos de respuesta REST API",
+   "question": "What does an HTTP 429 (Too Many Requests) status code indicate, and what client behavior does it typically call for?",
+   "options": {
+    "A": "429 indicates the client has exceeded a rate limit configured on the API server (sent too many requests within a given time window), and the appropriate client response is typically to slow down/back off and retry after a delay (sometimes indicated by a 'Retry-After' header), rather than immediately retrying the same request again at the same rate, which would likely just trigger the same rate-limit response repeatedly",
+    "B": "HTTP 429 always indicates the request was processed successfully with no issue, meaning the client can safely ignore this status code entirely and proceed exactly as it would after receiving a 200 OK",
+    "C": "A 429 status code indicates a permanent, unrecoverable authentication failure requiring the client to obtain entirely new credentials before any request of any kind will ever succeed again",
+    "D": "429 has no relationship whatsoever to the volume or rate of requests a client has sent, and instead exclusively indicates that the requested resource has been permanently deleted from the server"
+   },
+   "correct": "A",
+   "explanation_es": "429 indica que el cliente excedió un límite de tasa configurado en el servidor de la API (envió demasiadas solicitudes dentro de una ventana de tiempo dada), y la respuesta apropiada del cliente típicamente es ralentizar/retroceder y reintentar después de un retraso (a veces indicado por un encabezado 'Retry-After'), en lugar de reintentar inmediatamente la misma solicitud a la misma tasa, lo cual probablemente solo dispararía la misma respuesta de límite de tasa repetidamente."
+  },
+  {
+   "id": "b6_6.5_11",
+   "subtopic": "6.5",
+   "name": "Códigos de respuesta REST API",
+   "question": "Why might a well-designed REST API return a 403 Forbidden (rather than a 404 Not Found) when an authenticated user attempts to access a resource that does exist but that they lack permission to view?",
+   "options": {
+    "A": "A 403 explicitly confirms the resource exists but access to it is denied due to insufficient permissions, whereas some APIs deliberately choose to return a 404 instead in certain sensitive scenarios specifically to avoid confirming the resource's existence at all to an unauthorized party, so the choice between 403 and 404 in a given design reflects a deliberate trade-off between clarity of the error message and not revealing information about resources the caller isn't authorized to know about",
+    "B": "403 and 404 status codes are functionally and semantically identical in every possible API design, with no meaningful distinction between confirming a resource exists but is forbidden versus indicating a resource simply cannot be found at all",
+    "C": "A 403 status code always and exclusively indicates a resource does not exist anywhere on the server, which is actually the meaning more specifically associated with 404 rather than 403",
+    "D": "There is no legitimate design reason to ever choose between returning 403 versus 404 for an authorization-related failure; every properly designed API is required to always return exactly one of the two codes with no consideration of information-disclosure trade-offs"
+   },
+   "correct": "A",
+   "explanation_es": "Un 403 confirma explícitamente que el recurso existe pero el acceso a él se niega por permisos insuficientes, mientras que algunas APIs deliberadamente eligen devolver un 404 en cambio en ciertos escenarios sensibles específicamente para evitar confirmar la existencia del recurso a una parte no autorizada, así que la elección entre 403 y 404 en un diseño dado refleja un trade-off deliberado entre la claridad del mensaje de error y no revelar información sobre recursos que el llamante no está autorizado a conocer."
+  },
+  {
+   "id": "b6_6.5_12",
+   "subtopic": "6.5",
+   "name": "Códigos de respuesta REST API",
+   "question": "What does an HTTP 3xx (redirection) status code, such as 301 Moved Permanently or 302 Found, generally indicate to a client?",
+   "options": {
+    "A": "A 3xx status code indicates the requested resource is available at a different URL (indicated in the response's 'Location' header), and a well-behaved client (like a browser, or an HTTP library configured to follow redirects) should typically make a follow-up request to that new location to actually retrieve the resource, rather than treating the original request as either successful or failed on its own",
+    "B": "3xx status codes always indicate a definitive client-side error identical in meaning to the 4xx range, with no relationship whatsoever to redirecting the client toward an alternate resource location",
+    "C": "A 3xx response always indicates the request succeeded and the response body already contains the final, complete data, with the 'Location' header being entirely irrelevant informational metadata that a client can safely ignore",
+    "D": "3xx status codes are exclusively used by SOAP-based web services and have no applicability whatsoever to any REST API design"
+   },
+   "correct": "A",
+   "explanation_es": "Un código de estado 3xx indica que el recurso solicitado está disponible en una URL distinta (indicada en el encabezado 'Location' de la respuesta), y un cliente bien comportado (como un navegador, o una librería HTTP configurada para seguir redirecciones) típicamente debería hacer una solicitud de seguimiento a esa nueva ubicación para realmente obtener el recurso, en lugar de tratar la solicitud original como exitosa o fallida por sí sola."
+  },
+  {
+   "id": "b6_6.5_13",
+   "subtopic": "6.5",
+   "name": "Códigos de respuesta REST API",
+   "question": "Why is it a common automation-scripting mistake to only check whether an HTTP status code falls broadly within the '2xx' range as a proxy for 'the operation fully succeeded', without also inspecting the actual response body?",
+   "options": {
+    "A": "Some APIs may return a 2xx status code (indicating the request itself was successfully received/processed at the HTTP level) while the response body still contains additional details indicating a partial failure, a warning, or an asynchronous task that hasn't actually finished yet (as with a 202 Accepted for a long-running operation) — relying solely on the broad 2xx range without examining the body's actual content can cause a script to incorrectly assume complete success when the real outcome is more nuanced",
+    "B": "Checking only the broad 2xx status code range is always completely sufficient in every conceivable API design, with the actual content of the response body never providing any additional meaningful information beyond what the status code range alone already conveys",
+    "C": "APIs are technically incapable of ever returning a 2xx status code together with a response body indicating anything other than complete, unconditional success; a 2xx status and a nuanced/partial-success message can never occur together in any real API response",
+    "D": "This scripting mistake has no practical consequence whatsoever, since every automation script's subsequent logic is assumed to work correctly regardless of whether the actual underlying operation truly succeeded, partially succeeded, or is merely still pending"
+   },
+   "correct": "A",
+   "explanation_es": "Algunas APIs pueden devolver un código de estado 2xx (indicando que la solicitud en sí se recibió/procesó exitosamente a nivel HTTP) mientras el cuerpo de la respuesta todavía contiene detalles adicionales indicando una falla parcial, una advertencia, o una tarea asíncrona que en realidad aún no terminó (como con un 202 Accepted para una operación de larga duración) — depender solo del rango amplio 2xx sin examinar el contenido real del cuerpo puede hacer que un script asuma incorrectamente éxito completo cuando el resultado real es más matizado."
+  },
+  {
+   "id": "b6_6.5_14",
+   "subtopic": "6.5",
+   "name": "Códigos de respuesta REST API",
+   "question": "What is the general purpose of implementing 'exponential backoff' when an automation script encounters a retriable error (such as a 503 or 429 status code) from an API?",
+   "options": {
+    "A": "Exponential backoff progressively increases the delay between successive retry attempts (rather than retrying immediately and repeatedly at a constant, rapid interval), which reduces the risk of the client's repeated rapid retries themselves contributing to or worsening the server's load/congestion problem, giving the server a genuine opportunity to recover before being hit with another retry attempt",
+    "B": "Exponential backoff has no relationship whatsoever to the timing or delay between retry attempts, and instead exclusively controls how many total fields are included in each retry request's body",
+    "C": "Implementing exponential backoff always and completely prevents a script from ever retrying a failed request more than a single time total, regardless of how many retries might otherwise have been configured or desired",
+    "D": "Exponential backoff means each successive retry attempt happens progressively faster and more frequently than the previous one, the reverse of its actual defined behavior of progressively increasing the delay between attempts"
+   },
+   "correct": "A",
+   "explanation_es": "El exponential backoff aumenta progresivamente el retraso entre intentos de reintento sucesivos (en lugar de reintentar inmediata y repetidamente a un intervalo constante y rápido), lo cual reduce el riesgo de que los reintentos rápidos y repetidos del propio cliente contribuyan a o empeoren el problema de carga/congestión del servidor, dándole al servidor una oportunidad genuina de recuperarse antes de recibir otro intento de reintento."
+  },
+  {
+   "id": "b6_6.5_15",
+   "subtopic": "6.5",
+   "name": "Códigos de respuesta REST API",
+   "question": "Why might a REST API return an HTTP 422 (Unprocessable Entity) status code specifically, rather than a generic 400 (Bad Request), for certain kinds of invalid input?",
+   "options": {
+    "A": "A 422 more specifically indicates that the request was well-formed at the syntax level (valid JSON, correct Content-Type, etc.) but contains semantic errors that prevent it from being processed (such as a value that's syntactically valid JSON but fails a business-logic validation rule, like an invalid VLAN ID value), whereas a generic 400 is often used more broadly for basic malformed-syntax issues, giving API consumers a more precise signal about the specific nature of the validation failure",
+    "B": "422 and 400 status codes are functionally and semantically completely identical in every REST API design, with absolutely no meaningful distinction between the two that any API might use to differentiate different classes of invalid input",
+    "C": "A 422 status code always indicates the request succeeded completely with no validation issue whatsoever, functioning identically in meaning to a 200 OK or 201 Created response rather than indicating any kind of error condition",
+    "D": "422 is exclusively used to indicate a server-side hardware failure entirely unrelated to anything about the content or structure of the client's actual request"
+   },
+   "correct": "A",
+   "explanation_es": "Un 422 indica más específicamente que la solicitud estaba bien formada a nivel de sintaxis (JSON válido, Content-Type correcto, etc.) pero contiene errores semánticos que impiden procesarla (como un valor que es JSON sintácticamente válido pero falla una regla de validación de lógica de negocio, como un valor de VLAN ID inválido), mientras que un 400 genérico a menudo se usa más ampliamente para problemas básicos de sintaxis malformada, dándole a los consumidores de la API una señal más precisa sobre la naturaleza específica de la falla de validación."
+  },
+  {
+   "id": "b6_6.5_16",
+   "subtopic": "6.5",
+   "name": "Códigos de respuesta REST API",
+   "question": "Why is it important for API documentation (and for a script consuming that API) to clearly distinguish between what each specific 4xx status code means, rather than treating the entire 4xx range as a single generic 'client error' category with no further distinction?",
+   "options": {
+    "A": "Different 4xx codes indicate fundamentally different underlying problems that call for different remediation — a 401 (authentication failure) calls for re-authenticating, a 403 (authorization failure) calls for requesting different permissions rather than re-authenticating with the same account, and a 400/422 (invalid input) calls for correcting the request data itself — so a script that only checks 'was it in the 4xx range' without distinguishing further cannot apply the correct, specific remediation logic for the actual underlying problem",
+    "B": "Every single 4xx status code, regardless of its specific numeric value, always indicates exactly the same underlying problem and calls for exactly the same remediation action, making any further distinction between individual 4xx codes entirely unnecessary for any practical purpose",
+    "C": "Distinguishing between individual 4xx status codes is only relevant for human developers reading API documentation, and provides no practical benefit whatsoever to an automated script's own error-handling logic",
+    "D": "4xx status codes cannot actually be distinguished from one another by an automation script at all; a script is technically limited to only ever detecting whether a response falls broadly within the 4xx range as a whole, with no ability to read the specific three-digit code"
+   },
+   "correct": "A",
+   "explanation_es": "Distintos códigos 4xx indican problemas subyacentes fundamentalmente distintos que requieren remediación distinta — un 401 (falla de autenticación) requiere volver a autenticarse, un 403 (falla de autorización) requiere solicitar permisos distintos en lugar de volver a autenticarse con la misma cuenta, y un 400/422 (entrada inválida) requiere corregir los propios datos de la solicitud — así que un script que solo verifica 'si estuvo en el rango 4xx' sin distinguir más allá no puede aplicar la lógica de remediación correcta y específica para el problema subyacente real."
+  },
+  {
+   "id": "b6_6.5_17",
+   "subtopic": "6.5",
+   "name": "Códigos de respuesta REST API",
+   "question": "What is the purpose of the HTTP 'Retry-After' response header, sometimes included alongside a 429 or 503 status code?",
+   "options": {
+    "A": "'Retry-After' provides an explicit hint (either as a number of seconds or a specific date/time) telling the client how long it should wait before making another attempt, giving the client concrete, server-provided guidance rather than having to guess an appropriate retry delay on its own",
+    "B": "'Retry-After' has no relationship whatsoever to indicating how long a client should wait before retrying a request, and instead exclusively specifies which alternate API endpoint URL the client should use for all future requests",
+    "C": "Once a 'Retry-After' header is included in a response, the client is technically prohibited from ever retrying that same request again under any circumstances, making the header's name a contradiction of its actual documented purpose",
+    "D": "The 'Retry-After' header can only ever appear alongside a 2xx success status code, and is technically invalid, nonsensical syntax when included alongside any 4xx or 5xx error status code"
+   },
+   "correct": "A",
+   "explanation_es": "'Retry-After' provee una indicación explícita (ya sea como una cantidad de segundos o una fecha/hora específica) diciéndole al cliente cuánto debería esperar antes de hacer otro intento, dándole al cliente una guía concreta provista por el servidor en lugar de tener que adivinar un retraso de reintento apropiado por su cuenta."
   }
  ]
 }
