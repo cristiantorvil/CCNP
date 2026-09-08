@@ -3766,28 +3766,37 @@
   })();
 
   // ---------- stats ----------
-  // Historical (all-time) accuracy per subtopic — every question keeps
-  // reappearing regardless of past result, so the % is simply correct/total
-  // across every attempt ever recorded for that subtopic (no recency window).
+  // Coverage per subtopic: how many of the subtopic's OWN questions in the
+  // bank have you gotten right at least once, out of how many exist for it
+  // (e.g. "3/15"), not accuracy over attempts made so far. A question
+  // counts as mastered once it's been answered correctly one time; it never
+  // un-counts on a later miss, and it keeps reappearing either way.
   function subtopicStats(subtopic) {
+    var meta = SUBTOPIC_META[subtopic];
+    var bankTotal = meta ? meta.count : 0;
     var list = state.attempts.filter(function (a) { return a.subtopic === subtopic; });
-    var correct = 0, lastTs = 0;
+    var masteredIds = {};
+    var lastTs = 0;
     list.forEach(function (a) {
-      if (a.correct) correct++;
+      if (a.correct) masteredIds[a.questionId] = true;
       if (a.ts > lastTs) lastTs = a.ts;
     });
-    return { correct: correct, total: list.length, lastTs: lastTs };
+    return {
+      correct: Object.keys(masteredIds).length,
+      total: bankTotal,
+      attemptsCount: list.length,
+      lastTs: lastTs
+    };
   }
 
   function domainStats(domain) {
     var subtopics = Object.keys(SUBTOPIC_META).filter(function (s) { return SUBTOPIC_META[s].domain === domain; });
-    var correct = 0, total = 0, bankCount = 0;
+    var correct = 0, total = 0, attemptsCount = 0;
     subtopics.forEach(function (s) {
       var w = subtopicStats(s);
-      correct += w.correct; total += w.total;
-      bankCount += SUBTOPIC_META[s].count;
+      correct += w.correct; total += w.total; attemptsCount += w.attemptsCount;
     });
-    return { correct: correct, total: total, pct: total ? (100 * correct / total) : null, bankCount: bankCount, subtopics: subtopics };
+    return { correct: correct, total: total, pct: total ? (100 * correct / total) : null, bankCount: total, attemptsCount: attemptsCount, subtopics: subtopics };
   }
 
   function overallScore() {
@@ -4129,7 +4138,7 @@
             '<span class="domain-pct" style="color:' + pctColorVar(pct) + ';">' + (pct === null ? "—" : pct.toFixed(0) + "%") + '</span>' +
           '</div>' +
           '<div class="domain-bar-track"><div class="domain-bar-fill" style="width:' + (pct === null ? 0 : Math.min(100, pct)) + '%; background:' + pctColorVar(pct) + ';"></div></div>' +
-          '<div class="domain-sub">banco: ' + ds.bankCount + ' preguntas &middot; ' + ds.total + ' respuestas registradas</div>' +
+          '<div class="domain-sub">banco: ' + ds.bankCount + ' preguntas &middot; ' + ds.attemptsCount + ' intentos registrados</div>' +
         '</summary>' +
         '<div class="subtopic-list">' + subRowsHtml + '</div>';
       grid.appendChild(details);
@@ -4139,7 +4148,7 @@
     var bankNote = el(
       '<div class="panel" style="margin-top:16px;">' +
         '<h2 class="section-title">Cobertura del banco</h2>' +
-        '<div class="domain-sub" style="font-size:0.8rem;">' + ALL_QUESTIONS.length + ' / ' + BANK_TARGET_TOTAL + ' preguntas totales &middot; el % de cada subtema es correctas/total histórico, sin ventana</div>' +
+        '<div class="domain-sub" style="font-size:0.8rem;">' + ALL_QUESTIONS.length + ' / ' + BANK_TARGET_TOTAL + ' preguntas totales &middot; el % de cada subtema es preguntas acertadas alguna vez sobre el total que existe hoy para ese subtema en el banco</div>' +
       '</div>'
     );
     container.appendChild(bankNote);
