@@ -9,13 +9,13 @@ contenido de forma consistente.
 
 ## Archivos incluidos
 
-- `data/question_bank.json` — banco de preguntas actual (286 preguntas,
-  cobertura 49/49 subtemas del blueprint ENCOR 350-401 v1.2, mínimo 5 preguntas
-  por subtema). Formato:
+- `data/question_bank.json` — banco de preguntas actual (1000 preguntas,
+  cobertura 49/49 subtemas del blueprint ENCOR 350-401 v1.2, distribuidas
+  proporcionalmente al peso de cada dominio en el examen). Formato:
   ```json
   {
     "version": "2026-09-08_v5",
-    "total": 286,
+    "total": 1000,
     "questions": [
       {
         "id": "trustsec_01",
@@ -41,21 +41,29 @@ contenido de forma consistente.
 - `CONTEXTO_PROYECTO.md` — objetivos, convenciones de trabajo, y errores
   conceptuales recurrentes a reforzar al generar más preguntas.
 
-## Qué falta (meta: 1000 preguntas, ponderado por peso de dominio)
+## Cobertura (meta: 1000 preguntas, ponderado por peso de dominio) — completa
 
-| Dominio | Peso examen | Meta preguntas | Actual | Faltan |
+| Dominio | Peso examen | Meta preguntas | Actual | % del banco |
 |---|---|---|---|---|
-| 1.0 Architecture | 15% | 150 | 35 | 115 |
-| 2.0 Virtualization | 10% | 100 | 45 | 55 |
-| 3.0 Infrastructure | 30% | 300 | 66 | 234 |
-| 4.0 Network Assurance | 10% | 100 | 30 | 70 |
-| 5.0 Security | 20% | 200 | 50 | 150 |
-| 6.0 Automation & AI | 15% | 150 | 60 | 90 |
-| **Total** | **100%** | **1000** | **286** | **714** |
+| 1.0 Architecture | 15% | 150 | 150 | 15.0% |
+| 2.0 Virtualization | 10% | 100 | 101 | 10.1% |
+| 3.0 Infrastructure | 30% | 300 | 292 | 29.2% |
+| 4.0 Network Assurance | 10% | 100 | 106 | 10.6% |
+| 5.0 Security | 20% | 200 | 200 | 20.0% |
+| 6.0 Automation & AI | 15% | 150 | 151 | 15.1% |
+| **Total** | **100%** | **1000** | **1000** | **100%** |
 
-Todos los 49 subtemas tienen ahora al menos 5 preguntas (piso mínimo alcanzado
-2026-09-08). Subtemas con profundidad completa (10 c/u): TrustSec/MACsec (5.4.d),
-YANG (6.3), APIs Catalyst Center (6.4), RESTCONF (6.9), vSwitch/OVS (2.1.c),
-VXLAN EVPN/BUM (2.3.b). El resto tiene entre 5 y 6 preguntas — el próximo paso
-natural es seguir sumando volumen priorizando el dominio 3.0 Infrastructure
-(mayor peso y mayor brecha).
+Meta de 1000 preguntas alcanzada 2026-09-08, con distribución por dominio
+dentro de ±0.8 puntos porcentuales del peso oficial del blueprint. Todos los
+49 subtemas tienen cobertura proporcional a su dominio.
+
+**Corrección de sesgos (2026-09-08):** el contenido nuevo se auditó y corrigió
+para dos sesgos de "test-wiseness" que hacían las preguntas resolubles sin
+saber la materia: (1) sesgo de posición — la respuesta correcta se
+distribuía de forma dispareja entre A/B/C/D (originalmente A 61%/B 33%/C 6%/D
+0%); se corrigió con un shuffle determinístico de las opciones en todo el
+banco. (2) sesgo de longitud — la opción correcta tendía a ser sistemáticamente
+la más larga (originalmente 88.5% de las preguntas); se corrigió elaborando
+distractores para igualar su longitud. Métrica final bancowide: 22.9% de las
+preguntas tienen la opción correcta como la más larga (el azar puro con 4
+opciones da 25%), y las posiciones A/B/C/D quedaron en 29.7%/24.5%/23.3%/22.5%.
