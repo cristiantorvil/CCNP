@@ -1,6 +1,6 @@
 {
  "version": "2026-09-08_v4",
- "total": 812,
+ "total": 836,
  "questions": [
   {
    "id": "trustsec_01",
@@ -11369,6 +11369,342 @@
    },
    "correct": "A",
    "explanation_es": "Como el cifrado/descifrado de MACsec típicamente se realiza en hardware dedicado (basado en ASIC) en las plataformas de switching modernas de Cisco en lugar de por software, el impacto en rendimiento/latencia generalmente es mínimo en hardware soportado, aunque sigue siendo una consideración importante al elegir hardware para un despliegue de MACsec, ya que no toda plataforma/tarjeta de línea necesariamente tiene el mismo nivel de soporte de MACsec acelerado por hardware."
+  },
+  {
+   "id": "b6_6.1_06",
+   "subtopic": "6.1",
+   "name": "Python básico",
+   "question": "What does the following Python code print?\n\nfor i in range(3):\n    print(i)",
+   "options": {
+    "A": "0 1 2 (each on its own line, since range(3) generates the sequence 0, 1, 2, and the loop iterates once per value in that sequence)",
+    "B": "1 2 3 (each on its own line, since range(3) is assumed to start counting from 1 rather than 0)",
+    "C": "0 1 2 3 (each on its own line, since range(3) is assumed to include the value 3 itself)",
+    "D": "3 (printed only once, since range(3) returns only the single value 3 rather than a sequence)"
+   },
+   "correct": "A",
+   "explanation_es": "range(3) genera la secuencia 0, 1, 2 (comienza en 0 por defecto y no incluye el valor final 3), y el loop itera una vez por cada valor de esa secuencia, imprimiendo 0, luego 1, luego 2, cada uno en su propia línea."
+  },
+  {
+   "id": "b6_6.1_07",
+   "subtopic": "6.1",
+   "name": "Python básico",
+   "question": "What is the purpose of a Python 'try/except' block?",
+   "options": {
+    "A": "It allows a script to attempt to execute a block of code (the 'try' section) and gracefully handle a specific type of error/exception if one occurs (in the 'except' section), rather than the script crashing/terminating abruptly the moment an unhandled error is encountered",
+    "B": "'try/except' has no relationship whatsoever to error handling and instead only controls how many times a loop repeats",
+    "C": "A try/except block always and completely prevents any error from ever occurring in the enclosed code, making error handling logic within the except block entirely unreachable and unnecessary",
+    "D": "The 'except' section of a try/except block executes every single time the code runs, regardless of whether any error actually occurred in the try section"
+   },
+   "correct": "A",
+   "explanation_es": "Permite que un script intente ejecutar un bloque de código (la sección 'try') y maneje de forma controlada un tipo específico de error/excepción si ocurre (en la sección 'except'), en lugar de que el script se caiga/termine abruptamente en el momento en que se encuentra un error sin manejar."
+  },
+  {
+   "id": "b6_6.1_08",
+   "subtopic": "6.1",
+   "name": "Python básico",
+   "question": "What does the Python 'import' statement (e.g., 'import requests') allow a script to do?",
+   "options": {
+    "A": "It loads an external module/library (such as the 'requests' library for making HTTP calls) into the current script's namespace, making the functions and classes defined in that module available for the script to use, rather than requiring the script to reimplement that functionality itself from scratch",
+    "B": "'import' has no relationship whatsoever to loading external modules and instead only controls the physical file path where the script itself is saved on disk",
+    "C": "Using 'import' always and immediately executes every single function defined within that imported module the moment the import statement runs, rather than simply making those functions available to be called later",
+    "D": "A Python script can only ever import modules that are part of the language's built-in standard library, and is technically incapable of importing any third-party library like 'requests' that was separately installed"
+   },
+   "correct": "A",
+   "explanation_es": "Carga un módulo/librería externo (como la librería 'requests' para hacer llamadas HTTP) al namespace del script actual, dejando disponibles para usar las funciones y clases definidas en ese módulo, en lugar de requerir que el script reimplemente esa funcionalidad desde cero por su cuenta."
+  },
+  {
+   "id": "b6_6.1_09",
+   "subtopic": "6.1",
+   "name": "Python básico",
+   "question": "What is the difference between a Python 'list' and a Python 'tuple', beyond just tuples being written with parentheses instead of square brackets?",
+   "options": {
+    "A": "A list is mutable (its contents can be changed/added/removed after creation), while a tuple is immutable (once created, its contents cannot be modified), which also makes a tuple hashable and therefore usable as a dictionary key or a set element, unlike a list",
+    "B": "Lists and tuples are functionally and technically completely identical data structures in every respect, with the only difference being purely stylistic — which bracket character is used — and no actual behavioral distinction between the two",
+    "C": "A tuple is mutable and a list is immutable, the reverse of their actual defined characteristics in Python",
+    "D": "Tuples can only ever store numeric values, while lists can store any data type, making tuples fundamentally more restrictive in what they can contain than the bracket-style difference alone would suggest"
+   },
+   "correct": "A",
+   "explanation_es": "Una lista es mutable (su contenido se puede cambiar/agregar/quitar después de crearla), mientras que una tupla es inmutable (una vez creada, su contenido no se puede modificar), lo cual también la hace hasheable y por lo tanto utilizable como clave de diccionario o elemento de un set, a diferencia de una lista."
+  },
+  {
+   "id": "b6_6.1_10",
+   "subtopic": "6.1",
+   "name": "Python básico",
+   "question": "What does the following Python code print?\n\nmy_list = [1, 2, 3]\nmy_list.append(4)\nprint(my_list)",
+   "options": {
+    "A": "[1, 2, 3, 4] (since .append() adds the given value to the end of the existing list, modifying it in place)",
+    "B": "[4, 1, 2, 3] (assuming .append() always inserts the new value at the beginning of the list rather than the end)",
+    "C": "[1, 2, 3] (assuming .append() has no actual effect on the list and the appended value is simply discarded)",
+    "D": "An error is raised, since Python lists are assumed to be a fixed size once created and cannot have any additional element appended to them"
+   },
+   "correct": "A",
+   "explanation_es": ".append() agrega el valor dado al final de la lista existente, modificándola en el lugar; por eso my_list pasa de [1, 2, 3] a [1, 2, 3, 4] tras llamar a my_list.append(4)."
+  },
+  {
+   "id": "b6_6.1_11",
+   "subtopic": "6.1",
+   "name": "Python básico",
+   "question": "What is the purpose of Python's f-strings (formatted string literals, e.g., f\"Interface {name} is {status}\")?",
+   "options": {
+    "A": "F-strings allow variable values (and even expressions) to be directly embedded within a string literal using curly braces, providing a concise, readable way to build a formatted string that incorporates dynamic values, rather than needing to manually concatenate multiple separate string and variable pieces together with '+' operators",
+    "B": "F-strings have no relationship whatsoever to embedding variable values within a string, and instead exclusively control the file encoding (like UTF-8) used when the script is saved to disk",
+    "C": "Once a value is embedded in an f-string using curly braces, that value becomes permanently and irreversibly fixed at that point, with the string literal no longer able to reflect any subsequent change to the underlying variable, even before the string itself is actually created",
+    "D": "F-strings can only ever embed a maximum of a single variable per string literal, making it technically impossible to include more than one dynamic value within the same formatted string"
+   },
+   "correct": "A",
+   "explanation_es": "Los f-strings permiten incrustar directamente valores de variables (e incluso expresiones) dentro de un literal de cadena usando llaves, dando una forma concisa y legible de armar una cadena formateada que incorpora valores dinámicos, en lugar de necesitar concatenar manualmente varias piezas separadas de cadena y variable con operadores '+'."
+  },
+  {
+   "id": "b6_6.1_12",
+   "subtopic": "6.1",
+   "name": "Python básico",
+   "question": "What does Python's 'for key, value in my_dict.items():' loop construct allow a script to do when iterating over a dictionary?",
+   "options": {
+    "A": "It iterates over the dictionary, giving access to both the key and its corresponding value together on each iteration (unpacked into the two loop variables), rather than only getting the keys (as a plain 'for key in my_dict:' loop would) and having to separately look up each value using that key inside the loop body",
+    "B": "'.items()' has no relationship whatsoever to accessing both keys and values together, and instead only returns a count of how many total key-value pairs exist in the dictionary",
+    "C": "This construct can only ever be used to iterate over a Python list, and is technically invalid, unsupported syntax when used on an actual dictionary object",
+    "D": "Using '.items()' in a for loop always and completely deletes every key-value pair from the dictionary as it iterates, leaving the dictionary empty once the loop finishes"
+   },
+   "correct": "A",
+   "explanation_es": "Itera sobre el diccionario, dando acceso tanto a la clave como a su valor correspondiente juntos en cada iteración (desempaquetados en las dos variables del loop), en lugar de solo obtener las claves (como haría un loop simple 'for key in my_dict:') y tener que buscar por separado cada valor usando esa clave dentro del cuerpo del loop."
+  },
+  {
+   "id": "b6_6.1_13",
+   "subtopic": "6.1",
+   "name": "Python básico",
+   "question": "What is a Python 'list comprehension' (e.g., '[x*2 for x in range(5)]'), and what does it typically accomplish compared to writing an equivalent explicit for-loop?",
+   "options": {
+    "A": "A list comprehension provides a concise, single-line syntax for building a new list by applying an expression to each item from an iterable (optionally filtering items with a condition), accomplishing in one readable line what would otherwise require writing a multi-line explicit for-loop that appends each computed value to a separately initialized empty list",
+    "B": "A list comprehension has no relationship whatsoever to building a new list, and instead exclusively deletes every existing element from an already-created list",
+    "C": "List comprehensions can only ever be used with an empty range that produces exactly zero elements, making them incapable of ever actually generating any meaningful list content",
+    "D": "Using a list comprehension always and completely prevents the resulting list from ever being modified afterward, converting it into an immutable tuple-like structure rather than a regular mutable list"
+   },
+   "correct": "A",
+   "explanation_es": "Una list comprehension da una sintaxis concisa de una sola línea para construir una lista nueva aplicando una expresión a cada elemento de un iterable (opcionalmente filtrando elementos con una condición), logrando en una línea legible lo que de otro modo requeriría escribir un for-loop explícito de varias líneas que agregue cada valor calculado a una lista vacía inicializada por separado."
+  },
+  {
+   "id": "b6_6.1_14",
+   "subtopic": "6.1",
+   "name": "Python básico",
+   "question": "Why is proper Python indentation (using consistent spaces or tabs to define code blocks) not merely a stylistic preference but an actual syntactic requirement of the language?",
+   "options": {
+    "A": "Unlike many other programming languages that use explicit braces {} to delimit code blocks, Python uses indentation itself to define the boundaries of blocks (such as the body of a loop, function, or if-statement); inconsistent or incorrect indentation is a syntax error that will prevent the script from running correctly, rather than merely looking untidy",
+    "B": "Indentation in Python is purely a cosmetic, optional stylistic convention with no actual effect whatsoever on whether a script parses or runs correctly, functionally identical to how indentation is typically treated in many other common programming languages",
+    "C": "Python actually uses explicit curly braces {} exclusively to define code blocks, identical to languages like C or Java, making the description of Python relying on indentation for block structure entirely inaccurate",
+    "D": "Indentation only matters within Python string literals themselves, and has no relationship whatsoever to how the language's own code block structure (loops, functions, conditionals) is actually parsed"
+   },
+   "correct": "A",
+   "explanation_es": "A diferencia de muchos otros lenguajes de programación que usan llaves {} explícitas para delimitar bloques de código, Python usa la propia indentación para definir los límites de los bloques (como el cuerpo de un loop, función, o sentencia if); una indentación inconsistente o incorrecta es un error de sintaxis que impedirá que el script corra correctamente, no simplemente algo que se ve desprolijo."
+  },
+  {
+   "id": "b6_6.1_15",
+   "subtopic": "6.1",
+   "name": "Python básico",
+   "question": "What does calling 'response.json()' typically do when 'response' is an object returned by the Python 'requests' library after an HTTP call to a REST API?",
+   "options": {
+    "A": "It parses the HTTP response body (assuming it's actually JSON-formatted text) and converts it into a native Python data structure (such as a dict or list), allowing the script to work with the API response's data programmatically using normal Python syntax rather than having to manually parse the raw JSON text string itself",
+    "B": "'.json()' has no relationship whatsoever to parsing the response body, and instead only converts the HTTP status code returned by the API call into a human-readable text description",
+    "C": "Calling '.json()' always and immediately sends a brand new, separate HTTP request to the API, completely independent of and unrelated to the original response object that '.json()' was actually called on",
+    "D": "'.json()' can only be called on a response that used the HTTP POST method, and will always raise an error if called on a response resulting from an HTTP GET request"
+   },
+   "correct": "A",
+   "explanation_es": "Parsea el cuerpo de la respuesta HTTP (asumiendo que realmente es texto con formato JSON) y lo convierte en una estructura de datos nativa de Python (como un dict o una lista), permitiendo que el script trabaje con los datos de la respuesta de la API programáticamente usando sintaxis normal de Python en lugar de tener que parsear manualmente la cadena de texto JSON cruda."
+  },
+  {
+   "id": "b6_6.1_16",
+   "subtopic": "6.1",
+   "name": "Python básico",
+   "question": "What is the general purpose of a Python virtual environment (e.g., created with 'python -m venv'), particularly for network automation scripting?",
+   "options": {
+    "A": "A virtual environment creates an isolated Python installation with its own separate set of installed packages/library versions, allowing different projects on the same machine to each use potentially different, even conflicting, versions of the same library without those projects interfering with each other's dependencies",
+    "B": "A virtual environment has no relationship whatsoever to isolating installed packages between different projects, and instead only controls the visual color theme of the terminal window used to run Python scripts",
+    "C": "Once a virtual environment is created, it becomes technically impossible to ever install any additional Python package into it, limiting it exclusively to whatever packages happened to already be installed globally on the system at the time of its creation",
+    "D": "Virtual environments can only ever be used for web development projects, and are technically incompatible with or irrelevant to any network automation script that uses libraries like 'requests' or 'ncclient'"
+   },
+   "correct": "A",
+   "explanation_es": "Un entorno virtual crea una instalación aislada de Python con su propio conjunto separado de paquetes/versiones de librería instaladas, permitiendo que distintos proyectos en la misma máquina usen cada uno versiones potencialmente distintas, incluso en conflicto, de la misma librería sin que esos proyectos interfieran entre sí en sus dependencias — muy relevante para scripts de automatización de red que dependen de librerías específicas como 'requests' o 'ncclient'."
+  },
+  {
+   "id": "b6_6.1_17",
+   "subtopic": "6.1",
+   "name": "Python básico",
+   "question": "What does the following Python code print?\n\ndef greet(name=\"world\"):\n    return f\"Hello, {name}!\"\n\nprint(greet())",
+   "options": {
+    "A": "Hello, world! (since the function call 'greet()' provides no argument, Python uses the default value \"world\" defined in the function signature for the 'name' parameter)",
+    "B": "Hello, ! (with nothing filled in, assuming a missing argument leaves the f-string placeholder completely empty rather than falling back to the default value)",
+    "C": "An error is raised, since the function is assumed to require an argument to be explicitly passed every single time it's called, regardless of any default value defined in its signature",
+    "D": "Hello, name! (printing the literal word 'name' rather than substituting either the default value or any passed-in argument)"
+   },
+   "correct": "A",
+   "explanation_es": "Como la llamada 'greet()' no provee ningún argumento, Python usa el valor por defecto \"world\" definido en la firma de la función para el parámetro 'name', así que la función retorna \"Hello, world!\" y eso es lo que se imprime."
+  },
+  {
+   "id": "b6_6.2_06",
+   "subtopic": "6.2",
+   "name": "JSON",
+   "question": "What is the fundamental difference between a JSON 'object' (delimited by curly braces {}) and a JSON 'array' (delimited by square brackets [])?",
+   "options": {
+    "A": "A JSON object is an unordered collection of key-value pairs (each key being a string, mapped to a value), whereas a JSON array is an ordered, indexed list of values with no associated keys, meaning an object is typically used to represent a single entity's named properties while an array is used to represent an ordered collection/list of items",
+    "B": "JSON objects and JSON arrays are functionally and syntactically completely identical structures, with the only difference being purely stylistic — which bracket character is used — and no actual structural distinction between key-value pairs and an ordered value list",
+    "C": "A JSON array requires each of its values to have an associated string key, exactly like an object, the reverse of an array's actual defined structure as a plain ordered list of values",
+    "D": "JSON objects can only ever contain a maximum of a single key-value pair, making them fundamentally more restrictive than arrays in how much data they can represent"
+   },
+   "correct": "A",
+   "explanation_es": "Un objeto JSON es una colección no ordenada de pares clave-valor (cada clave siendo un string, mapeada a un valor), mientras que un array JSON es una lista ordenada e indexada de valores sin claves asociadas, lo que significa que un objeto típicamente se usa para representar las propiedades nombradas de una entidad única mientras que un array se usa para representar una colección/lista ordenada de elementos."
+  },
+  {
+   "id": "b6_6.2_07",
+   "subtopic": "6.2",
+   "name": "JSON",
+   "question": "Which of the following data types are natively supported as JSON values (according to the JSON specification)?",
+   "options": {
+    "A": "String, number, boolean (true/false), null, object, and array are the native JSON value types; there is no separate native type for something like a date/timestamp, which is typically represented as a formatted string by convention rather than as its own distinct JSON data type",
+    "B": "JSON natively supports exactly one single data type (string) for every value, with numbers, booleans, and nested objects/arrays all being technically invalid according to the JSON specification",
+    "C": "JSON has a dedicated native 'date' data type built directly into the specification, distinct from and in addition to the string type, specifically for representing timestamps",
+    "D": "Only numbers and strings are valid JSON value types; boolean values and null are not part of the JSON specification and cannot legally appear anywhere in a valid JSON document"
+   },
+   "correct": "A",
+   "explanation_es": "String, número, booleano (true/false), null, objeto, y array son los tipos de valor JSON nativos; no existe un tipo nativo separado para algo como una fecha/timestamp, que típicamente se representa como un string formateado por convención en lugar de ser su propio tipo de dato JSON distinto."
+  },
+  {
+   "id": "b6_6.2_08",
+   "subtopic": "6.2",
+   "name": "JSON",
+   "question": "Why does JSON require object keys to always be enclosed in double quotes, even though some other data formats (or even JavaScript object literal syntax itself) allow unquoted keys in certain cases?",
+   "options": {
+    "A": "The formal JSON specification (RFC 8259) strictly requires every key (and every string value) to be enclosed in double quotes for a document to be considered valid, well-formed JSON; while some JSON-like syntax used elsewhere (like JavaScript's own more permissive object literal syntax) might tolerate unquoted keys, that relaxed syntax is not valid, standards-compliant JSON and could fail to parse correctly with a strict JSON parser",
+    "B": "JSON has no actual requirement whatsoever regarding quoting object keys, and unquoted keys are equally valid, standards-compliant JSON syntax according to RFC 8259",
+    "C": "JSON requires keys to be enclosed in single quotes specifically, rather than double quotes, making the common convention of using double quotes technically invalid according to the formal specification",
+    "D": "The double-quote requirement for keys only applies to JSON arrays, and JSON objects are actually permitted to use entirely unquoted keys according to the formal specification"
+   },
+   "correct": "A",
+   "explanation_es": "La especificación formal de JSON (RFC 8259) exige estrictamente que cada clave (y cada valor de tipo string) esté encerrada en comillas dobles para que un documento se considere JSON válido y bien formado; aunque cierta sintaxis parecida a JSON usada en otros contextos (como la sintaxis de objeto literal más permisiva del propio JavaScript) podría tolerar claves sin comillas, esa sintaxis relajada no es JSON válido y conforme al estándar, y podría no parsearse correctamente con un parser JSON estricto."
+  },
+  {
+   "id": "b6_6.2_09",
+   "subtopic": "6.2",
+   "name": "JSON",
+   "question": "What does 'nesting' mean in the context of a JSON document, and why is it a common and useful characteristic for representing structured network data like a device's full configuration?",
+   "options": {
+    "A": "Nesting refers to an object or array containing another object or array as one of its values (rather than only simple scalar values like strings or numbers), allowing complex, hierarchical data — such as a device that has multiple interfaces, each interface having its own set of properties — to be represented in a single, structured JSON document that mirrors the actual hierarchical relationship of the underlying data",
+    "B": "Nesting refers exclusively to how many physical network cables are connected to a single switch, with no relationship whatsoever to the structural organization of a JSON document's data",
+    "C": "JSON documents are fundamentally incapable of representing any nested/hierarchical structure at all; every JSON document must always consist of a single, completely flat list of simple scalar key-value pairs with no objects or arrays nested inside any other object or array",
+    "D": "Once a JSON object is nested inside another object, the outer object's own keys are automatically and permanently deleted, leaving only the nested inner object's data accessible"
+   },
+   "correct": "A",
+   "explanation_es": "Nesting (anidamiento) se refiere a que un objeto o array contenga otro objeto o array como uno de sus valores (en lugar de solo valores escalares simples como strings o números), permitiendo que datos complejos y jerárquicos — como un dispositivo que tiene múltiples interfaces, cada interfaz con su propio conjunto de propiedades — se representen en un único documento JSON estructurado que refleja la relación jerárquica real de los datos subyacentes."
+  },
+  {
+   "id": "b6_6.2_10",
+   "subtopic": "6.2",
+   "name": "JSON",
+   "question": "What is the purpose of the Python 'json.dumps()' function, as the counterpart to 'json.loads()'?",
+   "options": {
+    "A": "'json.dumps()' converts (serializes) a native Python data structure (like a dict or list) into a JSON-formatted string, the inverse operation of 'json.loads()' which parses (deserializes) a JSON-formatted string into a native Python data structure",
+    "B": "'json.dumps()' and 'json.loads()' perform exactly identical operations, with no meaningful distinction between converting a Python structure to a JSON string versus converting a JSON string into a Python structure",
+    "C": "'json.dumps()' can only ever be used to permanently delete an existing JSON file from disk, with no relationship whatsoever to converting a Python data structure into a JSON-formatted string",
+    "D": "'json.dumps()' sends a JSON payload directly over the network to a remote API endpoint, functioning as a network transmission function rather than a local string-serialization function"
+   },
+   "correct": "A",
+   "explanation_es": "'json.dumps()' convierte (serializa) una estructura de datos nativa de Python (como un dict o una lista) en una cadena con formato JSON, la operación inversa de 'json.loads()', que parsea (deserializa) una cadena con formato JSON hacia una estructura de datos nativa de Python."
+  },
+  {
+   "id": "b6_6.2_11",
+   "subtopic": "6.2",
+   "name": "JSON",
+   "question": "Why does JSON not natively support comments (unlike some configuration file formats such as YAML, which does support comments using '#')?",
+   "options": {
+    "A": "The JSON specification was deliberately kept minimal and simple, intended primarily as a lightweight data-interchange format for programmatic consumption between systems rather than as a human-authored configuration format, and comments were omitted from the spec partly to keep parsing simple and unambiguous; as a practical workaround, some systems use a convention like a dedicated '_comment' key within the JSON structure itself, though this is not a native language feature",
+    "B": "JSON actually does natively support comments using the exact same '#' syntax as YAML, making this a common misconception with no actual basis in the JSON specification",
+    "C": "Comments are fully supported in JSON using C-style '//' or '/* */' syntax, identical to how comments work in many programming languages, as an official part of the RFC 8259 specification",
+    "D": "The lack of comment support in JSON has no relationship whatsoever to the format's design goals around simplicity or programmatic parsing, and exists purely as an arbitrary, unexplained limitation with no design rationale behind it"
+   },
+   "correct": "A",
+   "explanation_es": "La especificación de JSON se mantuvo deliberadamente mínima y simple, pensada principalmente como un formato de intercambio de datos liviano para consumo programático entre sistemas en lugar de como un formato de configuración escrito por humanos, y los comentarios se omitieron de la especificación en parte para mantener el parseo simple y sin ambigüedad; como workaround práctico, algunos sistemas usan una convención como una clave dedicada '_comment' dentro de la propia estructura JSON, aunque eso no es una característica nativa del lenguaje."
+  },
+  {
+   "id": "b6_6.2_12",
+   "subtopic": "6.2",
+   "name": "JSON",
+   "question": "What does it mean for JSON numbers to not distinguish between 'integer' and 'floating-point' types the way some programming languages do at the language level?",
+   "options": {
+    "A": "JSON defines a single generic 'number' type that can represent both whole numbers and decimal values, without JSON itself distinguishing between them at the data-format level; it's typically the receiving programming language/parser's own type system (such as Python distinguishing int from float) that decides how to represent a given JSON number once it's been parsed into that language's native types",
+    "B": "JSON strictly requires every single number to be explicitly and separately tagged as either 'integer' or 'float' using a dedicated additional field, with no ambiguity of any kind ever permitted in a valid JSON document",
+    "C": "JSON is fundamentally incapable of representing any decimal/floating-point value at all, and can only ever represent whole integer numbers within a valid document",
+    "D": "This distinction has no relevance whatsoever to how a JSON document is actually parsed or interpreted by any receiving application or programming language"
+   },
+   "correct": "A",
+   "explanation_es": "JSON define un único tipo genérico 'number' que puede representar tanto números enteros como valores decimales, sin que el propio JSON distinga entre ellos a nivel del formato de datos; típicamente es el propio sistema de tipos del lenguaje de programación/parser receptor (como Python distinguiendo int de float) el que decide cómo representar un número JSON dado una vez parseado a los tipos nativos de ese lenguaje."
+  },
+  {
+   "id": "b6_6.2_13",
+   "subtopic": "6.2",
+   "name": "JSON",
+   "question": "Why might a network automation script need to explicitly handle a 'KeyError' (or use a safer lookup method like dict.get()) when working with JSON data parsed from an API response?",
+   "options": {
+    "A": "Not every JSON response is guaranteed to contain every key the script might expect (a field might be optional, absent under certain conditions, or the API's response structure might have changed), so directly accessing a dictionary key that doesn't actually exist in that particular parsed response would raise a KeyError and potentially crash the script unless handled defensively (such as using .get() with a default value, or a try/except block)",
+    "B": "JSON responses always and unconditionally contain every single possible key defined anywhere in the API's documentation, making the possibility of a missing key, and therefore any need for defensive key-lookup handling, entirely nonexistent in practice",
+    "C": "A KeyError can only ever occur when working with a JSON array, and is technically impossible to encounter when accessing keys within a JSON object that's been parsed into a Python dictionary",
+    "D": "Handling a KeyError defensively has no relationship whatsoever to the structure or completeness of the parsed JSON data, and instead only relates to network connectivity issues during the original API call itself"
+   },
+   "correct": "A",
+   "explanation_es": "No todas las respuestas JSON garantizan contener cada clave que el script podría esperar (un campo podría ser opcional, estar ausente bajo ciertas condiciones, o la estructura de respuesta de la API podría haber cambiado), así que acceder directamente a una clave de diccionario que no existe realmente en esa respuesta parseada en particular lanzaría un KeyError y potencialmente haría fallar el script a menos que se maneje defensivamente (como usando .get() con un valor por defecto, o un bloque try/except)."
+  },
+  {
+   "id": "b6_6.2_14",
+   "subtopic": "6.2",
+   "name": "JSON",
+   "question": "What is the purpose of a 'JSON Schema' as a separate, related concept from JSON itself?",
+   "options": {
+    "A": "A JSON Schema is a formal, machine-readable document that describes the expected structure, data types, and constraints a JSON document should conform to (such as which fields are required, and what type each field's value must be), allowing that expected structure to be validated programmatically, similar in spirit to how a YANG model defines the expected structure of NETCONF/RESTCONF data",
+    "B": "A JSON Schema has no relationship whatsoever to describing or validating the structure of a JSON document, and instead refers exclusively to a database table used to physically store JSON text as a single large binary blob",
+    "C": "JSON Schema is a mandatory, built-in part of every valid JSON document itself; a JSON document cannot exist or be considered valid unless its own JSON Schema is included directly within the exact same document",
+    "D": "Once a JSON Schema is defined for a given document type, that schema automatically and permanently prevents any future JSON document conforming to it from ever being modified or updated in any way"
+   },
+   "correct": "A",
+   "explanation_es": "Un JSON Schema es un documento formal y legible por máquina que describe la estructura, tipos de datos, y restricciones esperadas que debería cumplir un documento JSON (como qué campos son requeridos, y qué tipo debe tener el valor de cada campo), permitiendo validar esa estructura esperada de forma programática, de forma conceptualmente similar a cómo un modelo YANG define la estructura esperada de los datos de NETCONF/RESTCONF."
+  },
+  {
+   "id": "b6_6.2_15",
+   "subtopic": "6.2",
+   "name": "JSON",
+   "question": "Why is JSON commonly preferred over XML for many modern REST API implementations, in terms of typical payload size and readability?",
+   "options": {
+    "A": "JSON's syntax is generally more compact than XML's (which requires explicit opening and closing tags for every element, adding more repeated text/overhead), and many developers find JSON's structure more directly readable and easier to map onto native programming language data structures (like dicts and lists) without needing a separate, more complex XML-parsing library, though XML retains other strengths (like namespaces and certain validation capabilities) that make it still preferred in some contexts, such as traditional NETCONF",
+    "B": "JSON and XML produce exactly identical payload sizes and readability characteristics in every single scenario, with no meaningful practical difference between the two formats that would explain any typical preference for one over the other",
+    "C": "JSON payloads are always dramatically larger in size than an equivalent XML payload representing the exact same data, the reverse of the typical size comparison between the two formats",
+    "D": "XML has been completely deprecated and is technically incapable of being used in any modern API context whatsoever, making any comparison between JSON and XML for API use purely historical with no current relevance"
+   },
+   "correct": "A",
+   "explanation_es": "La sintaxis de JSON generalmente es más compacta que la de XML (que requiere etiquetas de apertura y cierre explícitas para cada elemento, agregando más texto/overhead repetido), y muchos desarrolladores encuentran que la estructura de JSON es más directamente legible y más fácil de mapear a estructuras de datos nativas del lenguaje de programación (como dicts y listas) sin necesitar una librería de parseo de XML separada y más compleja, aunque XML conserva otras fortalezas (como namespaces y ciertas capacidades de validación) que lo mantienen preferido en algunos contextos, como el NETCONF tradicional."
+  },
+  {
+   "id": "b6_6.2_16",
+   "subtopic": "6.2",
+   "name": "JSON",
+   "question": "What does 'pretty-printing' (or indenting) a JSON document typically accomplish, and does it have any effect on the JSON's actual data content?",
+   "options": {
+    "A": "Pretty-printing adds whitespace (indentation, line breaks) purely for human readability, making the hierarchical structure of the JSON document visually easier to follow; this whitespace has no effect on the actual data content or meaning of the JSON, since a parser interprets the compact/minified version and the pretty-printed version as representing exactly the same underlying data",
+    "B": "Pretty-printing a JSON document always and fundamentally changes the actual data values contained within it, meaning a pretty-printed version of a JSON document represents genuinely different underlying data than its compact/minified equivalent",
+    "C": "Once a JSON document is pretty-printed, it can no longer be correctly parsed by any standard JSON parser, since the added whitespace is assumed to violate the JSON specification's syntax rules",
+    "D": "Pretty-printing has no relationship whatsoever to whitespace or human readability, and instead refers exclusively to converting every string value within the document into uppercase text"
+   },
+   "correct": "A",
+   "explanation_es": "El pretty-printing agrega espacios en blanco (indentación, saltos de línea) puramente por legibilidad humana, haciendo que la estructura jerárquica del documento JSON sea visualmente más fácil de seguir; ese espacio en blanco no tiene efecto sobre el contenido de datos real ni el significado del JSON, ya que un parser interpreta la versión compacta/minificada y la versión con pretty-print como representando exactamente los mismos datos subyacentes."
+  },
+  {
+   "id": "b6_6.2_17",
+   "subtopic": "6.2",
+   "name": "JSON",
+   "question": "What consideration is important regarding data type consistency when a network automation script generates JSON to send in an API request body, such as ensuring a numeric VLAN ID is sent as a JSON number rather than as a JSON string?",
+   "options": {
+    "A": "Many REST APIs strictly validate the expected data type of each field according to their own schema/data model, so sending a value in an unexpected type (e.g., the string \"10\" instead of the number 10 for a field expecting a numeric type) can cause the API to reject the request as invalid, even though the value might seem conceptually equivalent to a human reading it",
+    "B": "REST APIs universally and automatically treat every JSON string and every JSON number as being exactly interchangeable in every single case, making data type consistency between strings and numbers an irrelevant, non-issue for any API request",
+    "C": "Data type consistency is only ever a meaningful concern for XML-based APIs, and has absolutely no relevance whatsoever to any REST API that specifically uses a JSON request/response body format",
+    "D": "A REST API request always and automatically succeeds regardless of what data type is used for any given field, since JSON parsers are assumed to silently and losslessly convert any type mismatch into whatever type the server actually expected"
+   },
+   "correct": "A",
+   "explanation_es": "Muchas APIs REST validan estrictamente el tipo de dato esperado de cada campo según su propio esquema/modelo de datos, así que enviar un valor en un tipo inesperado (por ejemplo, el string \"10\" en lugar del número 10 para un campo que espera un tipo numérico) puede causar que la API rechace la solicitud como inválida, aunque el valor pueda parecerle conceptualmente equivalente a un humano que lo lee."
   }
  ]
 }
