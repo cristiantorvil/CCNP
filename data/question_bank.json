@@ -1,6 +1,6 @@
 {
  "version": "2026-09-08_v4",
- "total": 707,
+ "total": 743,
  "questions": [
   {
    "id": "trustsec_01",
@@ -9899,6 +9899,510 @@
    },
    "correct": "A",
    "explanation_es": "Una herramienta de gestión de configuración dedicada típicamente ofrece abstracciones de nivel más alto (como tareas idempotentes, plantillas, gestión de inventario, y manejo de errores) construidas sobre las interacciones de protocolo NETCONF/RESTCONF subyacentes, dejando que los ingenieros se enfoquen en describir el estado final deseado en lugar de manejar manualmente cada detalle de protocolo de bajo nivel y cada caso especial para cada tarea de automatización individual desde cero."
+  },
+  {
+   "id": "b6_5.1.a_06",
+   "subtopic": "5.1.a",
+   "name": "Líneas y autenticación local",
+   "question": "What is the difference between the 'password' and 'secret' fields when configuring the enable password on a Cisco device (e.g., 'enable password' vs 'enable secret')?",
+   "options": {
+    "A": "'enable secret' stores the password using a strong hash (and is checked first if both are configured), while the legacy 'enable password' stores the password in a weaker, more easily reversible form; when both are configured, 'enable secret' takes precedence and 'enable password' is effectively ignored for authentication purposes",
+    "B": "'enable password' and 'enable secret' provide exactly identical security and are simply two different command names for configuring the exact same stored value with no functional distinction",
+    "C": "'enable password' always takes precedence over 'enable secret' when both are configured, the reverse of their actual documented precedence",
+    "D": "'enable secret' can only be used for line-level (console/VTY) passwords and has no relationship whatsoever to the privileged EXEC enable password"
+   },
+   "correct": "A",
+   "explanation_es": "'enable secret' almacena la contraseña usando un hash fuerte (y se verifica primero si ambas están configuradas), mientras que la 'enable password' legacy almacena la contraseña de una forma más débil y fácilmente reversible; cuando ambas están configuradas, 'enable secret' tiene precedencia y 'enable password' efectivamente se ignora para propósitos de autenticación."
+  },
+  {
+   "id": "b6_5.1.a_07",
+   "subtopic": "5.1.a",
+   "name": "Líneas y autenticación local",
+   "question": "What is the purpose of the 'service password-encryption' global configuration command on a Cisco IOS device?",
+   "options": {
+    "A": "It applies a simple, reversible obfuscation (Type 7 encryption, not a strong cryptographic hash) to certain passwords stored in the running/startup configuration (such as line passwords), primarily to prevent someone casually viewing the configuration file from immediately reading the plaintext password, though this encoding is well known to be easily reversible and should not be relied upon as strong security",
+    "B": "'service password-encryption' applies unbreakable, military-grade AES-256 encryption to every single password on the device with absolutely no known way to reverse or decode it",
+    "C": "This command has no relationship whatsoever to password storage and instead only encrypts SNMP community strings, with zero effect on any line or enable password",
+    "D": "Enabling 'service password-encryption' automatically and permanently converts every configured password into an 'enable secret'-equivalent strong hash"
+   },
+   "correct": "A",
+   "explanation_es": "Aplica una ofuscación simple y reversible (cifrado Tipo 7, no un hash criptográfico fuerte) a ciertas contraseñas almacenadas en la configuración running/startup (como contraseñas de línea), principalmente para evitar que alguien viendo casualmente el archivo de configuración lea inmediatamente la contraseña en texto plano, aunque esta codificación es sabidamente fácil de revertir y no debería considerarse seguridad fuerte."
+  },
+  {
+   "id": "b6_5.1.a_08",
+   "subtopic": "5.1.a",
+   "name": "Líneas y autenticación local",
+   "question": "Why is local username-based authentication generally considered to provide better accountability than a single shared line password, from an auditing/troubleshooting perspective?",
+   "options": {
+    "A": "With individual usernames, actions taken during a session (in syslog/AAA accounting records) can be attributed to a specific named user, whereas a shared line password provides no way to distinguish which of the multiple people who know that shared password actually performed a given action during any particular session",
+    "B": "Local username authentication and a shared line password provide exactly identical accountability, since neither approach has any relationship whatsoever to identifying which specific individual took a given action",
+    "C": "A shared line password actually provides stronger individual accountability than username-based authentication, the reverse of their typical comparative characteristics",
+    "D": "Accountability has no relevance to authentication method choice in Cisco IOS device management, since syslog/AAA logging never records any information about which authentication method was used to establish a session"
+   },
+   "correct": "A",
+   "explanation_es": "Con nombres de usuario individuales, las acciones realizadas durante una sesión (en registros de syslog/accounting de AAA) se pueden atribuir a un usuario nombrado específico, mientras que una contraseña de línea compartida no da forma de distinguir cuál de las varias personas que conocen esa contraseña compartida realmente realizó una acción dada durante una sesión en particular."
+  },
+  {
+   "id": "b6_5.1.a_09",
+   "subtopic": "5.1.a",
+   "name": "Líneas y autenticación local",
+   "question": "What does the 'transport input ssh' command applied under the VTY lines accomplish, and why is it commonly paired with disabling Telnet?",
+   "options": {
+    "A": "It restricts the allowed remote access protocol on those VTY lines to SSH only, preventing Telnet (which transmits credentials and session data in plaintext) from being used to access the device remotely, forcing all remote CLI sessions through SSH's encrypted transport instead",
+    "B": "'transport input ssh' has no relationship whatsoever to which remote access protocols are permitted and instead only configures the physical console cable's baud rate",
+    "C": "Configuring 'transport input ssh' automatically and permanently disables the console port entirely, requiring all access (even local/physical) to go exclusively through SSH",
+    "D": "This command enables both Telnet and SSH simultaneously with no ability to restrict VTY access to SSH alone"
+   },
+   "correct": "A",
+   "explanation_es": "Restringe el protocolo de acceso remoto permitido en esas líneas VTY a solo SSH, evitando que se use Telnet (que transmite credenciales y datos de sesión en texto plano) para acceder al dispositivo remotamente, forzando que todas las sesiones CLI remotas pasen por el transporte cifrado de SSH."
+  },
+  {
+   "id": "b6_5.1.a_10",
+   "subtopic": "5.1.a",
+   "name": "Líneas y autenticación local",
+   "question": "What is the purpose of configuring an 'exec-timeout' on VTY and console lines?",
+   "options": {
+    "A": "It automatically disconnects an idle session after a configured period of inactivity, reducing the risk that an administrator who steps away from an unlocked, still-authenticated session leaves it available for someone else to use without re-authenticating",
+    "B": "'exec-timeout' controls exclusively how long the device waits during the initial boot process before displaying the login prompt, with no relationship whatsoever to an already-established session's idle behavior",
+    "C": "Configuring exec-timeout to any value greater than zero permanently and completely disables the ability to establish any new session on that line whatsoever, regardless of activity",
+    "D": "exec-timeout has no security-related purpose and exists purely to control the color of the CLI prompt text displayed to the user"
+   },
+   "correct": "A",
+   "explanation_es": "Desconecta automáticamente una sesión inactiva después de un período configurado de inactividad, reduciendo el riesgo de que un administrador que se aleja de una sesión desbloqueada y aún autenticada la deje disponible para que otra persona la use sin volver a autenticarse."
+  },
+  {
+   "id": "b6_5.1.a_11",
+   "subtopic": "5.1.a",
+   "name": "Líneas y autenticación local",
+   "question": "What does the 'login block-for' command help protect against on a Cisco IOS device's login process?",
+   "options": {
+    "A": "It helps mitigate brute-force password-guessing attacks by temporarily blocking further login attempts (for a configured duration) once a defined number of failed login attempts occurs within a configured time window, slowing down an attacker's ability to rapidly try many password guesses in succession",
+    "B": "'login block-for' has no relationship whatsoever to failed login attempts and instead only controls how long the console cable remains physically connected before being automatically ejected",
+    "C": "This command permanently and irreversibly disables the ability to log in to the device at all, the moment it is configured, regardless of any failed attempt threshold",
+    "D": "'login block-for' can only be applied to console-port access and has no applicability whatsoever to VTY (Telnet/SSH) login attempts"
+   },
+   "correct": "A",
+   "explanation_es": "Ayuda a mitigar ataques de fuerza bruta de adivinación de contraseña bloqueando temporalmente más intentos de login (por una duración configurada) una vez que ocurre una cantidad definida de intentos fallidos dentro de una ventana de tiempo configurada, ralentizando la capacidad de un atacante de probar rápidamente muchas contraseñas en sucesión."
+  },
+  {
+   "id": "b6_5.1.a_12",
+   "subtopic": "5.1.a",
+   "name": "Líneas y autenticación local",
+   "question": "Why is relying solely on local username/password authentication generally considered less scalable than using a centralized AAA server (like TACACS+ or RADIUS) in a large organization with many network devices and many administrators?",
+   "options": {
+    "A": "With only local authentication, adding, removing, or changing an administrator's credentials requires making that change individually on every single device where that person needs access, whereas a centralized AAA server allows credential and access-policy changes to be made once, centrally, and have that change apply consistently across every device that references the same AAA server",
+    "B": "Local authentication and centralized AAA server-based authentication scale identically well in every deployment scenario, with no meaningful operational difference between the two approaches as the number of devices and administrators grows",
+    "C": "Centralized AAA servers can only ever support a single administrator account total, making local authentication with multiple local usernames strictly more scalable in every scenario",
+    "D": "Local authentication automatically synchronizes credential changes across every device on the network in real time with zero manual configuration effort, providing scalability equal to or better than a centralized AAA solution"
+   },
+   "correct": "A",
+   "explanation_es": "Con solo autenticación local, agregar, quitar o cambiar las credenciales de un administrador requiere hacer ese cambio individualmente en cada dispositivo donde esa persona necesita acceso, mientras que un servidor AAA centralizado permite hacer cambios de credenciales y política de acceso una sola vez, de forma centralizada, y que ese cambio se aplique de forma consistente en cada dispositivo que referencie ese mismo servidor AAA."
+  },
+  {
+   "id": "b6_5.1.a_13",
+   "subtopic": "5.1.a",
+   "name": "Líneas y autenticación local",
+   "question": "What role does a local username database typically play as a 'fallback' method when AAA authentication (via TACACS+/RADIUS) is configured as the primary method?",
+   "options": {
+    "A": "A properly configured AAA authentication method list can specify local authentication as a backup method to be used if the primary AAA server(s) are unreachable, ensuring that administrators can still gain access to manage the device even during an outage of the centralized AAA infrastructure, rather than being completely locked out",
+    "B": "Local authentication can never be configured as any kind of fallback or backup method alongside AAA server-based authentication under any Cisco IOS AAA method-list configuration",
+    "C": "When AAA is configured, the local username database is always and automatically deleted entirely from the device's configuration, making any form of local fallback authentication technically impossible",
+    "D": "A local fallback method, if configured, always takes priority over the primary AAA server regardless of that server's actual reachability status, the reverse of how AAA method lists are typically intended to be used"
+   },
+   "correct": "A",
+   "explanation_es": "Una lista de métodos de autenticación AAA correctamente configurada puede especificar la autenticación local como método de respaldo a usar si el/los servidor(es) AAA primario(s) son inalcanzables, asegurando que los administradores puedan seguir accediendo para gestionar el dispositivo aún durante una interrupción de la infraestructura AAA centralizada, en lugar de quedar completamente bloqueados."
+  },
+  {
+   "id": "b6_5.1.a_14",
+   "subtopic": "5.1.a",
+   "name": "Líneas y autenticación local",
+   "question": "What does configuring a 'privilege level' for a local username (e.g., 'username admin privilege 15') accomplish?",
+   "options": {
+    "A": "It associates that username with a specific IOS privilege level (0-15, with 15 being the highest/full access), which determines which commands that user is authorized to execute once logged in, allowing an administrator to grant a user only limited (lower-privilege) command access rather than full administrative control by default",
+    "B": "Privilege level configuration on a username has no effect whatsoever on which commands that user can execute, and instead only controls the color of that user's CLI prompt text",
+    "C": "Every local username, regardless of any privilege level configured, always automatically receives full privilege level 15 access with no ability to restrict any user to a lower privilege level",
+    "D": "Privilege levels can only ever be configured for AAA server-based accounts and have no applicability whatsoever to locally defined usernames on the device itself"
+   },
+   "correct": "A",
+   "explanation_es": "Asocia ese nombre de usuario con un nivel de privilegio específico de IOS (0-15, siendo 15 el más alto/acceso completo), lo cual determina qué comandos está autorizado a ejecutar ese usuario una vez logueado, permitiendo que un administrador le otorgue a un usuario acceso limitado (privilegio menor) a comandos en lugar de control administrativo completo por defecto."
+  },
+  {
+   "id": "b6_5.1.a_15",
+   "subtopic": "5.1.a",
+   "name": "Líneas y autenticación local",
+   "question": "Why might an organization configure a 'banner login' message on network devices, and what legal/security purpose does this commonly serve?",
+   "options": {
+    "A": "A login banner is commonly used to display a warning notice (such as stating that access is restricted to authorized users and that activity may be monitored/logged) before authentication completes, which can serve both as a deterrent and, in some jurisdictions, as part of establishing legal grounds for prosecuting unauthorized access, since the banner demonstrates the user was explicitly warned before proceeding",
+    "B": "A login banner has no security or legal purpose whatsoever and exists purely as a decorative, purely cosmetic welcome message with zero relationship to authorized-use notification or deterrence",
+    "C": "Configuring a login banner automatically and completely disables the need for any actual password authentication, since the banner alone is considered sufficient access control on its own",
+    "D": "Login banners can only be displayed after a user has already successfully authenticated, making it technically impossible to warn an unauthorized user before they gain access"
+   },
+   "correct": "A",
+   "explanation_es": "Un banner de login se usa comúnmente para mostrar un aviso de advertencia (como indicar que el acceso está restringido a usuarios autorizados y que la actividad puede ser monitoreada/registrada) antes de que se complete la autenticación, lo cual puede servir tanto como disuasivo como, en algunas jurisdicciones, como parte de establecer bases legales para perseguir accesos no autorizados, ya que el banner demuestra que se advirtió explícitamente al usuario antes de continuar."
+  },
+  {
+   "id": "b6_5.1.a_16",
+   "subtopic": "5.1.a",
+   "name": "Líneas y autenticación local",
+   "question": "What is the difference between the console port ('line con 0') and the auxiliary port ('line aux 0') on a Cisco device, in terms of typical access method and security considerations?",
+   "options": {
+    "A": "The console port is typically used for direct, physical local access (via a console cable) to a device, often as the initial/out-of-band access method, while the auxiliary port has historically been used for out-of-band remote access (such as connecting a modem for dial-in access); both should be secured with authentication, since physical or dial-in access can otherwise provide a bypass around network-based (VTY) access controls",
+    "B": "The console and auxiliary ports are functionally and operationally identical in every respect, with no meaningful distinction in their typical use case or security considerations",
+    "C": "The auxiliary port is always automatically and permanently disabled by default on every Cisco platform with no possibility of ever being enabled or used for any purpose",
+    "D": "The console port can only be used for remote network-based access and has no relationship whatsoever to direct physical local access to the device"
+   },
+   "correct": "A",
+   "explanation_es": "El puerto de consola típicamente se usa para acceso local físico directo (vía un cable de consola) a un dispositivo, a menudo como el método de acceso inicial/fuera de banda, mientras que el puerto auxiliar históricamente se ha usado para acceso remoto fuera de banda (como conectar un módem para acceso por marcado); ambos deberían asegurarse con autenticación, ya que el acceso físico o por marcado de otro modo podría dar un bypass alrededor de los controles de acceso basados en red (VTY)."
+  },
+  {
+   "id": "b6_5.1.a_17",
+   "subtopic": "5.1.a",
+   "name": "Líneas y autenticación local",
+   "question": "Why is it generally considered a security risk to leave a device's default/factory credentials unchanged, even temporarily, during initial deployment?",
+   "options": {
+    "A": "Default credentials for common network device platforms are widely published/known (in documentation, online forums, or automated scanning tools), so a device left with unchanged default credentials — even briefly during initial setup — could be discovered and compromised by an attacker or automated scanner before an administrator has a chance to apply proper, unique credentials",
+    "B": "Default credentials on network devices are always cryptographically unique and randomly generated per individual unit, making the risk of them being 'widely known' or guessable by an attacker essentially nonexistent in practice",
+    "C": "There is no meaningful security risk whatsoever in leaving default credentials unchanged, since network devices are always physically inaccessible to any potential attacker by design",
+    "D": "Default credentials, once set by the manufacturer, can never be changed by an administrator under any circumstances, making the question of leaving them unchanged during deployment technically moot"
+   },
+   "correct": "A",
+   "explanation_es": "Las credenciales por defecto de las plataformas de dispositivos de red comunes suelen estar ampliamente publicadas/conocidas (en documentación, foros online, o herramientas de escaneo automatizado), así que un dispositivo dejado con credenciales por defecto sin cambiar — aunque sea brevemente durante la configuración inicial — podría ser descubierto y comprometido por un atacante o escáner automatizado antes de que un administrador tenga la oportunidad de aplicar credenciales propias y únicas."
+  },
+  {
+   "id": "b6_5.1.b_06",
+   "subtopic": "5.1.b",
+   "name": "AAA (TACACS+/RADIUS)",
+   "question": "What are the three functions represented by the 'AAA' acronym, and what does each generally address?",
+   "options": {
+    "A": "Authentication (verifying who a user is, typically via credentials), Authorization (determining what that authenticated user is permitted to do), and Accounting (recording what the user actually did, for auditing/billing purposes) — three related but distinct functions that together govern and log access to network resources",
+    "B": "AAA stands for three unrelated functions: Antenna, Amplifier, and Attenuator, with no relationship whatsoever to authentication, authorization, or accounting of network access",
+    "C": "Authentication and Authorization are simply two different names for the exact same function, with Accounting being the only actual distinct function among the three",
+    "D": "AAA functions can only ever be provided by a single specific vendor's proprietary hardware appliance, with no open protocol (TACACS+ or RADIUS) available to implement any of the three functions"
+   },
+   "correct": "A",
+   "explanation_es": "Authentication (verificar quién es un usuario, típicamente vía credenciales), Authorization (determinar qué está permitido hacer ese usuario ya autenticado), y Accounting (registrar qué hizo realmente el usuario, para auditoría/facturación) — tres funciones relacionadas pero distintas que juntas gobiernan y registran el acceso a recursos de red."
+  },
+  {
+   "id": "b6_5.1.b_07",
+   "subtopic": "5.1.b",
+   "name": "AAA (TACACS+/RADIUS)",
+   "question": "What is the general purpose of an 'AAA method list' in Cisco IOS AAA configuration?",
+   "options": {
+    "A": "A method list defines an ordered sequence of authentication (or authorization/accounting) methods to try, such as first attempting a TACACS+ server, then falling back to local authentication if the server is unreachable, allowing an administrator to define both a primary method and a resilient fallback strategy rather than relying on only a single, non-redundant method",
+    "B": "An AAA method list can only ever contain exactly one single method, making the concept of a 'list' with multiple fallback methods technically nonexistent in Cisco IOS AAA configuration",
+    "C": "Method lists have no relationship whatsoever to authentication or authorization and instead only define which VLANs are permitted on a given trunk interface",
+    "D": "Configuring a method list always and immediately disables local username-based authentication entirely, regardless of whether local authentication is explicitly included as one of the list's methods"
+   },
+   "correct": "A",
+   "explanation_es": "Una lista de métodos define una secuencia ordenada de métodos de autenticación (o autorización/accounting) a intentar, como primero intentar un servidor TACACS+, y luego caer a autenticación local si el servidor es inalcanzable, permitiendo que un administrador defina tanto un método primario como una estrategia de respaldo resiliente en lugar de depender de un único método no redundante."
+  },
+  {
+   "id": "b6_5.1.b_08",
+   "subtopic": "5.1.b",
+   "name": "AAA (TACACS+/RADIUS)",
+   "question": "Why is TACACS+'s separation of authentication and authorization into distinct exchanges particularly well suited to command-level authorization on network devices (e.g., allowing a specific user to run certain 'show' commands but not certain configuration commands)?",
+   "options": {
+    "A": "Because TACACS+ can send each individual command entered by a user to the AAA server for a distinct authorization decision (separate from the initial authentication step), it can enforce granular, per-command policy (such as permitting read-only 'show' commands for one user role while denying configuration-changing commands for that same role), which is more naturally suited to fine-grained command control than a protocol that bundles authentication and authorization together",
+    "B": "TACACS+ has no capability whatsoever to authorize individual commands and can only ever grant or deny a user's initial login, with no distinction of command-level granularity available at any point after that initial login decision",
+    "C": "Command-level authorization is a capability unique to RADIUS and is technically impossible to achieve using TACACS+ under any configuration",
+    "D": "TACACS+'s separation of authentication and authorization has no practical benefit whatsoever for command authorization and exists purely as an arbitrary protocol design choice with no real-world application"
+   },
+   "correct": "A",
+   "explanation_es": "Como TACACS+ puede enviar cada comando individual ingresado por un usuario al servidor AAA para una decisión de autorización distinta (separada del paso inicial de autenticación), puede aplicar política granular por comando (como permitir comandos 'show' de solo lectura para un rol de usuario mientras niega comandos que cambian configuración para ese mismo rol), algo más naturalmente adecuado para control fino de comandos que un protocolo que combina autenticación y autorización juntas."
+  },
+  {
+   "id": "b6_5.1.b_09",
+   "subtopic": "5.1.b",
+   "name": "AAA (TACACS+/RADIUS)",
+   "question": "What is the purpose of RADIUS 'attributes' (such as Vendor-Specific Attributes, VSAs) exchanged as part of an authentication/authorization response?",
+   "options": {
+    "A": "Attributes carry additional information beyond a simple pass/fail authentication result, such as which VLAN to assign a user to, what access-list to apply, or other vendor-specific authorization instructions, allowing RADIUS to communicate richer policy decisions to the requesting device (like a switch performing 802.1X authentication) beyond just 'permit' or 'deny'",
+    "B": "RADIUS attributes have no relationship whatsoever to conveying any policy or authorization information, and instead only carry the server's own internal software version number",
+    "C": "Vendor-Specific Attributes can only ever be used by TACACS+, and RADIUS is technically incapable of carrying any vendor-specific or standard attribute of any kind in its responses",
+    "D": "RADIUS responses can only ever contain a simple binary 'pass' or 'fail' result, with absolutely no capability to convey any additional attribute or policy instruction whatsoever"
+   },
+   "correct": "A",
+   "explanation_es": "Los atributos transportan información adicional más allá de un simple resultado pasa/no-pasa de autenticación, como a qué VLAN asignar a un usuario, qué access-list aplicar, u otras instrucciones de autorización específicas del vendor, permitiendo que RADIUS comunique decisiones de política más ricas al dispositivo solicitante (como un switch realizando autenticación 802.1X) más allá de solo 'permitir' o 'denegar'."
+  },
+  {
+   "id": "b6_5.1.b_10",
+   "subtopic": "5.1.b",
+   "name": "AAA (TACACS+/RADIUS)",
+   "question": "Why is RADIUS commonly used for 802.1X network access authentication (the 'Authentication Server' role in the 802.1X three-party model), while TACACS+ is more commonly associated with device administration (CLI access) authentication?",
+   "options": {
+    "A": "RADIUS's design (combined authentication/authorization in a single exchange, and its widespread use as the standard protocol referenced by 802.1X/EAP for network access control) made it the natural fit for network access scenarios, while TACACS+'s command-level authorization granularity made it better suited historically for administrative CLI access control on network devices; both distinctions reflect typical usage patterns rather than a strict technical requirement that only one protocol can ever be used for either purpose",
+    "B": "RADIUS and TACACS+ are functionally and historically completely interchangeable for both use cases, with no meaningful typical association between either protocol and either specific use case (network access versus device administration)",
+    "C": "TACACS+ is the protocol referenced by the 802.1X standard for network access authentication, and RADIUS is used exclusively for device administration, the reverse of their actual typical real-world usage pattern",
+    "D": "Neither RADIUS nor TACACS+ has ever been used for 802.1X network access authentication under any circumstances; 802.1X relies exclusively on a completely different, unrelated protocol"
+   },
+   "correct": "A",
+   "explanation_es": "El diseño de RADIUS (autenticación/autorización combinadas en un único intercambio, y su uso extendido como el protocolo estándar referenciado por 802.1X/EAP para control de acceso a la red) lo hizo el ajuste natural para escenarios de acceso a la red, mientras que la granularidad de autorización por comando de TACACS+ lo hizo históricamente más adecuado para control de acceso administrativo de CLI en dispositivos de red; ambas asociaciones reflejan patrones de uso típicos más que un requisito técnico estricto de que solo un protocolo pueda usarse para cada propósito."
+  },
+  {
+   "id": "b6_5.1.b_11",
+   "subtopic": "5.1.b",
+   "name": "AAA (TACACS+/RADIUS)",
+   "question": "What is the purpose of the 'shared secret' configured between a network device (AAA client) and a TACACS+/RADIUS server?",
+   "options": {
+    "A": "The shared secret is a key known only to the device and the server, used to encrypt/authenticate the AAA protocol exchange between them, verifying that messages actually come from a legitimate, trusted party and (in TACACS+'s case, for example) helping protect the confidentiality of the exchanged packet body; if the shared secrets don't match between the device and the server, AAA communication between them will generally fail",
+    "B": "The shared secret has no relationship whatsoever to authenticating or encrypting the AAA protocol exchange between the device and server, and instead only configures the device's own hostname",
+    "C": "A shared secret, once configured, is only ever used a single time during the very first AAA transaction and is then automatically and permanently discarded, playing no role in any subsequent authentication request",
+    "D": "Every single AAA client device across an entire organization must always use the exact same identical shared secret value with the AAA server, with no ability to configure a unique shared secret per device"
+   },
+   "correct": "A",
+   "explanation_es": "El shared secret es una clave conocida solo por el dispositivo y el servidor, usada para cifrar/autenticar el intercambio de protocolo AAA entre ellos, verificando que los mensajes realmente vengan de una parte legítima y confiable y (en el caso de TACACS+, por ejemplo) ayudando a proteger la confidencialidad del cuerpo del paquete intercambiado; si los shared secrets no coinciden entre el dispositivo y el servidor, la comunicación AAA entre ellos generalmente fallará."
+  },
+  {
+   "id": "b6_5.1.b_12",
+   "subtopic": "5.1.b",
+   "name": "AAA (TACACS+/RADIUS)",
+   "question": "What does 'AAA accounting' typically log, and why might this information be valuable for compliance or security auditing purposes?",
+   "options": {
+    "A": "Accounting can log details such as when a user logged in/out, which commands they executed (in TACACS+ command accounting), or how much network access/resources they consumed, providing an auditable record that can be reviewed to investigate an incident, demonstrate regulatory compliance, or simply understand who did what and when on a given device or network",
+    "B": "AAA accounting has no relationship whatsoever to logging user activity, and instead only tracks the physical inventory count of network devices in a rack",
+    "C": "Accounting records are always automatically and permanently deleted the instant they are generated, providing zero long-term auditable value for compliance or security investigation purposes",
+    "D": "AAA accounting can only log successful authentication events and is fundamentally incapable of recording any information about specific commands executed or session duration"
+   },
+   "correct": "A",
+   "explanation_es": "El accounting puede registrar detalles como cuándo un usuario inició/cerró sesión, qué comandos ejecutó (en command accounting de TACACS+), o cuántos recursos/acceso de red consumió, dando un registro auditable que se puede revisar para investigar un incidente, demostrar cumplimiento regulatorio, o simplemente entender quién hizo qué y cuándo en un dispositivo o red dado."
+  },
+  {
+   "id": "b6_5.1.b_13",
+   "subtopic": "5.1.b",
+   "name": "AAA (TACACS+/RADIUS)",
+   "question": "Why is deploying redundant (multiple) AAA servers generally recommended, rather than relying on a single centralized TACACS+/RADIUS server for an entire organization's authentication needs?",
+   "options": {
+    "A": "A single AAA server represents a single point of failure; if it becomes unreachable (due to a network issue, maintenance, or a server failure) and no redundant/backup server is configured, administrators could potentially lose the ability to authenticate to network devices via AAA (unless a local fallback method is also configured), disrupting management access across the organization",
+    "B": "Deploying multiple AAA servers provides no meaningful redundancy benefit whatsoever, since Cisco IOS AAA method lists are technically incapable of being configured with more than one single AAA server as an option",
+    "C": "A single centralized AAA server is always inherently more available and reliable than any redundant multi-server deployment, the reverse of the typical rationale for deploying server redundancy",
+    "D": "AAA servers, once deployed, can never actually become unreachable or experience any downtime under any circumstances, making redundancy planning for them entirely unnecessary in every real-world scenario"
+   },
+   "correct": "A",
+   "explanation_es": "Un único servidor AAA representa un punto único de falla; si se vuelve inalcanzable (por un problema de red, mantenimiento, o una falla del servidor) y no hay un servidor redundante/de respaldo configurado, los administradores podrían potencialmente perder la capacidad de autenticarse a los dispositivos de red vía AAA (a menos que también esté configurado un método de respaldo local), interrumpiendo el acceso de gestión en toda la organización."
+  },
+  {
+   "id": "b6_5.1.b_14",
+   "subtopic": "5.1.b",
+   "name": "AAA (TACACS+/RADIUS)",
+   "question": "What does the concept of 'AAA authorization' specifically add beyond what 'AAA authentication' alone already provides?",
+   "options": {
+    "A": "Authentication only verifies who the user actually is (validating their identity/credentials); authorization is a separate, subsequent decision about what that already-authenticated user is specifically permitted to do (such as which commands they can run, or which network resources they can access), meaning a user could be successfully authenticated yet still be denied authorization for a specific action if their authorization policy doesn't permit it",
+    "B": "Authentication and authorization are simply two different names describing exactly the same single verification step, with no meaningful distinction between confirming identity and determining permitted actions",
+    "C": "Authorization always happens before authentication in every AAA implementation, the reverse of their actual typical logical sequence (verify identity first, then determine what that verified identity is permitted to do)",
+    "D": "Once a user successfully authenticates, authorization becomes entirely unnecessary and redundant, since successful authentication alone always automatically and unconditionally grants that user full, unrestricted access to every possible action"
+   },
+   "correct": "A",
+   "explanation_es": "La autenticación solo verifica quién es realmente el usuario (validando su identidad/credenciales); la autorización es una decisión separada y posterior sobre qué está específicamente permitido hacer ese usuario ya autenticado (como qué comandos puede correr, o a qué recursos de red puede acceder), lo que significa que un usuario podría autenticarse exitosamente y aún así ser denegado en la autorización para una acción específica si su política de autorización no lo permite."
+  },
+  {
+   "id": "b6_5.1.b_15",
+   "subtopic": "5.1.b",
+   "name": "AAA (TACACS+/RADIUS)",
+   "question": "What is a 'RADIUS Change of Authorization' (CoA) message, and what does it allow a AAA server to do after a session has already been established?",
+   "options": {
+    "A": "CoA allows the RADIUS server to dynamically send an unsolicited message to the network device to modify or terminate an already-active session (for example, moving a connected client into a different VLAN, applying a new access-list, or disconnecting the session entirely) without requiring the client to fully re-authenticate from scratch, which is commonly used in NAC scenarios like changing a client's access after a posture assessment result changes",
+    "B": "CoA has no relationship whatsoever to modifying an already-established session and instead only controls the initial authentication handshake before any session is created",
+    "C": "A Change of Authorization message can only ever be sent from the network device to the RADIUS server, and RADIUS servers are technically incapable of ever sending any unsolicited message back to a network device",
+    "D": "CoA messages always and permanently and completely delete the RADIUS server's entire configuration the moment they are sent, making them an extremely destructive and rarely used feature with no legitimate operational use case"
+   },
+   "correct": "A",
+   "explanation_es": "CoA le permite al servidor RADIUS enviar dinámicamente un mensaje no solicitado al dispositivo de red para modificar o terminar una sesión ya activa (por ejemplo, mover a un cliente conectado a una VLAN distinta, aplicar una nueva access-list, o desconectar la sesión por completo) sin requerir que el cliente vuelva a autenticarse completamente desde cero, algo comúnmente usado en escenarios de NAC como cambiar el acceso de un cliente después de que cambia el resultado de una evaluación de postura."
+  },
+  {
+   "id": "b6_5.1.b_16",
+   "subtopic": "5.1.b",
+   "name": "AAA (TACACS+/RADIUS)",
+   "question": "Why might an organization use TACACS+ specifically to implement role-based command authorization that restricts a junior network operations team member to only a limited set of troubleshooting commands, while allowing senior engineers full configuration access?",
+   "options": {
+    "A": "Because TACACS+ can authorize each individual command a user attempts to enter (rather than just granting a single blanket login-level permission), the AAA server can be configured with distinct authorization policies per user/group that permit only a defined command set (like 'show' commands) for one role while granting broader configuration command access to another role, all enforced centrally from the AAA server rather than through inconsistent, manually configured local privilege levels on every individual device",
+    "B": "TACACS+ has no capability whatsoever to differentiate command authorization between different users or roles, and can only ever grant identical, full access to every single authenticated user regardless of their assigned role",
+    "C": "Role-based command restriction can only be achieved through RADIUS and is technically impossible to implement using TACACS+ under any configuration",
+    "D": "TACACS+ command authorization policies, once configured, can only ever be applied identically and universally to literally every single user account with no ability to differentiate access between individual users or defined roles"
+   },
+   "correct": "A",
+   "explanation_es": "Como TACACS+ puede autorizar cada comando individual que un usuario intenta ingresar (en lugar de solo otorgar un único permiso general a nivel de login), el servidor AAA se puede configurar con políticas de autorización distintas por usuario/grupo que permitan solo un conjunto definido de comandos (como comandos 'show') para un rol mientras otorgan acceso más amplio de comandos de configuración a otro rol, todo aplicado centralmente desde el servidor AAA en lugar de a través de niveles de privilegio locales configurados manualmente e inconsistentemente en cada dispositivo individual."
+  },
+  {
+   "id": "b6_5.1.b_17",
+   "subtopic": "5.1.b",
+   "name": "AAA (TACACS+/RADIUS)",
+   "question": "What show command is commonly used on a Cisco IOS device to verify which AAA method lists are configured and, more generally, to troubleshoot AAA-related authentication issues along with debug commands?",
+   "options": {
+    "A": "'show running-config | section aaa' (to review the configured AAA method lists and server group definitions) combined with debug commands like 'debug aaa authentication' can help an administrator verify configuration correctness and observe the actual AAA exchange in real time when troubleshooting a login or authorization failure",
+    "B": "'show vlan brief' is the only command capable of displaying any AAA-related configuration or troubleshooting information on a Cisco IOS device",
+    "C": "AAA configuration and troubleshooting can never be verified through any Cisco IOS command output and can only be diagnosed by directly examining raw packet captures on the AAA server itself",
+    "D": "'show interfaces status' displays AAA method list configuration directly alongside interface link status, with no separate AAA-specific command or debug output ever needed"
+   },
+   "correct": "A",
+   "explanation_es": "'show running-config | section aaa' (para revisar las listas de métodos AAA configuradas y las definiciones de grupos de servidores) combinado con comandos debug como 'debug aaa authentication' puede ayudar a un administrador a verificar la corrección de la configuración y observar el intercambio AAA real en tiempo real al resolver una falla de login o autorización."
+  },
+  {
+   "id": "b6_5.2.a_06",
+   "subtopic": "5.2.a",
+   "name": "ACLs",
+   "question": "Why does the order of individual statements (access-control entries) within an ACL matter so much for how traffic is actually filtered?",
+   "options": {
+    "A": "An ACL is processed top-to-bottom, and the very first statement that matches a given packet determines the action taken (permit or deny), with processing stopping at that first match; any later statements in the list — even if they would otherwise also match — are never evaluated for that particular packet, so placing a more specific statement after a broader one that already matches the same traffic renders that later, more specific statement ineffective",
+    "B": "ACL statement order has no effect whatsoever on filtering behavior, since every single statement in the list is always evaluated against every packet regardless of the order in which they appear",
+    "C": "ACLs always evaluate every statement in reverse order, from the bottom of the list to the top, the opposite of their actual top-to-bottom processing order",
+    "D": "Statement order only matters for extended ACLs and has absolutely no effect whatsoever on the behavior of standard ACLs"
+   },
+   "correct": "A",
+   "explanation_es": "Una ACL se procesa de arriba hacia abajo, y la primera sentencia que coincide con un paquete dado determina la acción tomada (permit o deny), deteniéndose el procesamiento en esa primera coincidencia; las sentencias posteriores en la lista — aunque también coincidirían — nunca se evalúan para ese paquete en particular, así que colocar una sentencia más específica después de una más amplia que ya coincide con el mismo tráfico vuelve inefectiva a esa sentencia posterior más específica."
+  },
+  {
+   "id": "b6_5.2.a_07",
+   "subtopic": "5.2.a",
+   "name": "ACLs",
+   "question": "What is the purpose of a 'wildcard mask' used in Cisco ACL configuration, and how does it conceptually differ from a standard subnet mask?",
+   "options": {
+    "A": "A wildcard mask specifies which bits of an address must match exactly (a 0 bit) versus which bits are 'don't care' and may be any value (a 1 bit) for a match to occur, which is conceptually the inverse of a standard subnet mask (where a 1 bit typically indicates the network portion that must match); this inverted logic allows ACLs to express flexible matching patterns beyond simple contiguous subnet boundaries",
+    "B": "A wildcard mask and a standard subnet mask are functionally and logically completely identical, with 1s and 0s meaning exactly the same thing in both, and the two terms being fully interchangeable with no inverted logic involved",
+    "C": "Wildcard masks can only ever specify a single exact host address and are fundamentally incapable of expressing any range or subnet-like grouping of addresses",
+    "D": "A wildcard mask determines the physical VLAN a packet must belong to for a match to occur, with no relationship whatsoever to matching IP address bits"
+   },
+   "correct": "A",
+   "explanation_es": "Una wildcard mask especifica qué bits de una dirección deben coincidir exactamente (un bit 0) versus qué bits son 'no importa' y pueden ser cualquier valor (un bit 1) para que ocurra una coincidencia, lo cual es conceptualmente el inverso de una máscara de subred estándar (donde un bit 1 típicamente indica la porción de red que debe coincidir); esta lógica invertida permite que las ACLs expresen patrones de coincidencia flexibles más allá de límites de subred contiguos simples."
+  },
+  {
+   "id": "b6_5.2.a_08",
+   "subtopic": "5.2.a",
+   "name": "ACLs",
+   "question": "What is the effect of the keyword 'any' used as a source or destination in an ACL statement, and what wildcard mask does it functionally represent?",
+   "options": {
+    "A": "'any' matches every possible address (equivalent to specifying address 0.0.0.0 with a wildcard mask of 255.255.255.255, where every bit is 'don't care'), providing a convenient shorthand for a statement intended to match all traffic regardless of that particular address field's actual value",
+    "B": "'any' matches only a single, specific address (0.0.0.0 exactly) and does not actually function as a wildcard covering the entire address space",
+    "C": "The keyword 'any' can only ever be used as a destination address in an ACL and is technically invalid/unsupported when used as a source address",
+    "D": "'any' is functionally equivalent to a wildcard mask of 0.0.0.0, requiring an exact, single-address match rather than matching every possible address"
+   },
+   "correct": "A",
+   "explanation_es": "'any' coincide con cualquier dirección posible (equivalente a especificar la dirección 0.0.0.0 con una wildcard mask de 255.255.255.255, donde cada bit es 'no importa'), dando un atajo conveniente para una sentencia pensada para coincidir con todo el tráfico sin importar el valor real de ese campo de dirección en particular."
+  },
+  {
+   "id": "b6_5.2.a_09",
+   "subtopic": "5.2.a",
+   "name": "ACLs",
+   "question": "What is the effect of the keyword 'host' used in an ACL statement (e.g., 'host 10.1.1.5'), and what wildcard mask does it functionally represent?",
+   "options": {
+    "A": "'host' matches exactly one specific single address (equivalent to specifying that address with a wildcard mask of 0.0.0.0, where every bit must match exactly), providing a convenient shorthand for a statement intended to match traffic to/from only that one precise address rather than any broader range",
+    "B": "'host' matches every possible address in the entire address space, functionally identical to the keyword 'any' rather than restricting the match to a single specific address",
+    "C": "The keyword 'host' can only be used in a standard ACL and is technically invalid/unsupported syntax within an extended ACL statement",
+    "D": "'host' is functionally equivalent to a wildcard mask of 255.255.255.255, matching every possible address rather than requiring an exact single-address match"
+   },
+   "correct": "A",
+   "explanation_es": "'host' coincide con exactamente una única dirección específica (equivalente a especificar esa dirección con una wildcard mask de 0.0.0.0, donde cada bit debe coincidir exactamente), dando un atajo conveniente para una sentencia pensada para coincidir con tráfico hacia/desde solo esa dirección precisa en lugar de cualquier rango más amplio."
+  },
+  {
+   "id": "b6_5.2.a_10",
+   "subtopic": "5.2.a",
+   "name": "ACLs",
+   "question": "Why is it generally recommended to place more specific ACL statements (matching a narrower, more precise set of traffic) before broader/more general statements within the same ACL?",
+   "options": {
+    "A": "Since ACL processing stops at the first matching statement, placing a broader statement before a more specific one that's meant to carve out an exception could cause that broader statement to match and act on the traffic first, effectively making the intended more-specific exception statement unreachable and never actually evaluated for the matching traffic",
+    "B": "Statement ordering has no relationship whatsoever to whether a more specific exception statement actually takes effect, since Cisco IOS ACLs always automatically reorder statements internally by specificity regardless of the order they were originally entered in",
+    "C": "Placing more general statements first, ahead of more specific ones, is actually the universally recommended best practice, the reverse of the guidance that specific-before-general ordering is typically needed",
+    "D": "ACL statement specificity has no bearing on processing order or outcome at all; every statement in the list is always evaluated in full for every single packet regardless of any earlier match"
+   },
+   "correct": "A",
+   "explanation_es": "Como el procesamiento de ACL se detiene en la primera sentencia coincidente, colocar una sentencia más amplia antes de una más específica pensada para dar una excepción podría causar que esa sentencia más amplia coincida y actúe sobre el tráfico primero, volviendo efectivamente inalcanzable a la sentencia de excepción más específica pretendida, que nunca llegaría a evaluarse realmente para ese tráfico."
+  },
+  {
+   "id": "b6_5.2.a_11",
+   "subtopic": "5.2.a",
+   "name": "ACLs",
+   "question": "What does 'ip access-group <name> in' versus 'ip access-group <name> out' control when applying an ACL to an interface?",
+   "options": {
+    "A": "'in' applies the ACL to traffic entering the router through that interface (evaluated before the routing decision for that traffic), while 'out' applies it to traffic exiting the router through that interface (evaluated after the routing decision has already determined that interface as the egress path), meaning the same ACL applied in different directions can produce very different filtering behavior depending on which side of the routing decision it's evaluated",
+    "B": "'in' and 'out' have no meaningful functional difference whatsoever and always produce exactly identical filtering behavior for any given ACL applied to any given interface",
+    "C": "'in' can only ever be used with standard ACLs, and 'out' can only ever be used with extended ACLs, with neither direction keyword being valid for the other ACL type",
+    "D": "Applying an ACL with the 'out' keyword always and completely disables the interface's ability to forward any traffic whatsoever in either direction"
+   },
+   "correct": "A",
+   "explanation_es": "'in' aplica la ACL al tráfico que entra al router por esa interfaz (evaluado antes de la decisión de enrutamiento para ese tráfico), mientras que 'out' la aplica al tráfico que sale del router por esa interfaz (evaluado después de que la decisión de enrutamiento ya determinó esa interfaz como el camino de salida), lo que significa que la misma ACL aplicada en direcciones distintas puede producir un comportamiento de filtrado muy diferente según de qué lado de la decisión de enrutamiento se evalúe."
+  },
+  {
+   "id": "b6_5.2.a_12",
+   "subtopic": "5.2.a",
+   "name": "ACLs",
+   "question": "What is the purpose of an ACL 'sequence number' (visible and editable in a named or numbered ACL using modern IOS syntax), and how does it help with ACL maintenance?",
+   "options": {
+    "A": "Sequence numbers allow an administrator to insert, remove, or reorder a specific individual statement within an existing ACL without needing to delete and completely retype the entire ACL from scratch, since each statement's position is explicitly identified by its own number rather than being purely implicit based on entry order",
+    "B": "Sequence numbers have no relationship whatsoever to inserting, removing, or reordering ACL statements, and instead only control which VLAN the ACL is associated with",
+    "C": "Once an ACL statement is created with a given sequence number, that number (and the statement's position) can never be changed or edited again under any circumstances, requiring the entire ACL to always be deleted and rebuilt for any single-statement change",
+    "D": "Sequence numbers are exclusively a feature of extended ACLs and have no applicability whatsoever to standard ACLs using modern IOS syntax"
+   },
+   "correct": "A",
+   "explanation_es": "Los números de secuencia le permiten a un administrador insertar, quitar, o reordenar una sentencia individual específica dentro de una ACL existente sin necesitar borrar y volver a escribir toda la ACL desde cero, ya que la posición de cada sentencia está explícitamente identificada por su propio número en lugar de ser puramente implícita según el orden de ingreso."
+  },
+  {
+   "id": "b6_5.2.a_13",
+   "subtopic": "5.2.a",
+   "name": "ACLs",
+   "question": "Why can applying an ACL to the wrong interface, or in the wrong direction, be a common source of unexpected traffic filtering behavior during troubleshooting?",
+   "options": {
+    "A": "An ACL applied to an unintended interface, or in the wrong direction (in vs out) on the intended interface, will filter a different set of traffic than what the administrator actually meant to control, potentially blocking legitimate traffic that was never meant to be filtered, or failing to filter traffic that was actually meant to be blocked, making 'show ip interface' (to verify exactly which ACL is applied where and in which direction) an important troubleshooting step",
+    "B": "An ACL applied to the wrong interface or in the wrong direction has no effect whatsoever on actual traffic filtering behavior, since Cisco IOS automatically detects and corrects any interface/direction misapplication without any administrator intervention needed",
+    "C": "ACLs can only ever be applied to a single, fixed, predetermined interface on any given router, making the scenario of applying one to 'the wrong interface' technically impossible to occur in practice",
+    "D": "Direction (in vs out) is a purely cosmetic label with no actual effect on which traffic is filtered, making it impossible for an ACL's direction to ever be a source of unexpected filtering behavior"
+   },
+   "correct": "A",
+   "explanation_es": "Una ACL aplicada a una interfaz no pretendida, o en la dirección equivocada (in vs out) en la interfaz correcta, filtrará un conjunto de tráfico distinto al que el administrador realmente quería controlar, potencialmente bloqueando tráfico legítimo que nunca se pretendía filtrar, o fallando en filtrar tráfico que sí se pretendía bloquear, haciendo que 'show ip interface' (para verificar exactamente qué ACL está aplicada dónde y en qué dirección) sea un paso importante de troubleshooting."
+  },
+  {
+   "id": "b6_5.2.a_14",
+   "subtopic": "5.2.a",
+   "name": "ACLs",
+   "question": "What does the 'log' keyword optionally added to an ACL statement (e.g., 'deny ip any any log') accomplish, and what is a potential trade-off of using it broadly?",
+   "options": {
+    "A": "The 'log' keyword causes the device to generate a syslog message whenever that specific statement matches traffic, which is useful for visibility/auditing of what's being permitted or denied, but broadly logging every match on a high-traffic statement can generate a very high volume of log messages and consume additional CPU resources, so it's often used selectively rather than on every single ACL statement",
+    "B": "The 'log' keyword has no relationship whatsoever to generating any syslog message, and instead only controls whether the ACL statement's own configuration line is displayed in 'show running-config' output",
+    "C": "Adding 'log' to an ACL statement always and immediately blocks all traffic matching that statement, converting any 'permit' action into an effective 'deny', regardless of the actual configured action keyword",
+    "D": "The 'log' keyword can only ever be applied to a 'permit' statement, and is technically invalid, unsupported syntax when used on a 'deny' statement"
+   },
+   "correct": "A",
+   "explanation_es": "El keyword 'log' hace que el dispositivo genere un mensaje de syslog cada vez que esa sentencia específica coincide con tráfico, lo cual es útil para visibilidad/auditoría de qué se está permitiendo o denegando, pero registrar ampliamente cada coincidencia en una sentencia de alto tráfico puede generar un volumen muy alto de mensajes de log y consumir recursos de CPU adicionales, así que a menudo se usa selectivamente en lugar de en cada sentencia de la ACL."
+  },
+  {
+   "id": "b6_5.2.a_15",
+   "subtopic": "5.2.a",
+   "name": "ACLs",
+   "question": "Why might an ACL be used on a router interface not just for security filtering, but also as a match criterion referenced by other features (like PBR, NAT, or QoS class-maps)?",
+   "options": {
+    "A": "An ACL's ability to precisely define a set of matching traffic (by source/destination address, protocol, port, etc.) makes it a reusable building block that many other Cisco IOS features reference as their own 'what traffic should this apply to' criterion, rather than each feature needing its own completely separate, redundant traffic-matching syntax",
+    "B": "ACLs can only ever be used for direct security filtering (permit/deny applied to an interface) and are technically incapable of being referenced by any other feature like PBR, NAT, or QoS class-maps under any Cisco IOS configuration",
+    "C": "Features like PBR, NAT, and QoS class-maps always ignore any ACL referenced within their configuration entirely, since those features are fundamentally incapable of using an ACL as a match criterion of any kind",
+    "D": "Using an ACL as a match criterion for a feature like NAT or PBR always and simultaneously also applies that same ACL as a direct security filter to every interface in the router, with no way to use it for matching purposes alone"
+   },
+   "correct": "A",
+   "explanation_es": "La capacidad de una ACL de definir con precisión un conjunto de tráfico coincidente (por dirección origen/destino, protocolo, puerto, etc.) la convierte en un bloque de construcción reutilizable que muchas otras funciones de Cisco IOS referencian como su propio criterio de 'a qué tráfico debería aplicarse esto', en lugar de que cada función necesite su propia sintaxis de coincidencia de tráfico completamente separada y redundante."
+  },
+  {
+   "id": "b6_5.2.a_16",
+   "subtopic": "5.2.a",
+   "name": "ACLs",
+   "question": "What is the general purpose of an 'infrastructure ACL' (an ACL specifically designed to protect the router/switch's own control plane and management access, as distinct from a general traffic-filtering ACL)?",
+   "options": {
+    "A": "An infrastructure ACL is specifically crafted to restrict which sources are permitted to send traffic destined to the device's own IP addresses/management interfaces (such as restricting SSH/SNMP access to only known management subnets), protecting the device's own control-plane and management surface, which is a related but distinct security goal from a general ACL filtering transit traffic passing through the device",
+    "B": "An infrastructure ACL has no relationship whatsoever to protecting the device's own control plane or management access, and instead exclusively controls physical rack mounting hardware configuration",
+    "C": "Infrastructure ACLs can only ever be applied to transit traffic passing through a device and are technically incapable of restricting access to the device's own management interfaces or control plane",
+    "D": "There is no meaningful distinction between an infrastructure ACL and any general traffic-filtering ACL; the two terms describe exactly the same single ACL use case with no difference in intent or typical scope"
+   },
+   "correct": "A",
+   "explanation_es": "Una ACL de infraestructura está específicamente diseñada para restringir qué orígenes tienen permitido enviar tráfico destinado a las propias direcciones IP/interfaces de gestión del dispositivo (como restringir el acceso SSH/SNMP solo a subredes de gestión conocidas), protegiendo la superficie de plano de control y gestión propia del dispositivo, un objetivo de seguridad relacionado pero distinto al de una ACL general que filtra tráfico de tránsito que pasa a través del dispositivo."
+  },
+  {
+   "id": "b6_5.2.a_17",
+   "subtopic": "5.2.a",
+   "name": "ACLs",
+   "question": "Why does a Cisco standard ACL's limited matching capability (source address only) make it generally unsuitable for filtering traffic based on a specific application or service (like blocking only HTTP traffic while permitting everything else from the same source)?",
+   "options": {
+    "A": "Because a standard ACL can only match on the packet's source IP address, it has no ability to differentiate between different applications/services (like HTTP vs. SSH) coming from that same source, since distinguishing by protocol and port number (Layer 4 information) requires the additional matching fields that only an extended ACL provides",
+    "B": "Standard ACLs actually have full Layer 4 port and protocol matching capability identical to extended ACLs, making this limitation a common misconception with no actual basis in how standard ACLs are defined",
+    "C": "Application-specific filtering by protocol/port is technically impossible using any type of Cisco ACL, whether standard or extended, and requires an entirely separate, unrelated firewall product instead",
+    "D": "Standard ACLs can match on destination port number just as effectively as extended ACLs, with the only actual difference between the two ACL types being their assigned numbering range"
+   },
+   "correct": "A",
+   "explanation_es": "Como una ACL estándar solo puede hacer match en la dirección IP de origen del paquete, no tiene forma de diferenciar entre distintas aplicaciones/servicios (como HTTP vs. SSH) provenientes de ese mismo origen, ya que distinguir por protocolo y número de puerto (información de Capa 4) requiere los campos de coincidencia adicionales que solo provee una ACL extendida."
   }
  ]
 }
