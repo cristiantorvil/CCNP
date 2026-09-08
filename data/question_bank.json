@@ -1,6 +1,6 @@
 {
  "version": "2026-09-08_v4",
- "total": 539,
+ "total": 586,
  "questions": [
   {
    "id": "trustsec_01",
@@ -7547,6 +7547,664 @@
    },
    "correct": "A",
    "explanation_es": "El reference bandwidth por defecto de OSPF (tradicionalmente 100 Mbps) hace que cualquier enlace igual o superior a 100 Mbps calcule al mismo costo mínimo de 1, lo cual no logra diferenciar significativamente, por ejemplo, entre un enlace de 1 Gbps y uno de 100 Gbps; aumentar el reference bandwidth en todos los routers del dominio (de forma consistente, ya que debe coincidir en todos los routers) restaura una diferenciación de costo significativa entre las interfaces de mucha mayor velocidad de hoy."
+  },
+  {
+   "id": "b6_3.2.c_07",
+   "subtopic": "3.2.c",
+   "name": "eBGP",
+   "question": "In the BGP best-path selection algorithm, after Weight and Local Preference, which attribute is typically evaluated next to help decide the best path among multiple candidates?",
+   "options": {
+    "A": "AS_PATH length: BGP generally prefers the path with the shortest AS_PATH (fewest autonomous systems traversed), all else being equal at the higher-priority Weight/Local Preference steps",
+    "B": "BGP evaluates the physical cable color of the interface next, before any other routing-related attribute",
+    "C": "The next attribute evaluated is always the destination port number of the traffic, unrelated to any BGP path attribute",
+    "D": "BGP skips directly to a purely random selection immediately after Weight, with Local Preference and AS_PATH playing no role at all"
+   },
+   "correct": "A",
+   "explanation_es": "Después de Weight y Local Preference, BGP generalmente evalúa la longitud del AS_PATH: prefiere el camino con el AS_PATH más corto (menos sistemas autónomos atravesados), siendo todo lo demás igual en los pasos de mayor prioridad."
+  },
+  {
+   "id": "b6_3.2.c_08",
+   "subtopic": "3.2.c",
+   "name": "eBGP",
+   "question": "What does the BGP 'Origin' attribute indicate about a prefix, and what are its three possible values?",
+   "options": {
+    "A": "Origin indicates how the prefix was originally introduced into BGP: IGP (originated via the 'network' command, generally most preferred), EGP (a legacy value rarely seen today), or Incomplete (typically from redistribution of another protocol into BGP, generally least preferred among the three when used as a tiebreaker)",
+    "B": "Origin refers exclusively to the physical country where the originating router is located, with no relationship to how the prefix entered BGP",
+    "C": "Origin has only a single possible value in modern BGP and is never actually used as part of the best-path selection process",
+    "D": "Origin indicates the encryption algorithm used to protect the BGP session carrying that prefix"
+   },
+   "correct": "A",
+   "explanation_es": "Origin indica cómo se introdujo originalmente el prefijo en BGP: IGP (originado vía el comando 'network', generalmente el más preferido), EGP (un valor legacy raramente visto hoy), o Incomplete (típicamente por redistribución de otro protocolo hacia BGP, generalmente el menos preferido de los tres cuando se usa como desempate)."
+  },
+  {
+   "id": "b6_3.2.c_09",
+   "subtopic": "3.2.c",
+   "name": "eBGP",
+   "question": "What is the purpose of the BGP MED (Multi-Exit Discriminator) attribute?",
+   "options": {
+    "A": "MED is a hint one autonomous system can send to a neighboring AS suggesting which of multiple entry points into the sending AS is preferred (lower MED is preferred), typically used when two ASes are connected at multiple points, to influence how the receiving AS chooses among those multiple entry paths",
+    "B": "MED encrypts the BGP session between two eBGP peers and has no relationship to path preference or entry-point selection at all",
+    "C": "MED is only relevant to iBGP sessions and is never exchanged between two different autonomous systems over an eBGP session",
+    "D": "A higher MED value is always preferred over a lower MED value, the reverse of how MED actually works in BGP best-path selection"
+   },
+   "correct": "A",
+   "explanation_es": "MED es una sugerencia que un sistema autónomo puede enviarle a un AS vecino indicando cuál de varios puntos de entrada al AS emisor es preferido (un MED más bajo es preferido), típicamente usado cuando dos ASes están conectados en múltiples puntos, para influir en cómo el AS receptor elige entre esos múltiples caminos de entrada."
+  },
+  {
+   "id": "b6_3.2.c_10",
+   "subtopic": "3.2.c",
+   "name": "eBGP",
+   "question": "Why does BGP, by default, generally only compare MED values between routes learned from the same neighboring autonomous system, rather than comparing MED across routes learned from entirely different autonomous systems?",
+   "options": {
+    "A": "Because MED values are set independently by each AS based on their own internal criteria, comparing MED values from two unrelated autonomous systems would not be a meaningful or fair comparison — MED is only intended to help choose among multiple entry points into the same single neighboring AS, not to rank unrelated ASes against each other",
+    "B": "BGP always compares MED across every route from every AS in the entire internet with no restriction of any kind on which routes are compared",
+    "C": "MED has no restriction on comparison scope at all; this default behavior does not actually exist in real BGP implementations",
+    "D": "MED is compared only between routes from the exact same router, never between routes learned from two different neighboring routers even within the same AS"
+   },
+   "correct": "A",
+   "explanation_es": "Como los valores de MED los fija cada AS de forma independiente según sus propios criterios internos, comparar valores de MED de dos sistemas autónomos no relacionados no sería una comparación significativa o justa — MED está pensado solo para ayudar a elegir entre múltiples puntos de entrada hacia el mismo AS vecino, no para rankear ASes no relacionados entre sí."
+  },
+  {
+   "id": "b6_3.2.c_11",
+   "subtopic": "3.2.c",
+   "name": "eBGP",
+   "question": "What does the BGP best-path rule 'prefer eBGP-learned paths over iBGP-learned paths' (when other higher-priority attributes are tied) reflect about typical network design intent?",
+   "options": {
+    "A": "A route learned directly from an external AS (eBGP) is often considered more direct/preferred than a route for the same prefix learned indirectly via an internal iBGP peer (which itself learned it from some other eBGP-speaking router within the same AS), reflecting a general preference for the most direct external path when other more specific attributes don't already determine a clear best path",
+    "B": "iBGP-learned paths are always preferred over eBGP-learned paths in every implementation, the reverse of the actual default best-path rule",
+    "C": "This rule has no relationship to eBGP versus iBGP distinction at all and instead compares only the physical distance in kilometers between routers",
+    "D": "eBGP and iBGP paths are never compared against each other under any circumstances in the BGP best-path algorithm"
+   },
+   "correct": "A",
+   "explanation_es": "Una ruta aprendida directamente de un AS externo (eBGP) suele considerarse más directa/preferida que una ruta para el mismo prefijo aprendida indirectamente vía un peer iBGP interno (que a su vez la aprendió de algún otro router que habla eBGP dentro del mismo AS), reflejando una preferencia general por el camino externo más directo cuando otros atributos más específicos aún no determinan un mejor camino claro."
+  },
+  {
+   "id": "b6_3.2.c_12",
+   "subtopic": "3.2.c",
+   "name": "eBGP",
+   "question": "Why is it generally required that all iBGP routers within the same autonomous system maintain a full mesh of iBGP sessions with each other (absent techniques like route reflectors or confederations)?",
+   "options": {
+    "A": "BGP's loop-prevention rule states that a router will not re-advertise a route learned via iBGP to another iBGP peer, so without a full mesh (or an alternative like route reflection), some routers within the AS might never receive certain external routes at all, since there would be no other mechanism to propagate them across every iBGP-speaking router",
+    "B": "iBGP routers are never actually required to peer with each other at all under any circumstances, since iBGP automatically propagates routes without any peering relationship needing to exist",
+    "C": "The full-mesh iBGP requirement exists purely for historical documentation reasons and has no actual technical basis rooted in BGP's loop-prevention behavior",
+    "D": "iBGP full-mesh requirements only apply to networks with a single router and have no relevance to any AS containing more than one BGP-speaking router"
+   },
+   "correct": "A",
+   "explanation_es": "La regla de prevención de loops de BGP establece que un router no volverá a anunciar una ruta aprendida vía iBGP a otro peer iBGP, así que sin una malla completa (o una alternativa como route reflection), algunos routers dentro del AS podrían nunca recibir ciertas rutas externas, ya que no habría otro mecanismo para propagarlas a través de cada router que hable iBGP."
+  },
+  {
+   "id": "b6_3.2.c_13",
+   "subtopic": "3.2.c",
+   "name": "eBGP",
+   "question": "What problem does a BGP 'Route Reflector' solve, allowing an AS to avoid a full iBGP mesh among all its internal routers?",
+   "options": {
+    "A": "A route reflector is permitted (as an exception to the standard loop-prevention rule) to re-advertise routes learned from one iBGP client peer to its other iBGP client peers, allowing 'client' routers to peer only with the route reflector(s) rather than with every other iBGP router directly, significantly reducing the number of iBGP sessions needed as the AS grows in size",
+    "B": "A route reflector eliminates the need for any BGP configuration whatsoever anywhere in the autonomous system, including on the route reflector itself",
+    "C": "Route reflectors are used exclusively in eBGP sessions between different autonomous systems and have no application to iBGP scaling within a single AS",
+    "D": "A route reflector requires every single router in the AS to still maintain a full mesh of iBGP sessions in addition to peering with the reflector, providing no reduction in session count at all"
+   },
+   "correct": "A",
+   "explanation_es": "Un route reflector tiene permitido (como excepción a la regla estándar de prevención de loops) volver a anunciar rutas aprendidas de un peer cliente iBGP a sus otros peers clientes iBGP, permitiendo que los routers 'cliente' se emparejen solo con el/los route reflector(s) en lugar de con cada otro router iBGP directamente, reduciendo significativamente la cantidad de sesiones iBGP necesarias a medida que el AS crece en tamaño."
+  },
+  {
+   "id": "b6_3.2.c_14",
+   "subtopic": "3.2.c",
+   "name": "eBGP",
+   "question": "What is a BGP 'confederation', and how does it also help address iBGP full-mesh scaling, as an alternative to route reflectors?",
+   "options": {
+    "A": "A confederation divides a single AS into multiple smaller sub-ASes (each requiring a full iBGP mesh only within itself, a much smaller number of routers), which then peer with each other using a special form of eBGP that behaves largely like iBGP externally, presenting the whole confederation as a single AS to the outside world while reducing the total iBGP mesh size needed internally",
+    "B": "A confederation has no relationship to iBGP scaling whatsoever and is used exclusively to configure MED values between unrelated autonomous systems",
+    "C": "A BGP confederation requires combining multiple separate, real autonomous systems into a single AS number with no sub-division of any kind, the opposite of its actual function",
+    "D": "Confederations can only be used in eBGP sessions and provide no benefit whatsoever for scaling iBGP relationships within a single AS"
+   },
+   "correct": "A",
+   "explanation_es": "Una confederación divide un único AS en múltiples sub-AS más pequeños (cada uno requiriendo una malla iBGP completa solo dentro de sí mismo, una cantidad mucho menor de routers), que luego se emparejan entre sí usando una forma especial de eBGP que se comporta mayormente como iBGP externamente, presentando toda la confederación como un único AS hacia el exterior mientras reduce el tamaño total de malla iBGP necesaria internamente."
+  },
+  {
+   "id": "b6_3.2.c_15",
+   "subtopic": "3.2.c",
+   "name": "eBGP",
+   "question": "What is the purpose of a BGP 'prefix-list' or 'route-map' applied to filter routes on an inbound or outbound eBGP session?",
+   "options": {
+    "A": "Prefix-lists and route-maps allow an administrator to control which specific prefixes are accepted from a neighbor (inbound filtering) or advertised to a neighbor (outbound filtering), which is important for security (preventing acceptance of illegitimate or overly broad prefixes) and for controlling routing policy (such as only advertising specific customer prefixes to an upstream provider)",
+    "B": "Prefix-lists and route-maps can only be used to filter iBGP sessions and have no applicability whatsoever to eBGP sessions between different autonomous systems",
+    "C": "These filtering tools have no relationship to which prefixes are accepted or advertised and are instead used exclusively to configure BGP timer values",
+    "D": "Applying any prefix-list or route-map to a BGP session automatically and immediately terminates that session, making inbound/outbound filtering technically incompatible with maintaining an active eBGP peering"
+   },
+   "correct": "A",
+   "explanation_es": "Los prefix-lists y route-maps permiten que un administrador controle qué prefijos específicos se aceptan de un vecino (filtrado entrante) o se anuncian a un vecino (filtrado saliente), lo cual es importante por seguridad (evitar aceptar prefijos ilegítimos o demasiado amplios) y por control de política de enrutamiento (como anunciar solo prefijos de clientes específicos a un proveedor upstream)."
+  },
+  {
+   "id": "b6_3.2.c_16",
+   "subtopic": "3.2.c",
+   "name": "eBGP",
+   "question": "Why might a network connected to the internet via two different ISPs (multihomed) use BGP rather than simply relying on two static default routes?",
+   "options": {
+    "A": "BGP can dynamically learn actual internet prefix reachability and react to real-time changes (like an ISP's upstream failure) by shifting traffic to the remaining functional path based on genuine routing information, whereas two static default routes have no inherent way to detect which specific destinations are actually reachable through which ISP, or to react intelligently to a partial failure somewhere beyond the directly connected ISP router",
+    "B": "BGP provides no advantage whatsoever over static routing in a multihomed scenario, since static routes are always equally capable of reacting to any type of remote failure",
+    "C": "Static default routes are technically incapable of being configured toward more than one ISP simultaneously under any circumstances, making BGP the only theoretically possible configuration option in any multihomed design",
+    "D": "BGP can only be used with a single ISP connection and is technically incompatible with any multihomed internet connectivity design"
+   },
+   "correct": "A",
+   "explanation_es": "BGP puede aprender dinámicamente la alcanzabilidad real de prefijos de internet y reaccionar a cambios en tiempo real (como una falla upstream de un ISP) desviando el tráfico hacia el camino funcional restante basándose en información de enrutamiento genuina, mientras que dos rutas default estáticas no tienen forma inherente de detectar qué destinos específicos son realmente alcanzables a través de qué ISP, ni de reaccionar de forma inteligente ante una falla parcial en algún punto más allá del router del ISP directamente conectado."
+  },
+  {
+   "id": "b6_3.2.c_17",
+   "subtopic": "3.2.c",
+   "name": "eBGP",
+   "question": "What does BGP 'route summarization/aggregation' toward an upstream provider typically accomplish for an organization advertising its own address space?",
+   "options": {
+    "A": "Instead of advertising every individual smaller subnet the organization uses internally, aggregation allows advertising a single summarized (aggregate) prefix that covers all of them, reducing the number of routes the organization injects into the global routing table and improving stability, since a change to one internal subnet doesn't necessarily need to be re-propagated externally if the aggregate itself remains unchanged",
+    "B": "Route summarization toward an upstream provider always increases the total number of individual routes advertised externally compared to advertising each subnet separately",
+    "C": "Aggregation in BGP has no relationship to reducing the number of advertised routes and is instead used exclusively to configure BGP session authentication",
+    "D": "BGP route summarization can only be performed by the upstream ISP and can never be configured by the customer organization advertising its own prefixes"
+   },
+   "correct": "A",
+   "explanation_es": "En lugar de anunciar cada subred individual más pequeña que la organización usa internamente, la agregación permite anunciar un único prefijo resumido (agregado) que las cubre a todas, reduciendo la cantidad de rutas que la organización inyecta en la tabla de enrutamiento global y mejorando la estabilidad, ya que un cambio en una subred interna no necesariamente necesita re-propagarse externamente si el agregado en sí permanece sin cambios."
+  },
+  {
+   "id": "b6_3.2.c_18",
+   "subtopic": "3.2.c",
+   "name": "eBGP",
+   "question": "What is the purpose of BGP communities (a BGP path attribute), and how are they commonly used in real-world routing policy?",
+   "options": {
+    "A": "BGP communities are optional, transitive tags that can be attached to a route to signal something about it (e.g., 'do not advertise to peers', 'received from a specific customer', 'prefer/de-prefer this route'), allowing routers along the path (including at other autonomous systems, if the community is honored) to apply policy decisions based on that tag without needing to match on the specific prefix itself every time",
+    "B": "BGP communities are used exclusively to configure the physical color-coding of network cables in a data center, with no relationship to routing policy",
+    "C": "A BGP community can only ever be attached to a route by the very first router that ever learns about that prefix, and can never be added, modified, or read by any other router along the path",
+    "D": "Communities have no functional purpose in BGP and exist purely as an unused, deprecated legacy attribute with zero real-world application"
+   },
+   "correct": "A",
+   "explanation_es": "Las comunidades BGP son etiquetas opcionales y transitivas que se pueden adjuntar a una ruta para señalar algo sobre ella (por ejemplo, 'no anunciar a peers', 'recibida de un cliente específico', 'preferir/despreferir esta ruta'), permitiendo que los routers a lo largo del camino (incluso en otros sistemas autónomos, si se respeta la comunidad) apliquen decisiones de política basadas en esa etiqueta sin necesitar hacer match con el prefijo específico cada vez."
+  },
+  {
+   "id": "b6_3.2.c_19",
+   "subtopic": "3.2.c",
+   "name": "eBGP",
+   "question": "Why does BGP use TCP (port 179) as its underlying transport protocol, rather than a connectionless protocol like UDP?",
+   "options": {
+    "A": "TCP provides reliable, ordered, connection-oriented delivery, which suits BGP's need to reliably exchange potentially large amounts of routing update information and maintain a stateful session between peers, rather than requiring BGP itself to implement its own reliability/ordering mechanisms on top of an unreliable transport",
+    "B": "BGP was originally designed to use UDP exclusively, and TCP support was only added as a deprecated legacy compatibility option that is never actually used in modern deployments",
+    "C": "BGP has no dependency on any transport-layer protocol at all and operates directly at Layer 2 without using either TCP or UDP",
+    "D": "TCP is used only for BGP authentication messages, while all actual routing update information is transmitted separately over UDP"
+   },
+   "correct": "A",
+   "explanation_es": "TCP provee entrega confiable, ordenada y orientada a conexión, lo cual se adapta a la necesidad de BGP de intercambiar de forma confiable potencialmente grandes cantidades de información de actualización de enrutamiento y mantener una sesión con estado entre peers, en lugar de requerir que el propio BGP implemente sus propios mecanismos de confiabilidad/orden sobre un transporte no confiable."
+  },
+  {
+   "id": "b6_3.2.c_20",
+   "subtopic": "3.2.c",
+   "name": "eBGP",
+   "question": "What does BGP 'soft reconfiguration' (or route refresh capability) allow an administrator to do without tearing down and re-establishing an existing BGP session?",
+   "options": {
+    "A": "It allows a change to inbound/outbound filtering policy (such as an updated prefix-list or route-map) to take effect by re-evaluating already-received or re-requested routing information against the new policy, without needing to reset the entire BGP session (which would otherwise cause a temporary, disruptive loss of all routes learned from that neighbor)",
+    "B": "Soft reconfiguration permanently and irreversibly disables the BGP session, requiring a full manual reconfiguration from scratch before it can ever be re-established",
+    "C": "This feature has no relationship to policy changes or filtering at all and instead controls only the physical interface's speed and duplex settings",
+    "D": "Soft reconfiguration can only be applied to newly created BGP sessions that have never previously exchanged any routes, and has no use on an already-established session"
+   },
+   "correct": "A",
+   "explanation_es": "Permite que un cambio en la política de filtrado entrante/saliente (como un prefix-list o route-map actualizado) surta efecto reevaluando información de enrutamiento ya recibida o vuelta a solicitar contra la nueva política, sin necesitar reiniciar toda la sesión BGP (lo cual de otro modo causaría una pérdida temporal y disruptiva de todas las rutas aprendidas de ese vecino)."
+  },
+  {
+   "id": "b6_3.2.c_21",
+   "subtopic": "3.2.c",
+   "name": "eBGP",
+   "question": "Why is manually filtering (or otherwise controlling) which prefixes are accepted from an eBGP peer generally considered an important security/stability practice, rather than blindly accepting every advertised route?",
+   "options": {
+    "A": "Without filtering, a misconfigured or malicious eBGP peer could advertise illegitimate, overly specific, or simply incorrect prefixes (including prefixes that don't actually belong to them, a scenario sometimes called route hijacking), which could cause the receiving router to send traffic for those destinations to the wrong place; filtering (such as accepting only prefixes actually expected from that specific peer) reduces this risk",
+    "B": "Filtering inbound BGP routes has no security or stability benefit whatsoever and only serves to unnecessarily slow down the routing table update process",
+    "C": "Every eBGP peer is inherently guaranteed to only ever advertise legitimate, correctly-owned prefixes, making any form of inbound filtering entirely unnecessary as a matter of protocol design",
+    "D": "Route filtering can only be applied to iBGP sessions internally and is technically impossible to configure on any eBGP session between two different autonomous systems"
+   },
+   "correct": "A",
+   "explanation_es": "Sin filtrado, un peer eBGP mal configurado o malicioso podría anunciar prefijos ilegítimos, demasiado específicos, o simplemente incorrectos (incluyendo prefijos que en realidad no le pertenecen, un escenario a veces llamado secuestro de rutas o route hijacking), lo cual podría causar que el router receptor envíe tráfico para esos destinos al lugar equivocado; filtrar (por ejemplo, aceptando solo los prefijos realmente esperados de ese peer específico) reduce ese riesgo."
+  },
+  {
+   "id": "b6_3.2.d_05",
+   "subtopic": "3.2.d",
+   "name": "Policy-based routing",
+   "question": "What action does the PBR route-map command 'set interface <interface-name>' perform, and what happens if that interface is down or otherwise unreachable?",
+   "options": {
+    "A": "It forwards matching traffic directly out the specified interface (useful mainly for point-to-point-like interfaces where no next-hop IP lookup is needed); if that interface is down, PBR generally falls back to normal destination-based routing table lookup for that traffic rather than blackholing it, since 'set interface' alone doesn't guarantee a valid next hop the way 'set ip next-hop' with a specific address does",
+    "B": "'set interface' has no relationship to PBR forwarding at all and is used exclusively to configure the interface's physical speed and duplex settings",
+    "C": "If the specified interface is down, PBR permanently and irreversibly disables the entire router's routing table, affecting all traffic regardless of whether it matched the PBR route-map",
+    "D": "'set interface' can only be used in a route-map applied to BGP, and has no valid use within a PBR route-map"
+   },
+   "correct": "A",
+   "explanation_es": "Reenvía el tráfico coincidente directamente por la interfaz especificada (útil principalmente para interfaces tipo punto a punto donde no hace falta una búsqueda de next-hop IP); si esa interfaz está caída, PBR generalmente cae de vuelta al enrutamiento normal basado en destino para ese tráfico en lugar de descartarlo silenciosamente, ya que 'set interface' por sí solo no garantiza un next-hop válido de la forma en que sí lo hace 'set ip next-hop' con una dirección específica."
+  },
+  {
+   "id": "b6_3.2.d_06",
+   "subtopic": "3.2.d",
+   "name": "Policy-based routing",
+   "question": "Why might an organization use PBR to route certain traffic (e.g., a specific application or a guest subnet) through a security appliance or specific inspection path, while allowing other traffic to follow the normal destination-based routing table?",
+   "options": {
+    "A": "PBR allows the organization to selectively force only the traffic matching specific criteria (like a source subnet or application signature) through a particular next hop (such as a firewall/IPS appliance) for mandatory inspection, without needing to redesign the entire network's destination-based routing just to insert that inspection point for one category of traffic",
+    "B": "PBR can only ever be applied to every single packet on the router with no ability to selectively match specific traffic types, making this targeted-inspection use case technically impossible",
+    "C": "Forcing specific traffic through a security appliance can only be accomplished using a dedicated physical cable for every single flow, with PBR playing no role in that design at all",
+    "D": "PBR permanently disables the ability to reach any destination not explicitly listed in its route-map, making it unsuitable for selectively redirecting only some traffic"
+   },
+   "correct": "A",
+   "explanation_es": "PBR le permite a la organización forzar selectivamente solo el tráfico que coincide con criterios específicos (como una subred origen o una firma de aplicación) a través de un next-hop en particular (como un firewall/IPS) para inspección obligatoria, sin necesitar rediseñar todo el enrutamiento basado en destino de la red solo para insertar ese punto de inspección para una categoría de tráfico."
+  },
+  {
+   "id": "b6_3.2.d_07",
+   "subtopic": "3.2.d",
+   "name": "Policy-based routing",
+   "question": "What is a potential operational risk of PBR that network engineers must consider, given that it overrides the normal destination-based routing table for matching traffic?",
+   "options": {
+    "A": "Because PBR can silently redirect traffic away from the path that normal routing/troubleshooting tools (like traceroute against the destination-based table) would suggest, misconfigured or poorly documented PBR policies can make network troubleshooting significantly more confusing, and a PBR policy pointing to an unreachable or incorrect next hop can cause traffic to be dropped even though the destination is otherwise reachable via normal routing",
+    "B": "PBR carries no operational risk whatsoever and is universally considered safer and simpler to troubleshoot than standard destination-based routing in every single scenario",
+    "C": "PBR can only affect traffic that is already being dropped by the normal routing table, meaning it can never introduce any new problem or unexpected forwarding behavior",
+    "D": "Once configured, PBR policies can never be modified or removed, making any misconfiguration permanent for the life of the router"
+   },
+   "correct": "A",
+   "explanation_es": "Como PBR puede redirigir silenciosamente el tráfico lejos del camino que sugerirían las herramientas normales de enrutamiento/troubleshooting (como un traceroute contra la tabla basada en destino), políticas de PBR mal configuradas o poco documentadas pueden hacer el troubleshooting de red significativamente más confuso, y una política de PBR que apunte a un next-hop inalcanzable o incorrecto puede causar que se descarte tráfico aunque el destino sea alcanzable normalmente por enrutamiento estándar."
+  },
+  {
+   "id": "b6_3.2.d_08",
+   "subtopic": "3.2.d",
+   "name": "Policy-based routing",
+   "question": "In a PBR route-map with multiple numbered sequences (e.g., 'route-map PBR-POLICY permit 10' and 'route-map PBR-POLICY permit 20'), how does the router process traffic against these sequences?",
+   "options": {
+    "A": "The router evaluates the sequences in numerical order (lowest first) and applies the actions of the first sequence whose match criteria the packet satisfies, similar to how an ACL is processed top-to-bottom; if a packet matches none of the sequences (and there's no explicit permit-all catch-all), it typically falls back to normal destination-based routing",
+    "B": "All sequences in the route-map are always applied simultaneously to every single packet, regardless of order, with every matching sequence's actions being combined together",
+    "C": "Route-map sequence numbers have no effect on processing order whatsoever, since PBR always evaluates every sequence in a purely random order for each packet",
+    "D": "Only the very last sequence number in the entire route-map is ever evaluated; all earlier sequence numbers are automatically ignored and serve no functional purpose"
+   },
+   "correct": "A",
+   "explanation_es": "El router evalúa las secuencias en orden numérico (la más baja primero) y aplica las acciones de la primera secuencia cuyos criterios de coincidencia satisfaga el paquete, de forma similar a cómo se procesa una ACL de arriba hacia abajo; si un paquete no coincide con ninguna secuencia (y no hay un permit-all explícito de respaldo), típicamente vuelve al enrutamiento normal basado en destino."
+  },
+  {
+   "id": "b6_3.2.d_09",
+   "subtopic": "3.2.d",
+   "name": "Policy-based routing",
+   "question": "What does the PBR route-map action 'set ip precedence' or 'set ip dscp' allow an administrator to do, in combination with a match criterion identifying certain traffic?",
+   "options": {
+    "A": "It allows PBR to also perform QoS marking (setting IP precedence or DSCP) on traffic matching the route-map's criteria, meaning a single route-map policy could both redirect traffic to a specific next hop AND mark it for downstream QoS treatment at the same time, combining routing and marking actions",
+    "B": "'set ip precedence' and 'set ip dscp' have no relationship whatsoever to PBR and can only be configured within a dedicated QoS policy-map, never within a PBR route-map",
+    "C": "These commands can only be used to permanently disable QoS marking on all traffic passing through the router, regardless of any match criteria",
+    "D": "Setting IP precedence or DSCP within a PBR route-map immediately and unconditionally overrides the destination-based routing table for every single packet on the router, regardless of whether it matches the route-map"
+   },
+   "correct": "A",
+   "explanation_es": "Permite que PBR también realice marcado de QoS (fijando IP precedence o DSCP) sobre el tráfico que coincide con los criterios del route-map, es decir, una única política de route-map podría tanto redirigir el tráfico a un next-hop específico COMO marcarlo para tratamiento de QoS aguas abajo al mismo tiempo, combinando acciones de enrutamiento y de marcado."
+  },
+  {
+   "id": "b6_3.2.d_10",
+   "subtopic": "3.2.d",
+   "name": "Policy-based routing",
+   "question": "Why is PBR typically evaluated and applied before the router consults its normal destination-based routing table (RIB) for a given inbound packet?",
+   "options": {
+    "A": "PBR is designed to override the default forwarding decision for matching traffic, so it must be checked first; if PBR had to consult the RIB before deciding whether to apply its own policy, it couldn't meaningfully redirect traffic away from whatever the RIB would have otherwise chosen — the whole point of PBR is to intercept the forwarding decision earlier in the process",
+    "B": "PBR is actually evaluated only after the destination-based routing table lookup completes, and can never override an already-determined RIB decision, contrary to its actual design intent",
+    "C": "The order of evaluation between PBR and the RIB is entirely random and unpredictable on every packet, with no consistent processing sequence defined by Cisco IOS",
+    "D": "PBR and the destination-based routing table are evaluated completely independently and simultaneously with no interaction or precedence between the two whatsoever"
+   },
+   "correct": "A",
+   "explanation_es": "PBR está diseñado para anular la decisión de reenvío por defecto para el tráfico coincidente, así que debe verificarse primero; si PBR tuviera que consultar la RIB antes de decidir si aplicar su propia política, no podría redirigir de forma significativa el tráfico lejos de lo que la RIB hubiera elegido de otro modo — todo el punto de PBR es interceptar la decisión de reenvío más temprano en el proceso."
+  },
+  {
+   "id": "b6_3.2.d_11",
+   "subtopic": "3.2.d",
+   "name": "Policy-based routing",
+   "question": "How can PBR be used to implement a simple form of load distribution across two ISP uplinks, based on source subnet, without needing a dynamic routing protocol like BGP?",
+   "options": {
+    "A": "By writing PBR route-map sequences that match different source subnets (e.g., subnet A matches sequence 10 and gets 'set ip next-hop' pointing toward ISP-1, while subnet B matches sequence 20 and gets 'set ip next-hop' pointing toward ISP-2), an administrator can deterministically split outbound traffic between the two uplinks based purely on where the traffic originated, without relying on BGP or any dynamic protocol to make that split",
+    "B": "PBR is fundamentally incapable of influencing which of two available uplinks traffic uses, and can only ever affect traffic destined to a single, fixed next hop configured identically for all traffic",
+    "C": "Achieving any form of traffic split between two ISP uplinks always strictly requires running full BGP with both providers, with PBR offering no alternative mechanism whatsoever",
+    "D": "PBR-based load distribution requires physically disconnecting one of the two ISP links entirely before it can be configured, making true dual-active uplink usage technically impossible with PBR"
+   },
+   "correct": "A",
+   "explanation_es": "Escribiendo secuencias de route-map de PBR que coincidan con distintas subredes de origen (por ejemplo, la subred A coincide con la secuencia 10 y recibe 'set ip next-hop' apuntando hacia ISP-1, mientras la subred B coincide con la secuencia 20 y recibe 'set ip next-hop' apuntando hacia ISP-2), un administrador puede dividir de forma determinística el tráfico saliente entre los dos uplinks según de dónde se originó el tráfico, sin depender de BGP ni de ningún protocolo dinámico para hacer esa división."
+  },
+  {
+   "id": "b6_3.2.d_12",
+   "subtopic": "3.2.d",
+   "name": "Policy-based routing",
+   "question": "What is the effect of applying 'ip local policy route-map <name>' on a router, as opposed to applying 'ip policy route-map <name>' on a specific interface?",
+   "options": {
+    "A": "'ip local policy route-map' applies PBR to traffic that is actually originated BY the router itself (locally generated traffic, such as pings sourced from the router or its own management traffic), whereas 'ip policy route-map' on an interface applies to transit traffic arriving on that interface from other devices",
+    "B": "'ip local policy route-map' and 'ip policy route-map' are functionally and completely identical commands, differing only in which IOS version supports each syntax variant",
+    "C": "'ip local policy route-map' can only be applied to traffic destined for a completely different router elsewhere in the network, never to traffic the local router itself originates",
+    "D": "Local policy route-maps apply exclusively to traffic destined for multicast addresses, with no relationship to router-originated unicast traffic at all"
+   },
+   "correct": "A",
+   "explanation_es": "'ip local policy route-map' aplica PBR al tráfico que en realidad se origina EN el propio router (tráfico generado localmente, como pings originados desde el router o su propio tráfico de gestión), mientras que 'ip policy route-map' en una interfaz se aplica al tráfico de tránsito que llega por esa interfaz desde otros dispositivos."
+  },
+  {
+   "id": "b6_3.2.d_13",
+   "subtopic": "3.2.d",
+   "name": "Policy-based routing",
+   "question": "Why might an administrator use an extended access-list (rather than a standard access-list) as the match criterion within a PBR route-map?",
+   "options": {
+    "A": "An extended ACL allows matching on more granular criteria than just source IP address alone — such as destination IP, protocol (TCP/UDP/ICMP), and Layer 4 port numbers — enabling PBR to make forwarding decisions based on much more specific traffic characteristics, such as redirecting only a particular application's traffic rather than everything from a given source subnet",
+    "B": "Extended ACLs have no additional matching capability compared to standard ACLs and are chosen purely by personal preference with no functional difference for PBR purposes",
+    "C": "Standard ACLs can match on destination port numbers just as well as extended ACLs, making the choice between them entirely arbitrary for PBR use cases involving application-specific matching",
+    "D": "PBR route-maps can only ever reference standard ACLs and are technically incompatible with extended ACLs as a match criterion"
+   },
+   "correct": "A",
+   "explanation_es": "Una ACL extendida permite hacer match en criterios mucho más granulares que solo la IP de origen — como IP destino, protocolo (TCP/UDP/ICMP), y números de puerto de Capa 4 — permitiendo que PBR tome decisiones de reenvío basadas en características de tráfico mucho más específicas, como redirigir solo el tráfico de una aplicación particular en lugar de todo el tráfico de una subred de origen dada."
+  },
+  {
+   "id": "b6_3.2.d_14",
+   "subtopic": "3.2.d",
+   "name": "Policy-based routing",
+   "question": "What verification command is commonly used to confirm which PBR route-map is applied to a given interface, and to see basic statistics about matched traffic?",
+   "options": {
+    "A": "'show ip policy' displays which route-map is applied to each interface via PBR, while 'show route-map <name>' (with policy routing counters) can show how many packets have matched each sequence, helping verify that the policy is actually being applied to real traffic as expected",
+    "B": "'show vlan brief' is the only command capable of displaying PBR route-map application status on an interface",
+    "C": "PBR configuration and matched-traffic statistics can never be verified through any Cisco IOS 'show' command; this can only be done through third-party packet capture tools",
+    "D": "'show interfaces status' displays PBR route-map statistics directly alongside interface link status, with no separate command needed"
+   },
+   "correct": "A",
+   "explanation_es": "'show ip policy' muestra qué route-map está aplicado a cada interfaz vía PBR, mientras que 'show route-map <nombre>' (con contadores de policy routing) puede mostrar cuántos paquetes coincidieron con cada secuencia, ayudando a verificar que la política realmente se esté aplicando al tráfico real como se espera."
+  },
+  {
+   "id": "b6_3.2.d_15",
+   "subtopic": "3.2.d",
+   "name": "Policy-based routing",
+   "question": "Why is PBR sometimes described as a tool for implementing 'policy-based' rather than purely 'topology-based' routing decisions?",
+   "options": {
+    "A": "Standard destination-based routing decisions are fundamentally driven by network topology and reachability information (the shortest/best path to a destination), whereas PBR allows forwarding decisions to be driven by administrative policy considerations (such as source, application, compliance requirements, or cost) that may have nothing to do with which path is topologically shortest or best according to a routing protocol's metric",
+    "B": "PBR and standard destination-based routing are functionally identical in every respect, with 'policy-based' being purely a marketing term with no actual distinction in decision-making criteria",
+    "C": "PBR can only ever make decisions based on network topology, exactly like standard routing, and has no capability to consider any administrative or business policy criteria at all",
+    "D": "The term 'policy-based' refers exclusively to which physical port color is used, unrelated to any actual routing decision logic"
+   },
+   "correct": "A",
+   "explanation_es": "Las decisiones de enrutamiento basado en destino estándar están fundamentalmente impulsadas por la topología de red y la información de alcanzabilidad (el camino más corto/mejor hacia un destino), mientras que PBR permite que las decisiones de reenvío se guíen por consideraciones de política administrativa (como origen, aplicación, requisitos de cumplimiento, o costo) que pueden no tener nada que ver con cuál camino es topológicamente más corto o mejor según la métrica de un protocolo de enrutamiento."
+  },
+  {
+   "id": "b6_3.2.d_16",
+   "subtopic": "3.2.d",
+   "name": "Policy-based routing",
+   "question": "What consideration is important regarding the placement (which router/interface) where PBR is applied in a multi-hop network path, given that PBR is only evaluated on the router where it's directly configured?",
+   "options": {
+    "A": "PBR only affects the forwarding decision made on the specific router/interface where it's configured; once a packet leaves that router (having been redirected to a particular next hop), subsequent routers along the path make their own independent forwarding decisions based on their own routing table (or their own PBR policy, if configured), so PBR does not itself dictate the entire multi-hop path end-to-end by configuring it on just one router",
+    "B": "Configuring PBR on a single router automatically propagates and enforces that identical policy on every other router in the entire network with no additional configuration required anywhere else",
+    "C": "PBR configured on one router has no effect on that router's own forwarding decisions and instead only affects a completely different, unrelated router elsewhere in the topology",
+    "D": "PBR must always be configured identically on every single router in a network path, or it will fail to take effect on even the router where it was actually configured"
+   },
+   "correct": "A",
+   "explanation_es": "PBR solo afecta la decisión de reenvío tomada en el router/interfaz específico donde está configurado; una vez que un paquete sale de ese router (habiendo sido redirigido a un next-hop en particular), los routers subsiguientes a lo largo del camino toman sus propias decisiones de reenvío independientes basadas en su propia tabla de enrutamiento (o su propia política PBR, si está configurada), así que PBR no dicta por sí solo todo el camino de múltiples saltos de extremo a extremo con solo configurarlo en un router."
+  },
+  {
+   "id": "b6_3.2.d_17",
+   "subtopic": "3.2.d",
+   "name": "Policy-based routing",
+   "question": "How might PBR be used to implement a basic form of 'policy-based failover', redirecting traffic to a backup path only under certain conditions, when combined with object tracking (the 'track' feature)?",
+   "options": {
+    "A": "A PBR route-map's 'set ip next-hop verify-availability' option (combined with a tracked object, such as an IP SLA probe) can be configured to only apply the specified next hop if the tracked condition indicates that next hop is actually reachable, allowing PBR to automatically skip a specific 'set' action and fall back to another sequence (or to normal routing) if the primary path being tracked becomes unavailable",
+    "B": "PBR has no mechanism whatsoever to consider the reachability of a next hop before applying a 'set' action, and will always blindly forward to a configured next hop even if that next hop is completely unreachable",
+    "C": "Object tracking can only be used with FHRP protocols like HSRP and has no possible integration with PBR route-maps of any kind",
+    "D": "PBR failover based on tracked object state requires manually removing and re-adding the entire route-map configuration by hand every time a failure occurs, with no automated conditional behavior possible"
+   },
+   "correct": "A",
+   "explanation_es": "La opción 'set ip next-hop verify-availability' de un route-map de PBR (combinada con un objeto rastreado, como una prueba de IP SLA) puede configurarse para aplicar el next-hop especificado solo si la condición rastreada indica que ese next-hop realmente es alcanzable, permitiendo que PBR se salte automáticamente una acción 'set' específica y caiga de vuelta a otra secuencia (o al enrutamiento normal) si el camino primario que se está rastreando se vuelve inalcanzable."
+  },
+  {
+   "id": "b6_3.2.d_18",
+   "subtopic": "3.2.d",
+   "name": "Policy-based routing",
+   "question": "Why does PBR generally need to be reapplied/reconfigured carefully (rather than assumed to 'just work') after significant network changes, such as adding a new next-hop router or renumbering a subnet used in its match criteria?",
+   "options": {
+    "A": "Because PBR relies on statically configured match criteria (like specific ACLs referencing particular addresses) and explicitly configured 'set' actions (like a specific next-hop IP address), it does not automatically adapt to network changes the way dynamic routing protocols do; if the referenced addresses, subnets, or next hops change, the PBR configuration itself must be manually updated to remain accurate and effective",
+    "B": "PBR automatically and dynamically updates itself to reflect any network topology change with zero administrator intervention required, behaving identically to a fully dynamic routing protocol in this respect",
+    "C": "Network changes have no effect whatsoever on PBR configuration validity, since PBR route-maps are entirely independent of any IP addressing or topology information",
+    "D": "PBR configurations are permanently locked once applied and can never be modified or updated under any circumstances, even manually by an administrator"
+   },
+   "correct": "A",
+   "explanation_es": "Como PBR depende de criterios de coincidencia configurados estáticamente (como ACLs específicas que referencian direcciones particulares) y acciones 'set' configuradas explícitamente (como una dirección IP de next-hop específica), no se adapta automáticamente a los cambios de red de la forma en que sí lo hacen los protocolos de enrutamiento dinámico; si las direcciones, subredes o next-hops referenciados cambian, la configuración de PBR en sí debe actualizarse manualmente para seguir siendo precisa y efectiva."
+  },
+  {
+   "id": "b6_3.2.d_19",
+   "subtopic": "3.2.d",
+   "name": "Policy-based routing",
+   "question": "In what scenario would 'set ip default next-hop' (as opposed to 'set ip next-hop') be the more appropriate PBR action to configure?",
+   "options": {
+    "A": "When the intent is to only override the destination for traffic that the router would otherwise have no explicit route for (falling back to the specified default next hop only in the absence of a more specific route in the routing table), rather than unconditionally forcing every matching packet to a specific next hop regardless of what the routing table already knows",
+    "B": "'set ip default next-hop' and 'set ip next-hop' are completely interchangeable in every scenario, with the choice between them having zero practical effect on PBR behavior",
+    "C": "'set ip default next-hop' should always be used instead of 'set ip next-hop' in every single PBR policy, since 'set ip next-hop' is deprecated and no longer supported on any current IOS release",
+    "D": "'set ip default next-hop' can only be applied to multicast traffic and has no valid use for unicast PBR policies"
+   },
+   "correct": "A",
+   "explanation_es": "Cuando la intención es solo anular el destino para el tráfico que de otro modo el router no tendría una ruta explícita para él (cayendo de vuelta al next-hop default especificado solo en ausencia de una ruta más específica en la tabla de enrutamiento), en lugar de forzar incondicionalmente cada paquete coincidente hacia un next-hop específico sin importar lo que la tabla de enrutamiento ya sepa."
+  },
+  {
+   "id": "b6_3.2.d_20",
+   "subtopic": "3.2.d",
+   "name": "Policy-based routing",
+   "question": "Why can PBR be particularly useful in a scenario where compliance or regulatory requirements dictate that certain categories of traffic (e.g., traffic subject to specific data residency rules) must always exit through a particular, designated path, regardless of the normal shortest/best routing path?",
+   "options": {
+    "A": "PBR allows the organization to explicitly and deterministically enforce that specific, identifiable traffic (matched by criteria like source subnet or application) always uses the mandated compliance-required path, overriding whatever the dynamic routing protocol's metric-based decision would otherwise have chosen, which is exactly the kind of administrative-policy-driven override that PBR is designed to provide",
+    "B": "Compliance and regulatory routing requirements can only ever be satisfied through manual, box-by-box static route configuration, with PBR offering no relevant capability for this use case at all",
+    "C": "PBR is fundamentally incapable of overriding a dynamic routing protocol's chosen best path under any circumstances, making it entirely unsuitable for enforcing compliance-driven path requirements",
+    "D": "This type of compliance requirement can only be satisfied by physically disconnecting every alternate network path, since PBR has no software-based mechanism to enforce a specific path"
+   },
+   "correct": "A",
+   "explanation_es": "PBR le permite a la organización forzar explícita y determinísticamente que cierto tráfico específico e identificable (según criterios como subred de origen o aplicación) siempre use el camino requerido por cumplimiento normativo, anulando lo que la decisión basada en métrica del protocolo de enrutamiento dinámico hubiera elegido de otro modo — exactamente el tipo de anulación impulsada por política administrativa que PBR está diseñado para proveer."
+  },
+  {
+   "id": "b6_3.2.d_21",
+   "subtopic": "3.2.d",
+   "name": "Policy-based routing",
+   "question": "What happens to traffic that matches a PBR route-map sequence with a 'deny' action (as opposed to a 'permit' action), in terms of how PBR handles it?",
+   "options": {
+    "A": "Traffic matching a route-map sequence configured with 'deny' is exempted from that specific PBR policy's 'set' actions and instead falls through to be handled by normal destination-based routing (or evaluated against subsequent route-map sequences, depending on the exact configuration), rather than being outright dropped by that deny statement the way a deny in a firewall ACL would drop traffic",
+    "B": "A 'deny' action within a PBR route-map always causes the matching traffic to be silently and permanently dropped, identical in effect to a deny statement within a security-focused firewall ACL",
+    "C": "PBR route-maps do not support any concept of permit or deny actions at all; every sequence unconditionally applies its 'set' actions to any matching traffic",
+    "D": "'deny' within a PBR route-map has the exact same effect as 'permit', with the two keywords being fully interchangeable and producing identical PBR behavior"
+   },
+   "correct": "A",
+   "explanation_es": "El tráfico que coincide con una secuencia de route-map configurada con 'deny' queda exento de las acciones 'set' de esa política PBR específica y en cambio cae hacia el enrutamiento normal basado en destino (o se evalúa contra secuencias posteriores del route-map, según la configuración exacta), en lugar de descartarse directamente por ese deny como lo haría un deny en una ACL de firewall."
+  },
+  {
+   "id": "b6_3.3.a_07",
+   "subtopic": "3.3.a",
+   "name": "NTP/PTP",
+   "question": "What is the difference between NTP operating in 'client/server' mode versus 'symmetric active/passive' mode?",
+   "options": {
+    "A": "In client/server mode, a client synchronizes its time from a server but the server does not synchronize from the client; in symmetric active/passive mode, both peers can potentially synchronize time from each other, which is useful for peer routers that want mutual backup time sources rather than a strict one-way client-to-server hierarchy",
+    "B": "Client/server and symmetric active/passive modes are functionally identical, differing only in which port number NTP uses for each mode",
+    "C": "Symmetric mode requires that a device never actually receive any time information from any peer, making it purely a listen-only mode",
+    "D": "Client/server mode requires exactly three separate NTP servers to be configured simultaneously, while symmetric mode requires exactly one"
+   },
+   "correct": "A",
+   "explanation_es": "En modo cliente/servidor, un cliente sincroniza su hora desde un servidor pero el servidor no se sincroniza desde el cliente; en modo simétrico activo/pasivo, ambos peers pueden potencialmente sincronizar la hora entre sí, lo cual es útil para routers peer que quieren fuentes de tiempo de respaldo mutuo en lugar de una jerarquía estricta de cliente-a-servidor en un solo sentido."
+  },
+  {
+   "id": "b6_3.3.a_08",
+   "subtopic": "3.3.a",
+   "name": "NTP/PTP",
+   "question": "Why does NTP typically query multiple time servers rather than relying on just one, and how does it use the responses from those multiple sources?",
+   "options": {
+    "A": "NTP uses an algorithm to compare responses from multiple sources, discard outliers/falsetickers (sources whose time appears inconsistent with the majority), and select the most statistically reliable subset of sources to synchronize from, improving accuracy and providing resilience if a single time source becomes inaccurate or unreachable",
+    "B": "NTP can only ever query exactly one single time source and has no mechanism whatsoever to use or compare multiple sources",
+    "C": "Querying multiple servers has no effect on accuracy or resilience; NTP always simply uses whichever server happens to respond fastest, regardless of the actual time value returned",
+    "D": "NTP averages the time from every single configured server with completely equal weight in every case, with no mechanism to discard a server providing clearly incorrect time"
+   },
+   "correct": "A",
+   "explanation_es": "NTP usa un algoritmo para comparar respuestas de múltiples fuentes, descartar valores atípicos/falsetickers (fuentes cuya hora parece inconsistente con la mayoría), y seleccionar el subconjunto de fuentes estadísticamente más confiable para sincronizarse, mejorando la precisión y dando resiliencia si una sola fuente de tiempo se vuelve inexacta o inalcanzable."
+  },
+  {
+   "id": "b6_3.3.a_09",
+   "subtopic": "3.3.a",
+   "name": "NTP/PTP",
+   "question": "Why is having accurate, synchronized time across network devices particularly important for security log correlation and forensic investigation?",
+   "options": {
+    "A": "When investigating a security incident that spans multiple devices (firewalls, switches, servers), consistent timestamps allow an analyst to accurately reconstruct the sequence of events across those devices; if clocks are unsynchronized or drifted, correlating log entries from different devices to build an accurate timeline becomes significantly more difficult or unreliable",
+    "B": "Time synchronization has no relationship whatsoever to security log analysis or forensic investigation, and is relevant only to unrelated applications like billing systems",
+    "C": "Log correlation across multiple devices is always accurate and reliable regardless of whether the devices' clocks are synchronized, since log analysis tools automatically compensate for any clock drift",
+    "D": "Security investigations rely exclusively on physical evidence and never reference timestamp information from network device logs at all"
+   },
+   "correct": "A",
+   "explanation_es": "Al investigar un incidente de seguridad que abarca múltiples dispositivos (firewalls, switches, servidores), marcas de tiempo consistentes le permiten a un analista reconstruir con precisión la secuencia de eventos entre esos dispositivos; si los relojes están desincronizados o desviados, correlacionar entradas de log de distintos dispositivos para armar una línea de tiempo precisa se vuelve significativamente más difícil o poco confiable."
+  },
+  {
+   "id": "b6_3.3.a_10",
+   "subtopic": "3.3.a",
+   "name": "NTP/PTP",
+   "question": "What is the general purpose of NTP 'orphan mode' or a locally configured 'master' clock (e.g., 'ntp master' on a Cisco device) in an isolated network with no reachable external time source?",
+   "options": {
+    "A": "It allows a device to act as an authoritative time source for the rest of the local network even without a reachable upstream/external time reference, ensuring that devices within that isolated network still have a consistent, common time reference among themselves, even if that time isn't necessarily traceable back to a globally accurate external source",
+    "B": "NTP master mode requires an active internet connection at all times and cannot function in any isolated or air-gapped network under any circumstances",
+    "C": "Configuring a device as an NTP master permanently disables time synchronization for every other device in the network, the opposite of its intended purpose",
+    "D": "'ntp master' mode has no relationship to time synchronization whatsoever and instead configures which VLANs are permitted on a trunk"
+   },
+   "correct": "A",
+   "explanation_es": "Permite que un dispositivo actúe como fuente de tiempo autoritativa para el resto de la red local incluso sin una referencia de tiempo upstream/externa alcanzable, asegurando que los dispositivos dentro de esa red aislada sigan teniendo una referencia de tiempo consistente y común entre sí, aunque ese tiempo no sea necesariamente trazable hasta una fuente externa globalmente precisa."
+  },
+  {
+   "id": "b6_3.3.a_11",
+   "subtopic": "3.3.a",
+   "name": "NTP/PTP",
+   "question": "Why does PTP (Precision Time Protocol) rely on hardware timestamping at the network interface level, rather than purely software-based timestamping, to achieve its high precision?",
+   "options": {
+    "A": "Software-based timestamping is subject to variable delays introduced by the operating system's processing (interrupt handling, scheduling, buffering), which can introduce microsecond-to-millisecond-level jitter; hardware timestamping captures the exact moment a PTP message actually crosses the physical network interface, eliminating that software-induced variability and enabling PTP's much tighter (sub-microsecond) precision",
+    "B": "PTP never uses hardware timestamping under any circumstances and instead relies entirely and exclusively on software-based timestamping, identical to NTP's typical approach",
+    "C": "Hardware timestamping has no effect on PTP's achievable precision, and PTP would perform identically whether using hardware or purely software-based timestamping",
+    "D": "Hardware timestamping is used exclusively to encrypt PTP messages and has no relationship to timing accuracy or jitter reduction"
+   },
+   "correct": "A",
+   "explanation_es": "El timestamping por software está sujeto a retrasos variables introducidos por el procesamiento del sistema operativo (manejo de interrupciones, scheduling, buffering), lo cual puede introducir jitter del orden de microsegundos a milisegundos; el timestamping por hardware captura el momento exacto en que un mensaje PTP realmente cruza la interfaz de red física, eliminando esa variabilidad inducida por software y habilitando la precisión mucho más ajustada (sub-microsegundo) de PTP."
+  },
+  {
+   "id": "b6_3.3.a_12",
+   "subtopic": "3.3.a",
+   "name": "NTP/PTP",
+   "question": "What is a 'boundary clock' in a PTP (IEEE 1588) network, and what problem does it solve for large or multi-hop PTP deployments?",
+   "options": {
+    "A": "A boundary clock has one PTP port synchronizing to an upstream master (acting as a slave toward it) and one or more other PTP ports acting as a master toward downstream devices, effectively re-timing and forwarding synchronization at each hop rather than requiring every single downstream device to synchronize directly and solely with the original grandmaster clock, which helps PTP scale and maintain accuracy across many network hops",
+    "B": "A boundary clock refers exclusively to a physical geographic fence around the data center where PTP-capable equipment is installed, with no relationship to timing synchronization roles",
+    "C": "Boundary clocks are used only in NTP deployments and have no equivalent role or relevance in any PTP (IEEE 1588) architecture",
+    "D": "A boundary clock's sole function is to permanently block all PTP traffic from crossing between two network segments, acting purely as a security filter"
+   },
+   "correct": "A",
+   "explanation_es": "Un boundary clock tiene un puerto PTP sincronizándose hacia un maestro upstream (actuando como esclavo hacia él) y uno o más otros puertos PTP actuando como maestro hacia dispositivos downstream, re-sincronizando y reenviando efectivamente la sincronización en cada salto en lugar de requerir que cada dispositivo downstream se sincronice directa y únicamente con el reloj grandmaster original, lo cual ayuda a que PTP escale y mantenga precisión a través de muchos saltos de red."
+  },
+  {
+   "id": "b6_3.3.a_13",
+   "subtopic": "3.3.a",
+   "name": "NTP/PTP",
+   "question": "What is a 'transparent clock' in a PTP network, and how does its function differ from a boundary clock's?",
+   "options": {
+    "A": "A transparent clock does not terminate and re-originate the PTP synchronization exchange the way a boundary clock does; instead, it measures and corrects for the residence time (the time a PTP message spends transiting through that particular switch/device) by adjusting a correction field within the PTP message itself, allowing downstream devices to compensate for the delay introduced by that intermediate device without the transparent clock acting as its own master/slave hierarchy point",
+    "B": "A transparent clock and a boundary clock perform exactly identical functions with no distinction between the two roles whatsoever",
+    "C": "A transparent clock physically becomes invisible/undetectable to any network monitoring tool, which is unrelated to any actual PTP timing function",
+    "D": "Transparent clocks are used exclusively in NTP deployments and have no defined role or function within the PTP (IEEE 1588) standard"
+   },
+   "correct": "A",
+   "explanation_es": "Un transparent clock no termina y vuelve a originar el intercambio de sincronización PTP como sí lo hace un boundary clock; en cambio, mide y corrige el tiempo de residencia (el tiempo que un mensaje PTP pasa transitando por ese switch/dispositivo en particular) ajustando un campo de corrección dentro del propio mensaje PTP, permitiendo que los dispositivos downstream compensen el retraso introducido por ese dispositivo intermedio sin que el transparent clock actúe como su propio punto de jerarquía maestro/esclavo."
+  },
+  {
+   "id": "b6_3.3.a_14",
+   "subtopic": "3.3.a",
+   "name": "NTP/PTP",
+   "question": "In what type of environment or use case is PTP's sub-microsecond time synchronization accuracy typically required, as opposed to NTP's millisecond-level accuracy being sufficient?",
+   "options": {
+    "A": "Environments such as financial trading platforms (which may have regulatory requirements for precise transaction timestamping), industrial automation/motion control systems, telecommunications synchronization (e.g., for certain cellular backhaul standards), and some scientific/measurement applications commonly require PTP's much tighter accuracy, whereas typical enterprise IT log correlation and general business applications are usually well served by NTP's millisecond-level accuracy",
+    "B": "PTP's higher precision provides no meaningful practical benefit in any real-world use case compared to NTP, making the choice between the two purely a matter of arbitrary preference",
+    "C": "NTP's millisecond-level accuracy is always technically superior to PTP's sub-microsecond accuracy in every conceivable use case, the reverse of their actual relative precision",
+    "D": "PTP is required in every single network deployment regardless of application, with NTP considered obsolete and unsuitable for any use case whatsoever"
+   },
+   "correct": "A",
+   "explanation_es": "Entornos como plataformas de trading financiero (que pueden tener requisitos regulatorios de marcado de tiempo preciso de transacciones), sistemas de automatización industrial/control de movimiento, sincronización de telecomunicaciones (por ejemplo, para ciertos estándares de backhaul celular), y algunas aplicaciones científicas/de medición suelen requerir la precisión mucho más ajustada de PTP, mientras que la correlación de logs de TI empresarial típica y las aplicaciones de negocio generales suelen estar bien servidas por la precisión de milisegundos de NTP."
+  },
+  {
+   "id": "b6_3.3.a_15",
+   "subtopic": "3.3.a",
+   "name": "NTP/PTP",
+   "question": "What does the term 'NTP drift' refer to regarding a device's local clock, and why does NTP need to continuously correct for it even after an initial synchronization?",
+   "options": {
+    "A": "'Drift' refers to the tendency of a device's local hardware clock (crystal oscillator) to gradually run slightly faster or slower than true time due to inherent hardware imperfections and temperature variations; because this drift is ongoing (not a one-time offset), NTP must periodically re-synchronize and adjust the local clock's rate (not just its instantaneous value) to keep it accurately tracking true time over the long term",
+    "B": "Drift refers exclusively to a device physically moving to a different geographic location, with no relationship to clock accuracy or the passage of time at all",
+    "C": "Once a device's clock is synchronized via NTP a single time, it will remain perfectly accurate forever afterward with absolutely no further drift or need for re-synchronization",
+    "D": "NTP drift only affects devices running on battery power and has no relevance whatsoever to devices connected to a continuous, stable power source"
+   },
+   "correct": "A",
+   "explanation_es": "'Drift' se refiere a la tendencia del reloj de hardware local de un dispositivo (oscilador de cristal) a correr gradualmente un poco más rápido o más lento que el tiempo real debido a imperfecciones inherentes del hardware y variaciones de temperatura; como este drift es continuo (no un desfase de una sola vez), NTP debe resincronizar periódicamente y ajustar la tasa del reloj local (no solo su valor instantáneo) para que siga rastreando con precisión el tiempo real a largo plazo."
+  },
+  {
+   "id": "b6_3.3.a_16",
+   "subtopic": "3.3.a",
+   "name": "NTP/PTP",
+   "question": "Why might an organization deploy a local GPS-based time source (acting as a stratum 1 NTP server, or a PTP grandmaster) within their own data center, rather than relying solely on public internet-based NTP servers?",
+   "options": {
+    "A": "A local GPS-based reference clock provides a highly accurate time source that is independent of internet connectivity/reachability and avoids the additional network latency and potential jitter of reaching external internet-based time servers, which is particularly valuable for organizations with strict internal accuracy requirements or environments where internet access to public time servers cannot be relied upon or is restricted for security reasons",
+    "B": "GPS-based time sources are technically incapable of being used for network time synchronization purposes and are relevant only to physical location/navigation applications",
+    "C": "Relying on a local GPS clock always produces strictly less accurate time than any public internet-based NTP server, the opposite of the typical motivation for deploying one",
+    "D": "A local GPS time source requires a permanent, continuous internet connection to function at all, providing no independence benefit over public NTP servers"
+   },
+   "correct": "A",
+   "explanation_es": "Un reloj de referencia local basado en GPS provee una fuente de tiempo muy precisa que es independiente de la conectividad/alcanzabilidad de internet y evita la latencia de red adicional y el jitter potencial de alcanzar servidores de tiempo externos basados en internet, lo cual es particularmente valioso para organizaciones con requisitos internos de precisión estrictos o entornos donde no se puede confiar en el acceso a internet hacia servidores de tiempo públicos o está restringido por razones de seguridad."
+  },
+  {
+   "id": "b6_3.3.a_17",
+   "subtopic": "3.3.a",
+   "name": "NTP/PTP",
+   "question": "What is the effect of configuring 'ntp server <IP> prefer' for a specific NTP server among several configured on a Cisco device?",
+   "options": {
+    "A": "It designates that specific server as preferred among the set of otherwise similarly-suitable candidate servers, so that when NTP's selection algorithm has multiple statistically valid sources to choose from, it will favor the 'prefer'-marked server, which can be useful when an administrator knows one server is more accurate, more reliable, or organizationally preferred over otherwise-similar alternatives",
+    "B": "The 'prefer' keyword has no functional effect whatsoever on NTP server selection and exists purely as an unused, non-functional legacy configuration option",
+    "C": "Marking a server as 'prefer' completely and unconditionally disables synchronization from every other configured NTP server, regardless of that preferred server's actual reachability or accuracy",
+    "D": "'prefer' can only be applied to exactly one server across the router's entire configuration and immediately causes every other 'ntp server' statement to be automatically and permanently removed"
+   },
+   "correct": "A",
+   "explanation_es": "Designa a ese servidor específico como preferido entre el conjunto de servidores candidatos por lo demás similarmente adecuados, de forma que cuando el algoritmo de selección de NTP tiene múltiples fuentes estadísticamente válidas para elegir, favorecerá al servidor marcado como 'prefer', lo cual puede ser útil cuando un administrador sabe que un servidor es más preciso, más confiable, u organizacionalmente preferido sobre alternativas por lo demás similares."
+  },
+  {
+   "id": "b6_3.3.a_18",
+   "subtopic": "3.3.a",
+   "name": "NTP/PTP",
+   "question": "What show command is commonly used on a Cisco device to verify NTP synchronization status, including the current stratum level and which server the device is currently synchronized to?",
+   "options": {
+    "A": "'show ntp status' (and/or 'show ntp associations') displays information including whether the device is currently synchronized, its stratum level, and details about its configured NTP associations/peers, helping verify that time synchronization is actually functioning as expected",
+    "B": "'show clock detail' is the only command capable of displaying NTP synchronization status, stratum level, or associated server information",
+    "C": "NTP synchronization status can never be verified through any Cisco IOS command and can only be confirmed by physically checking an external atomic clock display",
+    "D": "'show ip route' displays NTP stratum and synchronization status directly alongside the routing table, with no separate NTP-specific command needed"
+   },
+   "correct": "A",
+   "explanation_es": "'show ntp status' (y/o 'show ntp associations') muestra información que incluye si el dispositivo está actualmente sincronizado, su nivel de stratum, y detalles sobre sus asociaciones/peers NTP configurados, ayudando a verificar que la sincronización de tiempo realmente esté funcionando como se espera."
+  },
+  {
+   "id": "b6_3.3.a_19",
+   "subtopic": "3.3.a",
+   "name": "NTP/PTP",
+   "question": "Why is time synchronization particularly important for validating digital certificates (such as those used in HTTPS/TLS or 802.1X EAP-TLS authentication)?",
+   "options": {
+    "A": "Digital certificates include a validity period (a 'not before' and 'not after' date), and if a device's local clock is significantly wrong (too far in the past or future), it may incorrectly reject a currently valid certificate as expired or not-yet-valid, or in some cases incorrectly accept an actually-expired or not-yet-valid certificate, undermining the security guarantees that certificate validation is meant to provide",
+    "B": "Time synchronization has no relationship whatsoever to certificate validation, since certificates are validated purely based on their cryptographic signature with no reference to any date or time information at all",
+    "C": "Certificate validation always ignores the device's local clock entirely and instead relies exclusively on a certificate's file creation timestamp as stored on the local disk",
+    "D": "Digital certificates never include any validity period or expiration date of any kind, making clock accuracy irrelevant to their validation process"
+   },
+   "correct": "A",
+   "explanation_es": "Los certificados digitales incluyen un período de validez (una fecha 'not before' y 'not after'), y si el reloj local de un dispositivo está significativamente equivocado (demasiado en el pasado o el futuro), podría rechazar incorrectamente un certificado actualmente válido como expirado o aún no válido, o en algunos casos aceptar incorrectamente un certificado realmente expirado o aún no válido, socavando las garantías de seguridad que la validación de certificados está pensada para proveer."
+  },
+  {
+   "id": "b6_3.3.a_20",
+   "subtopic": "3.3.a",
+   "name": "NTP/PTP",
+   "question": "What is NTP authentication (using a shared key, e.g., MD5 or SHA-based) intended to protect against?",
+   "options": {
+    "A": "It's intended to prevent a malicious or unauthorized actor from injecting spoofed NTP responses that claim to be from a trusted time source but actually contain false time information, since without authentication, a client generally cannot verify that a received NTP response truly originated from the legitimate configured server rather than from an attacker",
+    "B": "NTP authentication encrypts the actual clock/time value being transmitted so that only authorized recipients can read what time it currently is, with no relationship to verifying the authenticity of the sender",
+    "C": "NTP authentication is required for the protocol to calculate the correct stratum value, with no relationship whatsoever to verifying sender legitimacy",
+    "D": "Authentication in NTP exists purely as a deprecated legacy feature that has no actual security effect on any current Cisco IOS or IOS-XE release"
+   },
+   "correct": "A",
+   "explanation_es": "Está pensada para prevenir que un actor malicioso o no autorizado inyecte respuestas NTP falsificadas que dicen venir de una fuente de tiempo confiable pero en realidad contienen información de tiempo falsa, ya que sin autenticación, un cliente generalmente no puede verificar que una respuesta NTP recibida realmente se originó del servidor configurado legítimo en lugar de un atacante."
+  },
+  {
+   "id": "b6_3.3.a_21",
+   "subtopic": "3.3.a",
+   "name": "NTP/PTP",
+   "question": "How does using multiple, geographically or organizationally diverse NTP stratum-1 or stratum-2 sources (rather than a single time source) improve the overall resilience of an organization's time infrastructure?",
+   "options": {
+    "A": "Relying on multiple diverse sources reduces the risk that a single point of failure (such as one server going offline, being misconfigured, or providing incorrect time due to a local fault) disrupts time synchronization for the entire organization, and it also allows NTP's outlier-detection algorithm to more reliably identify and reject any one source that starts providing inaccurate time, since it can be compared against several other independent sources",
+    "B": "Using multiple time sources provides no resilience benefit whatsoever compared to relying on exactly one single time source, since NTP can only ever process and consider one source's response at any given moment",
+    "C": "Diverse NTP sources are only useful for organizations with more than 100,000 employees and provide no meaningful benefit to smaller organizations of any size",
+    "D": "Configuring multiple NTP sources always causes a device's clock to become permanently and irreparably unsynchronized due to unavoidable conflicts between the sources"
+   },
+   "correct": "A",
+   "explanation_es": "Depender de múltiples fuentes diversas reduce el riesgo de que un solo punto de falla (como que un servidor se caiga, esté mal configurado, o provea tiempo incorrecto por una falla local) interrumpa la sincronización de tiempo para toda la organización, y también permite que el algoritmo de detección de valores atípicos de NTP identifique y rechace de forma más confiable cualquier fuente que empiece a proveer tiempo inexacto, ya que puede compararse contra varias otras fuentes independientes."
   }
  ]
 }
