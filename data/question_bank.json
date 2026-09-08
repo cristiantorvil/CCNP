@@ -1,6 +1,6 @@
 {
  "version": "2026-09-08_v4",
- "total": 397,
+ "total": 453,
  "questions": [
   {
    "id": "trustsec_01",
@@ -5559,6 +5559,790 @@
    },
    "correct": "B",
    "explanation_es": "Aunque la interfaz del hub sea rápida, el ancho de banda real del circuito de acceso de cada spoke suele ser mucho menor; aplicar shaping saliente en el hub ajustado a la tasa de cada spoke evita saturar ese enlace más lento y causar tail drops descontrolados o retardo de cola excesivo en el ingreso del spoke — un patrón de diseño clásico en topologías hub-and-spoke con enlaces de spoke más lentos que el hub."
+  },
+  {
+   "id": "b6_2.1.a_06",
+   "subtopic": "2.1.a",
+   "name": "Hypervisor tipo 1 y 2",
+   "question": "Which of these is an example of a Type 1 (bare-metal) hypervisor commonly used in enterprise data centers?",
+   "options": {
+    "A": "VMware ESXi, which installs directly on server hardware without requiring a separate general-purpose host operating system underneath it",
+    "B": "VMware Workstation, which requires a full Windows or Linux desktop operating system installed first before it can run any virtual machine",
+    "C": "Oracle VirtualBox, which is designed to run as a desktop application on top of an existing consumer operating system",
+    "D": "A standard web browser, since modern browsers can virtualize an entire operating system natively"
+   },
+   "correct": "A",
+   "explanation_es": "VMware ESXi es un ejemplo clásico de hypervisor tipo 1 (bare-metal): se instala directamente sobre el hardware del servidor, sin necesitar un sistema operativo host de propósito general debajo de él. VMware Workstation y VirtualBox, en cambio, son hypervisors tipo 2 que corren como aplicación sobre un SO existente."
+  },
+  {
+   "id": "b6_2.1.a_07",
+   "subtopic": "2.1.a",
+   "name": "Hypervisor tipo 1 y 2",
+   "question": "What resource-management responsibility does a hypervisor take on when running multiple virtual machines on a single physical server?",
+   "options": {
+    "A": "The hypervisor schedules and allocates the physical server's CPU, memory, storage, and network I/O among the various virtual machines, presenting each VM with the illusion of dedicated hardware while actually sharing the underlying physical resources",
+    "B": "The hypervisor has no involvement in resource allocation at all; each VM directly and exclusively owns a physically separate copy of the server's CPU and memory",
+    "C": "The hypervisor only manages network connectivity and has no role in CPU or memory allocation whatsoever",
+    "D": "Resource management is handled entirely by the guest operating system inside each VM, with the hypervisor playing no role at all"
+   },
+   "correct": "A",
+   "explanation_es": "El hypervisor programa y asigna la CPU, memoria, almacenamiento y E/S de red del servidor físico entre las distintas máquinas virtuales, dándole a cada VM la ilusión de hardware dedicado mientras en realidad comparte los recursos físicos subyacentes — esta es la función central de cualquier hypervisor."
+  },
+  {
+   "id": "b6_2.1.a_08",
+   "subtopic": "2.1.a",
+   "name": "Hypervisor tipo 1 y 2",
+   "question": "Which scenario is a more typical use case for a Type 2 hypervisor rather than a Type 1 hypervisor?",
+   "options": {
+    "A": "Running dozens of production virtual machines in an enterprise data center serving thousands of end users",
+    "B": "A developer running a single test virtual machine on their personal laptop, alongside their normal desktop applications, to test software in an isolated environment",
+    "C": "Hosting a large-scale, highly available private cloud infrastructure for an entire organization",
+    "D": "Providing the underlying virtualization layer for a public cloud provider's compute service"
+   },
+   "correct": "B",
+   "explanation_es": "Un caso de uso típico de hypervisor tipo 2 es un desarrollador ejecutando una VM de prueba en su laptop personal, junto a sus aplicaciones de escritorio normales, para probar software en un entorno aislado — los escenarios de producción a gran escala (a), (c) y (d) son el dominio típico de los hypervisors tipo 1."
+  },
+  {
+   "id": "b6_2.1.a_09",
+   "subtopic": "2.1.a",
+   "name": "Hypervisor tipo 1 y 2",
+   "question": "What does 'hardware-assisted virtualization' (e.g., Intel VT-x or AMD-V) provide that improves hypervisor performance?",
+   "options": {
+    "A": "CPU-level extensions that allow the processor itself to more efficiently trap and handle privileged instructions from guest operating systems, reducing the overhead the hypervisor would otherwise need in pure software to emulate privileged CPU operations",
+    "B": "A dedicated physical network card reserved exclusively for hypervisor management traffic, unrelated to CPU virtualization",
+    "C": "A guarantee that every virtual machine will always run at exactly the same clock speed as the physical host regardless of load",
+    "D": "Hardware-assisted virtualization eliminates the need for a hypervisor altogether, allowing guest operating systems to run directly on bare metal"
+   },
+   "correct": "A",
+   "explanation_es": "Las extensiones de virtualización asistida por hardware (Intel VT-x, AMD-V) son extensiones a nivel de CPU que permiten al propio procesador interceptar y manejar de forma más eficiente las instrucciones privilegiadas de los sistemas operativos huésped, reduciendo el overhead que el hypervisor de otro modo necesitaría emular por software."
+  },
+  {
+   "id": "b6_2.1.a_10",
+   "subtopic": "2.1.a",
+   "name": "Hypervisor tipo 1 y 2",
+   "question": "In terms of the attack surface, why is a Type 1 hypervisor generally considered to have a smaller/more controlled attack surface than a Type 2 hypervisor?",
+   "options": {
+    "A": "A Type 1 hypervisor runs directly on hardware with a comparatively minimal, purpose-built codebase, whereas a Type 2 hypervisor runs as an application on top of a full general-purpose host operating system, which itself has a much larger codebase and its own set of potential vulnerabilities that could also affect the hypervisor running on top of it",
+    "B": "Type 1 and Type 2 hypervisors have exactly identical attack surfaces in every measurable respect, with no meaningful security distinction between them",
+    "C": "Type 2 hypervisors are always more secure than Type 1 hypervisors because they include a built-in antivirus engine by default",
+    "D": "Attack surface has no relevance to hypervisor architecture and depends solely on the guest operating systems installed inside the VMs"
+   },
+   "correct": "A",
+   "explanation_es": "Un hypervisor tipo 1 corre directamente sobre el hardware con una base de código comparativamente mínima y de propósito específico, mientras que un hypervisor tipo 2 corre como aplicación sobre un sistema operativo host de propósito general completo, que tiene una base de código mucho más grande y sus propias vulnerabilidades potenciales que también podrían afectar al hypervisor que corre encima."
+  },
+  {
+   "id": "b6_2.1.a_11",
+   "subtopic": "2.1.a",
+   "name": "Hypervisor tipo 1 y 2",
+   "question": "What is a 'virtual machine monitor' (VMM), and how does this term relate to 'hypervisor'?",
+   "options": {
+    "A": "VMM and hypervisor are essentially synonymous terms — the VMM/hypervisor is the software layer responsible for creating, running, and managing virtual machines by abstracting and allocating the underlying physical hardware to each guest",
+    "B": "A VMM is a dedicated physical hardware device that has no software component and is unrelated to the concept of a hypervisor at all",
+    "C": "A VMM refers exclusively to a network monitoring dashboard used to view VLAN statistics, with no relationship to virtualization",
+    "D": "A VMM is a type of guest operating system that can only run inside a Type 2 hypervisor, never a Type 1"
+   },
+   "correct": "A",
+   "explanation_es": "VMM (Virtual Machine Monitor) y 'hypervisor' son términos esencialmente sinónimos — es la capa de software responsable de crear, ejecutar y gestionar máquinas virtuales, abstrayendo y asignando el hardware físico subyacente a cada huésped."
+  },
+  {
+   "id": "b6_2.1.a_12",
+   "subtopic": "2.1.a",
+   "name": "Hypervisor tipo 1 y 2",
+   "question": "How does a hypervisor typically provide virtual networking connectivity to the VMs it hosts?",
+   "options": {
+    "A": "The hypervisor includes or integrates with a vSwitch (virtual switch) component, which the hypervisor uses to switch traffic between VMs on the same host and to bridge that traffic out to the host's physical NICs toward the external physical network",
+    "B": "VMs hosted by a hypervisor can never communicate with the external physical network under any circumstances; they are always fully isolated from anything outside the host",
+    "C": "Virtual networking is provided exclusively by a separate physical switch that must be directly cabled to each individual VM, bypassing the hypervisor entirely",
+    "D": "The hypervisor requires every VM to have its own dedicated physical network interface card installed inside the physical server chassis"
+   },
+   "correct": "A",
+   "explanation_es": "El hypervisor incluye o se integra con un componente vSwitch (switch virtual), que el hypervisor usa para conmutar tráfico entre VMs del mismo host y para conectar ese tráfico hacia las NICs físicas del host, hacia la red física externa — así es como las VMs obtienen conectividad de red sin necesitar hardware dedicado por VM."
+  },
+  {
+   "id": "b6_2.1.a_13",
+   "subtopic": "2.1.a",
+   "name": "Hypervisor tipo 1 y 2",
+   "question": "What is 'CPU overcommitment' in a hypervisor environment, and what risk does it carry if pushed too far?",
+   "options": {
+    "A": "CPU overcommitment refers to allocating more total virtual CPUs to VMs than the number of physical CPU cores actually available on the host, betting that not all VMs will demand their full CPU allocation simultaneously; if too many VMs do demand CPU at once, contention can degrade performance across all of them",
+    "B": "CPU overcommitment means physically installing more CPU sockets in the server chassis than the motherboard supports",
+    "C": "CPU overcommitment guarantees improved performance for every VM with absolutely no downside or risk under any workload pattern",
+    "D": "CPU overcommitment refers exclusively to a licensing violation with no actual technical or performance meaning"
+   },
+   "correct": "A",
+   "explanation_es": "El overcommitment de CPU consiste en asignar más vCPUs totales a las VMs que la cantidad de núcleos físicos realmente disponibles en el host, apostando a que no todas las VMs demandarán su asignación completa simultáneamente; si demasiadas VMs sí lo hacen al mismo tiempo, la contención puede degradar el rendimiento de todas ellas."
+  },
+  {
+   "id": "b6_2.1.a_14",
+   "subtopic": "2.1.a",
+   "name": "Hypervisor tipo 1 y 2",
+   "question": "Why is compatibility with a broad range of certified physical server hardware an important consideration when selecting a Type 1 hypervisor for production use?",
+   "options": {
+    "A": "Hardware compatibility has no relevance whatsoever to hypervisor selection, since every Type 1 hypervisor runs identically on any hardware without any driver or firmware considerations",
+    "B": "A Type 1 hypervisor interacts directly with physical hardware, so using hardware from the vendor's hardware compatibility list (HCL) helps ensure proper driver support, stability, and vendor support, reducing the risk of unexpected hardware-related issues in production",
+    "C": "Hardware compatibility only matters for Type 2 hypervisors, since Type 1 hypervisors are hardware-agnostic by definition",
+    "D": "Selecting compatible hardware is only a cosmetic preference with no bearing on system stability or vendor support"
+   },
+   "correct": "B",
+   "explanation_es": "Como un hypervisor tipo 1 interactúa directamente con el hardware físico, usar equipos de la lista de compatibilidad de hardware (HCL) del fabricante ayuda a asegurar soporte de drivers adecuado, estabilidad y soporte del proveedor, reduciendo el riesgo de problemas inesperados relacionados con el hardware en producción."
+  },
+  {
+   "id": "b6_2.1.a_15",
+   "subtopic": "2.1.a",
+   "name": "Hypervisor tipo 1 y 2",
+   "question": "How does a Type 1 hypervisor's console/management interface (e.g., a direct console UI or a remote management client) typically differ from how a Type 2 hypervisor is managed?",
+   "options": {
+    "A": "Both types of hypervisor can only ever be managed via a physically attached keyboard and monitor, with no remote management option available for either",
+    "B": "A Type 1 hypervisor is typically managed remotely (via a dedicated management client, web interface, or centralized platform) since it has no traditional desktop of its own, while a Type 2 hypervisor is typically managed through an application window running inside the host operating system's own desktop environment",
+    "C": "Type 1 hypervisors can never be managed remotely under any circumstances and always require direct physical console access for every single operation",
+    "D": "Management interface design has no actual difference between Type 1 and Type 2 hypervisors in any real-world product"
+   },
+   "correct": "B",
+   "explanation_es": "Un hypervisor tipo 1 típicamente se gestiona de forma remota (vía un cliente de gestión dedicado, interfaz web, o plataforma centralizada) ya que no tiene un escritorio propio tradicional, mientras que un hypervisor tipo 2 típicamente se gestiona a través de una ventana de aplicación corriendo dentro del propio entorno de escritorio del sistema operativo host."
+  },
+  {
+   "id": "b6_2.1.b_06",
+   "subtopic": "2.1.b",
+   "name": "VMs / FT / DRS",
+   "question": "What is the difference between a 'cold migration' and a 'live migration' (e.g., vMotion) of a virtual machine?",
+   "options": {
+    "A": "A cold migration moves a VM between hosts while it is powered off (requiring downtime), while a live migration moves a running VM between hosts with minimal to no perceptible downtime for the workload",
+    "B": "Cold migration and live migration are two different names for exactly the same process, distinguished only by which time of day the migration is performed",
+    "C": "A cold migration is always faster than a live migration, since powered-off VMs transfer instantly with no data movement required at all",
+    "D": "Live migration can only move a VM to a host running a different hypervisor vendor, while cold migration can only move a VM within the same vendor's hosts"
+   },
+   "correct": "A",
+   "explanation_es": "Una migración en frío mueve una VM entre hosts mientras está apagada (requiriendo tiempo de inactividad), mientras que una migración en vivo (como vMotion) mueve una VM en ejecución entre hosts con mínima o nula interrupción perceptible para la carga de trabajo."
+  },
+  {
+   "id": "b6_2.1.b_07",
+   "subtopic": "2.1.b",
+   "name": "VMs / FT / DRS",
+   "question": "What prerequisite is typically required for live migration (vMotion) to work between two hypervisor hosts?",
+   "options": {
+    "A": "The two hosts typically need shared storage accessible to both (so the VM's disk doesn't need to be copied during the migration itself), compatible CPU features (or EVC/compatibility mode), and network connectivity for the migration traffic between hosts",
+    "B": "No prerequisites of any kind are needed; live migration can always occur instantly between any two hosts regardless of storage, CPU, or network configuration",
+    "C": "Live migration requires the destination host to be physically located in a different country than the source host",
+    "D": "Live migration requires both hosts to be completely powered off during the entire migration process"
+   },
+   "correct": "A",
+   "explanation_es": "Los dos hosts típicamente necesitan almacenamiento compartido accesible por ambos (para no tener que copiar el disco de la VM durante la migración en sí), características de CPU compatibles (o modo de compatibilidad EVC), y conectividad de red para el tráfico de migración entre hosts."
+  },
+  {
+   "id": "b6_2.1.b_08",
+   "subtopic": "2.1.b",
+   "name": "VMs / FT / DRS",
+   "question": "How does DRS (Distributed Resource Scheduler) decide when to migrate a VM from one host to another within a cluster?",
+   "options": {
+    "A": "DRS continuously monitors resource utilization (CPU, memory) across the hosts in a cluster and, based on configured thresholds/aggressiveness settings, recommends or automatically performs live migrations of VMs to balance load and resolve resource contention across the cluster",
+    "B": "DRS migrates VMs on a purely random schedule with no relationship to actual resource utilization at all",
+    "C": "DRS only migrates a VM once per calendar year, regardless of how unbalanced the cluster's resource utilization becomes",
+    "D": "DRS requires an administrator to manually initiate every single migration; it has no automated decision-making capability of its own"
+   },
+   "correct": "A",
+   "explanation_es": "DRS monitorea continuamente la utilización de recursos (CPU, memoria) en los hosts de un clúster y, según umbrales/nivel de agresividad configurados, recomienda o realiza automáticamente migraciones en vivo de VMs para balancear la carga y resolver contención de recursos en todo el clúster."
+  },
+  {
+   "id": "b6_2.1.b_09",
+   "subtopic": "2.1.b",
+   "name": "VMs / FT / DRS",
+   "question": "What does a 'DRS affinity rule' or 'anti-affinity rule' allow an administrator to configure?",
+   "options": {
+    "A": "An affinity rule can require certain VMs to always run on the same host (affinity) or, conversely, an anti-affinity rule can require certain VMs to always run on separate hosts (e.g., keeping redundant application servers apart so a single host failure doesn't take down both instances at once), influencing where DRS places and migrates those VMs",
+    "B": "Affinity and anti-affinity rules only control which color label is displayed next to a VM's name in the management console, with no actual placement effect",
+    "C": "Affinity rules apply only to network switch port configuration and have no relationship to VM placement across hosts",
+    "D": "Anti-affinity rules force every VM in the cluster to run on exactly the same single host at all times, with no distribution across the cluster"
+   },
+   "correct": "A",
+   "explanation_es": "Una regla de afinidad puede requerir que ciertas VMs siempre corran en el mismo host (afinidad) o, al contrario, una regla de anti-afinidad puede requerir que ciertas VMs siempre corran en hosts separados (por ejemplo, manteniendo servidores de aplicación redundantes separados para que la falla de un solo host no derribe ambas instancias a la vez), influyendo en dónde DRS coloca y migra esas VMs."
+  },
+  {
+   "id": "b6_2.1.b_10",
+   "subtopic": "2.1.b",
+   "name": "VMs / FT / DRS",
+   "question": "How does VMware HA (High Availability) differ from Fault Tolerance (FT) in how it responds to a host failure?",
+   "options": {
+    "A": "HA and FT are exactly the same mechanism with two different marketing names, providing identical zero-downtime protection in every scenario",
+    "B": "HA detects a host failure and then restarts the affected VMs on other surviving hosts in the cluster (involving a brief downtime and a full OS/application restart), whereas FT keeps a live, continuously synchronized secondary copy of a protected VM running in lockstep on another host, allowing an instantaneous takeover with no restart and no loss of in-memory state",
+    "C": "HA provides continuous lockstep protection with zero downtime, while FT only restarts VMs after a delay, the reverse of their actual behavior",
+    "D": "HA and FT can never be enabled on the same cluster simultaneously under any vendor's licensing model"
+   },
+   "correct": "B",
+   "explanation_es": "HA detecta la falla de un host y luego reinicia las VMs afectadas en otros hosts sobrevivientes del clúster (implicando una breve interrupción y un reinicio completo del SO/aplicación), mientras que FT mantiene una copia secundaria en vivo, sincronizada continuamente en lockstep en otro host, permitiendo una toma de control instantánea sin reinicio ni pérdida de estado en memoria."
+  },
+  {
+   "id": "b6_2.1.b_11",
+   "subtopic": "2.1.b",
+   "name": "VMs / FT / DRS",
+   "question": "Why might an organization choose to protect only a small subset of its most critical VMs with Fault Tolerance (FT) rather than enabling it broadly across every VM in the environment?",
+   "options": {
+    "A": "FT is typically resource-intensive (requiring a fully synchronized secondary VM consuming equivalent compute resources on another host) and often comes with certain configuration limitations, so it is usually reserved for the small number of truly mission-critical workloads that justify that overhead, while less critical VMs rely on more resource-efficient protection like HA",
+    "B": "FT can only ever be enabled on a single VM per entire data center, making broad adoption technically impossible regardless of resource considerations",
+    "C": "FT has no resource cost whatsoever and is always the default recommended protection method for every single VM without exception",
+    "D": "Organizations avoid FT because it is fundamentally incompatible with virtualized environments and only works on physical, non-virtualized servers"
+   },
+   "correct": "A",
+   "explanation_es": "FT suele ser intensivo en recursos (requiere una VM secundaria completamente sincronizada, consumiendo recursos de cómputo equivalentes en otro host) y suele venir con ciertas limitaciones de configuración, por lo que suele reservarse para el pequeño número de cargas verdaderamente críticas que justifican ese costo, mientras que las VMs menos críticas dependen de una protección más eficiente en recursos como HA."
+  },
+  {
+   "id": "b6_2.1.b_12",
+   "subtopic": "2.1.b",
+   "name": "VMs / FT / DRS",
+   "question": "What is a 'VM snapshot', and how does it differ from a full backup of a virtual machine?",
+   "options": {
+    "A": "A snapshot captures the VM's disk/memory state at a point in time (often used for short-term rollback during changes like a software upgrade) and is typically stored on the same underlying storage/host as the VM itself, whereas a full backup is generally an independent copy stored separately, intended for longer-term recovery even if the original VM and its storage are lost entirely",
+    "B": "A snapshot and a full backup are functionally and operationally identical in every respect, with no meaningful distinction between them",
+    "C": "A snapshot permanently deletes the VM's original disk once taken, requiring the snapshot itself to boot the VM from that point forward",
+    "D": "Full backups can only be taken while a VM is powered off, and snapshots can only be taken while a VM is completely deleted"
+   },
+   "correct": "A",
+   "explanation_es": "Un snapshot captura el estado de disco/memoria de la VM en un momento dado (a menudo usado para poder revertir a corto plazo durante cambios como una actualización de software) y típicamente se almacena en el mismo storage/host subyacente que la VM, mientras que un backup completo suele ser una copia independiente almacenada por separado, pensada para recuperación a más largo plazo incluso si se pierde la VM original y su storage por completo."
+  },
+  {
+   "id": "b6_2.1.b_13",
+   "subtopic": "2.1.b",
+   "name": "VMs / FT / DRS",
+   "question": "How does 'VM encapsulation' (the fact that a VM is essentially a set of files) benefit disaster recovery (DR) strategies?",
+   "options": {
+    "A": "Because a VM's entire state is represented as portable files, those files can be replicated to a secondary site's storage, and the VM can be powered on at that secondary site relatively quickly during a disaster, without needing to physically ship or rebuild hardware, unlike recovering a traditional physical server",
+    "B": "VM encapsulation has no relevance to disaster recovery whatsoever and only matters for day-to-day operational tasks",
+    "C": "Encapsulated VMs cannot be replicated to any other site under any circumstances, making them worse for DR than physical servers",
+    "D": "VM encapsulation requires physically transporting the host server's hard drive to the DR site by courier before any recovery can occur"
+   },
+   "correct": "A",
+   "explanation_es": "Como el estado completo de una VM se representa como archivos portables, esos archivos pueden replicarse hacia el storage de un sitio secundario, y la VM puede encenderse en ese sitio secundario relativamente rápido durante un desastre, sin necesitar enviar físicamente o reconstruir hardware — a diferencia de recuperar un servidor físico tradicional."
+  },
+  {
+   "id": "b6_2.1.b_14",
+   "subtopic": "2.1.b",
+   "name": "VMs / FT / DRS",
+   "question": "What is the general purpose of a 'resource pool' in a virtualization cluster managed with DRS?",
+   "options": {
+    "A": "A resource pool logically groups a set of CPU/memory resources and can have limits, reservations, and shares configured on it, allowing an administrator to allocate and prioritize resources among different groups of VMs (e.g., production vs. test/dev) without managing each individual VM's resource settings one by one",
+    "B": "A resource pool refers exclusively to a physical rack of unused, uninstalled servers sitting in storage, unrelated to any active virtualization configuration",
+    "C": "Resource pools can only be created for storage capacity and have no relationship to CPU or memory allocation",
+    "D": "A resource pool automatically deletes any VM that has not been powered on within the last 24 hours"
+   },
+   "correct": "A",
+   "explanation_es": "Un resource pool agrupa lógicamente un conjunto de recursos de CPU/memoria y puede tener límites, reservas y shares configurados, permitiendo que un administrador asigne y priorice recursos entre distintos grupos de VMs (por ejemplo, producción vs. test/dev) sin tener que gestionar la configuración de recursos de cada VM individualmente."
+  },
+  {
+   "id": "b6_2.1.c_11",
+   "subtopic": "2.1.c",
+   "name": "vSwitch/OVS",
+   "question": "What is the purpose of NIC teaming (uplink bonding) configured on a vSwitch's set of physical uplinks?",
+   "options": {
+    "A": "NIC teaming combines multiple physical NICs into a logical uplink group on the vSwitch, providing redundancy (if one physical NIC/link fails, traffic continues over the others) and/or load distribution of outbound traffic across the available physical uplinks",
+    "B": "NIC teaming disables all but one physical NIC permanently, with the others serving no functional purpose at all",
+    "C": "NIC teaming is used exclusively to assign IP addresses to virtual machines and has no relationship to physical uplink redundancy",
+    "D": "NIC teaming requires every VM on the host to share a single virtual NIC, regardless of how many physical uplinks exist"
+   },
+   "correct": "A",
+   "explanation_es": "El NIC teaming combina varias NICs físicas en un grupo de uplink lógico en el vSwitch, dando redundancia (si falla una NIC/enlace físico, el tráfico continúa por las demás) y/o distribución de carga del tráfico saliente entre los uplinks físicos disponibles."
+  },
+  {
+   "id": "b6_2.1.c_12",
+   "subtopic": "2.1.c",
+   "name": "vSwitch/OVS",
+   "question": "What does 'promiscuous mode' mean when configured on a vSwitch port group, and why is it typically disabled by default?",
+   "options": {
+    "A": "Promiscuous mode allows a VM's virtual NIC to see all traffic passing through the port group's virtual switch, not just traffic addressed to its own MAC address; it's disabled by default because it would otherwise let one VM potentially observe traffic intended for other VMs sharing that port group, which is a security concern",
+    "B": "Promiscuous mode automatically encrypts all traffic on the port group and is disabled by default purely to save CPU resources",
+    "C": "Promiscuous mode has no security implications whatsoever and is disabled by default only because it slightly increases the vSwitch's power consumption",
+    "D": "Promiscuous mode only affects physical switches and has no meaningful equivalent setting on any vSwitch"
+   },
+   "correct": "A",
+   "explanation_es": "El modo promiscuo permite que la NIC virtual de una VM vea todo el tráfico que pasa por el switch virtual de ese port group, no solo el tráfico dirigido a su propia MAC; está deshabilitado por defecto porque de lo contrario una VM podría observar tráfico destinado a otras VMs del mismo port group, lo cual es una preocupación de seguridad."
+  },
+  {
+   "id": "b6_2.1.c_13",
+   "subtopic": "2.1.c",
+   "name": "vSwitch/OVS",
+   "question": "In Open vSwitch (OVS), what is a 'bridge', and how does it relate to physical and virtual interfaces on the host?",
+   "options": {
+    "A": "An OVS bridge is a logical switch instance to which virtual machine interfaces (vNICs) and physical NICs can be attached as ports, allowing OVS to switch traffic between them, similar in concept to a VLAN-aware virtual switch instance",
+    "B": "An OVS bridge refers exclusively to a physical cable connecting two separate data centers together",
+    "C": "An OVS bridge can only ever have exactly one single port attached to it, making it functionally identical to a single Ethernet cable",
+    "D": "OVS bridges have no relationship to virtual machine networking and are used only for physical cable management labeling"
+   },
+   "correct": "A",
+   "explanation_es": "Un bridge de OVS es una instancia de switch lógico a la que se pueden conectar interfaces de máquinas virtuales (vNICs) y NICs físicas como puertos, permitiendo que OVS conmute tráfico entre ellas — conceptualmente similar a una instancia de switch virtual con soporte de VLAN."
+  },
+  {
+   "id": "b6_2.1.c_14",
+   "subtopic": "2.1.c",
+   "name": "vSwitch/OVS",
+   "question": "How does OVS's support for the OpenFlow protocol change how forwarding decisions can be made, compared to a purely traditional MAC-learning switch?",
+   "options": {
+    "A": "OpenFlow allows an external SDN controller to programmatically install fine-grained flow-matching rules directly into OVS's forwarding tables (matching on fields well beyond just destination MAC, such as IP, port, or other header fields), enabling centralized, software-defined control over forwarding behavior rather than relying solely on autonomous local MAC learning",
+    "B": "OpenFlow has no effect on forwarding behavior at all and is used exclusively for firmware update delivery to the switch",
+    "C": "OpenFlow disables all MAC learning capability permanently and forces every OVS instance to operate purely as a Layer 1 repeater",
+    "D": "OpenFlow can only be used to configure the physical color of status LEDs on a switch, with no relationship to actual packet forwarding"
+   },
+   "correct": "A",
+   "explanation_es": "OpenFlow permite que un controlador SDN externo instale programáticamente reglas de coincidencia de flujo detalladas directamente en las tablas de reenvío de OVS (haciendo match en campos mucho más allá de la MAC destino, como IP, puerto, u otros campos del encabezado), habilitando control centralizado y definido por software sobre el comportamiento de reenvío, en lugar de depender únicamente del aprendizaje autónomo de MAC local."
+  },
+  {
+   "id": "b6_2.1.c_15",
+   "subtopic": "2.1.c",
+   "name": "vSwitch/OVS",
+   "question": "Why is a vSwitch/OVS instance generally considered a critical point to secure and monitor within a virtualized or NFV (Network Functions Virtualization) environment?",
+   "options": {
+    "A": "The vSwitch has no security relevance whatsoever, since it operates entirely below the layer where any meaningful traffic manipulation, filtering, or misconfiguration could ever occur",
+    "B": "Because the vSwitch handles all traffic between co-located VMs and out to the physical network on that host, a misconfiguration or compromise at the vSwitch level (e.g., incorrect VLAN/port group assignment, or a compromised OVS controller in an SDN deployment) could expose sensitive intra-host traffic or allow traffic to cross security boundaries it should not",
+    "C": "vSwitches are only relevant to storage networking and play no role whatsoever in general data-plane traffic security",
+    "D": "Securing a vSwitch is only necessary in a Type 2 hypervisor environment and never in a Type 1 (bare-metal) enterprise deployment"
+   },
+   "correct": "B",
+   "explanation_es": "Como el vSwitch maneja todo el tráfico entre VMs coubicadas y hacia la red física desde ese host, una mala configuración o un compromiso a nivel de vSwitch (por ejemplo, una asignación incorrecta de VLAN/port group, o un controlador OVS comprometido en un despliegue SDN) podría exponer tráfico sensible entre VMs o permitir que el tráfico cruce límites de seguridad que no debería cruzar."
+  },
+  {
+   "id": "b6_2.2.a_06",
+   "subtopic": "2.2.a",
+   "name": "VRF",
+   "question": "What must typically be configured on a router interface to associate it with a specific VRF instance?",
+   "options": {
+    "A": "The interface must be explicitly assigned to the VRF (e.g., via a command like 'vrf forwarding <name>' in current IOS syntax), which also typically requires the interface's IP address to be reconfigured afterward, since assigning a VRF removes the interface's existing Layer 3 configuration",
+    "B": "VRF assignment happens automatically and silently based purely on which physical port number the interface uses, with no explicit configuration required by the administrator",
+    "C": "VRF assignment can only be applied to an entire physical chassis at once and can never be configured on an individual interface",
+    "D": "Interfaces can never be assigned to a VRF; only entire routers can be dedicated to a single VRF"
+   },
+   "correct": "A",
+   "explanation_es": "La interfaz debe asignarse explícitamente a la VRF (por ejemplo, con un comando como 'vrf forwarding <nombre>' en la sintaxis actual de IOS), lo cual típicamente requiere reconfigurar la dirección IP de la interfaz después, ya que asignar una VRF elimina la configuración de Capa 3 existente de esa interfaz."
+  },
+  {
+   "id": "b6_2.2.a_07",
+   "subtopic": "2.2.a",
+   "name": "VRF",
+   "question": "How does a router with multiple VRFs configured decide which routing table to use when making a forwarding decision for a given incoming packet?",
+   "options": {
+    "A": "The router uses the routing table (RIB) associated with the VRF that the packet's ingress interface belongs to, since each VRF maintains its own separate, independent routing table used only for traffic entering (or destined to leave) via interfaces assigned to that same VRF",
+    "B": "The router always consults a single shared global routing table for every packet, regardless of which VRF the ingress interface belongs to, making VRF configuration purely cosmetic",
+    "C": "The router randomly selects one of the configured VRF routing tables for each packet, with no deterministic relationship to the ingress interface",
+    "D": "VRF routing table selection depends solely on the packet's destination MAC address, with no relevance to the ingress interface's VRF assignment"
+   },
+   "correct": "A",
+   "explanation_es": "El router usa la tabla de enrutamiento (RIB) asociada a la VRF a la que pertenece la interfaz de ingreso del paquete, ya que cada VRF mantiene su propia tabla de enrutamiento separada e independiente, usada solo para tráfico que entra (o debe salir) por interfaces asignadas a esa misma VRF."
+  },
+  {
+   "id": "b6_2.2.a_08",
+   "subtopic": "2.2.a",
+   "name": "VRF",
+   "question": "What is the role of Multiprotocol BGP (MP-BGP) with route-distinguishers (RD) and route-targets (RT) in a full MPLS L3VPN deployment using VRFs, as opposed to simple VRF-lite?",
+   "options": {
+    "A": "MP-BGP with RD/RT allows a provider's core network to carry potentially overlapping customer VPN prefixes across multiple PE routers by making each VPN prefix unique (via the RD) and controlling which VRFs import/export which routes (via RT), enabling VRF routes to be distributed dynamically across the MPLS core rather than relying on manually configured point-to-point sub-interfaces per VRF like VRF-lite typically does",
+    "B": "MP-BGP with RD/RT is used exclusively for assigning VLAN IDs and has no relationship to VRF route distribution across a provider network",
+    "C": "MP-BGP is required even for a single-router VRF-lite deployment with no MPLS core involved at all",
+    "D": "Route-distinguishers and route-targets serve no functional purpose and exist purely for historical/legacy documentation reasons"
+   },
+   "correct": "A",
+   "explanation_es": "MP-BGP con RD/RT permite que el core de un proveedor transporte prefijos VPN de clientes potencialmente superpuestos a través de múltiples routers PE, haciendo único cada prefijo VPN (vía el RD) y controlando qué VRFs importan/exportan qué rutas (vía RT), permitiendo distribuir dinámicamente las rutas de VRF a través del core MPLS, en lugar de depender de sub-interfaces punto a punto configuradas manualmente por VRF como suele hacer VRF-lite."
+  },
+  {
+   "id": "b6_2.2.a_09",
+   "subtopic": "2.2.a",
+   "name": "VRF",
+   "question": "Why might a service provider use VRFs to offer 'MPLS L3VPN' services to multiple separate customers over a shared physical network infrastructure?",
+   "options": {
+    "A": "VRFs allow the provider to keep each customer's routes and traffic logically isolated from every other customer sharing the same physical PE routers and core links, even though multiple customers' traffic physically traverses the same shared infrastructure, without requiring a dedicated physical network per customer",
+    "B": "VRFs require the provider to build a completely separate physical fiber network for each individual customer, providing no actual infrastructure sharing benefit at all",
+    "C": "VRFs are used purely for internal network management labeling and have no effect on actual customer traffic isolation",
+    "D": "A provider can only support a single customer VRF per physical router chassis, limiting VRF-based multi-tenancy to very small deployments"
+   },
+   "correct": "A",
+   "explanation_es": "Las VRFs permiten al proveedor mantener las rutas y el tráfico de cada cliente lógicamente aislados de los demás clientes que comparten los mismos routers PE y enlaces de core físicos, aunque el tráfico de varios clientes atraviese físicamente la misma infraestructura compartida, sin necesitar una red física dedicada por cliente — la base del servicio MPLS L3VPN."
+  },
+  {
+   "id": "b6_2.2.a_10",
+   "subtopic": "2.2.a",
+   "name": "VRF",
+   "question": "What command is commonly used on a Cisco IOS/IOS-XE router to view the routing table specific to a particular VRF, rather than the global routing table?",
+   "options": {
+    "A": "'show ip route vrf <name>' displays the routing table specific to the named VRF, as distinct from 'show ip route' which displays the global routing table",
+    "B": "'show vlan brief' is the only command capable of displaying VRF-specific routing information",
+    "C": "VRF-specific routing tables can never be viewed independently; only the combined global table is ever displayed by any IOS command",
+    "D": "'show interfaces status' displays per-VRF routing table contents alongside interface link status"
+   },
+   "correct": "A",
+   "explanation_es": "'show ip route vrf <nombre>' muestra la tabla de enrutamiento específica de la VRF indicada, a diferencia de 'show ip route' que muestra la tabla de enrutamiento global — un comando básico para verificar el contenido de una VRF en particular durante troubleshooting."
+  },
+  {
+   "id": "b6_2.2.a_11",
+   "subtopic": "2.2.a",
+   "name": "VRF",
+   "question": "In a campus network segmentation design, what is a practical reason to place guest wireless traffic into its own dedicated VRF, separate from the corporate/employee VRF?",
+   "options": {
+    "A": "Placing guest traffic in a separate VRF ensures that guest devices, by default, cannot route to corporate resources via that VRF's routing table, providing a strong baseline of network-layer isolation between guest and corporate traffic without relying solely on VLAN/ACL-based separation",
+    "B": "VRFs have no relevance to guest network isolation and are used exclusively for voice traffic prioritization",
+    "C": "Using a separate VRF for guest traffic guarantees that guest devices will automatically receive faster internet bandwidth than corporate devices",
+    "D": "VRF-based guest isolation requires physically separate cabling from every guest access point back to the core, with no shared infrastructure possible"
+   },
+   "correct": "A",
+   "explanation_es": "Colocar el tráfico de invitados en su propia VRF asegura que, por defecto, los dispositivos de invitados no puedan enrutar hacia recursos corporativos a través de la tabla de enrutamiento de esa VRF, dando una base sólida de aislamiento a nivel de red entre tráfico de invitados y corporativo, sin depender únicamente de separación por VLAN/ACL."
+  },
+  {
+   "id": "b6_2.2.a_12",
+   "subtopic": "2.2.a",
+   "name": "VRF",
+   "question": "What happens to a router's global routing table entries (e.g., directly connected or statically configured routes on non-VRF interfaces) once some interfaces are moved into custom VRFs, while others remain outside any VRF?",
+   "options": {
+    "A": "Interfaces that remain unassigned to any custom VRF continue to use the router's default/global routing table, operating exactly as they did before any VRF was configured, while only the interfaces explicitly assigned to a custom VRF use that VRF's separate routing table",
+    "B": "Moving any interface into a VRF immediately deletes every route in the router's global routing table, including routes unrelated to the VRF-assigned interfaces",
+    "C": "All interfaces on the router, whether assigned to a VRF or not, are automatically forced to share a single combined routing table the moment any VRF is configured anywhere on the device",
+    "D": "A router can only ever have either VRFs configured or a global routing table, never both simultaneously"
+   },
+   "correct": "A",
+   "explanation_es": "Las interfaces que permanecen sin asignar a ninguna VRF personalizada siguen usando la tabla de enrutamiento default/global del router, operando exactamente igual que antes de configurar cualquier VRF, mientras que solo las interfaces explícitamente asignadas a una VRF personalizada usan la tabla separada de esa VRF."
+  },
+  {
+   "id": "b6_2.2.a_13",
+   "subtopic": "2.2.a",
+   "name": "VRF",
+   "question": "Why is it important to verify which VRF a troubleshooting command (like ping or traceroute) is actually operating in, when a router has multiple VRFs configured?",
+   "options": {
+    "A": "By default, commands like ping/traceroute typically operate against the global routing table unless explicitly told to use a specific VRF (e.g., 'ping vrf <name> <address>'), so failing to specify the correct VRF could lead to a misleading result — for example, a failed ping against the wrong table when the destination is actually reachable within a different VRF",
+    "B": "Ping and traceroute automatically detect and test every configured VRF simultaneously with each single command execution, so VRF specification is never actually necessary",
+    "C": "VRF has no bearing whatsoever on how ping or traceroute operate; these commands always ignore VRF configuration entirely",
+    "D": "Specifying the wrong VRF in a ping command will always cause the router itself to crash and reboot"
+   },
+   "correct": "A",
+   "explanation_es": "Por defecto, comandos como ping/traceroute suelen operar contra la tabla de enrutamiento global a menos que se les indique explícitamente usar una VRF específica (por ejemplo, 'ping vrf <nombre> <dirección>'), así que no especificar la VRF correcta podría llevar a un resultado engañoso — por ejemplo, un ping fallido contra la tabla equivocada cuando el destino en realidad es alcanzable dentro de otra VRF."
+  },
+  {
+   "id": "b6_2.2.a_14",
+   "subtopic": "2.2.a",
+   "name": "VRF",
+   "question": "How does the concept of a VRF relate to the broader idea of 'network virtualization' at Layer 3?",
+   "options": {
+    "A": "A VRF is a form of Layer 3 network virtualization: it creates a logically separate, independent instance of the routing/forwarding function on a single physical device, similar in spirit to how a hypervisor creates logically separate VMs on a single physical server",
+    "B": "VRF is unrelated to network virtualization and refers exclusively to a physical hardware add-on card that must be purchased separately",
+    "C": "VRF only virtualizes Layer 2 VLAN tagging and has no relationship whatsoever to Layer 3 routing table separation",
+    "D": "Network virtualization and VRF are mutually exclusive concepts, and a device supporting VRFs cannot be considered virtualized in any sense"
+   },
+   "correct": "A",
+   "explanation_es": "Una VRF es una forma de virtualización de red en Capa 3: crea una instancia lógicamente separada e independiente de la función de enrutamiento/reenvío en un único dispositivo físico, de forma conceptualmente similar a cómo un hypervisor crea VMs lógicamente separadas en un único servidor físico."
+  },
+  {
+   "id": "b6_2.2.b_06",
+   "subtopic": "2.2.b",
+   "name": "GRE / IPsec / AH",
+   "question": "What does the GRE header primarily contain, and what is its main function within an encapsulated packet?",
+   "options": {
+    "A": "The GRE header identifies the protocol type of the payload being encapsulated (allowing GRE to carry many different protocol types inside an IP packet) and provides basic encapsulation framing, without itself providing encryption, authentication, or reliable delivery",
+    "B": "The GRE header contains the full encryption key material needed to decrypt the payload at the remote end, making GRE inherently as secure as IPsec",
+    "C": "The GRE header exclusively carries routing protocol hello packets and cannot encapsulate any other type of payload",
+    "D": "The GRE header is functionally identical to a standard Ethernet header and operates only at Layer 2"
+   },
+   "correct": "A",
+   "explanation_es": "El encabezado GRE principalmente identifica el tipo de protocolo del payload encapsulado (permitiendo que GRE transporte muchos tipos de protocolo distintos dentro de un paquete IP) y provee el framing básico de encapsulación, sin proveer por sí mismo cifrado, autenticación, ni entrega confiable."
+  },
+  {
+   "id": "b6_2.2.b_07",
+   "subtopic": "2.2.b",
+   "name": "GRE / IPsec / AH",
+   "question": "In IPsec, what is the role of IKE (Internet Key Exchange) relative to AH and ESP?",
+   "options": {
+    "A": "IKE is the protocol used to negotiate and establish the Security Associations (SAs) — including the shared cryptographic keys and security parameters — that AH and/or ESP then use to actually authenticate/encrypt traffic; AH and ESP handle the data-plane protection, while IKE handles the control-plane key negotiation",
+    "B": "IKE, AH, and ESP are three interchangeable names for exactly the same single protocol, with no functional distinction between them",
+    "C": "IKE is responsible for encrypting user data packets directly, while AH and ESP are used only to negotiate encryption keys",
+    "D": "IKE has no relationship to AH or ESP and is used exclusively for DNS resolution over an IPsec tunnel"
+   },
+   "correct": "A",
+   "explanation_es": "IKE (Internet Key Exchange) es el protocolo usado para negociar y establecer las Asociaciones de Seguridad (SA) — incluyendo las claves criptográficas compartidas y los parámetros de seguridad — que luego AH y/o ESP usan para realmente autenticar/cifrar el tráfico; AH y ESP manejan la protección del plano de datos, mientras IKE maneja la negociación de claves del plano de control."
+  },
+  {
+   "id": "b6_2.2.b_08",
+   "subtopic": "2.2.b",
+   "name": "GRE / IPsec / AH",
+   "question": "Why does AH (Authentication Header) have compatibility problems with NAT (Network Address Translation) that ESP generally does not have to the same degree?",
+   "options": {
+    "A": "AH's integrity check includes portions of the outer IP header itself (including source/destination IP addresses) in its cryptographic hash, so if NAT modifies those IP addresses in transit, the AH integrity check fails at the receiver; ESP's authentication (in transport mode) does not cover the outer IP header in the same way, making it more NAT-tolerant, particularly when combined with NAT-Traversal (NAT-T) techniques for tunnel mode",
+    "B": "AH and NAT are perfectly compatible in every scenario with absolutely no known interoperability issues",
+    "C": "AH cannot be used over any IP network at all, regardless of whether NAT is present, making the NAT compatibility question irrelevant",
+    "D": "ESP has worse NAT compatibility than AH in every deployment scenario, the reverse of the actual behavior"
+   },
+   "correct": "A",
+   "explanation_es": "La verificación de integridad de AH incluye porciones del propio encabezado IP externo (incluyendo las direcciones IP origen/destino) en su hash criptográfico, así que si NAT modifica esas direcciones IP en tránsito, la verificación de integridad de AH falla en el receptor; la autenticación de ESP (en modo transporte) no cubre el encabezado IP externo de la misma forma, haciéndolo más tolerante a NAT, especialmente combinado con técnicas de NAT-Traversal (NAT-T) en modo túnel."
+  },
+  {
+   "id": "b6_2.2.b_09",
+   "subtopic": "2.2.b",
+   "name": "GRE / IPsec / AH",
+   "question": "What is a Security Association (SA) in the context of IPsec?",
+   "options": {
+    "A": "An SA is a unidirectional logical relationship between two IPsec peers that defines the security parameters (encryption algorithm, authentication method, keys, and lifetime) used to protect traffic in one direction, meaning a typical bidirectional IPsec session requires at least two SAs (one for each direction)",
+    "B": "An SA is a physical cable connector standard used exclusively for fiber-optic IPsec links",
+    "C": "An SA refers to a single, globally shared encryption key used identically by every IPsec deployment worldwide, with no per-session negotiation involved",
+    "D": "An SA is a bidirectional relationship requiring only a single instance total, regardless of how many directions of traffic need protection"
+   },
+   "correct": "A",
+   "explanation_es": "Una SA (Security Association) es una relación lógica unidireccional entre dos peers IPsec que define los parámetros de seguridad (algoritmo de cifrado, método de autenticación, claves y tiempo de vida) usados para proteger el tráfico en una dirección, lo que significa que una sesión IPsec bidireccional típica requiere al menos dos SAs (una por cada dirección)."
+  },
+  {
+   "id": "b6_2.2.b_10",
+   "subtopic": "2.2.b",
+   "name": "GRE / IPsec / AH",
+   "question": "Why is 'GRE over IPsec' (or IPsec protecting a GRE tunnel) a common design pattern instead of using plain IPsec tunnel mode alone for a site-to-site VPN that must carry a dynamic routing protocol?",
+   "options": {
+    "A": "Plain IPsec tunnel mode alone generally does not support carrying multicast traffic (which dynamic routing protocols like OSPF or EIGRP rely on for neighbor discovery), whereas GRE can encapsulate that multicast/routing-protocol traffic into a regular unicast IP packet first, which IPsec can then protect end-to-end, combining GRE's protocol flexibility with IPsec's confidentiality/integrity",
+    "B": "GRE over IPsec is used purely for historical compatibility with 1990s hardware and offers no functional advantage on any modern platform",
+    "C": "Plain IPsec tunnel mode fully supports every dynamic routing protocol natively with no limitation whatsoever, making GRE over IPsec functionally unnecessary in every case",
+    "D": "GRE over IPsec is required only when the VPN needs to carry exclusively HTTP traffic and serves no other purpose"
+   },
+   "correct": "A",
+   "explanation_es": "IPsec en modo túnel puro generalmente no soporta transportar tráfico multicast (del cual dependen protocolos de enrutamiento dinámico como OSPF o EIGRP para el descubrimiento de vecinos), mientras que GRE puede encapsular ese tráfico multicast/de protocolo de enrutamiento en un paquete IP unicast normal primero, que IPsec puede luego proteger de extremo a extremo, combinando la flexibilidad de protocolo de GRE con la confidencialidad/integridad de IPsec."
+  },
+  {
+   "id": "b6_2.2.b_11",
+   "subtopic": "2.2.b",
+   "name": "GRE / IPsec / AH",
+   "question": "What does 'Perfect Forward Secrecy' (PFS) provide when enabled as part of an IPsec IKE negotiation?",
+   "options": {
+    "A": "PFS ensures that even if a long-term key (or a past session key) is later compromised, previously captured/recorded encrypted traffic from earlier sessions cannot be decrypted, because each session's actual encryption keys are derived using fresh, independent key exchange material rather than being simply derived from a single long-term shared secret",
+    "B": "PFS guarantees that IPsec traffic will never experience any packet loss under any network condition",
+    "C": "PFS eliminates the need for any encryption key at all, allowing IPsec to operate with zero cryptographic overhead",
+    "D": "PFS refers exclusively to a physical security camera feature unrelated to any cryptographic property of IPsec"
+   },
+   "correct": "A",
+   "explanation_es": "PFS (Perfect Forward Secrecy) asegura que, aunque una clave de largo plazo (o una clave de sesión pasada) se vea comprometida más adelante, el tráfico cifrado capturado/registrado previamente de sesiones anteriores no pueda descifrarse, porque las claves de cifrado reales de cada sesión se derivan usando material de intercambio de claves fresco e independiente, en lugar de derivarse simplemente de un único secreto compartido de largo plazo."
+  },
+  {
+   "id": "b6_2.2.b_12",
+   "subtopic": "2.2.b",
+   "name": "GRE / IPsec / AH",
+   "question": "Which statement correctly describes IPsec's 'transport mode' as opposed to 'tunnel mode'?",
+   "options": {
+    "A": "In transport mode, the original IP header is preserved and only the payload (and, depending on AH/ESP, part of the header) is protected, making transport mode typically used for host-to-host communication rather than for encapsulating traffic between two gateways representing entire networks behind them, which is what tunnel mode is commonly used for",
+    "B": "Transport mode and tunnel mode are functionally identical, and the terms are used interchangeably with no configuration difference between them",
+    "C": "Transport mode always adds a completely new outer IP header, exactly like tunnel mode, with the two modes differing only in encryption algorithm choice",
+    "D": "Tunnel mode can only be used for host-to-host traffic and can never be used for site-to-site gateway-to-gateway VPNs"
+   },
+   "correct": "A",
+   "explanation_es": "En modo transporte, se preserva el encabezado IP original y solo se protege el payload (y, según AH/ESP, parte del encabezado), por lo que el modo transporte suele usarse para comunicación host-a-host en vez de para encapsular tráfico entre dos gateways que representan redes enteras detrás de ellos, que es para lo que se usa comúnmente el modo túnel."
+  },
+  {
+   "id": "b6_2.2.b_13",
+   "subtopic": "2.2.b",
+   "name": "GRE / IPsec / AH",
+   "question": "What is a key operational difference to consider when troubleshooting a GRE tunnel that is reported as 'up/up' at the interface level but is not actually passing traffic correctly?",
+   "options": {
+    "A": "A GRE tunnel interface can show as administratively and line-protocol 'up' based purely on reachability to the tunnel destination IP, even if there is a problem further along the path (such as an ACL blocking GRE protocol 47, an MTU/fragmentation issue, or a routing problem for traffic meant to traverse the tunnel), so 'up/up' status alone does not guarantee the tunnel is fully functional end-to-end for actual data traffic",
+    "B": "A GRE tunnel interface can never show as 'up/up' unless every single type of traffic that could ever traverse it is already flowing correctly with zero packet loss",
+    "C": "GRE tunnels have no concept of interface state at all and never display any up/down status in 'show interface' output",
+    "D": "An 'up/up' GRE tunnel interface guarantees that IPsec encryption (if configured) is also fully operational with no possibility of a separate IPsec-layer failure"
+   },
+   "correct": "A",
+   "explanation_es": "Una interfaz de túnel GRE puede mostrarse como 'up/up' basándose únicamente en la alcanzabilidad hacia la IP destino del túnel, aunque exista un problema más adelante en el camino (como una ACL bloqueando el protocolo GRE 47, un problema de MTU/fragmentación, o un problema de enrutamiento para el tráfico que debería atravesar el túnel), así que el estado 'up/up' por sí solo no garantiza que el túnel esté completamente funcional de extremo a extremo para el tráfico de datos real."
+  },
+  {
+   "id": "b6_2.2.b_14",
+   "subtopic": "2.2.b",
+   "name": "GRE / IPsec / AH",
+   "question": "Why might MTU and fragmentation be a particular concern when using GRE and/or IPsec tunnels compared to native, unencapsulated IP traffic?",
+   "options": {
+    "A": "Each layer of encapsulation (GRE header, and additionally IPsec/ESP header and trailer) adds extra bytes of overhead to the original packet, which can push the total packet size above the path's MTU, causing fragmentation (or, if the Don't Fragment bit is set and fragmentation isn't allowed, causing the packet to be dropped) unless the tunnel interface's MTU is adjusted or path MTU discovery is properly handled",
+    "B": "GRE and IPsec encapsulation always reduce the total packet size, so MTU and fragmentation concerns only apply to unencapsulated native IP traffic, never to tunneled traffic",
+    "C": "MTU has no relevance to tunneled traffic of any kind, since tunnel interfaces are exempt from all IP fragmentation rules by design",
+    "D": "Fragmentation concerns apply only to IPv6 tunnels and have no relevance whatsoever to IPv4-based GRE or IPsec tunnels"
+   },
+   "correct": "A",
+   "explanation_es": "Cada capa de encapsulación (encabezado GRE, y adicionalmente encabezado y trailer de IPsec/ESP) agrega bytes extra de overhead al paquete original, lo cual puede empujar el tamaño total del paquete por encima del MTU del camino, causando fragmentación (o, si el bit Don't Fragment está activo y no se permite fragmentar, causando que el paquete se descarte) a menos que se ajuste el MTU de la interfaz de túnel o se maneje correctamente el descubrimiento de MTU de camino."
+  },
+  {
+   "id": "b6_2.3.a_06",
+   "subtopic": "2.3.a",
+   "name": "LISP",
+   "question": "What is the function of the ITR (Ingress Tunnel Router) in a LISP deployment?",
+   "options": {
+    "A": "The ITR receives packets from a local EID-addressed source destined for a remote EID, queries the mapping system (via a Map-Resolver) to learn the destination's current RLOC if not already cached, and then encapsulates the original packet in a LISP header to be delivered to that RLOC",
+    "B": "The ITR is responsible exclusively for assigning DHCP leases to endpoints inside the LISP site and has no role in encapsulation",
+    "C": "The ITR only receives already-encapsulated LISP traffic from remote sites and decapsulates it; it never originates encapsulation itself",
+    "D": "The ITR replaces the need for any Map-Server in the LISP architecture, performing that role itself"
+   },
+   "correct": "A",
+   "explanation_es": "El ITR (Ingress Tunnel Router) recibe paquetes de una fuente local direccionada por EID destinados a un EID remoto, consulta el sistema de mapeo (vía un Map-Resolver) para aprender el RLOC actual del destino si aún no está en caché, y luego encapsula el paquete original en un encabezado LISP para entregarlo a ese RLOC."
+  },
+  {
+   "id": "b6_2.3.a_07",
+   "subtopic": "2.3.a",
+   "name": "LISP",
+   "question": "Why does LISP maintain a local 'map-cache' on ITRs, and what happens when that cache does not have an entry for a given destination EID?",
+   "options": {
+    "A": "The map-cache stores recently learned EID-to-RLOC mappings so subsequent packets to the same destination can be encapsulated immediately without a new lookup; if there is no cached entry (a 'cache miss'), the ITR sends a map-request to the mapping system (Map-Resolver/Map-Server) to learn the correct RLOC before it can encapsulate and forward the packet",
+    "B": "The map-cache is purely optional and provides no performance benefit whatsoever, since every single packet always triggers a fresh map-request regardless of prior lookups",
+    "C": "A map-cache miss causes the ITR to permanently block all future traffic to that destination EID until the device is manually rebooted",
+    "D": "The map-cache stores physical MAC addresses only and has no relationship to EID-to-RLOC mapping information at all"
+   },
+   "correct": "A",
+   "explanation_es": "El map-cache almacena mapeos EID-a-RLOC aprendidos recientemente para que los paquetes subsiguientes hacia el mismo destino puedan encapsularse de inmediato sin una nueva consulta; si no hay una entrada en caché (un 'cache miss'), el ITR envía un map-request al sistema de mapeo (Map-Resolver/Map-Server) para aprender el RLOC correcto antes de poder encapsular y reenviar el paquete."
+  },
+  {
+   "id": "b6_2.3.a_08",
+   "subtopic": "2.3.a",
+   "name": "LISP",
+   "question": "How does LISP support endpoint mobility (e.g., a host moving between sites) without requiring the endpoint to change its own IP address?",
+   "options": {
+    "A": "Because LISP separates identity (EID) from location (RLOC), when a host moves to a new site, only the RLOC associated with its EID needs to be updated in the mapping system (by the new site's xTR registering the host); the host's own EID address never has to change, and traffic destined to it is simply re-encapsulated toward the new RLOC once the mapping updates propagate",
+    "B": "LISP requires every mobile endpoint to obtain a completely new IP address every single time it physically moves to a different location",
+    "C": "LISP mobility support requires the endpoint itself to run a dedicated LISP software client that manually re-registers its own IP address with a central DNS server",
+    "D": "LISP has no mechanism to support endpoint mobility of any kind and endpoints must remain permanently in a single fixed location"
+   },
+   "correct": "A",
+   "explanation_es": "Como LISP separa identidad (EID) de ubicación (RLOC), cuando un host se mueve a un sitio nuevo, solo hace falta actualizar en el sistema de mapeo el RLOC asociado a su EID (registrado por el xTR del nuevo sitio); la dirección EID del host nunca tiene que cambiar, y el tráfico dirigido a él simplemente se vuelve a encapsular hacia el nuevo RLOC una vez que se propaga la actualización del mapeo."
+  },
+  {
+   "id": "b6_2.3.a_09",
+   "subtopic": "2.3.a",
+   "name": "LISP",
+   "question": "What is the general structure of a LISP-encapsulated data packet (LISP data encapsulation)?",
+   "options": {
+    "A": "The original packet (with its EID source/destination addressing intact) is encapsulated inside a UDP/IP packet, where the outer IP header uses RLOC addresses for actual routing across the underlying transport network, with a LISP header between the outer UDP header and the original inner packet",
+    "B": "LISP encapsulation completely discards the original packet's addressing information and replaces it entirely with a brand new packet containing no relationship to the original data",
+    "C": "LISP encapsulation uses TCP exclusively as its outer transport protocol, never UDP",
+    "D": "LISP-encapsulated packets carry no outer IP header at all and are transported purely at Layer 2 using MAC addressing only"
+   },
+   "correct": "A",
+   "explanation_es": "El paquete original (con su direccionamiento EID origen/destino intacto) se encapsula dentro de un paquete UDP/IP, donde el encabezado IP externo usa direcciones RLOC para el enrutamiento real a través de la red de transporte subyacente, con un encabezado LISP entre el encabezado UDP externo y el paquete interno original."
+  },
+  {
+   "id": "b6_2.3.a_10",
+   "subtopic": "2.3.a",
+   "name": "LISP",
+   "question": "What role does an ETR (Egress Tunnel Router) play once it receives a LISP-encapsulated packet destined for one of its locally registered EIDs?",
+   "options": {
+    "A": "The ETR decapsulates the LISP header (removing the outer RLOC-addressed transport wrapper) and forwards the original inner packet toward its final local EID destination, delivering the packet as it would have looked before it was ever encapsulated by the remote ITR",
+    "B": "The ETR discards every LISP-encapsulated packet it receives without any further processing, since ETRs are read-only monitoring devices with no forwarding capability",
+    "C": "The ETR re-encapsulates the packet a second time with an entirely new, unrelated destination before forwarding it anywhere",
+    "D": "An ETR can only ever process packets originally sent using plain unencapsulated IP, and cannot decapsulate any LISP header at all"
+   },
+   "correct": "A",
+   "explanation_es": "El ETR decapsula el encabezado LISP (quitando la envoltura de transporte externa direccionada por RLOC) y reenvía el paquete interno original hacia su destino EID local final, entregando el paquete tal como se veía antes de que el ITR remoto lo encapsulara."
+  },
+  {
+   "id": "b6_2.3.a_11",
+   "subtopic": "2.3.a",
+   "name": "LISP",
+   "question": "Why is LISP sometimes described as providing a more scalable alternative to putting every endpoint's specific /32 (or /128) host route into the global routing table for mobility scenarios?",
+   "options": {
+    "A": "LISP keeps detailed per-host EID-to-RLOC mapping information within its own separate mapping system rather than injecting individual host routes into the underlying routing protocol/table, which avoids bloating the core routing table with a massive number of host-specific entries just to support endpoint mobility",
+    "B": "LISP requires every single host route to still be injected into the global routing table in exactly the same way as without LISP, providing no scalability benefit at all",
+    "C": "LISP eliminates the need for any routing table on any device in the network, including the mapping system itself",
+    "D": "LISP scalability has nothing to do with routing table size and is purely a marketing claim with no technical basis"
+   },
+   "correct": "A",
+   "explanation_es": "LISP mantiene la información detallada de mapeo EID-a-RLOC por host dentro de su propio sistema de mapeo separado, en lugar de inyectar rutas de host individuales en el protocolo/tabla de enrutamiento subyacente, lo cual evita saturar la tabla de enrutamiento del core con una cantidad masiva de entradas específicas de host solo para soportar movilidad de endpoints."
+  },
+  {
+   "id": "b6_2.3.a_12",
+   "subtopic": "2.3.a",
+   "name": "LISP",
+   "question": "In the context of SD-Access, how is the general LISP architecture (ITR/ETR/Map-Server/Map-Resolver) mapped onto SD-Access's own fabric roles?",
+   "options": {
+    "A": "The Fabric Control Plane node in SD-Access takes on the Map-Server/Map-Resolver role, while Fabric Edge Nodes and Fabric Border Nodes act in xTR-like roles (encapsulating/decapsulating VXLAN traffic and registering endpoint EID-to-RLOC mappings), applying LISP's identity/location separation concepts within the fabric's own architecture",
+    "B": "SD-Access does not use any LISP concepts at all; the terminology is purely coincidental with no actual architectural relationship",
+    "C": "In SD-Access, the Fabric Edge Node performs the Map-Server/Map-Resolver role exclusively, while the Fabric Control Plane node has no LISP-related function whatsoever",
+    "D": "LISP roles apply only to wireless SD-Access deployments and have no relevance to wired fabric roles at all"
+   },
+   "correct": "A",
+   "explanation_es": "El Fabric Control Plane node de SD-Access asume el rol de Map-Server/Map-Resolver, mientras que los Fabric Edge Node y Fabric Border Node actúan en roles similares a xTR (encapsulando/decapsulando tráfico VXLAN y registrando mapeos EID-a-RLOC de endpoints), aplicando los conceptos de separación identidad/ubicación de LISP dentro de la arquitectura propia de la fabric."
+  },
+  {
+   "id": "b6_2.3.a_13",
+   "subtopic": "2.3.a",
+   "name": "LISP",
+   "question": "What potential latency impact can occur on the very first packet sent to a previously-unseen destination EID in a LISP deployment, and why?",
+   "options": {
+    "A": "The very first packet to a new destination may experience additional latency because the ITR must first perform a map-request/map-reply exchange with the mapping system to learn the destination's RLOC before it can encapsulate and forward that packet, whereas subsequent packets to the same destination benefit from the now-cached mapping and avoid that extra lookup delay",
+    "B": "LISP guarantees that every single packet, including the very first one to any destination, experiences exactly zero additional latency under all circumstances",
+    "C": "The first-packet latency concern applies only to packets smaller than 64 bytes and never to any larger packet size",
+    "D": "First-packet latency in LISP is caused exclusively by physical fiber-optic cable length and has no relationship to the map-request/map-reply process at all"
+   },
+   "correct": "A",
+   "explanation_es": "El primer paquete hacia un destino nuevo puede experimentar latencia adicional porque el ITR primero debe realizar un intercambio de map-request/map-reply con el sistema de mapeo para aprender el RLOC del destino antes de poder encapsular y reenviar ese paquete, mientras que los paquetes subsiguientes hacia el mismo destino se benefician del mapeo ya en caché y evitan ese retraso extra de consulta."
+  },
+  {
+   "id": "b6_2.3.a_14",
+   "subtopic": "2.3.a",
+   "name": "LISP",
+   "question": "Which statement correctly describes how LISP can support multiple 'instance IDs' within a single mapping system, conceptually similar to how VRFs provide multiple routing tables on a router?",
+   "options": {
+    "A": "A LISP instance ID allows the same EID address space to be reused independently across multiple isolated LISP 'virtual networks' (similar in spirit to how a VRF allows the same IP address range to be reused across isolated routing tables), enabling multi-tenancy within a single shared LISP mapping infrastructure",
+    "B": "LISP instance IDs have no relationship to multi-tenancy or address reuse and refer only to a device's hardware serial number",
+    "C": "A LISP deployment can support only a single instance ID globally, making any form of multi-tenant EID address reuse technically impossible",
+    "D": "Instance IDs are used exclusively to select which physical port an EID connects through, with no relationship to routing table isolation"
+   },
+   "correct": "A",
+   "explanation_es": "Un instance ID de LISP permite reutilizar el mismo espacio de direcciones EID de forma independiente entre múltiples 'virtual networks' LISP aisladas (de forma conceptualmente similar a cómo una VRF permite reutilizar el mismo rango de IP entre tablas de enrutamiento aisladas), habilitando multi-tenencia dentro de una única infraestructura de mapeo LISP compartida — este es justamente el mecanismo que usa SD-Access para separar sus virtual networks."
+  },
+  {
+   "id": "b6_2.3.b_11",
+   "subtopic": "2.3.b",
+   "name": "VXLAN EVPN/BUM",
+   "question": "What is the purpose of EVPN Type-1 (Ethernet Auto-Discovery) routes in a VXLAN EVPN fabric using multihoming?",
+   "options": {
+    "A": "Type-1 routes are used to advertise Ethernet Segment auto-discovery information, which supports multihoming scenarios (a device dual-connected to two VTEPs) by enabling fast convergence and split-horizon/aliasing behavior across the redundant links",
+    "B": "Type-1 routes are used exclusively to advertise individual host MAC addresses, identical in function to Type-2 routes",
+    "C": "Type-1 routes carry only multicast group membership information and have no relationship to multihoming or Ethernet Segments",
+    "D": "Type-1 routes exist purely for historical compatibility and are never actually used in any current EVPN deployment"
+   },
+   "correct": "A",
+   "explanation_es": "Las rutas Type-1 se usan para anunciar información de auto-descubrimiento de Segmento Ethernet, lo cual soporta escenarios de multihoming (un dispositivo doblemente conectado a dos VTEPs) habilitando convergencia rápida y comportamiento de split-horizon/aliasing a través de los enlaces redundantes."
+  },
+  {
+   "id": "b6_2.3.b_12",
+   "subtopic": "2.3.b",
+   "name": "VXLAN EVPN/BUM",
+   "question": "What does EVPN Type-3 (Inclusive Multicast Ethernet Tag) route advertise, and why is it needed even in a BGP EVPN control-plane deployment?",
+   "options": {
+    "A": "Type-3 routes advertise, per VNI, which VTEPs are interested in receiving BUM (Broadcast, Unknown-unicast, Multicast) traffic for that VNI, allowing other VTEPs to build the correct ingress-replication or multicast distribution list for BUM traffic even though EVPN handles known-unicast MAC learning via the control plane",
+    "B": "Type-3 routes are used exclusively to advertise IP prefix reachability for inter-subnet routing, identical to Type-5 routes",
+    "C": "Type-3 routes carry individual host MAC-to-IP bindings, making them functionally identical to Type-2 routes",
+    "D": "Type-3 routes have no relationship to BUM traffic handling and are used solely for BGP session keepalives"
+   },
+   "correct": "A",
+   "explanation_es": "Las rutas Type-3 anuncian, por VNI, qué VTEPs están interesados en recibir tráfico BUM (Broadcast, Unknown-unicast, Multicast) para esa VNI, permitiendo que otros VTEPs construyan la lista correcta de replicación por ingreso o distribución multicast para el tráfico BUM, incluso cuando EVPN maneja el aprendizaje de MAC conocidas vía el plano de control."
+  },
+  {
+   "id": "b6_2.3.b_13",
+   "subtopic": "2.3.b",
+   "name": "VXLAN EVPN/BUM",
+   "question": "What is 'symmetric IRB' (Integrated Routing and Bridging) in a VXLAN EVPN fabric, and why is it commonly preferred over 'asymmetric IRB'?",
+   "options": {
+    "A": "In symmetric IRB, both the ingress and egress VTEP perform a routing lookup (using a shared, consistently-provisioned L3 VNI) when forwarding inter-subnet traffic, which requires every VTEP to only be provisioned with the L2/L3 VNIs of the VLANs actually needed locally, improving scalability compared to asymmetric IRB, where the ingress VTEP must know about every possible destination VNI in the fabric to route directly to it in a single lookup",
+    "B": "Symmetric IRB refers exclusively to a physical cabling requirement where every VTEP must be connected with an identical number of cables, unrelated to routing behavior",
+    "C": "Symmetric IRB means that routing is only ever performed by a single centralized VTEP for the entire fabric, with no distributed routing capability",
+    "D": "Asymmetric IRB and symmetric IRB are functionally identical, differing only in which vendor coined each term"
+   },
+   "correct": "A",
+   "explanation_es": "En symmetric IRB, tanto el VTEP de ingreso como el de egreso realizan una búsqueda de enrutamiento (usando una L3 VNI compartida y provisionada de forma consistente) al reenviar tráfico entre subredes, lo cual requiere que cada VTEP solo esté provisionado con las VNIs de Capa 2/3 que realmente necesita localmente, mejorando la escalabilidad comparado con asymmetric IRB, donde el VTEP de ingreso debe conocer cada posible VNI destino de la fabric para enrutar directamente en una sola búsqueda."
+  },
+  {
+   "id": "b6_2.3.b_14",
+   "subtopic": "2.3.b",
+   "name": "VXLAN EVPN/BUM",
+   "question": "How does EVPN's BGP-based control plane help detect and prevent duplicate MAC address issues (MAC 'move' or 'flapping') across a VXLAN fabric compared to pure data-plane flood-and-learn?",
+   "options": {
+    "A": "Because MAC reachability is advertised and tracked via BGP EVPN Type-2 routes (with sequence numbers), the control plane can detect when the same MAC address is being advertised from two different VTEPs nearly simultaneously (a potential loop or misconfiguration) and can take protective action, such as flagging the MAC as duplicate, which is harder to reliably detect using only local data-plane MAC learning at each switch independently",
+    "B": "EVPN's control plane has no ability to detect duplicate MAC addresses at all; this can only ever be discovered using data-plane flood-and-learn",
+    "C": "Duplicate MAC detection in EVPN relies exclusively on manually configured static MAC address tables at every single VTEP",
+    "D": "EVPN prevents duplicate MACs by permanently disabling any VNI that has ever contained more than one host"
+   },
+   "correct": "A",
+   "explanation_es": "Como la alcanzabilidad MAC se anuncia y rastrea vía rutas EVPN Type-2 de BGP (con números de secuencia), el plano de control puede detectar cuando la misma MAC se está anunciando desde dos VTEPs distintos casi simultáneamente (un posible loop o mala configuración) y tomar acción protectora, como marcar la MAC como duplicada — algo más difícil de detectar de forma confiable usando solo aprendizaje de MAC en el plano de datos de cada switch de forma independiente."
+  },
+  {
+   "id": "b6_2.3.b_15",
+   "subtopic": "2.3.b",
+   "name": "VXLAN EVPN/BUM",
+   "question": "Why does a VXLAN EVPN fabric commonly need a way to handle BUM traffic even though EVPN's BGP control plane already distributes known unicast MAC reachability?",
+   "options": {
+    "A": "EVPN's BGP control plane specifically addresses learning and distributing known-unicast MAC-to-VTEP mappings, but broadcast, unknown-unicast, and multicast (BUM) traffic by definition must still reach multiple (or all) relevant VTEPs for a given VNI, requiring a separate mechanism (multicast underlay or ingress replication) specifically for that category of traffic, which EVPN's unicast MAC learning does not address",
+    "B": "BUM traffic does not exist as a concept in any VXLAN EVPN deployment, making this consideration entirely moot",
+    "C": "EVPN's BGP control plane already fully replaces the need to handle BUM traffic in any way, since all traffic becomes known-unicast automatically once EVPN is enabled",
+    "D": "BUM traffic handling is only relevant in fabrics that do not use BGP EVPN at all, and is automatically eliminated the moment EVPN is configured"
+   },
+   "correct": "A",
+   "explanation_es": "El plano de control BGP de EVPN aborda específicamente el aprendizaje y la distribución de mapeos MAC-a-VTEP de unicast conocido, pero el tráfico broadcast, unknown-unicast y multicast (BUM) por definición debe seguir llegando a múltiples (o todos) los VTEPs relevantes para una VNI dada, requiriendo un mecanismo separado (underlay multicast o replicación por ingreso) específicamente para esa categoría de tráfico, algo que el aprendizaje de MAC unicast de EVPN no resuelve por sí solo."
   }
  ]
 }
