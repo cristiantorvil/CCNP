@@ -1,6 +1,6 @@
 {
  "version": "2026-09-08_v4",
- "total": 927,
+ "total": 951,
  "questions": [
   {
    "id": "trustsec_01",
@@ -12979,6 +12979,342 @@
    },
    "correct": "A",
    "explanation_es": "Un límite de prefijos máximos protege al router de ser saturado si el peer inesperadamente anuncia una cantidad de prefijos mucho mayor de lo normalmente esperado (por una mala configuración de su lado, una fuga de rutas, o un ataque deliberado), tomando automáticamente una acción protectora (como derribar la sesión) si se excede el umbral configurado."
+  },
+  {
+   "id": "b6_3.3.a_22",
+   "subtopic": "3.3.a",
+   "name": "NTP/PTP",
+   "question": "What command is commonly used to verify a Cisco device's current clock/time setting, independent of whether it's synchronized via NTP?",
+   "options": {
+    "A": "'show clock' (or 'show clock detail'), which displays the device's current date and time, and with the detail option, indicates the time source (such as NTP) and whether the clock is considered authoritative/synchronized",
+    "B": "'show ip route', which displays routing table entries and has no relationship whatsoever to the device's current clock setting",
+    "C": "The device's current clock setting can never be verified through any Cisco IOS command, and can only be inferred by comparing syslog timestamps against an external reference",
+    "D": "'show interfaces status' displays the device clock directly alongside interface link status, with no separate clock-specific command needed"
+   },
+   "correct": "A",
+   "explanation_es": "'show clock' (o 'show clock detail') muestra la fecha y hora actual del dispositivo, y con la opción detail, indica la fuente de tiempo (como NTP) y si el reloj se considera autoritativo/sincronizado."
+  },
+  {
+   "id": "b6_3.3.a_23",
+   "subtopic": "3.3.a",
+   "name": "NTP/PTP",
+   "question": "Why might a network with devices spread across multiple time zones still configure every device's underlying clock to UTC rather than each device's local time zone?",
+   "options": {
+    "A": "Using UTC as the underlying reference avoids ambiguity and complexity when correlating logs/events across devices in different time zones (and avoids daylight-saving-time transition issues), while a locally displayed time zone offset can still be configured separately for human-readable convenience without changing the underlying UTC-based timestamp used internally",
+    "B": "Using UTC has no practical benefit whatsoever compared to each device independently using its own local time zone, and provides no advantage for correlating logs across a geographically distributed network",
+    "C": "Devices are technically incapable of displaying any time zone other than UTC; local time zone display is not a configurable option on any Cisco IOS platform",
+    "D": "Configuring UTC as the underlying clock reference always and completely disables the ability to also configure a local time zone offset for display purposes"
+   },
+   "correct": "A",
+   "explanation_es": "Usar UTC como referencia subyacente evita ambigüedad y complejidad al correlacionar logs/eventos entre dispositivos en distintas zonas horarias (y evita problemas de transición de horario de verano), mientras que un offset de zona horaria local mostrado igual se puede configurar por separado por conveniencia legible para humanos sin cambiar la marca de tiempo subyacente basada en UTC usada internamente."
+  },
+  {
+   "id": "b6_3.3.a_24",
+   "subtopic": "3.3.a",
+   "name": "NTP/PTP",
+   "question": "What does the term 'jitter' mean specifically in the context of NTP time synchronization accuracy (as distinct from network/voice jitter)?",
+   "options": {
+    "A": "NTP jitter refers to the variability/inconsistency observed in the offset measurements between the local clock and the reference time source across successive synchronization exchanges, which NTP's algorithms account for when deciding how much to trust and adjust based on a given time source",
+    "B": "NTP jitter has no relationship whatsoever to time synchronization accuracy, and refers exclusively to variation in voice/video packet arrival timing, an entirely unrelated networking concept sharing only the same word",
+    "C": "Jitter in NTP always indicates a hardware failure requiring the device to be physically replaced, rather than being a normal measurable characteristic of the synchronization process itself",
+    "D": "NTP jitter is a fixed, unchangeable constant defined identically for every device, with no relationship to actual observed measurement variability at all"
+   },
+   "correct": "A",
+   "explanation_es": "El jitter de NTP se refiere a la variabilidad/inconsistencia observada en las mediciones de offset entre el reloj local y la fuente de tiempo de referencia a través de intercambios de sincronización sucesivos, lo cual los algoritmos de NTP tienen en cuenta al decidir cuánto confiar y ajustar en base a una fuente de tiempo dada."
+  },
+  {
+   "id": "b6_3.3.a_25",
+   "subtopic": "3.3.a",
+   "name": "NTP/PTP",
+   "question": "Why might PTP be deployed alongside (rather than instead of) NTP in some environments, with different devices using different protocols?",
+   "options": {
+    "A": "Not every device in an environment necessarily requires PTP's sub-microsecond precision (or supports PTP's hardware timestamping capability); general-purpose devices with more relaxed timing accuracy needs can continue using the simpler, more broadly supported NTP, while only the specific devices that genuinely need extreme precision are configured for PTP, avoiding unnecessary complexity across the whole environment",
+    "B": "PTP and NTP are mutually exclusive protocols that can never coexist within the same environment under any circumstances, requiring every single device to use exactly one or the other with no mixed deployment ever possible",
+    "C": "Deploying both protocols together always and completely disables time synchronization entirely for every device in the environment, regardless of which protocol any individual device is actually configured to use",
+    "D": "PTP has no relationship whatsoever to time synchronization precision, and choosing between PTP and NTP has no bearing on the timing accuracy any given device can achieve"
+   },
+   "correct": "A",
+   "explanation_es": "No todos los dispositivos de un entorno necesariamente requieren la precisión de sub-microsegundo de PTP (ni soportan la capacidad de timestamping por hardware de PTP); los dispositivos de propósito general con necesidades de precisión de tiempo más relajadas pueden seguir usando el NTP más simple y ampliamente soportado, mientras que solo los dispositivos específicos que genuinamente necesitan precisión extrema se configuran para PTP, evitando complejidad innecesaria en todo el entorno."
+  },
+  {
+   "id": "b6_3.3.a_26",
+   "subtopic": "3.3.a",
+   "name": "NTP/PTP",
+   "question": "What is the significance of stratum 1 devices being directly connected to a stratum 0 reference clock (such as a GPS receiver), rather than reaching it over a network?",
+   "options": {
+    "A": "A direct physical/hardware connection to the stratum 0 source (rather than reaching it over a network with its own inherent latency and variability) allows a stratum 1 server to achieve the highest practical accuracy possible in the hierarchy, since it avoids the additional timing uncertainty that network-based communication with the reference source would introduce",
+    "B": "Stratum 1 devices are never directly connected to any stratum 0 source under any circumstances; this description of a direct connection between stratum 0 and stratum 1 is fundamentally inaccurate",
+    "C": "The stratum numbering scheme has no relationship whatsoever to how directly (or indirectly) a device is connected to an authoritative time reference source",
+    "D": "A stratum 1 device connected directly to a GPS receiver is always considered less accurate than a stratum 2 device reaching that same GPS-based time indirectly over the network"
+   },
+   "correct": "A",
+   "explanation_es": "Una conexión física/de hardware directa a la fuente stratum 0 (en lugar de alcanzarla por red con su propia latencia y variabilidad inherentes) le permite a un servidor stratum 1 lograr la mayor precisión práctica posible en la jerarquía, ya que evita la incertidumbre de temporización adicional que introduciría la comunicación basada en red con la fuente de referencia."
+  },
+  {
+   "id": "b6_3.3.a_27",
+   "subtopic": "3.3.a",
+   "name": "NTP/PTP",
+   "question": "Why might relying on each device's own free-running internal clock (with no NTP/PTP synchronization at all) be problematic for a network that must support certificate-based authentication across many devices?",
+   "options": {
+    "A": "Without synchronization, each device's clock can drift independently over time in different directions and at different rates, potentially causing one device to consider a certificate expired (or not yet valid) while another device, with a differently-drifted clock, considers that exact same certificate currently valid, leading to inconsistent, hard-to-diagnose authentication failures across the network",
+    "B": "Free-running clocks with no synchronization have no relationship whatsoever to certificate validation outcomes, since certificate validity is determined purely by cryptographic signature verification with zero dependency on any device's local clock value",
+    "C": "Every device's internal clock is always guaranteed to remain perfectly accurate indefinitely without any synchronization whatsoever, making this scenario a purely theoretical concern with no practical relevance",
+    "D": "This problem only affects devices running IPv6, and has no relevance whatsoever to devices using IPv4-only addressing for their certificate-based authentication exchanges"
+   },
+   "correct": "A",
+   "explanation_es": "Sin sincronización, el reloj de cada dispositivo puede desviarse independientemente con el tiempo en direcciones y a tasas distintas, potencialmente causando que un dispositivo considere expirado (o aún no válido) un certificado mientras otro dispositivo, con un reloj desviado de forma distinta, considere ese mismo certificado exacto como actualmente válido, llevando a fallas de autenticación inconsistentes y difíciles de diagnosticar en toda la red."
+  },
+  {
+   "id": "b6_3.3.b_22",
+   "subtopic": "3.3.b",
+   "name": "NAT/PAT",
+   "question": "What command is commonly used on a Cisco router to view the currently active NAT translation table entries?",
+   "options": {
+    "A": "'show ip nat translations', which lists the active inside local/global and outside local/global address mappings currently maintained by the router's NAT process",
+    "B": "'show vlan brief', which has no relationship whatsoever to NAT translation table entries and only displays VLAN configuration",
+    "C": "NAT translation table entries can never be viewed through any Cisco IOS command, and can only be inferred indirectly by monitoring interface traffic counters",
+    "D": "'show ip route' displays the NAT translation table directly alongside routing table entries, with no separate NAT-specific command needed"
+   },
+   "correct": "A",
+   "explanation_es": "'show ip nat translations' lista los mapeos activos de direcciones inside local/global y outside local/global actualmente mantenidos por el proceso NAT del router."
+  },
+  {
+   "id": "b6_3.3.b_23",
+   "subtopic": "3.3.b",
+   "name": "NAT/PAT",
+   "question": "Why does a dynamic NAT/PAT translation table entry typically have an idle timeout, after which the entry is removed if no matching traffic is seen?",
+   "options": {
+    "A": "Removing stale, no-longer-active translation entries frees up resources (like the finite pool of translated addresses/ports) for new sessions, rather than allowing the table to grow indefinitely with entries for sessions that have already effectively ended but were never explicitly torn down",
+    "B": "NAT/PAT translation entries never expire under any circumstances and persist permanently in the table for the entire uptime of the router, regardless of whether any matching traffic is ever seen again",
+    "C": "The idle timeout has no relationship whatsoever to freeing up translated address/port resources, and instead exclusively controls how often the router's own clock resynchronizes via NTP",
+    "D": "Timeout only applies to static NAT entries, while dynamic NAT/PAT entries are technically incapable of ever expiring or being removed automatically"
+   },
+   "correct": "A",
+   "explanation_es": "Eliminar entradas de traducción obsoletas y ya no activas libera recursos (como el pool finito de direcciones/puertos traducidos) para sesiones nuevas, en lugar de permitir que la tabla crezca indefinidamente con entradas de sesiones que ya efectivamente terminaron pero nunca se cerraron explícitamente."
+  },
+  {
+   "id": "b6_3.3.b_24",
+   "subtopic": "3.3.b",
+   "name": "NAT/PAT",
+   "question": "Why might NAT complicate an organization's ability to directly trace a specific internal user's activity from an external, internet-facing log alone (such as a web server's access log)?",
+   "options": {
+    "A": "Because many internal hosts may share the same translated public IP address under PAT, the external log's source IP alone doesn't uniquely identify which specific internal host generated a given request; correlating that external log entry back to the actual internal host typically requires cross-referencing the NAT device's own translation logs (which also need the specific source port and precise timestamp)",
+    "B": "NAT has no effect whatsoever on the ability to trace internal user activity from external logs, since the original internal source IP is always automatically preserved unchanged in every external-facing log regardless of NAT translation",
+    "C": "External logs always automatically and directly display each internal host's true private IP address alongside the translated address, making any correlation with NAT device logs entirely unnecessary in every case",
+    "D": "This tracing complication only occurs with static NAT, and never occurs with dynamic PAT overload, the reverse of the scenario where it's actually more pronounced"
+   },
+   "correct": "A",
+   "explanation_es": "Como muchos hosts internos pueden compartir la misma dirección IP pública traducida bajo PAT, la IP de origen sola en el log externo no identifica de forma única a qué host interno específico generó una solicitud dada; correlacionar esa entrada de log externa con el host interno real típicamente requiere cruzar referencias con los propios logs de traducción del dispositivo NAT (que también necesitan el puerto de origen específico y una marca de tiempo precisa)."
+  },
+  {
+   "id": "b6_3.3.b_25",
+   "subtopic": "3.3.b",
+   "name": "NAT/PAT",
+   "question": "What is the general purpose of Carrier-Grade NAT (CGN/CGNAT), as deployed by some internet service providers?",
+   "options": {
+    "A": "CGNAT applies NAT/PAT at the ISP's own network edge, allowing many subscriber households (each already potentially doing their own NAT internally) to share a smaller pool of public IPv4 addresses at the provider level, helping the ISP conserve increasingly scarce public IPv4 address space across its entire subscriber base",
+    "B": "CGNAT has no relationship whatsoever to conserving public IPv4 address space, and instead exclusively provides encryption for subscriber traffic",
+    "C": "Carrier-Grade NAT can only ever be applied to a single individual subscriber at a time, providing no aggregate address-conservation benefit across an ISP's broader subscriber base",
+    "D": "CGNAT eliminates the need for any subscriber-side NAT entirely, since it's assumed to replace, rather than stack on top of, any NAT already occurring within a subscriber's own home network"
+   },
+   "correct": "A",
+   "explanation_es": "CGNAT aplica NAT/PAT en el propio borde de red del ISP, permitiendo que muchos hogares suscriptores (cada uno potencialmente ya haciendo su propio NAT internamente) compartan un pool más pequeño de direcciones públicas IPv4 a nivel del proveedor, ayudando al ISP a conservar el espacio de direcciones IPv4 públicas cada vez más escaso en toda su base de suscriptores."
+  },
+  {
+   "id": "b6_3.3.b_26",
+   "subtopic": "3.3.b",
+   "name": "NAT/PAT",
+   "question": "Why might 'NAT hairpinning' (or NAT loopback) be needed when an internal client tries to reach an internal server using that server's public/external IP address (rather than its private internal address)?",
+   "options": {
+    "A": "Without hairpinning support, a router might not correctly handle traffic that enters and needs to exit through the same internal-facing interface (since the client's request to the server's public IP would normally be expected to go out toward the internet and come back, not simply loop internally); hairpinning allows the NAT device to correctly translate and redirect that traffic back into the internal network toward the actual server, even though both the client and server are on the inside",
+    "B": "NAT hairpinning has no relationship whatsoever to handling internal-to-internal traffic directed at a server's public address, and instead exclusively refers to a specific type of physical cable routing pattern within a server rack",
+    "C": "Hairpinning is only relevant for IPv6 deployments and has no applicability whatsoever to an IPv4 NAT scenario where an internal client accesses an internal server via its public IP",
+    "D": "This scenario never actually requires any special NAT handling, since every router is assumed to automatically and correctly handle this internal-loopback case with zero additional configuration or capability needed"
+   },
+   "correct": "A",
+   "explanation_es": "Sin soporte de hairpinning, un router podría no manejar correctamente tráfico que entra y necesita salir por la misma interfaz orientada hacia adentro (ya que la solicitud del cliente hacia la IP pública del servidor normalmente se esperaría que saliera hacia internet y volviera, no que simplemente diera vuelta internamente); el hairpinning le permite al dispositivo NAT traducir y redirigir correctamente ese tráfico de vuelta hacia la red interna hacia el servidor real, aunque tanto el cliente como el servidor estén adentro."
+  },
+  {
+   "id": "b6_3.3.b_27",
+   "subtopic": "3.3.b",
+   "name": "NAT/PAT",
+   "question": "Why is it important to consider NAT when designing a network monitoring/troubleshooting strategy that relies on packet captures taken at different points in the network?",
+   "options": {
+    "A": "A packet captured on the inside of a NAT boundary will show the original (inside local) addressing, while a capture taken on the outside will show the translated (inside global) addressing for that same traffic; failing to account for this can make it difficult to correlate the 'same' conversation observed at two different capture points, since the IP addresses (and possibly ports) visible in each capture will differ",
+    "B": "NAT has no effect whatsoever on how traffic appears in a packet capture; the exact same source and destination IP addresses are always visible identically in a capture taken on either side of a NAT boundary",
+    "C": "Packet captures are technically impossible to take on any network segment where NAT is configured anywhere in the topology, making this consideration entirely moot in practice",
+    "D": "This consideration only matters for capturing IPv6 traffic and has no relevance whatsoever to capturing IPv4 traffic crossing a NAT boundary"
+   },
+   "correct": "A",
+   "explanation_es": "Un paquete capturado dentro del límite de NAT mostrará el direccionamiento original (inside local), mientras que una captura tomada afuera mostrará el direccionamiento traducido (inside global) para ese mismo tráfico; no tener esto en cuenta puede dificultar correlacionar la 'misma' conversación observada en dos puntos de captura distintos, ya que las direcciones IP (y posiblemente puertos) visibles en cada captura diferirán."
+  },
+  {
+   "id": "b6_3.3.c_22",
+   "subtopic": "3.3.c",
+   "name": "HSRP/VRRP",
+   "question": "What command is commonly used to verify the currently active HSRP router and its priority for a given group on a specific interface?",
+   "options": {
+    "A": "'show standby [interface] [group] brief' or 'show standby', which displays the group's state (Active/Standby), priority, and virtual IP for each configured HSRP group",
+    "B": "'show vlan brief', which only shows VLAN-to-port assignments and has no relationship whatsoever to HSRP group state or priority",
+    "C": "HSRP active/standby state can never be verified through any Cisco IOS command output, and can only be inferred by observing whether end hosts have connectivity",
+    "D": "'show ip route' displays the HSRP group's active router directly alongside routing table entries, with no separate HSRP-specific command needed"
+   },
+   "correct": "A",
+   "explanation_es": "'show standby [interfaz] [grupo] brief' o 'show standby' muestra el estado del grupo (Active/Standby), la prioridad, y la IP virtual de cada grupo HSRP configurado."
+  },
+  {
+   "id": "b6_3.3.c_23",
+   "subtopic": "3.3.c",
+   "name": "HSRP/VRRP",
+   "question": "Why might an engineer configure HSRP 'track' on a specific uplink interface with a priority decrement larger than the default 10, in a design with only two routers?",
+   "options": {
+    "A": "A larger decrement can help ensure that if the tracked uplink fails, the resulting reduced priority definitively drops below the peer router's priority (guaranteeing a failover to the peer), which might not reliably happen if the default decrement of 10 isn't large enough relative to the priority gap between the two routers in that specific design",
+    "B": "The size of the priority decrement has no bearing whatsoever on whether a failover actually occurs after a tracked interface fails; failover always happens identically regardless of the decrement value configured",
+    "C": "Configuring any decrement value larger than the default 10 is technically invalid, unsupported syntax and will be rejected by Cisco IOS",
+    "D": "A larger decrement value always and completely disables HSRP tracking entirely for that specific interface, rather than simply causing a bigger priority reduction upon a tracked failure"
+   },
+   "correct": "A",
+   "explanation_es": "Un decremento mayor puede ayudar a asegurar que si el uplink rastreado falla, la prioridad reducida resultante caiga definitivamente por debajo de la prioridad del router peer (garantizando un failover hacia el peer), algo que podría no ocurrir de forma confiable si el decremento por defecto de 10 no es suficientemente grande respecto a la brecha de prioridad entre ambos routers en ese diseño específico."
+  },
+  {
+   "id": "b6_3.3.c_24",
+   "subtopic": "3.3.c",
+   "name": "HSRP/VRRP",
+   "question": "What does the VRRP 'Master' role correspond to conceptually in HSRP terminology?",
+   "options": {
+    "A": "VRRP's 'Master' role corresponds conceptually to HSRP's 'Active' role — the router currently forwarding traffic for the group's virtual IP — while VRRP's 'Backup' role corresponds to HSRP's 'Standby' role",
+    "B": "VRRP's 'Master' role has no HSRP equivalent whatsoever, since HSRP is described as having no concept of any router actively forwarding traffic for a group at all",
+    "C": "VRRP's 'Master' role corresponds to HSRP's 'Standby' role, and VRRP's 'Backup' corresponds to HSRP's 'Active' role, the reverse of the actual typical mapping between the two protocols' terminology",
+    "D": "VRRP has no equivalent concept to HSRP's Active/Standby roles at all; VRRP instead relies on a fundamentally different mechanism with no comparable role-based terminology whatsoever"
+   },
+   "correct": "A",
+   "explanation_es": "El rol 'Master' de VRRP corresponde conceptualmente al rol 'Active' de HSRP — el router actualmente reenviando tráfico para la IP virtual del grupo — mientras que el rol 'Backup' de VRRP corresponde al rol 'Standby' de HSRP."
+  },
+  {
+   "id": "b6_3.3.c_25",
+   "subtopic": "3.3.c",
+   "name": "HSRP/VRRP",
+   "question": "Why might a network design use different HSRP/VRRP groups (with different active routers) for different VLANs on the same pair of distribution switches, rather than always making the same physical router active for every VLAN?",
+   "options": {
+    "A": "Distributing the active role across different routers for different VLANs helps spread the forwarding load for uplink traffic more evenly between both distribution switches, rather than concentrating all forwarding responsibility onto a single device while the other sits comparatively idle",
+    "B": "Using different active routers per VLAN group has no relationship whatsoever to load distribution, and is done purely for aesthetic/labeling consistency with no actual traffic-forwarding benefit",
+    "C": "FHRP protocols technically require that the exact same single router always be Active for absolutely every configured group on a device, making the scenario of varying the active router per VLAN group technically impossible to configure",
+    "D": "Varying the active router per VLAN always and completely disables the ability to configure interface tracking on any of those groups"
+   },
+   "correct": "A",
+   "explanation_es": "Distribuir el rol activo entre distintos routers para distintas VLANs ayuda a repartir de forma más pareja la carga de reenvío del tráfico de uplink entre ambos switches de distribución, en lugar de concentrar toda la responsabilidad de reenvío en un solo dispositivo mientras el otro permanece comparativamente ocioso."
+  },
+  {
+   "id": "b6_3.3.c_26",
+   "subtopic": "3.3.c",
+   "name": "HSRP/VRRP",
+   "question": "What happens to end-host connectivity during the brief transition period while an HSRP group is failing over from the previous Active router to a new one?",
+   "options": {
+    "A": "There is typically a brief period during which traffic destined for the virtual gateway MAC may be lost or delayed, since the new Active router needs to take over responding to that virtual MAC/IP, and any in-flight ARP cache entries on end hosts pointing toward the old physical MAC association may need a moment to be refreshed, though HSRP is designed to make this transition as fast as reasonably possible",
+    "B": "HSRP failover is always instantaneous with zero possible connectivity impact whatsoever, regardless of any timer configuration or the specific failure scenario involved",
+    "C": "End hosts always require manual reconfiguration of their own default gateway IP address immediately after any HSRP failover event occurs",
+    "D": "Connectivity is permanently and completely lost for every end host on that VLAN for the remainder of the router's uptime once any single HSRP failover event has occurred"
+   },
+   "correct": "A",
+   "explanation_es": "Típicamente hay un breve período durante el cual el tráfico destinado a la MAC del gateway virtual puede perderse o retrasarse, ya que el nuevo router Active necesita empezar a responder por esa MAC/IP virtual, y cualquier entrada de caché ARP en tránsito en los hosts finales apuntando a la asociación de MAC física anterior podría necesitar un momento para refrescarse, aunque HSRP está diseñado para hacer esta transición lo más rápida razonablemente posible."
+  },
+  {
+   "id": "b6_3.3.c_27",
+   "subtopic": "3.3.c",
+   "name": "HSRP/VRRP",
+   "question": "Why is it important that the FHRP hello/hold (or advertisement) timers be configured consistently across all routers participating in the same group?",
+   "options": {
+    "A": "Mismatched timers between group members could cause one router to declare the other dead prematurely (based on its own shorter hold timer) even though the peer is actually still sending hellos at its own longer configured interval, potentially causing unnecessary or inconsistent failover behavior between the members of that same group",
+    "B": "FHRP timers have no relationship whatsoever to failover behavior, and mismatched timers between group members produce exactly identical behavior to matched timers in every possible scenario",
+    "C": "Timer configuration only matters for VRRP and has absolutely no relevance whatsoever to HSRP, which is described as being fundamentally incapable of using any configurable hello or hold timer at all",
+    "D": "A mismatched timer configuration between group members always and immediately prevents the FHRP group from forming at all, refusing to elect any Active/Master router whatsoever until the mismatch is corrected"
+   },
+   "correct": "A",
+   "explanation_es": "Temporizadores desajustados entre miembros del grupo podrían causar que un router declare al otro muerto prematuramente (basándose en su propio hold timer más corto) aunque el peer en realidad siga enviando hellos a su propio intervalo configurado más largo, potencialmente causando comportamiento de failover innecesario o inconsistente entre los miembros de ese mismo grupo."
+  },
+  {
+   "id": "b6_3.3.d_22",
+   "subtopic": "3.3.d",
+   "name": "Multicast",
+   "question": "What command is commonly used to view the current multicast routing table (mroute table) on a Cisco router?",
+   "options": {
+    "A": "'show ip mroute', which displays active multicast (S,G) and (*,G) entries, including incoming and outgoing interface information for each multicast group/source pair",
+    "B": "'show ip route', which only displays the unicast routing table and has no relationship whatsoever to multicast-specific routing entries",
+    "C": "The multicast routing table can never be viewed through any Cisco IOS command output, and can only be inferred indirectly by capturing packets on every interface",
+    "D": "'show vlan brief' displays the multicast routing table directly alongside VLAN-to-port assignments, with no separate multicast-specific command needed"
+   },
+   "correct": "A",
+   "explanation_es": "'show ip mroute' muestra las entradas multicast (S,G) y (*,G) activas, incluyendo información de interfaz entrante y saliente para cada par grupo/fuente multicast."
+  },
+  {
+   "id": "b6_3.3.d_23",
+   "subtopic": "3.3.d",
+   "name": "Multicast",
+   "question": "What is the difference between a '(*,G)' and an '(S,G)' entry in a multicast routing table?",
+   "options": {
+    "A": "A (*,G) entry represents the shared tree for a given group G (rooted at the RP, matching traffic from any source), while an (S,G) entry represents the source-specific tree for a particular source S sending to group G, which is more specific and typically results from either an SPT-switchover or SSM's direct source-specific join",
+    "B": "(*,G) and (S,G) entries represent exactly the same information with no meaningful distinction between them, differing only in notation style with no actual difference in what tree or traffic each one represents",
+    "C": "A (*,G) entry can only ever exist in PIM Dense Mode, and is technically unsupported in PIM Sparse Mode, which is described as using only (S,G) entries",
+    "D": "An (S,G) entry represents traffic from every possible source combined, while a (*,G) entry represents traffic from exactly one single specific source, the reverse of how the two entry types are actually defined"
+   },
+   "correct": "A",
+   "explanation_es": "Una entrada (*,G) representa el árbol compartido para un grupo G dado (enraizado en el RP, coincidiendo con tráfico de cualquier fuente), mientras que una entrada (S,G) representa el árbol específico de fuente para una fuente S en particular enviando al grupo G, lo cual es más específico y típicamente resulta de un SPT-switchover o de un join directo específico de fuente de SSM."
+  },
+  {
+   "id": "b6_3.3.d_24",
+   "subtopic": "3.3.d",
+   "name": "Multicast",
+   "question": "Why might an organization use multicast for delivering routine software updates or OS images simultaneously to a large number of devices on the same network segment?",
+   "options": {
+    "A": "Multicast lets a single stream of update data reach many recipient devices simultaneously without the source needing to send a completely separate unicast copy to each individual device, which can dramatically reduce the total bandwidth consumed and total time needed compared to sequentially or simultaneously unicasting the same large file to every device one connection at a time",
+    "B": "Multicast delivery of software updates provides no bandwidth or time efficiency benefit whatsoever compared to sending a fully separate unicast copy of the same update to every single individual recipient device",
+    "C": "Multicast can only ever deliver data to a maximum of exactly one single recipient device at a time, making it functionally identical to unicast rather than offering any one-to-many efficiency benefit",
+    "D": "Using multicast for this purpose always and completely prevents any device from actually receiving the update data correctly, making it fundamentally unsuitable for any file-delivery use case like software updates"
+   },
+   "correct": "A",
+   "explanation_es": "El multicast le permite a un único stream de datos de actualización llegar a muchos dispositivos receptores simultáneamente sin que la fuente necesite enviar una copia unicast completamente separada a cada dispositivo individual, lo cual puede reducir drásticamente el ancho de banda total consumido y el tiempo total necesario comparado con hacer unicast secuencial o simultáneo del mismo archivo grande a cada dispositivo una conexión a la vez."
+  },
+  {
+   "id": "b6_3.3.d_25",
+   "subtopic": "3.3.d",
+   "name": "Multicast",
+   "question": "What potential security consideration arises from the fact that, by default, any host on a network segment can typically send an IGMP join to receive traffic for any multicast group it wants?",
+   "options": {
+    "A": "Without additional controls (such as an access-list restricting which groups a host is permitted to join, or IGMP snooping with appropriate filtering), an unauthorized or unintended host could potentially join and receive multicast traffic that wasn't meant for it, so some deployments apply filtering to restrict which multicast groups specific hosts/ports are permitted to join",
+    "B": "IGMP joins have no security implications whatsoever, since multicast traffic is always automatically restricted at the network layer to only the specific host(s) that legitimately originated the underlying application session",
+    "C": "Multicast group membership can only ever be controlled by physically disconnecting a host's cable, since IGMP itself provides absolutely no mechanism of any kind for restricting or filtering which groups a given host may join",
+    "D": "This consideration only applies to source-specific multicast (SSM) and has no relevance whatsoever to any-source multicast using PIM-SM with a shared tree"
+   },
+   "correct": "A",
+   "explanation_es": "Sin controles adicionales (como una access-list restringiendo a qué grupos tiene permitido unirse un host, o IGMP snooping con filtrado apropiado), un host no autorizado o no pretendido podría potencialmente unirse y recibir tráfico multicast que no estaba pensado para él, así que algunos despliegues aplican filtrado para restringir a qué grupos multicast tienen permitido unirse hosts/puertos específicos."
+  },
+  {
+   "id": "b6_3.3.d_26",
+   "subtopic": "3.3.d",
+   "name": "Multicast",
+   "question": "Why is PIM itself (the protocol routers use to build multicast distribution trees) generally considered a control-plane protocol distinct from the actual multicast data traffic it helps route?",
+   "options": {
+    "A": "PIM messages (joins, prunes, hellos, assert messages) are exchanged between routers to build and maintain the multicast distribution tree structure and determine which interfaces should forward a given group's traffic, while the actual multicast data packets themselves are a separate thing being forwarded according to the state PIM establishes — similar in spirit to how a unicast routing protocol like OSPF builds the routing table used to forward unrelated unicast data traffic",
+    "B": "PIM and multicast data traffic are exactly the same thing with no meaningful distinction between the control-plane signaling protocol and the actual application data being distributed via multicast",
+    "C": "PIM messages themselves carry the actual multicast application data payload directly within them, rather than being a separate control-plane signaling mechanism used to build forwarding state for that data",
+    "D": "There is no relationship whatsoever between PIM and how multicast data traffic is actually forwarded through the network; PIM exclusively handles an entirely unrelated function like device inventory management"
+   },
+   "correct": "A",
+   "explanation_es": "Los mensajes de PIM (joins, prunes, hellos, mensajes assert) se intercambian entre routers para construir y mantener la estructura del árbol de distribución multicast y determinar qué interfaces deberían reenviar el tráfico de un grupo dado, mientras que los propios paquetes de datos multicast son algo separado que se reenvía según el estado que PIM establece — de forma conceptualmente similar a cómo un protocolo de enrutamiento unicast como OSPF construye la tabla de enrutamiento usada para reenviar tráfico de datos unicast no relacionado."
+  },
+  {
+   "id": "b6_3.3.d_27",
+   "subtopic": "3.3.d",
+   "name": "Multicast",
+   "question": "What is a practical reason an organization deploying IP video/broadcast services over multicast would need to carefully plan IGMP snooping configuration on every Layer 2 switch in the path between source and receivers?",
+   "options": {
+    "A": "Without properly functioning IGMP snooping on every intermediate switch, multicast traffic might either be unnecessarily flooded to every port in the VLAN (wasting bandwidth on links with no actual interested receiver) or, if misconfigured, might fail to reach a port that does have a legitimate receiver, so consistent, correctly functioning snooping configuration across the entire Layer 2 path is important for both efficiency and correct delivery",
+    "B": "IGMP snooping configuration only matters on the very first switch closest to the multicast source, and has absolutely no relevance whatsoever to any switch further downstream toward the actual receivers",
+    "C": "IGMP snooping has no relationship whatsoever to how efficiently or correctly multicast traffic is delivered across a Layer 2 switched path, and exists purely as an optional cosmetic feature with zero practical forwarding impact",
+    "D": "Every Layer 2 switch is assumed to always forward multicast traffic with perfect efficiency and correctness by default, with absolutely no IGMP snooping configuration of any kind ever actually required for correct multicast delivery"
+   },
+   "correct": "A",
+   "explanation_es": "Sin IGMP snooping funcionando correctamente en cada switch intermedio, el tráfico multicast podría inundarse innecesariamente hacia cada puerto de la VLAN (desperdiciando ancho de banda en enlaces sin ningún receptor interesado real) o, si está mal configurado, podría no llegar a un puerto que sí tiene un receptor legítimo, así que una configuración de snooping consistente y correctamente funcional en todo el camino de Capa 2 es importante tanto para la eficiencia como para la entrega correcta."
   }
  ]
 }
