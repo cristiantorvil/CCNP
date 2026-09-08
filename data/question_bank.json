@@ -1,6 +1,6 @@
 {
- "version": "2026-09-08_v4",
- "total": 229,
+ "version": "2026-09-08_v5",
+ "total": 286,
  "questions": [
   {
    "id": "trustsec_01",
@@ -3207,6 +3207,804 @@
    },
    "correct": "B",
    "explanation_es": "LACP forma el canal si al menos un extremo está en modo 'active' (y el otro en 'active' o 'passive'). Si ambos extremos están en 'passive', ninguno inicia la negociación y el canal nunca se forma, porque 'passive' espera recibir paquetes LACP en lugar de enviarlos."
+  },
+  {
+   "id": "b5_6.1_03",
+   "subtopic": "6.1",
+   "name": "Python básico",
+   "question": "Which Python data type is immutable and therefore commonly used as a dictionary key?",
+   "options": {
+    "A": "list",
+    "B": "dict",
+    "C": "tuple",
+    "D": "set"
+   },
+   "correct": "C",
+   "explanation_es": "Las tuplas son inmutables, por lo que pueden usarse como claves de diccionario (los dicts requieren claves hashables). Las listas y los propios dicts son mutables y no son hashables, así que no pueden usarse como claves."
+  },
+  {
+   "id": "b5_6.1_04",
+   "subtopic": "6.1",
+   "name": "Python básico",
+   "question": "What does the following Python code print?\n\ndata = {\"name\": \"R1\", \"interfaces\": 3}\nprint(data.get(\"status\", \"unknown\"))",
+   "options": {
+    "A": "None",
+    "B": "KeyError",
+    "C": "unknown",
+    "D": "status"
+   },
+   "correct": "C",
+   "explanation_es": "dict.get(key, default) retorna el valor default indicado si la clave no existe, en vez de lanzar KeyError como haría data[\"status\"]. Como \"status\" no está en el dict, imprime \"unknown\"."
+  },
+  {
+   "id": "b5_6.1_05",
+   "subtopic": "6.1",
+   "name": "Python básico",
+   "question": "In a Python script using the 'requests' library to call a REST API, which method sends an HTTP GET request?",
+   "options": {
+    "A": "requests.send()",
+    "B": "requests.get()",
+    "C": "requests.fetch()",
+    "D": "requests.query()"
+   },
+   "correct": "B",
+   "explanation_es": "La librería requests usa requests.get(url) para solicitudes GET y requests.post() para POST. Las otras opciones no son métodos reales de la librería."
+  },
+  {
+   "id": "b5_6.2_03",
+   "subtopic": "6.2",
+   "name": "JSON",
+   "question": "Which of the following is valid JSON?",
+   "options": {
+    "A": "{name: \"R1\", vlan: 10}",
+    "B": "{'name': 'R1', 'vlan': 10}",
+    "C": "{\"name\": \"R1\", \"vlan\": 10}",
+    "D": "{\"name\": \"R1\", \"vlan\": 10,}"
+   },
+   "correct": "C",
+   "explanation_es": "JSON exige comillas dobles para claves y strings; las comillas simples (B) y las claves sin comillas (A) no son válidas, y una coma final después del último elemento (D) tampoco lo es en JSON estricto."
+  },
+  {
+   "id": "b5_6.2_04",
+   "subtopic": "6.2",
+   "name": "JSON",
+   "question": "What Python type does the JSON value 'null' map to when parsed with json.loads()?",
+   "options": {
+    "A": "0",
+    "B": "\"\" (empty string)",
+    "C": "None",
+    "D": "False"
+   },
+   "correct": "C",
+   "explanation_es": "Al parsear JSON en Python, el valor null se convierte en el objeto None, no en 0, cadena vacía ni False."
+  },
+  {
+   "id": "b5_6.2_05",
+   "subtopic": "6.2",
+   "name": "JSON",
+   "question": "Which JSON structure correctly represents an array of two interface objects?",
+   "options": {
+    "A": "{\"interfaces\": {\"Gi0/1\": \"up\", \"Gi0/2\": \"down\"}}",
+    "B": "{\"interfaces\": [\"Gi0/1\", \"up\", \"Gi0/2\", \"down\"]}",
+    "C": "{\"interfaces\": [{\"name\": \"Gi0/1\", \"status\": \"up\"}, {\"name\": \"Gi0/2\", \"status\": \"down\"}]}",
+    "D": "{\"interfaces\": (\"Gi0/1\": \"up\", \"Gi0/2\": \"down\")}"
+   },
+   "correct": "C",
+   "explanation_es": "Un array JSON de objetos usa corchetes conteniendo objetos {} separados por comas. La opción A es un objeto (no array), la B mezcla claves y valores en una lista plana, y la D usa paréntesis, que no es sintaxis JSON válida."
+  },
+  {
+   "id": "b5_1.3.b_03",
+   "subtopic": "1.3.b",
+   "name": "Interoperabilidad campus tradicional/SD-Access",
+   "question": "When integrating a traditional (non-fabric) campus network with an SD-Access fabric, which device role connects the two domains?",
+   "options": {
+    "A": "Fabric Edge Node",
+    "B": "Fabric Border Node",
+    "C": "Control Plane Node",
+    "D": "Fabric WLC"
+   },
+   "correct": "B",
+   "explanation_es": "El Border Node es el punto de interoperabilidad entre la fabric SD-Access y las redes externas o tradicionales; traduce entre el encapsulado VXLAN/LISP de la fabric y el enrutamiento IP tradicional fuera de ella."
+  },
+  {
+   "id": "b5_1.3.b_04",
+   "subtopic": "1.3.b",
+   "name": "Interoperabilidad campus tradicional/SD-Access",
+   "question": "A host in a traditional VLAN-based segment needs to reach a host inside an SD-Access fabric. Which statement is correct?",
+   "options": {
+    "A": "The traditional host must also run LISP",
+    "B": "Traffic enters/exits the fabric through the Border Node, which translates between the fabric overlay and traditional routing/switching",
+    "C": "SD-Access cannot interoperate with traditional networks under any circumstances",
+    "D": "The Control Plane Node performs all packet forwarding for external traffic"
+   },
+   "correct": "B",
+   "explanation_es": "El Border Node traduce el tráfico entre el overlay de la fabric (VXLAN con políticas basadas en SGT) y una red tradicional externa; el host tradicional no necesita ejecutar LISP ni ningún protocolo especial de la fabric."
+  },
+  {
+   "id": "b5_1.3.b_05",
+   "subtopic": "1.3.b",
+   "name": "Interoperabilidad campus tradicional/SD-Access",
+   "question": "During a phased migration from a traditional 3-tier campus to SD-Access, which approach is commonly recommended?",
+   "options": {
+    "A": "Migrate the entire campus in a single maintenance window",
+    "B": "Migrate site by site or IP pool by IP pool, using the Border Node to maintain connectivity between migrated and non-migrated segments",
+    "C": "It is not possible to migrate incrementally; all switches must be replaced simultaneously",
+    "D": "Only wireless clients can be migrated to SD-Access; wired clients must stay traditional"
+   },
+   "correct": "B",
+   "explanation_es": "Una migración típica hacia SD-Access se hace de forma incremental (por sitio, por IP pool o por switch), aprovechando el Border Node para mantener conectividad entre las partes ya migradas y las que siguen en la red tradicional, evitando un corte total."
+  },
+  {
+   "id": "b5_5.2.b_03",
+   "subtopic": "5.2.b",
+   "name": "CoPP",
+   "question": "What is the primary purpose of Control Plane Policing (CoPP)?",
+   "options": {
+    "A": "To encrypt traffic destined to the control plane",
+    "B": "To protect the router/switch CPU by rate-limiting or filtering traffic destined to the control plane",
+    "C": "To perform NAT on control plane traffic",
+    "D": "To load-balance traffic across multiple CPUs"
+   },
+   "correct": "B",
+   "explanation_es": "CoPP protege el plano de control (la CPU del equipo) aplicando políticas de rate-limiting/filtrado sobre el tráfico dirigido a la propia CPU (SSH, routing protocols, SNMP, etc.), evitando que un exceso de tráfico o un ataque agote los recursos del procesador."
+  },
+  {
+   "id": "b5_5.2.b_04",
+   "subtopic": "5.2.b",
+   "name": "CoPP",
+   "question": "In which direction does Control Plane Policing apply its policy?",
+   "options": {
+    "A": "Only to transit traffic passing through the device",
+    "B": "Only to traffic sourced by the device toward external hosts",
+    "C": "To traffic destined TO the device's control plane (the CPU itself)",
+    "D": "To traffic between two VLANs on the same switch"
+   },
+   "correct": "C",
+   "explanation_es": "CoPP se aplica específicamente al tráfico destinado a la CPU del propio dispositivo (control plane), no al tráfico de tránsito que solo pasa por el plano de datos sin involucrar a la CPU."
+  },
+  {
+   "id": "b5_5.2.b_05",
+   "subtopic": "5.2.b",
+   "name": "CoPP",
+   "question": "Which Cisco IOS mechanism is used to configure CoPP?",
+   "options": {
+    "A": "A service-policy applied under the 'control-plane' context, using class-maps and a policy-map",
+    "B": "An access-list applied directly to a physical interface with 'ip access-group'",
+    "C": "QoS marking with 'mls qos trust'",
+    "D": "A VACL (VLAN ACL) configuration"
+   },
+   "correct": "A",
+   "explanation_es": "CoPP se configura definiendo class-maps para clasificar el tráfico, un policy-map con las acciones (police/drop), y aplicándolo con 'service-policy input <nombre>' bajo el contexto 'control-plane', que representa lógicamente a la CPU del dispositivo."
+  },
+  {
+   "id": "b5_6.7_03",
+   "subtopic": "6.7",
+   "name": "Orquestación agent vs agentless",
+   "question": "Which of these automation tools is classified as agentless (no software needs to be installed on the managed device)?",
+   "options": {
+    "A": "Puppet",
+    "B": "Chef",
+    "C": "Ansible",
+    "D": "SaltStack running in agent mode"
+   },
+   "correct": "C",
+   "explanation_es": "Ansible es agentless: se conecta a los dispositivos gestionados vía SSH o APIs sin instalar software permanente en ellos. Puppet y Chef típicamente requieren un agente instalado en el nodo gestionado."
+  },
+  {
+   "id": "b5_6.7_04",
+   "subtopic": "6.7",
+   "name": "Orquestación agent vs agentless",
+   "question": "What is a key operational advantage of an agentless automation approach for network devices?",
+   "options": {
+    "A": "It always executes tasks faster than agent-based tools in every scenario",
+    "B": "It avoids installing, updating, and maintaining agent software on each device — useful since many network devices cannot run third-party agents",
+    "C": "It eliminates the need for any credentials to connect to devices",
+    "D": "It guarantees real-time push notifications from every managed device"
+   },
+   "correct": "B",
+   "explanation_es": "Muchos dispositivos de red no pueden ejecutar software de terceros como un agente; el enfoque agentless evita esa necesidad, conectándose bajo demanda (SSH/API) sin instalar ni mantener nada persistente en el dispositivo."
+  },
+  {
+   "id": "b5_6.7_05",
+   "subtopic": "6.7",
+   "name": "Orquestación agent vs agentless",
+   "question": "In an agent-based orchestration model (e.g., Puppet), what role does the agent play on the managed node?",
+   "options": {
+    "A": "It only serves as a passive log collector with no configuration capability",
+    "B": "It runs persistently, periodically pulling configuration from a central server and applying it locally",
+    "C": "It replaces the need for a central server entirely",
+    "D": "It only functions during initial provisioning and is then uninstalled"
+   },
+   "correct": "B",
+   "explanation_es": "En un modelo basado en agentes, el agente se instala de forma persistente en el nodo gestionado y contacta periódicamente a un servidor central (master) para obtener y aplicar la configuración deseada."
+  },
+  {
+   "id": "b5_6.6_03",
+   "subtopic": "6.6",
+   "name": "EEM applets",
+   "question": "What is the primary purpose of Cisco Embedded Event Manager (EEM)?",
+   "options": {
+    "A": "To provide a GUI for network monitoring",
+    "B": "To detect an event on a device (CLI command, syslog message, CPU threshold, etc.) and automatically trigger a defined action in response",
+    "C": "To replace SNMP entirely",
+    "D": "To encrypt configuration files"
+   },
+   "correct": "B",
+   "explanation_es": "EEM permite definir applets que combinan un evento disparador (event detector) con una acción automática a ejecutar en respuesta, como enviar un email, correr un comando o generar un log."
+  },
+  {
+   "id": "b5_6.6_04",
+   "subtopic": "6.6",
+   "name": "EEM applets",
+   "question": "Which EEM event detector triggers an applet when a specific CLI command is entered by a user?",
+   "options": {
+    "A": "event syslog",
+    "B": "event cli",
+    "C": "event snmp",
+    "D": "event timer"
+   },
+   "correct": "B",
+   "explanation_es": "'event cli' detecta cuando se ingresa un patrón de comando CLI específico (con 'match' sobre una expresión regular), disparando el applet antes o después de ejecutarse ese comando."
+  },
+  {
+   "id": "b5_6.6_05",
+   "subtopic": "6.6",
+   "name": "EEM applets",
+   "question": "An EEM applet is configured with 'event syslog pattern \"%LINK-3-UPDOWN\"' and an action to send an email. What triggers this applet?",
+   "options": {
+    "A": "A scheduled timer, regardless of any link event",
+    "B": "The router generating a syslog message matching that pattern, such as an interface changing state",
+    "C": "A manual CLI command entered by the administrator",
+    "D": "An SNMP trap received from another device"
+   },
+   "correct": "B",
+   "explanation_es": "'event syslog' dispara el applet cuando el dispositivo genera internamente un mensaje de syslog que coincide con el patrón indicado, en este caso un cambio de estado de una interfaz."
+  },
+  {
+   "id": "b5_6.8_03",
+   "subtopic": "6.8",
+   "name": "Métodos HTTP",
+   "question": "In RESTful API design, which HTTP method is idempotent and used to completely replace an existing resource?",
+   "options": {
+    "A": "POST",
+    "B": "PATCH",
+    "C": "PUT",
+    "D": "GET"
+   },
+   "correct": "C",
+   "explanation_es": "PUT reemplaza por completo el recurso indicado con el cuerpo enviado y es idempotente. POST no es idempotente (crea un nuevo recurso cada vez) y PATCH aplica una modificación parcial, no un reemplazo completo."
+  },
+  {
+   "id": "b5_6.8_04",
+   "subtopic": "6.8",
+   "name": "Métodos HTTP",
+   "question": "Which HTTP method is typically used to apply a partial update to an existing resource, modifying only specific fields?",
+   "options": {
+    "A": "PUT",
+    "B": "PATCH",
+    "C": "DELETE",
+    "D": "OPTIONS"
+   },
+   "correct": "B",
+   "explanation_es": "PATCH se usa para aplicar una modificación parcial a un recurso existente (cambiar solo algunos campos), a diferencia de PUT, que reemplaza el recurso completo."
+  },
+  {
+   "id": "b5_6.8_05",
+   "subtopic": "6.8",
+   "name": "Métodos HTTP",
+   "question": "Which statement about the HTTP GET method is correct?",
+   "options": {
+    "A": "GET is used to create new resources on the server",
+    "B": "GET should be safe and idempotent, retrieving a representation of a resource without side effects on the server",
+    "C": "GET requires a request body containing the resource data",
+    "D": "GET is the only method that can return a 201 Created status"
+   },
+   "correct": "B",
+   "explanation_es": "GET es un método seguro (no debería modificar el estado del servidor) e idempotente, usado para leer un recurso. Crear un recurso, que puede devolver 201 Created, es responsabilidad típica de POST."
+  },
+  {
+   "id": "b5_5.4.b_04",
+   "subtopic": "5.4.b",
+   "name": "Seguridad de endpoint (NAC/ISE)",
+   "question": "In Cisco ISE, what is the primary function of a posture assessment?",
+   "options": {
+    "A": "To determine the physical location of an endpoint",
+    "B": "To check whether an endpoint complies with security policies (e.g., antivirus up to date, OS patches installed) before granting full network access",
+    "C": "To assign a static IP address to the endpoint",
+    "D": "To encrypt traffic between the endpoint and the switch"
+   },
+   "correct": "B",
+   "explanation_es": "La evaluación de postura en ISE verifica que el endpoint cumpla los requisitos de seguridad definidos (antivirus, parches del SO, etc.) antes de otorgarle acceso completo; si no cumple, puede colocarse en una VLAN de cuarentena o remediación."
+  },
+  {
+   "id": "b5_5.4.b_05",
+   "subtopic": "5.4.b",
+   "name": "Seguridad de endpoint (NAC/ISE)",
+   "question": "Before 802.1X authentication completes, what kind of access does a switch port typically allow the connecting endpoint?",
+   "options": {
+    "A": "Full, unrestricted access to the network",
+    "B": "No traffic of any kind, including DHCP",
+    "C": "Restricted access via a pre-authentication ACL, allowing only what's needed for the authentication process itself (e.g., DHCP, ISE communication)",
+    "D": "Trunk-level access to all VLANs"
+   },
+   "correct": "C",
+   "explanation_es": "Antes de completarse la autenticación 802.1X, el puerto suele permitir un acceso restringido mediante una ACL de pre-autenticación, habilitando solo el tráfico necesario para el propio proceso (DHCP, DNS, comunicación con ISE), no acceso completo."
+  },
+  {
+   "id": "b5_5.1.b_04",
+   "subtopic": "5.1.b",
+   "name": "AAA (TACACS+/RADIUS)",
+   "question": "Which statement correctly distinguishes TACACS+ from RADIUS?",
+   "options": {
+    "A": "TACACS+ encrypts only the password in the packet, while RADIUS encrypts the entire packet body",
+    "B": "TACACS+ encrypts the entire packet body, while RADIUS encrypts only the password field",
+    "C": "Both encrypt the entire packet identically",
+    "D": "Neither protocol encrypts any part of the packet"
+   },
+   "correct": "B",
+   "explanation_es": "TACACS+ cifra todo el cuerpo del paquete, mientras que RADIUS solo cifra el campo de contraseña, dejando el resto del paquete (como el username) sin cifrar."
+  },
+  {
+   "id": "b5_5.1.b_05",
+   "subtopic": "5.1.b",
+   "name": "AAA (TACACS+/RADIUS)",
+   "question": "Which AAA protocol separates authentication and authorization into distinct processes, making it well suited for granular per-command authorization on network devices?",
+   "options": {
+    "A": "RADIUS",
+    "B": "TACACS+",
+    "C": "Kerberos",
+    "D": "LDAP"
+   },
+   "correct": "B",
+   "explanation_es": "TACACS+ separa claramente autenticación, autorización y accounting en procesos independientes, permitiendo un control granular como autorizar comandos individuales en el CLI — algo que RADIUS, al combinar autenticación y autorización, no maneja tan bien."
+  },
+  {
+   "id": "b5_5.2.a_04",
+   "subtopic": "5.2.a",
+   "name": "ACLs",
+   "question": "In a standard IPv4 ACL, which criterion can be used to match traffic?",
+   "options": {
+    "A": "Source IP address only",
+    "B": "Source and destination IP address plus Layer 4 port",
+    "C": "Destination MAC address",
+    "D": "VLAN tag"
+   },
+   "correct": "A",
+   "explanation_es": "Las ACL estándar de IPv4 solo pueden filtrar según la dirección IP de origen. Para filtrar por IP destino, protocolo o puertos de Capa 4 se necesita una ACL extendida."
+  },
+  {
+   "id": "b5_5.2.a_05",
+   "subtopic": "5.2.a",
+   "name": "ACLs",
+   "question": "By default, what happens to a packet that matches no explicit statement in an ACL applied to an interface?",
+   "options": {
+    "A": "It is permitted, since ACLs default to permit",
+    "B": "It is denied, due to an implicit 'deny all' at the end of every ACL",
+    "C": "It is queued until an administrator manually decides",
+    "D": "It is forwarded using the next ACL in sequence"
+   },
+   "correct": "B",
+   "explanation_es": "Toda ACL de Cisco tiene una sentencia implícita de 'deny all' al final (aunque no se muestre en la configuración), por lo que el tráfico que no coincide explícitamente con un 'permit' se descarta."
+  },
+  {
+   "id": "b5_5.4.a_04",
+   "subtopic": "5.4.a",
+   "name": "Threat defense",
+   "question": "What is the primary advantage of a Next-Generation Firewall (NGFW) compared to a traditional stateful firewall?",
+   "options": {
+    "A": "NGFW only filters based on source/destination IP and port, exactly like a traditional firewall",
+    "B": "NGFW adds capabilities like application awareness and integrated intrusion prevention on top of traditional stateful filtering",
+    "C": "NGFW cannot perform stateful inspection",
+    "D": "NGFW is only used for wireless networks"
+   },
+   "correct": "B",
+   "explanation_es": "Un NGFW mantiene la inspección con estado tradicional pero suma capacidades como reconocimiento de aplicaciones (más allá del puerto) y prevención de intrusiones (IPS) integrada, no solo filtrado por IP/puerto."
+  },
+  {
+   "id": "b5_5.4.a_05",
+   "subtopic": "5.4.a",
+   "name": "Threat defense",
+   "question": "In the context of threat defense, what does 'defense in depth' refer to?",
+   "options": {
+    "A": "Using a single, very powerful firewall as the sole security control",
+    "B": "Applying multiple, layered security controls so that if one layer fails, others still provide protection",
+    "C": "Encrypting data at rest only",
+    "D": "Relying exclusively on user training to prevent attacks"
+   },
+   "correct": "B",
+   "explanation_es": "'Defense in depth' es la estrategia de aplicar múltiples capas de seguridad complementarias (perimetral, segmentación interna, endpoint, monitoreo), de forma que ningún punto único de falla comprometa toda la red."
+  },
+  {
+   "id": "b5_5.3_04",
+   "subtopic": "5.3",
+   "name": "Seguridad de REST API",
+   "question": "Which authentication mechanism involves the client sending a token in the 'Authorization: Bearer <token>' HTTP header on each API request?",
+   "options": {
+    "A": "Basic authentication with username/password on every request",
+    "B": "OAuth 2.0 token-based authentication",
+    "C": "IPsec",
+    "D": "802.1X"
+   },
+   "correct": "B",
+   "explanation_es": "En OAuth 2.0, tras autenticarse el cliente recibe un token de acceso que envía en el header 'Authorization: Bearer <token>' en cada solicitud posterior, sin reenviar usuario/contraseña cada vez."
+  },
+  {
+   "id": "b5_5.3_05",
+   "subtopic": "5.3",
+   "name": "Seguridad de REST API",
+   "question": "Why is HTTPS (TLS) considered essential for securing REST API calls that carry authentication credentials or tokens?",
+   "options": {
+    "A": "HTTPS makes the API respond faster",
+    "B": "HTTPS encrypts the data in transit, preventing credentials/tokens from being intercepted in cleartext",
+    "C": "HTTPS is only needed for GET requests",
+    "D": "HTTPS replaces the need for any authentication mechanism"
+   },
+   "correct": "B",
+   "explanation_es": "HTTPS cifra el tráfico entre cliente y servidor, protegiendo credenciales y tokens de ser interceptados en texto plano (por ejemplo en un ataque man-in-the-middle); no reemplaza la autenticación, la complementa."
+  },
+  {
+   "id": "b5_4.4_04",
+   "subtopic": "4.4",
+   "name": "IP SLA",
+   "question": "What is the primary purpose of Cisco IP SLA?",
+   "options": {
+    "A": "To assign IP addresses dynamically to hosts",
+    "B": "To actively generate synthetic traffic and measure network performance metrics such as latency, jitter, and packet loss",
+    "C": "To perform routing between VLANs",
+    "D": "To encrypt traffic between two IP SLA-enabled routers"
+   },
+   "correct": "B",
+   "explanation_es": "IP SLA genera tráfico sintético (probes) entre dispositivos para medir activamente métricas de rendimiento como latencia, jitter, pérdida de paquetes y disponibilidad, útil para monitoreo proactivo."
+  },
+  {
+   "id": "b5_4.4_05",
+   "subtopic": "4.4",
+   "name": "IP SLA",
+   "question": "How can IP SLA be combined with object tracking to improve network resiliency?",
+   "options": {
+    "A": "IP SLA cannot be combined with any other feature",
+    "B": "A 'track' object can monitor an IP SLA operation and trigger actions like removing a static route from the routing table if the tracked path fails",
+    "C": "IP SLA automatically reconfigures BGP neighbor relationships",
+    "D": "IP SLA replaces the need for a routing protocol entirely"
+   },
+   "correct": "B",
+   "explanation_es": "Un objeto 'track' puede monitorear el estado de una operación de IP SLA (por ejemplo, alcanzabilidad de un gateway) y, si falla, disparar acciones automáticas como retirar una ruta estática, logrando una conmutación por falla más rápida."
+  },
+  {
+   "id": "b5_4.2_04",
+   "subtopic": "4.2",
+   "name": "Flexible NetFlow",
+   "question": "In Flexible NetFlow, what is the role of a flow exporter?",
+   "options": {
+    "A": "It defines which fields are used as match/key fields for identifying a flow",
+    "B": "It defines the destination (IP address and port) and transport used to send exported flow data to a collector",
+    "C": "It applies the flow monitor to an interface",
+    "D": "It stores historical flow records permanently on the router"
+   },
+   "correct": "B",
+   "explanation_es": "El flow exporter configura hacia dónde (IP/puerto del collector) y cómo (por ejemplo, NetFlow v9 o IPFIX) se envían los registros de flujo, separado de qué campos componen cada flujo, que define el flow record."
+  },
+  {
+   "id": "b5_4.2_05",
+   "subtopic": "4.2",
+   "name": "Flexible NetFlow",
+   "question": "Which components must be configured and associated to enable Flexible NetFlow on an interface?",
+   "options": {
+    "A": "A flow record and a flow monitor (with an optional flow exporter), with the flow monitor applied to the interface",
+    "B": "Only an access-list applied to the interface",
+    "C": "A route-map and a class-map",
+    "D": "A SPAN session and a VLAN ACL"
+   },
+   "correct": "A",
+   "explanation_es": "Flexible NetFlow se arma con un flow record (define qué campos se recolectan) y un flow monitor (asocia el record con una caché, opcionalmente con un exporter) que se aplica a la interfaz; el exporter es opcional para enviar los datos a un collector externo."
+  },
+  {
+   "id": "b5_4.3_04",
+   "subtopic": "4.3",
+   "name": "SPAN/RSPAN/ERSPAN",
+   "question": "What is the key difference between SPAN and RSPAN?",
+   "options": {
+    "A": "SPAN can span traffic across multiple switches using a dedicated VLAN, while RSPAN cannot",
+    "B": "RSPAN can mirror traffic across multiple switches over a dedicated RSPAN VLAN, while SPAN is limited to a single switch",
+    "C": "SPAN encrypts mirrored traffic; RSPAN does not",
+    "D": "There is no functional difference; RSPAN is just a newer name for SPAN"
+   },
+   "correct": "B",
+   "explanation_es": "SPAN copia tráfico de un puerto/VLAN origen a un puerto destino dentro del mismo switch. RSPAN extiende esa capacidad usando una VLAN dedicada para transportar el tráfico espejado a través de múltiples switches."
+  },
+  {
+   "id": "b5_4.3_05",
+   "subtopic": "4.3",
+   "name": "SPAN/RSPAN/ERSPAN",
+   "question": "Why would an administrator choose ERSPAN over SPAN or RSPAN?",
+   "options": {
+    "A": "ERSPAN is required whenever mirroring traffic within the same switch",
+    "B": "ERSPAN encapsulates the mirrored traffic in GRE, allowing it to be transported over a routed Layer 3 network to a remote destination",
+    "C": "ERSPAN only works on a single VLAN within one switch",
+    "D": "ERSPAN cannot be used with Cisco Catalyst switches"
+   },
+   "correct": "B",
+   "explanation_es": "ERSPAN encapsula el tráfico espejado en GRE, permitiendo enviarlo a través de una red enrutada de Capa 3 hacia un destino remoto (por ejemplo, una herramienta de monitoreo en otro sitio), algo que SPAN y RSPAN no pueden hacer al estar limitados a Capa 2."
+  },
+  {
+   "id": "b5_5.1.a_04",
+   "subtopic": "5.1.a",
+   "name": "Líneas y autenticación local",
+   "question": "Which command creates a local username/password database entry for authentication on a Cisco device?",
+   "options": {
+    "A": "username admin password Cisco123",
+    "B": "line vty 0 4",
+    "C": "enable secret Cisco123",
+    "D": "aaa new-model"
+   },
+   "correct": "A",
+   "explanation_es": "El comando 'username <nombre> password <clave>' crea una entrada en la base de datos local de usuarios del dispositivo, usada para autenticación local en líneas configuradas con 'login local'."
+  },
+  {
+   "id": "b5_5.1.a_05",
+   "subtopic": "5.1.a",
+   "name": "Líneas y autenticación local",
+   "question": "What is the effect of the 'login local' command applied under 'line vty 0 4'?",
+   "options": {
+    "A": "It disables authentication entirely for VTY lines",
+    "B": "It requires users connecting via those VTY lines to authenticate using the local username database configured on the device",
+    "C": "It forces authentication exclusively through a RADIUS server",
+    "D": "It applies only to console line access, not VTY"
+   },
+   "correct": "B",
+   "explanation_es": "'login local' bajo las líneas VTY indica que la autenticación debe validarse contra la base de datos local de usuarios (creada con 'username'), en lugar de usar solo una contraseña de línea genérica o un servidor AAA externo."
+  },
+  {
+   "id": "b5_4.6_04",
+   "subtopic": "4.6",
+   "name": "NETCONF/RESTCONF",
+   "question": "Which transport protocol does NETCONF use by default?",
+   "options": {
+    "A": "HTTP",
+    "B": "HTTPS",
+    "C": "SSH",
+    "D": "Telnet"
+   },
+   "correct": "C",
+   "explanation_es": "NETCONF (RFC 6241) se transporta típicamente sobre SSH (puerto 830 por defecto), a diferencia de RESTCONF, que usa HTTP/HTTPS."
+  },
+  {
+   "id": "b5_4.6_05",
+   "subtopic": "4.6",
+   "name": "NETCONF/RESTCONF",
+   "question": "Which encoding format does NETCONF use to structure its messages, such as <get-config> and <edit-config> operations?",
+   "options": {
+    "A": "Only JSON",
+    "B": "Only plain text",
+    "C": "XML",
+    "D": "CSV"
+   },
+   "correct": "C",
+   "explanation_es": "NETCONF utiliza XML para codificar sus mensajes y operaciones, a diferencia de RESTCONF, que soporta tanto XML como JSON."
+  },
+  {
+   "id": "b5_4.5_04",
+   "subtopic": "4.5",
+   "name": "Catalyst Center",
+   "question": "Which Cisco Catalyst Center (formerly DNA Center) feature provides end-to-end visibility into network health and can proactively identify issues affecting client connectivity?",
+   "options": {
+    "A": "Path Trace",
+    "B": "Assurance",
+    "C": "Template Editor",
+    "D": "Plug and Play"
+   },
+   "correct": "B",
+   "explanation_es": "Assurance en Catalyst Center recopila telemetría de la red y los clientes para dar visibilidad de salud end-to-end, detectando proactivamente problemas y sugiriendo posibles causas raíz."
+  },
+  {
+   "id": "b5_4.5_05",
+   "subtopic": "4.5",
+   "name": "Catalyst Center",
+   "question": "What does the Catalyst Center 'Path Trace' tool do?",
+   "options": {
+    "A": "It automatically remediates any configuration errors found",
+    "B": "It simulates and traces the actual path a packet would take between two endpoints, showing each hop and potential issues along the way",
+    "C": "It only shows historical CPU utilization graphs",
+    "D": "It is used exclusively for wireless site surveys"
+   },
+   "correct": "B",
+   "explanation_es": "Path Trace traza la ruta real (hop por hop) que seguiría o está siguiendo el tráfico entre un origen y un destino, mostrando el estado de cada salto y ayudando a identificar dónde ocurre un problema."
+  },
+  {
+   "id": "b5_5.4.c_04",
+   "subtopic": "5.4.c",
+   "name": "NGFW/FMC/AVC",
+   "question": "What is the role of Cisco Firepower Management Center (FMC) in relation to NGFW/FTD devices?",
+   "options": {
+    "A": "FMC is installed directly on each NGFW device with no separate management platform",
+    "B": "FMC is a centralized management platform used to configure policies, monitor events, and manage multiple NGFW/FTD devices from one place",
+    "C": "FMC only performs DNS resolution for the NGFW",
+    "D": "FMC replaces the need for any firewall policy configuration"
+   },
+   "correct": "B",
+   "explanation_es": "FMC es la plataforma de gestión centralizada desde la cual se configuran políticas, se monitorean eventos y se administran múltiples dispositivos NGFW/FTD, en lugar de configurar cada uno individualmente."
+  },
+  {
+   "id": "b5_5.4.c_05",
+   "subtopic": "5.4.c",
+   "name": "NGFW/FMC/AVC",
+   "question": "What does Application Visibility and Control (AVC) primarily provide on a Cisco network device?",
+   "options": {
+    "A": "Encryption of all application traffic",
+    "B": "The ability to identify applications traversing the network (via NBAR2) and apply policies such as QoS marking or blocking based on that application",
+    "C": "Automatic patching of vulnerable applications",
+    "D": "DNS-based load balancing between applications"
+   },
+   "correct": "B",
+   "explanation_es": "AVC combina NBAR2 para identificar aplicaciones específicas en el tráfico (más allá del puerto) con la capacidad de aplicar políticas —como QoS o bloqueo— basadas en esa aplicación identificada."
+  },
+  {
+   "id": "b5_2.1.b_04",
+   "subtopic": "2.1.b",
+   "name": "VMs / FT / DRS",
+   "question": "In a virtualized environment (e.g., VMware vSphere), what does Fault Tolerance (FT) provide?",
+   "options": {
+    "A": "Automatic load balancing of VMs across hosts based on resource usage",
+    "B": "A live, continuously synchronized secondary copy of a VM on a different host, which takes over instantly with zero downtime if the primary host fails",
+    "C": "Scheduled nightly backups of VM disk images",
+    "D": "Encryption of VM network traffic"
+   },
+   "correct": "B",
+   "explanation_es": "Fault Tolerance mantiene una VM secundaria sincronizada en tiempo real en otro host; si el host primario falla, la secundaria toma el control de inmediato sin pérdida de estado — a diferencia de HA, que reinicia la VM tras la falla."
+  },
+  {
+   "id": "b5_2.1.b_05",
+   "subtopic": "2.1.b",
+   "name": "VMs / FT / DRS",
+   "question": "What is the purpose of Distributed Resource Scheduler (DRS) in a virtualization cluster?",
+   "options": {
+    "A": "It provides zero-downtime failover identical to Fault Tolerance",
+    "B": "It automatically balances VM workloads across hosts in a cluster by migrating VMs to optimize resource utilization",
+    "C": "It performs VM backups automatically",
+    "D": "It manages physical firewall rules"
+   },
+   "correct": "B",
+   "explanation_es": "DRS monitorea el uso de recursos de los hosts en un clúster y migra VMs automáticamente (vía migración en vivo) entre hosts para balancear la carga, sin proveer la tolerancia a fallas instantánea que sí ofrece FT."
+  },
+  {
+   "id": "b5_2.1.a_04",
+   "subtopic": "2.1.a",
+   "name": "Hypervisor tipo 1 y 2",
+   "question": "What distinguishes a Type 1 (bare-metal) hypervisor from a Type 2 (hosted) hypervisor?",
+   "options": {
+    "A": "Type 1 runs directly on the physical hardware; Type 2 runs as an application on top of a host operating system",
+    "B": "Type 1 requires a host OS to function; Type 2 does not",
+    "C": "Type 2 hypervisors always provide better performance than Type 1",
+    "D": "There is no meaningful architectural difference between them"
+   },
+   "correct": "A",
+   "explanation_es": "Un hypervisor tipo 1 (bare-metal, como VMware ESXi) se ejecuta directamente sobre el hardware físico sin un sistema operativo host intermedio. Un tipo 2 se ejecuta como aplicación dentro de un SO host ya existente, agregando overhead."
+  },
+  {
+   "id": "b5_2.1.a_05",
+   "subtopic": "2.1.a",
+   "name": "Hypervisor tipo 1 y 2",
+   "question": "Why are Type 1 hypervisors generally preferred in enterprise data center environments over Type 2 hypervisors?",
+   "options": {
+    "A": "Type 1 hypervisors are always free of charge",
+    "B": "Type 1 hypervisors offer better performance and lower overhead since they interact directly with hardware, without an extra host OS layer",
+    "C": "Type 2 hypervisors cannot run more than one VM at a time",
+    "D": "Type 1 hypervisors do not support live migration"
+   },
+   "correct": "B",
+   "explanation_es": "Al ejecutarse directamente sobre el hardware sin un sistema operativo host de por medio, los hypervisors tipo 1 tienen menor overhead y mejor rendimiento, por lo que son preferidos en centros de datos que ejecutan múltiples VMs de producción."
+  },
+  {
+   "id": "b5_2.2.a_04",
+   "subtopic": "2.2.a",
+   "name": "VRF",
+   "question": "What is the primary purpose of VRF (Virtual Routing and Forwarding)?",
+   "options": {
+    "A": "To encrypt traffic between two routers",
+    "B": "To maintain multiple independent routing tables on a single router, allowing overlapping IP address spaces and traffic isolation between virtual networks",
+    "C": "To load-balance traffic across multiple physical interfaces",
+    "D": "To compress routing table entries to save memory"
+   },
+   "correct": "B",
+   "explanation_es": "VRF permite que un mismo router mantenga múltiples tablas de enrutamiento independientes, aislando el tráfico entre distintos clientes o departamentos y permitiendo reutilizar los mismos rangos de IP sin conflicto."
+  },
+  {
+   "id": "b5_2.2.a_05",
+   "subtopic": "2.2.a",
+   "name": "VRF",
+   "question": "For two devices in different VRFs on the same router to communicate with each other, what is typically required?",
+   "options": {
+    "A": "Nothing extra; VRFs communicate with each other by default",
+    "B": "Route leaking (importing/exporting routes between VRFs) or an intermediate device connecting them, since VRFs are isolated by design",
+    "C": "Both devices must be in the same VLAN",
+    "D": "VRF automatically bridges all instances at Layer 2"
+   },
+   "correct": "B",
+   "explanation_es": "Las VRFs están aisladas entre sí por diseño; para que se comuniquen se necesita una técnica explícita como route leaking (por ejemplo vía route-targets con MP-BGP) o un dispositivo intermedio como un firewall."
+  },
+  {
+   "id": "b5_2.3.a_04",
+   "subtopic": "2.3.a",
+   "name": "LISP",
+   "question": "In LISP (Locator/ID Separation Protocol), what do the EID and RLOC represent?",
+   "options": {
+    "A": "EID and RLOC are two names for the same address",
+    "B": "EID identifies the device's identity, while RLOC identifies where that device is topologically reachable",
+    "C": "EID is used only for IPv6 and RLOC only for IPv4",
+    "D": "RLOC identifies the device's identity, while EID identifies its location"
+   },
+   "correct": "B",
+   "explanation_es": "LISP separa identidad y ubicación: el EID identifica quién es el dispositivo (no cambia aunque se mueva), mientras que el RLOC identifica dónde está topológicamente alcanzable (el router de borde que lo conecta a la red de tránsito)."
+  },
+  {
+   "id": "b5_2.3.a_05",
+   "subtopic": "2.3.a",
+   "name": "LISP",
+   "question": "What is the role of the LISP Map Server/Map Resolver system?",
+   "options": {
+    "A": "It performs NAT translation for LISP traffic",
+    "B": "It maintains and answers mapping queries between EIDs and their current RLOCs, similar in concept to how DNS maps names to IP addresses",
+    "C": "It encrypts LISP-encapsulated packets",
+    "D": "It replaces the need for BGP in the underlay entirely"
+   },
+   "correct": "B",
+   "explanation_es": "El sistema Map Server/Map Resolver mantiene la base de datos de mapeos EID-a-RLOC y resuelve consultas sobre dónde está alcanzable un EID, de forma conceptualmente similar a cómo DNS resuelve nombres a direcciones IP."
+  },
+  {
+   "id": "b5_2.2.b_04",
+   "subtopic": "2.2.b",
+   "name": "GRE / IPsec / AH",
+   "question": "Which statement about GRE (Generic Routing Encapsulation) tunnels is correct?",
+   "options": {
+    "A": "GRE provides encryption of the encapsulated payload by default",
+    "B": "GRE encapsulates a wide variety of protocols (including multicast and non-IP protocols) inside an IP packet, but provides no encryption on its own",
+    "C": "GRE can only encapsulate TCP traffic",
+    "D": "GRE requires IPsec to function at all"
+   },
+   "correct": "B",
+   "explanation_es": "GRE encapsula una amplia variedad de protocolos (incluido tráfico multicast) dentro de paquetes IP, creando un túnel; pero por sí solo no cifra ni autentica el tráfico, por eso suele combinarse con IPsec."
+  },
+  {
+   "id": "b5_2.2.b_05",
+   "subtopic": "2.2.b",
+   "name": "GRE / IPsec / AH",
+   "question": "Why is GRE often combined with IPsec (GRE over IPsec) instead of using IPsec alone for certain deployments?",
+   "options": {
+    "A": "Because IPsec alone cannot transport multicast or dynamic routing protocol traffic well, while GRE can encapsulate that traffic before IPsec encrypts it",
+    "B": "Because GRE is required for IPsec to establish a Security Association",
+    "C": "Because IPsec cannot encrypt any IP traffic without GRE",
+    "D": "Because GRE improves the encryption strength of IPsec"
+   },
+   "correct": "A",
+   "explanation_es": "IPsec en modo túnel puro no soporta bien tráfico multicast ni protocolos de enrutamiento dinámico que dependen de multicast (como OSPF). GRE puede encapsular ese tráfico dentro de un túnel IP unicast que luego IPsec cifra, combinando la flexibilidad de GRE con la seguridad de IPsec."
+  },
+  {
+   "id": "b5_4.1_05",
+   "subtopic": "4.1",
+   "name": "Diagnóstico (debug/traceroute/ping/SNMP/syslog)",
+   "question": "Which statement about the 'debug' command on a Cisco IOS device is correct?",
+   "options": {
+    "A": "'debug' commands have no impact on device CPU and can always be left running safely",
+    "B": "'debug' commands can consume significant CPU resources and should be used cautiously in production, narrowed and disabled promptly after troubleshooting",
+    "C": "'debug' output is only visible via SNMP",
+    "D": "'debug' commands permanently alter the device's running configuration"
+   },
+   "correct": "B",
+   "explanation_es": "Los comandos 'debug' generan y procesan mucha información en tiempo real, lo que puede consumir CPU significativa; se recomienda acotarlos (por ejemplo con listas de acceso) y desactivarlos ('undebug all') apenas se termina el troubleshooting."
+  },
+  {
+   "id": "b5_6.5_05",
+   "subtopic": "6.5",
+   "name": "Códigos de respuesta REST API",
+   "question": "What does an HTTP 204 No Content response typically indicate?",
+   "options": {
+    "A": "The request failed due to a client error",
+    "B": "The request succeeded, but there is no content to return in the response body (common after a successful DELETE)",
+    "C": "The server is temporarily unavailable",
+    "D": "The requested resource was permanently moved"
+   },
+   "correct": "B",
+   "explanation_es": "HTTP 204 No Content indica que la solicitud se procesó exitosamente pero no hay contenido para devolver — es común, por ejemplo, como respuesta a un DELETE exitoso donde no hace falta retornar datos."
   }
  ]
 }
