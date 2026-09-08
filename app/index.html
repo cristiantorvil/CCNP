@@ -4607,6 +4607,20 @@
     return sum;
   }
 
+  function subtopicCompare(a, b) {
+    var pa = a.split(".");
+    var pb = b.split(".");
+    for (var i = 0; i < Math.max(pa.length, pb.length); i++) {
+      var xa = pa[i] || "";
+      var ya = pb[i] || "";
+      var na = parseInt(xa, 10);
+      var nb = parseInt(ya, 10);
+      if (!isNaN(na) && !isNaN(nb) && na !== nb) return na - nb;
+      if (xa !== ya) return xa < ya ? -1 : 1;
+    }
+    return 0;
+  }
+
   function pctClass(pct) {
     if (pct === null) return "flat";
     if (pct >= TARGET_SCORE) return "good";
@@ -4909,12 +4923,7 @@
       details.className = "domain";
       if (isWeak) details.open = true;
 
-      var subRowsHtml = ds.subtopics.slice().sort(function (a, b) {
-        var wa = subtopicStats(a), wb = subtopicStats(b);
-        var pa = wa.total ? wa.correct / wa.total : -1;
-        var pb = wb.total ? wb.correct / wb.total : -1;
-        return pa - pb;
-      }).map(function (sub) {
+      var subRowsHtml = ds.subtopics.slice().sort(subtopicCompare).map(function (sub) {
         var w = subtopicStats(sub);
         var subPct = w.total ? (100 * w.correct / w.total) : null;
         var pillClass = pctClass(subPct);
