@@ -1,6 +1,6 @@
 {
  "version": "2026-09-08_v4",
- "total": 453,
+ "total": 539,
  "questions": [
   {
    "id": "trustsec_01",
@@ -6343,6 +6343,1210 @@
    },
    "correct": "A",
    "explanation_es": "El plano de control BGP de EVPN aborda específicamente el aprendizaje y la distribución de mapeos MAC-a-VTEP de unicast conocido, pero el tráfico broadcast, unknown-unicast y multicast (BUM) por definición debe seguir llegando a múltiples (o todos) los VTEPs relevantes para una VNI dada, requiriendo un mecanismo separado (underlay multicast o replicación por ingreso) específicamente para esa categoría de tráfico, algo que el aprendizaje de MAC unicast de EVPN no resuelve por sí solo."
+  },
+  {
+   "id": "b6_3.1.a_07",
+   "subtopic": "3.1.a",
+   "name": "Trunking 802.1Q",
+   "question": "What happens on a Cisco switch trunk port if the native VLAN configured on one end does not match the native VLAN configured on the other end of the same trunk link?",
+   "options": {
+    "A": "Cisco Discovery Protocol (CDP) typically detects this native VLAN mismatch and generates a warning/syslog message, since untagged frames sent by one side would otherwise be silently placed into the wrong VLAN on the other side, effectively leaking traffic between two VLANs that were never meant to be bridged together",
+    "B": "A native VLAN mismatch has no operational effect whatsoever and is purely cosmetic, generating no warning of any kind",
+    "C": "The trunk port immediately and permanently shuts down with no possibility of recovery once a mismatch is detected",
+    "D": "Native VLAN mismatches can only occur on fiber-optic trunk links and never on copper Ethernet trunk links"
+   },
+   "correct": "A",
+   "explanation_es": "CDP típicamente detecta este desajuste de VLAN nativa y genera una advertencia/mensaje de syslog, ya que los frames sin etiquetar enviados por un lado se colocarían silenciosamente en la VLAN incorrecta del otro lado, filtrando efectivamente tráfico entre dos VLANs que nunca debían puentearse."
+  },
+  {
+   "id": "b6_3.1.a_08",
+   "subtopic": "3.1.a",
+   "name": "Trunking 802.1Q",
+   "question": "Which command is commonly used on a Cisco IOS switch to restrict which VLANs are permitted to traverse a specific 802.1Q trunk link?",
+   "options": {
+    "A": "'switchport trunk allowed vlan <list>', which explicitly defines the set of VLANs permitted to be carried across that trunk, pruning all other VLANs from that particular link",
+    "B": "'ip access-group <name> in', which is used for Layer 3 ACLs and has no relationship to VLAN pruning on a trunk",
+    "C": "'spanning-tree vlan <list> priority', which only affects STP priority and has no effect on which VLANs are allowed across the trunk",
+    "D": "'no shutdown', which only administratively enables the interface and has no relationship to VLAN filtering on a trunk"
+   },
+   "correct": "A",
+   "explanation_es": "'switchport trunk allowed vlan <lista>' define explícitamente el conjunto de VLANs permitidas para transportarse a través de ese trunk, podando todas las demás VLANs de ese enlace en particular — útil para limitar el alcance de broadcast domains y mejorar la seguridad."
+  },
+  {
+   "id": "b6_3.1.a_09",
+   "subtopic": "3.1.a",
+   "name": "Trunking 802.1Q",
+   "question": "What is the difference between 'switchport mode trunk' and 'switchport mode dynamic desirable' on a Cisco switch interface?",
+   "options": {
+    "A": "'switchport mode trunk' statically and unconditionally configures the port as a trunk, while 'switchport mode dynamic desirable' actively attempts to negotiate trunking with the far end via DTP, becoming a trunk only if the neighbor agrees (trunk, dynamic desirable, or dynamic auto with the neighbor initiating)",
+    "B": "'switchport mode trunk' and 'switchport mode dynamic desirable' are functionally identical modes with different names introduced purely for backward compatibility with older IOS releases",
+    "C": "'switchport mode dynamic desirable' always forces the port to become an access port, never a trunk, regardless of DTP negotiation results",
+    "D": "'switchport mode trunk' requires DTP negotiation to succeed before the port becomes a trunk, exactly like dynamic desirable"
+   },
+   "correct": "A",
+   "explanation_es": "'switchport mode trunk' configura el puerto como trunk de forma estática e incondicional, mientras que 'switchport mode dynamic desirable' intenta activamente negociar trunking con el extremo remoto vía DTP, volviéndose trunk solo si el vecino está de acuerdo (trunk, dynamic desirable, o dynamic auto con el vecino iniciando la negociación)."
+  },
+  {
+   "id": "b6_3.1.a_10",
+   "subtopic": "3.1.a",
+   "name": "Trunking 802.1Q",
+   "question": "Why is it generally considered a security best practice to explicitly configure 'switchport nonegotiate' (or disable DTP) on trunk links between switches, rather than leaving DTP negotiation enabled?",
+   "options": {
+    "A": "Leaving DTP negotiation enabled on a port that should always be a trunk introduces a risk that an attacker connecting a rogue device configured to negotiate trunking could potentially cause that port to become a trunk, gaining access to multiple VLANs that a simple access port would not have exposed; explicitly and statically configuring trunk mode with negotiation disabled removes that risk",
+    "B": "'switchport nonegotiate' has no security benefit whatsoever and is recommended purely to reduce CPU load on very old switch hardware",
+    "C": "Disabling DTP negotiation is required by 802.1Q itself and trunking is technically impossible without first disabling DTP",
+    "D": "DTP negotiation, if left enabled, automatically disables all VLAN tagging on the trunk, making 'nonegotiate' unnecessary for security purposes"
+   },
+   "correct": "A",
+   "explanation_es": "Dejar la negociación DTP habilitada en un puerto que siempre debería ser trunk introduce el riesgo de que un atacante conectando un dispositivo malicioso configurado para negociar trunking pueda hacer que ese puerto se vuelva trunk, ganando acceso a múltiples VLANs que un simple puerto de acceso no habría expuesto; configurar explícita y estáticamente el modo trunk con la negociación deshabilitada elimina ese riesgo (parte de la mitigación de ataques de VLAN hopping)."
+  },
+  {
+   "id": "b6_3.1.a_11",
+   "subtopic": "3.1.a",
+   "name": "Trunking 802.1Q",
+   "question": "What does the 802.1Q 'TPID' (Tag Protocol Identifier) field indicate within an Ethernet frame?",
+   "options": {
+    "A": "The TPID is a fixed value (0x8100 for standard 802.1Q) placed where the EtherType field would normally be, signaling to the receiving device that this frame carries an 802.1Q tag (with the VLAN ID and PCP fields following) rather than being an untagged frame",
+    "B": "The TPID field contains the actual numeric VLAN ID value itself, functioning identically to the VLAN ID field",
+    "C": "The TPID field is used exclusively to store the sending device's IP address and has no relationship to VLAN tagging",
+    "D": "The TPID field only exists in IPv6 frames and has no equivalent or use in IPv4-carrying Ethernet frames"
+   },
+   "correct": "A",
+   "explanation_es": "El TPID es un valor fijo (0x8100 para 802.1Q estándar) colocado donde normalmente iría el campo EtherType, señalando al dispositivo receptor que este frame lleva una etiqueta 802.1Q (con los campos de VLAN ID y PCP a continuación) en lugar de ser un frame sin etiquetar."
+  },
+  {
+   "id": "b6_3.1.a_12",
+   "subtopic": "3.1.a",
+   "name": "Trunking 802.1Q",
+   "question": "How does 802.1Q tagging typically interact with the maximum frame size ('baby giant' frames) on an Ethernet link?",
+   "options": {
+    "A": "Adding an 802.1Q tag increases the frame size by 4 bytes beyond the standard untagged Ethernet frame size, which is why many switches support slightly larger 'baby giant' frames specifically to accommodate tagged frames without exceeding what would otherwise be treated as an oversized/invalid frame",
+    "B": "802.1Q tagging always reduces the frame size by 4 bytes compared to an untagged frame, the opposite of its actual effect",
+    "C": "802.1Q tagging has no effect on frame size whatsoever, since the tag is inserted without consuming any additional bytes",
+    "D": "802.1Q tagging is only possible on frames that are already at the absolute minimum Ethernet frame size of 64 bytes"
+   },
+   "correct": "A",
+   "explanation_es": "Agregar una etiqueta 802.1Q aumenta el tamaño del frame en 4 bytes respecto al tamaño estándar de un frame Ethernet sin etiquetar, por eso muchos switches soportan frames 'baby giant' ligeramente más grandes específicamente para acomodar frames etiquetados sin que se traten como frames sobredimensionados/inválidos."
+  },
+  {
+   "id": "b6_3.1.a_13",
+   "subtopic": "3.1.a",
+   "name": "Trunking 802.1Q",
+   "question": "In a design where an IP phone and a PC share a single switch port (phone in the middle, PC connected to the phone's own switch port), how does 802.1Q trunking commonly get used at that access-layer port?",
+   "options": {
+    "A": "The switch port is often configured as a sort of limited multi-VLAN access port (using an auxiliary/voice VLAN alongside a data VLAN), where the IP phone tags its own voice traffic with the voice VLAN ID while the PC's traffic remains untagged in the native/data VLAN — a specialized trunking-like behavior rather than a full unrestricted trunk",
+    "B": "This scenario requires the port to become a completely unrestricted 802.1Q trunk carrying every VLAN configured anywhere in the switch, with no distinction between voice and data",
+    "C": "IP phones can never share a switch port with a PC under any circumstances; each device always requires a fully separate physical cable run",
+    "D": "The PC's traffic must always be tagged with the voice VLAN ID, identical to the phone's traffic, with no separate data VLAN involved"
+   },
+   "correct": "A",
+   "explanation_es": "El puerto suele configurarse como una especie de puerto de acceso multi-VLAN limitado (usando una VLAN auxiliar/de voz junto a una VLAN de datos), donde el teléfono IP etiqueta su propio tráfico de voz con el VLAN ID de voz mientras el tráfico del PC permanece sin etiquetar en la VLAN nativa/de datos — un comportamiento tipo trunking especializado, no un trunk completo sin restricciones."
+  },
+  {
+   "id": "b6_3.1.a_14",
+   "subtopic": "3.1.a",
+   "name": "Trunking 802.1Q",
+   "question": "Which show command is commonly used on a Cisco IOS switch to verify the current trunking status, native VLAN, and allowed VLAN list of an interface?",
+   "options": {
+    "A": "'show interfaces trunk', which lists trunk interfaces along with their native VLAN, allowed VLAN list, and the VLANs currently active/forwarding on that trunk",
+    "B": "'show ip route', which only displays Layer 3 routing table entries and has no relationship to trunk/VLAN status",
+    "C": "'show spanning-tree vlan 1', which only shows STP topology information for VLAN 1 and does not display trunk allowed-VLAN configuration",
+    "D": "'show mac address-table', which only shows learned MAC-to-port bindings and does not display trunk status directly"
+   },
+   "correct": "A",
+   "explanation_es": "'show interfaces trunk' lista las interfaces trunk junto con su VLAN nativa, la lista de VLANs permitidas, y las VLANs actualmente activas/reenviando en ese trunk — el comando de verificación más directo para confirmar el estado de trunking en Cisco IOS."
+  },
+  {
+   "id": "b6_3.1.a_15",
+   "subtopic": "3.1.a",
+   "name": "Trunking 802.1Q",
+   "question": "What is the maximum number of usable VLAN IDs typically available in a standard 802.1Q VLAN ID space, and why does this sometimes matter for very large environments (like some data center or service provider designs)?",
+   "options": {
+    "A": "802.1Q's 12-bit VLAN ID field theoretically supports up to 4094 usable VLANs (0 and 4095 reserved), which can become a practical scaling limitation in very large multi-tenant environments, motivating the use of technologies like VXLAN (with its 24-bit VNI space) that support a vastly larger number of logical segments",
+    "B": "802.1Q supports an effectively unlimited number of VLANs with no practical ceiling, making VXLAN's larger address space entirely unnecessary for any scaling reason",
+    "C": "802.1Q VLAN IDs are limited to exactly 16 total values, an extremely restrictive limit that applies to every Cisco switch regardless of platform",
+    "D": "The VLAN ID space has no relationship whatsoever to why VXLAN was developed; VXLAN was created purely for encryption purposes"
+   },
+   "correct": "A",
+   "explanation_es": "El campo de 12 bits de VLAN ID de 802.1Q soporta teóricamente hasta 4094 VLANs utilizables (0 y 4095 reservados), lo cual puede convertirse en una limitación práctica de escala en entornos multi-tenant muy grandes, motivando el uso de tecnologías como VXLAN (con su espacio de VNI de 24 bits) que soportan una cantidad de segmentos lógicos muchísimo mayor."
+  },
+  {
+   "id": "b6_3.1.a_16",
+   "subtopic": "3.1.a",
+   "name": "Trunking 802.1Q",
+   "question": "What potential security issue does 'double-tagging' (also called 'VLAN double-encapsulation') exploit in a VLAN hopping attack?",
+   "options": {
+    "A": "An attacker crafts a frame with two stacked 802.1Q tags: the outer tag matches the trunk's native VLAN (which gets stripped by the first switch that treats it as untagged-native traffic), exposing the inner tag (targeting the victim VLAN) to be forwarded onward by the next switch — effectively hopping from the attacker's VLAN into a different target VLAN without a router",
+    "B": "Double-tagging refers to a legitimate, harmless troubleshooting technique with no security implications of any kind",
+    "C": "Double-tagging can only occur on Layer 3 switches performing inter-VLAN routing, and has no relevance to any purely Layer 2 switch",
+    "D": "Double-tagging requires physically connecting two separate Ethernet cables to the same switch port simultaneously"
+   },
+   "correct": "A",
+   "explanation_es": "Un atacante fabrica un frame con dos etiquetas 802.1Q apiladas: la etiqueta externa coincide con la VLAN nativa del trunk (que el primer switch quita al tratarla como tráfico nativo sin etiquetar), exponiendo la etiqueta interna (apuntando a la VLAN víctima) para que el siguiente switch la reenvíe — saltando efectivamente de la VLAN del atacante a una VLAN objetivo distinta sin pasar por un router. Por eso se recomienda no usar VLAN 1 como nativa y evitar que coincida con VLANs de usuario."
+  },
+  {
+   "id": "b6_3.1.a_17",
+   "subtopic": "3.1.a",
+   "name": "Trunking 802.1Q",
+   "question": "Why do some organizations choose to explicitly configure an unused VLAN ID (rather than VLAN 1 or any actively used data VLAN) as the native VLAN on trunk links, as part of hardening against VLAN hopping?",
+   "options": {
+    "A": "Using an unused, dedicated VLAN as the native VLAN means that even if a double-tagging attack strips the outer tag, the frame is effectively dropped into a VLAN with no real hosts, limiting the practical impact of that class of attack, and it avoids accidentally mixing untagged native-VLAN traffic in with a VLAN that actually carries production traffic",
+    "B": "Using an unused VLAN as the native VLAN has no security benefit whatsoever and is done purely for cosmetic labeling reasons",
+    "C": "An unused native VLAN automatically and completely disables 802.1Q tagging on the entire trunk, removing the need for any further configuration",
+    "D": "Choosing an unused native VLAN is a mandatory requirement of the 802.1Q standard itself, with no flexibility to use any other VLAN as native"
+   },
+   "correct": "A",
+   "explanation_es": "Usar una VLAN dedicada sin uso real como VLAN nativa significa que, aunque un ataque de doble etiquetado quite la etiqueta externa, el frame termine efectivamente en una VLAN sin hosts reales, limitando el impacto práctico de ese tipo de ataque, y evita mezclar accidentalmente tráfico nativo sin etiquetar con una VLAN que realmente transporta tráfico de producción."
+  },
+  {
+   "id": "b6_3.1.a_18",
+   "subtopic": "3.1.a",
+   "name": "Trunking 802.1Q",
+   "question": "What is the relationship between a trunk link's configured 'allowed VLAN' list and the VLAN database (VLAN configuration) that must also exist on the switch?",
+   "options": {
+    "A": "A VLAN must generally exist in the switch's VLAN database before it can be meaningfully carried across a trunk's allowed-VLAN list; listing a VLAN as 'allowed' on a trunk does not itself create that VLAN if it was never configured/active on the switch",
+    "B": "The allowed-VLAN list on a trunk automatically creates every listed VLAN in the switch's VLAN database, with no separate VLAN configuration step ever required",
+    "C": "There is no relationship between the two; a trunk can carry any VLAN ID at all, whether or not that VLAN exists anywhere in the switch's configuration",
+    "D": "The VLAN database and the trunk's allowed-VLAN list must always be configured with the exact same syntax on a completely separate, unrelated device"
+   },
+   "correct": "A",
+   "explanation_es": "Generalmente una VLAN debe existir en la base de datos VLAN del switch antes de que pueda transportarse de forma significativa a través de la lista de VLANs permitidas de un trunk; listar una VLAN como 'permitida' en un trunk no crea esa VLAN por sí sola si nunca se configuró/activó en el switch."
+  },
+  {
+   "id": "b6_3.1.a_19",
+   "subtopic": "3.1.a",
+   "name": "Trunking 802.1Q",
+   "question": "How does VLAN pruning (whether manual via allowed-VLAN lists, or automatic via VTP pruning where supported) benefit STP and overall broadcast traffic on a trunk?",
+   "options": {
+    "A": "Restricting a trunk to only carry VLANs that are actually needed on the far end reduces unnecessary broadcast/multicast flooding and STP BPDU processing for VLANs that have no active devices on that particular link, improving efficiency and reducing unnecessary control-plane and data-plane overhead across the switched topology",
+    "B": "VLAN pruning has no effect on broadcast traffic or STP processing whatsoever and exists purely as a documentation/labeling convenience",
+    "C": "VLAN pruning always increases the total number of broadcast domains flooded across every trunk in the topology, the opposite of its intended effect",
+    "D": "VLAN pruning can only be applied to Layer 3 routed links and has no applicability to Layer 2 trunk links"
+   },
+   "correct": "A",
+   "explanation_es": "Restringir un trunk para que solo transporte las VLANs realmente necesarias del otro lado reduce el flooding innecesario de broadcast/multicast y el procesamiento de BPDUs de STP para VLANs que no tienen dispositivos activos en ese enlace en particular, mejorando la eficiencia y reduciendo el overhead innecesario de plano de control y de datos en toda la topología conmutada."
+  },
+  {
+   "id": "b6_3.1.a_20",
+   "subtopic": "3.1.a",
+   "name": "Trunking 802.1Q",
+   "question": "What is the effect of the 'switchport trunk pruning vlan' command, in environments where VTP pruning is used?",
+   "options": {
+    "A": "It restricts which VLANs are eligible to be automatically pruned by VTP pruning on that specific trunk, refining the default set of prunable VLANs rather than statically hardcoding the entire allowed-VLAN list the way 'switchport trunk allowed vlan' does",
+    "B": "It has no relationship to VTP pruning at all and is used exclusively to configure the trunk's native VLAN",
+    "C": "It permanently and unconditionally removes the listed VLANs from the switch's VLAN database entirely, deleting them",
+    "D": "It is only relevant on Layer 3 routed interfaces and cannot be applied to a Layer 2 trunk port at all"
+   },
+   "correct": "A",
+   "explanation_es": "Restringe qué VLANs son elegibles para ser podadas automáticamente por VTP pruning en ese trunk específico, refinando el conjunto por defecto de VLANs podables, en lugar de fijar de forma estática toda la lista de VLANs permitidas como hace 'switchport trunk allowed vlan'."
+  },
+  {
+   "id": "b6_3.1.a_21",
+   "subtopic": "3.1.a",
+   "name": "Trunking 802.1Q",
+   "question": "Why might a network engineer prefer to disable Dynamic Trunking Protocol (DTP) entirely on end-user-facing access ports, even though those ports are not intended to become trunks?",
+   "options": {
+    "A": "Explicitly configuring access ports as 'switchport mode access' and disabling DTP negotiation on them closes off the possibility that a connected device attempting to speak DTP could ever trick the port into becoming a trunk, which is a defensive best practice regardless of whether an attack is actually anticipated on that specific port",
+    "B": "DTP has no relevance to access ports whatsoever, since it is a protocol that only exists on Layer 3 interfaces, making this consideration moot",
+    "C": "Disabling DTP on access ports is required before any VLAN can ever be assigned to that port, with the port otherwise remaining permanently unusable",
+    "D": "DTP, if left enabled on an access port, automatically and immediately converts every connected end-user device into a Layer 3 router"
+   },
+   "correct": "A",
+   "explanation_es": "Configurar explícitamente los puertos de acceso como 'switchport mode access' y deshabilitar la negociación DTP en ellos cierra la posibilidad de que un dispositivo conectado que intente hablar DTP pueda engañar al puerto para que se vuelva trunk — una buena práctica defensiva independientemente de si se anticipa un ataque específico en ese puerto en particular."
+  },
+  {
+   "id": "b6_3.1.b_07",
+   "subtopic": "3.1.b",
+   "name": "EtherChannel",
+   "question": "What does the 'show etherchannel summary' command on a Cisco switch primarily help an administrator verify?",
+   "options": {
+    "A": "It shows the configured EtherChannel bundles, their protocol (LACP/PAgP/none), and the status of each member port (e.g., bundled 'P', suspended 's', individual 'I'), helping quickly identify whether all expected member links are actually bundled and forwarding as part of the channel",
+    "B": "It displays only the physical color of the cables plugged into each EtherChannel member port, with no protocol or status information",
+    "C": "It exclusively shows IP routing table entries and has no relationship to Layer 2 EtherChannel status at all",
+    "D": "It can only be used to verify wireless access point associations and has no application to wired EtherChannel bundles"
+   },
+   "correct": "A",
+   "explanation_es": "Muestra los bundles de EtherChannel configurados, su protocolo (LACP/PAgP/ninguno), y el estado de cada puerto miembro (por ejemplo, bundled 'P', suspended 's', individual 'I'), ayudando a identificar rápidamente si todos los enlaces miembro esperados están realmente agrupados y reenviando como parte del canal."
+  },
+  {
+   "id": "b6_3.1.b_08",
+   "subtopic": "3.1.b",
+   "name": "EtherChannel",
+   "question": "What does it mean if a member port of an EtherChannel bundle shows a status of 'suspended' (commonly displayed as 's') in 'show etherchannel summary' output?",
+   "options": {
+    "A": "That port has been detected as mismatched in some way (e.g., inconsistent configuration compared to the other bundle members, such as speed/duplex/trunk settings), so it has been excluded from actively forwarding as part of the channel until the mismatch is resolved, even though it is still physically part of the configured bundle",
+    "B": "A 'suspended' port is functioning perfectly normally and actively forwarding traffic exactly the same as a 'bundled' port, with the label being purely cosmetic",
+    "C": "'Suspended' means the port has been permanently and irreversibly removed from the switch's configuration entirely",
+    "D": "'Suspended' status only ever appears on ports that are physically unplugged, never due to any configuration mismatch"
+   },
+   "correct": "A",
+   "explanation_es": "Un puerto 'suspended' fue detectado con algún tipo de desajuste (por ejemplo, configuración inconsistente comparada con los demás miembros del bundle, como velocidad/duplex/ajustes de trunk), por lo que se excluyó de reenviar activamente como parte del canal hasta que se resuelva el desajuste, aunque siga siendo físicamente parte del bundle configurado."
+  },
+  {
+   "id": "b6_3.1.b_09",
+   "subtopic": "3.1.b",
+   "name": "EtherChannel",
+   "question": "Why is it important that all member links of an EtherChannel bundle be configured with the exact same trunk 'allowed VLAN' list (when the bundle is used as a trunk)?",
+   "options": {
+    "A": "Because the bundle is treated as a single logical link, an inconsistent allowed-VLAN configuration across member ports could cause unpredictable behavior (such as certain VLANs being reachable only over some physical links and not others depending on the hashing algorithm's link selection), rather than the consistent, unified trunk behavior expected from a properly bundled EtherChannel",
+    "B": "Allowed-VLAN consistency across member links has no actual effect on EtherChannel behavior and is purely a cosmetic documentation preference",
+    "C": "EtherChannel automatically synchronizes and overrides each member port's allowed-VLAN list to match regardless of how each individual port was configured, making manual consistency unnecessary",
+    "D": "Allowed-VLAN lists can only be configured on an entire EtherChannel port-channel interface and can never be configured on individual physical member ports in the first place"
+   },
+   "correct": "A",
+   "explanation_es": "Como el bundle se trata como un único enlace lógico, una configuración inconsistente de VLANs permitidas entre los puertos miembro podría causar comportamiento impredecible (por ejemplo, que ciertas VLANs solo sean alcanzables por algunos enlaces físicos y no por otros según el algoritmo de hashing), en lugar del comportamiento de trunk consistente y unificado esperado de un EtherChannel correctamente agrupado."
+  },
+  {
+   "id": "b6_3.1.b_10",
+   "subtopic": "3.1.b",
+   "name": "EtherChannel",
+   "question": "What is the general purpose of configuring a specific load-balancing hashing method (e.g., 'src-dst-ip' vs 'src-dst-mac') on an EtherChannel bundle?",
+   "options": {
+    "A": "The chosen hashing method determines which fields of a packet/frame are used as input to select which physical member link a given flow is placed on, and selecting a method that produces good entropy across many distinct flows (rather than always hashing to the same result) helps more evenly distribute traffic across all the bundle's physical links",
+    "B": "The load-balancing hashing method controls exclusively how fast each individual physical link runs, unrelated to which link carries which flow",
+    "C": "Load-balancing hashing methods only apply to wireless EtherChannel-like bundles and have no relevance to wired switch EtherChannel configuration",
+    "D": "Configuring a hashing method is purely optional cosmetic labeling with zero effect on how traffic is actually distributed across the bundle's member links"
+   },
+   "correct": "A",
+   "explanation_es": "El método de hashing elegido determina qué campos de un paquete/frame se usan como entrada para seleccionar qué enlace físico miembro lleva un flujo determinado, y elegir un método que produzca buena entropía entre muchos flujos distintos (en vez de siempre hashear al mismo resultado) ayuda a distribuir el tráfico de forma más pareja entre todos los enlaces físicos del bundle."
+  },
+  {
+   "id": "b6_3.1.b_11",
+   "subtopic": "3.1.b",
+   "name": "EtherChannel",
+   "question": "Why can EtherChannel load balancing sometimes appear 'unbalanced' even though the hashing algorithm is functioning correctly, particularly when there are relatively few distinct traffic flows?",
+   "options": {
+    "A": "With very few distinct flows (e.g., just two or three large flows), the hashing algorithm's output can happen to place multiple large flows onto the same physical link purely due to how the hash values distribute for that specific small set of flows, resulting in uneven utilization across the bundle even though the algorithm itself is working as designed — this is a statistical/flow-count limitation rather than a malfunction",
+    "B": "EtherChannel load balancing is always perfectly even across every member link at every single moment in time, regardless of the number or size of active flows, making this scenario technically impossible",
+    "C": "Unbalanced EtherChannel load distribution can only ever be caused by a hardware failure on one of the member ports, never by the number or characteristics of the actual traffic flows",
+    "D": "Uneven load balancing indicates that LACP has failed entirely and none of the member links are actually part of the bundle any longer"
+   },
+   "correct": "A",
+   "explanation_es": "Con muy pocos flujos distintos (por ejemplo, solo dos o tres flujos grandes), el resultado del algoritmo de hashing puede coincidir en colocar varios flujos grandes en el mismo enlace físico simplemente por cómo se distribuyen los valores de hash para ese conjunto pequeño específico de flujos, resultando en utilización despareja del bundle aunque el algoritmo en sí funcione como fue diseñado — es una limitación estadística/de cantidad de flujos, no un mal funcionamiento."
+  },
+  {
+   "id": "b6_3.1.b_12",
+   "subtopic": "3.1.b",
+   "name": "EtherChannel",
+   "question": "What is the relationship between an EtherChannel's logical 'Port-channel' interface and its physical member interfaces, in terms of Layer 3 configuration (for a routed EtherChannel)?",
+   "options": {
+    "A": "For a Layer 3 EtherChannel, IP addressing and most Layer 3 configuration is applied to the logical Port-channel interface itself, not to each individual physical member interface, since the member interfaces operate as part of the single logical bundled link represented by the Port-channel",
+    "B": "Layer 3 IP addressing must always be configured identically and separately on every individual physical member interface, with no IP configuration ever applied to the logical Port-channel interface",
+    "C": "A Layer 3 EtherChannel cannot have any IP address configured anywhere, on either the Port-channel interface or its members, under any circumstances",
+    "D": "The logical Port-channel interface and its physical members must always be assigned to two entirely different, unrelated VRFs"
+   },
+   "correct": "A",
+   "explanation_es": "Para un EtherChannel de Capa 3, el direccionamiento IP y la mayor parte de la configuración de Capa 3 se aplica a la interfaz lógica Port-channel en sí, no a cada interfaz física miembro individualmente, ya que las interfaces miembro operan como parte del único enlace agrupado lógico representado por el Port-channel."
+  },
+  {
+   "id": "b6_3.1.b_13",
+   "subtopic": "3.1.b",
+   "name": "EtherChannel",
+   "question": "How does STP typically treat a properly formed EtherChannel bundle in terms of the spanning-tree topology?",
+   "options": {
+    "A": "STP treats the entire EtherChannel bundle as a single logical link/port in its topology calculations, meaning it does not run a separate STP instance per physical member link; this avoids STP blocking individual member links (which would defeat the purpose of the bundle) while still allowing STP to block or forward the bundle as a whole relative to other paths in the topology",
+    "B": "STP treats every physical member link of the bundle as a completely separate, independent port in its calculations, often blocking most of the member links individually and defeating the purpose of bundling them together",
+    "C": "STP has no interaction with EtherChannel bundles whatsoever and is automatically and permanently disabled the moment any EtherChannel is configured anywhere on the switch",
+    "D": "EtherChannel bundles can never participate in a spanning-tree topology at all and must always be manually excluded from STP calculations"
+   },
+   "correct": "A",
+   "explanation_es": "STP trata todo el bundle de EtherChannel como un único enlace/puerto lógico en sus cálculos de topología, es decir, no corre una instancia de STP separada por cada enlace físico miembro; esto evita que STP bloquee enlaces miembro individuales (lo cual anularía el propósito del bundle) mientras sigue permitiendo que STP bloquee o reenvíe el bundle como un todo respecto a otros caminos en la topología."
+  },
+  {
+   "id": "b6_3.1.b_14",
+   "subtopic": "3.1.b",
+   "name": "EtherChannel",
+   "question": "What is 'Cross-Stack EtherChannel' (or similar multi-chassis EtherChannel technologies like StackWise or VSS-based EtherChannel), and what availability benefit does it provide over a standard single-switch EtherChannel?",
+   "options": {
+    "A": "It allows the individual physical member links of a single logical EtherChannel bundle to terminate on two (or more) physically separate switches that act as one logical switching entity, so that the failure of one entire physical chassis does not take down the whole EtherChannel bundle, only the member links that happened to terminate on the failed chassis",
+    "B": "Cross-stack EtherChannel requires every member link to terminate on exactly the same single physical switch, with no cross-chassis capability of any kind, making the name purely misleading",
+    "C": "Cross-stack EtherChannel eliminates the need for any physical cabling between the two switches involved in the bundle entirely",
+    "D": "This technology is used exclusively for wireless access point redundancy and has no application to wired switch-to-switch EtherChannel links"
+   },
+   "correct": "A",
+   "explanation_es": "Permite que los enlaces físicos individuales miembro de un único bundle lógico de EtherChannel terminen en dos (o más) switches físicamente separados que actúan como una única entidad de switching lógica, de forma que la falla de un chasis físico completo no derribe todo el bundle de EtherChannel, solo los enlaces miembro que terminaban en el chasis que falló — una mejora de disponibilidad importante sobre un EtherChannel de un solo switch."
+  },
+  {
+   "id": "b6_3.1.b_15",
+   "subtopic": "3.1.b",
+   "name": "EtherChannel",
+   "question": "Why must the member interfaces of an EtherChannel bundle generally be removed from any existing Layer 3 IP configuration before they can be added to a Layer 2 (switched) EtherChannel bundle?",
+   "options": {
+    "A": "A given physical interface cannot simultaneously have its own independent Layer 3 IP address configuration and also participate as a Layer 2 switched member of an EtherChannel bundle, since bundling a port into a Layer 2 channel converts that port's role into one governed by the logical Port-channel, not by any individually configured Layer 3 settings on that specific member port",
+    "B": "There is no such requirement; a member port can retain a fully independent IP address and simultaneously participate in a Layer 2 EtherChannel bundle with no conflict whatsoever",
+    "C": "EtherChannel bundling permanently and irreversibly deletes the physical interface from the switch's hardware inventory the moment it is added to a bundle",
+    "D": "This requirement only applies to fiber-optic member interfaces and never to copper Ethernet member interfaces"
+   },
+   "correct": "A",
+   "explanation_es": "Un puerto físico dado no puede tener simultáneamente su propia configuración de dirección IP de Capa 3 independiente y participar como miembro conmutado de Capa 2 de un bundle de EtherChannel, ya que agrupar un puerto en un canal de Capa 2 convierte el rol de ese puerto en uno gobernado por el Port-channel lógico, no por ninguna configuración de Capa 3 configurada individualmente en ese puerto miembro específico."
+  },
+  {
+   "id": "b6_3.1.b_16",
+   "subtopic": "3.1.b",
+   "name": "EtherChannel",
+   "question": "What is a common recommended practice regarding the physical diversity of the individual links that make up an EtherChannel bundle, when availability is a priority?",
+   "options": {
+    "A": "Where practical, spreading member links across different physical line cards/modules (on a modular chassis) or different physical paths reduces the risk that a single hardware fault (like one line card failing) takes down every member link of the bundle simultaneously, preserving the redundancy benefit the bundle is meant to provide",
+    "B": "Physical diversity of member links has no bearing on EtherChannel availability whatsoever, since all member links are logically treated identically regardless of which physical hardware they terminate on",
+    "C": "Best practice explicitly recommends concentrating every member link of a bundle onto the exact same single physical line card specifically to simplify cabling, with availability being a secondary concern",
+    "D": "EtherChannel technology itself physically prevents an administrator from ever placing member links on different line cards or modules"
+   },
+   "correct": "A",
+   "explanation_es": "Cuando es práctico, distribuir los enlaces miembro entre distintas tarjetas de línea/módulos físicos (en un chasis modular) o distintos caminos físicos reduce el riesgo de que una sola falla de hardware (como una tarjeta de línea cayéndose) derribe todos los enlaces miembro del bundle simultáneamente, preservando el beneficio de redundancia que el bundle está pensado para dar."
+  },
+  {
+   "id": "b6_3.1.b_17",
+   "subtopic": "3.1.b",
+   "name": "EtherChannel",
+   "question": "How does LACP's 'system priority' and 'port priority' influence which links are actively used when more links are configured in a bundle than the maximum number of active links supported (e.g., more than 8)?",
+   "options": {
+    "A": "LACP uses these priority values (combined with system/port ID) to determine which links become the 'active' bundled members versus which are placed into a 'hot-standby' state, so that if an active member fails, one of the standby links can automatically take its place without requiring an administrator to manually reconfigure the bundle",
+    "B": "System priority and port priority have no functional effect in LACP whatsoever and exist purely as unused legacy fields with no bearing on which links are active",
+    "C": "These priority values are used exclusively to determine the color of the status LED on each member port, unrelated to which links actively forward traffic",
+    "D": "LACP can never support more member links than the maximum number of simultaneously active links; any extra configured link is immediately and permanently rejected with no standby capability"
+   },
+   "correct": "A",
+   "explanation_es": "LACP usa estos valores de prioridad (combinados con el ID de sistema/puerto) para determinar qué enlaces se vuelven miembros activos del bundle versus cuáles quedan en estado de 'hot-standby', de forma que si un miembro activo falla, uno de los enlaces en espera pueda tomar su lugar automáticamente sin que un administrador tenga que reconfigurar manualmente el bundle."
+  },
+  {
+   "id": "b6_3.1.b_18",
+   "subtopic": "3.1.b",
+   "name": "EtherChannel",
+   "question": "Why is EtherChannel commonly used on the uplinks between an access-layer switch and a pair of redundant distribution-layer switches, in designs that support it (such as with a switch stack or VSS/StackWise at the distribution layer)?",
+   "options": {
+    "A": "EtherChannel across those uplinks combines the bandwidth of multiple physical links into one logical link while also providing redundancy, all without STP needing to block any of the redundant physical paths (since they appear as a single logical link to STP), which is more bandwidth-efficient than a design where STP simply blocks one of two separate redundant uplinks entirely",
+    "B": "EtherChannel on access-to-distribution uplinks is used purely as a licensing requirement with no actual bandwidth or redundancy benefit",
+    "C": "EtherChannel can only be used on downlinks toward end-user devices and is technically incompatible with switch-to-switch uplink connections",
+    "D": "Using EtherChannel on these uplinks always reduces the total available bandwidth compared to leaving the links as separate, individually STP-managed ports"
+   },
+   "correct": "A",
+   "explanation_es": "El EtherChannel en esos uplinks combina el ancho de banda de varios enlaces físicos en un único enlace lógico mientras también provee redundancia, todo sin que STP necesite bloquear ninguno de los caminos físicos redundantes (ya que aparecen como un único enlace lógico ante STP), lo cual es más eficiente en ancho de banda que un diseño donde STP simplemente bloquea uno de dos uplinks redundantes por completo."
+  },
+  {
+   "id": "b6_3.1.b_19",
+   "subtopic": "3.1.b",
+   "name": "EtherChannel",
+   "question": "What does the term 'min-links' configuration on an LACP EtherChannel bundle control?",
+   "options": {
+    "A": "It specifies the minimum number of member links that must be actively bundled and up for the entire Port-channel interface itself to be considered up; if the number of active links drops below that configured minimum, the whole logical Port-channel interface goes down, which can be used to ensure a minimum guaranteed bandwidth threshold is always met whenever the channel is considered operational",
+    "B": "'min-links' specifies the minimum physical cable length allowed for any member link in the bundle, measured in meters",
+    "C": "'min-links' has no functional purpose and is a deprecated, unused command with no effect on any current Cisco IOS platform",
+    "D": "'min-links' controls exclusively the minimum number of VLANs that must be allowed across the bundle's trunk configuration"
+   },
+   "correct": "A",
+   "explanation_es": "Especifica el número mínimo de enlaces miembro que deben estar activamente agrupados y up para que la propia interfaz Port-channel se considere up; si el número de enlaces activos cae por debajo de ese mínimo configurado, toda la interfaz Port-channel lógica cae, lo cual puede usarse para asegurar que siempre se cumpla un umbral mínimo de ancho de banda garantizado cuando el canal se considere operativo."
+  },
+  {
+   "id": "b6_3.1.b_20",
+   "subtopic": "3.1.b",
+   "name": "EtherChannel",
+   "question": "Why is it generally recommended to configure EtherChannel member ports consistently for STP-related settings (such as PortFast, BPDU Guard) at the Port-channel interface level rather than trying to configure them differently per individual physical member port?",
+   "options": {
+    "A": "Because STP treats the bundle as a single logical port, STP-related settings are meant to apply to that logical Port-channel interface as a whole; attempting to configure conflicting STP settings on individual member ports could lead to inconsistent or unintended behavior, since STP does not actually process each member port as an independent, separately-controlled STP port",
+    "B": "STP-related settings have no relevance to EtherChannel bundles at all and can be safely ignored entirely in any EtherChannel design",
+    "C": "Each individual member port must always have a completely different, unique STP configuration from every other member port in the same bundle, or the bundle will refuse to form at all",
+    "D": "PortFast and BPDU Guard can only ever be configured on access ports and can never be associated with any EtherChannel Port-channel interface under any circumstances"
+   },
+   "correct": "A",
+   "explanation_es": "Como STP trata el bundle como un único puerto lógico, los ajustes relacionados con STP están pensados para aplicarse a esa interfaz Port-channel lógica como un todo; intentar configurar ajustes de STP en conflicto en puertos miembro individuales podría llevar a comportamiento inconsistente o no deseado, ya que STP en realidad no procesa cada puerto miembro como un puerto STP independiente y controlado por separado."
+  },
+  {
+   "id": "b6_3.1.b_21",
+   "subtopic": "3.1.b",
+   "name": "EtherChannel",
+   "question": "What common troubleshooting step should be taken if an EtherChannel bundle configured with LACP fails to form (all member ports remain individual/independent rather than bundled)?",
+   "options": {
+    "A": "Verify that both ends are running a compatible LACP mode combination (at least one side active, or active+passive), and that basic Layer 2 parameters (speed, duplex, trunk encapsulation/allowed VLANs, access VLAN if applicable) are consistent across all intended member ports on both switches, since a mismatch in any of these is a common cause of ports being suspended or failing to bundle",
+    "B": "The only possible cause of an LACP bundle failing to form is a completely dead physical cable; no other configuration mismatch could ever prevent bundling",
+    "C": "LACP bundles can never fail to form once configured; any apparent failure must actually be a display/reporting bug in the 'show etherchannel summary' command itself",
+    "D": "The only fix for a failed LACP bundle is to physically replace every switch involved with new hardware"
+   },
+   "correct": "A",
+   "explanation_es": "Verificar que ambos extremos corran una combinación de modos LACP compatible (al menos un lado active, o active+passive), y que los parámetros básicos de Capa 2 (velocidad, duplex, encapsulación de trunk/VLANs permitidas, VLAN de acceso si aplica) sean consistentes en todos los puertos miembro pretendidos en ambos switches, ya que un desajuste en cualquiera de estos es una causa común de puertos suspendidos o que no logran agruparse."
+  },
+  {
+   "id": "b6_3.1.b_22",
+   "subtopic": "3.1.b",
+   "name": "EtherChannel",
+   "question": "How does PAgP's 'desirable' and 'auto' negotiation modes compare conceptually to LACP's 'active' and 'passive' modes?",
+   "options": {
+    "A": "PAgP 'desirable' behaves similarly to LACP 'active' (it actively initiates negotiation), and PAgP 'auto' behaves similarly to LACP 'passive' (it only responds to negotiation initiated by the other side); as with LACP, two ports both set to the passive-equivalent mode (auto+auto) will not form a channel, since neither side initiates",
+    "B": "PAgP and LACP negotiation modes are entirely unrelated concepts with no conceptual parallel between them whatsoever",
+    "C": "PAgP 'desirable' and 'auto' are both equivalent to LACP 'active', meaning any combination of PAgP modes will always successfully negotiate a channel",
+    "D": "PAgP has no negotiation modes at all and always forms a channel unconditionally regardless of any configuration on either side"
+   },
+   "correct": "A",
+   "explanation_es": "PAgP 'desirable' se comporta de forma similar a LACP 'active' (inicia activamente la negociación), y PAgP 'auto' se comporta de forma similar a LACP 'passive' (solo responde a una negociación iniciada por el otro lado); igual que con LACP, dos puertos configurados en el modo equivalente a pasivo (auto+auto) no formarán un canal, ya que ninguno de los dos inicia."
+  },
+  {
+   "id": "b6_3.1.b_23",
+   "subtopic": "3.1.b",
+   "name": "EtherChannel",
+   "question": "What advantage does LACP's ability to negotiate and dynamically detect a misconfigured or miswired member link provide, compared to a statically configured EtherChannel with no negotiation protocol ('mode on')?",
+   "options": {
+    "A": "With LACP, if a link is accidentally cabled to the wrong switch/port or otherwise doesn't match the expected bundle configuration, LACP's negotiation can detect the mismatch and keep that specific link out of the active bundle (avoiding it being blindly included), whereas a statically configured 'mode on' EtherChannel has no negotiation protocol running at all and will simply attempt to treat any physically connected, correctly-numbered member port as bundled, without any protocol-level verification that the far end agrees",
+    "B": "Static 'mode on' EtherChannel configuration is always safer and more resilient to miscabling than LACP negotiation, the reverse of their actual behavior",
+    "C": "LACP negotiation and static 'mode on' configuration provide functionally identical protection against miscabling, with no meaningful safety difference between them",
+    "D": "LACP is incapable of detecting any form of link mismatch whatsoever and behaves identically to a statically configured channel in every respect"
+   },
+   "correct": "A",
+   "explanation_es": "Con LACP, si un enlace se cablea accidentalmente al switch/puerto equivocado o de algún modo no coincide con la configuración de bundle esperada, la negociación de LACP puede detectar el desajuste y mantener ese enlace específico fuera del bundle activo (evitando incluirlo ciegamente), mientras que un EtherChannel configurado estáticamente con 'mode on' no corre ningún protocolo de negociación e intentará simplemente tratar como agrupado a cualquier puerto miembro físicamente conectado y correctamente numerado, sin ninguna verificación a nivel de protocolo de que el otro extremo esté de acuerdo."
+  },
+  {
+   "id": "b6_3.1.b_24",
+   "subtopic": "3.1.b",
+   "name": "EtherChannel",
+   "question": "Why is using 'mode on' (static, unconditional EtherChannel with no negotiation protocol) generally discouraged in favor of LACP or PAgP negotiation, except in specific compatibility scenarios?",
+   "options": {
+    "A": "Because 'mode on' bypasses any negotiation entirely, both ends will unconditionally treat their configured ports as bundled even if there is a cabling mistake, a mismatched configuration, or the far end is not actually configured for a channel at all, which can silently cause a Layer 2 loop or other unexpected forwarding behavior that a negotiation protocol like LACP would have caught and prevented",
+    "B": "'mode on' configuration is objectively faster and more reliable in every single deployment scenario, with negotiation protocols like LACP offering no benefit over it whatsoever",
+    "C": "'mode on' cannot be configured on any modern Cisco switch platform and has been completely removed from current IOS software",
+    "D": "There is no meaningful difference in risk between 'mode on' and LACP negotiation; the choice is purely a matter of personal preference with identical safety characteristics"
+   },
+   "correct": "A",
+   "explanation_es": "Como 'mode on' evita cualquier negociación por completo, ambos extremos tratarán sus puertos configurados como agrupados incondicionalmente aunque haya un error de cableado, una configuración desajustada, o el otro extremo ni siquiera esté configurado para un canal, lo cual puede causar silenciosamente un loop de Capa 2 u otro comportamiento de reenvío inesperado que un protocolo de negociación como LACP habría detectado y evitado."
+  },
+  {
+   "id": "b6_3.1.b_25",
+   "subtopic": "3.1.b",
+   "name": "EtherChannel",
+   "question": "What happens to the traffic currently being carried by a specific member link of an active EtherChannel bundle if that individual physical link fails, while other member links remain up?",
+   "options": {
+    "A": "The EtherChannel protocol (LACP/PAgP) or the underlying hardware forwarding logic redistributes the flows that were using the failed link across the remaining active member links, typically resulting in a brief re-hash/re-convergence for the affected flows rather than a full outage of the entire logical channel, since the other member links continue forwarding traffic uninterrupted",
+    "B": "The failure of any single member link, no matter how many other members remain active, always immediately takes down the entire logical Port-channel interface completely",
+    "C": "Traffic that was using the failed member link is permanently lost and can never be recovered or redistributed to any other member link under any circumstances",
+    "D": "EtherChannel bundles are physically incapable of continuing to operate with fewer member links than were originally configured, and require a full manual reconfiguration after any single link failure"
+   },
+   "correct": "A",
+   "explanation_es": "El protocolo de EtherChannel (LACP/PAgP) o la lógica de reenvío de hardware subyacente redistribuye los flujos que usaban el enlace caído entre los demás enlaces miembro activos, típicamente resultando en un breve re-hash/reconvergencia para los flujos afectados en lugar de una interrupción total del canal lógico, ya que los demás enlaces miembro siguen reenviando tráfico sin interrupción."
+  },
+  {
+   "id": "b6_3.1.b_26",
+   "subtopic": "3.1.b",
+   "name": "EtherChannel",
+   "question": "Which statement correctly describes a limitation of relying on a hash-based load-balancing algorithm for EtherChannel, in terms of per-flow bandwidth?",
+   "options": {
+    "A": "Because the hashing algorithm places an entire flow onto a single physical member link (rather than splitting a single flow's packets across multiple links simultaneously), a single flow's maximum achievable throughput is generally limited to the bandwidth of one member link, not the combined bandwidth of the whole bundle, even if the bundle as a whole has much higher aggregate capacity",
+    "B": "EtherChannel hashing always splits every individual flow's packets evenly across all member links simultaneously, guaranteeing that a single flow can achieve the full combined bandwidth of the entire bundle",
+    "C": "Hash-based load balancing has no limitation whatsoever regarding per-flow throughput, and every flow always achieves the combined bandwidth of the entire bundle regardless of the hashing algorithm used",
+    "D": "Per-flow bandwidth limitations only apply to wireless EtherChannel-like technologies and have no relevance to wired switch EtherChannel bundles"
+   },
+   "correct": "A",
+   "explanation_es": "Como el algoritmo de hashing coloca un flujo entero en un único enlace físico miembro (en lugar de dividir los paquetes de un mismo flujo entre varios enlaces simultáneamente), el rendimiento máximo alcanzable de un solo flujo generalmente está limitado al ancho de banda de un único enlace miembro, no al ancho de banda combinado de todo el bundle, aunque el bundle en su conjunto tenga una capacidad agregada mucho mayor — una limitación importante a tener en cuenta al diseñar para un solo flujo de alto ancho de banda."
+  },
+  {
+   "id": "b6_3.1.c_07",
+   "subtopic": "3.1.c",
+   "name": "STP/RSTP/MST, root guard, BPDU guard",
+   "question": "How is the STP Root Bridge elected among a set of switches running standard 802.1D/RSTP Spanning Tree?",
+   "options": {
+    "A": "Each switch compares Bridge IDs (a combination of a configurable bridge priority and the switch's MAC address) received in BPDUs, and the switch with the numerically lowest Bridge ID is elected as the Root Bridge; a lower priority value wins, and the MAC address acts as a tiebreaker when priorities are equal",
+    "B": "The Root Bridge is always the switch that was physically powered on most recently in the topology, regardless of any configured priority",
+    "C": "The Root Bridge election is based exclusively on which switch has the highest number of physical ports, with priority and MAC address playing no role",
+    "D": "Root Bridge election requires manual selection by an administrator typing a specific command on every single switch in the topology, with no automatic election process at all"
+   },
+   "correct": "A",
+   "explanation_es": "Cada switch compara los Bridge ID (una combinación de una prioridad de bridge configurable y la dirección MAC del switch) recibidos en BPDUs, y el switch con el Bridge ID numéricamente más bajo es elegido Root Bridge; un valor de prioridad más bajo gana, y la dirección MAC actúa como desempate cuando las prioridades son iguales."
+  },
+  {
+   "id": "b6_3.1.c_08",
+   "subtopic": "3.1.c",
+   "name": "STP/RSTP/MST, root guard, BPDU guard",
+   "question": "What is the purpose of 'Root Path Cost' in STP, and how does it influence which port on a non-root switch becomes the Root Port?",
+   "options": {
+    "A": "Root Path Cost is the cumulative cost of all links along the path from a given switch back to the Root Bridge, and each non-root switch selects, as its Root Port, the port with the lowest total Root Path Cost toward the Root Bridge, since that represents the best (lowest-cost) path back to the root",
+    "B": "Root Path Cost is a fixed, unchangeable value that is always identical on every port of every switch in the topology, regardless of actual link speed or path length",
+    "C": "Root Path Cost has no relationship to Root Port selection at all; the Root Port is chosen purely at random among all of a switch's active ports",
+    "D": "Root Path Cost only applies to ports that are already blocking, and has no relevance to any port that is actively forwarding traffic"
+   },
+   "correct": "A",
+   "explanation_es": "El Root Path Cost es el costo acumulado de todos los enlaces a lo largo del camino desde un switch dado hasta el Root Bridge, y cada switch no-raíz selecciona, como su Root Port, el puerto con el menor Root Path Cost total hacia el Root Bridge, ya que representa el mejor camino (de menor costo) de regreso a la raíz."
+  },
+  {
+   "id": "b6_3.1.c_09",
+   "subtopic": "3.1.c",
+   "name": "STP/RSTP/MST, root guard, BPDU guard",
+   "question": "What is a 'Designated Port' in classic 802.1D Spanning Tree, and how is it selected on a given LAN segment?",
+   "options": {
+    "A": "For each LAN segment, the switch offering the lowest Root Path Cost to reach the Root Bridge through that segment has its port on that segment elected as the Designated Port, which is the port responsible for forwarding traffic onto and off of that particular segment (with Bridge ID as a tiebreaker for equal costs)",
+    "B": "Every port on every switch in the topology is always a Designated Port simultaneously, with no distinction ever made between forwarding and blocking ports",
+    "C": "A Designated Port is selected purely alphabetically based on the switch's configured hostname, with no relationship to path cost or Bridge ID at all",
+    "D": "Designated Ports only exist on the Root Bridge itself; no other switch in the topology can ever have a Designated Port"
+   },
+   "correct": "A",
+   "explanation_es": "Para cada segmento de LAN, el switch que ofrece el menor Root Path Cost para llegar al Root Bridge a través de ese segmento tiene su puerto en ese segmento elegido como Designated Port, que es el puerto responsable de reenviar tráfico hacia y desde ese segmento en particular (con el Bridge ID como desempate en caso de costos iguales)."
+  },
+  {
+   "id": "b6_3.1.c_10",
+   "subtopic": "3.1.c",
+   "name": "STP/RSTP/MST, root guard, BPDU guard",
+   "question": "In classic 802.1D STP, what are the five possible port states a port can transition through, and roughly what does each represent?",
+   "options": {
+    "A": "Blocking (not forwarding, only listening for BPDUs), Listening (preparing to forward, not yet learning MACs), Learning (building the MAC address table, still not forwarding user data), Forwarding (actively forwarding traffic), and Disabled (administratively shut down); a port typically moves through Blocking/Listening/Learning before reaching Forwarding, which is why classic 802.1D convergence can take tens of seconds",
+    "B": "802.1D STP has only two possible port states, 'On' and 'Off', with no intermediate states of any kind involved in convergence",
+    "C": "The five port states are exclusively named after colors (Red, Yellow, Green, Blue, Purple) with no functional distinction between them",
+    "D": "Every port state in 802.1D STP allows the port to immediately forward user data traffic with zero delay, making the concept of transitional states meaningless"
+   },
+   "correct": "A",
+   "explanation_es": "Blocking (no reenvía, solo escucha BPDUs), Listening (preparándose para reenviar, aún no aprende MACs), Learning (construyendo la tabla de direcciones MAC, todavía sin reenviar datos de usuario), Forwarding (reenviando tráfico activamente), y Disabled (apagado administrativamente); un puerto típicamente pasa por Blocking/Listening/Learning antes de llegar a Forwarding, por eso la convergencia del 802.1D clásico puede tardar decenas de segundos."
+  },
+  {
+   "id": "b6_3.1.c_11",
+   "subtopic": "3.1.c",
+   "name": "STP/RSTP/MST, root guard, BPDU guard",
+   "question": "How does RSTP's 'proposal/agreement' mechanism enable much faster convergence than classic 802.1D STP's timer-based transitions?",
+   "options": {
+    "A": "RSTP allows a switch to actively propose that its port become the new designated forwarding port and receive an explicit agreement back from its neighbor, enabling both sides to synchronize and move directly to forwarding without waiting through the fixed listening/learning timer delays that classic 802.1D relies on",
+    "B": "RSTP's proposal/agreement mechanism has nothing to do with convergence speed and exists purely for logging/auditing purposes",
+    "C": "RSTP achieves faster convergence exclusively by disabling all STP calculations entirely and simply forwarding on every port unconditionally with no loop prevention at all",
+    "D": "The proposal/agreement mechanism only functions on the Root Bridge itself and has no effect on convergence anywhere else in the topology"
+   },
+   "correct": "A",
+   "explanation_es": "RSTP permite que un switch proponga activamente que su puerto se convierta en el nuevo puerto designado de reenvío y reciba un acuerdo explícito de su vecino, permitiendo que ambos lados se sincronicen y pasen directamente a forwarding sin esperar los retrasos de temporizador fijos de listening/learning en los que se basa el 802.1D clásico."
+  },
+  {
+   "id": "b6_3.1.c_12",
+   "subtopic": "3.1.c",
+   "name": "STP/RSTP/MST, root guard, BPDU guard",
+   "question": "What is a 'backup port' role, specific to RSTP, and when does it typically appear?",
+   "options": {
+    "A": "A backup port is a non-designated port role that appears when a switch has more than one port connected to the same shared LAN segment (e.g., via a hub), representing a redundant path to a segment the switch can already reach via its own designated port on that same segment; it is ready to take over the designated role if the current designated port on that segment fails",
+    "B": "A backup port refers exclusively to a completely separate physical switch kept powered off in a storage closet as a spare replacement unit",
+    "C": "Backup ports only exist in classic 802.1D STP and were entirely removed from RSTP, with no equivalent role present in RSTP",
+    "D": "A backup port is simply another name for the Root Port, with the two terms being fully interchangeable"
+   },
+   "correct": "A",
+   "explanation_es": "Un puerto backup es un rol de puerto no designado que aparece cuando un switch tiene más de un puerto conectado al mismo segmento de LAN compartido (por ejemplo, vía un hub), representando un camino redundante hacia un segmento que el switch ya puede alcanzar por su propio puerto designado en ese mismo segmento; está listo para asumir el rol designado si el puerto designado actual de ese segmento falla."
+  },
+  {
+   "id": "b6_3.1.c_13",
+   "subtopic": "3.1.c",
+   "name": "STP/RSTP/MST, root guard, BPDU guard",
+   "question": "What does 'BackboneFast' (a legacy Cisco STP enhancement) address, and why is it generally unnecessary once a network has migrated fully to RSTP?",
+   "options": {
+    "A": "BackboneFast reduced the time it took classic 802.1D STP to detect an indirect link failure (one not directly connected to the switch, discovered via the absence of expected BPDUs after the max-age timer), a scenario RSTP's more responsive BPDU-based mechanisms already handle quickly and natively without needing a separate feature",
+    "B": "BackboneFast has no relationship to STP convergence at all and instead refers exclusively to a physical cable labeling scheme",
+    "C": "BackboneFast is required in every RSTP deployment and cannot be omitted, contrary to being a legacy 802.1D-era enhancement",
+    "D": "BackboneFast only affects Layer 3 routing convergence and has no relationship to Layer 2 Spanning Tree behavior whatsoever"
+   },
+   "correct": "A",
+   "explanation_es": "BackboneFast reducía el tiempo que le tomaba al 802.1D clásico detectar la falla de un enlace indirecto (uno no conectado directamente al switch, descubierto por la ausencia de las BPDUs esperadas tras el temporizador max-age), un escenario que los mecanismos más reactivos basados en BPDU de RSTP ya manejan rápida y nativamente sin necesitar una función separada."
+  },
+  {
+   "id": "b6_3.1.c_14",
+   "subtopic": "3.1.c",
+   "name": "STP/RSTP/MST, root guard, BPDU guard",
+   "question": "How does MST (Multiple Spanning Tree) group VLANs into 'MST instances' (MSTIs), and why does this grouping matter for scalability?",
+   "options": {
+    "A": "MST allows an administrator to map many VLANs onto a smaller number of MST instances, each running its own independent spanning-tree topology calculation; since the number of actual STP computations equals the (typically small) number of instances rather than the (potentially much larger) number of VLANs, this significantly reduces the CPU/control-plane load compared to running a fully separate STP instance for every single VLAN (as PVST+ does)",
+    "B": "MST requires that every single VLAN always be mapped to its own unique, individual MST instance, providing no CPU savings whatsoever compared to PVST+",
+    "C": "MST instances have no relationship to VLANs at all and are used exclusively to group physical switch ports by cable color",
+    "D": "MST can only ever define a single instance total across the entire network, with no ability to run more than one spanning-tree topology anywhere"
+   },
+   "correct": "A",
+   "explanation_es": "MST permite que un administrador mapee muchas VLANs a una cantidad menor de instancias MST, cada una corriendo su propio cálculo de topología de spanning-tree independiente; como el número real de cálculos de STP es igual a la cantidad (típicamente pequeña) de instancias en lugar de la cantidad (potencialmente mucho mayor) de VLANs, esto reduce significativamente la carga de CPU/plano de control comparado con correr una instancia STP completamente separada por cada VLAN (como hace PVST+)."
+  },
+  {
+   "id": "b6_3.1.c_15",
+   "subtopic": "3.1.c",
+   "name": "STP/RSTP/MST, root guard, BPDU guard",
+   "question": "What must be configured identically across all switches within the same MST 'region' for them to be considered part of that same region?",
+   "options": {
+    "A": "All switches in an MST region must share the same configured MST configuration name, revision number, and VLAN-to-instance mapping table; if any of these differ between two switches, they are considered to be in different MST regions, which affects how BPDUs and topology information are exchanged between them",
+    "B": "Only the physical cable color connecting the switches needs to match; no software configuration parameters need to be consistent for switches to be considered part of the same MST region",
+    "C": "MST regions are determined purely by the switches' physical geographic distance from each other, with no software configuration involved at all",
+    "D": "Every switch in an MST region must have an identical hostname, with configuration name, revision, and VLAN mapping playing no role in region membership"
+   },
+   "correct": "A",
+   "explanation_es": "Todos los switches en una región MST deben compartir el mismo nombre de configuración MST, número de revisión, y tabla de mapeo VLAN-a-instancia; si alguno de estos difiere entre dos switches, se consideran en regiones MST distintas, lo cual afecta cómo se intercambian entre ellos las BPDUs y la información de topología."
+  },
+  {
+   "id": "b6_3.1.c_16",
+   "subtopic": "3.1.c",
+   "name": "STP/RSTP/MST, root guard, BPDU guard",
+   "question": "How does MST interact with switches running a different spanning-tree variant (like PVST+) at the boundary between an MST region and a non-MST switch?",
+   "options": {
+    "A": "MST includes interoperability behavior at region boundaries (using an Internal Spanning Tree/Common Spanning Tree, or CIST) so that MST regions can present a single, compatible spanning-tree view to neighboring switches running PVST+ or other STP variants, allowing the two to interoperate without requiring every single switch in the network to run the exact same STP variant",
+    "B": "MST cannot interoperate with any other STP variant under any circumstances, requiring every single switch in an entire organization to be upgraded to MST simultaneously in one flash cut",
+    "C": "MST regions automatically and permanently disable Spanning Tree entirely on every neighboring non-MST switch the moment they are connected",
+    "D": "Boundary interoperability between MST and PVST+ requires manually disabling STP on the MST region entirely, defeating the purpose of running STP at all"
+   },
+   "correct": "A",
+   "explanation_es": "MST incluye comportamiento de interoperabilidad en los límites de región (usando un Internal Spanning Tree/Common Spanning Tree, o CIST) para que las regiones MST puedan presentar una vista de spanning-tree única y compatible a switches vecinos que corren PVST+ u otras variantes de STP, permitiendo que ambos interoperen sin requerir que absolutamente todos los switches de la red corran exactamente la misma variante de STP."
+  },
+  {
+   "id": "b6_3.1.c_17",
+   "subtopic": "3.1.c",
+   "name": "STP/RSTP/MST, root guard, BPDU guard",
+   "question": "What is the purpose of 'UplinkFast' (a legacy Cisco 802.1D enhancement), and why is its function largely built into RSTP natively?",
+   "options": {
+    "A": "UplinkFast allowed an access-layer switch with a blocked backup uplink to quickly transition that backup link to forwarding if its active uplink failed, bypassing the normal listening/learning delay; RSTP achieves a similar (and generally faster/more general) rapid-failover capability natively through its alternate port role and proposal/agreement mechanism, without needing a separate legacy feature",
+    "B": "UplinkFast has no relationship to uplink failover speed at all and refers exclusively to increasing the physical bandwidth of an uplink cable",
+    "C": "UplinkFast is a mandatory feature that must be manually enabled even on switches already running RSTP, since RSTP does not provide any equivalent capability on its own",
+    "D": "UplinkFast only applies to Layer 3 routed uplinks and has no relevance to Layer 2 STP-blocked redundant links"
+   },
+   "correct": "A",
+   "explanation_es": "UplinkFast permitía que un switch de capa de acceso con un uplink de respaldo bloqueado transicionara rápidamente ese enlace de respaldo a forwarding si su uplink activo fallaba, saltándose el retraso normal de listening/learning; RSTP logra una capacidad de conmutación rápida similar (y generalmente más rápida/general) de forma nativa a través de su rol de puerto alternate y el mecanismo de proposal/agreement, sin necesitar una función legacy separada."
+  },
+  {
+   "id": "b6_3.1.c_18",
+   "subtopic": "3.1.c",
+   "name": "STP/RSTP/MST, root guard, BPDU guard",
+   "question": "Why is it generally recommended to manually set the STP root bridge priority (rather than relying on default priorities and letting the election happen arbitrarily) on the intended core/distribution switches in a campus design?",
+   "options": {
+    "A": "Manually and predictably setting a lower priority on the intended root switch(es) ensures the STP topology's root is a deliberately chosen, well-connected, high-capacity device rather than whichever switch happens to have the lowest default priority/MAC address, which could otherwise end up being an underpowered access-layer switch poorly suited to be the root of the topology",
+    "B": "Manually setting root bridge priority has no actual effect on which switch becomes the root; the election always ignores configured priority and uses only the MAC address",
+    "C": "Root bridge priority can only be configured on switches that are physically the very last ones added to the network, with no ability to configure it on any pre-existing switch",
+    "D": "Setting root bridge priority manually is prohibited by the 802.1D and 802.1w standards and will cause the switch to reject the configuration"
+   },
+   "correct": "A",
+   "explanation_es": "Fijar de forma manual y predecible una prioridad más baja en el/los switch(es) destinado(s) a ser root asegura que la raíz de la topología STP sea un dispositivo deliberadamente elegido, bien conectado y de alta capacidad, en lugar de cualquier switch que resulte tener la prioridad/MAC más baja por defecto, lo cual de otro modo podría terminar siendo un switch de acceso de bajo poder poco adecuado para ser la raíz de la topología."
+  },
+  {
+   "id": "b6_3.1.c_19",
+   "subtopic": "3.1.c",
+   "name": "STP/RSTP/MST, root guard, BPDU guard",
+   "question": "What specific risk does 'Root Guard' protect against that PortFast/BPDU Guard alone does not directly address?",
+   "options": {
+    "A": "Root Guard specifically prevents a port from ever becoming a Root Port by blocking any superior BPDU received on that port (rather than allowing that port's switch to become the new root), protecting the intended root switch's position in the topology; PortFast/BPDU Guard, by contrast, focuses on quickly enabling and protecting edge/access ports from receiving any BPDU at all, without specifically addressing root-role manipulation on non-edge ports",
+    "B": "Root Guard and BPDU Guard provide functionally identical protection with no meaningful distinction between the two features",
+    "C": "Root Guard's sole function is to physically prevent a cable from being unplugged from a designated root-facing port, with no relationship to BPDU processing at all",
+    "D": "Root Guard only operates on the actual Root Bridge itself and has no effect when configured on any other switch in the topology"
+   },
+   "correct": "A",
+   "explanation_es": "Root Guard específicamente evita que un puerto se convierta en Root Port bloqueando cualquier BPDU superior recibida en ese puerto (en lugar de permitir que el switch de ese puerto se convierta en la nueva raíz), protegiendo la posición del switch raíz previsto en la topología; BPDU Guard, en cambio, se enfoca en habilitar rápidamente y proteger puertos de borde/acceso de recibir cualquier BPDU en absoluto, sin abordar específicamente la manipulación del rol de raíz en puertos que no son de borde."
+  },
+  {
+   "id": "b6_3.1.c_20",
+   "subtopic": "3.1.c",
+   "name": "STP/RSTP/MST, root guard, BPDU guard",
+   "question": "What happens to a port protected by Root Guard if it receives a superior BPDU (one that would normally cause it to become a Root Port)?",
+   "options": {
+    "A": "The port is placed into a 'root-inconsistent' blocking state, preventing it from forwarding traffic (and from becoming the Root Port) as long as it continues receiving that superior BPDU; once the superior BPDUs stop being received, the port can automatically recover back to its normal STP-determined state",
+    "B": "The port immediately and permanently becomes the new Root Port, exactly opposite to Root Guard's intended function",
+    "C": "Root Guard has no defined behavior for this scenario and simply ignores any BPDU received, superior or not",
+    "D": "The entire switch (not just the affected port) is immediately and permanently powered off the moment any superior BPDU is received anywhere on it"
+   },
+   "correct": "A",
+   "explanation_es": "El puerto se coloca en un estado de bloqueo 'root-inconsistent', impidiéndole reenviar tráfico (y convertirse en Root Port) mientras siga recibiendo esa BPDU superior; una vez que dejan de recibirse las BPDUs superiores, el puerto puede recuperarse automáticamente de vuelta a su estado normal determinado por STP."
+  },
+  {
+   "id": "b6_3.1.c_21",
+   "subtopic": "3.1.c",
+   "name": "STP/RSTP/MST, root guard, BPDU guard",
+   "question": "Why is PortFast specifically intended only for ports connected to end hosts (like PCs, printers, or IP phones) and not for ports connecting to other switches?",
+   "options": {
+    "A": "PortFast causes a port to skip the normal listening/learning delay and transition immediately to forwarding, which is safe for a port that will never receive a BPDU from a downstream switch (an end host doesn't run STP); if PortFast were enabled on a port actually connecting to another switch, it could create a temporary Layer 2 loop before STP has a chance to properly detect the topology and block a redundant path",
+    "B": "PortFast is actually intended exclusively for switch-to-switch trunk links and was never designed to be used on end-host-facing access ports at all",
+    "C": "PortFast has no relationship to loop prevention or forwarding delay whatsoever, and is used purely to change the color of a port's status LED",
+    "D": "PortFast can be safely enabled on any port type, including switch-to-switch links, with no additional risk of any kind"
+   },
+   "correct": "A",
+   "explanation_es": "PortFast hace que un puerto se salte el retraso normal de listening/learning y pase inmediatamente a forwarding, lo cual es seguro para un puerto que nunca recibirá una BPDU de un switch aguas abajo (un host final no corre STP); si PortFast se habilitara en un puerto que en realidad conecta a otro switch, podría crear un loop temporal de Capa 2 antes de que STP tenga la oportunidad de detectar correctamente la topología y bloquear un camino redundante — por eso PortFast siempre debe combinarse con BPDU Guard en puertos de acceso."
+  },
+  {
+   "id": "b6_3.1.c_22",
+   "subtopic": "3.1.c",
+   "name": "STP/RSTP/MST, root guard, BPDU guard",
+   "question": "What is the difference between BPDU Guard and BPDU Filter, both of which relate to how a port reacts to receiving a BPDU?",
+   "options": {
+    "A": "BPDU Guard, upon receiving any BPDU on a protected (typically PortFast) port, immediately puts that port into an err-disabled state to protect the topology, whereas BPDU Filter suppresses the sending and processing of BPDUs on that port entirely, which can be riskier since it silently prevents STP loop detection on that port rather than actively shutting it down when unexpected BPDUs appear",
+    "B": "BPDU Guard and BPDU Filter are simply two different configuration command names for exactly the same underlying behavior, with no functional distinction whatsoever",
+    "C": "BPDU Filter always shuts the port down completely upon receiving a BPDU, while BPDU Guard merely logs a warning message with no other action taken, the reverse of their actual typical behavior",
+    "D": "Neither BPDU Guard nor BPDU Filter has any relationship to received BPDUs; both features instead control only the port's VLAN assignment"
+   },
+   "correct": "A",
+   "explanation_es": "BPDU Guard, al recibir cualquier BPDU en un puerto protegido (típicamente con PortFast), pone inmediatamente ese puerto en estado err-disabled para proteger la topología, mientras que BPDU Filter suprime el envío y procesamiento de BPDUs en ese puerto por completo, lo cual puede ser más riesgoso ya que silenciosamente impide la detección de loops de STP en ese puerto en lugar de apagarlo activamente cuando aparecen BPDUs inesperadas."
+  },
+  {
+   "id": "b6_3.1.c_23",
+   "subtopic": "3.1.c",
+   "name": "STP/RSTP/MST, root guard, BPDU guard",
+   "question": "What is 'UDLD' (UniDirectional Link Detection), and what specific failure scenario does it address that basic STP BPDU exchange might not reliably catch?",
+   "options": {
+    "A": "UDLD detects a unidirectional link failure — where traffic can flow in one direction on a fiber pair (e.g., due to a crossed or damaged fiber strand) but not the other — a condition that can confuse STP (since BPDUs might still be received in one direction) and potentially lead to a forwarding loop; UDLD actively exchanges its own hello messages in both directions to verify true bidirectional connectivity and can err-disable a port if unidirectional behavior is detected",
+    "B": "UDLD is used exclusively to measure the physical distance in meters of a fiber-optic cable, with no relationship to link directionality or loop prevention",
+    "C": "UDLD and STP are functionally identical protocols that perform exactly the same detection and prevention function, making UDLD entirely redundant wherever STP is already running",
+    "D": "UDLD only operates on copper Ethernet links and has no application whatsoever to fiber-optic connections, where unidirectional failures are most common"
+   },
+   "correct": "A",
+   "explanation_es": "UDLD detecta una falla de enlace unidireccional — donde el tráfico puede fluir en una dirección en un par de fibra (por ejemplo, por una hebra de fibra cruzada o dañada) pero no en la otra — una condición que puede confundir a STP (ya que las BPDUs podrían seguir recibiéndose en una dirección) y potencialmente llevar a un loop de reenvío; UDLD intercambia activamente sus propios mensajes hello en ambas direcciones para verificar conectividad bidireccional real y puede dejar el puerto err-disabled si detecta comportamiento unidireccional."
+  },
+  {
+   "id": "b6_3.1.c_24",
+   "subtopic": "3.1.c",
+   "name": "STP/RSTP/MST, root guard, BPDU guard",
+   "question": "How does 'err-disable recovery' functionality help operationally after a port has been automatically shut down by a protective feature like BPDU Guard or UDLD?",
+   "options": {
+    "A": "Err-disable recovery can be configured to automatically re-enable a port that was shut down due to a specific cause (like BPDU Guard or UDLD) after a configured timeout period, reducing the need for an administrator to manually intervene and re-enable the port every single time the protective feature triggers, while still preserving the initial protective shutdown behavior",
+    "B": "Err-disable recovery permanently disables the affected port forever, with no possibility of it ever being automatically or manually re-enabled again under any circumstances",
+    "C": "Err-disable recovery has no relationship to any protective feature like BPDU Guard or UDLD and instead controls only VLAN trunking negotiation timers",
+    "D": "Enabling err-disable recovery completely disables the protective feature (BPDU Guard/UDLD) that caused the shutdown, preventing it from ever triggering again on that port"
+   },
+   "correct": "A",
+   "explanation_es": "La recuperación de err-disable puede configurarse para volver a habilitar automáticamente un puerto que fue apagado por una causa específica (como BPDU Guard o UDLD) después de un período de timeout configurado, reduciendo la necesidad de que un administrador intervenga manualmente y vuelva a habilitar el puerto cada vez que se dispara la función protectora, mientras sigue preservando el comportamiento inicial de apagado protectivo."
+  },
+  {
+   "id": "b6_3.1.c_25",
+   "subtopic": "3.1.c",
+   "name": "STP/RSTP/MST, root guard, BPDU guard",
+   "question": "Why might 'PVST+' (Per-VLAN Spanning Tree Plus) allow for more granular load balancing across redundant uplinks than a single common spanning-tree instance shared by all VLANs?",
+   "options": {
+    "A": "Because PVST+ runs a logically separate STP instance per VLAN, different VLANs can independently select different root bridges/root ports, allowing an administrator to intentionally make one uplink the forwarding path for some VLANs while a second redundant uplink forwards a different set of VLANs, spreading traffic across both physical uplinks rather than leaving one uplink completely blocked for every VLAN simultaneously",
+    "B": "PVST+ always forces every single VLAN to use the exact same root bridge and identical forwarding topology, providing no additional load-balancing flexibility over a single shared STP instance",
+    "C": "PVST+ has no relationship to load balancing whatsoever and exists purely to reduce the number of VLANs a switch can support",
+    "D": "Load balancing across uplinks is only possible with EtherChannel and can never be achieved through any STP-based mechanism like PVST+"
+   },
+   "correct": "A",
+   "explanation_es": "Como PVST+ corre una instancia de STP lógicamente separada por VLAN, distintas VLANs pueden elegir de forma independiente distintos root bridges/root ports, permitiendo que un administrador haga intencionalmente que un uplink sea el camino de reenvío para algunas VLANs mientras un segundo uplink redundante reenvía un conjunto distinto de VLANs, repartiendo el tráfico entre ambos uplinks físicos en lugar de dejar un uplink completamente bloqueado para todas las VLANs simultáneamente."
+  },
+  {
+   "id": "b6_3.1.c_26",
+   "subtopic": "3.1.c",
+   "name": "STP/RSTP/MST, root guard, BPDU guard",
+   "question": "What operational cost does PVST+'s per-VLAN STP instance model impose as the number of VLANs on a switch grows very large, which MST was specifically designed to avoid?",
+   "options": {
+    "A": "Because PVST+ runs a fully separate STP computation and BPDU exchange for every single VLAN, a switch with hundreds of VLANs must perform hundreds of independent STP calculations and process a proportionally larger volume of BPDUs, consuming significantly more CPU and control-plane resources than MST's approach of mapping many VLANs onto a much smaller number of instances",
+    "B": "PVST+ has no additional CPU or control-plane cost regardless of how many VLANs are configured, making MST's instance-mapping approach unnecessary from a scalability perspective",
+    "C": "The number of VLANs configured on a switch has no relationship whatsoever to STP-related CPU utilization under PVST+",
+    "D": "PVST+ automatically converts itself into MST once a switch exceeds a certain number of configured VLANs, with no administrator action required"
+   },
+   "correct": "A",
+   "explanation_es": "Como PVST+ corre un cálculo de STP y un intercambio de BPDUs completamente separado para cada VLAN, un switch con cientos de VLANs debe realizar cientos de cálculos de STP independientes y procesar un volumen proporcionalmente mayor de BPDUs, consumiendo significativamente más CPU y recursos de plano de control que el enfoque de MST de mapear muchas VLANs a una cantidad mucho menor de instancias — la razón principal detrás de la existencia de MST."
+  },
+  {
+   "id": "b6_3.1.c_27",
+   "subtopic": "3.1.c",
+   "name": "STP/RSTP/MST, root guard, BPDU guard",
+   "question": "Why is it important that STP timers (hello time, forward delay, max age) be consistent with the actual diameter (maximum switch-to-switch hop count) of the switched topology?",
+   "options": {
+    "A": "The default STP timers are calculated assuming a certain maximum network diameter; if the actual topology's diameter exceeds what the configured timers were designed to safely accommodate, BPDUs might age out or convergence calculations might not have propagated fully across the entire topology in time, risking a temporary loop or slower-than-expected, potentially unreliable convergence behavior",
+    "B": "STP timers have no relationship to network diameter whatsoever and can be set to any arbitrary value with zero risk regardless of how many switches are in the topology",
+    "C": "Network diameter only matters for Layer 3 routing protocols like OSPF and has no bearing on Layer 2 Spanning Tree behavior of any kind",
+    "D": "STP timers are automatically and dynamically recalculated in real time based on diameter with no default assumptions or administrator consideration ever required"
+   },
+   "correct": "A",
+   "explanation_es": "Los temporizadores por defecto de STP se calculan asumiendo un cierto diámetro máximo de red; si el diámetro real de la topología excede lo que esos temporizadores configurados fueron diseñados para acomodar de forma segura, las BPDUs podrían expirar o los cálculos de convergencia podrían no haberse propagado completamente por toda la topología a tiempo, arriesgando un loop temporal o un comportamiento de convergencia más lento de lo esperado y potencialmente poco confiable."
+  },
+  {
+   "id": "b6_3.2.a_07",
+   "subtopic": "3.2.a",
+   "name": "EIGRP vs OSPF",
+   "question": "What is the role of the 'successor' route in EIGRP's DUAL algorithm?",
+   "options": {
+    "A": "The successor is the route with the lowest overall composite metric to a given destination, and it is the route that is actually installed in the routing table and used for forwarding, while a feasible successor (if one exists) is kept as a loop-free backup in the topology table",
+    "B": "The successor is always a backup-only route that is never installed in the routing table under any circumstances",
+    "C": "EIGRP does not use the term 'successor' at all; this terminology is exclusive to OSPF's SPF algorithm",
+    "D": "A successor route is selected purely at random among all routes with an equal hop count, regardless of metric"
+   },
+   "correct": "A",
+   "explanation_es": "El successor es la ruta con el menor costo compuesto general hacia un destino dado, y es la ruta que realmente se instala en la tabla de enrutamiento y se usa para reenviar tráfico, mientras que un feasible successor (si existe) se mantiene como respaldo libre de loops en la tabla de topología."
+  },
+  {
+   "id": "b6_3.2.a_08",
+   "subtopic": "3.2.a",
+   "name": "EIGRP vs OSPF",
+   "question": "What is the 'Feasibility Condition' that a backup route must satisfy in EIGRP to be considered a valid feasible successor (and thus be loop-free)?",
+   "options": {
+    "A": "A neighbor's advertised distance (its own reported metric to the destination) to that destination must be strictly less than the current successor's feasible distance (the local router's own best metric to that destination); this guarantees the neighbor is not routing back through the local router itself, avoiding a loop",
+    "B": "The Feasibility Condition requires the backup route to have an identical metric to the successor route in every single case, with no tolerance for any difference",
+    "C": "There is no such thing as a Feasibility Condition in EIGRP; any advertised route from any neighbor is automatically accepted as a feasible successor with no verification",
+    "D": "The Feasibility Condition only applies to OSPF's SPF calculation and has no equivalent concept in EIGRP whatsoever"
+   },
+   "correct": "A",
+   "explanation_es": "La distancia anunciada de un vecino (su propio costo reportado hacia el destino) debe ser estrictamente menor que la distancia factible (feasible distance) actual del successor (el mejor costo propio del router local hacia ese destino); esto garantiza que el vecino no esté enrutando de vuelta a través del propio router local, evitando un loop."
+  },
+  {
+   "id": "b6_3.2.a_09",
+   "subtopic": "3.2.a",
+   "name": "EIGRP vs OSPF",
+   "question": "How does EIGRP behave when a successor route fails and no feasible successor exists in the topology table for that destination?",
+   "options": {
+    "A": "EIGRP enters 'Active' state for that route and sends Query packets to its neighbors asking whether they have an alternate loop-free path to the destination, waiting for Reply packets before recalculating and re-installing a new best route (or declaring the destination unreachable if no neighbor has a valid path)",
+    "B": "EIGRP immediately and permanently marks the entire routing process as failed and requires a full router reboot to recover from the loss of any single route",
+    "C": "EIGRP always has a feasible successor pre-computed for every possible destination in every topology, making this active-state query scenario technically impossible",
+    "D": "EIGRP silently drops all traffic to that destination forever with no attempt to query neighbors or recompute an alternate path of any kind"
+   },
+   "correct": "A",
+   "explanation_es": "EIGRP entra en estado 'Active' para esa ruta y envía paquetes Query a sus vecinos preguntando si tienen un camino alternativo libre de loops hacia el destino, esperando paquetes Reply antes de recalcular e instalar una nueva mejor ruta (o declarar el destino inalcanzable si ningún vecino tiene un camino válido)."
+  },
+  {
+   "id": "b6_3.2.a_10",
+   "subtopic": "3.2.a",
+   "name": "EIGRP vs OSPF",
+   "question": "What potential problem does a prolonged EIGRP 'Stuck-In-Active' (SIA) condition represent, and what generally causes it?",
+   "options": {
+    "A": "An SIA condition occurs when a router does not receive Reply packets from one or more neighbors within the configured active-state timer after sending Query packets, often caused by a slow, congested, or unreachable neighbor that fails to reply in time; this can significantly delay convergence and, in the worst case, cause the router to reset the neighbor relationship with the non-responding neighbor",
+    "B": "Stuck-In-Active is a normal, desirable steady-state condition that every EIGRP route is expected to remain in permanently under healthy network operation",
+    "C": "SIA only occurs in OSPF, not EIGRP, and has no relationship to EIGRP's Query/Reply active-state process at all",
+    "D": "An SIA condition is resolved automatically and instantly with zero impact on convergence time, regardless of how long a neighbor takes to reply"
+   },
+   "correct": "A",
+   "explanation_es": "Una condición SIA (Stuck-In-Active) ocurre cuando un router no recibe paquetes Reply de uno o más vecinos dentro del temporizador de estado activo configurado, a menudo causado por un vecino lento, congestionado o inalcanzable que no responde a tiempo; esto puede retrasar significativamente la convergencia y, en el peor caso, causar que el router reinicie la relación de vecindad con el vecino que no respondió."
+  },
+  {
+   "id": "b6_3.2.a_11",
+   "subtopic": "3.2.a",
+   "name": "EIGRP vs OSPF",
+   "question": "What is the purpose of OSPF's SPF (Shortest Path First / Dijkstra) algorithm, run by every router within an area?",
+   "options": {
+    "A": "Each OSPF router uses SPF to independently calculate the shortest-cost tree from itself to every other router/network in its Link State Database, based on the complete topology information (link states) it has received, resulting in each router building its own view of the best path to every destination",
+    "B": "SPF is calculated only once by a single centralized router for the entire OSPF domain, with every other router simply copying that one router's routing table verbatim with no independent calculation of their own",
+    "C": "SPF has no relationship to path/cost calculation at all and is used exclusively to negotiate OSPF authentication passwords between neighbors",
+    "D": "OSPF routers never run SPF; instead they rely entirely on distance-vector-style periodic full routing table exchanges, identical to RIP"
+   },
+   "correct": "A",
+   "explanation_es": "Cada router OSPF usa SPF para calcular de forma independiente el árbol de menor costo desde sí mismo hacia cada otro router/red en su base de datos de estado de enlace (LSDB), basándose en la información completa de topología (estados de enlace) que ha recibido, resultando en que cada router construya su propia vista del mejor camino hacia cada destino."
+  },
+  {
+   "id": "b6_3.2.a_12",
+   "subtopic": "3.2.a",
+   "name": "EIGRP vs OSPF",
+   "question": "Why does OSPF, as a link-state protocol, generally require every router within the same area to have an identical Link State Database (LSDB) before their individual SPF calculations produce a consistent, loop-free view of the topology?",
+   "options": {
+    "A": "Because SPF calculates each router's own shortest-path tree from the same underlying topology information, all routers within an area must have synchronized, identical LSDBs — if routers had inconsistent topology information, their independently calculated shortest-path trees could disagree and potentially create routing loops or blackholes",
+    "B": "OSPF routers within the same area are permitted and expected to maintain completely different, unsynchronized LSDBs with no negative consequence to routing consistency",
+    "C": "LSDB synchronization is only relevant across different OSPF areas and has no importance whatsoever for routers within the same single area",
+    "D": "OSPF does not use an LSDB at all; that term is exclusive to EIGRP's topology table"
+   },
+   "correct": "A",
+   "explanation_es": "Como SPF calcula el árbol de menor camino de cada router a partir de la misma información de topología subyacente, todos los routers dentro de un área deben tener LSDBs sincronizadas e idénticas — si los routers tuvieran información de topología inconsistente, sus árboles de menor camino calculados independientemente podrían no coincidir y potencialmente crear loops de enrutamiento o agujeros negros."
+  },
+  {
+   "id": "b6_3.2.a_13",
+   "subtopic": "3.2.a",
+   "name": "EIGRP vs OSPF",
+   "question": "What distinguishes EIGRP as an 'advanced distance-vector' (sometimes called hybrid) protocol from a pure link-state protocol like OSPF, in terms of what information each router maintains?",
+   "options": {
+    "A": "EIGRP routers primarily learn about destinations and metrics reported by their directly connected neighbors (like a distance-vector protocol) rather than building a full topological map of the entire network the way OSPF's link-state LSDB does; EIGRP's DUAL algorithm and feasibility conditions add loop-avoidance sophistication beyond a classic distance-vector protocol like RIP, without requiring the full link-state topology database OSPF maintains",
+    "B": "EIGRP and OSPF maintain functionally identical databases with no meaningful architectural distinction between a distance-vector and a link-state approach",
+    "C": "EIGRP maintains a full link-state database identical in every respect to OSPF's LSDB, making the 'advanced distance-vector' label entirely inaccurate",
+    "D": "EIGRP routers have no knowledge of metrics reported by neighbors at all and instead calculate every path using a link-state SPF algorithm identical to OSPF's"
+   },
+   "correct": "A",
+   "explanation_es": "Los routers EIGRP principalmente aprenden sobre destinos y métricas reportadas por sus vecinos directamente conectados (como un protocolo de vector distancia) en lugar de construir un mapa topológico completo de toda la red como hace la LSDB de estado de enlace de OSPF; el algoritmo DUAL de EIGRP y sus condiciones de factibilidad agregan sofisticación de prevención de loops más allá de un protocolo de vector distancia clásico como RIP, sin necesitar la base de datos de topología de estado de enlace completa que mantiene OSPF."
+  },
+  {
+   "id": "b6_3.2.a_14",
+   "subtopic": "3.2.a",
+   "name": "EIGRP vs OSPF",
+   "question": "How do EIGRP and OSPF typically differ in how quickly they converge after a topology change, and why?",
+   "options": {
+    "A": "Both protocols are generally designed for fast convergence, but they achieve it differently: EIGRP can often converge almost instantly when a pre-computed feasible successor already exists (no recalculation needed), while OSPF must re-run SPF over its LSDB after a topology change is flooded, though modern OSPF implementations with incremental SPF and fast-hello/BFD tuning can also converge very quickly",
+    "B": "EIGRP and OSPF are incapable of fast convergence under any circumstances and both always take several minutes at minimum to detect and react to any topology change",
+    "C": "OSPF always converges instantly with zero computation required, while EIGRP always requires a full network-wide reboot to converge after any change",
+    "D": "Convergence speed has no relationship to whether a feasible successor exists or whether SPF must be recalculated; both protocols always take an identical, fixed amount of time regardless of any pre-computed backup information"
+   },
+   "correct": "A",
+   "explanation_es": "Ambos protocolos están generalmente diseñados para converger rápido, pero lo logran de forma distinta: EIGRP a menudo puede converger casi instantáneamente cuando ya existe un feasible successor precalculado (sin necesitar recalcular), mientras que OSPF debe volver a correr SPF sobre su LSDB después de que se inunda un cambio de topología, aunque implementaciones modernas de OSPF con SPF incremental y ajuste de fast-hello/BFD también pueden converger muy rápido."
+  },
+  {
+   "id": "b6_3.2.a_15",
+   "subtopic": "3.2.a",
+   "name": "EIGRP vs OSPF",
+   "question": "What is EIGRP 'unequal-cost load balancing' via the 'variance' command, and how does it differ from OSPF's typical equal-cost-only load balancing?",
+   "options": {
+    "A": "EIGRP's variance command allows traffic to be load-balanced across multiple feasible-successor paths even when their metrics are not exactly equal (as long as each qualifies as a feasible successor and falls within the configured variance multiplier of the best metric), whereas standard OSPF (without additional features) only load-balances across paths that have exactly equal cost",
+    "B": "OSPF natively supports unequal-cost load balancing by default in every implementation, while EIGRP only ever supports equal-cost load balancing with no variance capability at all",
+    "C": "Neither EIGRP nor OSPF is capable of load balancing traffic across more than a single path under any circumstances",
+    "D": "The variance command in EIGRP disables load balancing entirely, forcing all traffic onto a single best path regardless of any other available route"
+   },
+   "correct": "A",
+   "explanation_es": "El comando variance de EIGRP permite balancear tráfico entre múltiples caminos feasible successor aunque sus métricas no sean exactamente iguales (siempre que cada uno califique como feasible successor y esté dentro del multiplicador de variance configurado respecto a la mejor métrica), mientras que OSPF estándar (sin funciones adicionales) solo balancea entre caminos de costo exactamente igual."
+  },
+  {
+   "id": "b6_3.2.a_16",
+   "subtopic": "3.2.a",
+   "name": "EIGRP vs OSPF",
+   "question": "Why might an organization prefer OSPF over EIGRP in a multi-vendor network environment containing routers from vendors other than Cisco?",
+   "options": {
+    "A": "OSPF is an open, IETF-standardized protocol (RFC 2328 for OSPFv2) implemented by essentially every major router vendor, providing straightforward multi-vendor interoperability, whereas EIGRP was historically Cisco-proprietary (though Cisco has since published parts of it as an informational RFC, it remains predominantly a Cisco-centric protocol in practice)",
+    "B": "EIGRP is the universally standardized protocol supported identically by every vendor, while OSPF is Cisco-proprietary, the reverse of their actual standardization history",
+    "C": "Vendor interoperability has no relationship whatsoever to the choice between EIGRP and OSPF, since both protocols are equally proprietary to a single vendor",
+    "D": "Multi-vendor environments must always use RIP instead of either EIGRP or OSPF, since neither is considered usable outside a single-vendor network"
+   },
+   "correct": "A",
+   "explanation_es": "OSPF es un protocolo abierto, estandarizado por el IETF (RFC 2328 para OSPFv2) e implementado esencialmente por todos los principales fabricantes de routers, dando interoperabilidad multi-vendor directa, mientras que EIGRP fue históricamente propietario de Cisco (aunque Cisco luego publicó partes de él como un RFC informativo, en la práctica sigue siendo un protocolo predominantemente centrado en Cisco)."
+  },
+  {
+   "id": "b6_3.2.a_17",
+   "subtopic": "3.2.a",
+   "name": "EIGRP vs OSPF",
+   "question": "What role does the 'K-value' configuration play in EIGRP's composite metric calculation, and why must K-values match between EIGRP neighbors?",
+   "options": {
+    "A": "K-values are weighting constants (K1 through K5) that determine how heavily each individual metric component (bandwidth, delay, reliability, load, MTU) contributes to the overall composite metric formula; if two EIGRP neighbors have mismatched K-values, they will compute different metrics for the same route and will actually fail to form a neighbor relationship at all, since K-value mismatch is checked during neighbor establishment",
+    "B": "K-values have no effect on the metric calculation whatsoever and exist purely as an unused legacy configuration field with no functional impact",
+    "C": "K-values control exclusively the EIGRP hello/hold timer intervals and have no relationship to metric weighting at all",
+    "D": "Mismatched K-values between neighbors have no negative effect and neighbors will always form a full adjacency and calculate identical metrics regardless of any K-value differences"
+   },
+   "correct": "A",
+   "explanation_es": "Los K-values son constantes de ponderación (K1 a K5) que determinan cuánto peso aporta cada componente individual de la métrica (ancho de banda, delay, confiabilidad, carga, MTU) a la fórmula de la métrica compuesta general; si dos vecinos EIGRP tienen K-values desajustados, calcularán métricas distintas para la misma ruta y de hecho no lograrán formar una relación de vecindad, ya que el desajuste de K-value se verifica durante el establecimiento de la vecindad."
+  },
+  {
+   "id": "b6_3.2.a_18",
+   "subtopic": "3.2.a",
+   "name": "EIGRP vs OSPF",
+   "question": "How does OSPF's hierarchical area design (with Area 0 as the mandatory backbone) help control the size and computational burden of the SPF calculation on any individual router?",
+   "options": {
+    "A": "By dividing the network into multiple areas connected through the backbone (Area 0), a router only needs to run the full SPF calculation using detailed link-state information for its own area(s); inter-area routes are learned as summarized Type 3 LSAs rather than full topology detail, reducing both the LSDB size and the SPF computation burden compared to running SPF over one giant flat area containing the entire network",
+    "B": "OSPF areas have no effect on SPF computation size or LSDB size whatsoever; every router always calculates SPF over the entire network's topology regardless of area boundaries",
+    "C": "Area 0 is entirely optional in OSPF and can be omitted from any multi-area design with no requirement for a backbone area to exist at all",
+    "D": "Dividing a network into OSPF areas always increases the total SPF computation burden on every router compared to a single flat area design"
+   },
+   "correct": "A",
+   "explanation_es": "Al dividir la red en múltiples áreas conectadas a través del backbone (Área 0), un router solo necesita correr el cálculo SPF completo usando información detallada de estado de enlace de su(s) propia(s) área(s); las rutas entre áreas se aprenden como LSAs Type 3 resumidas en lugar de detalle completo de topología, reduciendo tanto el tamaño de la LSDB como la carga de cálculo de SPF comparado con correr SPF sobre una única área plana gigante que contenga toda la red."
+  },
+  {
+   "id": "b6_3.2.a_19",
+   "subtopic": "3.2.a",
+   "name": "EIGRP vs OSPF",
+   "question": "What is a practical operational consideration when migrating a network from EIGRP to OSPF (or vice versa), regarding route redistribution?",
+   "options": {
+    "A": "Because EIGRP and OSPF use fundamentally different metric systems (EIGRP's composite bandwidth/delay-based metric versus OSPF's cost based on reference bandwidth), routes redistributed between the two protocols need a manually configured seed metric on the redistributing router, and careful attention must be paid to avoid routing loops or suboptimal path selection during the transition period when both protocols may be running simultaneously",
+    "B": "EIGRP and OSPF use an identical metric system with no conversion or seed metric ever required when redistributing routes between them",
+    "C": "Redistribution between EIGRP and OSPF is technically impossible under any Cisco IOS configuration, requiring a complete simultaneous flash-cut of every router in the network",
+    "D": "Route redistribution between these two protocols has no risk of routing loops or suboptimal paths under any circumstances, regardless of configuration"
+   },
+   "correct": "A",
+   "explanation_es": "Como EIGRP y OSPF usan sistemas de métrica fundamentalmente distintos (la métrica compuesta de EIGRP basada en ancho de banda/delay versus el costo de OSPF basado en ancho de banda de referencia), las rutas redistribuidas entre ambos protocolos necesitan una métrica semilla configurada manualmente en el router que redistribuye, y hay que prestar atención cuidadosa para evitar loops de enrutamiento o selección de caminos subóptima durante el período de transición cuando ambos protocolos puedan estar corriendo simultáneamente."
+  },
+  {
+   "id": "b6_3.2.a_20",
+   "subtopic": "3.2.a",
+   "name": "EIGRP vs OSPF",
+   "question": "Why is EIGRP often described as converging particularly efficiently in a hub-and-spoke WAN topology using DMVPN, compared to some link-state protocol behaviors in the same topology?",
+   "options": {
+    "A": "EIGRP's neighbor-based, incremental update model (sending only changes rather than the full topology to every neighbor) and its per-neighbor feasible-successor tracking can be well suited to hub-and-spoke DMVPN designs, especially when combined with EIGRP stub configuration on spokes to prevent spoke routers from being queried as transit paths during convergence events, reducing unnecessary Query traffic across potentially bandwidth-constrained spoke links",
+    "B": "EIGRP cannot function at all over a DMVPN hub-and-spoke topology under any configuration, making this comparison moot",
+    "C": "Link-state protocols like OSPF always converge strictly faster than EIGRP in every single hub-and-spoke DMVPN scenario with no exception",
+    "D": "EIGRP's convergence behavior in DMVPN has no relationship whatsoever to neighbor relationships, updates, or stub configuration"
+   },
+   "correct": "A",
+   "explanation_es": "El modelo de actualización incremental basado en vecinos de EIGRP (enviando solo cambios en vez de toda la topología a cada vecino) y su rastreo de feasible successor por vecino pueden adaptarse bien a diseños hub-and-spoke con DMVPN, especialmente combinado con la configuración de EIGRP stub en los spokes para evitar que los routers spoke sean consultados como caminos de tránsito durante eventos de convergencia, reduciendo tráfico Query innecesario a través de enlaces spoke potencialmente limitados en ancho de banda."
+  },
+  {
+   "id": "b6_3.2.a_21",
+   "subtopic": "3.2.a",
+   "name": "EIGRP vs OSPF",
+   "question": "What does configuring a router as an 'EIGRP stub' router typically accomplish, and in what type of topology is it most commonly used?",
+   "options": {
+    "A": "An EIGRP stub router (commonly a branch/spoke router with a single or limited path back to the rest of the network) informs its neighbors that it should not be queried as a potential transit path during DUAL's active-state Query process, since it has no alternate path to offer anyway; this reduces unnecessary Query traffic and speeds convergence elsewhere in the network, and is commonly used on spoke routers in a hub-and-spoke topology",
+    "B": "EIGRP stub configuration has no relationship to the Query process at all and instead controls exclusively which VLANs a router can route between",
+    "C": "Stub routers are required on every single router in an EIGRP domain, including the hub/core routers, with no distinction made based on topology role",
+    "D": "Configuring a router as an EIGRP stub prevents it from learning any routes at all, effectively disabling EIGRP routing entirely on that device"
+   },
+   "correct": "A",
+   "explanation_es": "Un router EIGRP stub (comúnmente un router de sucursal/spoke con un único camino o un camino limitado de regreso al resto de la red) informa a sus vecinos que no debería ser consultado como un posible camino de tránsito durante el proceso de Query en estado activo de DUAL, ya que de todos modos no tiene un camino alternativo que ofrecer; esto reduce tráfico Query innecesario y acelera la convergencia en el resto de la red, y se usa comúnmente en routers spoke de una topología hub-and-spoke."
+  },
+  {
+   "id": "b6_3.2.b_07",
+   "subtopic": "3.2.b",
+   "name": "OSPFv2/v3 config",
+   "question": "What must generally match between two OSPF neighbors for them to successfully form a full adjacency (beyond just being on the same subnet)?",
+   "options": {
+    "A": "Key parameters such as the area ID for that link, hello/dead timer intervals, authentication configuration (if used), and MTU (if MTU mismatch checking is not disabled) generally need to be consistent between neighbors, or the adjacency will fail to form or get stuck in an incomplete state",
+    "B": "OSPF neighbors require no matching parameters whatsoever; any two routers with IP connectivity will always automatically form a full adjacency regardless of any other configuration",
+    "C": "Only the router's hostname needs to match between neighbors; all other OSPF-specific parameters are irrelevant to adjacency formation",
+    "D": "OSPF adjacencies can only ever form between routers manufactured by the exact same hardware vendor, regardless of any software configuration"
+   },
+   "correct": "A",
+   "explanation_es": "Parámetros clave como el área ID de ese enlace, los intervalos de temporizador hello/dead, la configuración de autenticación (si se usa), y el MTU (si la verificación de desajuste de MTU no está deshabilitada) generalmente deben ser consistentes entre vecinos, o la adyacencia no logrará formarse o quedará atascada en un estado incompleto."
+  },
+  {
+   "id": "b6_3.2.b_08",
+   "subtopic": "3.2.b",
+   "name": "OSPFv2/v3 config",
+   "question": "What is the purpose of the OSPF 'router-id', and how is it typically determined if not manually configured?",
+   "options": {
+    "A": "The router-id is a unique 32-bit identifier (formatted like an IP address) used to identify a router within the OSPF domain; if not manually configured, it is typically automatically selected as the highest IP address among the router's active loopback interfaces, or if none exist, the highest IP address among its active physical interfaces at the time OSPF starts",
+    "B": "The router-id is a randomly generated value that changes every time the router reboots, with no consistent selection logic of any kind",
+    "C": "The router-id has no relationship to interface IP addresses whatsoever and is instead derived exclusively from the router's physical serial number",
+    "D": "Every router in an OSPF domain must share the exact same identical router-id for the protocol to function correctly"
+   },
+   "correct": "A",
+   "explanation_es": "El router-id es un identificador único de 32 bits (con formato de dirección IP) usado para identificar a un router dentro del dominio OSPF; si no se configura manualmente, típicamente se selecciona de forma automática como la IP más alta entre las interfaces loopback activas del router, o si no existe ninguna, la IP más alta entre sus interfaces físicas activas al momento en que OSPF arranca."
+  },
+  {
+   "id": "b6_3.2.b_09",
+   "subtopic": "3.2.b",
+   "name": "OSPFv2/v3 config",
+   "question": "Why is it generally considered a best practice to manually configure a stable loopback interface as the OSPF router-id, rather than relying on automatic selection from a physical interface?",
+   "options": {
+    "A": "A loopback interface is always administratively up as long as the router itself is up, and doesn't depend on the state of any single physical link; using it as the basis for the router-id avoids the router-id unexpectedly changing if the physical interface that happened to provide the highest IP address goes down or is removed, which could otherwise force OSPF adjacencies to reset",
+    "B": "Using a loopback interface for the router-id has no operational benefit whatsoever compared to relying on a physical interface's IP address",
+    "C": "OSPF requires a loopback interface to exist before the protocol can even be enabled on the router at all, making this purely a mandatory requirement rather than a best practice",
+    "D": "A loopback-based router-id causes OSPF adjacencies to reset far more frequently than a physical-interface-based router-id, the reverse of the actual benefit"
+   },
+   "correct": "A",
+   "explanation_es": "Una interfaz loopback siempre está administrativamente up mientras el router mismo esté up, y no depende del estado de ningún enlace físico individual; usarla como base para el router-id evita que el router-id cambie inesperadamente si la interfaz física que proveía la IP más alta cae o se elimina, lo cual de otro modo podría forzar el reinicio de adyacencias OSPF."
+  },
+  {
+   "id": "b6_3.2.b_10",
+   "subtopic": "3.2.b",
+   "name": "OSPFv2/v3 config",
+   "question": "What is the function of the OSPF 'network' command (or, alternatively, enabling OSPF directly under an interface) when configuring OSPF on a router?",
+   "options": {
+    "A": "It specifies which interfaces (matched by their IP address falling within the specified network/wildcard-mask range) should participate in the OSPF process, both by enabling OSPF to form adjacencies over them and by causing their connected network(s) to be advertised into OSPF",
+    "B": "The network command only affects Layer 2 VLAN assignment and has no relationship to which interfaces participate in OSPF at all",
+    "C": "The network command is used exclusively to configure static routes and has no relevance to dynamic OSPF operation whatsoever",
+    "D": "Every interface on a router automatically participates in OSPF the moment the 'router ospf' process is created, making the network command entirely unnecessary and non-functional"
+   },
+   "correct": "A",
+   "explanation_es": "Especifica qué interfaces (identificadas porque su dirección IP cae dentro del rango de red/wildcard-mask especificado) deben participar en el proceso OSPF, tanto habilitando que formen adyacencias a través de ellas como haciendo que su(s) red(es) conectada(s) se anuncien en OSPF."
+  },
+  {
+   "id": "b6_3.2.b_11",
+   "subtopic": "3.2.b",
+   "name": "OSPFv2/v3 config",
+   "question": "What does the OSPF interface 'network type' (e.g., broadcast, point-to-point, non-broadcast, point-to-multipoint) control?",
+   "options": {
+    "A": "The network type determines behaviors such as whether DR/BDR election occurs on that interface, whether neighbors must be manually configured (as on some non-broadcast media), and certain default timer values; setting the correct network type for the actual underlying media (or intentionally overriding it, such as configuring a point-to-point network type on a subnet that only has two routers to skip unnecessary DR/BDR election) is an important part of OSPF interface configuration",
+    "B": "Network type only affects the color used to display the interface in a network management GUI, with zero effect on actual OSPF protocol behavior",
+    "C": "Every OSPF network type behaves in an absolutely identical way in every respect, making the concept of different network types purely a naming convention with no functional distinction",
+    "D": "OSPF network type controls exclusively which VLAN ID is assigned to that interface, with no relationship to DR/BDR election or neighbor discovery at all"
+   },
+   "correct": "A",
+   "explanation_es": "El tipo de red determina comportamientos como si ocurre elección de DR/BDR en esa interfaz, si los vecinos deben configurarse manualmente (como en algunos medios non-broadcast), y ciertos valores de temporizador por defecto; configurar el tipo de red correcto para el medio subyacente real (o anularlo intencionalmente, como configurar un tipo point-to-point en una subred que solo tiene dos routers para saltarse la elección innecesaria de DR/BDR) es una parte importante de la configuración de interfaz OSPF."
+  },
+  {
+   "id": "b6_3.2.b_12",
+   "subtopic": "3.2.b",
+   "name": "OSPFv2/v3 config",
+   "question": "Why does configuring an OSPF interface's network type as 'point-to-point' (instead of the default broadcast type) make sense on a subnet where only exactly two routers will ever be connected?",
+   "options": {
+    "A": "With only two routers on the segment, DR/BDR election serves no real purpose (there's no need to reduce adjacency count on a link that only ever has two potential neighbors), so configuring point-to-point skips that election process, allowing the two routers to form a full adjacency directly and slightly speeding up convergence, since point-to-point links don't need a DR/BDR relationship at all",
+    "B": "Point-to-point network type configuration is only valid on interfaces with more than ten connected routers, making it inapplicable to a two-router segment",
+    "C": "DR/BDR election always improves convergence time on a two-router segment, so configuring point-to-point network type would actually be a mistake in this scenario",
+    "D": "Network type configuration has no effect whatsoever on DR/BDR election under any circumstances, regardless of how many routers share the segment"
+   },
+   "correct": "A",
+   "explanation_es": "Con solo dos routers en el segmento, la elección de DR/BDR no cumple un propósito real (no hace falta reducir la cantidad de adyacencias en un enlace que de todos modos solo tiene dos vecinos potenciales), así que configurar point-to-point se salta ese proceso de elección, permitiendo que los dos routers formen una adyacencia completa directamente y acelerando levemente la convergencia, ya que los enlaces point-to-point no necesitan ninguna relación de DR/BDR."
+  },
+  {
+   "id": "b6_3.2.b_13",
+   "subtopic": "3.2.b",
+   "name": "OSPFv2/v3 config",
+   "question": "What is the purpose of configuring OSPF authentication (plaintext, MD5, or newer cryptographic methods) on an interface or area?",
+   "options": {
+    "A": "OSPF authentication verifies that received OSPF packets (hellos, LSAs, etc.) are actually coming from a legitimate, trusted neighbor possessing the correct shared key, helping prevent an unauthorized device from injecting false routing information or forming a rogue adjacency with a router in the OSPF domain",
+    "B": "OSPF authentication encrypts all user data traffic passing through the router, providing confidentiality for application traffic in addition to routing protocol traffic",
+    "C": "OSPF authentication is required before any interface can be assigned an IP address at all, regardless of whether OSPF is even enabled on that interface",
+    "D": "Authentication has no security purpose in OSPF and exists purely to satisfy an unrelated licensing requirement"
+   },
+   "correct": "A",
+   "explanation_es": "La autenticación OSPF verifica que los paquetes OSPF recibidos (hellos, LSAs, etc.) realmente provienen de un vecino legítimo y confiable que posee la clave compartida correcta, ayudando a prevenir que un dispositivo no autorizado inyecte información de enrutamiento falsa o forme una adyacencia no autorizada con un router del dominio OSPF."
+  },
+  {
+   "id": "b6_3.2.b_14",
+   "subtopic": "3.2.b",
+   "name": "OSPFv2/v3 config",
+   "question": "What is the general purpose of configuring an OSPF 'stub area', and what type of LSAs does it block from entering the area?",
+   "options": {
+    "A": "A stub area blocks external (Type 5) LSAs — routes redistributed into OSPF from outside the OSPF domain — from being flooded into that area, instead relying on a default route injected by the ABR for reaching external destinations; this reduces the LSDB size and SPF computation burden on routers within that area, which is useful for areas (often at the edge of the network) with limited router resources or no need for detailed external route visibility",
+    "B": "A stub area blocks every single type of LSA, including intra-area Type 1 and Type 2 LSAs, leaving routers in that area with no topology information whatsoever",
+    "C": "Stub areas have no effect on which LSA types are permitted and are purely a cosmetic naming label with no functional filtering behavior",
+    "D": "A stub area can only ever be configured as the backbone Area 0, and cannot be applied to any other non-backbone area"
+   },
+   "correct": "A",
+   "explanation_es": "Un área stub bloquea que las LSAs externas (Type 5) — rutas redistribuidas a OSPF desde fuera del dominio OSPF — se inunden en esa área, dependiendo en cambio de una ruta default inyectada por el ABR para alcanzar destinos externos; esto reduce el tamaño de la LSDB y la carga de cálculo de SPF en los routers de esa área, útil para áreas (a menudo en el borde de la red) con recursos de router limitados o sin necesidad de visibilidad detallada de rutas externas."
+  },
+  {
+   "id": "b6_3.2.b_15",
+   "subtopic": "3.2.b",
+   "name": "OSPFv2/v3 config",
+   "question": "How does a 'not-so-stubby area' (NSSA) differ from a regular stub area, particularly regarding local route redistribution within that area?",
+   "options": {
+    "A": "An NSSA allows a router within that area (an ASBR) to still redistribute external routes into OSPF using a special Type 7 LSA (which the ABR then translates into a Type 5 LSA as it leaves the area toward the rest of the OSPF domain), whereas a regular stub area does not permit any external route redistribution to originate from within it at all",
+    "B": "NSSA and regular stub areas behave identically in every respect, with 'not-so-stubby' being purely a marketing rename with no functional difference",
+    "C": "An NSSA blocks all forms of LSAs entirely, including intra-area LSAs, making it more restrictive than a regular stub area rather than allowing any redistribution",
+    "D": "NSSA configuration is only possible on the backbone Area 0 and can never be applied to any other area"
+   },
+   "correct": "A",
+   "explanation_es": "Un NSSA permite que un router dentro de esa área (un ASBR) todavía redistribuya rutas externas hacia OSPF usando una LSA Type 7 especial (que el ABR luego traduce a una LSA Type 5 al salir del área hacia el resto del dominio OSPF), mientras que un área stub regular no permite que se origine ninguna redistribución de rutas externas dentro de ella."
+  },
+  {
+   "id": "b6_3.2.b_16",
+   "subtopic": "3.2.b",
+   "name": "OSPFv2/v3 config",
+   "question": "What is the significance of the 'Area Border Router' (ABR) role in a multi-area OSPF design?",
+   "options": {
+    "A": "An ABR is a router that has interfaces in two or more OSPF areas (typically including Area 0), and it is responsible for summarizing and translating routing information between those areas (originating Type 3 summary LSAs), acting as the boundary point where inter-area route information is exchanged",
+    "B": "An ABR role can only ever exist on a router that has interfaces in exactly one single OSPF area, with no interfaces in any other area",
+    "C": "ABR stands for a router that performs exclusively external route redistribution and has no relationship to inter-area summarization or boundaries between areas at all",
+    "D": "Every router in an OSPF domain, regardless of how many areas its interfaces belong to, is automatically considered an ABR with no distinction from any other router role"
+   },
+   "correct": "A",
+   "explanation_es": "Un ABR es un router que tiene interfaces en dos o más áreas OSPF (típicamente incluyendo el Área 0), y es responsable de resumir y traducir información de enrutamiento entre esas áreas (originando LSAs Type 3 de resumen), actuando como el punto límite donde se intercambia información de rutas entre áreas."
+  },
+  {
+   "id": "b6_3.2.b_17",
+   "subtopic": "3.2.b",
+   "name": "OSPFv2/v3 config",
+   "question": "What command is commonly used on an OSPF ABR to summarize a contiguous range of inter-area routes into a single advertised summary route, reducing the number of individual Type 3 LSAs sent into another area?",
+   "options": {
+    "A": "'area <area-id> range <network> <mask>', configured on the ABR, summarizes the specified range of routes belonging to the given area into a single summary LSA advertised to other areas, rather than advertising each individual subnet separately",
+    "B": "'ip summary-address eigrp', which is an EIGRP-specific command with no equivalent function or applicability to OSPF area summarization at all",
+    "C": "'redistribute static', which is used only to inject static routes into OSPF and has no summarization function of its own",
+    "D": "'passive-interface default', which only suppresses OSPF hello packets on interfaces and has no relationship to route summarization"
+   },
+   "correct": "A",
+   "explanation_es": "'area <area-id> range <red> <máscara>', configurado en el ABR, resume el rango de rutas especificado que pertenece al área dada en una única LSA de resumen anunciada a otras áreas, en lugar de anunciar cada subred individual por separado — reduce el tamaño de la LSDB y mejora la estabilidad al ocultar cambios específicos de subred detrás de un resumen agregado."
+  },
+  {
+   "id": "b6_3.2.b_18",
+   "subtopic": "3.2.b",
+   "name": "OSPFv2/v3 config",
+   "question": "What is the fundamental addressing change in OSPFv3 compared to OSPFv2 that reflects its design to support IPv6 (and, via address families, potentially IPv4 as well)?",
+   "options": {
+    "A": "OSPFv3 was redesigned to carry network layer address information (prefixes) more independently of the packet header used for neighbor communication, using link-local IPv6 addresses to form neighbor adjacencies while carrying the actual advertised prefix information (which can be IPv6 or, with address-family extensions, IPv4) within the LSAs themselves, separating the 'topology' information from specific prefix addressing more cleanly than OSPFv2 did",
+    "B": "OSPFv3 uses the exact same IPv4-only addressing scheme as OSPFv2 with absolutely no support for IPv6 of any kind",
+    "C": "OSPFv3 eliminated the concept of neighbor adjacencies entirely, requiring every router to have a single, flat, unstructured routing table with no per-neighbor relationship of any kind",
+    "D": "OSPFv3 requires every router to be manually assigned a public IPv6 address before any adjacency can ever form, with no use of link-local addressing whatsoever"
+   },
+   "correct": "A",
+   "explanation_es": "OSPFv3 fue rediseñado para transportar información de dirección de capa de red (prefijos) de forma más independiente del encabezado del paquete usado para la comunicación entre vecinos, usando direcciones IPv6 link-local para formar adyacencias mientras transporta la información de prefijo anunciada real (que puede ser IPv6 o, con extensiones de address-family, IPv4) dentro de las propias LSAs, separando la información de 'topología' del direccionamiento de prefijo específico de forma más limpia que OSPFv2."
+  },
+  {
+   "id": "b6_3.2.b_19",
+   "subtopic": "3.2.b",
+   "name": "OSPFv2/v3 config",
+   "question": "What is a practical benefit of OSPFv3's 'address family' support (allowing a single OSPFv3 process to carry both IPv4 and IPv6 topology/routing information)?",
+   "options": {
+    "A": "It allows an organization running a dual-stack (IPv4 and IPv6) network to potentially operate a single unified OSPFv3 routing process for both address families, rather than needing to run two entirely separate routing processes (OSPFv2 for IPv4 and OSPFv3 for IPv6) with their own independent configuration, simplifying certain aspects of dual-stack routing operations",
+    "B": "Address family support in OSPFv3 has no practical benefit and exists purely as an unused theoretical feature never actually deployed in any real network",
+    "C": "OSPFv3 address families require completely disabling IPv6 support before IPv4 can be configured, making dual-stack operation technically impossible",
+    "D": "Address family support only applies to BGP and has no relationship whatsoever to OSPFv3 or any OSPF version"
+   },
+   "correct": "A",
+   "explanation_es": "Permite que una organización con una red dual-stack (IPv4 e IPv6) potencialmente opere un único proceso de enrutamiento OSPFv3 unificado para ambas familias de direcciones, en lugar de necesitar correr dos procesos de enrutamiento completamente separados (OSPFv2 para IPv4 y OSPFv3 para IPv6) con su propia configuración independiente, simplificando ciertos aspectos de la operación de enrutamiento dual-stack."
+  },
+  {
+   "id": "b6_3.2.b_20",
+   "subtopic": "3.2.b",
+   "name": "OSPFv2/v3 config",
+   "question": "How does the OSPF 'passive-interface' command affect an interface that is included in the OSPF process's network statement but should not form any neighbor adjacencies (e.g., a LAN-facing interface with only end hosts, not other routers)?",
+   "options": {
+    "A": "'passive-interface' suppresses the sending and receiving of OSPF hello packets on that specific interface (preventing any adjacency from forming over it), while the interface's connected network is still advertised into OSPF as a normal reachable route, giving the benefit of advertising that subnet without exposing the interface to unnecessary OSPF hello traffic or potential unauthorized adjacencies",
+    "B": "'passive-interface' completely removes the interface's connected network from being advertised by OSPF at all, effectively hiding that subnet from the rest of the OSPF domain entirely",
+    "C": "'passive-interface' has no relationship to hello packets or neighbor adjacencies whatsoever and instead only affects the interface's physical link speed negotiation",
+    "D": "Configuring an interface as passive causes OSPF to be completely disabled on that interface, removing it from the OSPF process altogether, identical to not including it in the network statement at all"
+   },
+   "correct": "A",
+   "explanation_es": "'passive-interface' suprime el envío y la recepción de paquetes hello OSPF en esa interfaz específica (evitando que se forme cualquier adyacencia a través de ella), mientras que la red conectada a la interfaz se sigue anunciando en OSPF como una ruta alcanzable normal, dando el beneficio de anunciar esa subred sin exponer la interfaz a tráfico hello OSPF innecesario ni a posibles adyacencias no autorizadas."
+  },
+  {
+   "id": "b6_3.2.b_21",
+   "subtopic": "3.2.b",
+   "name": "OSPFv2/v3 config",
+   "question": "What is the purpose of tuning the OSPF 'reference bandwidth' (via the 'auto-cost reference-bandwidth' command) on modern high-speed networks?",
+   "options": {
+    "A": "OSPF's default reference bandwidth (traditionally 100 Mbps) means that any link at or above 100 Mbps calculates to the same minimum cost of 1, which fails to meaningfully differentiate between, for example, a 1 Gbps and a 100 Gbps link; increasing the reference bandwidth on every router in the domain (consistently, since it must match across all routers) restores meaningful cost differentiation among today's much higher-speed interfaces",
+    "B": "Reference bandwidth has no effect on OSPF cost calculation whatsoever and is purely a cosmetic display value shown in 'show' command output with no bearing on path selection",
+    "C": "Reference bandwidth only needs to be configured on a single router in the OSPF domain, with all other routers automatically inheriting that value with no need for consistent manual configuration elsewhere",
+    "D": "Increasing the reference bandwidth always decreases the calculated cost of every link in the domain to exactly 1, regardless of the link's actual physical bandwidth"
+   },
+   "correct": "A",
+   "explanation_es": "El reference bandwidth por defecto de OSPF (tradicionalmente 100 Mbps) hace que cualquier enlace igual o superior a 100 Mbps calcule al mismo costo mínimo de 1, lo cual no logra diferenciar significativamente, por ejemplo, entre un enlace de 1 Gbps y uno de 100 Gbps; aumentar el reference bandwidth en todos los routers del dominio (de forma consistente, ya que debe coincidir en todos los routers) restaura una diferenciación de costo significativa entre las interfaces de mucha mayor velocidad de hoy."
   }
  ]
 }
