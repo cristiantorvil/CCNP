@@ -6,7 +6,7 @@ retomar la app de práctica.
 
 ## Archivos incluidos
 
-- `ENCOR_question_bank_2026-09-07.json` — banco de preguntas actual (215 preguntas,
+- `data/question_bank.json` — banco de preguntas actual (229 preguntas,
   cobertura 49/49 subtemas del blueprint ENCOR 350-401 v1.2). Formato:
   ```json
   {
@@ -34,16 +34,18 @@ retomar la app de práctica.
 |---|---|---|---|---|
 | 1.0 Architecture | 15% | 150 | 32 | 118 |
 | 2.0 Virtualization | 10% | 100 | 35 | 65 |
-| 3.0 Infrastructure | 30% | 300 | 46 | 254 |
+| 3.0 Infrastructure | 30% | 300 | 60 | 240 |
 | 4.0 Network Assurance | 10% | 100 | 19 | 81 |
 | 5.0 Security | 20% | 200 | 33 | 167 |
 | 6.0 Automation & AI | 15% | 150 | 50 | 100 |
-| **Total** | **100%** | **1000** | **215** | **785** |
+| **Total** | **100%** | **1000** | **229** | **771** |
 
 Subtemas ya con profundidad completa (10 preguntas c/u): TrustSec/MACsec (5.4.d),
 YANG (6.3), APIs Catalyst Center (6.4), RESTCONF (6.9), vSwitch/OVS (2.1.c),
 VXLAN EVPN/BUM (2.3.b). El resto de los 49 subtemas tiene entre 2 y 6 preguntas
-como semilla inicial.
+como semilla inicial (2026-09-08: se sumaron 14 preguntas nuevas en dominio 3.0
+Infrastructure — PBR, NAT/PAT, HSRP/VRRP, Multicast, NTP/PTP, EtherChannel —
+por ser el dominio con mayor peso y mayor brecha).
 
 ## Sugerencia de estructura de repo
 

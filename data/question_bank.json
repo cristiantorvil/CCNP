@@ -1,6 +1,6 @@
 {
- "version": "2026-09-07_v3",
- "total": 215,
+ "version": "2026-09-08_v4",
+ "total": 229,
  "questions": [
   {
    "id": "trustsec_01",
@@ -3011,6 +3011,202 @@
    },
    "correct": "A",
    "explanation_es": "Que PUT sea idempotente significa que enviar la misma solicitud PUT múltiples veces produce el mismo estado final (el recurso queda reemplazado con el mismo contenido cada vez, sin efectos adicionales acumulativos). POST generalmente NO es idempotente, ya que repetir la misma solicitud POST puede crear múltiples recursos nuevos (por ejemplo, múltiples entradas duplicadas) en lugar de producir el mismo resultado."
+  },
+  {
+   "id": "b4_3.2.d_01",
+   "subtopic": "3.2.d",
+   "name": "Policy-based routing",
+   "question": "Which statement best describes how Policy-Based Routing (PBR) makes forwarding decisions compared to standard destination-based routing?",
+   "options": {
+    "A": "PBR only considers the destination IP address, exactly like the routing table",
+    "B": "PBR can forward packets based on criteria such as source address, packet size, or protocol, overriding the routing table before the normal lookup occurs",
+    "C": "PBR requires BGP to be configured on the router",
+    "D": "PBR only functions on Layer 2 switches"
+   },
+   "correct": "B",
+   "explanation_es": "PBR usa route-maps para clasificar el tráfico por múltiples criterios (IP origen, tamaño de paquete, protocolo, etc.) y aplicar un next-hop distinto al que indicaría la tabla de enrutamiento normal. Se evalúa antes de la búsqueda estándar en la RIB."
+  },
+  {
+   "id": "b4_3.2.d_02",
+   "subtopic": "3.2.d",
+   "name": "Policy-based routing",
+   "question": "In a PBR route-map, what is the difference between the 'set ip next-hop' and 'set ip default next-hop' commands?",
+   "options": {
+    "A": "They are functionally identical",
+    "B": "'set ip next-hop' forwards to the specified address unconditionally when the route-map matches, while 'set ip default next-hop' is used only as a fallback when the routing table has no explicit route for the destination",
+    "C": "'set ip default next-hop' overrides BGP routes only",
+    "D": "'set ip next-hop' only works with static routes"
+   },
+   "correct": "B",
+   "explanation_es": "'set ip next-hop' fuerza el next-hop indicado sin importar la tabla de enrutamiento. 'set ip default next-hop' solo se usa como respaldo, cuando el router no tiene una ruta explícita hacia el destino más allá de la default."
+  },
+  {
+   "id": "b4_3.2.d_03",
+   "subtopic": "3.2.d",
+   "name": "Policy-based routing",
+   "question": "On which interface direction is Policy-Based Routing typically applied with the 'ip policy route-map' command?",
+   "options": {
+    "A": "Outbound, after the routing table lookup",
+    "B": "Inbound, before the normal routing table lookup is performed",
+    "C": "It applies globally to the router regardless of interface",
+    "D": "Only on loopback interfaces"
+   },
+   "correct": "B",
+   "explanation_es": "PBR se aplica con 'ip policy route-map' en el sentido entrante de la interfaz; el router evalúa el route-map sobre el tráfico que ingresa, antes de hacer la búsqueda normal en la tabla de enrutamiento."
+  },
+  {
+   "id": "b4_3.2.d_04",
+   "subtopic": "3.2.d",
+   "name": "Policy-based routing",
+   "question": "A company wants traffic from the Finance subnet (10.10.10.0/24) to always exit via ISP-A, while all other traffic uses the normal default route via ISP-B, regardless of destination. Which technology best achieves this without changing destination-based routing for other traffic?",
+   "options": {
+    "A": "Policy-Based Routing matching source address 10.10.10.0/24",
+    "B": "A static default route",
+    "C": "OSPF route redistribution",
+    "D": "VRRP"
+   },
+   "correct": "A",
+   "explanation_es": "PBR permite clasificar el tráfico según el origen (entre otros criterios) y forzar un next-hop distinto solo para ese tráfico, dejando el resto sujeto al enrutamiento normal — algo que una ruta estática o un protocolo de enrutamiento por destino no logran por sí solos."
+  },
+  {
+   "id": "b4_3.3.b_04",
+   "subtopic": "3.3.b",
+   "name": "NAT/PAT",
+   "question": "What distinguishes PAT (Port Address Translation) from standard dynamic NAT?",
+   "options": {
+    "A": "PAT translates only the destination address, never the source",
+    "B": "PAT allows multiple internal hosts to share a single public IP address by also translating the Layer 4 port number",
+    "C": "PAT requires a one-to-one mapping between inside and outside addresses",
+    "D": "PAT only works with UDP traffic"
+   },
+   "correct": "B",
+   "explanation_es": "PAT (NAT overload) traduce dirección IP y puerto, permitiendo que muchos hosts internos compartan una sola IP pública, distinguiéndose entre sí por el número de puerto de origen traducido."
+  },
+  {
+   "id": "b4_3.3.b_05",
+   "subtopic": "3.3.b",
+   "name": "NAT/PAT",
+   "question": "In Cisco NAT terminology, what does the 'inside local' address represent?",
+   "options": {
+    "A": "The public IP address as seen from the outside network",
+    "B": "The real, typically private IP address assigned to a host on the inside network before translation",
+    "C": "The address of an outside host as seen from the inside network",
+    "D": "The translated address of an outside host"
+   },
+   "correct": "B",
+   "explanation_es": "'Inside local' es la dirección real (normalmente privada) del host interno, tal como aparece en la red interna antes de la traducción. 'Inside global' es esa misma dirección después de traducirse a una IP pública."
+  },
+  {
+   "id": "b4_3.3.b_06",
+   "subtopic": "3.3.b",
+   "name": "NAT/PAT",
+   "question": "Which statement about static NAT is correct?",
+   "options": {
+    "A": "It creates a temporary one-to-one mapping only when traffic is initiated from the inside",
+    "B": "It creates a permanent one-to-one mapping between an inside local and an inside global address, allowing outside hosts to initiate connections to the inside host",
+    "C": "It always requires PAT to function",
+    "D": "It cannot be used for servers that must be reachable from the internet"
+   },
+   "correct": "B",
+   "explanation_es": "El NAT estático crea un mapeo fijo 1:1 entre una IP interna y una IP pública, permitiendo que hosts externos inicien conexiones hacia el host interno (por ejemplo, un servidor web) — a diferencia del NAT dinámico o PAT, que dependen de que la conexión se inicie desde adentro."
+  },
+  {
+   "id": "b4_3.3.c_05",
+   "subtopic": "3.3.c",
+   "name": "HSRP/VRRP",
+   "question": "In HSRP, which router becomes the Active router by default?",
+   "options": {
+    "A": "The router with the lowest IP address",
+    "B": "The router with the highest HSRP priority (default 100); if tied, the highest IP address on the HSRP interface breaks the tie",
+    "C": "The router with the lowest priority value",
+    "D": "Whichever router boots up last"
+   },
+   "correct": "B",
+   "explanation_es": "En HSRP, el router con mayor prioridad (por defecto 100) se convierte en el Active. Si hay empate en la prioridad, se decide por la IP más alta en la interfaz HSRP."
+  },
+  {
+   "id": "b4_3.3.c_06",
+   "subtopic": "3.3.c",
+   "name": "HSRP/VRRP",
+   "question": "Unlike HSRP, which is a Cisco proprietary protocol, VRRP has what key characteristic?",
+   "options": {
+    "A": "VRRP is an IETF standard protocol and can use the real interface IP address of one of the group's routers as the virtual IP",
+    "B": "VRRP requires a dedicated virtual IP separate from all physical interfaces",
+    "C": "VRRP only supports 2 routers per group",
+    "D": "VRRP does not support preemption"
+   },
+   "correct": "A",
+   "explanation_es": "VRRP es un estándar IETF (RFC), y permite que uno de los routers del grupo use su propia IP física de interfaz como la IP virtual (ese router se vuelve el Master 'IP owner'), algo que HSRP no hace, ya que siempre usa una IP virtual separada."
+  },
+  {
+   "id": "b4_3.3.d_05",
+   "subtopic": "3.3.d",
+   "name": "Multicast",
+   "question": "What is the purpose of IGMP (Internet Group Management Protocol)?",
+   "options": {
+    "A": "To route multicast traffic between different subnets",
+    "B": "To allow hosts on a local subnet to inform a directly connected router which multicast groups they wish to receive",
+    "C": "To elect the Rendezvous Point in PIM sparse mode",
+    "D": "To encrypt multicast traffic"
+   },
+   "correct": "B",
+   "explanation_es": "IGMP opera entre hosts y su router local (dentro de la misma subred) para que los hosts informen su interés en recibir tráfico de determinados grupos multicast. El enrutamiento multicast entre subredes lo hace PIM, no IGMP."
+  },
+  {
+   "id": "b4_3.3.d_06",
+   "subtopic": "3.3.d",
+   "name": "Multicast",
+   "question": "In PIM Sparse Mode, what is the role of the Rendezvous Point (RP)?",
+   "options": {
+    "A": "It is the only device allowed to send multicast traffic",
+    "B": "It acts as a meeting point where multicast sources register and receivers initially join, before the network potentially shifts to a more optimal shortest-path tree",
+    "C": "It replaces the need for IGMP entirely",
+    "D": "It is only used in PIM Dense Mode"
+   },
+   "correct": "B",
+   "explanation_es": "El RP en PIM-SM funciona como un punto de encuentro: las fuentes se registran ahí y los receptores se unen inicialmente al árbol compartido (RPT) a través del RP; luego el tráfico puede migrar al árbol de ruta más corta (SPT) hacia la fuente para mayor eficiencia."
+  },
+  {
+   "id": "b4_3.3.a_05",
+   "subtopic": "3.3.a",
+   "name": "NTP/PTP",
+   "question": "What does the NTP stratum number indicate?",
+   "options": {
+    "A": "The encryption strength of the NTP session",
+    "B": "The number of hops a device is away from an authoritative time source (stratum 0), with lower stratum numbers indicating greater accuracy",
+    "C": "The version of NTP being used",
+    "D": "The number of NTP servers configured"
+   },
+   "correct": "B",
+   "explanation_es": "El stratum indica cuántos saltos hay entre el dispositivo y una fuente de tiempo autoritativa (stratum 0, como un reloj atómico o GPS). Cuanto menor el número de stratum, más cercano (y en teoría más preciso) es el dispositivo respecto a la fuente original."
+  },
+  {
+   "id": "b4_3.3.a_06",
+   "subtopic": "3.3.a",
+   "name": "NTP/PTP",
+   "question": "Compared to NTP, why is PTP (Precision Time Protocol, IEEE 1588) used in environments requiring extremely accurate time synchronization?",
+   "options": {
+    "A": "PTP only works over Layer 3 networks, while NTP is Layer 2 only",
+    "B": "PTP achieves sub-microsecond accuracy using hardware timestamping, while NTP typically only achieves millisecond-level accuracy",
+    "C": "PTP does not require any master clock",
+    "D": "PTP is a Cisco-proprietary replacement for NTP"
+   },
+   "correct": "B",
+   "explanation_es": "PTP (IEEE 1588) usa timestamping por hardware en los dispositivos de red, logrando precisión de sub-microsegundos, mientras que NTP típicamente logra precisión del orden de milisegundos — por eso PTP se usa en entornos como telco o financiero que requieren sincronización extremadamente precisa."
+  },
+  {
+   "id": "b4_3.1.b_06",
+   "subtopic": "3.1.b",
+   "name": "EtherChannel",
+   "question": "Which statement about LACP (Link Aggregation Control Protocol) EtherChannel modes is correct?",
+   "options": {
+    "A": "Setting both ends to 'active' will not form a channel",
+    "B": "A channel will form if at least one side is set to 'active' and the other side is set to 'active' or 'passive'; two 'passive' sides will never form a channel",
+    "C": "LACP requires PAgP to be enabled first",
+    "D": "'passive' mode actively sends LACP packets to initiate negotiation"
+   },
+   "correct": "B",
+   "explanation_es": "LACP forma el canal si al menos un extremo está en modo 'active' (y el otro en 'active' o 'passive'). Si ambos extremos están en 'passive', ninguno inicia la negociación y el canal nunca se forma, porque 'passive' espera recibir paquetes LACP en lugar de enviarlos."
   }
  ]
 }
