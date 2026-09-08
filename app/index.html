@@ -379,7 +379,7 @@
 
   .subtopic-list { padding: 4px 20px 16px; display: flex; flex-direction: column; }
   .subtopic-row {
-    display: flex; align-items: center; gap: 10px;
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap; row-gap: 4px;
     padding: 9px 0; border-top: 1px solid var(--border);
     font-size: 0.85rem;
   }
@@ -14570,26 +14570,37 @@
     var list = state.attempts.filter(function (a) { return a.subtopic === subtopic; });
     var masteredIds = {};
     var lastTs = 0;
+    var correctAttempts = 0;
     list.forEach(function (a) {
-      if (a.correct) masteredIds[a.questionId] = true;
+      if (a.correct) { masteredIds[a.questionId] = true; correctAttempts++; }
       if (a.ts > lastTs) lastTs = a.ts;
     });
     return {
       correct: Object.keys(masteredIds).length,
       total: bankTotal,
       attemptsCount: list.length,
+      correctAttempts: correctAttempts,
       lastTs: lastTs
     };
   }
 
   function domainStats(domain) {
     var subtopics = Object.keys(SUBTOPIC_META).filter(function (s) { return SUBTOPIC_META[s].domain === domain; });
-    var correct = 0, total = 0, attemptsCount = 0;
+    var correct = 0, total = 0, attemptsCount = 0, correctAttempts = 0;
     subtopics.forEach(function (s) {
       var w = subtopicStats(s);
-      correct += w.correct; total += w.total; attemptsCount += w.attemptsCount;
+      correct += w.correct; total += w.total; attemptsCount += w.attemptsCount; correctAttempts += w.correctAttempts;
     });
-    return { correct: correct, total: total, pct: total ? (100 * correct / total) : null, bankCount: total, attemptsCount: attemptsCount, subtopics: subtopics };
+    return {
+      correct: correct,
+      total: total,
+      pct: total ? (100 * correct / total) : null,
+      answeredPct: attemptsCount ? (100 * correctAttempts / attemptsCount) : null,
+      bankCount: total,
+      attemptsCount: attemptsCount,
+      correctAttempts: correctAttempts,
+      subtopics: subtopics
+    };
   }
 
   function overallScore() {
@@ -14918,16 +14929,20 @@
       details.className = "domain";
       if (isWeak) details.open = true;
 
+      var domAnsPct = ds.answeredPct;
+
       var subRowsHtml = ds.subtopics.slice().sort(subtopicCompare).map(function (sub) {
         var w = subtopicStats(sub);
-        var subPct = w.total ? (100 * w.correct / w.total) : null;
-        var pillClass = pctClass(subPct);
-        var label = subPct === null ? "sin datos" : subPct.toFixed(0) + "%";
+        var bankPct = w.total ? (100 * w.correct / w.total) : null;
+        var ansPct = w.attemptsCount ? (100 * w.correctAttempts / w.attemptsCount) : null;
+        var bankLabel = bankPct === null ? "—" : bankPct.toFixed(0) + "%";
+        var ansLabel = ansPct === null ? "—" : ansPct.toFixed(0) + "%";
         return '<div class="subtopic-row">' +
           '<span class="code">' + sub + '</span>' +
           '<span class="name">' + SUBTOPIC_META[sub].name + '</span>' +
           '<span class="frac">' + w.correct + "/" + w.total + '</span>' +
-          '<span class="pill ' + pillClass + '">' + label + '</span>' +
+          '<span class="pill ' + pctClass(bankPct) + '" title="Sobre el total de preguntas del banco">' + bankLabel + '</span>' +
+          '<span class="pill ' + pctClass(ansPct) + '" title="Sobre las preguntas contestadas (' + w.correctAttempts + '/' + w.attemptsCount + ')">' + ansLabel + '</span>' +
         '</div>';
       }).join("");
 
@@ -14937,10 +14952,11 @@
             '<span class="chev mono">&#9656;</span>' +
             '<span class="domain-title">' + d + '.0 ' + meta.name + '</span>' +
             '<span class="domain-weight">peso ' + meta.weight + '%</span>' +
-            '<span class="domain-pct" style="color:' + pctColorVar(pct) + ';">' + (pct === null ? "—" : pct.toFixed(0) + "%") + '</span>' +
+            '<span class="domain-pct" style="color:' + pctColorVar(pct) + ';" title="Sobre el total de preguntas del banco">' + (pct === null ? "—" : pct.toFixed(0) + "%") + '</span>' +
+            '<span class="pill ' + pctClass(domAnsPct) + '" title="Sobre las preguntas contestadas (' + ds.correctAttempts + '/' + ds.attemptsCount + ')">' + (domAnsPct === null ? "—" : domAnsPct.toFixed(0) + "%") + '</span>' +
           '</div>' +
           '<div class="domain-bar-track"><div class="domain-bar-fill" style="width:' + (pct === null ? 0 : Math.min(100, pct)) + '%; background:' + pctColorVar(pct) + ';"></div></div>' +
-          '<div class="domain-sub">banco: ' + ds.bankCount + ' preguntas &middot; ' + ds.attemptsCount + ' intentos registrados</div>' +
+          '<div class="domain-sub">banco: ' + ds.bankCount + ' preguntas &middot; ' + ds.attemptsCount + ' intentos registrados &middot; <span class="mono">%banco</span> = acertadas/total del banco, <span class="mono">%resp.</span> = acertadas/contestadas</div>' +
         '</summary>' +
         '<div class="subtopic-list">' + subRowsHtml + '</div>';
       grid.appendChild(details);
@@ -14950,7 +14966,9 @@
     var bankNote = el(
       '<div class="panel" style="margin-top:16px;">' +
         '<h2 class="section-title">Cobertura del banco</h2>' +
-        '<div class="domain-sub" style="font-size:0.8rem;">' + ALL_QUESTIONS.length + ' / ' + BANK_TARGET_TOTAL + ' preguntas totales &middot; el % de cada subtema es preguntas acertadas alguna vez sobre el total que existe hoy para ese subtema en el banco</div>' +
+        '<div class="domain-sub" style="font-size:0.8rem;">' + ALL_QUESTIONS.length + ' / ' + BANK_TARGET_TOTAL + ' preguntas totales &middot; cada dominio y subtema muestra dos porcentajes: ' +
+          '<b style="color:var(--text);">%banco</b> = preguntas acertadas alguna vez sobre el total que existe hoy para ese tema en el banco, y ' +
+          '<b style="color:var(--text);">%resp.</b> = aciertos sobre el total de veces que has respondido preguntas de ese tema (precisión en tus intentos)</div>' +
       '</div>'
     );
     container.appendChild(bankNote);
