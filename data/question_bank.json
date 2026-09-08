@@ -1,6 +1,6 @@
 {
  "version": "2026-09-08_v4",
- "total": 951,
+ "total": 966,
  "questions": [
   {
    "id": "trustsec_01",
@@ -13315,6 +13315,216 @@
    },
    "correct": "A",
    "explanation_es": "Sin IGMP snooping funcionando correctamente en cada switch intermedio, el tráfico multicast podría inundarse innecesariamente hacia cada puerto de la VLAN (desperdiciando ancho de banda en enlaces sin ningún receptor interesado real) o, si está mal configurado, podría no llegar a un puerto que sí tiene un receptor legítimo, así que una configuración de snooping consistente y correctamente funcional en todo el camino de Capa 2 es importante tanto para la eficiencia como para la entrega correcta."
+  },
+  {
+   "id": "b6_5.1.a_18",
+   "subtopic": "5.1.a",
+   "name": "Líneas y autenticación local",
+   "question": "What is the purpose of setting a 'login authentication' method list on the VTY lines that references AAA, rather than relying on the simpler 'login' (line-password-only) command?",
+   "options": {
+    "A": "Referencing an AAA method list allows the VTY lines to use username-based authentication (local database and/or a AAA server) with its associated accountability and granular control, rather than the simpler 'login' command, which only checks a single shared line password with no per-user identity involved",
+    "B": "'login authentication' and plain 'login' provide exactly identical authentication behavior with no meaningful distinction between checking a shared line password versus checking individual per-user credentials",
+    "C": "Configuring 'login authentication' always and completely disables password-based authentication entirely on that line, requiring a different, entirely non-password-based mechanism instead",
+    "D": "This command can only be applied to the console line and is technically invalid, unsupported syntax when applied to VTY lines"
+   },
+   "correct": "A",
+   "explanation_es": "Referenciar una lista de métodos AAA le permite a las líneas VTY usar autenticación basada en nombre de usuario (base de datos local y/o un servidor AAA) con su responsabilidad y control granular asociados, en lugar del comando 'login' más simple, que solo verifica una única contraseña de línea compartida sin ninguna identidad por usuario involucrada."
+  },
+  {
+   "id": "b6_5.1.a_19",
+   "subtopic": "5.1.a",
+   "name": "Líneas y autenticación local",
+   "question": "Why might an organization configure a maximum number of simultaneous VTY sessions (via 'line vty 0 4' limiting to 5 sessions, for example) rather than allowing an unlimited number?",
+   "options": {
+    "A": "Limiting the number of concurrent management sessions reduces the risk of a device's limited CPU/memory resources being exhausted by an excessive number of simultaneous administrative connections, and can also make it harder for an attacker to open many simultaneous sessions as part of a resource-exhaustion or brute-force attempt",
+    "B": "There is no meaningful reason whatsoever to limit the number of VTY sessions, since a Cisco device's CPU and memory resources are assumed to be infinite and unaffected by any number of simultaneous management connections",
+    "C": "VTY line limits only affect wireless management sessions and have no relevance whatsoever to wired SSH/Telnet-based device management access",
+    "D": "Configuring a VTY session limit always and completely disables the ability for any administrator to ever connect to the device remotely again"
+   },
+   "correct": "A",
+   "explanation_es": "Limitar la cantidad de sesiones de gestión concurrentes reduce el riesgo de que los recursos limitados de CPU/memoria de un dispositivo se agoten por una cantidad excesiva de conexiones administrativas simultáneas, y también puede dificultar que un atacante abra muchas sesiones simultáneas como parte de un intento de agotamiento de recursos o de fuerza bruta."
+  },
+  {
+   "id": "b6_5.1.a_20",
+   "subtopic": "5.1.a",
+   "name": "Líneas y autenticación local",
+   "question": "What is the purpose of an 'access-class' applied to the VTY lines, restricting which source addresses are permitted to even attempt a management connection?",
+   "options": {
+    "A": "An access-class references an ACL that restricts which source IP addresses are permitted to connect to the VTY lines at all, providing a network-layer access restriction (limiting management access to known, trusted management subnets) that applies before any authentication is even attempted",
+    "B": "Access-class has no relationship whatsoever to restricting which source addresses can connect to VTY lines, and instead exclusively controls the physical baud rate of the console port",
+    "C": "Configuring an access-class always and completely disables authentication entirely on the VTY lines, replacing username/password checking rather than adding an additional, complementary layer of restriction",
+    "D": "Access-class can only be applied to the console port and is technically invalid, unsupported configuration syntax when applied to VTY lines"
+   },
+   "correct": "A",
+   "explanation_es": "Un access-class referencia una ACL que restringe qué direcciones IP de origen tienen permitido siquiera conectarse a las líneas VTY, dando una restricción de acceso a nivel de red (limitando el acceso de gestión a subredes de gestión conocidas y confiables) que se aplica antes de siquiera intentar cualquier autenticación."
+  },
+  {
+   "id": "b6_5.1.a_21",
+   "subtopic": "5.1.a",
+   "name": "Líneas y autenticación local",
+   "question": "Why does combining 'access-class' (restricting source IP) with 'login local' (or AAA-based authentication) on VTY lines provide layered protection compared to using either control alone?",
+   "options": {
+    "A": "The two controls address different aspects of access: access-class restricts which network sources can even attempt to connect at all, while authentication restricts which credentials are accepted once a connection attempt from a permitted source is made; combining them means an attacker would need to both originate from a permitted source AND possess valid credentials, rather than only needing to satisfy one of those two conditions",
+    "B": "Access-class and login local perform exactly identical functions with no meaningful distinction, making it entirely redundant to configure both together on the same VTY lines",
+    "C": "Combining access-class with login local always and completely disables both controls simultaneously, since Cisco IOS is described as only ever supporting one access-restriction mechanism active at a time on a given line",
+    "D": "Layered protection from combining these two controls provides no meaningful security benefit whatsoever compared to using only a single one of the two controls alone"
+   },
+   "correct": "A",
+   "explanation_es": "Los dos controles abordan aspectos distintos del acceso: access-class restringe qué fuentes de red pueden siquiera intentar conectarse, mientras que la autenticación restringe qué credenciales se aceptan una vez que se hace un intento de conexión desde una fuente permitida; combinarlos significa que un atacante necesitaría tanto originarse desde una fuente permitida COMO poseer credenciales válidas, en lugar de solo necesitar satisfacer una de esas dos condiciones."
+  },
+  {
+   "id": "b6_5.1.a_22",
+   "subtopic": "5.1.a",
+   "name": "Líneas y autenticación local",
+   "question": "What is the security rationale for disabling unused physical/logical management interfaces (such as the auxiliary port, if not actually needed) on a network device?",
+   "options": {
+    "A": "Every enabled access method represents a potential attack surface; disabling an interface that isn't actually needed for legitimate operational purposes removes that specific avenue of potential unauthorized access entirely, following the general security principle of minimizing unnecessary exposed attack surface",
+    "B": "Disabling unused management interfaces has no security rationale whatsoever and provides no meaningful reduction in a device's overall attack surface",
+    "C": "Every management interface on a device must always remain enabled at all times regardless of whether it's actually used, since Cisco IOS is described as technically incapable of disabling any interface once it has been initially configured",
+    "D": "This practice is only relevant for interfaces carrying production data traffic, and has no relevance whatsoever to a purely out-of-band management interface like the auxiliary port"
+   },
+   "correct": "A",
+   "explanation_es": "Cada método de acceso habilitado representa una superficie de ataque potencial; deshabilitar una interfaz que en realidad no se necesita para propósitos operativos legítimos elimina esa vía específica de acceso no autorizado potencial por completo, siguiendo el principio general de seguridad de minimizar la superficie de ataque expuesta innecesaria."
+  },
+  {
+   "id": "b6_5.1.b_18",
+   "subtopic": "5.1.b",
+   "name": "AAA (TACACS+/RADIUS)",
+   "question": "What does 'aaa authentication login default group tacacs+ local' configure, in terms of the order methods are attempted?",
+   "options": {
+    "A": "It configures the default login authentication method list to first attempt authentication against the TACACS+ server group, and if that server group is unreachable, to fall back to the local username database as a backup method",
+    "B": "This command configures authentication to only ever use the local username database, with TACACS+ never actually being contacted or attempted under any circumstances despite appearing in the command",
+    "C": "The command causes both TACACS+ and local authentication to be checked simultaneously on every single login attempt, with the user needing to satisfy both methods at once rather than one serving as a fallback for the other",
+    "D": "This syntax is invalid and unsupported on any current Cisco IOS or IOS-XE release, since AAA method lists cannot reference more than one authentication method"
+   },
+   "correct": "A",
+   "explanation_es": "Configura la lista de métodos de autenticación de login por defecto para primero intentar autenticación contra el grupo de servidores TACACS+, y si ese grupo de servidores es inalcanzable, caer de vuelta a la base de datos de usuarios local como método de respaldo."
+  },
+  {
+   "id": "b6_5.1.b_19",
+   "subtopic": "5.1.b",
+   "name": "AAA (TACACS+/RADIUS)",
+   "question": "Why might an organization configure separate AAA server groups for authentication versus accounting, pointing to different sets of servers for each function?",
+   "options": {
+    "A": "An organization might have infrastructure reasons (such as different server capacity, geographic placement, or organizational ownership) to route authentication requests to one set of servers while sending accounting/logging data to a different set optimized for log storage and retention, and Cisco IOS AAA configuration supports defining separate server groups for each AAA function to accommodate that kind of architecture",
+    "B": "Cisco IOS AAA configuration technically requires that the exact same single server group always be used identically for authentication, authorization, and accounting, with no ability whatsoever to configure different server groups for different AAA functions",
+    "C": "Separating authentication and accounting server groups always and completely disables the authorization function entirely, making authorization technically impossible to configure alongside a split authentication/accounting server group setup",
+    "D": "There is no practical architectural reason an organization would ever want to route authentication and accounting traffic to different sets of servers; doing so provides no benefit whatsoever in any real-world deployment"
+   },
+   "correct": "A",
+   "explanation_es": "Una organización podría tener razones de infraestructura (como distinta capacidad de servidor, ubicación geográfica, o propiedad organizacional) para enrutar solicitudes de autenticación hacia un conjunto de servidores mientras envía datos de accounting/logging hacia un conjunto distinto optimizado para almacenamiento y retención de logs, y la configuración AAA de Cisco IOS soporta definir grupos de servidores separados para cada función AAA para acomodar ese tipo de arquitectura."
+  },
+  {
+   "id": "b6_5.1.b_20",
+   "subtopic": "5.1.b",
+   "name": "AAA (TACACS+/RADIUS)",
+   "question": "What is the purpose of TACACS+ 'authorization' exec-level checking, as distinct from command-level authorization?",
+   "options": {
+    "A": "Exec-level authorization determines whether a user is even permitted to establish an interactive EXEC session on the device at all (and potentially what starting privilege level they receive), which is a separate, earlier check from the ongoing, per-command authorization that governs which specific individual commands that user can subsequently run once inside that session",
+    "B": "Exec-level authorization and command-level authorization are exactly the same check performed twice redundantly, with no meaningful distinction in what each one actually verifies",
+    "C": "Exec-level authorization only ever applies to console-port sessions, and has no relevance whatsoever to a session established via VTY (Telnet/SSH)",
+    "D": "TACACS+ has no concept of exec-level authorization at all; only command-level authorization is a feature TACACS+ actually supports"
+   },
+   "correct": "A",
+   "explanation_es": "La autorización a nivel exec determina si a un usuario siquiera se le permite establecer una sesión EXEC interactiva en el dispositivo (y potencialmente qué nivel de privilegio inicial recibe), lo cual es una verificación separada y anterior a la autorización continua por comando que gobierna qué comandos individuales específicos puede correr después ese usuario una vez dentro de esa sesión."
+  },
+  {
+   "id": "b6_5.1.b_21",
+   "subtopic": "5.1.b",
+   "name": "AAA (TACACS+/RADIUS)",
+   "question": "Why might 'test aaa' (or an equivalent AAA testing command) be useful during initial AAA configuration or troubleshooting?",
+   "options": {
+    "A": "It allows an administrator to directly test whether a specific set of credentials successfully authenticates against a configured AAA server/group, verifying the AAA configuration and connectivity to the server without needing to actually establish a full separate management session (and risk being locked out) to confirm the configuration works",
+    "B": "'test aaa' has no relationship whatsoever to verifying AAA authentication, and instead exclusively runs a physical cable continuity test on the device's network ports",
+    "C": "This command always and permanently deletes the tested AAA server's configuration from the device the moment the test is run, regardless of whether the test itself succeeds or fails",
+    "D": "'test aaa' can only be used to test RADIUS servers, and is technically incapable of testing a TACACS+ server configuration in any way"
+   },
+   "correct": "A",
+   "explanation_es": "Le permite a un administrador probar directamente si un conjunto específico de credenciales se autentica exitosamente contra un servidor/grupo AAA configurado, verificando la configuración AAA y la conectividad al servidor sin necesitar realmente establecer una sesión de gestión completa separada (y arriesgarse a quedar bloqueado) para confirmar que la configuración funciona."
+  },
+  {
+   "id": "b6_5.1.b_22",
+   "subtopic": "5.1.b",
+   "name": "AAA (TACACS+/RADIUS)",
+   "question": "Why is it generally recommended to always verify that a fallback authentication method (like local authentication) actually works correctly before deploying AAA-based authentication broadly across many production devices?",
+   "options": {
+    "A": "If the fallback method is misconfigured or untested and the primary AAA server later becomes unreachable for any reason, administrators could find themselves completely locked out of managing the affected devices, since neither the primary AAA method nor the (broken) fallback method would actually grant access, potentially requiring a disruptive console-based or physical recovery process",
+    "B": "There is no meaningful risk whatsoever in deploying an untested fallback authentication method, since the primary AAA server is assumed to always remain permanently reachable with zero possibility of any outage or connectivity loss ever occurring",
+    "C": "Fallback authentication methods are technically incapable of ever failing or being misconfigured in any way, making pre-deployment verification an unnecessary and pointless precaution",
+    "D": "This verification consideration only applies to RADIUS-based AAA deployments, and has no relevance whatsoever to a deployment using TACACS+ as the primary authentication method"
+   },
+   "correct": "A",
+   "explanation_es": "Si el método de respaldo está mal configurado o no se probó y el servidor AAA primario luego se vuelve inalcanzable por cualquier razón, los administradores podrían encontrarse completamente bloqueados de gestionar los dispositivos afectados, ya que ni el método AAA primario ni el método de respaldo (roto) realmente otorgarían acceso, potencialmente requiriendo un proceso de recuperación disruptivo vía consola o físico."
+  },
+  {
+   "id": "b6_5.2.a_18",
+   "subtopic": "5.2.a",
+   "name": "ACLs",
+   "question": "What command is commonly used to verify the contents and match counters of a configured ACL on a Cisco device?",
+   "options": {
+    "A": "'show access-lists [name/number]', which displays each configured statement along with a running count of how many packets have matched it, useful for confirming an ACL is actually being hit by the expected traffic",
+    "B": "'show vlan brief', which only shows VLAN-to-port assignments and has no relationship whatsoever to ACL configuration or match statistics",
+    "C": "ACL contents and match counters can never be viewed through any Cisco IOS command output, and can only be inferred by capturing packets on every interface",
+    "D": "'show ip route' displays ACL statement match counters directly alongside routing table entries, with no separate ACL-specific command needed"
+   },
+   "correct": "A",
+   "explanation_es": "'show access-lists [nombre/número]' muestra cada sentencia configurada junto con un conteo acumulado de cuántos paquetes han coincidido con ella, útil para confirmar que una ACL realmente está siendo alcanzada por el tráfico esperado."
+  },
+  {
+   "id": "b6_5.2.a_19",
+   "subtopic": "5.2.a",
+   "name": "ACLs",
+   "question": "Why might an administrator use the 'established' keyword in an extended ACL matching TCP traffic, and what does it actually check?",
+   "options": {
+    "A": "'established' matches TCP segments that have the ACK (or RST) flag set, which is commonly used to permit return traffic for connections that were initiated from the inside, without needing a stateful firewall — it's a simple heuristic (not true stateful inspection) that assumes a segment with ACK set belongs to an already-established session",
+    "B": "'established' has no relationship whatsoever to TCP flags, and instead exclusively matches traffic based on the physical cable type used by the connection",
+    "C": "The established keyword can only be used with UDP traffic and is technically invalid, unsupported syntax when applied to a TCP-matching ACL statement",
+    "D": "Configuring 'established' always and unconditionally blocks every single TCP connection regardless of any flag actually set in that connection's segments"
+   },
+   "correct": "A",
+   "explanation_es": "'established' hace match con segmentos TCP que tienen el flag ACK (o RST) activo, comúnmente usado para permitir tráfico de retorno de conexiones iniciadas desde adentro, sin necesitar un firewall con estado — es una heurística simple (no inspección con estado real) que asume que un segmento con ACK activo pertenece a una sesión ya establecida."
+  },
+  {
+   "id": "b6_5.2.a_20",
+   "subtopic": "5.2.a",
+   "name": "ACLs",
+   "question": "What is the effect of applying an ACL that contains only 'deny' statements and no explicit 'permit' statement of any kind to an interface?",
+   "options": {
+    "A": "Because of the implicit 'deny all' at the end of every ACL, an ACL with no explicit permit statement effectively blocks all traffic matching that ACL's applied direction/interface, since nothing would ever match a permit condition",
+    "B": "An ACL consisting solely of deny statements automatically and implicitly permits every packet that reaches the end of the list, the reverse of how the implicit deny actually works",
+    "C": "Cisco IOS technically prohibits configuring an ACL with only deny statements and no permit statement; such a configuration will always be rejected outright at the moment of entry",
+    "D": "An ACL with no permit statements has no effect whatsoever when applied to an interface, behaving identically to having no ACL applied at all"
+   },
+   "correct": "A",
+   "explanation_es": "Por el 'deny all' implícito al final de cada ACL, una ACL sin ninguna sentencia permit explícita bloquea efectivamente todo el tráfico que coincida con la dirección/interfaz donde se aplicó esa ACL, ya que nada llegaría a coincidir con una condición permit."
+  },
+  {
+   "id": "b6_5.2.a_21",
+   "subtopic": "5.2.a",
+   "name": "ACLs",
+   "question": "Why might an ACL be used on a router to filter routing protocol updates themselves (e.g., via a distribute-list referencing an ACL), as distinct from filtering general data traffic?",
+   "options": {
+    "A": "An ACL referenced by a distribute-list can control which specific routes/prefixes a router accepts from, or advertises to, a routing neighbor, which is a control-plane filtering use case distinct from filtering general user data traffic passing through the router's data plane",
+    "B": "ACLs can only ever filter general user data traffic and are technically incapable of being referenced by any routing-protocol-related feature like a distribute-list",
+    "C": "Filtering routing protocol updates with an ACL always and completely disables the routing protocol itself entirely on that router, rather than selectively controlling which specific routes are accepted or advertised",
+    "D": "A distribute-list can only reference a prefix-list and is technically incompatible with referencing a standard or extended ACL of any kind"
+   },
+   "correct": "A",
+   "explanation_es": "Una ACL referenciada por un distribute-list puede controlar qué rutas/prefijos específicos acepta un router de, o anuncia hacia, un vecino de enrutamiento, un caso de uso de filtrado del plano de control distinto de filtrar el tráfico de datos general de usuario que pasa por el plano de datos del router."
+  },
+  {
+   "id": "b6_5.2.a_22",
+   "subtopic": "5.2.a",
+   "name": "ACLs",
+   "question": "Why is it important to apply an ACL as close to the source of unwanted traffic as practical, when the goal is primarily to conserve bandwidth on downstream links rather than pure security enforcement?",
+   "options": {
+    "A": "Filtering traffic close to its source prevents that unwanted traffic from consuming bandwidth on every downstream link it would otherwise traverse before reaching a filter placed further away, whereas filtering only at a distant point still allows the unwanted traffic to consume bandwidth on every link between the source and that distant filtering point",
+    "B": "The physical location where an ACL is applied has no bearing whatsoever on how much bandwidth unwanted traffic consumes anywhere in the network, regardless of how close to or far from the source the filter is placed",
+    "C": "ACLs can only ever be applied at the exact physical location of the traffic's ultimate destination, making the concept of filtering 'close to the source' technically inapplicable to any Cisco IOS ACL deployment",
+    "D": "Applying an ACL close to the source always and completely increases the total bandwidth consumed elsewhere in the network compared to applying that same ACL farther downstream"
+   },
+   "correct": "A",
+   "explanation_es": "Filtrar el tráfico cerca de su origen evita que ese tráfico no deseado consuma ancho de banda en cada enlace aguas abajo que de otro modo atravesaría antes de llegar a un filtro colocado más lejos, mientras que filtrar solo en un punto distante igual permite que el tráfico no deseado consuma ancho de banda en cada enlace entre el origen y ese punto de filtrado distante."
   }
  ]
 }
