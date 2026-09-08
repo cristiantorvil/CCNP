@@ -1,6 +1,6 @@
 {
  "version": "2026-09-08_v4",
- "total": 778,
+ "total": 812,
  "questions": [
   {
    "id": "trustsec_01",
@@ -10893,6 +10893,482 @@
    },
    "correct": "A",
    "explanation_es": "Defensa en profundidad significa depender de múltiples capas de protección independientes y complementarias (como la segmentación de red limitando quién puede siquiera alcanzar el servidor, un firewall basado en host restringiendo aún más qué puertos/protocolos específicos se aceptan en ese servidor, software de seguridad de endpoint detectando actividad local sospechosa, y control de acceso estricto limitando quién puede autenticarse) de forma que si una sola capa falla o es evadida, las demás capas sigan dando protección significativa, en lugar de que la seguridad del servidor dependa enteramente de la efectividad de un único control."
+  },
+  {
+   "id": "b6_5.4.b_06",
+   "subtopic": "5.4.b",
+   "name": "Seguridad de endpoint (NAC/ISE)",
+   "question": "What is the difference between 'closed mode' and 'monitor mode' when deploying 802.1X on a switch port, particularly during an initial rollout?",
+   "options": {
+    "A": "In closed mode, only EAP/802.1X traffic is allowed until authentication succeeds, with all other traffic blocked, providing full enforcement; monitor mode allows all traffic to pass regardless of authentication outcome while still logging what the authentication result would have been, letting an administrator observe and validate what would happen under full enforcement before actually turning on the traffic-blocking behavior of closed mode, reducing the risk of accidentally locking out legitimate devices during initial deployment",
+    "B": "Closed mode and monitor mode are simply two different names referring to exactly the same 802.1X enforcement behavior, with no meaningful distinction in whether unauthenticated traffic is actually blocked or merely observed",
+    "C": "Monitor mode always actively blocks all traffic on the port regardless of authentication outcome, while closed mode always passively logs without blocking anything, the reverse of their actual typical respective behaviors",
+    "D": "Monitor mode can only ever be used on wireless access points and has no applicability whatsoever to wired 802.1X-enabled switch ports"
+   },
+   "correct": "A",
+   "explanation_es": "En closed mode, solo se permite tráfico EAP/802.1X hasta que la autenticación tenga éxito, con todo el demás tráfico bloqueado, dando aplicación completa; monitor mode permite pasar todo el tráfico sin importar el resultado de autenticación mientras sigue registrando cuál habría sido ese resultado, permitiendo que un administrador observe y valide qué pasaría bajo aplicación completa antes de realmente activar el comportamiento de bloqueo de tráfico del closed mode, reduciendo el riesgo de bloquear accidentalmente dispositivos legítimos durante el despliegue inicial."
+  },
+  {
+   "id": "b6_5.4.b_07",
+   "subtopic": "5.4.b",
+   "name": "Seguridad de endpoint (NAC/ISE)",
+   "question": "What is a 'dACL' (downloadable ACL) in a Cisco ISE/802.1X deployment, and how is it typically used?",
+   "options": {
+    "A": "A dACL is an access-control list defined centrally on the AAA/policy server (like ISE) and dynamically pushed down (downloaded) to the switch port at the time a specific endpoint authenticates, allowing per-user or per-device-specific traffic restrictions to be applied dynamically without needing to be statically pre-configured identically on every possible switch port an endpoint might connect to",
+    "B": "A dACL is a physical hardware component that must be manually installed into a switch's expansion slot before any access control of any kind can be applied to that switch",
+    "C": "dACLs can only ever be applied identically to every single port on a switch simultaneously, with no capability to apply a different, dynamically-determined ACL per individual authenticated endpoint",
+    "D": "dACL configuration is entirely unrelated to 802.1X or endpoint authentication and instead refers exclusively to a static access-list manually and permanently configured directly on the switch's own local CLI, never pushed from any central server"
+   },
+   "correct": "A",
+   "explanation_es": "Una dACL es una lista de control de acceso definida centralmente en el servidor AAA/de políticas (como ISE) y empujada dinámicamente (descargada) hacia el puerto del switch en el momento en que un endpoint específico se autentica, permitiendo aplicar restricciones de tráfico específicas por usuario o dispositivo de forma dinámica sin necesitar preconfigurarlas estáticamente e idénticamente en cada posible puerto de switch al que un endpoint pudiera conectarse."
+  },
+  {
+   "id": "b6_5.4.b_08",
+   "subtopic": "5.4.b",
+   "name": "Seguridad de endpoint (NAC/ISE)",
+   "question": "What is the purpose of 'profiling' in a NAC solution like Cisco ISE, particularly for devices that cannot perform 802.1X authentication (like many IoT devices)?",
+   "options": {
+    "A": "Profiling attempts to identify what type of device is connecting (based on characteristics like DHCP fingerprinting, MAC OUI, or other observable network behavior) without requiring the device itself to actively participate in an authentication exchange, which can inform policy decisions (such as which VLAN or access level to assign) for devices that are incapable of 802.1X, complementing MAB as a way to still apply some level of informed, device-aware access control",
+    "B": "Profiling requires every single connecting device to have 802.1X supplicant software installed and actively authenticate, making it functionally identical to standard 802.1X authentication with no distinct value for non-802.1X-capable devices",
+    "C": "Profiling in a NAC context refers exclusively to measuring the physical dimensions and weight of a connecting hardware device, with no relationship whatsoever to network-observable characteristics or access policy",
+    "D": "Profiling can only ever be used to identify wireless devices and has no applicability whatsoever to identifying wired endpoints connecting through a switch port"
+   },
+   "correct": "A",
+   "explanation_es": "El profiling intenta identificar qué tipo de dispositivo se está conectando (basándose en características como fingerprinting de DHCP, OUI de MAC, u otro comportamiento observable de red) sin requerir que el propio dispositivo participe activamente en un intercambio de autenticación, lo cual puede informar decisiones de política (como qué VLAN o nivel de acceso asignar) para dispositivos incapaces de hacer 802.1X, complementando a MAB como una forma de aplicar de todos modos cierto nivel de control de acceso informado y consciente del dispositivo."
+  },
+  {
+   "id": "b6_5.4.b_09",
+   "subtopic": "5.4.b",
+   "name": "Seguridad de endpoint (NAC/ISE)",
+   "question": "What does 'multi-auth' host mode on an 802.1X-enabled switch port allow, as opposed to 'single-host' mode?",
+   "options": {
+    "A": "Multi-auth mode allows multiple devices connected to the same physical switch port (such as through a small unmanaged hub, or a PC and phone both plugged into the same drop) to each independently authenticate and be individually authorized with their own access policy, whereas single-host mode only permits exactly one authenticated device (typically the first one) on that port and treats any additional device as a security violation",
+    "B": "Multi-auth mode and single-host mode are functionally and operationally identical port behaviors, with no meaningful distinction in how many independently authenticated devices can be active on the same physical port at once",
+    "C": "Multi-auth mode can only ever be used on trunk ports carrying multiple VLANs, and is technically incompatible with a simple access port carrying a single VLAN",
+    "D": "Single-host mode allows an unlimited number of independently authenticated devices per port, while multi-auth mode restricts the port to exactly one single authenticated device, the reverse of their actual defined behavior"
+   },
+   "correct": "A",
+   "explanation_es": "El modo multi-auth permite que múltiples dispositivos conectados al mismo puerto físico del switch (por ejemplo, a través de un pequeño hub no gestionado, o una PC y un teléfono ambos conectados a la misma toma) se autentiquen cada uno de forma independiente y sean autorizados individualmente con su propia política de acceso, mientras que el modo single-host solo permite exactamente un dispositivo autenticado (típicamente el primero) en ese puerto y trata a cualquier dispositivo adicional como una violación de seguridad."
+  },
+  {
+   "id": "b6_5.4.b_10",
+   "subtopic": "5.4.b",
+   "name": "Seguridad de endpoint (NAC/ISE)",
+   "question": "What is the general purpose of 'multi-domain authentication' (MDA) host mode on a switch port, in the common scenario of an IP phone with a PC connected behind it?",
+   "options": {
+    "A": "MDA specifically allows exactly one authenticated device in the 'voice domain' (the IP phone) and one authenticated device in the 'data domain' (the PC) simultaneously on the same physical port, each potentially placed into a different VLAN (voice VLAN vs. data VLAN) with its own independent authentication/authorization, which is the common host mode used for the standard phone-plus-PC-daisy-chained deployment scenario",
+    "B": "Multi-domain authentication mode only permits devices from a single domain type (either voice or data, but never both simultaneously) to authenticate on the port, making it functionally identical to single-host mode in terms of how many concurrently authenticated devices are supported",
+    "C": "MDA host mode has no relationship whatsoever to the common IP-phone-plus-PC deployment scenario and instead only applies to ports connecting two switches together directly",
+    "D": "Multi-domain authentication requires that both the phone and PC share the exact same single VLAN and identical authorization policy, with no ability to differentiate access between the voice and data domains on that port"
+   },
+   "correct": "A",
+   "explanation_es": "MDA permite específicamente exactamente un dispositivo autenticado en el 'dominio de voz' (el teléfono IP) y un dispositivo autenticado en el 'dominio de datos' (la PC) simultáneamente en el mismo puerto físico, cada uno potencialmente colocado en una VLAN distinta (VLAN de voz vs. VLAN de datos) con su propia autenticación/autorización independiente, siendo el host mode común usado para el escenario estándar de despliegue de teléfono-con-PC-encadenada."
+  },
+  {
+   "id": "b6_5.4.b_11",
+   "subtopic": "5.4.b",
+   "name": "Seguridad de endpoint (NAC/ISE)",
+   "question": "Why might an organization configure 802.1X with a fallback to MAB (MAC Authentication Bypass) using an 'order' and 'priority' setting on the switch port, rather than only enabling one authentication method alone?",
+   "options": {
+    "A": "Configuring 802.1X to be attempted first (since it provides stronger, credential-based authentication when the connecting device supports it), with MAB configured as a fallback method for devices that don't respond to 802.1X at all (like many printers or IoT devices), allows a single port configuration to accommodate both 802.1X-capable devices and legacy/non-802.1X-capable devices without needing to know in advance exactly which type of device will be plugged into any given port",
+    "B": "802.1X and MAB can never both be configured together as complementary methods on the exact same switch port under any Cisco IOS/ISE deployment; only a single authentication method may ever be active on a given port at a time",
+    "C": "MAB is always configured to be attempted before 802.1X, providing stronger security by prioritizing MAC-address-based authentication over credential-based 802.1X, the reverse of the typical recommended priority order",
+    "D": "This combined 802.1X-with-MAB-fallback configuration approach provides no practical benefit whatsoever over configuring only a single authentication method, since every device connecting to any given port is always known in advance to support one specific method"
+   },
+   "correct": "A",
+   "explanation_es": "Configurar que 802.1X se intente primero (ya que da autenticación más fuerte basada en credenciales cuando el dispositivo conectado la soporta), con MAB configurado como método de respaldo para dispositivos que no responden a 802.1X en absoluto (como muchas impresoras o dispositivos IoT), permite que una única configuración de puerto acomode tanto dispositivos capaces de 802.1X como dispositivos legacy/incapaces de 802.1X, sin necesitar saber de antemano exactamente qué tipo de dispositivo se conectará a un puerto dado."
+  },
+  {
+   "id": "b6_5.4.b_12",
+   "subtopic": "5.4.b",
+   "name": "Seguridad de endpoint (NAC/ISE)",
+   "question": "What does a 'change of authorization' (CoA) triggered after an ISE posture assessment typically accomplish for a previously-onboarded endpoint?",
+   "options": {
+    "A": "If a device initially connects with restricted (quarantine/remediation) access pending posture assessment, and then the posture check confirms it's compliant, ISE can send a CoA to dynamically update that device's access (such as moving it to full production VLAN access) without requiring the device to fully disconnect and re-authenticate from scratch, streamlining the transition from restricted to full access once compliance is confirmed",
+    "B": "A change of authorization triggered by posture assessment has no relationship whatsoever to updating a device's actual network access, and instead only updates a cosmetic label displayed in the ISE dashboard with no functional effect on the device's connectivity",
+    "C": "CoA can only ever be used to permanently and irrevocably disconnect a device, and has no capability whatsoever to grant a device increased access after it's found to be compliant with posture requirements",
+    "D": "Posture assessment and CoA are entirely unrelated NAC concepts with no functional interaction between the two; posture results never trigger any subsequent access-level change via CoA"
+   },
+   "correct": "A",
+   "explanation_es": "Si un dispositivo inicialmente se conecta con acceso restringido (cuarentena/remediación) pendiente de evaluación de postura, y luego la verificación de postura confirma que cumple, ISE puede enviar un CoA para actualizar dinámicamente el acceso de ese dispositivo (como moverlo a acceso completo de la VLAN de producción) sin requerir que el dispositivo se desconecte completamente y vuelva a autenticarse desde cero, agilizando la transición de acceso restringido a acceso completo una vez confirmado el cumplimiento."
+  },
+  {
+   "id": "b6_5.4.b_13",
+   "subtopic": "5.4.b",
+   "name": "Seguridad de endpoint (NAC/ISE)",
+   "question": "Why might an organization deploy TrustSec (SGT-based policy) together with 802.1X/ISE-based NAC, rather than relying on 802.1X alone for network access control?",
+   "options": {
+    "A": "802.1X/NAC primarily addresses who/what is allowed to connect to the network and under what initial conditions (authentication, posture), while TrustSec's SGT-based policy addresses ongoing, topology-independent segmentation and communication policy between already-connected endpoints/groups, so combining the two provides both an entry-point access control layer and an ongoing, more granular segmentation/communication policy layer",
+    "B": "TrustSec and 802.1X/NAC are functionally and technically identical solutions addressing exactly the same problem, making it entirely redundant and unnecessary to deploy both together in the same network",
+    "C": "TrustSec can only ever be deployed as a complete replacement for 802.1X, and is technically incapable of being used alongside or in combination with 802.1X-based network access control in the same deployment",
+    "D": "Combining TrustSec with 802.1X-based NAC provides no additional segmentation or policy capability whatsoever beyond what 802.1X authentication alone already provides"
+   },
+   "correct": "A",
+   "explanation_es": "802.1X/NAC principalmente aborda quién/qué tiene permitido conectarse a la red y bajo qué condiciones iniciales (autenticación, postura), mientras que la política basada en SGT de TrustSec aborda la segmentación continua e independiente de la topología y la política de comunicación entre endpoints/grupos ya conectados, así que combinar ambos da tanto una capa de control de acceso en el punto de entrada como una capa de política de segmentación/comunicación continua y más granular."
+  },
+  {
+   "id": "b6_5.4.b_14",
+   "subtopic": "5.4.b",
+   "name": "Seguridad de endpoint (NAC/ISE)",
+   "question": "What is the purpose of a 'guest portal' (captive portal) in a NAC deployment for visitors who don't have corporate 802.1X credentials?",
+   "options": {
+    "A": "A guest portal presents an unauthenticated (or lightly authenticated, e.g., via a sponsor-approved or self-registered account) web page that a guest device is redirected to upon connecting, allowing the guest to register/authenticate through a web-based flow appropriate for someone without corporate credentials, after which the guest is typically granted limited, isolated network access (often internet-only, separate from corporate resources)",
+    "B": "A guest portal requires every visiting guest to already possess full corporate 802.1X credentials before they can access it, making it functionally identical to standard corporate 802.1X authentication with no distinct guest-specific workflow",
+    "C": "Guest portals are used exclusively to display a static welcome message with no actual authentication, registration, or network-access-granting functionality of any kind",
+    "D": "A guest portal always and automatically grants full, unrestricted access to every corporate network resource, identical to what an authenticated employee device would receive, with no isolation or access limitation applied to guest traffic"
+   },
+   "correct": "A",
+   "explanation_es": "Un portal de invitados presenta una página web no autenticada (o ligeramente autenticada, por ejemplo vía una cuenta aprobada por un sponsor o autoregistrada) a la que se redirige a un dispositivo invitado al conectarse, permitiendo que el invitado se registre/autentique a través de un flujo basado en web apropiado para alguien sin credenciales corporativas, después de lo cual típicamente se le otorga acceso de red limitado y aislado (a menudo solo internet, separado de los recursos corporativos)."
+  },
+  {
+   "id": "b6_5.4.b_15",
+   "subtopic": "5.4.b",
+   "name": "Seguridad de endpoint (NAC/ISE)",
+   "question": "Why is centralized visibility into 'what devices are on my network' (provided by a NAC platform like ISE, combined with profiling) considered a valuable security capability in its own right, separate from actually enforcing access policy?",
+   "options": {
+    "A": "An organization cannot effectively secure or apply policy to devices it doesn't even know exist on its network; comprehensive, up-to-date device visibility is a foundational prerequisite for informed security decision-making, risk assessment, and policy design, since unknown/unmanaged 'shadow IT' devices represent a blind spot that can't be properly secured if their presence isn't even known",
+    "B": "Device visibility has no independent security value whatsoever separate from active policy enforcement, meaning an organization gains no security benefit from simply knowing what's connected to its network unless every single device is immediately and simultaneously subject to full enforcement action",
+    "C": "NAC platforms like ISE are technically incapable of providing any visibility into connected devices, and can only ever perform binary access-granting or access-denying actions with no discovery or profiling capability whatsoever",
+    "D": "Visibility into connected devices is only relevant for wireless networks and provides no meaningful security value whatsoever for a purely wired network infrastructure"
+   },
+   "correct": "A",
+   "explanation_es": "Una organización no puede asegurar efectivamente ni aplicar política a dispositivos cuya existencia en su red ni siquiera conoce; una visibilidad de dispositivos integral y actualizada es un prerrequisito fundamental para la toma de decisiones de seguridad informada, la evaluación de riesgo, y el diseño de política, ya que los dispositivos desconocidos/no gestionados de 'shadow IT' representan un punto ciego que no puede asegurarse adecuadamente si ni siquiera se conoce su presencia."
+  },
+  {
+   "id": "b6_5.4.b_16",
+   "subtopic": "5.4.b",
+   "name": "Seguridad de endpoint (NAC/ISE)",
+   "question": "What does the term 'supplicant' refer to in the 802.1X three-party authentication model, and where does that software/component typically run?",
+   "options": {
+    "A": "The supplicant is the client-side software component running on the connecting endpoint device itself (such as a laptop's built-in 802.1X client, or a dedicated supplicant application) that initiates the 802.1X authentication exchange with the authenticator (the switch/AP), presenting the endpoint's credentials to be validated by the authentication server",
+    "B": "The supplicant refers exclusively to the authentication server (like ISE) itself, rather than to any client-side software component running on the connecting endpoint device",
+    "C": "The supplicant role is always performed by the switch or wireless access point (the authenticator), with no separate client-side software component involved anywhere in the 802.1X exchange",
+    "D": "A supplicant is a piece of specialized physical hardware that must be manually inserted into a switch's expansion slot, rather than a software component running on the connecting endpoint"
+   },
+   "correct": "A",
+   "explanation_es": "El supplicant es el componente de software del lado del cliente que corre en el propio dispositivo endpoint que se conecta (como el cliente 802.1X integrado de una laptop, o una aplicación supplicant dedicada) que inicia el intercambio de autenticación 802.1X con el authenticator (el switch/AP), presentando las credenciales del endpoint para que las valide el servidor de autenticación."
+  },
+  {
+   "id": "b6_5.4.b_17",
+   "subtopic": "5.4.b",
+   "name": "Seguridad de endpoint (NAC/ISE)",
+   "question": "Why is it important to plan a phased, well-communicated rollout of 802.1X enforcement (rather than enabling closed-mode enforcement across an entire large organization all at once with no prior preparation)?",
+   "options": {
+    "A": "A poorly planned, abrupt rollout risks disconnecting legitimate devices that aren't yet properly configured with supplicant credentials, don't support 802.1X at all, or weren't accounted for in the MAB exception list, potentially causing widespread, disruptive outages across the organization; a phased approach (often starting in monitor mode, as discussed earlier) allows issues to be identified and corrected before full enforcement is turned on broadly",
+    "B": "There is no meaningful operational risk whatsoever in immediately enabling full closed-mode 802.1X enforcement across an entire large organization simultaneously with no prior testing, preparation, or phased approach of any kind",
+    "C": "802.1X enforcement can only ever be enabled or disabled for an organization's entire network as a single, indivisible, all-or-nothing action, making any kind of phased, incremental rollout technically impossible to configure",
+    "D": "Planning a phased rollout is only relevant for wireless 802.1X deployments and provides no meaningful risk-reduction benefit whatsoever for a wired, switch-port-based 802.1X deployment"
+   },
+   "correct": "A",
+   "explanation_es": "Un despliegue mal planeado y abrupto arriesga desconectar dispositivos legítimos que aún no están correctamente configurados con credenciales de supplicant, no soportan 802.1X en absoluto, o no fueron contemplados en la lista de excepciones de MAB, potencialmente causando interrupciones disruptivas y generalizadas en toda la organización; un enfoque por fases (a menudo empezando en monitor mode, como se discutió antes) permite identificar y corregir problemas antes de activar la aplicación completa ampliamente."
+  },
+  {
+   "id": "b6_5.4.c_06",
+   "subtopic": "5.4.c",
+   "name": "NGFW/FMC/AVC",
+   "question": "What is the general purpose of 'access control policy' within Cisco Firepower/FTD, as the primary mechanism for defining what traffic is allowed or blocked?",
+   "options": {
+    "A": "An access control policy defines a set of rules (matching on criteria that can include zones, networks, ports, applications, users, and URL categories) that determine how traffic is handled — permitted, blocked, or subject to further inspection (like IPS or malware analysis) — serving as the central policy construct that governs the FTD's overall traffic-handling behavior",
+    "B": "Access control policy in Firepower/FTD is used exclusively to configure the physical color of status LEDs on the appliance chassis, with no relationship whatsoever to actual traffic filtering or inspection decisions",
+    "C": "An access control policy can only ever define a single universal rule applied identically to all traffic, with no capability to define multiple distinct rules based on different matching criteria",
+    "D": "Access control policy exclusively governs which administrators can log into the FMC management interface, with no relationship whatsoever to how actual network traffic passing through the FTD is handled"
+   },
+   "correct": "A",
+   "explanation_es": "Una política de control de acceso define un conjunto de reglas (que hacen match en criterios que pueden incluir zonas, redes, puertos, aplicaciones, usuarios, y categorías de URL) que determinan cómo se maneja el tráfico — permitido, bloqueado, o sujeto a inspección adicional (como IPS o análisis de malware) — sirviendo como el constructo de política central que gobierna el comportamiento general de manejo de tráfico del FTD."
+  },
+  {
+   "id": "b6_5.4.c_07",
+   "subtopic": "5.4.c",
+   "name": "NGFW/FMC/AVC",
+   "question": "What is the purpose of an 'intrusion policy' associated with an access control rule in Firepower/FTD, as distinct from the access control rule's own basic permit/deny decision?",
+   "options": {
+    "A": "An intrusion policy defines the specific IPS/signature-based inspection rules (and their configured actions, like alert or drop) that should be applied to traffic that the access control rule has already decided to permit but also route through deeper inspection, adding a further layer of threat detection/prevention beyond the basic access control rule's initial allow decision",
+    "B": "An intrusion policy and an access control rule are simply two different names for exactly the same single configuration object, with no meaningful distinction in what each one actually governs",
+    "C": "An intrusion policy can only be applied to traffic that the access control rule has already decided to block, and has no relevance whatsoever to traffic that's been permitted through the access control rule",
+    "D": "Configuring an intrusion policy always and completely overrides the access control rule's own permit/deny decision, making the access control rule's initial decision entirely irrelevant once any intrusion policy is associated with it"
+   },
+   "correct": "A",
+   "explanation_es": "Una política de intrusión define las reglas específicas de inspección basadas en IPS/firmas (y sus acciones configuradas, como alertar o descartar) que deberían aplicarse al tráfico que la regla de control de acceso ya decidió permitir pero también encaminar a través de inspección más profunda, agregando una capa adicional de detección/prevención de amenazas más allá de la decisión inicial de permitir de la regla de control de acceso básica."
+  },
+  {
+   "id": "b6_5.4.c_08",
+   "subtopic": "5.4.c",
+   "name": "NGFW/FMC/AVC",
+   "question": "What is the purpose of 'URL filtering' (or URL category-based blocking) as a capability of a Cisco NGFW?",
+   "options": {
+    "A": "URL filtering allows the firewall to categorize and control access to websites based on their content category (such as social media, gambling, malware-hosting, or adult content), enabling an organization to enforce acceptable-use policy or block access to categories of sites considered risky or non-business-appropriate, without needing to maintain a manually curated list of every individual site to block",
+    "B": "URL filtering has no relationship whatsoever to categorizing or controlling access to specific websites, and instead exclusively controls the physical routing path taken by traffic destined to any web server",
+    "C": "URL filtering can only ever block or allow access based on a website's numeric IP address, with no capability whatsoever to categorize or filter based on the actual content/purpose of that website",
+    "D": "Once URL filtering is enabled on an NGFW, it always and automatically blocks 100% of all web traffic universally, with no capability to selectively allow any category of website"
+   },
+   "correct": "A",
+   "explanation_es": "El filtrado de URL le permite al firewall categorizar y controlar el acceso a sitios web según su categoría de contenido (como redes sociales, apuestas, hosting de malware, o contenido para adultos), permitiendo que una organización aplique política de uso aceptable o bloquee el acceso a categorías de sitios consideradas riesgosas o no apropiadas para el negocio, sin necesitar mantener una lista curada manualmente de cada sitio individual a bloquear."
+  },
+  {
+   "id": "b6_5.4.c_09",
+   "subtopic": "5.4.c",
+   "name": "NGFW/FMC/AVC",
+   "question": "What does 'file policy' (including malware/AMP inspection) allow a Cisco NGFW to do with files transiting through it (e.g., a file downloaded via HTTP or attached to an email passing through the firewall)?",
+   "options": {
+    "A": "A file policy can inspect files as they pass through the firewall, potentially blocking specific file types entirely, or submitting file hashes/samples for malware analysis (such as via Cisco's AMP — Advanced Malware Protection — cloud intelligence) to detect and block known-malicious files before they reach their destination, adding a threat-detection layer specifically focused on file-based threats",
+    "B": "File policy has no relationship whatsoever to inspecting or blocking files transiting through the firewall, and instead only controls how configuration backup files are stored on the FMC server itself",
+    "C": "A file policy can only ever inspect files that are already confirmed to be malicious through some entirely separate mechanism, and has no capability whatsoever to perform its own detection or analysis of a file's contents",
+    "D": "Enabling a file policy always and completely blocks every single file transfer of any kind through the firewall, with no capability to distinguish between benign and malicious files"
+   },
+   "correct": "A",
+   "explanation_es": "Una política de archivos puede inspeccionar archivos a medida que pasan por el firewall, potencialmente bloqueando tipos de archivo específicos por completo, o enviando hashes/muestras de archivos para análisis de malware (como vía la inteligencia en la nube de AMP — Advanced Malware Protection — de Cisco) para detectar y bloquear archivos conocidos como maliciosos antes de que lleguen a su destino, agregando una capa de detección de amenazas enfocada específicamente en amenazas basadas en archivos."
+  },
+  {
+   "id": "b6_5.4.c_10",
+   "subtopic": "5.4.c",
+   "name": "NGFW/FMC/AVC",
+   "question": "Why might identity-based policy (associating firewall rules with specific Active Directory users or groups, rather than only IP addresses) be valuable in an NGFW deployment?",
+   "options": {
+    "A": "Identity-based policy allows access control decisions to follow the actual user regardless of which specific device or IP address they happen to be using at a given moment (particularly relevant in environments with DHCP-assigned addresses or where users move between devices), and allows policy to be expressed in more meaningful business terms (like 'the Finance group') rather than in terms of specific, potentially changing IP address ranges",
+    "B": "Identity-based policy has no practical advantage whatsoever over pure IP-address-based policy, since a user's identity never has any relationship to which specific traffic they generate or which IP address they're currently using",
+    "C": "Identity-based policy can only ever be applied to a single specific user account across an entire organization, making it impossible to define policy for an entire group or department of users at once",
+    "D": "Once identity-based policy is enabled, IP-address-based policy becomes entirely unusable and unconfigurable on that same NGFW device, forcing an all-or-nothing choice between the two approaches"
+   },
+   "correct": "A",
+   "explanation_es": "La política basada en identidad permite que las decisiones de control de acceso sigan al usuario real sin importar qué dispositivo o dirección IP específicos esté usando en un momento dado (particularmente relevante en entornos con direcciones asignadas por DHCP o donde los usuarios se mueven entre dispositivos), y permite expresar la política en términos de negocio más significativos (como 'el grupo de Finanzas') en lugar de en términos de rangos de IP específicos y potencialmente cambiantes."
+  },
+  {
+   "id": "b6_5.4.c_11",
+   "subtopic": "5.4.c",
+   "name": "NGFW/FMC/AVC",
+   "question": "What is the purpose of Firepower Management Center's (FMC) 'health monitoring' dashboard for managed FTD devices?",
+   "options": {
+    "A": "Health monitoring tracks operational metrics of the managed FTD devices themselves (such as CPU/memory utilization, interface status, and connectivity to FMC), alerting administrators to a device-level operational problem (like a managed device losing connectivity to FMC, or running critically low on resources) that could affect the device's ability to properly enforce security policy, complementing the security-focused event/traffic monitoring FMC also provides",
+    "B": "Health monitoring in FMC has no relationship whatsoever to the operational status of managed FTD devices, and instead exclusively displays the physical building temperature where the FMC server itself is racked",
+    "C": "FMC's health monitoring dashboard can only display information about the FMC server's own hardware, and is technically incapable of reporting on the status of any separate, remotely managed FTD device",
+    "D": "Health monitoring exclusively tracks security event/threat data (like blocked intrusion attempts), with no capability whatsoever to report on device-level operational metrics like CPU, memory, or connectivity status"
+   },
+   "correct": "A",
+   "explanation_es": "El monitoreo de salud rastrea métricas operativas de los propios dispositivos FTD gestionados (como utilización de CPU/memoria, estado de interfaces, y conectividad con FMC), alertando a los administradores sobre un problema operativo a nivel de dispositivo (como que un dispositivo gestionado pierda conectividad con FMC, o se quede críticamente bajo de recursos) que podría afectar la capacidad del dispositivo de aplicar correctamente la política de seguridad, complementando el monitoreo de eventos/tráfico de seguridad que FMC también provee."
+  },
+  {
+   "id": "b6_5.4.c_12",
+   "subtopic": "5.4.c",
+   "name": "NGFW/FMC/AVC",
+   "question": "Why might an organization deploy multiple FTD devices managed by a single, centralized FMC, rather than managing each FTD independently?",
+   "options": {
+    "A": "A centralized FMC allows policies (access control, intrusion, file, and other settings) to be defined once and consistently applied/pushed to multiple FTD devices across the organization, along with centralized event monitoring/correlation and reporting across all managed devices, rather than requiring an administrator to configure and separately monitor each individual FTD device's own local management interface one at a time",
+    "B": "Centralized FMC management provides no practical advantage whatsoever over independently managing each FTD device separately, since FMC is technically incapable of pushing consistent policy to more than a single FTD device at a time",
+    "C": "Deploying FMC always and completely eliminates the need for any FTD device at all, since FMC alone (without any managed FTD appliances) is fully capable of performing all firewall/IPS traffic inspection and enforcement on its own",
+    "D": "FMC can only ever manage exactly one single FTD device across an entire organization, making the scenario of managing 'multiple' FTD devices from one FMC technically impossible"
+   },
+   "correct": "A",
+   "explanation_es": "Un FMC centralizado permite definir políticas (control de acceso, intrusión, archivos, y otros ajustes) una sola vez y aplicarlas/empujarlas de forma consistente a múltiples dispositivos FTD en toda la organización, junto con monitoreo/correlación de eventos y reportes centralizados en todos los dispositivos gestionados, en lugar de requerir que un administrador configure y monitoree por separado la interfaz de gestión local de cada FTD individual uno por uno."
+  },
+  {
+   "id": "b6_5.4.c_13",
+   "subtopic": "5.4.c",
+   "name": "NGFW/FMC/AVC",
+   "question": "What does AVC's (Application Visibility and Control) reliance on NBAR2 (Network-Based Application Recognition) enable an NGFW or router to do that simple port-based classification cannot?",
+   "options": {
+    "A": "NBAR2 can identify applications based on deeper inspection of traffic characteristics (such as packet signatures/patterns, not just the destination port number), which allows AVC to correctly identify and apply policy to applications that don't use a fixed, well-known port, or that deliberately try to disguise themselves by using a common port (like port 443) shared by many different applications, something a simple port-number-only classification approach cannot reliably distinguish",
+    "B": "NBAR2 identifies applications purely and exclusively based on the destination port number, providing no additional classification capability beyond what simple port-based filtering already offers",
+    "C": "AVC and NBAR2 have no relationship whatsoever to application identification, and instead exclusively control the physical color-coding scheme used for cable management in a data center rack",
+    "D": "NBAR2-based application recognition can only ever be used to identify a maximum of a single specific application across an entire network, making it far less capable than simple port-based classification for any environment with more than one application in use"
+   },
+   "correct": "A",
+   "explanation_es": "NBAR2 puede identificar aplicaciones basándose en una inspección más profunda de las características del tráfico (como firmas/patrones de paquetes, no solo el número de puerto destino), lo cual le permite a AVC identificar correctamente y aplicar política a aplicaciones que no usan un puerto fijo y conocido, o que deliberadamente intentan disfrazarse usando un puerto común (como el 443) compartido por muchas aplicaciones distintas, algo que un enfoque de clasificación simple basado solo en número de puerto no puede distinguir de forma confiable."
+  },
+  {
+   "id": "b6_5.4.c_14",
+   "subtopic": "5.4.c",
+   "name": "NGFW/FMC/AVC",
+   "question": "What is the purpose of applying QoS marking or bandwidth shaping based on AVC's application identification, rather than only using traditional port/protocol-based QoS classification?",
+   "options": {
+    "A": "Because AVC can identify the specific application generating traffic (beyond just its port/protocol), QoS policy can be applied with much finer granularity — for example, prioritizing a specific business-critical SaaS application's traffic while de-prioritizing recreational streaming traffic, even if both happen to use the same underlying port/protocol (like HTTPS on port 443) — something traditional port-based QoS classification alone cannot distinguish between",
+    "B": "AVC-based QoS marking has no advantage whatsoever over traditional port/protocol-based QoS classification, since both approaches always classify and treat every application identically regardless of the actual application generating the traffic",
+    "C": "AVC-based QoS can only be applied to traffic using well-known, fixed ports, providing no additional benefit over traditional port-based classification for any application that doesn't use a fixed, predictable port number",
+    "D": "Applying AVC-based QoS marking always and completely disables the underlying port/protocol-based QoS classification mechanism entirely, making the two approaches fundamentally incompatible with each other rather than complementary"
+   },
+   "correct": "A",
+   "explanation_es": "Como AVC puede identificar la aplicación específica que genera el tráfico (más allá de solo su puerto/protocolo), la política de QoS se puede aplicar con mucha más granularidad — por ejemplo, priorizando el tráfico de una aplicación SaaS crítica para el negocio mientras se despriorizan tráfico de streaming recreativo, aunque ambos usen el mismo puerto/protocolo subyacente (como HTTPS en el puerto 443) — algo que la clasificación de QoS tradicional basada solo en puerto no puede distinguir."
+  },
+  {
+   "id": "b6_5.4.c_15",
+   "subtopic": "5.4.c",
+   "name": "NGFW/FMC/AVC",
+   "question": "Why is TLS/SSL decryption (inspection of otherwise encrypted traffic) sometimes enabled on an NGFW, and what trade-off does enabling it typically introduce?",
+   "options": {
+    "A": "Since a growing majority of traffic is encrypted (HTTPS), an NGFW that cannot see inside that encrypted traffic has limited ability to apply deep content inspection (like malware scanning or detailed application/URL classification) to it; enabling decryption (typically via a trusted intermediate certificate the firewall presents to internal clients) restores that visibility, but at the cost of additional processing overhead, privacy considerations, and the operational complexity of managing and distributing that intermediate certificate to client devices",
+    "B": "TLS/SSL decryption on an NGFW provides no additional visibility whatsoever into encrypted traffic, and enabling it has zero relationship to the firewall's ability to perform deep content inspection on that traffic",
+    "C": "Enabling TLS/SSL decryption always and completely eliminates any processing overhead on the firewall, making it strictly more efficient than leaving encrypted traffic uninspected",
+    "D": "TLS/SSL decryption can only be applied to traffic using the HTTP protocol specifically, and is technically incapable of inspecting HTTPS or any other TLS-encrypted protocol"
+   },
+   "correct": "A",
+   "explanation_es": "Como una porción creciente del tráfico está cifrada (HTTPS), un NGFW que no puede ver dentro de ese tráfico cifrado tiene capacidad limitada de aplicar inspección profunda de contenido (como escaneo de malware o clasificación detallada de aplicación/URL) a ese tráfico; habilitar el descifrado (típicamente vía un certificado intermedio confiable que el firewall presenta a los clientes internos) restaura esa visibilidad, pero a costa de overhead de procesamiento adicional, consideraciones de privacidad, y la complejidad operativa de gestionar y distribuir ese certificado intermedio a los dispositivos cliente."
+  },
+  {
+   "id": "b6_5.4.c_16",
+   "subtopic": "5.4.c",
+   "name": "NGFW/FMC/AVC",
+   "question": "What does FMC's 'correlation policy' capability allow an administrator to configure, beyond simply viewing individual security events?",
+   "options": {
+    "A": "A correlation policy allows an administrator to define rules that trigger an automated response (such as generating an alert, or in some integrations, an automated remediation action) when a specific combination or pattern of events occurs (for example, a particular type of intrusion event combined with a specific host's traffic pattern), rather than requiring an analyst to manually notice and connect related individual events on their own",
+    "B": "Correlation policy in FMC has no relationship whatsoever to defining automated responses to combinations of security events, and instead only controls the visual color scheme used to display individual events in the FMC dashboard",
+    "C": "A correlation policy can only ever respond to a single isolated event type in complete isolation, and is technically incapable of considering any combination or pattern involving more than one event type at a time",
+    "D": "Configuring a correlation policy always and completely disables FMC's ability to display any individual security event at all, forcing administrators to rely exclusively on aggregated correlation results with no access to underlying individual event details"
+   },
+   "correct": "A",
+   "explanation_es": "Una política de correlación le permite a un administrador definir reglas que disparan una respuesta automatizada (como generar una alerta, o en algunas integraciones, una acción de remediación automatizada) cuando ocurre una combinación o patrón específico de eventos (por ejemplo, un tipo particular de evento de intrusión combinado con un patrón de tráfico de un host específico), en lugar de requerir que un analista note y conecte manualmente eventos individuales relacionados por su cuenta."
+  },
+  {
+   "id": "b6_5.4.c_17",
+   "subtopic": "5.4.c",
+   "name": "NGFW/FMC/AVC",
+   "question": "Why might an organization use FMC's reporting capability to generate periodic (e.g., weekly or monthly) summary reports of firewall/IPS activity, rather than relying solely on real-time event monitoring?",
+   "options": {
+    "A": "Periodic summary reports provide a higher-level, trend-oriented view of security activity over time (such as top blocked applications, most-triggered intrusion signatures, or overall traffic/threat volume trends) that's useful for management reporting, capacity/policy planning, and identifying longer-term patterns that might not be obvious when only looking at individual real-time events as they occur",
+    "B": "Periodic summary reporting provides no practical value whatsoever beyond what real-time event monitoring alone already provides, since aggregated trend data over time offers no additional insight compared to observing individual events one at a time as they happen",
+    "C": "FMC's reporting capability can only ever generate a report covering a single specific event in complete isolation, and is technically incapable of aggregating or summarizing multiple events or trends over any period of time",
+    "D": "Generating periodic summary reports always and automatically disables FMC's real-time event monitoring capability entirely, forcing an administrator to choose between the two mutually exclusive monitoring approaches"
+   },
+   "correct": "A",
+   "explanation_es": "Los reportes periódicos de resumen dan una vista de más alto nivel y orientada a tendencias de la actividad de seguridad a lo largo del tiempo (como las aplicaciones más bloqueadas, las firmas de intrusión más disparadas, o tendencias generales de volumen de tráfico/amenazas) útil para reportes gerenciales, planificación de capacidad/política, e identificación de patrones de más largo plazo que podrían no ser obvios al mirar solo eventos individuales en tiempo real a medida que ocurren."
+  },
+  {
+   "id": "b6_5.4.d_11",
+   "subtopic": "5.4.d",
+   "name": "TrustSec/MACsec",
+   "question": "What is the purpose of the 'SGT-to-VLAN' or 'SGT-to-IP' binding maintained by SXP (SGT Exchange Protocol) between a device that assigns an SGT and a device that needs to enforce policy based on it?",
+   "options": {
+    "A": "SXP propagates the mapping between a specific IP address (or the source of traffic) and its associated SGT to devices that lack inline SGT-tagging hardware support, allowing those downstream devices to still apply SGT-based enforcement (like an SGACL) by looking up the IP-to-SGT binding rather than reading a tag carried directly in the packet itself",
+    "B": "SXP has no relationship whatsoever to propagating SGT-to-IP bindings, and instead exclusively handles the initial 802.1X authentication exchange between an endpoint and the network",
+    "C": "SXP can only propagate SGT bindings between devices that both natively support inline SGT tagging in hardware, providing no benefit whatsoever for devices lacking that hardware capability",
+    "D": "Once an SGT-to-IP binding is propagated via SXP, that binding is permanently and irrevocably fixed for the lifetime of the device, with no ability to ever update it if the underlying IP-to-SGT relationship changes"
+   },
+   "correct": "A",
+   "explanation_es": "SXP propaga el mapeo entre una dirección IP específica (o el origen del tráfico) y su SGT asociado hacia dispositivos que carecen de soporte de hardware para tagging inline de SGT, permitiendo que esos dispositivos aguas abajo igual apliquen enforcement basado en SGT (como una SGACL) buscando el binding IP-a-SGT en lugar de leer una etiqueta transportada directamente en el paquete."
+  },
+  {
+   "id": "b6_5.4.d_12",
+   "subtopic": "5.4.d",
+   "name": "TrustSec/MACsec",
+   "question": "What is the purpose of MKA (MACsec Key Agreement) protocol in a MACsec deployment?",
+   "options": {
+    "A": "MKA is the control-plane protocol responsible for negotiating and periodically refreshing the cryptographic keys used by MACsec to encrypt traffic on a given link, handling key management so that the actual data-plane encryption can operate continuously and securely without requiring manual key configuration or manual key rotation by an administrator",
+    "B": "MKA is the actual data-plane encryption algorithm itself that encrypts every Ethernet frame, with no relationship whatsoever to key negotiation or management",
+    "C": "MKA has no relationship whatsoever to MACsec and instead refers exclusively to a completely unrelated protocol used for VLAN trunk negotiation between two switches",
+    "D": "MKA can only be used to negotiate keys for IPsec tunnels and has no applicability whatsoever to MACsec, which relies entirely on manually configured static keys with no negotiation protocol of any kind"
+   },
+   "correct": "A",
+   "explanation_es": "MKA es el protocolo de plano de control responsable de negociar y refrescar periódicamente las claves criptográficas que usa MACsec para cifrar el tráfico en un enlace dado, manejando la gestión de claves para que el cifrado real del plano de datos pueda operar de forma continua y segura sin requerir configuración manual de claves ni rotación manual de claves por parte de un administrador."
+  },
+  {
+   "id": "b6_5.4.d_13",
+   "subtopic": "5.4.d",
+   "name": "TrustSec/MACsec",
+   "question": "Why is MACsec considered to provide stronger data-plane protection on a given link than 802.1X authentication alone (without MACsec) provides?",
+   "options": {
+    "A": "802.1X primarily controls whether a device is authenticated/authorized to gain network access in the first place, but does not itself encrypt the actual data traffic sent over the link afterward; MACsec, by contrast, encrypts the Ethernet frames themselves (confidentiality and integrity) once the link is established, meaning even if someone could physically tap the link, they couldn't read or tamper with the encrypted frame contents, a protection 802.1X authentication alone doesn't provide",
+    "B": "802.1X and MACsec provide functionally and technically identical protections, with 802.1X already fully encrypting all data-plane traffic on its own, making MACsec's additional encryption entirely redundant wherever 802.1X is already deployed",
+    "C": "MACsec's sole function is to perform the initial authentication handshake, with 802.1X responsible for the actual ongoing frame-by-frame data encryption, the reverse of their actual respective roles",
+    "D": "Neither 802.1X nor MACsec has any relationship whatsoever to protecting data confidentiality on a physical link; both protocols exclusively concern themselves with routing table convergence speed"
+   },
+   "correct": "A",
+   "explanation_es": "802.1X principalmente controla si un dispositivo está autenticado/autorizado para obtener acceso a la red en primer lugar, pero no cifra por sí solo el tráfico de datos real enviado por el enlace después; MACsec, en cambio, cifra los propios frames Ethernet (confidencialidad e integridad) una vez establecido el enlace, lo que significa que aunque alguien pudiera intervenir físicamente el enlace, no podría leer ni manipular el contenido del frame cifrado, una protección que la autenticación 802.1X sola no provee."
+  },
+  {
+   "id": "b6_5.4.d_14",
+   "subtopic": "5.4.d",
+   "name": "TrustSec/MACsec",
+   "question": "What does 'should-secure' versus 'must-secure' MACsec policy mode typically control on a switch port during MACsec deployment?",
+   "options": {
+    "A": "'must-secure' mode requires MACsec to successfully negotiate before any traffic is permitted on the link (failing closed if MACsec negotiation doesn't succeed), whereas 'should-secure' mode is a more permissive transitional mode that allows traffic to still pass even if MACsec negotiation fails, which can be useful during a phased rollout to avoid immediately breaking connectivity on links where the far-end device doesn't yet support or isn't yet properly configured for MACsec",
+    "B": "'should-secure' and 'must-secure' modes are functionally and operationally identical, with no meaningful distinction in how each one handles a failed MACsec negotiation attempt",
+    "C": "'should-secure' mode always and completely blocks all traffic if MACsec negotiation fails, while 'must-secure' mode always permits traffic regardless of negotiation outcome, the reverse of their actual typical behavior",
+    "D": "These policy modes have no relationship whatsoever to MACsec negotiation outcomes and instead only control the physical LED color displayed on the switch port"
+   },
+   "correct": "A",
+   "explanation_es": "El modo 'must-secure' requiere que MACsec negocie exitosamente antes de permitir cualquier tráfico en el enlace (fallando cerrado si la negociación de MACsec no tiene éxito), mientras que 'should-secure' es un modo transicional más permisivo que permite que el tráfico siga pasando aunque falle la negociación de MACsec, lo cual puede ser útil durante un despliegue por fases para evitar romper inmediatamente la conectividad en enlaces donde el dispositivo del otro extremo aún no soporta o no está correctamente configurado para MACsec."
+  },
+  {
+   "id": "b6_5.4.d_15",
+   "subtopic": "5.4.d",
+   "name": "TrustSec/MACsec",
+   "question": "Why might an organization deploy MACsec specifically on the links between switches in a data center or campus core, in addition to (or instead of) only on access-layer links facing end users?",
+   "options": {
+    "A": "Core/inter-switch links often carry a large amount of aggregated, potentially sensitive traffic from many different sources; protecting those links with MACsec guards against a physical tap or interception at any point along that core infrastructure, which could otherwise expose a much broader volume and variety of traffic than tapping a single access-layer link would expose",
+    "B": "MACsec can technically only ever be deployed on access-layer links facing directly connected end-user devices, and is fundamentally incapable of being configured on switch-to-switch inter-switch/core links under any circumstances",
+    "C": "There is no meaningful security benefit whatsoever to deploying MACsec on core/inter-switch links, since core links are always considered to be physically completely inaccessible to any potential attacker by definition",
+    "D": "Deploying MACsec on core links always and completely eliminates the need for any encryption whatsoever on access-layer links, making access-layer MACsec entirely redundant wherever core-layer MACsec is already deployed"
+   },
+   "correct": "A",
+   "explanation_es": "Los enlaces del core/entre switches suelen llevar una gran cantidad de tráfico agregado y potencialmente sensible de muchas fuentes distintas; proteger esos enlaces con MACsec resguarda contra una intervención física o interceptación en cualquier punto de esa infraestructura de core, lo cual de otro modo podría exponer un volumen y variedad de tráfico mucho más amplio que intervenir un único enlace de capa de acceso."
+  },
+  {
+   "id": "b6_5.4.d_16",
+   "subtopic": "5.4.d",
+   "name": "TrustSec/MACsec",
+   "question": "What is the general relationship between TrustSec's SGT-based segmentation and traditional micro-segmentation goals, in terms of how policy scales as the network grows?",
+   "options": {
+    "A": "Because SGT-based policy is expressed in terms of group membership (source SGT to destination SGT) rather than specific IP addresses or physical topology, the number of policy rules needed to express a given segmentation goal tends to scale with the number of groups rather than the number of individual IP addresses or subnets, which can be significantly more manageable in a large, dynamic environment than trying to maintain an equivalent segmentation policy using traditional IP/subnet-based ACLs that must be updated whenever addressing or topology changes",
+    "B": "TrustSec's SGT-based policy model scales identically to traditional IP-address-based ACL policy in every possible way, requiring the exact same amount of policy rule maintenance regardless of which approach is used",
+    "C": "SGT-based policy actually requires dramatically more individual rules to be manually maintained than an equivalent traditional IP-based ACL approach, the reverse of the typical scalability rationale for adopting TrustSec",
+    "D": "TrustSec's group-based policy model has no relationship whatsoever to network segmentation scalability, and exists purely as an alternative labeling convention with zero difference in actual policy rule count or maintenance overhead"
+   },
+   "correct": "A",
+   "explanation_es": "Como la política basada en SGT se expresa en términos de membresía de grupo (SGT origen a SGT destino) en lugar de direcciones IP específicas o topología física, la cantidad de reglas de política necesarias para expresar un objetivo de segmentación dado tiende a escalar con la cantidad de grupos en lugar de con la cantidad de direcciones IP o subredes individuales, lo cual puede ser significativamente más manejable en un entorno grande y dinámico que intentar mantener una política de segmentación equivalente usando ACLs tradicionales basadas en IP/subred que deben actualizarse cada vez que cambia el direccionamiento o la topología."
+  },
+  {
+   "id": "b6_5.4.d_17",
+   "subtopic": "5.4.d",
+   "name": "TrustSec/MACsec",
+   "question": "Why does deploying TrustSec typically require close integration with an identity/NAC platform like Cisco ISE, rather than SGTs being assigned in a purely static, manually configured way everywhere?",
+   "options": {
+    "A": "While SGTs can be statically assigned in some scenarios, TrustSec's real value in dynamic environments comes from ISE dynamically assigning an SGT to a session based on the outcome of authentication/authorization (such as a user's role, device type, or posture status), meaning the SGT assignment automatically reflects the actual, current identity/context of the connecting endpoint rather than requiring an administrator to manually and statically pre-map every possible endpoint to a fixed SGT ahead of time",
+    "B": "TrustSec has no relationship whatsoever to any identity or NAC platform like ISE, and SGTs can only ever be assigned through completely manual, static configuration entered separately and independently on every single switch port",
+    "C": "ISE's sole function in a TrustSec deployment is to physically manufacture and distribute network cabling, with no relationship whatsoever to dynamically assigning SGTs based on authentication or authorization outcomes",
+    "D": "Once an SGT is assigned to a session via ISE, that same assignment applies permanently and identically to every future session for every device on the entire network, regardless of that device's actual subsequent authentication outcome"
+   },
+   "correct": "A",
+   "explanation_es": "Aunque los SGT se pueden asignar de forma estática en algunos escenarios, el valor real de TrustSec en entornos dinámicos viene de que ISE asigne dinámicamente un SGT a una sesión basándose en el resultado de la autenticación/autorización (como el rol de un usuario, tipo de dispositivo, o estado de postura), lo que significa que la asignación de SGT refleja automáticamente la identidad/contexto real y actual del endpoint que se conecta, en lugar de requerir que un administrador mapee manual y estáticamente cada posible endpoint a un SGT fijo de antemano."
+  },
+  {
+   "id": "b6_5.4.d_18",
+   "subtopic": "5.4.d",
+   "name": "TrustSec/MACsec",
+   "question": "What is the general purpose of an 'SGACL matrix' (the grid of source SGT vs. destination SGT policy decisions) managed centrally (e.g., via ISE) in a TrustSec deployment?",
+   "options": {
+    "A": "The SGACL matrix provides a single, centralized, visual representation of the segmentation policy across the entire TrustSec domain (which source SGTs are permitted to communicate with which destination SGTs, and under what conditions), making it easier for an administrator to understand, audit, and manage the overall segmentation policy compared to piecing together the equivalent policy from many separate, device-specific traditional ACL configurations scattered across the network",
+    "B": "The SGACL matrix has no relationship whatsoever to visualizing or managing segmentation policy, and instead exclusively displays the physical rack locations of every switch in the TrustSec domain",
+    "C": "An SGACL matrix can only ever define policy for a single pair of SGTs at a time, with no capability whatsoever to represent or manage policy across multiple different SGT pairs simultaneously in one unified view",
+    "D": "Once an SGACL matrix is defined centrally, it has no actual effect on how traffic is enforced anywhere in the network, serving purely as a documentation artifact with zero functional enforcement capability"
+   },
+   "correct": "A",
+   "explanation_es": "La matriz de SGACL da una representación única, centralizada y visual de la política de segmentación en todo el dominio TrustSec (qué SGTs de origen tienen permitido comunicarse con qué SGTs de destino, y bajo qué condiciones), facilitando que un administrador entienda, audite y gestione la política de segmentación general comparado con armar la política equivalente a partir de muchas configuraciones de ACL tradicionales separadas y específicas de dispositivo dispersas por la red."
+  },
+  {
+   "id": "b6_5.4.d_19",
+   "subtopic": "5.4.d",
+   "name": "TrustSec/MACsec",
+   "question": "Why can combining TrustSec (SGT-based logical segmentation) with MACsec (link-level encryption) together provide a more comprehensive security posture than deploying either technology alone?",
+   "options": {
+    "A": "TrustSec addresses which groups of traffic are logically permitted to communicate with which other groups (segmentation/access control), while MACsec addresses whether traffic on a given physical link can be read/tampered with by someone with physical access to that link (confidentiality/integrity); the two address genuinely different threat vectors (unauthorized logical communication versus physical link interception) and are complementary rather than redundant with each other",
+    "B": "TrustSec and MACsec address exactly the same threat vector in an identical way, making it entirely redundant and unnecessary to deploy both technologies together in the same network",
+    "C": "MACsec's sole function is to perform SGT-based segmentation, and TrustSec's sole function is to perform link-level frame encryption, the reverse of their actual respective, distinct roles within a TrustSec deployment",
+    "D": "Deploying TrustSec always and completely eliminates any possible benefit from also deploying MACsec, since TrustSec by itself already provides equivalent link-level frame encryption with no need for any additional encryption technology"
+   },
+   "correct": "A",
+   "explanation_es": "TrustSec aborda qué grupos de tráfico tienen permitido lógicamente comunicarse con qué otros grupos (segmentación/control de acceso), mientras que MACsec aborda si el tráfico en un enlace físico dado puede ser leído/manipulado por alguien con acceso físico a ese enlace (confidencialidad/integridad); ambos abordan vectores de amenaza genuinamente distintos (comunicación lógica no autorizada versus interceptación física del enlace) y son complementarios en lugar de redundantes entre sí."
+  },
+  {
+   "id": "b6_5.4.d_20",
+   "subtopic": "5.4.d",
+   "name": "TrustSec/MACsec",
+   "question": "What consideration is important regarding MACsec's performance/latency impact on a switch, given that encryption/decryption must occur on every frame traversing a MACsec-protected link?",
+   "options": {
+    "A": "Because MACsec encryption/decryption is typically performed in dedicated hardware (ASIC-based) on modern Cisco switching platforms rather than in software, the performance/latency impact is generally minimal on supported hardware, though it's still an important consideration when selecting hardware for a MACsec deployment, since not every platform/line card necessarily has the same level of hardware-accelerated MACsec support",
+    "B": "MACsec always and inevitably introduces such severe performance degradation that no modern Cisco switching platform is capable of supporting it at any meaningful production traffic volume",
+    "C": "MACsec encryption/decryption has zero relationship whatsoever to switch hardware capability, since the protocol is defined to always be processed entirely in software regardless of the underlying platform's hardware architecture",
+    "D": "Performance impact is not a relevant consideration for MACsec deployment planning at all, since every single Cisco switching platform ever manufactured provides completely identical MACsec hardware acceleration capability"
+   },
+   "correct": "A",
+   "explanation_es": "Como el cifrado/descifrado de MACsec típicamente se realiza en hardware dedicado (basado en ASIC) en las plataformas de switching modernas de Cisco en lugar de por software, el impacto en rendimiento/latencia generalmente es mínimo en hardware soportado, aunque sigue siendo una consideración importante al elegir hardware para un despliegue de MACsec, ya que no toda plataforma/tarjeta de línea necesariamente tiene el mismo nivel de soporte de MACsec acelerado por hardware."
   }
  ]
 }
