@@ -1,6 +1,6 @@
 {
- "version": "2026-09-08_v5",
- "total": 286,
+ "version": "2026-09-08_v4",
+ "total": 397,
  "questions": [
   {
    "id": "trustsec_01",
@@ -4005,6 +4005,1560 @@
    },
    "correct": "D",
    "explanation_es": "HTTP 204 No Content indica que la solicitud se procesó exitosamente pero no hay contenido para devolver — es común, por ejemplo, como respuesta a un DELETE exitoso donde no hace falta retornar datos."
+  },
+  {
+   "id": "b6_1.1.a_06",
+   "subtopic": "1.1.a",
+   "name": "Diseños de red (2-tier/3-tier/fabric/cloud)",
+   "question": "In a spine-leaf (Clos) fabric design commonly used in data centers, what is a defining architectural principle?",
+   "options": {
+    "A": "Every leaf switch connects to every spine switch, and leaf switches never connect directly to each other, giving predictable equal-cost paths between any two leaves",
+    "B": "Spine switches connect only to each other in a ring, while leaf switches form a separate independent mesh with no connection to the spine at all",
+    "C": "Only a single spine switch is permitted per fabric, with all leaf switches connecting exclusively to that one central device",
+    "D": "Leaf switches connect directly to each other in a full mesh, and the spine layer is used only as a passive Layer 1 patch panel"
+   },
+   "correct": "A",
+   "explanation_es": "En un diseño spine-leaf (topología Clos), cada switch leaf se conecta a todos los switches spine, y los leaves nunca se conectan directamente entre sí. Esto da caminos de igual costo (ECMP) predecibles entre cualquier par de leaves, con latencia y ancho de banda consistentes independientemente de qué leaf a leaf se comunique."
+  },
+  {
+   "id": "b6_1.1.a_07",
+   "subtopic": "1.1.a",
+   "name": "Diseños de red (2-tier/3-tier/fabric/cloud)",
+   "question": "Why do modern data center fabrics favor a spine-leaf design over a traditional 3-tier (core/distribution/access) design?",
+   "options": {
+    "A": "Spine-leaf eliminates the need for any IP addressing within the data center",
+    "B": "Spine-leaf provides predictable, low-latency East-West bandwidth between any two leaf switches, which suits the high server-to-server traffic patterns typical of modern data centers, better than a hierarchical design optimized for North-South traffic",
+    "C": "Spine-leaf requires fewer total switch ports than a 3-tier design of equivalent scale",
+    "D": "Spine-leaf was designed specifically to eliminate the need for any Layer 3 routing in the data center"
+   },
+   "correct": "B",
+   "explanation_es": "El tráfico en los data centers modernos es mayormente East-West (servidor a servidor, por ejemplo entre microservicios), a diferencia del tráfico North-South típico de un campus. El diseño spine-leaf ofrece ancho de banda y latencia predecibles entre cualquier par de leaves, algo que un diseño jerárquico de 3 capas (optimizado para tráfico hacia/desde un borde central) no logra tan eficientemente."
+  },
+  {
+   "id": "b6_1.1.a_08",
+   "subtopic": "1.1.a",
+   "name": "Diseños de red (2-tier/3-tier/fabric/cloud)",
+   "question": "What does 'oversubscription ratio' refer to in the context of a spine-leaf or hierarchical network design?",
+   "options": {
+    "A": "The ratio of downlink (access-facing) bandwidth to uplink bandwidth toward the next layer, indicating how much traffic could theoretically be blocked if every downlink were fully utilized simultaneously",
+    "B": "The number of physical switches purchased compared to the number actually installed in the rack",
+    "C": "The ratio of IPv4 addresses to IPv6 addresses configured on a given VLAN",
+    "D": "The percentage of ports on a switch that are administratively shut down for security reasons"
+   },
+   "correct": "A",
+   "explanation_es": "El ratio de oversubscription compara el ancho de banda total disponible hacia los downlinks (por ejemplo, hacia los servidores o el access) contra el ancho de banda de los uplinks hacia la capa siguiente. Un ratio de 3:1, por ejemplo, significa que si los tres downlinks estuvieran saturados simultáneamente, el uplink no podría cursar todo ese tráfico sin congestión."
+  },
+  {
+   "id": "b6_1.1.a_09",
+   "subtopic": "1.1.a",
+   "name": "Diseños de red (2-tier/3-tier/fabric/cloud)",
+   "question": "In network design, what does a 'modular' or 'building block' approach (e.g., separate blocks for campus, data center, WAN edge) primarily achieve?",
+   "options": {
+    "A": "It guarantees that no additional hardware will ever need to be purchased as the network grows",
+    "B": "It isolates failures and complexity within each functional block, and allows each block to be scaled, upgraded, or troubleshot independently without redesigning the entire network",
+    "C": "It requires every block to use an identical IP addressing scheme with no variation allowed",
+    "D": "It removes the need for any routing between the different blocks of the network"
+   },
+   "correct": "B",
+   "explanation_es": "El enfoque modular (por bloques funcionales) contiene las fallas y la complejidad dentro de cada bloque (campus, data center, WAN, etc.), permitiendo escalar, actualizar o diagnosticar cada uno de forma independiente sin tener que rediseñar toda la red — un principio central del diseño jerárquico de Cisco."
+  },
+  {
+   "id": "b6_1.1.a_10",
+   "subtopic": "1.1.a",
+   "name": "Diseños de red (2-tier/3-tier/fabric/cloud)",
+   "question": "Which statement accurately distinguishes 'North-South' traffic from 'East-West' traffic in network design terminology?",
+   "options": {
+    "A": "North-South traffic flows between clients and servers/services (often crossing the network's edge toward users or the internet), while East-West traffic flows between servers or workloads within the data center itself",
+    "B": "North-South traffic only occurs on IPv6 networks, while East-West traffic only occurs on IPv4 networks",
+    "C": "North-South and East-West are simply two different names for the exact same traffic pattern, chosen based on regional naming convention",
+    "D": "East-West traffic refers only to traffic between two different physical data center sites, and North-South refers only to traffic within a single rack"
+   },
+   "correct": "A",
+   "explanation_es": "El tráfico North-South es el que entra o sale del data center/campus hacia los clientes o internet (cliente-servidor). El tráfico East-West es el que ocurre entre servidores o cargas de trabajo dentro del mismo data center (por ejemplo, entre microservicios) — este patrón ha crecido mucho con arquitecturas distribuidas y es la razón principal detrás del diseño spine-leaf."
+  },
+  {
+   "id": "b6_1.1.a_11",
+   "subtopic": "1.1.a",
+   "name": "Diseños de red (2-tier/3-tier/fabric/cloud)",
+   "question": "When comparing public cloud, private cloud, and hybrid cloud deployment models, what best characterizes a 'hybrid cloud'?",
+   "options": {
+    "A": "A deployment that exclusively uses on-premises infrastructure with no connection whatsoever to any public cloud provider",
+    "B": "A combination of private (on-premises or dedicated) infrastructure and public cloud resources, typically interconnected so that workloads or data can move between the two as needed",
+    "C": "A cloud model where a single public cloud provider hosts all workloads for multiple, entirely unrelated customers on strictly isolated hardware",
+    "D": "A deployment model that is defined solely by whether the organization pays a monthly subscription instead of buying hardware outright"
+   },
+   "correct": "B",
+   "explanation_es": "Una nube híbrida combina infraestructura privada (propia o dedicada) con recursos de nube pública, típicamente interconectados para que las cargas de trabajo o los datos puedan moverse entre ambos entornos según convenga (por ejemplo, picos de demanda desbordando hacia la nube pública)."
+  },
+  {
+   "id": "b6_1.1.a_12",
+   "subtopic": "1.1.a",
+   "name": "Diseños de red (2-tier/3-tier/fabric/cloud)",
+   "question": "In the traditional 3-tier campus model, what functional separation exists between the access layer and the distribution layer regarding VLANs?",
+   "options": {
+    "A": "VLANs are configured exclusively at the core layer, and neither the access nor the distribution layer has any VLAN awareness at all",
+    "B": "The access layer typically terminates end-user VLANs at the switch port, while the distribution layer often serves as the Layer 2/Layer 3 boundary, aggregating multiple access-layer VLANs and routing between them",
+    "C": "The distribution layer only ever operates at Layer 1, with all VLAN tagging and routing decisions made exclusively at the access layer",
+    "D": "Access and distribution layers must always use exactly the same single VLAN throughout the entire campus for the design to function"
+   },
+   "correct": "B",
+   "explanation_es": "En el modelo tradicional de 3 capas, el access layer conecta a los usuarios finales dentro de sus VLANs, mientras que la distribution layer suele actuar como el límite Capa 2/Capa 3, agregando las VLANs de múltiples switches de acceso y enrutando entre ellas — de ahí su rol central en el diseño jerárquico."
+  },
+  {
+   "id": "b6_1.1.a_13",
+   "subtopic": "1.1.a",
+   "name": "Diseños de red (2-tier/3-tier/fabric/cloud)",
+   "question": "What is a key limitation of a traditional 3-tier VLAN-based campus design that fabric-based designs (like SD-Access) aim to address?",
+   "options": {
+    "A": "3-tier designs cannot support any wireless access points under any circumstances",
+    "B": "VLANs in a 3-tier design are often tied to specific physical switches/subnets, making network-wide segmentation and consistent policy enforcement across the whole campus difficult without extending Layer 2 broadly (which introduces its own risks, like large broadcast domains)",
+    "C": "3-tier designs require every device on the network to use a public IP address",
+    "D": "3-tier designs cannot use any routing protocol other than static routes"
+   },
+   "correct": "B",
+   "explanation_es": "En un diseño tradicional, las VLANs suelen estar atadas a switches/subredes físicas, lo que dificulta aplicar segmentación y políticas consistentes en toda la red sin extender Capa 2 ampliamente (lo cual trae riesgos, como dominios de broadcast grandes). Las fabrics como SD-Access resuelven esto desacoplando la política (SGT) de la topología/IP."
+  },
+  {
+   "id": "b6_1.1.a_14",
+   "subtopic": "1.1.a",
+   "name": "Diseños de red (2-tier/3-tier/fabric/cloud)",
+   "question": "Which statement about Cisco Validated Designs (CVDs) is accurate?",
+   "options": {
+    "A": "A CVD is a proprietary hardware component that must be physically installed in every Cisco switch",
+    "B": "CVDs are tested, documented reference architectures published by Cisco that provide design guidance and best practices for specific network scenarios, helping reduce design risk compared to building a fully custom architecture from scratch",
+    "C": "CVDs are a certification that individual network engineers must obtain before configuring any Cisco device",
+    "D": "CVDs eliminate the need for any site-specific customization or planning whatsoever"
+   },
+   "correct": "B",
+   "explanation_es": "Los Cisco Validated Designs (CVD) son arquitecturas de referencia probadas y documentadas por Cisco que ofrecen guías de diseño y mejores prácticas para escenarios específicos, ayudando a reducir el riesgo de diseño frente a construir una arquitectura completamente a medida desde cero."
+  },
+  {
+   "id": "b6_1.1.a_15",
+   "subtopic": "1.1.a",
+   "name": "Diseños de red (2-tier/3-tier/fabric/cloud)",
+   "question": "In a 2-tier (collapsed core) design, what operational trade-off is typically accepted compared to a full 3-tier design?",
+   "options": {
+    "A": "A 2-tier design always provides strictly higher total bandwidth than any 3-tier design of the same physical size",
+    "B": "By merging the core and distribution functions into one layer, the design reduces cost and complexity for smaller networks, but may offer less separation of failure domains and less room to scale to very large campus sizes compared to a dedicated 3-tier design",
+    "C": "A 2-tier design cannot support any form of Layer 3 routing under any circumstances",
+    "D": "A 2-tier design requires strictly more physical switches than an equivalent 3-tier design"
+   },
+   "correct": "B",
+   "explanation_es": "Al fusionar las funciones de core y distribución en una sola capa, un diseño de 2 niveles reduce costo y complejidad para redes más pequeñas, pero típicamente ofrece menos separación de dominios de falla y menos margen de crecimiento hacia campus muy grandes, comparado con un diseño de 3 niveles dedicado."
+  },
+  {
+   "id": "b6_1.1.a_16",
+   "subtopic": "1.1.a",
+   "name": "Diseños de red (2-tier/3-tier/fabric/cloud)",
+   "question": "What is a key advantage of a cloud-managed networking model (such as Meraki dashboard or Catalyst Center cloud monitoring) for an organization with many geographically distributed small sites?",
+   "options": {
+    "A": "It eliminates the need for any network hardware at each individual site",
+    "B": "It provides a single centralized point of configuration, monitoring, and troubleshooting across many distributed sites, without requiring on-site staff to manage each location's hardware individually via local CLI access",
+    "C": "It guarantees that every site will experience zero downtime regardless of local internet connectivity",
+    "D": "It requires each site to maintain its own completely separate management platform with no central visibility"
+   },
+   "correct": "B",
+   "explanation_es": "La gestión desde la nube ofrece un único punto centralizado de configuración, monitoreo y troubleshooting para muchos sitios distribuidos geográficamente, sin necesitar personal técnico local que gestione cada ubicación por CLI de forma individual — un beneficio clave para organizaciones con muchas sucursales pequeñas."
+  },
+  {
+   "id": "b6_1.1.a_17",
+   "subtopic": "1.1.a",
+   "name": "Diseños de red (2-tier/3-tier/fabric/cloud)",
+   "question": "In network design documentation, what is the difference between a 'physical topology' diagram and a 'logical topology' diagram?",
+   "options": {
+    "A": "There is no real difference; both terms describe exactly the same diagram used interchangeably",
+    "B": "A physical topology diagram shows actual devices, cabling, and physical connections; a logical topology diagram shows how traffic/data actually flows, such as VLANs, IP subnets, and routing relationships, regardless of the physical cabling layout",
+    "C": "A physical topology diagram only shows software configuration, while a logical topology diagram only shows hardware model numbers",
+    "D": "Logical topology diagrams are only used for wireless networks, while physical topology diagrams are only used for wired networks"
+   },
+   "correct": "B",
+   "explanation_es": "Un diagrama de topología física muestra los dispositivos reales, el cableado y las conexiones físicas. Un diagrama de topología lógica muestra cómo fluye realmente el tráfico/datos (VLANs, subredes IP, relaciones de enrutamiento), independientemente del cableado físico subyacente — ambos son complementarios para documentar una red."
+  },
+  {
+   "id": "b6_1.1.a_18",
+   "subtopic": "1.1.a",
+   "name": "Diseños de red (2-tier/3-tier/fabric/cloud)",
+   "question": "Which factor is a primary design driver for choosing a fabric-based architecture (like SD-Access or a data center VXLAN fabric) over a traditional VLAN-based design at scale?",
+   "options": {
+    "A": "Fabric-based architectures were created purely to reduce the number of vendors an organization needs to work with",
+    "B": "Fabric-based architectures decouple policy and segmentation from the physical IP addressing/topology, enabling consistent, scalable policy enforcement and simplified operations across a large number of switches without extending Layer 2 broadly",
+    "C": "Fabric-based architectures eliminate the need for any physical cabling between switches",
+    "D": "Fabric-based architectures are required by law in any network exceeding 100 connected devices"
+   },
+   "correct": "B",
+   "explanation_es": "Las arquitecturas basadas en fabric (SD-Access, fabrics VXLAN de data center) desacoplan la política y la segmentación de la IP/topología física, permitiendo aplicar políticas de forma consistente y escalable en muchos switches sin necesidad de extender Capa 2 ampliamente — el motor principal detrás de adoptarlas a gran escala."
+  },
+  {
+   "id": "b6_1.1.a_19",
+   "subtopic": "1.1.a",
+   "name": "Diseños de red (2-tier/3-tier/fabric/cloud)",
+   "question": "What does 'IaaS' (Infrastructure as a Service) refer to in the context of cloud service models relevant to network design?",
+   "options": {
+    "A": "A cloud model where the provider delivers fully finished, ready-to-use business applications, and the customer has no infrastructure to manage at all",
+    "B": "A cloud model where the provider offers fundamental computing resources — virtual machines, storage, and networking — while the customer manages the operating system, applications, and much of the network configuration on top of that infrastructure",
+    "C": "A licensing term that refers exclusively to the physical hardware warranty period offered by a vendor",
+    "D": "A protocol used specifically for encrypting traffic between two IaaS providers"
+   },
+   "correct": "B",
+   "explanation_es": "IaaS (Infraestructura como Servicio) es un modelo donde el proveedor ofrece recursos de cómputo fundamentales (VMs, almacenamiento, redes), mientras que el cliente gestiona el sistema operativo, las aplicaciones y buena parte de la configuración de red sobre esa infraestructura — a diferencia de PaaS o SaaS, donde el proveedor gestiona más capas."
+  },
+  {
+   "id": "b6_1.1.a_20",
+   "subtopic": "1.1.a",
+   "name": "Diseños de red (2-tier/3-tier/fabric/cloud)",
+   "question": "Why might an organization choose a hybrid cloud connectivity design (e.g., a dedicated private connection like AWS Direct Connect or Azure ExpressRoute) instead of routing all traffic to the cloud over the public internet?",
+   "options": {
+    "A": "Dedicated private connections are required by every cloud provider before any workload can be deployed at all",
+    "B": "A dedicated private connection can offer more predictable bandwidth, lower latency, and improved security/reliability compared to relying solely on best-effort public internet paths for critical hybrid workloads",
+    "C": "Dedicated private connections eliminate the need for any IP addressing on the cloud side entirely",
+    "D": "Public internet connectivity to a cloud provider is always technically impossible without a dedicated private circuit"
+   },
+   "correct": "B",
+   "explanation_es": "Una conexión privada dedicada hacia el proveedor de nube ofrece ancho de banda más predecible, menor latencia y mejor seguridad/confiabilidad comparado con depender únicamente de internet público (best-effort) para cargas de trabajo híbridas críticas — por eso se usa en diseños que exigen SLA más estrictos."
+  },
+  {
+   "id": "b6_1.1.a_21",
+   "subtopic": "1.1.a",
+   "name": "Diseños de red (2-tier/3-tier/fabric/cloud)",
+   "question": "In the context of intent-based networking (IBN) as a design philosophy, what is the general idea behind expressing network configuration as 'intent'?",
+   "options": {
+    "A": "Intent-based networking means every configuration must be typed manually into each device's CLI one command at a time, with no automation involved",
+    "B": "Intent-based networking means the administrator declares a high-level desired outcome (e.g., 'this group of users should have access to that group of resources'), and the system translates that intent into the detailed low-level device configuration needed to achieve it, often verifying that the actual network state matches the intent",
+    "C": "Intent-based networking refers exclusively to naming conventions used for VLAN IDs",
+    "D": "Intent-based networking eliminates the need for any network monitoring, since the network is assumed to always work correctly once intent is declared"
+   },
+   "correct": "B",
+   "explanation_es": "En redes basadas en intención, el administrador declara un resultado deseado de alto nivel (por ejemplo, 'este grupo de usuarios debe tener acceso a aquel grupo de recursos'), y el sistema traduce esa intención a la configuración detallada de bajo nivel necesaria, a menudo verificando continuamente que el estado real de la red coincida con esa intención declarada."
+  },
+  {
+   "id": "b6_1.1.a_22",
+   "subtopic": "1.1.a",
+   "name": "Diseños de red (2-tier/3-tier/fabric/cloud)",
+   "question": "Which statement correctly compares a traditional CLI-driven, box-by-box network design approach to a controller-based (e.g., Catalyst Center or SD-WAN vManage) design approach?",
+   "options": {
+    "A": "Both approaches are functionally identical in every respect, differing only in which vendor's logo appears on the management screen",
+    "B": "A controller-based approach centralizes configuration and policy definition, pushing consistent configuration to many devices from a single source of truth, whereas a traditional box-by-box approach requires configuring and maintaining consistency across each device individually via its own CLI",
+    "C": "A controller-based approach can only ever manage a single device at a time, exactly like box-by-box CLI configuration",
+    "D": "Box-by-box CLI configuration is always faster to deploy at scale than any controller-based approach, regardless of the number of devices involved"
+   },
+   "correct": "B",
+   "explanation_es": "Un enfoque basado en controlador centraliza la definición de configuración y política, empujando configuración consistente a muchos dispositivos desde una única fuente de verdad, mientras que el enfoque tradicional caja por caja requiere configurar y mantener la consistencia en cada dispositivo individualmente vía su propio CLI — una diferencia clave de escalabilidad operativa."
+  },
+  {
+   "id": "b6_1.1.a_23",
+   "subtopic": "1.1.a",
+   "name": "Diseños de red (2-tier/3-tier/fabric/cloud)",
+   "question": "What is a common reason a network designer would choose to keep certain workloads on-premises (private cloud/traditional data center) rather than migrating them fully to a public cloud?",
+   "options": {
+    "A": "On-premises infrastructure is always cheaper than public cloud under every possible circumstance with no exceptions",
+    "B": "Regulatory, data sovereignty, latency-sensitive, or legacy application compatibility requirements may make it impractical or non-compliant to move certain workloads to a public cloud provider",
+    "C": "Public cloud providers are legally prohibited from hosting any type of business application",
+    "D": "On-premises infrastructure requires no operational staff or maintenance whatsoever once installed"
+   },
+   "correct": "B",
+   "explanation_es": "Requisitos regulatorios, de soberanía de datos, sensibilidad a la latencia, o compatibilidad con aplicaciones legacy pueden hacer poco práctico o no conforme migrar ciertas cargas de trabajo a la nube pública — una consideración de diseño real detrás de mantener algunos workloads on-premises o en nube privada."
+  },
+  {
+   "id": "b6_1.1.a_24",
+   "subtopic": "1.1.a",
+   "name": "Diseños de red (2-tier/3-tier/fabric/cloud)",
+   "question": "In a 3-tier hierarchical design, why is it generally recommended to keep detailed security/QoS policy enforcement closer to the access layer edge rather than centralizing all of it at the core?",
+   "options": {
+    "A": "Because switches at the access layer are technically incapable of applying any policy at all",
+    "B": "Because enforcing policy as close as possible to the traffic's origin filters or shapes unwanted/misclassified traffic before it consumes bandwidth deeper in the network, and keeps the core layer focused on fast, low-latency forwarding rather than heavy per-flow inspection",
+    "C": "Because the core layer is physically incapable of running any software newer than five years old",
+    "D": "Because access-layer switches always have more CPU resources available than core switches"
+   },
+   "correct": "B",
+   "explanation_es": "Aplicar la política (seguridad, QoS) lo más cerca posible del origen del tráfico filtra o clasifica el tráfico no deseado antes de que consuma ancho de banda más adentro de la red, y mantiene a la capa core enfocada en reenvío rápido y de baja latencia en vez de inspección pesada por flujo — un principio clásico del diseño jerárquico."
+  },
+  {
+   "id": "b6_1.1.a_25",
+   "subtopic": "1.1.a",
+   "name": "Diseños de red (2-tier/3-tier/fabric/cloud)",
+   "question": "Which best describes the relationship between the underlay network and the overlay network in a fabric-based design (such as SD-Access or a VXLAN data center fabric)?",
+   "options": {
+    "A": "The underlay and overlay are two unrelated networks that never interact or depend on each other in any way",
+    "B": "The underlay provides basic IP reachability (routed connectivity) between fabric nodes, and the overlay (e.g., VXLAN) is built logically on top of that underlay to carry segmented, policy-aware traffic between endpoints",
+    "C": "The overlay must be built first, and the underlay is generated automatically afterward with no IP addressing plan required",
+    "D": "The underlay and overlay refer to the exact same layer, just using different terminology depending on the vendor"
+   },
+   "correct": "B",
+   "explanation_es": "El underlay provee conectividad IP básica (enrutada) entre los nodos de la fabric, y el overlay (por ejemplo, VXLAN) se construye lógicamente encima de ese underlay para transportar tráfico segmentado y consciente de políticas entre endpoints — el underlay es la base de transporte, el overlay es donde vive la lógica de la fabric."
+  },
+  {
+   "id": "b6_1.1.a_26",
+   "subtopic": "1.1.a",
+   "name": "Diseños de red (2-tier/3-tier/fabric/cloud)",
+   "question": "When designing network redundancy at the distribution/core layer of a campus, what is the general goal of deploying redundant links and redundant devices together?",
+   "options": {
+    "A": "To ensure that the network requires manual intervention to reroute traffic after every single link failure",
+    "B": "To eliminate any single point of failure, so that the failure of one link or one device does not disrupt overall connectivity, ideally with automatic failover handled by protocols like STP, FHRP, or dynamic routing",
+    "C": "To intentionally introduce Layer 2 loops that STP can then be tested against during a scheduled maintenance window",
+    "D": "Redundant links and devices are purely a cosmetic requirement with no actual availability benefit"
+   },
+   "correct": "B",
+   "explanation_es": "El objetivo de desplegar enlaces y dispositivos redundantes es eliminar puntos únicos de falla, de forma que la caída de un enlace o un dispositivo no interrumpa la conectividad general, idealmente con conmutación automática manejada por protocolos como STP, FHRP o enrutamiento dinámico — sin necesitar intervención manual."
+  },
+  {
+   "id": "b6_1.1.b_06",
+   "subtopic": "1.1.b",
+   "name": "Alta disponibilidad (SSO/FHRP)",
+   "question": "What is the relationship between NSF (Non-Stop Forwarding) and SSO (Stateful Switchover)?",
+   "options": {
+    "A": "NSF and SSO are unrelated features that cannot be used together on the same device",
+    "B": "NSF works together with SSO: while SSO synchronizes control-plane state between supervisors so a switchover doesn't require a reboot, NSF allows the data plane to continue forwarding packets during that switchover using the last known-good routing information, minimizing packet loss",
+    "C": "NSF replaces the need for SSO entirely, making SSO obsolete on any modern platform",
+    "D": "NSF only applies to wireless controllers, while SSO only applies to routers"
+   },
+   "correct": "B",
+   "explanation_es": "NSF y SSO trabajan juntos: SSO sincroniza el estado del plano de control entre supervisoras para que un switchover no requiera reinicio, mientras que NSF permite que el plano de datos siga reenviando paquetes durante ese switchover usando la última información de enrutamiento conocida, minimizando la pérdida de paquetes durante la transición."
+  },
+  {
+   "id": "b6_1.1.b_07",
+   "subtopic": "1.1.b",
+   "name": "Alta disponibilidad (SSO/FHRP)",
+   "question": "In an HSRP deployment, what does the 'standby' router do while the 'active' router is functioning normally?",
+   "options": {
+    "A": "The standby router actively forwards half of the traffic for the group at all times, sharing the load equally with the active router",
+    "B": "The standby router monitors the active router's hello messages and is prepared to take over the active role if the active router fails or stops sending hellos, but does not forward traffic for the virtual IP while in standby state",
+    "C": "The standby router is completely powered off until a failover event occurs",
+    "D": "The standby router only monitors DNS server reachability and has no role related to gateway redundancy"
+   },
+   "correct": "B",
+   "explanation_es": "El router en estado Standby monitorea los mensajes hello del Active y está listo para asumir el rol activo si este falla o deja de enviar hellos, pero no reenvía tráfico para la IP virtual mientras está en estado standby — solo un router reenvía tráfico para el grupo HSRP a la vez (a diferencia de GLBP)."
+  },
+  {
+   "id": "b6_1.1.b_08",
+   "subtopic": "1.1.b",
+   "name": "Alta disponibilidad (SSO/FHRP)",
+   "question": "Which FHRP tracking mechanism allows a router to lower its own HSRP/VRRP priority if a specific uplink interface goes down, encouraging failover to a peer router?",
+   "options": {
+    "A": "Interface tracking (e.g., 'standby track' in HSRP), which decrements the local priority by a configured amount when the tracked interface fails, potentially causing another router to become active instead",
+    "B": "VTP pruning, which automatically reassigns the active role based on VLAN database revision numbers",
+    "C": "CDP neighbor discovery, which has no relationship to FHRP priority or state at all",
+    "D": "Spanning Tree root guard, which blocks any FHRP hello messages received on a non-root port"
+   },
+   "correct": "A",
+   "explanation_es": "El tracking de interfaz (por ejemplo, 'standby track' en HSRP) permite que un router disminuya su propia prioridad si una interfaz rastreada (típicamente un uplink) cae, lo que puede provocar que otro router con mayor prioridad relativa se vuelva Active — así el failover ocurre no solo si el router entero falla, sino también si pierde conectividad ascendente."
+  },
+  {
+   "id": "b6_1.1.b_09",
+   "subtopic": "1.1.b",
+   "name": "Alta disponibilidad (SSO/FHRP)",
+   "question": "How many virtual MAC addresses does GLBP typically use for a single group, compared to HSRP?",
+   "options": {
+    "A": "GLBP uses a single shared virtual MAC for the entire group, exactly the same as HSRP, with no per-router distinction",
+    "B": "GLBP can assign up to four different virtual MAC addresses (one per AVF, Active Virtual Forwarder) within a group, allowing different client default gateways to be load-balanced across multiple physical routers, whereas HSRP uses a single virtual MAC shared by only one active forwarder at a time",
+    "C": "GLBP does not use any virtual MAC address at all, relying purely on virtual IP addressing",
+    "D": "GLBP requires a unique virtual MAC per VLAN interface on every router in the network, regardless of group membership"
+   },
+   "correct": "B",
+   "explanation_es": "GLBP puede asignar hasta cuatro MAC virtuales distintas (una por AVF, Active Virtual Forwarder) dentro de un mismo grupo, permitiendo balancear las respuestas ARP del gateway virtual entre varios routers físicos. HSRP, en cambio, usa una única MAC virtual asociada a un solo router activo por vez."
+  },
+  {
+   "id": "b6_1.1.b_10",
+   "subtopic": "1.1.b",
+   "name": "Alta disponibilidad (SSO/FHRP)",
+   "question": "What is the purpose of the HSRP or VRRP 'hello timer' and 'hold timer' (or 'dead timer')?",
+   "options": {
+    "A": "The hello timer controls how often status messages are sent between group members, and the hold/dead timer defines how long a peer can go without receiving a hello before declaring the other router dead and initiating failover",
+    "B": "The hello timer determines how often the physical link light blinks on the switch port",
+    "C": "Both timers control exclusively how often DHCP leases are renewed for end hosts using the virtual gateway",
+    "D": "The hold timer must always be set to a value smaller than the hello timer, or the protocol will fail to start"
+   },
+   "correct": "A",
+   "explanation_es": "El hello timer controla cada cuánto se envían los mensajes de estado entre los miembros del grupo FHRP, y el hold/dead timer define cuánto tiempo puede pasar sin recibir un hello del peer antes de considerarlo caído e iniciar el failover. Por buena práctica, el hold timer debe ser mayor (típicamente 3-4 veces) que el hello timer."
+  },
+  {
+   "id": "b6_1.1.b_11",
+   "subtopic": "1.1.b",
+   "name": "Alta disponibilidad (SSO/FHRP)",
+   "question": "Why might a network designer choose to configure multiple HSRP groups across different VLANs, each with a different router as the active gateway, instead of always making the same router active for every VLAN?",
+   "options": {
+    "A": "HSRP technically requires a different active router for every VLAN, or the protocol will refuse to start",
+    "B": "Distributing the active role across different routers for different VLANs allows the uplink traffic load to be spread more evenly across multiple routers/paths, rather than concentrating all forwarding on a single device",
+    "C": "This configuration is purely cosmetic and provides no operational benefit whatsoever",
+    "D": "Doing this disables the ability to use interface tracking on any of the HSRP groups involved"
+   },
+   "correct": "B",
+   "explanation_es": "Distribuir el rol Active entre distintos routers para distintas VLANs permite repartir la carga de tráfico de uplink entre varios dispositivos/rutas, en lugar de concentrar todo el reenvío en un solo equipo — una técnica común para aprovechar mejor el ancho de banda disponible en un diseño con dos routers de distribución."
+  },
+  {
+   "id": "b6_1.1.b_12",
+   "subtopic": "1.1.b",
+   "name": "Alta disponibilidad (SSO/FHRP)",
+   "question": "In terms of standardization, which of these statements about VRRP is correct?",
+   "options": {
+    "A": "VRRP was defined by an IETF RFC (originally RFC 2338, later RFC 3768 and RFC 5798) specifically to provide an open, multi-vendor alternative to Cisco's proprietary HSRP",
+    "B": "VRRP is a Cisco-only proprietary protocol with no IETF standardization whatsoever",
+    "C": "VRRP was created by the IEEE exclusively for use within 802.1Q trunk negotiation",
+    "D": "VRRP has never been documented in any RFC and exists only as informal vendor documentation"
+   },
+   "correct": "A",
+   "explanation_es": "VRRP fue definido por el IETF (originalmente RFC 2338, luego RFC 3768 y RFC 5798) específicamente para ofrecer una alternativa abierta y multi-vendor al HSRP propietario de Cisco, permitiendo interoperabilidad de redundancia de gateway entre equipos de distintos fabricantes."
+  },
+  {
+   "id": "b6_1.1.b_13",
+   "subtopic": "1.1.b",
+   "name": "Alta disponibilidad (SSO/FHRP)",
+   "question": "What does it mean for a router to be the VRRP 'IP address owner' in a given VRRP group?",
+   "options": {
+    "A": "It means the router physically owns the actual interface IP address that is also being used as the group's virtual IP address, which affects certain default behaviors such as automatically preempting and responding to ICMP pings sent to the virtual IP",
+    "B": "It means the router is the only device on the network permitted to send any traffic at all",
+    "C": "It means the router has purchased a static public IP address from an internet registry specifically for that VRRP group",
+    "D": "It means the router must be physically located in the same rack as every other member of the VRRP group"
+   },
+   "correct": "A",
+   "explanation_es": "El 'IP address owner' es el router cuya IP real de interfaz coincide con la IP virtual del grupo VRRP. Esto afecta ciertos comportamientos por defecto, como preemption automática y responder directamente a pings ICMP dirigidos a la IP virtual — un concepto propio de VRRP que no existe de la misma forma en HSRP."
+  },
+  {
+   "id": "b6_1.1.b_14",
+   "subtopic": "1.1.b",
+   "name": "Alta disponibilidad (SSO/FHRP)",
+   "question": "How does a client host typically use an FHRP virtual IP address (HSRP/VRRP/GLBP) in its own configuration?",
+   "options": {
+    "A": "The client is configured with the FHRP virtual IP address as its default gateway, so it always sends off-subnet traffic to that virtual IP, regardless of which physical router is currently active behind it",
+    "B": "The client must be manually reconfigured with a new default gateway IP address every time an FHRP failover occurs",
+    "C": "The client uses the FHRP virtual IP only for DNS resolution, never as a default gateway",
+    "D": "FHRP virtual IP addresses can never be used as a default gateway; they exist purely for internal router-to-router communication"
+   },
+   "correct": "A",
+   "explanation_es": "El host cliente se configura con la IP virtual del FHRP como su default gateway, por lo que siempre envía el tráfico fuera de subred a esa IP virtual, sin importar qué router físico esté actualmente activo detrás de ella — esto es justamente lo que hace transparente el failover para los endpoints."
+  },
+  {
+   "id": "b6_1.1.b_15",
+   "subtopic": "1.1.b",
+   "name": "Alta disponibilidad (SSO/FHRP)",
+   "question": "What potential issue can arise if 'preempt' is enabled on an HSRP group but the returning higher-priority router's uplink is not yet fully converged (e.g., routing protocol still reconverging) when it reclaims the active role?",
+   "options": {
+    "A": "No issue can ever occur, since preemption always guarantees a perfectly seamless transition with zero risk under every condition",
+    "B": "The router could become the HSRP active for the group and start receiving traffic for the virtual IP before its own upstream routing is fully functional, potentially causing a brief black-holing of traffic until convergence completes",
+    "C": "Preemption automatically disables itself if the uplink is not fully converged, so this scenario is not possible by design",
+    "D": "This scenario only affects VRRP, and HSRP is immune to it entirely"
+   },
+   "correct": "B",
+   "explanation_es": "Si un router con mayor prioridad reclama el rol Active antes de que su propio enrutamiento ascendente haya convergido completamente, puede empezar a recibir tráfico para la IP virtual sin poder reenviarlo correctamente todavía, causando una breve pérdida de tráfico (black-holing) hasta que termine de converger — por eso a veces se retrasa la preemption con temporizadores."
+  },
+  {
+   "id": "b6_1.1.b_16",
+   "subtopic": "1.1.b",
+   "name": "Alta disponibilidad (SSO/FHRP)",
+   "question": "Which statement correctly describes how GLBP achieves load balancing of outbound traffic from clients, given that clients only ever point to a single default gateway IP?",
+   "options": {
+    "A": "GLBP achieves load balancing by responding to different clients' ARP requests for the virtual IP with different virtual MAC addresses (belonging to different AVFs), so different clients end up sending their traffic to different physical routers even though they share one virtual gateway IP",
+    "B": "GLBP achieves load balancing by forcing every client to periodically change its own configured default gateway IP address",
+    "C": "GLBP achieves load balancing only by adjusting DHCP lease times for each client",
+    "D": "GLBP cannot perform any load balancing; it only provides simple failover exactly like HSRP"
+   },
+   "correct": "A",
+   "explanation_es": "GLBP logra balanceo de carga respondiendo a las solicitudes ARP de distintos clientes con distintas MAC virtuales (correspondientes a distintos AVFs), de forma que distintos clientes terminan enviando su tráfico a distintos routers físicos aunque todos compartan la misma IP virtual de gateway — el 'truco' está en la respuesta ARP, no en la IP."
+  },
+  {
+   "id": "b6_1.1.b_17",
+   "subtopic": "1.1.b",
+   "name": "Alta disponibilidad (SSO/FHRP)",
+   "question": "In the context of high availability design, what does 'MTBF' (Mean Time Between Failures) and 'MTTR' (Mean Time To Repair) help a network designer estimate?",
+   "options": {
+    "A": "MTBF and MTTR are marketing terms with no quantifiable meaning used in real network design",
+    "B": "MTBF estimates the average time a component or system operates before failing, while MTTR estimates the average time needed to restore service after a failure; together they help estimate overall system availability (uptime percentage)",
+    "C": "MTBF measures only the physical temperature of a device, and MTTR measures only its power consumption",
+    "D": "MTBF and MTTR apply exclusively to software licensing renewal cycles, not to hardware or network availability"
+   },
+   "correct": "B",
+   "explanation_es": "MTBF estima el tiempo promedio que un componente o sistema opera antes de fallar, y MTTR estima el tiempo promedio necesario para restaurar el servicio tras una falla; juntos ayudan a estimar la disponibilidad general del sistema (el famoso porcentaje de 'nueves' de uptime) al diseñar redundancia."
+  },
+  {
+   "id": "b6_1.1.b_18",
+   "subtopic": "1.1.b",
+   "name": "Alta disponibilidad (SSO/FHRP)",
+   "question": "Which of these is a valid reason to prefer VRRP over HSRP in a specific network design scenario?",
+   "options": {
+    "A": "VRRP provides significantly stronger encryption of user data traffic than HSRP under every configuration",
+    "B": "The environment includes non-Cisco routers that need to participate in the same first-hop redundancy group, requiring an open, multi-vendor standard rather than Cisco's proprietary protocol",
+    "C": "VRRP is the only FHRP that supports more than two routers in a single group",
+    "D": "VRRP eliminates the need for any IP addressing on the routers participating in the group"
+   },
+   "correct": "B",
+   "explanation_es": "Si el entorno incluye routers de otros fabricantes que necesitan participar del mismo grupo de redundancia de primer salto, se necesita un estándar abierto y multi-vendor como VRRP en lugar del protocolo propietario de Cisco (HSRP) — ese es un motivo válido y común para elegir VRRP."
+  },
+  {
+   "id": "b6_1.1.b_19",
+   "subtopic": "1.1.b",
+   "name": "Alta disponibilidad (SSO/FHRP)",
+   "question": "What is a potential downside of enabling 'preempt' with a very short or zero delay on an FHRP group in a network prone to flapping links?",
+   "options": {
+    "A": "There is no possible downside; preemption with zero delay is always the safest configuration in every network",
+    "B": "Frequent flapping could cause the active role to repeatedly switch back and forth between routers each time the higher-priority router briefly comes back up and then goes down again, potentially causing unnecessary churn and brief connectivity disruptions",
+    "C": "Enabling preempt with zero delay automatically disables the hold timer entirely",
+    "D": "Preempt with zero delay can only be configured on VRRP, never on HSRP"
+   },
+   "correct": "B",
+   "explanation_es": "En un enlace inestable (flapping), la preemption sin demora puede provocar que el rol Active cambie repetidamente de un router a otro cada vez que el de mayor prioridad vuelve a estar disponible brevemente y luego cae de nuevo, generando churn innecesario y breves interrupciones — por eso a veces se configura un delay de preemption."
+  },
+  {
+   "id": "b6_1.1.b_20",
+   "subtopic": "1.1.b",
+   "name": "Alta disponibilidad (SSO/FHRP)",
+   "question": "How does object tracking with FHRP typically differ from simple interface tracking alone?",
+   "options": {
+    "A": "Object tracking is identical to interface tracking in every respect and the two terms are used completely interchangeably with no distinction",
+    "B": "Object tracking (via the 'track' command) is a more general mechanism that can monitor conditions beyond just a local interface's up/down state — such as an IP SLA probe's reachability to a remote destination — and then adjust FHRP priority based on that broader condition, not just a directly connected interface's status",
+    "C": "Object tracking can only monitor VLAN database revision numbers, never IP reachability",
+    "D": "Object tracking requires disabling FHRP entirely while it is active"
+   },
+   "correct": "B",
+   "explanation_es": "El object tracking (comando 'track') es un mecanismo más general que puede monitorear condiciones más allá del simple estado up/down de una interfaz local — como la alcanzabilidad de un destino remoto vía una prueba de IP SLA — y ajustar la prioridad FHRP en base a esa condición más amplia, no solo al estado de una interfaz directamente conectada."
+  },
+  {
+   "id": "b6_1.1.b_21",
+   "subtopic": "1.1.b",
+   "name": "Alta disponibilidad (SSO/FHRP)",
+   "question": "In a design using both SSO (on redundant supervisors within a chassis) and HSRP (between separate chassis), what layer of redundancy does each protocol primarily address?",
+   "options": {
+    "A": "SSO and HSRP both address the exact same layer of redundancy and are fully redundant with one another, making it pointless to use both together",
+    "B": "SSO addresses redundancy within a single chassis (between its two supervisor/route processor modules), while HSRP addresses redundancy between separate physical chassis acting as first-hop gateways for end hosts",
+    "C": "SSO only applies to wireless controllers, and HSRP only applies to firewalls",
+    "D": "HSRP addresses redundancy within a single chassis, while SSO addresses redundancy between separate chassis"
+   },
+   "correct": "B",
+   "explanation_es": "SSO aborda la redundancia dentro de un mismo chasis (entre sus dos módulos de supervisora/procesador de ruta), mientras que HSRP aborda la redundancia entre chasis físicos separados actuando como gateways de primer salto para los hosts — son capas de redundancia complementarias, no equivalentes, y a menudo se usan juntas."
+  },
+  {
+   "id": "b6_1.1.b_22",
+   "subtopic": "1.1.b",
+   "name": "Alta disponibilidad (SSO/FHRP)",
+   "question": "Which statement about FHRP authentication (e.g., HSRP or VRRP plaintext or MD5 authentication) is correct?",
+   "options": {
+    "A": "FHRP authentication encrypts all user data traffic passing through the virtual gateway",
+    "B": "FHRP authentication is used to verify that hello/advertisement packets are coming from a legitimate group member, helping prevent a rogue device from injecting itself into the group (e.g., claiming to be the active router) without providing the correct shared key",
+    "C": "FHRP authentication is mandatory and the protocol cannot start without it configured",
+    "D": "FHRP authentication only works over IPv6 and has no equivalent for IPv4 deployments"
+   },
+   "correct": "B",
+   "explanation_es": "La autenticación FHRP (texto plano o MD5) se usa para verificar que los mensajes hello/advertisement provienen de un miembro legítimo del grupo, ayudando a prevenir que un dispositivo no autorizado se inserte en el grupo (por ejemplo, haciéndose pasar por el router activo) sin conocer la clave compartida correcta."
+  },
+  {
+   "id": "b6_1.2.a_06",
+   "subtopic": "1.2.a",
+   "name": "SD-WAN componentes",
+   "question": "In Cisco Catalyst SD-WAN, what does OMP (Overlay Management Protocol) run over between the vSmart controller and WAN Edge routers?",
+   "options": {
+    "A": "OMP runs inside a DTLS or TLS-secured control connection between vSmart and each WAN Edge, similar in spirit to how BGP runs over TCP between peers",
+    "B": "OMP runs directly over raw unencrypted UDP with no session-layer protection of any kind",
+    "C": "OMP requires a separate physical out-of-band cable connecting every WAN Edge directly to vSmart",
+    "D": "OMP only operates over satellite links and cannot function over standard MPLS or broadband transport"
+   },
+   "correct": "A",
+   "explanation_es": "OMP corre dentro de una conexión de control asegurada con DTLS o TLS entre vSmart y cada WAN Edge, de forma conceptualmente similar a cómo BGP corre sobre TCP entre peers — esto protege el intercambio de rutas, TLOCs y políticas del overlay."
+  },
+  {
+   "id": "b6_1.2.a_07",
+   "subtopic": "1.2.a",
+   "name": "SD-WAN componentes",
+   "question": "What is a TLOC (Transport Locator) in Cisco Catalyst SD-WAN terminology?",
+   "options": {
+    "A": "A TLOC identifies a specific transport attachment point on a WAN Edge router (combining its system IP, color, and encapsulation), used to represent where and how that router can be reached over a given underlay transport",
+    "B": "A TLOC is the physical MAC address burned into every WAN Edge router's motherboard",
+    "C": "A TLOC is a licensing token required before a WAN Edge router can boot for the first time",
+    "D": "A TLOC refers exclusively to the geographic GPS coordinates of a branch site"
+   },
+   "correct": "A",
+   "explanation_es": "Un TLOC identifica un punto específico de conexión de transporte en un WAN Edge (combinando su system-ip, el 'color' del transporte y la encapsulación), representando dónde y cómo se puede alcanzar ese router sobre un underlay de transporte determinado — es una pieza clave que OMP distribuye para armar el overlay."
+  },
+  {
+   "id": "b6_1.2.a_08",
+   "subtopic": "1.2.a",
+   "name": "SD-WAN componentes",
+   "question": "What does the 'color' attribute assigned to a TLOC represent in Cisco Catalyst SD-WAN?",
+   "options": {
+    "A": "A cosmetic label used only in the vManage dashboard's user interface theme, with no effect on routing or policy",
+    "B": "A tag identifying the type/identity of the underlying transport (e.g., mpls, biz-internet, lte, public-internet), which can be used in centralized policy to influence path selection, restrict certain traffic to certain transports, or control which TLOCs form control connections with each other",
+    "C": "An encryption cipher suite selector with no relationship to transport identity",
+    "D": "A field that determines the physical LED color displayed on the router's chassis"
+   },
+   "correct": "B",
+   "explanation_es": "El 'color' de un TLOC identifica el tipo/identidad del transporte subyacente (por ejemplo, mpls, biz-internet, lte, public-internet). Se usa en políticas centralizadas para influir en la selección de camino, restringir cierto tráfico a ciertos transportes, o controlar qué TLOCs forman conexiones de control entre sí."
+  },
+  {
+   "id": "b6_1.2.a_09",
+   "subtopic": "1.2.a",
+   "name": "SD-WAN componentes",
+   "question": "Which SD-WAN controller component is primarily responsible for storing and analyzing historical performance data and providing predictive analytics (in deployments that include it)?",
+   "options": {
+    "A": "vBond, since it is responsible for all historical data storage in every SD-WAN deployment",
+    "B": "vAnalytics (or an equivalent analytics/telemetry component), which collects and analyzes network and application performance data over time to provide insights, trends, and predictive recommendations beyond real-time monitoring",
+    "C": "vSmart, since analytics is a core function of the control-plane protocol itself",
+    "D": "The WAN Edge router's local flash storage, which is the sole location where all analytics are permanently retained"
+   },
+   "correct": "B",
+   "explanation_es": "vAnalytics (o un componente de analítica/telemetría equivalente) recopila y analiza datos históricos de rendimiento de red y aplicaciones a lo largo del tiempo, ofreciendo insights, tendencias y recomendaciones predictivas más allá del monitoreo en tiempo real que ya provee vManage."
+  },
+  {
+   "id": "b6_1.2.a_10",
+   "subtopic": "1.2.a",
+   "name": "SD-WAN componentes",
+   "question": "In a typical Cisco Catalyst SD-WAN control-plane sequence, what is the general order in which a new WAN Edge router establishes connectivity to the overlay?",
+   "options": {
+    "A": "The WAN Edge first contacts vBond for initial authentication and orchestration (including learning about vSmart/vManage), then establishes secure control connections to vSmart and vManage, and finally begins exchanging OMP routes",
+    "B": "The WAN Edge contacts vManage directly first with no prior orchestration step of any kind, skipping vBond and vSmart entirely",
+    "C": "The WAN Edge must be manually pre-configured with every other WAN Edge's IP address before it can join the overlay",
+    "D": "The WAN Edge only ever contacts vSmart, and vBond/vManage play no role in the onboarding process"
+   },
+   "correct": "A",
+   "explanation_es": "Típicamente el WAN Edge primero contacta a vBond para autenticación inicial y orquestación (incluyendo aprender sobre vSmart/vManage), luego establece conexiones de control seguras hacia vSmart y vManage, y finalmente comienza a intercambiar rutas OMP — vBond actúa como el punto de entrada inicial al overlay."
+  },
+  {
+   "id": "b6_1.2.a_11",
+   "subtopic": "1.2.a",
+   "name": "SD-WAN componentes",
+   "question": "Why is vBond often deployed with a publicly reachable IP address, even when vSmart and vManage may sit behind NAT or in a private address space?",
+   "options": {
+    "A": "Because vBond needs to be reachable by every new/unknown WAN Edge device across the internet (often from behind NAT at a branch site) so it can perform initial orchestration and help with NAT traversal, before those devices have learned how to reach the other controllers",
+    "B": "Because vBond is the only controller that requires internet access to receive periodic software updates",
+    "C": "Because a public IP address is a licensing requirement unrelated to any functional need",
+    "D": "vBond is never deployed with a public IP address under any circumstances; this scenario does not occur in practice"
+   },
+   "correct": "A",
+   "explanation_es": "vBond necesita ser alcanzable por cualquier WAN Edge nuevo/desconocido a través de internet (a menudo detrás de NAT en la sucursal) para realizar la orquestación inicial y ayudar con el traspaso de NAT, antes de que esos dispositivos hayan aprendido cómo alcanzar a los demás controladores — por eso suele tener una IP pública alcanzable."
+  },
+  {
+   "id": "b6_1.2.a_12",
+   "subtopic": "1.2.a",
+   "name": "SD-WAN componentes",
+   "question": "How many vSmart controllers are typically deployed in a production Cisco Catalyst SD-WAN environment, and why?",
+   "options": {
+    "A": "Exactly one vSmart controller only, since the architecture technically forbids deploying more than one under any circumstances",
+    "B": "Typically two or more vSmart controllers are deployed for redundancy, so that the loss of a single vSmart controller does not disrupt the control plane's ability to distribute OMP routing and policy information to WAN Edge routers",
+    "C": "Exactly one vSmart controller per individual WAN Edge router, requiring as many vSmarts as there are branch sites",
+    "D": "vSmart controllers are never deployed redundantly because OMP itself provides all necessary control-plane redundancy without needing multiple controllers"
+   },
+   "correct": "B",
+   "explanation_es": "Típicamente se despliegan dos o más controladores vSmart por redundancia, de forma que la pérdida de un vSmart no interrumpa la capacidad del plano de control de distribuir rutas OMP y políticas a los WAN Edge — un principio básico de alta disponibilidad en el diseño de controladores de SD-WAN."
+  },
+  {
+   "id": "b6_1.2.a_13",
+   "subtopic": "1.2.a",
+   "name": "SD-WAN componentes",
+   "question": "What is the role of a 'system IP' address assigned to each WAN Edge router and controller in Cisco Catalyst SD-WAN?",
+   "options": {
+    "A": "The system IP is a stable, loopback-like identifier used within the overlay (for OMP, TLOCs, and management) that remains consistent regardless of which physical transport interface or underlay IP address is actually used to reach the device",
+    "B": "The system IP changes automatically every time the device reboots, with no persistence across restarts",
+    "C": "The system IP is only used for the device's local console port configuration and has no relevance to the overlay",
+    "D": "The system IP must be identical across every device in the SD-WAN fabric for the overlay to function"
+   },
+   "correct": "A",
+   "explanation_es": "La system-ip es un identificador estable, similar a una loopback, usado dentro del overlay (para OMP, TLOCs y gestión) que permanece consistente sin importar qué interfaz de transporte física o IP de underlay se use realmente para alcanzar el dispositivo — es la 'identidad' persistente del dispositivo en el fabric SD-WAN."
+  },
+  {
+   "id": "b6_1.2.a_14",
+   "subtopic": "1.2.a",
+   "name": "SD-WAN componentes",
+   "question": "What does a 'centralized policy' configured on vSmart typically control in a Cisco Catalyst SD-WAN deployment?",
+   "options": {
+    "A": "Centralized policy only controls the color scheme of the vManage web dashboard for all logged-in administrators",
+    "B": "Centralized policy can control aspects such as which OMP routes are advertised or filtered to which sites, traffic engineering/path preference across specific TLOCs, and application-aware routing decisions, applied consistently across the fabric from a single definition pushed by vSmart",
+    "C": "Centralized policy only applies to a single WAN Edge router at a time and must be manually copy-pasted to each device individually",
+    "D": "Centralized policy exclusively manages user login credentials for the vManage GUI"
+   },
+   "correct": "B",
+   "explanation_es": "La política centralizada en vSmart puede controlar qué rutas OMP se anuncian o filtran hacia qué sitios, la ingeniería de tráfico/preferencia de camino sobre TLOCs específicos, y decisiones de enrutamiento consciente de la aplicación, aplicadas de forma consistente en todo el fabric desde una única definición que vSmart distribuye."
+  },
+  {
+   "id": "b6_1.2.a_15",
+   "subtopic": "1.2.a",
+   "name": "SD-WAN componentes",
+   "question": "In Cisco Catalyst SD-WAN, what is a 'localized policy' as opposed to a 'centralized policy'?",
+   "options": {
+    "A": "A localized policy is applied and pushed directly to a specific device's data-plane/control-plane configuration (e.g., ACLs, QoS, routing policy on that device), as opposed to a centralized policy which shapes overlay-wide routing/topology behavior via vSmart",
+    "B": "A localized policy and a centralized policy are exactly the same concept, differing only in naming convention between different vManage software versions",
+    "C": "A localized policy can only be applied to vBond, never to any WAN Edge device",
+    "D": "Localized policies are deprecated and no longer supported in any current release of the SD-WAN software"
+   },
+   "correct": "A",
+   "explanation_es": "Una política localizada se aplica y empuja directamente a la configuración de un dispositivo específico (por ejemplo, ACLs, QoS, política de enrutamiento local en ese router), a diferencia de una política centralizada que moldea el comportamiento de enrutamiento/topología de todo el overlay a través de vSmart."
+  },
+  {
+   "id": "b6_1.2.a_16",
+   "subtopic": "1.2.a",
+   "name": "SD-WAN componentes",
+   "question": "Which statement about the data plane in Cisco Catalyst SD-WAN is correct regarding how WAN Edge routers protect traffic between sites?",
+   "options": {
+    "A": "WAN Edge routers exchange traffic between sites in plaintext by default, with encryption being an optional add-on that is rarely used in practice",
+    "B": "WAN Edge routers establish IPsec tunnels between each other (built and keyed using information distributed via OMP/vSmart) to protect data-plane traffic as it crosses the underlay transport between sites",
+    "C": "Data-plane encryption in SD-WAN is handled exclusively by vManage, with WAN Edge routers having no role in encrypting or decrypting traffic",
+    "D": "WAN Edge routers can only exchange traffic via GRE tunnels with no encryption capability whatsoever"
+   },
+   "correct": "B",
+   "explanation_es": "Los WAN Edge establecen túneles IPsec entre sí (construidos y con claves distribuidas vía OMP/vSmart) para proteger el tráfico del plano de datos mientras cruza el transporte del underlay entre sitios — la seguridad del data plane es una función distribuida entre los propios WAN Edges, no centralizada en un solo dispositivo."
+  },
+  {
+   "id": "b6_1.2.a_17",
+   "subtopic": "1.2.a",
+   "name": "SD-WAN componentes",
+   "question": "What is a common deployment option for vManage, vSmart, and vBond controllers in terms of hosting location?",
+   "options": {
+    "A": "Controllers can only ever be deployed as physical hardware appliances shipped directly to the customer's headquarters, with no cloud-hosted option available",
+    "B": "Controllers are commonly hosted either in a cloud-hosted model managed by Cisco, or on-premises/self-hosted as virtual machines within the customer's own data center, depending on the organization's requirements",
+    "C": "Controllers must always be co-located on the exact same physical device as every WAN Edge router they manage",
+    "D": "Controllers can only run as a mobile application installed on an administrator's personal smartphone"
+   },
+   "correct": "B",
+   "explanation_es": "Los controladores suelen alojarse ya sea en un modelo hospedado en la nube gestionado por Cisco, o de forma on-premises/auto-alojada como máquinas virtuales dentro del propio data center del cliente, según los requisitos de la organización (regulatorios, de control, etc.)."
+  },
+  {
+   "id": "b6_1.2.a_18",
+   "subtopic": "1.2.a",
+   "name": "SD-WAN componentes",
+   "question": "What role does the WAN Edge router's local configuration (as opposed to controller-pushed policy) typically still play in a Catalyst SD-WAN deployment?",
+   "options": {
+    "A": "WAN Edge routers have absolutely no local configuration of any kind; every single setting must always originate exclusively from vManage with zero local CLI access permitted",
+    "B": "WAN Edge routers still maintain some local device-specific configuration (such as interface settings, local system parameters, or device templates applied via vManage), which works alongside centrally-pushed policy rather than being fully replaced by it",
+    "C": "WAN Edge routers download their entire configuration fresh from vBond on every single reboot, discarding all controller-pushed policy each time",
+    "D": "Local configuration on a WAN Edge router is only relevant for wireless access points, never for the router's own routing behavior"
+   },
+   "correct": "B",
+   "explanation_es": "Los WAN Edge mantienen cierta configuración local específica del dispositivo (ajustes de interfaz, parámetros locales del sistema, o plantillas de dispositivo aplicadas vía vManage), que trabaja junto con la política empujada centralmente en lugar de ser completamente reemplazada por ella."
+  },
+  {
+   "id": "b6_1.2.a_19",
+   "subtopic": "1.2.a",
+   "name": "SD-WAN componentes",
+   "question": "Which statement best describes how a WAN Edge router determines which remote WAN Edge TLOCs it should attempt to build BFD sessions and data-plane tunnels with?",
+   "options": {
+    "A": "A WAN Edge router builds a data-plane tunnel and BFD session to literally every other TLOC that has ever existed anywhere on the internet, with no filtering of any kind",
+    "B": "vSmart, guided by centralized control policy, determines and advertises via OMP which TLOCs a given WAN Edge should learn about and establish connections/tunnels with, effectively controlling the resulting overlay topology (full mesh, hub-and-spoke, etc.)",
+    "C": "Each WAN Edge router must be manually configured with the exact IP address of every other WAN Edge router it should ever connect to, since vSmart plays no role in this decision at all",
+    "D": "WAN Edge routers determine tunnel peers purely at random, with no influence from any controller"
+   },
+   "correct": "B",
+   "explanation_es": "vSmart, guiado por la política de control centralizada, determina y anuncia vía OMP qué TLOCs debe conocer un WAN Edge determinado y con cuáles debe establecer conexiones/túneles, controlando efectivamente la topología resultante del overlay (malla completa, hub-and-spoke, etc.) sin necesidad de configuración manual por sitio."
+  },
+  {
+   "id": "b6_1.2.a_20",
+   "subtopic": "1.2.a",
+   "name": "SD-WAN componentes",
+   "question": "What is BFD (Bidirectional Forwarding Detection) used for between WAN Edge routers in an SD-WAN data-plane tunnel?",
+   "options": {
+    "A": "BFD is used to rapidly detect data-plane path failures or degraded conditions (such as high loss/latency) between two WAN Edge tunnel endpoints, enabling fast failover to an alternate path, faster than relying solely on higher-level routing protocol timers",
+    "B": "BFD is used exclusively to negotiate the initial IPsec encryption keys between two WAN Edge routers",
+    "C": "BFD only operates between vManage and a single WAN Edge router, never between two WAN Edge routers directly",
+    "D": "BFD replaces the need for any IP addressing on WAN Edge transport interfaces"
+   },
+   "correct": "A",
+   "explanation_es": "BFD se usa para detectar rápidamente fallas o condiciones degradadas (alta pérdida/latencia) en el camino del plano de datos entre dos extremos de túnel WAN Edge, permitiendo una conmutación rápida hacia un camino alternativo — mucho más rápido que depender únicamente de los temporizadores de un protocolo de enrutamiento de capa superior."
+  },
+  {
+   "id": "b6_1.2.a_21",
+   "subtopic": "1.2.a",
+   "name": "SD-WAN componentes",
+   "question": "Why does Cisco Catalyst SD-WAN separate the control plane (vSmart/OMP) from the data plane (WAN Edge-to-WAN Edge tunnels), similar in philosophy to how traditional SDN architectures separate control and data planes?",
+   "options": {
+    "A": "This separation is purely a marketing distinction with no actual architectural or operational significance",
+    "B": "Separating control and data planes allows routing/policy decisions to be centralized and managed consistently from vSmart, while the actual forwarding of user traffic remains distributed across WAN Edge routers, avoiding a single point of failure for data forwarding and improving scalability of policy management",
+    "C": "This separation exists only to comply with a specific national telecommunications regulation and serves no technical purpose otherwise",
+    "D": "The control plane and data plane are actually the exact same component in SD-WAN, and no real separation exists despite common descriptions"
+   },
+   "correct": "B",
+   "explanation_es": "Separar el plano de control (vSmart/OMP) del plano de datos (túneles WAN Edge a WAN Edge) permite centralizar y gestionar las decisiones de enrutamiento/política de forma consistente desde vSmart, mientras el reenvío real del tráfico de usuario permanece distribuido entre los WAN Edge, evitando un punto único de falla para el forwarding y mejorando la escalabilidad de la gestión de políticas."
+  },
+  {
+   "id": "b6_1.2.b_06",
+   "subtopic": "1.2.b",
+   "name": "SD-WAN beneficios/limitaciones",
+   "question": "How does application-aware routing in SD-WAN typically benefit a business-critical application such as VoIP or video conferencing?",
+   "options": {
+    "A": "Application-aware routing can continuously monitor per-tunnel metrics like loss, latency, and jitter, and dynamically steer a specific application's traffic toward whichever available path currently meets that application's defined SLA, rather than using a single static path regardless of quality",
+    "B": "Application-aware routing only works for file transfer protocols and has no effect on real-time applications like VoIP",
+    "C": "Application-aware routing requires disabling all encryption for the application being prioritized",
+    "D": "Application-aware routing eliminates the need for any WAN bandwidth at each site"
+   },
+   "correct": "A",
+   "explanation_es": "El enrutamiento consciente de aplicación monitorea continuamente métricas por túnel (pérdida, latencia, jitter) y puede dirigir dinámicamente el tráfico de una aplicación específica hacia el camino disponible que actualmente cumpla el SLA definido para ella, en vez de usar siempre un único camino estático sin importar su calidad actual."
+  },
+  {
+   "id": "b6_1.2.b_07",
+   "subtopic": "1.2.b",
+   "name": "SD-WAN beneficios/limitaciones",
+   "question": "What is a realistic operational limitation to consider when using low-cost broadband internet as a transport in an SD-WAN design, compared to a traditional MPLS circuit?",
+   "options": {
+    "A": "Broadband internet transport typically comes with no SLA (or a much weaker one) from the ISP regarding bandwidth, latency, or uptime, compared to a carrier-backed MPLS circuit, so application-aware routing and redundancy across multiple transports become more important to compensate",
+    "B": "Broadband internet is technically incapable of carrying any IP traffic whatsoever",
+    "C": "Broadband internet transport always costs strictly more than an equivalent MPLS circuit in every market and every country",
+    "D": "SD-WAN cannot technically function over broadband internet under any circumstances"
+   },
+   "correct": "A",
+   "explanation_es": "El internet de banda ancha suele venir sin SLA (o con uno mucho más débil) del ISP respecto a ancho de banda, latencia o disponibilidad, comparado con un circuito MPLS respaldado por el carrier — por eso el enrutamiento consciente de aplicación y la redundancia entre múltiples transportes se vuelven más importantes para compensar esa incertidumbre."
+  },
+  {
+   "id": "b6_1.2.b_08",
+   "subtopic": "1.2.b",
+   "name": "SD-WAN beneficios/limitaciones",
+   "question": "Why is centralized, template-based device configuration considered a significant operational benefit of SD-WAN compared to manually configuring each branch router's CLI individually?",
+   "options": {
+    "A": "Template-based configuration guarantees that no branch site will ever experience an outage under any circumstances",
+    "B": "Templates let an administrator define configuration once and apply it consistently across many devices, reducing manual configuration errors and the time needed to provision or update a large number of branch sites, compared to logging into and configuring each router's CLI one at a time",
+    "C": "Templates eliminate the need for any IP addressing plan across the organization",
+    "D": "Templates are purely a cosmetic feature of the vManage GUI with no actual configuration impact on the underlying devices"
+   },
+   "correct": "B",
+   "explanation_es": "Las plantillas permiten definir la configuración una sola vez y aplicarla de forma consistente en muchos dispositivos, reduciendo errores de configuración manual y el tiempo necesario para aprovisionar o actualizar un gran número de sitios, en comparación con entrar al CLI de cada router uno por uno."
+  },
+  {
+   "id": "b6_1.2.b_09",
+   "subtopic": "1.2.b",
+   "name": "SD-WAN beneficios/limitaciones",
+   "question": "What is a legitimate concern regarding the SD-WAN controllers (vManage, vSmart, vBond) representing a form of centralized dependency in the architecture?",
+   "options": {
+    "A": "There is no such concern; centralizing control has literally zero downside in any SD-WAN design",
+    "B": "Because vSmart distributes routing/policy and vManage handles configuration and monitoring, sustained unavailability of these controllers can impair the ability to make new configuration changes or have new routing/policy changes take effect, even though already-established WAN Edge data-plane tunnels generally continue forwarding traffic independently for some time",
+    "C": "If any controller goes down for even one second, every single WAN Edge router immediately loses all connectivity to every other WAN Edge instantly and permanently",
+    "D": "Controller unavailability has no effect on the network at all, since WAN Edge routers do not depend on controllers in any way whatsoever"
+   },
+   "correct": "B",
+   "explanation_es": "Dado que vSmart distribuye enrutamiento/política y vManage maneja configuración y monitoreo, la falta de disponibilidad sostenida de estos controladores puede afectar la capacidad de hacer nuevos cambios de configuración o que nuevos cambios de política surtan efecto, aunque los túneles de datos ya establecidos entre WAN Edges generalmente sigan reenviando tráfico de forma independiente por un tiempo — de ahí la importancia de desplegar controladores redundantes."
+  },
+  {
+   "id": "b6_1.2.b_10",
+   "subtopic": "1.2.b",
+   "name": "SD-WAN beneficios/limitaciones",
+   "question": "How can SD-WAN's transport-independent design help an organization during a migration away from an expensive legacy MPLS circuit?",
+   "options": {
+    "A": "SD-WAN requires MPLS to be present at every site and cannot function if MPLS is removed",
+    "B": "Because SD-WAN can run its overlay across any mix of transports, an organization can gradually introduce broadband/LTE alongside or instead of MPLS at each site, migrating transport-by-transport or site-by-site without having to redesign the entire overlay policy each time",
+    "C": "SD-WAN transport independence means the organization no longer needs any physical WAN circuit of any kind at all",
+    "D": "Transport independence only applies to data centers and has no relevance to branch site migrations"
+   },
+   "correct": "B",
+   "explanation_es": "Como SD-WAN puede correr su overlay sobre cualquier combinación de transportes, una organización puede introducir gradualmente banda ancha/LTE junto con o en reemplazo del MPLS en cada sitio, migrando transporte por transporte o sitio por sitio sin tener que rediseñar toda la política del overlay cada vez — una ventaja concreta de la independencia de transporte."
+  },
+  {
+   "id": "b6_1.2.b_11",
+   "subtopic": "1.2.b",
+   "name": "SD-WAN beneficios/limitaciones",
+   "question": "What operational skill-set shift does adopting SD-WAN typically require from a networking team accustomed to purely traditional box-by-box router configuration?",
+   "options": {
+    "A": "No shift is required at all; SD-WAN configuration is byte-for-byte identical to traditional router CLI configuration with no new concepts involved",
+    "B": "Teams typically need to build familiarity with controller-based/centralized policy concepts, templates, and the overlay's control-plane abstractions (like OMP, TLOCs, and centralized policy), in addition to (not instead of) traditional networking fundamentals",
+    "C": "SD-WAN eliminates the need for networking staff to understand IP addressing or routing concepts of any kind ever again",
+    "D": "SD-WAN requires the entire team to become expert C++ software developers before any configuration can be performed"
+   },
+   "correct": "B",
+   "explanation_es": "Los equipos suelen necesitar familiarizarse con conceptos de política centralizada/basada en controlador, plantillas, y las abstracciones del plano de control del overlay (OMP, TLOCs, política centralizada), además de (no en reemplazo de) los fundamentos tradicionales de networking — es un salto de habilidades real a considerar en la adopción."
+  },
+  {
+   "id": "b6_1.2.b_12",
+   "subtopic": "1.2.b",
+   "name": "SD-WAN beneficios/limitaciones",
+   "question": "Why might Direct Internet Access (DIA) combined with local security inspection at the branch (SD-WAN 'secure branch' design) be preferred over backhauling all internet-bound traffic to a central data center for inspection?",
+   "options": {
+    "A": "Backhauling internet traffic to a central site always provides lower latency than accessing the internet locally at the branch",
+    "B": "DIA with local security inspection avoids adding the extra latency and WAN bandwidth cost of backhauling every SaaS/internet request through a central hub, which can meaningfully improve the user experience for cloud applications, provided adequate security controls are deployed at each branch",
+    "C": "DIA eliminates the need for any firewall or security inspection anywhere in the network",
+    "D": "Backhauling is always technically impossible to configure in an SD-WAN environment"
+   },
+   "correct": "B",
+   "explanation_es": "El acceso directo a internet (DIA) con inspección de seguridad local evita agregar la latencia extra y el costo de ancho de banda WAN de retroceder cada solicitud SaaS/internet hacia un hub central, lo cual puede mejorar notablemente la experiencia de usuario para aplicaciones en la nube, siempre que se desplieguen controles de seguridad adecuados en cada sucursal."
+  },
+  {
+   "id": "b6_1.2.b_13",
+   "subtopic": "1.2.b",
+   "name": "SD-WAN beneficios/limitaciones",
+   "question": "What is a potential risk of enabling Direct Internet Access (DIA) at many branch sites without adequate local security controls?",
+   "options": {
+    "A": "DIA with weak local security expands the organization's attack surface, since each branch now has its own path to the internet that must be independently secured (e.g., firewall, DNS security, malware inspection), rather than relying on a single, more heavily fortified central internet edge",
+    "B": "There is no risk whatsoever; DIA is always strictly safer than centralized internet access under every circumstance",
+    "C": "DIA automatically disables all encryption for every application at the branch",
+    "D": "DIA can only be enabled if the branch site has zero users connected to it"
+   },
+   "correct": "A",
+   "explanation_es": "Habilitar DIA sin controles de seguridad locales adecuados amplía la superficie de ataque de la organización, ya que cada sucursal pasa a tener su propio camino a internet que debe asegurarse de forma independiente (firewall, seguridad DNS, inspección de malware), en vez de depender de un único borde de internet central más fortificado."
+  },
+  {
+   "id": "b6_1.2.b_14",
+   "subtopic": "1.2.b",
+   "name": "SD-WAN beneficios/limitaciones",
+   "question": "How does SD-WAN's ability to define policy centrally help with consistent security segmentation across many branch offices?",
+   "options": {
+    "A": "Centralized policy has no relationship to security segmentation whatsoever and only affects routing metrics",
+    "B": "A segmentation policy (e.g., isolating guest traffic from corporate traffic via VPN/VRF segmentation) can be defined once centrally and pushed consistently to every site, rather than requiring an administrator to manually replicate the same segmentation configuration correctly on each individual branch router",
+    "C": "Centralized policy requires every branch to have physically separate cabling for each segment, which SD-WAN cannot avoid",
+    "D": "Segmentation can only be applied to a single branch at a time and cannot be defined centrally under any circumstances"
+   },
+   "correct": "B",
+   "explanation_es": "Una política de segmentación (por ejemplo, aislar tráfico de invitados del tráfico corporativo vía segmentación VPN/VRF) puede definirse una sola vez de forma centralizada y aplicarse de forma consistente a cada sitio, en lugar de requerir que un administrador replique manualmente esa misma configuración de segmentación correctamente en cada router de sucursal."
+  },
+  {
+   "id": "b6_1.2.b_15",
+   "subtopic": "1.2.b",
+   "name": "SD-WAN beneficios/limitaciones",
+   "question": "What total cost of ownership (TCO) benefit does SD-WAN's ability to combine cheaper broadband transport with intelligent path selection commonly offer, compared to relying purely on MPLS?",
+   "options": {
+    "A": "SD-WAN guarantees that broadband internet will always be technically superior to MPLS in every performance metric with no trade-offs",
+    "B": "By blending lower-cost broadband/LTE transport with MPLS (or replacing MPLS at some sites) while using application-aware routing to protect critical traffic, organizations can often reduce overall WAN transport spend while maintaining acceptable performance for important applications",
+    "C": "TCO benefits only apply if an organization completely eliminates all WAN circuits and relies solely on satellite internet",
+    "D": "SD-WAN always costs more in total than an equivalent pure-MPLS design, with no scenario where it reduces spend"
+   },
+   "correct": "B",
+   "explanation_es": "Combinando transporte de menor costo (banda ancha/LTE) con MPLS (o reemplazándolo en algunos sitios) y usando enrutamiento consciente de aplicación para proteger el tráfico crítico, las organizaciones suelen poder reducir el gasto total en transporte WAN manteniendo un rendimiento aceptable para las aplicaciones importantes — un argumento de TCO frecuente a favor de SD-WAN."
+  },
+  {
+   "id": "b6_1.2.b_16",
+   "subtopic": "1.2.b",
+   "name": "SD-WAN beneficios/limitaciones",
+   "question": "Why is it important to plan bandwidth and licensing sizing carefully on SD-WAN controllers (especially vManage/vSmart) as the number of managed WAN Edge sites grows significantly?",
+   "options": {
+    "A": "Controller sizing has no relationship to the number of managed sites; a single minimal controller instance can support any number of sites with zero performance impact",
+    "B": "As the number of WAN Edge devices, control connections, and routes grows, the controllers require adequate compute/scale sizing to handle the increased control-plane load (OMP route processing, template pushes, telemetry ingestion), or performance and responsiveness can degrade",
+    "C": "Controller sizing is only relevant for the physical color of the rack the controllers are mounted in",
+    "D": "Licensing for SD-WAN controllers has nothing to do with the number of WAN Edge devices under management"
+   },
+   "correct": "B",
+   "explanation_es": "A medida que crece el número de dispositivos WAN Edge, conexiones de control y rutas, los controladores necesitan un dimensionamiento de cómputo/escala adecuado para manejar la mayor carga del plano de control (procesamiento de rutas OMP, envío de plantillas, ingestión de telemetría), o el rendimiento y la capacidad de respuesta pueden degradarse — una consideración real de diseño al escalar."
+  },
+  {
+   "id": "b6_1.2.b_17",
+   "subtopic": "1.2.b",
+   "name": "SD-WAN beneficios/limitaciones",
+   "question": "What benefit does zero-touch provisioning (ZTP) offer when deploying SD-WAN to many new branch sites?",
+   "options": {
+    "A": "ZTP requires an experienced network engineer to be physically on-site at every branch to manually type the full configuration before the device can join the overlay",
+    "B": "ZTP allows a WAN Edge device to be shipped to a branch, connected to power and a transport link by non-technical local staff, and then automatically contact vBond/vManage to receive its identity, software, and configuration with minimal or no manual CLI configuration required on-site",
+    "C": "ZTP eliminates the need for the device to ever have any IP addressing configured, even automatically",
+    "D": "ZTP only functions for wireless access points and has no application to WAN Edge routers"
+   },
+   "correct": "B",
+   "explanation_es": "El aprovisionamiento sin intervención (ZTP) permite que un dispositivo WAN Edge se envíe a una sucursal, lo conecte a energía y a un enlace de transporte personal no técnico local, y luego contacte automáticamente a vBond/vManage para recibir su identidad, software y configuración con mínima o ninguna configuración manual de CLI en el sitio — un beneficio operativo clave para desplegar muchas sucursales rápidamente."
+  },
+  {
+   "id": "b6_1.3.a_06",
+   "subtopic": "1.3.a",
+   "name": "SD-Access control/data plane",
+   "question": "In Cisco SD-Access, what happens when a wired endpoint first connects to a Fabric Edge Node and sends its first packet?",
+   "options": {
+    "A": "The Fabric Edge Node authenticates/onboards the endpoint (e.g., via 802.1X or MAB), then registers the endpoint's identity (EID) and location with the Fabric Control Plane node, so other nodes can learn how to reach it",
+    "B": "The endpoint's traffic is immediately flooded unencapsulated to every other switch in the entire campus with no registration step of any kind",
+    "C": "The Fabric Border Node handles all endpoint registration directly, and the Fabric Edge Node has no role in this process",
+    "D": "The endpoint must first manually register itself with the Fabric Control Plane using a dedicated software client installed on the endpoint"
+   },
+   "correct": "A",
+   "explanation_es": "El Fabric Edge Node autentica/incorpora al endpoint (por ejemplo, vía 802.1X o MAB) y luego registra la identidad (EID) y ubicación de ese endpoint ante el Fabric Control Plane node, para que otros nodos de la fabric puedan aprender cómo alcanzarlo — este registro es análogo a cómo un ITR de LISP registra mapeos EID-a-RLOC."
+  },
+  {
+   "id": "b6_1.3.a_07",
+   "subtopic": "1.3.a",
+   "name": "SD-Access control/data plane",
+   "question": "What role does the LISP protocol play specifically in the SD-Access control plane?",
+   "options": {
+    "A": "LISP is used only for encrypting data-plane traffic between Fabric Edge Nodes, with no role in the control plane at all",
+    "B": "LISP provides the mapping mechanism (EID-to-RLOC) that the Fabric Control Plane node uses to track and resolve where endpoints are currently located within the fabric, similar to how LISP is used in a standalone LISP deployment for identity/location separation",
+    "C": "LISP is used exclusively to assign VLAN IDs to fabric-enabled switch ports",
+    "D": "LISP has been fully replaced by BGP EVPN in every SD-Access deployment and is never actually used"
+   },
+   "correct": "B",
+   "explanation_es": "LISP provee el mecanismo de mapeo (EID-a-RLOC) que el Fabric Control Plane node usa para rastrear y resolver dónde está actualmente ubicado un endpoint dentro de la fabric, de forma similar a cómo se usa LISP en un despliegue LISP independiente para separar identidad de ubicación."
+  },
+  {
+   "id": "b6_1.3.a_08",
+   "subtopic": "1.3.a",
+   "name": "SD-Access control/data plane",
+   "question": "How does SGT (Scalable/Security Group Tag) information get carried across the SD-Access fabric data plane?",
+   "options": {
+    "A": "SGT information is carried inside the VXLAN header alongside the encapsulated frame, allowing the Fabric Edge Node at the destination to apply SGACL policy based on the source SGT without needing a separate lookup or out-of-band signaling",
+    "B": "SGT information is never transmitted across the network at all; it exists only as a label in the ISE database and has no bearing on actual forwarded packets",
+    "C": "SGT information is carried exclusively via a separate SNMP trap sent to each Fabric Edge Node for every single packet",
+    "D": "SGT information can only be applied if MACsec encryption is also enabled on every link in the fabric"
+   },
+   "correct": "A",
+   "explanation_es": "La información de SGT viaja dentro del encabezado VXLAN junto con el frame encapsulado, permitiendo que el Fabric Edge Node en el destino aplique política SGACL basándose en el SGT de origen sin necesitar una consulta separada ni señalización fuera de banda — esto es lo que hace posible la microsegmentación consistente en toda la fabric."
+  },
+  {
+   "id": "b6_1.3.a_09",
+   "subtopic": "1.3.a",
+   "name": "SD-Access control/data plane",
+   "question": "What is the function of the 'Map-Server/Map-Resolver' role within the SD-Access Fabric Control Plane node?",
+   "options": {
+    "A": "The Map-Server/Map-Resolver role stores and answers queries about EID-to-RLOC mappings, similar in concept to how a DNS server resolves names to IP addresses, allowing other fabric nodes to discover the current location of any registered endpoint",
+    "B": "The Map-Server/Map-Resolver role is solely responsible for issuing DHCP leases to every endpoint in the fabric",
+    "C": "The Map-Server/Map-Resolver role only functions for wireless endpoints and has no relevance to wired endpoints in the fabric",
+    "D": "The Map-Server/Map-Resolver role encrypts all traffic between the Fabric Border Node and external networks"
+   },
+   "correct": "A",
+   "explanation_es": "El rol de Map-Server/Map-Resolver almacena y responde consultas sobre mapeos EID-a-RLOC, de forma conceptualmente similar a cómo un servidor DNS resuelve nombres a direcciones IP, permitiendo que otros nodos de la fabric descubran la ubicación actual de cualquier endpoint registrado."
+  },
+  {
+   "id": "b6_1.3.a_10",
+   "subtopic": "1.3.a",
+   "name": "SD-Access control/data plane",
+   "question": "In SD-Access, what is a 'virtual network' (VN), and how does it relate to a VRF?",
+   "options": {
+    "A": "A virtual network in SD-Access is a macro-segmentation construct that maps to an underlying VRF instance, providing a fully isolated Layer 3 routing domain (for example, separating a 'Guest' virtual network from an 'Employee' virtual network) on top of which SGT-based micro-segmentation can further be applied within each VN",
+    "B": "A virtual network is simply another name for a VLAN, with no relationship to VRF or Layer 3 isolation at all",
+    "C": "A virtual network is used exclusively to identify a specific wireless SSID, with no relevance to wired fabric segmentation",
+    "D": "A virtual network and a VRF are mutually exclusive concepts that cannot be used together in the same fabric"
+   },
+   "correct": "A",
+   "explanation_es": "Una virtual network (VN) en SD-Access es un constructo de macro-segmentación que se mapea a una instancia VRF subyacente, proveyendo un dominio de enrutamiento de Capa 3 completamente aislado (por ejemplo, separando una VN 'Invitados' de una VN 'Empleados'), sobre el cual además se puede aplicar micro-segmentación basada en SGT dentro de cada VN."
+  },
+  {
+   "id": "b6_1.3.a_11",
+   "subtopic": "1.3.a",
+   "name": "SD-Access control/data plane",
+   "question": "How does the SD-Access data plane (VXLAN) support carrying Layer 2 traffic across what is fundamentally a routed (Layer 3) underlay?",
+   "options": {
+    "A": "VXLAN cannot carry Layer 2 traffic under any circumstances; SD-Access data plane traffic is always purely Layer 3",
+    "B": "VXLAN encapsulates the original Ethernet frame (including its Layer 2 header) inside a UDP/IP packet, allowing that Layer 2 frame to be transported across the routed underlay between Fabric Edge Nodes, effectively creating an overlay Layer 2 segment (per VNI) on top of Layer 3 transport",
+    "C": "VXLAN requires the underlay itself to be a pure Layer 2 network with no routing at all, contradicting SD-Access's routed-access design",
+    "D": "VXLAN only supports carrying IP multicast traffic and cannot transport regular unicast Ethernet frames"
+   },
+   "correct": "B",
+   "explanation_es": "VXLAN encapsula el frame Ethernet original (incluyendo su encabezado de Capa 2) dentro de un paquete UDP/IP, permitiendo que ese frame de Capa 2 se transporte a través del underlay enrutado entre Fabric Edge Nodes, creando efectivamente un segmento Capa 2 de overlay (por VNI) sobre transporte de Capa 3."
+  },
+  {
+   "id": "b6_1.3.a_12",
+   "subtopic": "1.3.a",
+   "name": "SD-Access control/data plane",
+   "question": "What happens from a control-plane perspective when a wired endpoint roams from one Fabric Edge Node to another within the same SD-Access fabric?",
+   "options": {
+    "A": "The new Fabric Edge Node updates the Fabric Control Plane node with the endpoint's new location (RLOC), so that subsequent traffic destined for that endpoint is directed to the new Fabric Edge Node instead of the old one, without requiring the endpoint to change its own IP address",
+    "B": "The endpoint is forced to obtain a completely new IP address every time it roams to a different Fabric Edge Node",
+    "C": "Roaming is not supported at all for wired endpoints in SD-Access; only wireless clients can move between access points",
+    "D": "The old Fabric Edge Node continues to receive all traffic for the endpoint indefinitely, with no update ever propagated to the Control Plane node"
+   },
+   "correct": "A",
+   "explanation_es": "El nuevo Fabric Edge Node actualiza al Fabric Control Plane node con la nueva ubicación (RLOC) del endpoint, de forma que el tráfico subsiguiente dirigido a ese endpoint se enrute hacia el nuevo Fabric Edge Node en lugar del anterior, sin que el endpoint necesite cambiar su propia dirección IP — esto es posible gracias a la separación identidad/ubicación que provee LISP."
+  },
+  {
+   "id": "b6_1.3.a_13",
+   "subtopic": "1.3.a",
+   "name": "SD-Access control/data plane",
+   "question": "Why does SD-Access use a routed access design (Layer 3 all the way to the Fabric Edge Node) in its underlay, rather than a traditional Layer 2 access-to-distribution design?",
+   "options": {
+    "A": "A routed underlay avoids large Layer 2 broadcast domains and STP-related convergence concerns in the underlay, providing fast, predictable IP-based convergence, while all the segmentation/policy flexibility traditionally requiring Layer 2 extension is instead handled by the VXLAN overlay and SGTs",
+    "B": "A routed access design was chosen purely because it requires less IP addressing than a Layer 2 design",
+    "C": "A routed underlay was chosen because Layer 3 protocols cannot experience any form of network loop, making STP entirely irrelevant to the design's benefits",
+    "D": "Routed access is used only because it is a mandatory requirement for connecting wireless access points, with no benefit for wired forwarding"
+   },
+   "correct": "A",
+   "explanation_es": "Un underlay enrutado evita dominios de broadcast de Capa 2 grandes y preocupaciones de convergencia relacionadas con STP en el underlay, dando una convergencia rápida y predecible basada en IP, mientras que toda la flexibilidad de segmentación/política que tradicionalmente requería extender Capa 2 la maneja en cambio el overlay VXLAN junto con los SGT."
+  },
+  {
+   "id": "b6_1.3.a_14",
+   "subtopic": "1.3.a",
+   "name": "SD-Access control/data plane",
+   "question": "What is the significance of an 'anycast gateway' in SD-Access, configured identically on every Fabric Edge Node for a given subnet/VN?",
+   "options": {
+    "A": "An anycast gateway means every Fabric Edge Node in the fabric uses the exact same default gateway IP and virtual MAC for a given subnet, allowing an endpoint to roam to any Fabric Edge Node within that subnet's virtual network and keep using the exact same default gateway address, without needing any FHRP protocol like HSRP or VRRP",
+    "B": "An anycast gateway refers to a single, physically centralized router that all fabric traffic must always pass through no matter where the endpoint is located",
+    "C": "Anycast gateway is a wireless-only concept and has no meaning for wired Fabric Edge Nodes",
+    "D": "An anycast gateway requires manually configuring a different gateway IP per Fabric Edge Node, defeating the purpose of a consistent addressing scheme"
+   },
+   "correct": "A",
+   "explanation_es": "El anycast gateway significa que todos los Fabric Edge Node de la fabric usan la misma IP y MAC virtual de gateway para una subred dada, permitiendo que un endpoint pueda estar conectado (o moverse) a cualquier Fabric Edge Node de esa virtual network y seguir usando exactamente la misma dirección de gateway, sin necesitar un protocolo FHRP tradicional como HSRP o VRRP."
+  },
+  {
+   "id": "b6_1.3.a_15",
+   "subtopic": "1.3.a",
+   "name": "SD-Access control/data plane",
+   "question": "When SD-Access enforces SGACL (Security Group ACL) policy, at which point in the data path is that policy typically enforced?",
+   "options": {
+    "A": "SGACL policy is enforced only at the Fabric Border Node, regardless of where the source and destination endpoints are actually located within the fabric",
+    "B": "SGACL enforcement typically occurs at the egress Fabric Edge Node (closest to the destination endpoint), which evaluates the source SGT carried in the VXLAN header against the destination SGT/policy matrix before forwarding the traffic to the destination",
+    "C": "SGACL policy is only ever enforced centrally on the Fabric Control Plane node, which physically intercepts every packet before it reaches any Fabric Edge Node",
+    "D": "SGACL enforcement requires a separate physical firewall appliance inserted between every pair of communicating endpoints"
+   },
+   "correct": "B",
+   "explanation_es": "La aplicación de SGACL típicamente ocurre en el Fabric Edge Node de egreso (el más cercano al endpoint destino), que evalúa el SGT de origen transportado en el encabezado VXLAN contra la matriz de política/SGT destino antes de reenviar el tráfico al destino final."
+  },
+  {
+   "id": "b6_1.3.a_16",
+   "subtopic": "1.3.a",
+   "name": "SD-Access control/data plane",
+   "question": "How does SD-Access typically integrate wireless traffic into the fabric's data plane when using a fabric-enabled Wireless LAN Controller (WLC)?",
+   "options": {
+    "A": "Wireless traffic in a fabric-enabled deployment is VXLAN-encapsulated at the fabric-enabled Access Point (or at the Fabric Edge Node it connects through) and carried over the same fabric overlay used for wired traffic, rather than being tunneled back to the WLC using traditional CAPWAP data tunneling",
+    "B": "Wireless traffic can never be integrated into an SD-Access fabric under any circumstances; SD-Access is a wired-only architecture",
+    "C": "Wireless traffic is always sent unencapsulated in plaintext directly onto the underlay with no VXLAN involvement whatsoever",
+    "D": "Wireless clients must obtain a completely separate, non-fabric IP addressing scheme that is entirely disconnected from the wired fabric's virtual networks"
+   },
+   "correct": "A",
+   "explanation_es": "En un despliegue con fabric habilitada, el tráfico inalámbrico se encapsula en VXLAN en el access point (o en el Fabric Edge Node al que se conecta) y se transporta sobre el mismo overlay de la fabric usado para tráfico cableado, en lugar de tunelizarse de vuelta al WLC vía CAPWAP tradicional — así unifica el tratamiento de política entre cableado e inalámbrico."
+  },
+  {
+   "id": "b6_1.3.a_17",
+   "subtopic": "1.3.a",
+   "name": "SD-Access control/data plane",
+   "question": "What advantage does separating the control plane (LISP-based mapping) from the data plane (VXLAN forwarding) provide in SD-Access, similar to the general SDN philosophy?",
+   "options": {
+    "A": "This separation provides no practical advantage and exists purely for historical/legacy reasons carried over from older Cisco products",
+    "B": "Separating control and data planes allows endpoint location/identity information to be managed and updated centrally and efficiently (via the Control Plane node), while actual packet forwarding remains distributed and fast at each Fabric Edge Node, avoiding the need for every switch to flood-and-learn or maintain a full picture of every endpoint in the fabric",
+    "C": "This separation means the data plane no longer needs any IP addressing at all",
+    "D": "This separation exists only to allow SD-Access to be marketed as 'software-defined' with no actual technical benefit"
+   },
+   "correct": "B",
+   "explanation_es": "Separar el plano de control (mapeo basado en LISP) del plano de datos (reenvío VXLAN) permite gestionar y actualizar la información de identidad/ubicación de endpoints de forma centralizada y eficiente (vía el Control Plane node), mientras el reenvío real de paquetes permanece distribuido y rápido en cada Fabric Edge Node, evitando que cada switch tenga que hacer flood-and-learn o mantener una imagen completa de cada endpoint de la fabric."
+  },
+  {
+   "id": "b6_1.3.b_06",
+   "subtopic": "1.3.b",
+   "name": "Interoperabilidad campus tradicional/SD-Access",
+   "question": "When an SD-Access fabric needs to advertise its internal virtual network subnets to a traditional routed core outside the fabric, what typically happens at the Fabric Border Node?",
+   "options": {
+    "A": "The Border Node redistributes or advertises the fabric's VXLAN-encapsulated routes into standard IP routing (e.g., via BGP or OSPF) toward the external network, translating the fabric's internal reachability information into a form the traditional routed network understands",
+    "B": "The Border Node simply drops all traffic destined for any address outside the fabric, since fabrics are designed to be fully isolated from external networks by default",
+    "C": "The Border Node requires every external router to run LISP natively before any interoperability is possible",
+    "D": "The Border Node converts all external traffic into VXLAN before it even reaches the fabric boundary, regardless of whether the external device supports VXLAN"
+   },
+   "correct": "A",
+   "explanation_es": "El Border Node redistribuye o anuncia las rutas internas de la fabric (VXLAN) hacia el enrutamiento IP estándar (por ejemplo, vía BGP u OSPF) hacia la red externa, traduciendo la información de alcanzabilidad interna de la fabric a una forma que la red enrutada tradicional entienda — es el punto de traducción entre ambos mundos."
+  },
+  {
+   "id": "b6_1.3.b_07",
+   "subtopic": "1.3.b",
+   "name": "Interoperabilidad campus tradicional/SD-Access",
+   "question": "Why is a Fusion Router (or Fusion Firewall) often needed when SD-Access virtual networks (VRFs) need to communicate with resources in a shared services VRF or the traditional network's global routing table?",
+   "options": {
+    "A": "VRFs are isolated from each other and from the global routing table by design; a Fusion device performs controlled route leaking (importing/exporting routes) between the VRFs and the external network, since simply attaching them to the same Border Node does not automatically merge their routing tables",
+    "B": "A Fusion Router is needed only to provide DHCP services, with no relationship to route leaking or VRF communication at all",
+    "C": "Fusion Routers exist purely to physically convert copper cabling into fiber cabling at the fabric boundary",
+    "D": "A Fusion Router is required only when the fabric has exactly one virtual network configured, and becomes unnecessary once a second VN is added"
+   },
+   "correct": "A",
+   "explanation_es": "Las VRFs están aisladas entre sí y de la tabla de enrutamiento global por diseño; un dispositivo Fusion realiza route leaking controlado (importando/exportando rutas) entre las VRFs y la red externa, ya que simplemente conectarlas al mismo Border Node no fusiona automáticamente sus tablas de enrutamiento."
+  },
+  {
+   "id": "b6_1.3.b_08",
+   "subtopic": "1.3.b",
+   "name": "Interoperabilidad campus tradicional/SD-Access",
+   "question": "How can SGT information be preserved when traffic needs to leave the SD-Access fabric and cross a segment of traditional (non-fabric) network before reaching another fabric-aware or ISE-integrated device?",
+   "options": {
+    "A": "SGT information is always permanently lost the moment traffic leaves any fabric, with absolutely no way to preserve or propagate it across non-fabric segments under any circumstances",
+    "B": "SXP (SGT Exchange Protocol) can be used to propagate IP-address-to-SGT bindings to devices that lack inline SGT tagging support, allowing policy enforcement to be extended (in a limited, IP-binding-based way) even across parts of the network that don't natively carry SGTs in the data plane",
+    "C": "SGT information can only be preserved if the entire traditional network segment is physically replaced with fabric-capable switches first",
+    "D": "SGT information is automatically converted into a VLAN ID whenever it crosses into a non-fabric segment, with no configuration required"
+   },
+   "correct": "B",
+   "explanation_es": "SXP (SGT Exchange Protocol) permite propagar los bindings de IP-a-SGT hacia dispositivos que no soportan tagging inline de SGT, permitiendo extender la aplicación de política (de forma limitada, basada en bindings de IP) incluso a través de partes de la red que no transportan SGTs nativamente en el plano de datos."
+  },
+  {
+   "id": "b6_1.3.b_09",
+   "subtopic": "1.3.b",
+   "name": "Interoperabilidad campus tradicional/SD-Access",
+   "question": "In a phased SD-Access migration, why might an organization choose to migrate by 'IP pool' rather than migrating an entire physical site all at once?",
+   "options": {
+    "A": "IP pool-based migration is purely a licensing requirement with no operational reasoning behind it",
+    "B": "Migrating by IP pool allows specific groups of endpoints (e.g., a particular department or VLAN's address range) to be moved into the fabric incrementally, limiting the blast radius and complexity of each migration step, while other pools continue operating on the traditional network until they too are migrated",
+    "C": "IP pool-based migration requires renumbering the entire campus to a single subnet before any migration can begin",
+    "D": "IP pools are only relevant to wireless clients and have no bearing on how wired migration is phased"
+   },
+   "correct": "B",
+   "explanation_es": "Migrar por IP pool permite mover grupos específicos de endpoints (por ejemplo, el rango de direcciones de un departamento o VLAN en particular) a la fabric de forma incremental, limitando el radio de impacto y la complejidad de cada paso de migración, mientras el resto sigue operando en la red tradicional hasta que también se migre."
+  },
+  {
+   "id": "b6_1.3.b_10",
+   "subtopic": "1.3.b",
+   "name": "Interoperabilidad campus tradicional/SD-Access",
+   "question": "What consideration is important when connecting a traditional Layer 2 access switch (non-fabric) to a Fabric Edge Node as part of an interoperability/migration design?",
+   "options": {
+    "A": "No special consideration is needed at all; a traditional switch can be plugged directly into a Fabric Edge Node with zero configuration and instantly gains full fabric capabilities, including VXLAN encapsulation, automatically",
+    "B": "The traditional switch's VLANs and trunking need to be properly mapped/extended to correspond with the correct IP pools and virtual networks configured on the fabric side, since the traditional switch itself has no awareness of VXLAN, SGTs, or the fabric's LISP control plane",
+    "C": "Traditional switches can never be connected to a Fabric Edge Node under any circumstances; only fabric-capable hardware may connect there",
+    "D": "Connecting a traditional switch to a Fabric Edge Node automatically disables SGACL enforcement fabric-wide"
+   },
+   "correct": "B",
+   "explanation_es": "Las VLANs y el trunking del switch tradicional deben mapearse/extenderse correctamente para corresponder con los IP pools y virtual networks configurados del lado de la fabric, ya que el switch tradicional en sí no tiene conocimiento de VXLAN, SGTs, ni del plano de control LISP de la fabric — la traducción ocurre en el Fabric Edge Node al que se conecta."
+  },
+  {
+   "id": "b6_1.3.b_11",
+   "subtopic": "1.3.b",
+   "name": "Interoperabilidad campus tradicional/SD-Access",
+   "question": "Why is it generally recommended to plan IP addressing/subnetting carefully before beginning an SD-Access migration from a traditional network?",
+   "options": {
+    "A": "IP addressing has no bearing whatsoever on SD-Access migration planning, since the fabric automatically renumbers every device transparently with zero pre-planning required",
+    "B": "SD-Access typically maps subnets to IP pools associated with specific virtual networks, so a clean, well-planned addressing scheme makes it easier to logically group endpoints into the correct virtual networks and simplifies the eventual mapping between legacy VLANs/subnets and fabric IP pools",
+    "C": "IP addressing only matters for wireless clients in an SD-Access deployment and has no relevance to wired endpoint migration",
+    "D": "Careful IP planning is only necessary if the organization plans to use IPv6 exclusively, with no relevance to IPv4-only deployments"
+   },
+   "correct": "B",
+   "explanation_es": "SD-Access típicamente mapea subredes a IP pools asociados a virtual networks específicas, así que un esquema de direccionamiento limpio y bien planeado facilita agrupar lógicamente a los endpoints en la virtual network correcta y simplifica el mapeo eventual entre VLANs/subredes legacy y los IP pools de la fabric."
+  },
+  {
+   "id": "b6_1.3.b_12",
+   "subtopic": "1.3.b",
+   "name": "Interoperabilidad campus tradicional/SD-Access",
+   "question": "What role can a traditional distribution-layer switch play temporarily during a phased migration, before it is eventually replaced or converted into a Fabric Border/Edge role?",
+   "options": {
+    "A": "It can continue serving non-migrated access switches and VLANs exactly as before, connecting into the fabric via the Border Node so that migrated and non-migrated portions of the campus remain interconnected throughout the transition period",
+    "B": "A traditional distribution switch must be physically powered off the instant any part of the campus begins migrating to SD-Access, with no coexistence period possible",
+    "C": "Traditional distribution switches automatically gain full SD-Access fabric awareness the moment SD-Access is enabled anywhere in the campus, with no configuration required",
+    "D": "A traditional distribution switch can only interoperate with a fabric if it is running the exact same software version as every Fabric Edge Node"
+   },
+   "correct": "A",
+   "explanation_es": "Un switch de distribución tradicional puede seguir sirviendo a los switches de acceso y VLANs aún no migrados exactamente como antes, conectándose a la fabric a través del Border Node, de forma que las porciones migradas y no migradas del campus permanezcan interconectadas durante todo el período de transición."
+  },
+  {
+   "id": "b6_1.3.b_13",
+   "subtopic": "1.3.b",
+   "name": "Interoperabilidad campus tradicional/SD-Access",
+   "question": "When extending shared services (such as DNS, DHCP, or an ISE server) that live in the traditional network's global routing table to be reachable from within SD-Access virtual networks, what is a common design approach?",
+   "options": {
+    "A": "Shared services must be physically duplicated and re-hosted separately inside every single virtual network, since cross-VN or cross-VRF reachability is technically impossible under any configuration",
+    "B": "Route leaking is configured (often via a Fusion device or route-target import/export) so that each virtual network's VRF can reach the shared services subnet in the global table, without fully merging every VN's routing table together",
+    "C": "Shared services are always automatically reachable from every virtual network with no configuration required, since VRF isolation does not apply to well-known service ports like DNS or DHCP",
+    "D": "Shared services can only be reached by manually connecting a physical Ethernet cable from every access switch directly to the DHCP server"
+   },
+   "correct": "B",
+   "explanation_es": "Se configura route leaking (a menudo vía un dispositivo Fusion o import/export de route-targets) para que la VRF de cada virtual network pueda alcanzar la subred de servicios compartidos en la tabla global, sin fusionar completamente la tabla de enrutamiento de cada VN — un patrón de diseño común para servicios como DNS, DHCP o ISE."
+  },
+  {
+   "id": "b6_1.3.b_14",
+   "subtopic": "1.3.b",
+   "name": "Interoperabilidad campus tradicional/SD-Access",
+   "question": "What is a key reason SD-Access migrations are typically done incrementally rather than as a single 'flash cut' across an entire large campus?",
+   "options": {
+    "A": "Incremental migration is purely a marketing recommendation with no real operational benefit over a single flash cut",
+    "B": "An incremental approach limits risk by validating fabric behavior, policy, and interoperability on a smaller scale first, allows lessons learned to inform later phases, and reduces the potential impact/blast radius if an issue is discovered, compared to converting an entire large campus in one maintenance window",
+    "C": "Flash-cut migrations are technically impossible for any Cisco product due to a hard-coded software limitation",
+    "D": "Incremental migration is required because SD-Access fabrics are limited to a maximum of exactly one switch per fabric"
+   },
+   "correct": "B",
+   "explanation_es": "Un enfoque incremental limita el riesgo al validar el comportamiento de la fabric, la política y la interoperabilidad a menor escala primero, permite que las lecciones aprendidas informen fases posteriores, y reduce el impacto potencial si se descubre un problema, comparado con convertir todo un campus grande en una sola ventana de mantenimiento."
+  },
+  {
+   "id": "b6_1.3.b_15",
+   "subtopic": "1.3.b",
+   "name": "Interoperabilidad campus tradicional/SD-Access",
+   "question": "How does a Fabric Border Node typically handle a default route or 'internet-bound' traffic originating from inside the SD-Access fabric?",
+   "options": {
+    "A": "The Border Node commonly advertises a default route (or specific external routes) into the fabric's control plane, so that internal fabric traffic destined for unknown/external destinations (like the internet) is directed toward the Border Node for handoff to the traditional network/internet edge",
+    "B": "Internet-bound traffic from inside the fabric is always silently dropped, since fabrics have no concept of a default route by design",
+    "C": "Every individual Fabric Edge Node must have its own direct physical connection to the internet, with no role for the Border Node in internet connectivity at all",
+    "D": "The Border Node requires every endpoint to manually configure its own static default route pointing directly at an ISP router"
+   },
+   "correct": "A",
+   "explanation_es": "El Border Node comúnmente anuncia una ruta default (o rutas externas específicas) hacia el plano de control de la fabric, de forma que el tráfico interno de la fabric destinado a destinos desconocidos/externos (como internet) se dirija hacia el Border Node para su entrega hacia la red tradicional/borde de internet."
+  },
+  {
+   "id": "b6_1.3.b_16",
+   "subtopic": "1.3.b",
+   "name": "Interoperabilidad campus tradicional/SD-Access",
+   "question": "Why might an organization deploy more than one Fabric Border Node in an SD-Access design that interoperates with a traditional network?",
+   "options": {
+    "A": "Multiple Border Nodes are required purely to increase the total VLAN ID range available anywhere in the fabric",
+    "B": "Deploying redundant Border Nodes avoids a single point of failure for external/interoperability connectivity, so the fabric can continue reaching external networks and shared services even if one Border Node fails or needs maintenance",
+    "C": "A fabric can technically have only one Border Node ever, so 'multiple Border Nodes' is not a real deployment option in SD-Access",
+    "D": "Multiple Border Nodes exist solely to allow different wireless SSIDs to be broadcast from different physical locations"
+   },
+   "correct": "B",
+   "explanation_es": "Desplegar Border Nodes redundantes evita un punto único de falla para la conectividad externa/de interoperabilidad, de forma que la fabric pueda seguir alcanzando redes externas y servicios compartidos aunque un Border Node falle o requiera mantenimiento — un patrón de alta disponibilidad habitual en diseños de producción."
+  },
+  {
+   "id": "b6_1.4_06",
+   "subtopic": "1.4",
+   "name": "QoS",
+   "question": "What is the primary purpose of the DiffServ (Differentiated Services) QoS model, as opposed to IntServ (Integrated Services)?",
+   "options": {
+    "A": "DiffServ classifies and marks traffic into a small number of forwarding classes (using DSCP) and applies per-hop behaviors at each device, providing scalable QoS without requiring per-flow signaling or reservation across the entire path, unlike IntServ's RSVP-based per-flow reservation model",
+    "B": "DiffServ requires every router along the path to reserve dedicated bandwidth for every individual flow before any traffic can be sent, exactly like IntServ",
+    "C": "DiffServ only applies to wireless networks and has no relevance to wired QoS design",
+    "D": "DiffServ and IntServ are simply two different names for the exact same mechanism with no technical distinction"
+   },
+   "correct": "A",
+   "explanation_es": "DiffServ clasifica y marca el tráfico en un número pequeño de clases de reenvío (usando DSCP) y aplica comportamientos por salto (per-hop behavior) en cada dispositivo, dando QoS escalable sin necesitar señalización o reserva por flujo a lo largo de todo el camino — a diferencia de IntServ, que usa RSVP para reservar recursos por flujo individual, lo cual escala mucho peor en redes grandes."
+  },
+  {
+   "id": "b6_1.4_07",
+   "subtopic": "1.4",
+   "name": "QoS",
+   "question": "What does the term 'trust boundary' mean in a QoS design, and where is it typically placed?",
+   "options": {
+    "A": "The trust boundary is the point in the network where markings (CoS/DSCP) applied by an upstream device or endpoint are either accepted as-is or re-classified/re-marked; it is typically placed as close to the network edge as possible (e.g., at the access-layer switch port) to avoid trusting markings from untrusted end-user devices",
+    "B": "The trust boundary refers exclusively to the physical distance (in meters) that fiber cabling can carry a QoS-marked signal without amplification",
+    "C": "The trust boundary is a firewall rule that has no relationship to DSCP or CoS marking at all",
+    "D": "The trust boundary must always be placed at the network core, and can never be placed at the access layer"
+   },
+   "correct": "A",
+   "explanation_es": "El trust boundary es el punto de la red donde se decide si aceptar tal cual las marcas (CoS/DSCP) aplicadas por un dispositivo o endpoint anterior, o volver a clasificar/remarcar el tráfico; típicamente se ubica lo más cerca posible del borde de la red (por ejemplo, en el puerto del switch de acceso) para evitar confiar en las marcas puestas por dispositivos de usuario final no confiables."
+  },
+  {
+   "id": "b6_1.4_08",
+   "subtopic": "1.4",
+   "name": "QoS",
+   "question": "Which queuing mechanism is specifically designed to give strict priority to a designated class of traffic (such as voice), ensuring it is always serviced first, ahead of other queues, up to a configured bandwidth limit?",
+   "options": {
+    "A": "FIFO (First In, First Out) queuing, which treats every packet from every class identically with no prioritization",
+    "B": "LLQ (Low Latency Queuing), which adds a strict-priority queue on top of CBWFQ, so traffic assigned to that priority queue (like voice) is always serviced ahead of the other CBWFQ classes, within a configured policed bandwidth limit to prevent it from starving other traffic",
+    "C": "WRED (Weighted Random Early Detection), which is a congestion avoidance mechanism, not a queuing/scheduling mechanism",
+    "D": "Round-robin queuing, which services every queue in strict rotating order regardless of any traffic's latency sensitivity"
+   },
+   "correct": "B",
+   "explanation_es": "LLQ (Low Latency Queuing) agrega una cola de prioridad estricta sobre CBWFQ, de forma que el tráfico asignado a esa cola de prioridad (como voz) siempre se atienda antes que las demás clases de CBWFQ, dentro de un límite de ancho de banda policiado configurado para evitar que ahogue al resto del tráfico."
+  },
+  {
+   "id": "b6_1.4_09",
+   "subtopic": "1.4",
+   "name": "QoS",
+   "question": "What does CBWFQ (Class-Based Weighted Fair Queuing) provide that basic WFQ (Weighted Fair Queuing) does not?",
+   "options": {
+    "A": "CBWFQ allows the administrator to explicitly define traffic classes (via class-maps matching specific criteria) and assign a guaranteed minimum bandwidth or percentage to each class, whereas basic WFQ automatically classifies flows based on characteristics like IP address/port with no administrator-defined classes or guaranteed bandwidth allocation",
+    "B": "CBWFQ and WFQ are identical mechanisms, differing only in which IOS command is used to configure them",
+    "C": "CBWFQ can only be applied to wireless interfaces, while WFQ can only be applied to wired interfaces",
+    "D": "CBWFQ removes the ability to guarantee any bandwidth at all, while WFQ guarantees 100% of bandwidth to every flow simultaneously"
+   },
+   "correct": "A",
+   "explanation_es": "CBWFQ permite que el administrador defina explícitamente clases de tráfico (mediante class-maps que hacen match con criterios específicos) y asigne un ancho de banda mínimo garantizado o un porcentaje a cada clase, mientras que el WFQ básico clasifica flujos automáticamente según características como IP/puerto, sin clases definidas por el administrador ni garantía de ancho de banda por clase."
+  },
+  {
+   "id": "b6_1.4_10",
+   "subtopic": "1.4",
+   "name": "QoS",
+   "question": "What is the fundamental difference between traffic 'shaping' and traffic 'policing' when traffic exceeds a configured rate?",
+   "options": {
+    "A": "Shaping and policing are exactly the same mechanism, differing only in which IOS command syntax is used to enable them",
+    "B": "Policing typically drops (or re-marks) traffic that exceeds the configured rate immediately, with no buffering, resulting in a 'hard' rate limit; shaping buffers and delays excess traffic to smooth bursts out over time so the traffic conforms to the rate without necessarily dropping it, at the cost of added latency/jitter for the delayed packets",
+    "C": "Shaping can only be applied on inbound traffic, and policing can only be applied on outbound traffic, with no exceptions",
+    "D": "Policing always adds latency by buffering excess traffic, while shaping always drops excess traffic immediately with no buffering"
+   },
+   "correct": "B",
+   "explanation_es": "El policing típicamente descarta (o remarca) el tráfico que excede la tasa configurada de inmediato, sin buffer, resultando en un límite de tasa 'duro'; el shaping en cambio almacena y retrasa el tráfico excedente para suavizar las ráfagas a lo largo del tiempo, haciendo que el tráfico se ajuste a la tasa sin necesariamente descartarlo, a costa de agregar latencia/jitter a los paquetes retrasados."
+  },
+  {
+   "id": "b6_1.4_11",
+   "subtopic": "1.4",
+   "name": "QoS",
+   "question": "What problem does WRED (Weighted Random Early Detection) address, and how does it work at a high level?",
+   "options": {
+    "A": "WRED prevents TCP global synchronization and worsening congestion by proactively and randomly dropping some packets before a queue becomes completely full, with the drop probability increasing (and weighted by factors like DSCP/IP precedence) as the queue fills, rather than waiting until the queue overflows and dropping many packets from many flows all at once (tail drop)",
+    "B": "WRED guarantees that no packet will ever be dropped under any level of network congestion, no matter how severe",
+    "C": "WRED only operates on wireless interfaces and has no application to wired congestion avoidance",
+    "D": "WRED works by physically reducing the interface's link speed whenever congestion is detected"
+   },
+   "correct": "A",
+   "explanation_es": "WRED previene la sincronización global de TCP y el empeoramiento de la congestión, descartando de forma proactiva y aleatoria algunos paquetes antes de que la cola se llene completamente, con probabilidad de descarte creciente (ponderada por factores como DSCP/IP precedence) a medida que la cola se llena, en lugar de esperar a que la cola desborde y descartar muchos paquetes de muchos flujos de golpe (tail drop)."
+  },
+  {
+   "id": "b6_1.4_12",
+   "subtopic": "1.4",
+   "name": "QoS",
+   "question": "According to Cisco's QoS best-practice marking recommendations, which DSCP class is typically used to mark call-signaling traffic (e.g., SCCP/SIP), as distinct from the voice bearer (RTP) traffic itself?",
+   "options": {
+    "A": "CS3 (Class Selector 3) is the commonly recommended marking for call-signaling traffic, which is treated with a lower priority guarantee than the EF-marked voice bearer traffic but still receives preferential treatment over best-effort data",
+    "B": "Call-signaling traffic uses the exact same EF marking as voice bearer traffic, with no distinction made between the two at all",
+    "C": "Call-signaling traffic is always marked with the lowest possible DSCP value (0, best-effort), identical to ordinary web browsing traffic",
+    "D": "Call-signaling traffic cannot be marked with DSCP at all and must rely exclusively on Layer 2 CoS marking"
+   },
+   "correct": "A",
+   "explanation_es": "CS3 (Class Selector 3) es la marca comúnmente recomendada para tráfico de señalización de llamadas, que recibe un trato con menor prioridad garantizada que el tráfico portador de voz marcado con EF, pero aún así recibe trato preferencial frente al tráfico de datos best-effort."
+  },
+  {
+   "id": "b6_1.4_13",
+   "subtopic": "1.4",
+   "name": "QoS",
+   "question": "What is the relationship between Layer 2 CoS (Class of Service, in an 802.1Q tag's PCP field) and Layer 3 DSCP marking?",
+   "options": {
+    "A": "CoS and DSCP are completely unrelated fields that can never be mapped to one another under any circumstances",
+    "B": "CoS is a 3-bit field carried at Layer 2 (in the 802.1Q PCP field), while DSCP is a 6-bit field carried at Layer 3 (in the IP header's ToS/DS byte); network devices often map between the two (CoS-to-DSCP and DSCP-to-CoS) as traffic crosses the Layer 2/Layer 3 boundary, since CoS marking does not survive being routed while DSCP does",
+    "C": "DSCP only exists in IPv6 and has no equivalent field in IPv4, making CoS-to-DSCP mapping technically impossible for IPv4 traffic",
+    "D": "CoS is an 8-bit field, and DSCP is a 2-bit field, making a one-to-one mapping between them numerically impossible"
+   },
+   "correct": "B",
+   "explanation_es": "CoS es un campo de 3 bits transportado en Capa 2 (en el campo PCP del tag 802.1Q), mientras que DSCP es un campo de 6 bits transportado en Capa 3 (en el byte ToS/DS del encabezado IP); los dispositivos suelen mapear entre ambos (CoS-a-DSCP y DSCP-a-CoS) al cruzar el límite Capa 2/Capa 3, ya que la marca CoS no sobrevive al ser enrutada, mientras que DSCP sí."
+  },
+  {
+   "id": "b6_1.4_14",
+   "subtopic": "1.4",
+   "name": "QoS",
+   "question": "Why is jitter (variation in packet delay) particularly problematic for real-time applications like voice and video, even more so than a moderate constant delay?",
+   "options": {
+    "A": "Jitter has no actual effect on voice or video quality whatsoever and is purely a theoretical concern with no practical impact",
+    "B": "Real-time applications play out received packets at a steady rate for the listener/viewer; jitter buffers can compensate for a limited amount of variation, but excessive jitter can cause packets to arrive too late to be used, leading to audio/video glitches, gaps, or dropped frames, even if the average delay itself is acceptable",
+    "C": "Jitter only affects text-based protocols like HTTP and has no bearing on audio or video streams at all",
+    "D": "Jitter is measured exclusively in bytes, not in time, making it unrelated to any timing-sensitive application"
+   },
+   "correct": "B",
+   "explanation_es": "Las aplicaciones en tiempo real reproducen los paquetes recibidos a un ritmo constante para el oyente/espectador; los buffers de jitter pueden compensar una variación limitada, pero un jitter excesivo puede hacer que los paquetes lleguen demasiado tarde para usarse, causando cortes o glitches de audio/video, incluso si el retardo promedio en sí es aceptable."
+  },
+  {
+   "id": "b6_1.4_15",
+   "subtopic": "1.4",
+   "name": "QoS",
+   "question": "What is the Cisco-recommended best-practice DSCP marking for interactive video (e.g., video conferencing) traffic, as distinct from voice?",
+   "options": {
+    "A": "AF41 (Assured Forwarding class 4, low drop precedence) is the commonly recommended marking for interactive video, giving it strong (though not strict-priority-queue-guaranteed like EF) preferential treatment distinct from voice bearer traffic",
+    "B": "Interactive video always uses the exact same EF marking as voice, with Cisco best practice making no distinction between the two traffic types whatsoever",
+    "C": "Interactive video is always marked as best-effort (DSCP 0), identical to ordinary web browsing, since video is considered non-critical by Cisco best practice",
+    "D": "Interactive video cannot be marked with any DSCP value under any Cisco best-practice recommendation and must rely solely on physical bandwidth reservation"
+   },
+   "correct": "A",
+   "explanation_es": "AF41 (Assured Forwarding clase 4, baja precedencia de descarte) es la marca comúnmente recomendada para video interactivo, dándole un trato preferencial fuerte (aunque no con la garantía de cola de prioridad estricta que sí tiene EF), distinto del tráfico portador de voz."
+  },
+  {
+   "id": "b6_1.4_16",
+   "subtopic": "1.4",
+   "name": "QoS",
+   "question": "In QoS policy configuration on Cisco IOS, what is the relationship between a class-map, a policy-map, and a service-policy?",
+   "options": {
+    "A": "A class-map defines the traffic classification criteria (what to match); a policy-map defines the QoS actions (e.g., bandwidth, priority, marking) to apply to one or more classes referenced from class-maps; and a service-policy applies a given policy-map to a specific interface (inbound or outbound)",
+    "B": "Class-map, policy-map, and service-policy are three interchangeable names for the exact same single configuration object, with no functional difference between them",
+    "C": "A service-policy defines traffic classification, while class-map and policy-map are only used for interface speed/duplex negotiation, unrelated to QoS",
+    "D": "A policy-map can only be applied globally to the entire router and can never be applied to an individual interface"
+   },
+   "correct": "A",
+   "explanation_es": "El class-map define los criterios de clasificación del tráfico (qué hacer match); el policy-map define las acciones de QoS (ancho de banda, prioridad, marcado) a aplicar a una o más clases referenciadas desde los class-maps; y el service-policy aplica un policy-map determinado a una interfaz específica (entrante o saliente) — la jerarquía típica de configuración de QoS en Cisco IOS."
+  },
+  {
+   "id": "b6_1.4_17",
+   "subtopic": "1.4",
+   "name": "QoS",
+   "question": "Why does Cisco best practice generally recommend classifying and marking traffic as close to the source as possible (e.g., at the endpoint or access-layer switch), rather than only at a central point like the WAN edge?",
+   "options": {
+    "A": "Marking close to the source has no actual benefit and is purely a stylistic convention with no operational reasoning behind it",
+    "B": "Marking traffic early allows every downstream device along the path to make consistent QoS decisions (queuing, dropping, shaping) based on that marking from the very first hop, rather than treating all traffic as best-effort until it reaches a distant central point, which could allow congestion to occur before any prioritization is ever applied",
+    "C": "Marking traffic close to the source is only relevant for wireless traffic and has no bearing on wired network design at all",
+    "D": "Cisco best practice actually recommends the opposite: never marking traffic until it reaches the WAN edge, to avoid any risk of early misclassification"
+   },
+   "correct": "B",
+   "explanation_es": "Marcar el tráfico temprano permite que todos los dispositivos aguas abajo en el camino tomen decisiones de QoS consistentes (colas, descartes, shaping) basadas en esa marca desde el primer salto, en lugar de tratar todo el tráfico como best-effort hasta que llegue a un punto central lejano, lo cual podría permitir que ocurra congestión antes de que se aplique cualquier priorización."
+  },
+  {
+   "id": "b6_1.4_18",
+   "subtopic": "1.4",
+   "name": "QoS",
+   "question": "What does 'admission control' typically refer to in the context of voice/video QoS design (e.g., via CAC — Call Admission Control)?",
+   "options": {
+    "A": "Admission control refers to a physical security badge reader that grants employees access to the building where network equipment is stored",
+    "B": "Admission control (CAC) limits the number of simultaneous voice/video calls/sessions allowed over a given constrained-bandwidth link, rejecting or redirecting new call attempts once the configured bandwidth threshold for that traffic class would be exceeded, protecting the quality of calls already in progress",
+    "C": "Admission control refers exclusively to which VLANs are permitted to trunk across a given switch port, unrelated to voice or video traffic",
+    "D": "Admission control guarantees unlimited simultaneous calls of any quality on any link, regardless of available bandwidth"
+   },
+   "correct": "B",
+   "explanation_es": "El control de admisión de llamadas (CAC) limita el número de llamadas/sesiones de voz o video simultáneas permitidas sobre un enlace de ancho de banda limitado, rechazando o redirigiendo nuevos intentos de llamada una vez que se superaría el umbral de ancho de banda configurado para esa clase de tráfico, protegiendo la calidad de las llamadas ya en curso."
+  },
+  {
+   "id": "b6_1.4_19",
+   "subtopic": "1.4",
+   "name": "QoS",
+   "question": "What is a key QoS design consideration specific to wireless LANs (e.g., using WMM — Wi-Fi Multimedia) compared to wired QoS?",
+   "options": {
+    "A": "Wireless QoS is identical in every respect to wired QoS, since the shared wireless medium behaves exactly like a dedicated switched Ethernet link with no contention involved",
+    "B": "Because wireless is a shared, contention-based medium (unlike a dedicated switched Ethernet link), wireless QoS mechanisms like WMM adjust channel access parameters (such as contention window sizes) to give higher-priority traffic classes a statistically better chance of gaining access to the shared airtime, in addition to queuing/marking concepts similar to wired QoS",
+    "C": "Wireless networks are technically incapable of supporting any form of QoS marking or prioritization under any circumstances",
+    "D": "WMM only applies to wired Ethernet ports and has no relevance to actual over-the-air wireless transmissions"
+   },
+   "correct": "B",
+   "explanation_es": "Como el medio inalámbrico es compartido y basado en contención (a diferencia de un enlace Ethernet conmutado dedicado), mecanismos de QoS inalámbrico como WMM ajustan parámetros de acceso al canal (como el tamaño de la ventana de contención) para darle a las clases de tráfico de mayor prioridad una probabilidad estadísticamente mejor de acceder al medio compartido, además de conceptos de colas/marcado similares a los del QoS cableado."
+  },
+  {
+   "id": "b6_1.4_20",
+   "subtopic": "1.4",
+   "name": "QoS",
+   "question": "Why is it generally considered a QoS design mistake to mark a large portion of an organization's traffic (e.g., most applications) as high priority or EF?",
+   "options": {
+    "A": "There is no downside to marking most traffic as high priority; doing so always improves the performance of every application simultaneously with no trade-off",
+    "B": "If most traffic is marked as high priority, the priority marking loses its meaning as a differentiator — during actual congestion, a priority queue that is itself oversubscribed with too much 'high priority' traffic can no longer reliably protect the truly latency-sensitive applications (like voice) it was meant to protect",
+    "C": "Marking traffic as high priority is purely cosmetic and has zero effect on actual queuing or dropping behavior on any Cisco platform",
+    "D": "QoS marking is limited to exactly one single traffic class per router globally, so marking multiple applications as high priority is not technically possible in the first place"
+   },
+   "correct": "B",
+   "explanation_es": "Si la mayor parte del tráfico se marca como alta prioridad, la marca pierde su valor como diferenciador — durante congestión real, una cola de prioridad sobre-suscrita con demasiado tráfico 'de alta prioridad' ya no puede proteger de forma confiable a las aplicaciones realmente sensibles a la latencia (como voz) que se suponía debía proteger. Por eso EF debe reservarse estrictamente para voz."
+  },
+  {
+   "id": "b6_1.4_21",
+   "subtopic": "1.4",
+   "name": "QoS",
+   "question": "What does the term 'tail drop' refer to in the context of interface queuing, and why is it generally considered less desirable than WRED for TCP-heavy traffic?",
+   "options": {
+    "A": "Tail drop happens when a queue is completely full and any newly arriving packet is simply discarded because there is no room left; for TCP flows, this can cause many flows to experience loss and reduce their send rate at roughly the same time (TCP global synchronization), leading to oscillating underutilization and re-congestion of the link",
+    "B": "Tail drop refers to physically disconnecting the last few centimeters of an Ethernet cable to intentionally reduce signal quality",
+    "C": "Tail drop only occurs on wireless interfaces and has no equivalent behavior on any wired interface queue",
+    "D": "Tail drop guarantees that TCP flows will never reduce their sending rate, regardless of how full the queue becomes"
+   },
+   "correct": "A",
+   "explanation_es": "Tail drop ocurre cuando una cola está completamente llena y cualquier paquete nuevo que llega simplemente se descarta porque no queda espacio; para flujos TCP, esto puede hacer que muchos flujos experimenten pérdida y reduzcan su tasa de envío casi al mismo tiempo (sincronización global de TCP), provocando una oscilación de subutilización y recongestión del enlace — por eso WRED suele preferirse para tráfico dominado por TCP."
+  },
+  {
+   "id": "b6_1.4_22",
+   "subtopic": "1.4",
+   "name": "QoS",
+   "question": "In an end-to-end QoS design spanning a campus LAN and a WAN edge, why is it important that DSCP markings be preserved (not stripped or reset) as traffic crosses from the LAN into the WAN?",
+   "options": {
+    "A": "DSCP markings are automatically regenerated identically at every hop regardless of any configuration, making preservation an automatic, unavoidable behavior with nothing to design for",
+    "B": "If markings are stripped or reset at the LAN/WAN boundary, the WAN edge device and every downstream device across the WAN would be unable to apply the correct differentiated treatment to that traffic, effectively defeating the purpose of having classified and marked it consistently within the campus in the first place",
+    "C": "DSCP markings only matter within a single VLAN and have no relevance once traffic leaves that VLAN, regardless of whether it crosses into a WAN",
+    "D": "Preserving DSCP markings across the LAN/WAN boundary is prohibited by RFC 2474 and must always be explicitly reset"
+   },
+   "correct": "B",
+   "explanation_es": "Si las marcas se eliminan o reinician en el límite LAN/WAN, el equipo de borde WAN y todos los dispositivos aguas abajo a través de la WAN no podrían aplicar el trato diferenciado correcto a ese tráfico, anulando efectivamente el propósito de haberlo clasificado y marcado de forma consistente dentro del campus — por eso preservar DSCP de extremo a extremo es un principio de diseño clave."
+  },
+  {
+   "id": "b6_1.4_23",
+   "subtopic": "1.4",
+   "name": "QoS",
+   "question": "What is a 'conform-action' and 'exceed-action' in the context of a Cisco policing configuration (e.g., using CIR — Committed Information Rate)?",
+   "options": {
+    "A": "Conform-action and exceed-action refer exclusively to which VLAN a packet belongs to, with no relationship to rate or bandwidth at all",
+    "B": "The conform-action specifies what to do with traffic that stays within the configured committed rate (e.g., transmit as-is), while the exceed-action specifies what to do with traffic that goes above that rate (e.g., drop it, or re-mark it to a lower-priority DSCP/CoS value before transmitting)",
+    "C": "Conform-action and exceed-action are two names for the exact same action, applied redundantly for legacy compatibility reasons",
+    "D": "Conform-action only applies to inbound traffic, and exceed-action only applies to traffic that has already been dropped, making it moot"
+   },
+   "correct": "B",
+   "explanation_es": "El conform-action especifica qué hacer con el tráfico que se mantiene dentro de la tasa comprometida configurada (por ejemplo, transmitirlo tal cual), mientras que el exceed-action especifica qué hacer con el tráfico que supera esa tasa (por ejemplo, descartarlo, o remarcarlo a un valor DSCP/CoS de menor prioridad antes de transmitirlo) — la base de una configuración de policing con CIR en Cisco IOS."
+  },
+  {
+   "id": "b6_1.4_24",
+   "subtopic": "1.4",
+   "name": "QoS",
+   "question": "Why might a service provider apply policing (rather than shaping) at the ingress of their network for a customer's traffic entering via an MPLS or internet circuit?",
+   "options": {
+    "A": "A service provider always prefers shaping over policing at every ingress point in every scenario, with policing never actually being used at the network edge",
+    "B": "Policing at ingress lets the provider enforce a hard contracted rate limit (e.g., a customer's purchased bandwidth) immediately, without the provider's own network having to buffer/delay a customer's excess traffic — protecting the provider's shared infrastructure from a single customer exceeding their agreed rate, at the cost of dropping (rather than smoothing) that excess traffic",
+    "C": "Policing is only technically possible on customer-owned equipment and can never be applied on provider-owned equipment",
+    "D": "Policing at ingress guarantees that a customer's traffic will never experience any packet loss under any circumstances"
+   },
+   "correct": "B",
+   "explanation_es": "El policing en el ingreso le permite al proveedor aplicar de inmediato un límite de tasa contratado (por ejemplo, el ancho de banda comprado por el cliente), sin que la propia red del proveedor tenga que hacer buffer/retrasar el tráfico excedente del cliente — protegiendo la infraestructura compartida del proveedor de que un solo cliente exceda su tasa acordada, a costa de descartar (en vez de suavizar) ese tráfico excedente."
+  },
+  {
+   "id": "b6_1.4_25",
+   "subtopic": "1.4",
+   "name": "QoS",
+   "question": "According to Cisco's QoS baseline marking recommendations, roughly how many traffic classes (application categories) does the model typically define for consistent enterprise-wide marking?",
+   "options": {
+    "A": "Exactly one single class, since Cisco best practice recommends treating all traffic identically with no differentiation whatsoever",
+    "B": "Cisco's QoS baseline defines a fairly granular set of traffic classes (covering categories such as voice, broadcast video, real-time interactive, multimedia conferencing, network control, signaling, and various data classes like transactional/bulk/best-effort/scavenger), each intended to receive consistent marking and treatment across the enterprise",
+    "C": "Exactly two classes only: 'important' and 'unimportant', with no further granularity defined by Cisco",
+    "D": "The number of classes is fixed permanently at exactly 256, matching the maximum possible DSCP value"
+   },
+   "correct": "B",
+   "explanation_es": "El QoS baseline de Cisco define un conjunto bastante granular de clases de tráfico (voz, video broadcast, tiempo real interactivo, conferencia multimedia, control de red, señalización, y varias clases de datos como transaccional/bulk/best-effort/scavenger), cada una pensada para recibir marcado y trato consistente en toda la empresa — no es simplemente 'importante vs no importante'."
+  },
+  {
+   "id": "b6_1.4_26",
+   "subtopic": "1.4",
+   "name": "QoS",
+   "question": "What is the 'scavenger' traffic class typically used for in a Cisco QoS marking scheme, and how is it usually marked?",
+   "options": {
+    "A": "The scavenger class is used for the organization's most business-critical, latency-sensitive applications, and is always marked with EF, identical to voice",
+    "B": "The scavenger class (commonly marked with CS1) is used for traffic that is explicitly considered 'less than best-effort' — such as recreational or non-business applications — so that during periods of congestion, this traffic is the first to be starved/dropped, protecting bandwidth for all other legitimate business traffic classes",
+    "C": "The scavenger class refers exclusively to network management/monitoring traffic like SNMP and syslog, which Cisco recommends marking with the highest possible priority",
+    "D": "Scavenger-class traffic is always given strictly more guaranteed bandwidth than any other class in the QoS baseline"
+   },
+   "correct": "B",
+   "explanation_es": "La clase scavenger (comúnmente marcada con CS1) se usa para tráfico explícitamente considerado 'menos que best-effort' — como aplicaciones recreativas o no relacionadas con el negocio — de forma que durante períodos de congestión, ese tráfico sea el primero en verse limitado/descartado, protegiendo el ancho de banda para el resto de las clases de tráfico legítimas del negocio."
+  },
+  {
+   "id": "b6_1.4_27",
+   "subtopic": "1.4",
+   "name": "QoS",
+   "question": "In a hub-and-spoke WAN topology with a high-bandwidth hub and lower-bandwidth spoke links, why is shaping commonly applied at the hub site toward each spoke, even though the hub's own physical interface may have plenty of bandwidth available?",
+   "options": {
+    "A": "Shaping at the hub has no real purpose in a hub-and-spoke design and is never actually recommended by Cisco for this scenario",
+    "B": "Even though the hub interface itself may be fast, each individual spoke's actual access-circuit bandwidth is typically much lower; shaping outbound traffic at the hub toward each spoke's rate prevents overrunning that spoke's slower link and causing uncontrolled tail drops or excessive queuing delay at the spoke's ingress",
+    "C": "Shaping at the hub is only relevant if every spoke has identical bandwidth to the hub itself, with no benefit in a mixed-bandwidth topology",
+    "D": "Shaping at the hub is required only to comply with a licensing restriction, with no actual traffic-management purpose"
+   },
+   "correct": "B",
+   "explanation_es": "Aunque la interfaz del hub sea rápida, el ancho de banda real del circuito de acceso de cada spoke suele ser mucho menor; aplicar shaping saliente en el hub ajustado a la tasa de cada spoke evita saturar ese enlace más lento y causar tail drops descontrolados o retardo de cola excesivo en el ingreso del spoke — un patrón de diseño clásico en topologías hub-and-spoke con enlaces de spoke más lentos que el hub."
   }
  ]
 }
