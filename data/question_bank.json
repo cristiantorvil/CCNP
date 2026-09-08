@@ -1,6 +1,6 @@
 {
  "version": "2026-09-08_v4",
- "total": 885,
+ "total": 927,
  "questions": [
   {
    "id": "trustsec_01",
@@ -12391,6 +12391,594 @@
    },
    "correct": "A",
    "explanation_es": "Como el controlador agentless típicamente almacena o tiene acceso a las credenciales necesarias para conectarse a cada dispositivo gestionado, ese almacén central de credenciales se convierte en un objetivo de alto valor — proteger esas credenciales (mediante cifrado en reposo, un sistema dedicado de gestión de secretos/vault, y control de acceso estricto al propio controlador) es crítico, ya que un compromiso del almacén de credenciales del controlador podría potencialmente exponer el acceso a toda la flota de dispositivos gestionados de una vez."
+  },
+  {
+   "id": "b6_6.8_06",
+   "subtopic": "6.8",
+   "name": "Métodos HTTP",
+   "question": "What does it mean for an HTTP method to be 'safe', as HTTP specifications describe GET and HEAD as being?",
+   "options": {
+    "A": "A 'safe' method is not expected to cause any meaningful change in the state of the server/resource — it's intended purely for retrieval, meaning a client (or an intermediary like a cache or proxy) can generally assume that simply making a safe request has no meaningful side effect on the server, unlike a method such as POST or DELETE which is expected to change server state as its normal, intended purpose",
+    "B": "A 'safe' HTTP method refers exclusively to whether the method's traffic is encrypted via HTTPS, with no relationship whatsoever to whether the method is expected to change server-side state",
+    "C": "Every single HTTP method, including POST, PUT, and DELETE, is considered 'safe' according to the HTTP specification, with GET and HEAD holding no special distinction from any other method in this regard",
+    "D": "A 'safe' method is one that always requires authentication before it can be used, while an 'unsafe' method can always be called without any authentication whatsoever, the reverse of what 'safe' actually describes in this context"
+   },
+   "correct": "A",
+   "explanation_es": "No se espera que un método 'safe' cause ningún cambio significativo en el estado del servidor/recurso — está pensado puramente para recuperación, lo que significa que un cliente (o un intermediario como un caché o proxy) generalmente puede asumir que simplemente hacer una solicitud safe no tiene efecto secundario significativo en el servidor, a diferencia de un método como POST o DELETE, del cual se espera que cambie el estado del servidor como su propósito normal y pretendido."
+  },
+  {
+   "id": "b6_6.8_07",
+   "subtopic": "6.8",
+   "name": "Métodos HTTP",
+   "question": "What does the HTTP 'OPTIONS' method typically allow a client to discover about a given resource/endpoint?",
+   "options": {
+    "A": "OPTIONS is commonly used to query which HTTP methods (and sometimes other capabilities, like CORS-related headers) are actually supported for a given resource/endpoint, allowing a client to programmatically determine what operations are valid before actually attempting one of them, rather than simply guessing or hardcoding an assumption about what methods a given endpoint accepts",
+    "B": "OPTIONS has no relationship whatsoever to discovering which HTTP methods are supported by a given endpoint, and instead exclusively deletes the targeted resource from the server permanently",
+    "C": "The OPTIONS method can only ever be used with an endpoint that exclusively supports the GET method, and is technically inapplicable to querying the capabilities of any endpoint that also supports POST, PUT, or DELETE",
+    "D": "Calling OPTIONS on an endpoint always and unconditionally creates a brand new resource on the server, functioning identically in effect to a POST request rather than simply querying the endpoint's supported capabilities"
+   },
+   "correct": "A",
+   "explanation_es": "OPTIONS se usa comúnmente para consultar qué métodos HTTP (y a veces otras capacidades, como encabezados relacionados con CORS) realmente soporta un recurso/endpoint dado, permitiendo que un cliente determine programáticamente qué operaciones son válidas antes de realmente intentar alguna de ellas, en lugar de simplemente adivinar o asumir de forma hardcodeada qué métodos acepta un endpoint dado."
+  },
+  {
+   "id": "b6_6.8_08",
+   "subtopic": "6.8",
+   "name": "Métodos HTTP",
+   "question": "What does the HTTP 'HEAD' method do, and how does it typically differ from a GET request to the same resource?",
+   "options": {
+    "A": "HEAD requests the same response headers that a GET request to that same resource would return, but without the actual response body, which can be useful for efficiently checking metadata about a resource (like its size, last-modified date, or simply whether it exists at all) without incurring the cost of transferring the potentially large full response body",
+    "B": "HEAD and GET are functionally and technically identical requests in every respect, with HEAD always returning the exact same full response body as an equivalent GET request to that same resource",
+    "C": "A HEAD request always and unconditionally creates a new resource on the server, functioning identically to a POST request rather than retrieving information about an existing resource",
+    "D": "HEAD can only ever be used to retrieve the response body of a resource, with absolutely no capability whatsoever to retrieve or convey any response header information about that resource"
+   },
+   "correct": "A",
+   "explanation_es": "HEAD solicita los mismos encabezados de respuesta que devolvería una solicitud GET a ese mismo recurso, pero sin el cuerpo de la respuesta real, lo cual puede ser útil para verificar eficientemente metadatos sobre un recurso (como su tamaño, fecha de última modificación, o simplemente si existe) sin incurrir en el costo de transferir el cuerpo completo de la respuesta, potencialmente grande."
+  },
+  {
+   "id": "b6_6.8_09",
+   "subtopic": "6.8",
+   "name": "Métodos HTTP",
+   "question": "Why is POST generally considered 'not idempotent', in contrast to PUT which is idempotent?",
+   "options": {
+    "A": "Sending the exact same POST request multiple times is generally expected to create multiple separate new resources (or otherwise cause a cumulative effect) each time it's sent, since POST is typically used to 'create a new instance of something' rather than to update a specific, already-identified resource to a defined final state the way PUT does, meaning repeating a POST request doesn't reliably converge to the same single end result",
+    "B": "POST and PUT are both equally idempotent methods with no meaningful distinction in how repeatedly sending the exact same request to each of them affects the resulting resource state",
+    "C": "POST is actually the idempotent method and PUT is the one that's not idempotent, the reverse of how the two methods are typically characterized and defined in HTTP specifications",
+    "D": "Idempotency has no relationship whatsoever to how many times the same request is sent, or to what resulting effect that has on server-side resource state; it instead refers exclusively to how quickly a given HTTP method's request typically completes"
+   },
+   "correct": "A",
+   "explanation_es": "Se espera generalmente que enviar la misma solicitud POST varias veces cree múltiples recursos nuevos separados (o de otro modo cause un efecto acumulativo) cada vez que se envía, ya que POST típicamente se usa para 'crear una nueva instancia de algo' en lugar de actualizar un recurso específico ya identificado hacia un estado final definido como sí hace PUT, lo que significa que repetir una solicitud POST no converge de forma confiable al mismo resultado final único."
+  },
+  {
+   "id": "b6_6.8_10",
+   "subtopic": "6.8",
+   "name": "Métodos HTTP",
+   "question": "What is the general REST API design convention regarding which HTTP method maps to each CRUD (Create, Read, Update, Delete) operation?",
+   "options": {
+    "A": "A common convention maps Create to POST, Read to GET, Update to PUT (full replace) or PATCH (partial update), and Delete to DELETE — providing a widely recognized, predictable pattern that helps API consumers infer the general purpose of an operation from its HTTP method alone, even before reading detailed documentation for a specific new endpoint",
+    "B": "There is no common convention whatsoever mapping HTTP methods to CRUD operations; each individual API is assumed to always use a completely arbitrary, unpredictable, and non-standardized mapping between HTTP methods and CRUD actions with zero cross-API consistency of any kind",
+    "C": "The conventional mapping uses GET exclusively for all four CRUD operations (Create, Read, Update, and Delete), with no distinction made between the different HTTP methods for any of those four distinct actions",
+    "D": "DELETE is conventionally used for the Create operation, and POST is conventionally used for the Delete operation, the reverse of the actual typical, widely recognized convention"
+   },
+   "correct": "A",
+   "explanation_es": "Una convención común mapea Create a POST, Read a GET, Update a PUT (reemplazo completo) o PATCH (actualización parcial), y Delete a DELETE — dando un patrón ampliamente reconocido y predecible que ayuda a los consumidores de la API a inferir el propósito general de una operación solo a partir de su método HTTP, incluso antes de leer documentación detallada de un endpoint nuevo específico."
+  },
+  {
+   "id": "b6_6.8_11",
+   "subtopic": "6.8",
+   "name": "Métodos HTTP",
+   "question": "Why might a client's HTTP library or an intermediate proxy cache a GET response but never cache a POST response by default?",
+   "options": {
+    "A": "Because GET is defined as a safe, typically idempotent retrieval operation with no expected side effects, its response is generally considered safe to cache and reuse for a subsequent identical request; POST, by contrast, is expected to potentially cause a state change (like creating a new resource) each time it's called, so caching and reusing a previous POST response instead of actually sending the request again could produce incorrect or unintended behavior",
+    "B": "GET and POST responses are treated with exactly identical caching behavior by every HTTP client and intermediate proxy, with no meaningful distinction in whether either method's response is typically eligible for caching by default",
+    "C": "POST responses are always cached by default while GET responses are never cached under any circumstances, the reverse of the typical default caching behavior associated with each of the two methods",
+    "D": "HTTP caching behavior has no relationship whatsoever to which specific HTTP method (GET, POST, or otherwise) was used to make the original request that produced the response being considered for caching"
+   },
+   "correct": "A",
+   "explanation_es": "Como GET se define como una operación de recuperación segura y típicamente idempotente sin efectos secundarios esperados, generalmente se considera seguro cachear y reutilizar su respuesta para una solicitud idéntica posterior; POST, en cambio, se espera que potencialmente cause un cambio de estado (como crear un recurso nuevo) cada vez que se llama, así que cachear y reutilizar una respuesta POST previa en lugar de realmente enviar la solicitud de nuevo podría producir comportamiento incorrecto o no deseado."
+  },
+  {
+   "id": "b6_6.8_12",
+   "subtopic": "6.8",
+   "name": "Métodos HTTP",
+   "question": "What does it mean, in RESTful API terms, for the DELETE method to be considered idempotent even though calling it a second time on an already-deleted resource typically returns a 404 Not Found rather than the same success response as the first call?",
+   "options": {
+    "A": "Idempotency is defined in terms of the end state of the resource on the server (the resource ends up deleted/absent) rather than requiring every single response to be byte-for-byte identical across repeated calls; since the resource remains deleted (absent) no matter how many additional times DELETE is called after the first successful deletion, the method is still considered idempotent even though the specific status code returned on a repeat call (like 404) may differ from the first call's response (like 200 or 204)",
+    "B": "DELETE is actually not considered idempotent at all according to standard REST API design principles, the reverse of how it's typically classified and described in HTTP method semantics",
+    "C": "Idempotency strictly requires that every single response returned by repeated calls to the same method be exactly, byte-for-byte identical in every respect, meaning DELETE cannot be considered idempotent if a later call returns a different status code like 404 instead of the original success code",
+    "D": "This scenario has no relationship whatsoever to the concept of idempotency, since idempotency is defined purely in terms of the specific HTTP status code returned rather than the actual resulting state of the underlying resource"
+   },
+   "correct": "A",
+   "explanation_es": "La idempotencia se define en términos del estado final del recurso en el servidor (el recurso termina eliminado/ausente) en lugar de requerir que cada respuesta sea idéntica byte por byte entre llamadas repetidas; como el recurso permanece eliminado (ausente) sin importar cuántas veces más se llame a DELETE después de la primera eliminación exitosa, el método sigue considerándose idempotente aunque el código de estado específico devuelto en una llamada repetida (como 404) pueda diferir del de la primera llamada (como 200 o 204)."
+  },
+  {
+   "id": "b6_6.8_13",
+   "subtopic": "6.8",
+   "name": "Métodos HTTP",
+   "question": "Why might an automation script deliberately choose to use PATCH rather than PUT when it only needs to update a single specific field (like an interface's description) on an otherwise larger, multi-field resource?",
+   "options": {
+    "A": "Using PATCH to send only the specific field(s) being changed avoids the risk (present with PUT's full-replace semantics) of accidentally omitting or overwriting other existing fields on that resource that weren't meant to be touched — if a script sent a PUT request with an incomplete representation of the resource (missing fields it wasn't actually trying to change), those omitted fields could be unintentionally cleared or reset, whereas PATCH is designed to merge in only the specified changes",
+    "B": "PUT and PATCH are functionally and technically identical for this specific scenario, with no meaningful difference in risk or behavior between sending a full-resource PUT versus a partial-field PATCH when only one field actually needs to change",
+    "C": "PATCH can only ever be used to update every single field of a resource simultaneously, making it functionally identical to PUT rather than offering a genuinely more targeted, partial-update alternative for changing just one specific field",
+    "D": "Choosing PATCH over PUT for a single-field update always and completely prevents the API server from validating the submitted data in any way whatsoever, removing any server-side validation that a PUT request would otherwise have received"
+   },
+   "correct": "A",
+   "explanation_es": "Usar PATCH para enviar solo el/los campo(s) específico(s) que se está cambiando evita el riesgo (presente con la semántica de reemplazo completo de PUT) de omitir u sobrescribir accidentalmente otros campos existentes de ese recurso que no se pretendía tocar — si un script enviara una solicitud PUT con una representación incompleta del recurso (faltando campos que en realidad no intentaba cambiar), esos campos omitidos podrían borrarse o reiniciarse sin querer, mientras que PATCH está diseñado para fusionar solo los cambios especificados."
+  },
+  {
+   "id": "b6_6.8_14",
+   "subtopic": "6.8",
+   "name": "Métodos HTTP",
+   "question": "What is the purpose of the HTTP 'CONNECT' method, and in what typical scenario is it used rather than GET, POST, or the other more commonly discussed REST-oriented methods?",
+   "options": {
+    "A": "CONNECT is used to establish a tunnel through an HTTP proxy to a destination server, typically used to support HTTPS connections passing through a proxy (the client asks the proxy to open a raw, tunneled connection to the destination, after which encrypted TLS traffic flows through that tunnel directly between the client and destination), rather than being used for typical REST API resource operations like retrieving or modifying data",
+    "B": "CONNECT has no relationship whatsoever to establishing a tunneled connection through a proxy, and instead functions identically to a standard GET request for retrieving a resource's data",
+    "C": "The CONNECT method can only ever be used to permanently delete a resource from a server, making it functionally identical to DELETE rather than serving any proxy-tunneling purpose",
+    "D": "CONNECT is the standard, universally recommended method for a typical REST API's Create operation, functioning as a direct alternative to POST for creating new resources"
+   },
+   "correct": "A",
+   "explanation_es": "CONNECT se usa para establecer un túnel a través de un proxy HTTP hacia un servidor destino, típicamente usado para soportar conexiones HTTPS que pasan por un proxy (el cliente le pide al proxy que abra una conexión cruda y tunelizada hacia el destino, después de lo cual el tráfico TLS cifrado fluye a través de ese túnel directamente entre el cliente y el destino), en lugar de usarse para operaciones típicas de recurso de una API REST como recuperar o modificar datos."
+  },
+  {
+   "id": "b6_6.8_15",
+   "subtopic": "6.8",
+   "name": "Métodos HTTP",
+   "question": "Why might a REST API design choose to explicitly restrict which HTTP methods are permitted on a given endpoint (for example, allowing only GET on a read-only reporting endpoint), rather than allowing every possible HTTP method on every endpoint?",
+   "options": {
+    "A": "Restricting the allowed methods on a given endpoint enforces the endpoint's intended purpose at the API level (for example, ensuring a purely informational reporting endpoint can never accidentally or maliciously be used to modify data via an unintended POST/PUT/DELETE call), providing a layer of API-level access control that complements broader authentication/authorization mechanisms",
+    "B": "Restricting allowed HTTP methods on an endpoint provides no meaningful security or design benefit whatsoever, since every endpoint in any well-designed REST API is expected to always support every single possible HTTP method with no restriction of any kind",
+    "C": "Once an endpoint restricts which methods are permitted, that restriction always and completely disables the ability for a client to interact with that endpoint using the one specific method that IS actually permitted, effectively disabling the endpoint entirely",
+    "D": "HTTP method restriction is a capability unique to XML-based SOAP APIs and has no meaningful applicability whatsoever to the design of any typical JSON-based REST API"
+   },
+   "correct": "A",
+   "explanation_es": "Restringir los métodos permitidos en un endpoint dado hace cumplir el propósito pretendido de ese endpoint a nivel de API (por ejemplo, asegurando que un endpoint de reportes puramente informativo nunca pueda usarse accidental o maliciosamente para modificar datos vía una llamada POST/PUT/DELETE no pretendida), dando una capa de control de acceso a nivel de API que complementa mecanismos más amplios de autenticación/autorización."
+  },
+  {
+   "id": "b6_6.8_16",
+   "subtopic": "6.8",
+   "name": "Métodos HTTP",
+   "question": "What does the term 'method not allowed' (associated with the HTTP 405 status code) indicate, and how does it relate to a resource that does exist but doesn't support the specific method that was attempted?",
+   "options": {
+    "A": "A 405 response indicates that the targeted resource does exist and is reachable, but the specific HTTP method used in the request (such as attempting a DELETE on a resource that only supports GET and PUT) is not supported for that resource, which is a more specific and informative signal than a generic 404 (which would suggest the resource itself doesn't exist at all)",
+    "B": "405 status codes always indicate the targeted resource does not exist anywhere on the server at all, which is actually the meaning more specifically associated with 404 rather than 405",
+    "C": "A 405 response indicates the request succeeded completely with no issue whatsoever, functioning identically in meaning to a 200 OK response rather than signaling any kind of method-related error condition",
+    "D": "405 has no relationship whatsoever to which specific HTTP method was used in the request, and instead exclusively indicates a client-side authentication credential failure"
+   },
+   "correct": "A",
+   "explanation_es": "Una respuesta 405 indica que el recurso destino existe y es alcanzable, pero el método HTTP específico usado en la solicitud (como intentar un DELETE en un recurso que solo soporta GET y PUT) no está soportado para ese recurso, lo cual es una señal más específica e informativa que un 404 genérico (que sugeriría que el propio recurso no existe en absoluto)."
+  },
+  {
+   "id": "b6_6.8_17",
+   "subtopic": "6.8",
+   "name": "Métodos HTTP",
+   "question": "Why is it important for API documentation to clearly specify not just which HTTP methods a given endpoint supports, but also the expected request body format and required fields for methods like POST, PUT, or PATCH?",
+   "options": {
+    "A": "Simply knowing that an endpoint 'accepts POST' isn't enough information for a developer or automation script to actually construct a valid request; without clear documentation of the expected body structure, required versus optional fields, and data types, a client is likely to send a malformed or incomplete request that the API would reject (typically with a 400 or 422 error), making that additional documentation essential for successfully integrating with the API rather than the HTTP method name alone being sufficient guidance",
+    "B": "The HTTP method name alone (such as 'POST') always and completely conveys every detail a client needs to construct a fully valid request body, making any additional documentation of expected fields, structure, or data types entirely redundant and unnecessary",
+    "C": "Request body format and required fields are only relevant for GET requests specifically, and have no meaningful relevance whatsoever to POST, PUT, or PATCH requests, which are assumed to never actually require any specific body structure at all",
+    "D": "API documentation is technically incapable of describing anything beyond which HTTP methods are supported by a given endpoint; no documentation format has ever existed that's capable of also specifying expected request body structure or required fields"
+   },
+   "correct": "A",
+   "explanation_es": "Simplemente saber que un endpoint 'acepta POST' no es suficiente información para que un desarrollador o script de automatización realmente construya una solicitud válida; sin documentación clara de la estructura de cuerpo esperada, los campos requeridos versus opcionales, y los tipos de dato, es probable que un cliente envíe una solicitud malformada o incompleta que la API rechazaría (típicamente con un error 400 o 422), haciendo que esa documentación adicional sea esencial para integrarse exitosamente con la API en lugar de que el nombre del método HTTP solo sea guía suficiente."
+  },
+  {
+   "id": "b6_6.9_11",
+   "subtopic": "6.9",
+   "name": "RESTCONF",
+   "question": "What is the purpose of the RESTCONF 'Accept' request header, and what does it tell the server about how the client wants the response formatted?",
+   "options": {
+    "A": "The 'Accept' header tells the RESTCONF server which media type(s) the client is able to process in the response (such as 'application/yang-data+json' or 'application/yang-data+xml'), allowing the client to request its preferred response encoding rather than the server unilaterally choosing a format the client might not be prepared to parse",
+    "B": "The 'Accept' header has no relationship whatsoever to specifying the client's preferred response format, and instead exclusively authenticates the client's identity to the RESTCONF server",
+    "C": "RESTCONF servers always ignore the 'Accept' header entirely and unconditionally return every response in a single fixed format, regardless of what the client actually specified in that header",
+    "D": "The 'Accept' header can only ever be used with a GET request, and is technically invalid, unsupported syntax when included with a POST, PUT, or PATCH request to a RESTCONF server"
+   },
+   "correct": "A",
+   "explanation_es": "El encabezado 'Accept' le dice al servidor RESTCONF qué tipo(s) de medio puede procesar el cliente en la respuesta (como 'application/yang-data+json' o 'application/yang-data+xml'), permitiendo que el cliente solicite su codificación de respuesta preferida en lugar de que el servidor elija unilateralmente un formato que el cliente podría no estar preparado para parsear."
+  },
+  {
+   "id": "b6_6.9_12",
+   "subtopic": "6.9",
+   "name": "RESTCONF",
+   "question": "Why does a RESTCONF request that modifies configuration (like a POST or PUT) typically need to include a 'Content-Type' header specifying the format of the request body?",
+   "options": {
+    "A": "The 'Content-Type' header tells the server how to correctly parse/interpret the request body being sent (such as 'application/yang-data+json' indicating the body is JSON-formatted YANG data), which the server needs to know in order to correctly decode the submitted configuration data before validating and applying it, rather than the server having to guess or assume a single fixed format for every incoming request",
+    "B": "'Content-Type' has no relationship whatsoever to how the server interprets the request body's format, and instead exclusively specifies which specific YANG module the request is targeting",
+    "C": "A RESTCONF server always ignores the 'Content-Type' header entirely regardless of what value the client sends, and instead attempts to auto-detect the request body's format through some other undocumented mechanism",
+    "D": "The 'Content-Type' header can only ever be included with a GET request, and is technically invalid, unsupported syntax when included with any configuration-modifying request like POST, PUT, or PATCH"
+   },
+   "correct": "A",
+   "explanation_es": "El encabezado 'Content-Type' le dice al servidor cómo parsear/interpretar correctamente el cuerpo de la solicitud que se está enviando (como 'application/yang-data+json' indicando que el cuerpo tiene formato JSON de datos YANG), lo cual el servidor necesita saber para decodificar correctamente los datos de configuración enviados antes de validarlos y aplicarlos, en lugar de que el servidor tenga que adivinar o asumir un único formato fijo para cada solicitud entrante."
+  },
+  {
+   "id": "b6_6.9_13",
+   "subtopic": "6.9",
+   "name": "RESTCONF",
+   "question": "What does RESTCONF's reliance on standard HTTP status codes (rather than a completely custom, RESTCONF-specific error-reporting scheme) provide as a practical benefit for client development?",
+   "options": {
+    "A": "Since RESTCONF reuses the same well-understood HTTP status code semantics that developers are already broadly familiar with from working with countless other REST APIs (like 404 for not found, 401 for unauthorized, 400/422 for invalid input), a client library or developer doesn't need to learn an entirely new, RESTCONF-specific error-code scheme from scratch, easing the general learning curve and enabling reuse of existing HTTP-handling logic/tooling",
+    "B": "RESTCONF actually uses a completely custom, proprietary error-code numbering scheme entirely unrelated to standard HTTP status codes, making this description of it reusing standard HTTP codes fundamentally inaccurate",
+    "C": "Standard HTTP status codes provide no practical benefit whatsoever for RESTCONF client development, since every developer would need to learn an entirely new set of codes regardless of whether RESTCONF reused standard HTTP codes or invented its own custom scheme",
+    "D": "RESTCONF's use of HTTP status codes is limited exclusively to the 2xx success range, with the protocol relying on some other undocumented mechanism entirely separate from HTTP status codes to report any kind of error condition"
+   },
+   "correct": "A",
+   "explanation_es": "Como RESTCONF reutiliza la misma semántica de códigos de estado HTTP bien entendida con la que los desarrolladores ya están ampliamente familiarizados por trabajar con incontables otras APIs REST (como 404 para no encontrado, 401 para no autorizado, 400/422 para entrada inválida), una librería cliente o un desarrollador no necesita aprender un esquema de códigos de error completamente nuevo y específico de RESTCONF desde cero, facilitando la curva de aprendizaje general y permitiendo reutilizar lógica/herramientas de manejo de HTTP ya existentes."
+  },
+  {
+   "id": "b6_6.9_14",
+   "subtopic": "6.9",
+   "name": "RESTCONF",
+   "question": "What is the purpose of the 'ietf-yang-patch' media type sometimes used with RESTCONF, as a more granular alternative to a plain PATCH request?",
+   "options": {
+    "A": "The YANG Patch media type allows a single RESTCONF request to describe multiple distinct edit operations (each potentially targeting a different specific location within the data tree, with its own operation type like merge, replace, or delete) in one structured request body, providing finer-grained control over a set of changes than a single, simpler PATCH request targeting just one resource path would allow",
+    "B": "'ietf-yang-patch' has no relationship whatsoever to describing multiple distinct edit operations within a single request, and instead exclusively refers to a mechanism for physically patching/updating a device's firmware image",
+    "C": "YANG Patch can only ever be used to perform a single edit operation identical to a plain PATCH request, providing no additional granularity or capability whatsoever beyond what a standard PATCH request already offers",
+    "D": "Once a YANG Patch request is submitted, it always and completely replaces the device's entire running configuration in one operation, rather than allowing multiple distinct, more targeted edit operations to be described"
+   },
+   "correct": "A",
+   "explanation_es": "El media type YANG Patch le permite a una única solicitud RESTCONF describir múltiples operaciones de edición distintas (cada una potencialmente apuntando a una ubicación específica distinta dentro del árbol de datos, con su propio tipo de operación como merge, replace, o delete) en un único cuerpo de solicitud estructurado, dando un control más granular sobre un conjunto de cambios de lo que permitiría una única solicitud PATCH más simple apuntando a solo una ruta de recurso."
+  },
+  {
+   "id": "b6_6.9_15",
+   "subtopic": "6.9",
+   "name": "RESTCONF",
+   "question": "Why might a RESTCONF client need to handle the possibility of receiving a response in either JSON or XML format, even when it specifically requested one particular format via the Accept header?",
+   "options": {
+    "A": "While a well-behaved RESTCONF server should honor the client's Accept header preference when possible, a client written robustly should still be prepared to handle the case where the server returns an error response (or otherwise cannot honor that preference) in the alternative supported format, or should explicitly verify the actual returned Content-Type in the response rather than blindly assuming the response format always exactly matches what the request's Accept header specified",
+    "B": "RESTCONF servers are technically incapable of ever returning any format other than exactly what the client's Accept header specified, making this consideration around handling an unexpected format entirely unnecessary and irrelevant in practice",
+    "C": "A RESTCONF client is fundamentally incapable of ever specifying a preferred response format via any request header, meaning the server always unilaterally and unpredictably decides the response format regardless of any client preference",
+    "D": "This consideration only applies to RESTCONF clients written in a compiled language like C++, and has no relevance whatsoever to a client written in a scripting language like Python"
+   },
+   "correct": "A",
+   "explanation_es": "Aunque un servidor RESTCONF bien comportado debería respetar la preferencia del encabezado Accept del cliente cuando sea posible, un cliente escrito de forma robusta debería igual estar preparado para manejar el caso donde el servidor devuelve una respuesta de error (u de otro modo no puede respetar esa preferencia) en el formato alternativo soportado, o debería verificar explícitamente el Content-Type realmente devuelto en la respuesta en lugar de asumir ciegamente que el formato de respuesta siempre coincide exactamente con lo que especificó el Accept header de la solicitud."
+  },
+  {
+   "id": "b6_6.9_16",
+   "subtopic": "6.9",
+   "name": "RESTCONF",
+   "question": "What does RESTCONF's stateless request/response model mean for how a client must handle a sequence of related configuration changes, compared to NETCONF's stateful, session-based candidate/commit workflow?",
+   "options": {
+    "A": "Because each RESTCONF request is generally treated as an independent, self-contained operation with no built-in server-side session state tying multiple requests together into one transaction, a client needing to apply several related changes together as a single atomic unit typically must either combine them into one structured request (such as via YANG Patch) or accept that RESTCONF's default model doesn't provide the same native multi-request staging/commit transaction that NETCONF's candidate datastore workflow offers",
+    "B": "RESTCONF and NETCONF provide exactly identical native support for staging and atomically committing multiple related configuration changes together as a single transaction, with no meaningful difference in transactional capability between the two protocols",
+    "C": "RESTCONF's stateless model has no relationship whatsoever to how a client would need to handle applying multiple related configuration changes, since the concept of 'staging changes' or 'atomicity' doesn't apply to configuration management of any kind, in either NETCONF or RESTCONF",
+    "D": "Because RESTCONF is stateless, it's technically impossible for a RESTCONF client to ever make more than a single configuration change in total to a device across its entire lifetime, making the very question of applying 'a sequence of related changes' inapplicable to RESTCONF"
+   },
+   "correct": "A",
+   "explanation_es": "Como cada solicitud RESTCONF generalmente se trata como una operación independiente y autocontenida sin estado de sesión del lado del servidor incorporado que ate varias solicitudes juntas en una transacción, un cliente que necesita aplicar varios cambios relacionados juntos como una unidad atómica típicamente debe combinarlos en una única solicitud estructurada (como vía YANG Patch) o aceptar que el modelo por defecto de RESTCONF no provee la misma transacción nativa de preparación/commit de múltiples solicitudes que ofrece el flujo de trabajo del datastore candidate de NETCONF."
+  },
+  {
+   "id": "b6_3.1.a_22",
+   "subtopic": "3.1.a",
+   "name": "Trunking 802.1Q",
+   "question": "What happens to an 802.1Q tag when a frame is forwarded from a trunk port onto an access port configured for that same VLAN?",
+   "options": {
+    "A": "The switch strips the 802.1Q tag before forwarding the frame out the access port, since access ports carry only untagged traffic for their single assigned VLAN",
+    "B": "The tag is left intact and the access port forwards the frame exactly as received, tag included",
+    "C": "The switch converts the tag into an MPLS label before forwarding it out the access port",
+    "D": "The frame is dropped, since access ports can never receive tagged traffic from a trunk under any configuration"
+   },
+   "correct": "A",
+   "explanation_es": "El switch quita la etiqueta 802.1Q antes de reenviar el frame por el puerto de acceso, ya que los puertos de acceso transportan tráfico sin etiquetar para su única VLAN asignada."
+  },
+  {
+   "id": "b6_3.1.a_23",
+   "subtopic": "3.1.a",
+   "name": "Trunking 802.1Q",
+   "question": "Why is running CDP or LLDP on trunk links useful for documenting and troubleshooting a VLAN trunking topology?",
+   "options": {
+    "A": "CDP/LLDP let neighboring switches automatically discover and display information about each other (device ID, port, capabilities), helping an engineer quickly verify actual physical topology and cabling against what's documented, without relying solely on manual diagrams",
+    "B": "CDP/LLDP encrypt all VLAN tags exchanged across a trunk, with no relationship to topology discovery",
+    "C": "CDP/LLDP require every trunk to carry exactly one single VLAN, restricting trunking flexibility",
+    "D": "CDP/LLDP replace the need for 802.1Q tagging entirely on any link where they are enabled"
+   },
+   "correct": "A",
+   "explanation_es": "CDP/LLDP permiten que switches vecinos se descubran automáticamente y compartan información (ID del dispositivo, puerto, capacidades), ayudando a un ingeniero a verificar rápidamente la topología física real contra lo documentado, sin depender solo de diagramas manuales."
+  },
+  {
+   "id": "b6_3.1.a_24",
+   "subtopic": "3.1.a",
+   "name": "Trunking 802.1Q",
+   "question": "What is a potential downside of extending the same VLAN across many switches and a large geographic area within a campus?",
+   "options": {
+    "A": "It expands the Layer 2 broadcast/failure domain, meaning a broadcast storm, MAC flapping issue, or STP problem in one part of that VLAN can potentially impact every switch carrying it, across the entire extended footprint",
+    "B": "Extending a VLAN across many switches always improves convergence time for every routing protocol running on those switches",
+    "C": "There is no downside whatsoever; VLANs are designed specifically to scale without any limit across an arbitrarily large Layer 2 footprint",
+    "D": "Extending a VLAN automatically increases the maximum frame size that can be carried on every trunk in the topology"
+   },
+   "correct": "A",
+   "explanation_es": "Extender la misma VLAN entre muchos switches y un área geográfica grande amplía el dominio de broadcast/falla de Capa 2, lo que significa que una tormenta de broadcast, un problema de flapping de MAC, o un problema de STP en una parte de esa VLAN puede potencialmente impactar a cada switch que la transporta en todo ese alcance extendido."
+  },
+  {
+   "id": "b6_3.1.a_25",
+   "subtopic": "3.1.a",
+   "name": "Trunking 802.1Q",
+   "question": "What does 802.1Q's ability to carry multiple VLANs over a single physical trunk link fundamentally save compared to using a dedicated physical link per VLAN?",
+   "options": {
+    "A": "It saves physical cabling and switch port count, since one trunk link can logically carry traffic for many VLANs instead of requiring a separate cable and port pair dedicated to each individual VLAN between the same two switches",
+    "B": "802.1Q trunking has no relationship whatsoever to reducing physical cabling or port requirements, and exists purely to increase the total number of physical cables needed between two switches",
+    "C": "Trunking always requires strictly more physical cables between two switches than running one dedicated cable per VLAN would require",
+    "D": "802.1Q eliminates the need for any physical cabling whatsoever between two switches carrying multiple VLANs"
+   },
+   "correct": "A",
+   "explanation_es": "Ahorra cableado físico y cantidad de puertos de switch, ya que un único enlace trunk puede transportar lógicamente el tráfico de muchas VLANs en lugar de requerir un cable y par de puertos dedicado a cada VLAN individual entre los mismos dos switches."
+  },
+  {
+   "id": "b6_3.1.a_26",
+   "subtopic": "3.1.a",
+   "name": "Trunking 802.1Q",
+   "question": "Why might an engineer verify 'show interfaces trunk' output on both ends of a link during troubleshooting, rather than checking only one side?",
+   "options": {
+    "A": "A trunk's actual behavior depends on the configuration of both ends agreeing (native VLAN, allowed VLANs, trunk mode); checking only one side could miss a mismatch that's only visible by comparing both switches' configuration and status side by side",
+    "B": "Trunk configuration only ever needs to be verified on a single side of a link, since Cisco IOS is assumed to automatically synchronize configuration between both ends of any trunk with zero possibility of mismatch",
+    "C": "'show interfaces trunk' output is always identical on both ends of any link regardless of actual configuration, making comparison between the two sides entirely unnecessary",
+    "D": "Checking both ends of a trunk link is only relevant when troubleshooting a routing protocol issue, and has no relevance whatsoever to diagnosing a Layer 2 trunking problem"
+   },
+   "correct": "A",
+   "explanation_es": "El comportamiento real de un trunk depende de que la configuración de ambos extremos coincida (VLAN nativa, VLANs permitidas, modo de trunk); verificar solo un lado podría pasar por alto un desajuste que solo es visible comparando la configuración y el estado de ambos switches lado a lado."
+  },
+  {
+   "id": "b6_3.1.a_27",
+   "subtopic": "3.1.a",
+   "name": "Trunking 802.1Q",
+   "question": "What does it mean for a VLAN to be in the 'active' state but not currently 'forwarding' on a specific trunk, as shown in 'show interfaces trunk' output?",
+   "options": {
+    "A": "The VLAN exists and is allowed on that trunk, but STP has currently placed that VLAN's instance on that particular trunk port into a blocking state (to prevent a loop), so traffic for that VLAN is not actively being forwarded across that specific link at this moment",
+    "B": "'Active' and 'forwarding' are exactly synonymous terms with no distinction whatsoever, so a VLAN can never be reported as active without also being reported as forwarding on the exact same trunk",
+    "C": "A VLAN shown as active but not forwarding has been permanently and irreversibly deleted from the switch's VLAN database entirely",
+    "D": "This state indicates the physical trunk link itself is completely down, with no relationship whatsoever to per-VLAN STP forwarding state"
+   },
+   "correct": "A",
+   "explanation_es": "La VLAN existe y está permitida en ese trunk, pero STP actualmente colocó la instancia de esa VLAN en ese puerto trunk en particular en estado de bloqueo (para evitar un loop), así que el tráfico de esa VLAN no se está reenviando activamente por ese enlace específico en este momento."
+  },
+  {
+   "id": "b6_3.2.a_22",
+   "subtopic": "3.2.a",
+   "name": "EIGRP vs OSPF",
+   "question": "What EIGRP command displays the topology table, including successors and feasible successors for each destination?",
+   "options": {
+    "A": "'show ip eigrp topology', which lists each known destination along with its feasible distance, reported distances from neighbors, and which entries qualify as successor or feasible successor",
+    "B": "'show ip ospf database', which is an OSPF-specific command with no relationship to EIGRP's topology table",
+    "C": "'show ip protocols' only, which never displays any per-destination topology table information for EIGRP",
+    "D": "'show cdp neighbors', which displays Layer 2 neighbor information unrelated to EIGRP's Layer 3 topology table"
+   },
+   "correct": "A",
+   "explanation_es": "'show ip eigrp topology' lista cada destino conocido junto con su distancia factible, las distancias reportadas por los vecinos, y cuáles entradas califican como successor o feasible successor."
+  },
+  {
+   "id": "b6_3.2.a_23",
+   "subtopic": "3.2.a",
+   "name": "EIGRP vs OSPF",
+   "question": "Why does EIGRP typically converge very quickly when a feasible successor already exists for a failed route?",
+   "options": {
+    "A": "Because the feasible successor was already validated as loop-free ahead of time and is already present in the topology table, EIGRP can immediately promote it to successor and install it in the routing table without needing to query neighbors or wait for any new computation",
+    "B": "EIGRP always requires querying every neighbor in the topology before it can use any feasible successor, regardless of whether one is already available",
+    "C": "A feasible successor can only be used after a fixed delay of several minutes, regardless of how quickly the successor actually failed",
+    "D": "EIGRP has no concept of using a pre-computed backup route; every route change always requires a full topology recalculation"
+   },
+   "correct": "A",
+   "explanation_es": "Como el feasible successor ya fue validado como libre de loops de antemano y ya está presente en la tabla de topología, EIGRP puede promoverlo inmediatamente a successor e instalarlo en la tabla de enrutamiento sin necesitar consultar a los vecinos ni esperar ningún cálculo nuevo."
+  },
+  {
+   "id": "b6_3.2.a_24",
+   "subtopic": "3.2.a",
+   "name": "EIGRP vs OSPF",
+   "question": "What is the purpose of OSPF's 'router LSA' (Type 1) age field, and what happens when an LSA's age reaches MaxAge without being refreshed?",
+   "options": {
+    "A": "The age field tracks how long since the LSA was originated/refreshed; if it reaches MaxAge (typically 3600 seconds) without a fresh refresh from the originating router, the LSA is flushed from the database, since routers periodically refresh their own LSAs to keep them current",
+    "B": "LSA age has no relationship whatsoever to whether an LSA remains in the database; LSAs persist forever once originated, regardless of any age value",
+    "C": "MaxAge is reached instantly the moment an LSA is created, causing every LSA to be immediately flushed as soon as it's originated",
+    "D": "The age field only applies to External (Type 5) LSAs and has no relevance to Router (Type 1) LSAs"
+   },
+   "correct": "A",
+   "explanation_es": "El campo age rastrea cuánto tiempo pasó desde que la LSA se originó/refrescó; si llega a MaxAge (típicamente 3600 segundos) sin un refresco del router originador, la LSA se elimina de la base de datos, ya que los routers refrescan periódicamente sus propias LSAs para mantenerlas vigentes."
+  },
+  {
+   "id": "b6_3.2.a_25",
+   "subtopic": "3.2.a",
+   "name": "EIGRP vs OSPF",
+   "question": "Why might an engineer prefer EIGRP in a mixed-bandwidth WAN environment where per-neighbor path metrics vary significantly?",
+   "options": {
+    "A": "EIGRP's composite metric (heavily weighted by bandwidth and delay by default) can naturally reflect meaningful differences between paths of very different quality, and its unequal-cost load-balancing via variance offers additional flexibility not natively available with plain OSPF cost",
+    "B": "EIGRP is technically incapable of considering bandwidth or delay in its metric calculation at all, relying purely on hop count identical to RIP",
+    "C": "OSPF's cost metric always more accurately reflects true path quality than EIGRP's composite metric in every possible topology, making this scenario irrelevant",
+    "D": "Metric differences between paths have no bearing whatsoever on which routing protocol might be preferred in a given WAN design"
+   },
+   "correct": "A",
+   "explanation_es": "La métrica compuesta de EIGRP (fuertemente ponderada por ancho de banda y delay por defecto) puede reflejar naturalmente diferencias significativas entre caminos de calidad muy distinta, y su balanceo de carga de costo desigual vía variance ofrece flexibilidad adicional no disponible nativamente con el costo simple de OSPF."
+  },
+  {
+   "id": "b6_3.2.a_26",
+   "subtopic": "3.2.a",
+   "name": "EIGRP vs OSPF",
+   "question": "What does the OSPF 'show ip ospf neighbor' command's 'State' column (e.g., FULL, 2WAY, INIT) indicate about a given adjacency?",
+   "options": {
+    "A": "It shows the current stage of the neighbor formation/synchronization process that adjacency has reached, with FULL indicating the two routers have fully synchronized their link-state databases and are considered fully adjacent, while an earlier state like INIT or 2WAY indicates the process hasn't yet completed",
+    "B": "The State column only ever displays a static, unchanging value of 'FULL' regardless of the neighbor's actual adjacency progress, making it meaningless for troubleshooting",
+    "C": "State reflects exclusively the physical cable type (copper vs. fiber) connecting to that neighbor, with no relationship to OSPF's own adjacency formation process",
+    "D": "A neighbor showing 'INIT' state means the adjacency has already fully synchronized and no further progress is possible or needed"
+   },
+   "correct": "A",
+   "explanation_es": "Muestra la etapa actual del proceso de formación/sincronización de vecino que alcanzó esa adyacencia, con FULL indicando que ambos routers sincronizaron completamente sus bases de datos de estado de enlace y se consideran totalmente adyacentes, mientras que un estado anterior como INIT o 2WAY indica que el proceso aún no terminó."
+  },
+  {
+   "id": "b6_3.2.a_27",
+   "subtopic": "3.2.a",
+   "name": "EIGRP vs OSPF",
+   "question": "Why might two OSPF routers get stuck in the 'EXSTART' or 'EXCHANGE' state and never reach FULL adjacency?",
+   "options": {
+    "A": "A common cause is an MTU mismatch between the two routers' interfaces, since OSPF's database description packets carried during exchange can be dropped or rejected if their size exceeds what one side's interface MTU allows, preventing the link-state database synchronization from ever completing",
+    "B": "EXSTART and EXCHANGE states always automatically and immediately transition to FULL within milliseconds with no possibility of ever becoming stuck at either state",
+    "C": "Getting stuck at EXSTART or EXCHANGE can only ever be caused by a physical cable being unplugged, never by any software-level configuration mismatch like MTU",
+    "D": "These states have no relationship whatsoever to link-state database synchronization, and instead only reflect whether the router has been manually rebooted recently"
+   },
+   "correct": "A",
+   "explanation_es": "Una causa común es un desajuste de MTU entre las interfaces de ambos routers, ya que los paquetes de descripción de base de datos de OSPF transportados durante exchange pueden descartarse o rechazarse si su tamaño excede lo que permite el MTU de la interfaz de un lado, impidiendo que la sincronización de la base de datos de estado de enlace llegue a completarse."
+  },
+  {
+   "id": "b6_3.2.b_22",
+   "subtopic": "3.2.b",
+   "name": "OSPFv2/v3 config",
+   "question": "What does 'show ip ospf interface' display that is useful for verifying OSPF interface-level configuration?",
+   "options": {
+    "A": "It shows per-interface OSPF details such as the area assignment, network type, cost, timers, DR/BDR status, and neighbor count, helping verify that an interface is configured and participating in OSPF as expected",
+    "B": "It exclusively displays the physical cable length in meters for that interface, with no relationship to OSPF configuration or state",
+    "C": "'show ip ospf interface' only ever displays information about interfaces not running OSPF, excluding any OSPF-enabled interface from its output entirely",
+    "D": "This command is used exclusively to configure interface speed and duplex, with no relationship to reporting any existing OSPF state"
+   },
+   "correct": "A",
+   "explanation_es": "Muestra detalles por interfaz de OSPF como la asignación de área, tipo de red, costo, temporizadores, estado de DR/BDR, y cantidad de vecinos, ayudando a verificar que una interfaz esté configurada y participando en OSPF como se espera."
+  },
+  {
+   "id": "b6_3.2.b_23",
+   "subtopic": "3.2.b",
+   "name": "OSPFv2/v3 config",
+   "question": "Why must the OSPF 'area' assigned to a given interface match on both ends of a link for an adjacency to form?",
+   "options": {
+    "A": "OSPF adjacencies are formed per-area; if the two ends of a link disagree about which area that link belongs to, they'll consider the hello parameters mismatched and refuse to form an adjacency, since the area is a fundamental part of how OSPF hello packets are validated between neighbors",
+    "B": "OSPF area assignment has no bearing whatsoever on adjacency formation; two routers with mismatched area configuration on the same link will always form a full adjacency without any issue",
+    "C": "Area mismatch is automatically and silently corrected by OSPF itself, with the two routers each independently deciding to use whichever area was configured on the router with the lower router-id",
+    "D": "Area assignment is relevant only for OSPFv3, and OSPFv2 routers never check or require area agreement between neighbors on the same link"
+   },
+   "correct": "A",
+   "explanation_es": "Las adyacencias de OSPF se forman por área; si los dos extremos de un enlace no están de acuerdo sobre a qué área pertenece ese enlace, considerarán que los parámetros del hello no coinciden y se negarán a formar una adyacencia, ya que el área es una parte fundamental de cómo se validan los paquetes hello de OSPF entre vecinos."
+  },
+  {
+   "id": "b6_3.2.b_24",
+   "subtopic": "3.2.b",
+   "name": "OSPFv2/v3 config",
+   "question": "What is the effect of configuring 'default-information originate' on an OSPF router?",
+   "options": {
+    "A": "It causes that router to originate and advertise a default route (0.0.0.0/0) into the OSPF domain, which is commonly used on a router that connects to the internet or another external network, so other OSPF routers can learn a path toward destinations not otherwise present in the OSPF database",
+    "B": "This command disables all OSPF route advertisement on that router entirely, preventing it from originating any route of any kind, default or otherwise",
+    "C": "'default-information originate' can only be used within a stub area, and is technically invalid, unsupported syntax anywhere else in an OSPF configuration",
+    "D": "The command has no relationship whatsoever to default route advertisement, and instead exclusively configures the router's own default administrative distance value"
+   },
+   "correct": "A",
+   "explanation_es": "Hace que ese router origine y anuncie una ruta default (0.0.0.0/0) hacia el dominio OSPF, comúnmente usado en un router que se conecta a internet u otra red externa, para que los demás routers OSPF puedan aprender un camino hacia destinos que de otro modo no estarían presentes en la base de datos OSPF."
+  },
+  {
+   "id": "b6_3.2.b_25",
+   "subtopic": "3.2.b",
+   "name": "OSPFv2/v3 config",
+   "question": "Why might an engineer configure OSPF 'bfd' (Bidirectional Forwarding Detection) on a link, in addition to standard OSPF hello/dead timers?",
+   "options": {
+    "A": "BFD can detect a link/neighbor failure much faster (often in tens to hundreds of milliseconds) than waiting for OSPF's own dead timer to expire, and can trigger OSPF to react to that failure faster than relying solely on missed OSPF hellos",
+    "B": "BFD and OSPF hello/dead timers detect exactly the same failure condition using an identical mechanism, providing zero speed or detection benefit whatsoever when used together",
+    "C": "Configuring BFD on an OSPF-enabled link always and completely disables OSPF's own hello/dead timer mechanism entirely, replacing it rather than complementing it",
+    "D": "BFD can only be used with EIGRP and has no applicability whatsoever to detecting an OSPF neighbor or link failure"
+   },
+   "correct": "A",
+   "explanation_es": "BFD puede detectar una falla de enlace/vecino mucho más rápido (a menudo en decenas a cientos de milisegundos) que esperar a que expire el propio dead timer de OSPF, y puede hacer que OSPF reaccione a esa falla más rápido que depender únicamente de hellos de OSPF perdidos."
+  },
+  {
+   "id": "b6_3.2.b_26",
+   "subtopic": "3.2.b",
+   "name": "OSPFv2/v3 config",
+   "question": "What does the 'ip ospf priority 0' command applied to an interface accomplish, in terms of DR/BDR election on that segment?",
+   "options": {
+    "A": "A priority of 0 makes the router ineligible to ever become the DR or BDR on that segment, effectively guaranteeing it will always be a DROTHER regardless of any other router's priority or router-id, which can be useful to intentionally exclude a specific router from the DR/BDR role",
+    "B": "A priority of 0 always guarantees that router will become the DR on that segment, since a priority of 0 is treated as the highest possible value in the DR election algorithm",
+    "C": "Configuring priority 0 disables OSPF entirely on that interface, preventing the interface from forming any adjacency at all",
+    "D": "Priority has no relationship whatsoever to DR/BDR election, and instead only affects which VLAN the interface belongs to"
+   },
+   "correct": "A",
+   "explanation_es": "Una prioridad de 0 hace que el router sea inelegible para convertirse en DR o BDR en ese segmento, garantizando efectivamente que siempre sea un DROTHER sin importar la prioridad o router-id de cualquier otro router, lo cual puede ser útil para excluir intencionalmente a un router específico del rol de DR/BDR."
+  },
+  {
+   "id": "b6_3.2.b_27",
+   "subtopic": "3.2.b",
+   "name": "OSPFv2/v3 config",
+   "question": "Why is understanding OSPF LSA types (Type 1 Router, Type 2 Network, Type 3 Summary, Type 5 External, etc.) important when troubleshooting why a specific route is missing from a router's routing table?",
+   "options": {
+    "A": "Each LSA type conveys different information and propagates differently (some are confined to an area, others cross area/domain boundaries); understanding which LSA type should be carrying a given route helps an engineer determine where in the OSPF topology to look for a missing or unexpectedly filtered piece of routing information",
+    "B": "LSA types have no relationship whatsoever to route propagation or troubleshooting, since every OSPF route is always carried identically regardless of which LSA type is technically involved",
+    "C": "There is only a single LSA type in OSPF, making the concept of distinguishing between different LSA types for troubleshooting purposes entirely inapplicable",
+    "D": "LSA type only matters for OSPFv3, and OSPFv2 does not use LSA types of any kind to categorize different pieces of routing information"
+   },
+   "correct": "A",
+   "explanation_es": "Cada tipo de LSA transporta información distinta y se propaga de forma distinta (algunas quedan confinadas a un área, otras cruzan límites de área/dominio); entender qué tipo de LSA debería estar transportando una ruta dada ayuda a un ingeniero a determinar dónde buscar en la topología OSPF una pieza de información de enrutamiento faltante o filtrada inesperadamente."
+  },
+  {
+   "id": "b6_3.2.c_22",
+   "subtopic": "3.2.c",
+   "name": "eBGP",
+   "question": "What command is commonly used to verify the current state of a BGP neighbor relationship (e.g., Idle, Active, Established)?",
+   "options": {
+    "A": "'show ip bgp summary' (or 'show bgp summary'), which lists each configured neighbor along with its current session state or, if Established, the number of prefixes received from that neighbor",
+    "B": "'show vlan brief', which has no relationship whatsoever to BGP neighbor state and only displays VLAN information",
+    "C": "BGP neighbor state can never be verified through any Cisco IOS command output, and must always be inferred solely by observing whether routes are actually present in the routing table",
+    "D": "'show interfaces status' displays BGP neighbor state directly alongside physical interface link status, with no separate BGP-specific command needed"
+   },
+   "correct": "A",
+   "explanation_es": "'show ip bgp summary' (o 'show bgp summary') lista cada vecino configurado junto con su estado de sesión actual o, si está Established, la cantidad de prefijos recibidos de ese vecino."
+  },
+  {
+   "id": "b6_3.2.c_23",
+   "subtopic": "3.2.c",
+   "name": "eBGP",
+   "question": "Why does BGP typically use a much longer default hold-down/keepalive interval compared to an IGP like OSPF or EIGRP?",
+   "options": {
+    "A": "BGP is designed for stability over the internet-scale routing table, where excessively fast reconvergence triggered by a transient blip could cause significant route-flapping/instability across many downstream networks; a longer timer trades off some convergence speed for greater overall stability at that massive scale",
+    "B": "BGP timers are always identical to OSPF's default timers, with no meaningful difference in typical default interval length between the two protocols",
+    "C": "A longer BGP timer has no relationship whatsoever to network stability, and exists purely as an arbitrary historical default with no design rationale behind it",
+    "D": "BGP cannot support any configurable timer at all; its keepalive/hold interval is a fixed, unchangeable constant on every implementation"
+   },
+   "correct": "A",
+   "explanation_es": "BGP está diseñado para dar estabilidad sobre la tabla de enrutamiento a escala de internet, donde una reconvergencia excesivamente rápida disparada por un problema transitorio podría causar inestabilidad/flapping de rutas significativo en muchas redes aguas abajo; un temporizador más largo intercambia algo de velocidad de convergencia por mayor estabilidad general a esa escala masiva."
+  },
+  {
+   "id": "b6_3.2.c_24",
+   "subtopic": "3.2.c",
+   "name": "eBGP",
+   "question": "What is the purpose of BGP 'next-hop-self' configured on an iBGP router that receives a route from an eBGP peer and re-advertises it to other iBGP peers?",
+   "options": {
+    "A": "'next-hop-self' causes the router to rewrite the BGP next-hop attribute to its own address before advertising the route to iBGP peers, ensuring those iBGP peers use this router as the actual next hop rather than potentially trying to route toward the original eBGP peer's address, which those iBGP routers might not have a route to at all",
+    "B": "'next-hop-self' has no relationship whatsoever to the BGP next-hop attribute, and instead exclusively configures which AS number the router advertises as its own",
+    "C": "Configuring next-hop-self always and completely prevents that router from ever advertising any route learned via eBGP to any of its iBGP peers",
+    "D": "Next-hop-self can only be applied to eBGP sessions and is technically invalid, unsupported configuration syntax on an iBGP session"
+   },
+   "correct": "A",
+   "explanation_es": "'next-hop-self' hace que el router reescriba el atributo next-hop de BGP hacia su propia dirección antes de anunciar la ruta a los peers iBGP, asegurando que esos peers iBGP usen a este router como el next-hop real en lugar de potencialmente intentar enrutar hacia la dirección del peer eBGP original, hacia la cual esos routers iBGP podrían no tener ninguna ruta."
+  },
+  {
+   "id": "b6_3.2.c_25",
+   "subtopic": "3.2.c",
+   "name": "eBGP",
+   "question": "Why might an organization use BGP 'AS_PATH prepending' to influence how inbound traffic from the internet reaches it across multiple upstream ISP connections?",
+   "options": {
+    "A": "By artificially lengthening the AS_PATH advertised toward one ISP (repeating its own AS number multiple times), the organization makes that path appear less attractive to remote networks applying AS_PATH-length-based best-path selection, influencing more inbound traffic to prefer the other, non-prepended path instead",
+    "B": "AS_PATH prepending has no relationship whatsoever to influencing inbound traffic path selection, and instead exclusively controls outbound traffic engineering with zero effect on how remote networks route traffic back toward the prepending organization",
+    "C": "Prepending the AS_PATH always and unconditionally causes every remote network on the internet to completely stop sending any traffic whatsoever toward the prepended path, rather than merely making it comparatively less preferred",
+    "D": "AS_PATH prepending can only be used within a single autonomous system on iBGP sessions, and has no applicability whatsoever to influencing eBGP-learned path selection by external networks"
+   },
+   "correct": "A",
+   "explanation_es": "Al alargar artificialmente el AS_PATH anunciado hacia un ISP (repitiendo el propio número de AS varias veces), la organización hace que ese camino parezca menos atractivo para redes remotas que aplican selección de mejor camino basada en longitud de AS_PATH, influyendo a que más tráfico entrante prefiera en cambio el otro camino, sin prepending."
+  },
+  {
+   "id": "b6_3.2.c_26",
+   "subtopic": "3.2.c",
+   "name": "eBGP",
+   "question": "What does the BGP 'synchronization' rule (largely deprecated/disabled by default on modern implementations) historically required before advertising an iBGP-learned route to an eBGP peer?",
+   "options": {
+    "A": "The historical synchronization rule required that a route learned via iBGP also be present in the IGP (like OSPF) before it could be advertised to an eBGP peer, intended to avoid a scenario where external traffic was directed into the AS toward a destination that internal routers running only the IGP (not BGP) might not yet know how to reach; this rule is disabled by default on modern routers because it's generally assumed every router in the transit path also runs BGP",
+    "B": "Synchronization has no relationship whatsoever to coordinating between iBGP and an IGP, and instead exclusively refers to keeping two routers' internal clocks aligned via NTP",
+    "C": "BGP synchronization is mandatory and cannot be disabled on any current Cisco IOS or IOS-XE platform, contrary to it actually being disabled by default on modern implementations",
+    "D": "The synchronization rule only ever applied to eBGP-to-eBGP route advertisement, with no relationship whatsoever to iBGP-learned routes or IGP coordination"
+   },
+   "correct": "A",
+   "explanation_es": "La regla histórica de sincronización requería que una ruta aprendida vía iBGP también estuviera presente en el IGP (como OSPF) antes de poder anunciarse a un peer eBGP, pensada para evitar un escenario donde tráfico externo se dirigiera hacia el AS hacia un destino que routers internos corriendo solo el IGP (no BGP) podrían no saber todavía cómo alcanzar; esta regla está deshabilitada por defecto en routers modernos porque generalmente se asume que cada router en el camino de tránsito también corre BGP."
+  },
+  {
+   "id": "b6_3.2.c_27",
+   "subtopic": "3.2.c",
+   "name": "eBGP",
+   "question": "Why might a network engineer configure a maximum-prefix limit on a BGP eBGP session with an ISP or customer?",
+   "options": {
+    "A": "A maximum-prefix limit protects the router from being overwhelmed if the peer unexpectedly advertises a much larger number of prefixes than normally expected (due to a misconfiguration on their end, a route leak, or a deliberate attack), automatically taking a protective action (like tearing down the session) if the configured threshold is exceeded",
+    "B": "Maximum-prefix limits have no protective purpose whatsoever and exist purely to artificially restrict a legitimate peer from ever advertising more than a single prefix in total",
+    "C": "Configuring a maximum-prefix limit always and immediately terminates the BGP session the instant it's configured, regardless of how many prefixes the peer is actually advertising at that time",
+    "D": "This feature can only be applied to iBGP sessions within a single autonomous system, and is technically inapplicable to an eBGP session with an external ISP or customer"
+   },
+   "correct": "A",
+   "explanation_es": "Un límite de prefijos máximos protege al router de ser saturado si el peer inesperadamente anuncia una cantidad de prefijos mucho mayor de lo normalmente esperado (por una mala configuración de su lado, una fuga de rutas, o un ataque deliberado), tomando automáticamente una acción protectora (como derribar la sesión) si se excede el umbral configurado."
   }
  ]
 }
