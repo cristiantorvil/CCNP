@@ -304,6 +304,16 @@
     font-variant-numeric: tabular-nums;
   }
   .gauge-sub { font-size: 0.8rem; color: var(--text-dim); margin-top: 2px; }
+  .gauge-secondary {
+    display: flex; flex-direction: column;
+    padding-left: 18px; border-left: 1px solid var(--border);
+  }
+  .gauge-secondary-pct {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
   .gauge-bar-track {
     flex: 1 1 220px;
     height: 10px;
@@ -14613,6 +14623,17 @@
     return sum;
   }
 
+  // Global accuracy across every attempt ever recorded (not weighted by
+  // domain exam weight, unlike overallScore): correct answers / answers
+  // given so far. null when nothing has been answered yet.
+  function overallAnsweredScore() {
+    var total = state.attempts.length;
+    if (!total) return null;
+    var correct = 0;
+    state.attempts.forEach(function (a) { if (a.correct) correct++; });
+    return { pct: 100 * correct / total, correct: correct, total: total };
+  }
+
   function subtopicCompare(a, b) {
     var pa = a.split(".");
     var pb = b.split(".");
@@ -14903,17 +14924,22 @@
   function renderProgress() {
     var score = overallScore();
     var delta = score - TARGET_SCORE;
+    var ans = overallAnsweredScore();
     var container = document.createElement("div");
 
     var overall = el(
       '<div class="panel overall-card">' +
         '<div>' +
-          '<div class="gauge" style="color:' + pctColorVar(score) + ';">' + score.toFixed(1) + '%</div>' +
+          '<div class="gauge" style="color:' + pctColorVar(score) + ';" title="Sobre el total de preguntas del banco">' + score.toFixed(1) + '%</div>' +
           '<div class="gauge-sub">meta ' + TARGET_SCORE + '% &middot; ' +
             (delta >= 0 ? "+" + delta.toFixed(1) + " sobre la meta" : delta.toFixed(1) + " para la meta") +
           '</div>' +
         '</div>' +
         '<div class="gauge-bar-track"><div class="gauge-bar-fill" style="width:' + Math.min(100, score) + '%; background:' + pctColorVar(score) + ';"></div></div>' +
+        '<div class="gauge-secondary" title="Sobre las preguntas contestadas">' +
+          '<div class="gauge-secondary-pct" style="color:' + pctColorVar(ans ? ans.pct : null) + ';">' + (ans ? ans.pct.toFixed(1) + "%" : "—") + '</div>' +
+          '<div class="gauge-sub">' + (ans ? "sobre respondidas &middot; " + ans.correct + "/" + ans.total : "sobre respondidas &middot; sin intentos aún") + '</div>' +
+        '</div>' +
       '</div>'
     );
     container.appendChild(overall);
