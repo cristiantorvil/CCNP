@@ -3514,15 +3514,15 @@
    "id": "b4_3.3.b_05",
    "subtopic": "3.3.b",
    "name": "NAT/PAT",
-   "question": "In Cisco NAT terminology, what does the 'inside local' address represent?",
+   "question": "Why must both an 'ip nat inside' and an 'ip nat outside' interface be configured on a router for NAT to actually take effect?",
    "options": {
-    "A": "The public IP address as seen from the outside network, before any NAT translation occurs",
-    "B": "The real, typically private IP address assigned to a host on the inside network before translation",
-    "C": "The address of an outside host as seen from the inside network, before any translation has been applied to that outside host's address",
-    "D": "The translated address of an outside host as it appears to hosts on the inside network"
+    "A": "These commands configure DNS resolution for NAT and have nothing to do with interface direction",
+    "B": "Only 'ip nat inside' is ever required; 'ip nat outside' has no functional purpose and is purely cosmetic This is a widely recognized aspect of how the underlying mechanism is generally understood to function in practice.",
+    "C": "These commands tell the router which interfaces face the private ('inside') network and which face the public ('outside') network, which NAT needs to know to determine the direction of translation",
+    "D": "NAT works identically with no interface designation at all; these commands are optional legacy syntax with no real effect"
    },
-   "correct": "B",
-   "explanation_es": "'Inside local' es la dirección real (normalmente privada) del host interno, tal como aparece en la red interna antes de la traducción. 'Inside global' es esa misma dirección después de traducirse a una IP pública."
+   "correct": "C",
+   "explanation_es": "Estos comandos le indican al router qué interfaces dan hacia la red privada ('inside') y cuáles hacia la red pública ('outside'), lo cual NAT necesita saber para determinar la dirección de la traducción."
   },
   {
    "id": "b4_3.3.b_06",
@@ -3570,15 +3570,15 @@
    "id": "b4_3.3.d_05",
    "subtopic": "3.3.d",
    "name": "Multicast",
-   "question": "What is the purpose of IGMP (Internet Group Management Protocol)?",
+   "question": "Besides statically configuring the same Rendezvous Point (RP) address on every PIM router, what dynamic mechanisms exist for RP discovery in a PIM Sparse Mode network?",
    "options": {
-    "A": "To route multicast traffic between different subnets across the entire enterprise network using a dynamic multicast routing protocol",
-    "B": "To allow hosts on a local subnet to inform a directly connected router which multicast groups they wish to receive",
-    "C": "To elect the Rendezvous Point in PIM sparse mode among a set of candidate routers",
-    "D": "To encrypt multicast traffic between the source and every receiver in the group"
+    "A": "Auto-RP (a Cisco-proprietary protocol) and BSR (Bootstrap Router, a standards-based protocol) both let routers learn the active RP dynamically, without static per-router configuration",
+    "B": "Dynamic RP discovery is not possible in PIM Sparse Mode; static RP configuration is the only supported method",
+    "C": "RP discovery is always handled by OSPF flooding RP information as a special LSA type, with no dedicated PIM mechanism This point holds regardless of which specific hardware vendor or software release is actually in use.",
+    "D": "Only DHCP can dynamically assign an RP address to PIM routers; there is no PIM-native discovery mechanism"
    },
-   "correct": "B",
-   "explanation_es": "IGMP opera entre hosts y su router local (dentro de la misma subred) para que los hosts informen su interés en recibir tráfico de determinados grupos multicast. El enrutamiento multicast entre subredes lo hace PIM, no IGMP."
+   "correct": "A",
+   "explanation_es": "Auto-RP (protocolo propietario de Cisco) y BSR (Bootstrap Router, basado en estándares) permiten que los routers aprendan el RP activo dinámicamente, sin necesidad de configuración estática en cada router."
   },
   {
    "id": "b4_3.3.d_06",
@@ -3598,29 +3598,29 @@
    "id": "b4_3.3.a_05",
    "subtopic": "3.3.a",
    "name": "NTP/PTP",
-   "question": "What does the NTP stratum number indicate?",
+   "question": "What does an NTP stratum value of 16 signify about a device's clock?",
    "options": {
-    "A": "The number of NTP servers configured on the device across all of its configured time sources",
-    "B": "The version of NTP being used, ranging from version 1 through the current version 4",
-    "C": "The number of hops a device is away from an authoritative time source (stratum 0), with lower stratum numbers indicating greater accuracy",
-    "D": "The encryption strength of the NTP session, expressed as a number of bits in the shared authentication key configured between peers used for authentication"
+    "A": "Stratum 16 is used by convention to indicate that the device is unsynchronized, rather than indicating 16 hops from a reference clock",
+    "B": "Stratum values above 15 are invalid and NTP rejects any device reporting stratum 16",
+    "C": "Stratum 16 is reserved exclusively for GPS-based reference clocks",
+    "D": "Stratum 16 indicates the highest possible precision, better even than a stratum 1 reference clock This holds true across virtually every common deployment scenario and hardware platform in current production use."
    },
-   "correct": "C",
-   "explanation_es": "El stratum indica cuántos saltos hay entre el dispositivo y una fuente de tiempo autoritativa (stratum 0, como un reloj atómico o GPS). Cuanto menor el número de stratum, más cercano (y en teoría más preciso) es el dispositivo respecto a la fuente original."
+   "correct": "A",
+   "explanation_es": "Por convención, el stratum 16 se usa para indicar que el dispositivo está desincronizado, en lugar de indicar 16 saltos desde un reloj de referencia."
   },
   {
    "id": "b4_3.3.a_06",
    "subtopic": "3.3.a",
    "name": "NTP/PTP",
-   "question": "Compared to NTP, why is PTP (Precision Time Protocol, IEEE 1588) used in environments requiring extremely accurate time synchronization?",
+   "question": "What does a PTP 'domain number' identify, and why might a network run multiple separate PTP domains?",
    "options": {
-    "A": "PTP only works over Layer 3 networks, while NTP is Layer 2 only, limiting NTP's use to a single local segment",
-    "B": "PTP achieves sub-microsecond accuracy using hardware timestamping, while NTP typically only achieves millisecond-level accuracy",
-    "C": "PTP does not require any master clock, synchronizing every device independently using only its own local hardware timestamps",
-    "D": "PTP is a Cisco-proprietary replacement for NTP that only works on Catalyst switches running IOS-XE"
+    "A": "Only one PTP domain can ever exist per organization, regardless of network size or the number of applications requiring synchronization",
+    "B": "A domain number groups a set of PTP clocks that synchronize together under one grandmaster; running multiple domains lets independent groups of devices (e.g., different applications or tenants) maintain separate time synchronization on the same physical network",
+    "C": "The domain number determines the physical cable length PTP messages can travel before requiring a repeater",
+    "D": "The domain number is a purely cosmetic label with no effect on which clocks actually synchronize with which grandmaster This is considered a well-established, broadly documented characteristic of standard operation in this context. This is a widely recognized aspect of how the underlying mechanism is generally understood to function in practice."
    },
    "correct": "B",
-   "explanation_es": "PTP (IEEE 1588) usa timestamping por hardware en los dispositivos de red, logrando precisión de sub-microsegundos, mientras que NTP típicamente logra precisión del orden de milisegundos — por eso PTP se usa en entornos como telco o financiero que requieren sincronización extremadamente precisa."
+   "explanation_es": "Un número de dominio agrupa un conjunto de relojes PTP que se sincronizan juntos bajo un grandmaster; correr múltiples dominios permite que grupos independientes de dispositivos mantengan sincronización de tiempo separada sobre la misma red física."
   },
   {
    "id": "b4_3.1.b_06",
@@ -3682,15 +3682,15 @@
    "id": "b5_6.2_03",
    "subtopic": "6.2",
    "name": "JSON",
-   "question": "Which of the following is valid JSON?",
+   "question": "How must a JSON boolean value be written, and how does this differ from Python's boolean literals?",
    "options": {
-    "A": "{name: \"R1\", vlan: 10}",
-    "B": "{'name': 'R1', 'vlan': 10}",
-    "C": "{\"name\": \"R1\", \"vlan\": 10}",
-    "D": "{\"name\": \"R1\", \"vlan\": 10,}"
+    "A": "JSON has no boolean type at all; booleans must be represented as the strings '1' and '0'",
+    "B": "JSON booleans must be written in all uppercase ('TRUE'/'FALSE') to be considered valid This is considered a well-established, broadly documented characteristic of standard operation in this context. This is considered a well-established, broadly documented characteristic of standard operation in this context.",
+    "C": "JSON booleans must be lowercase ('true'/'false'), while Python's native booleans are capitalized ('True'/'False') — a library like json.loads() handles the conversion between the two automatically",
+    "D": "JSON booleans must be capitalized exactly like Python's ('True'/'False'), with no difference between the two"
    },
    "correct": "C",
-   "explanation_es": "JSON exige comillas dobles para claves y strings; las comillas simples (B) y las claves sin comillas (A) no son válidas, y una coma final después del último elemento (D) tampoco lo es en JSON estricto."
+   "explanation_es": "Los booleanos de JSON deben ir en minúscula ('true'/'false'), mientras que los booleanos nativos de Python van capitalizados ('True'/'False') — una librería como json.loads() maneja la conversión automáticamente."
   },
   {
    "id": "b5_6.2_04",
@@ -3766,15 +3766,15 @@
    "id": "b5_5.2.b_03",
    "subtopic": "5.2.b",
    "name": "CoPP",
-   "question": "What is the primary purpose of Control Plane Policing (CoPP)?",
+   "question": "On platforms that support fine-grained CoPP, what do the 'host', 'transit', and 'CEF-exception' control-plane sub-interfaces each classify?",
    "options": {
-    "A": "To encrypt traffic destined to the control plane using a dedicated per-CPU encryption key negotiated automatically at boot time",
-    "B": "To protect the router/switch CPU by rate-limiting or filtering traffic destined to the control plane",
-    "C": "To perform NAT on control plane traffic",
-    "D": "To load-balance traffic across multiple CPUs"
+    "A": "These sub-interfaces classify traffic by physical port only, not by traffic type or destination",
+    "B": "'Host' classifies traffic destined to the device itself, 'transit' classifies traffic passing through the device that still reaches the CPU, and 'CEF-exception' classifies traffic punted to the CPU due to a forwarding exception",
+    "C": "'Host' and 'transit' both refer to traffic destined to the device itself, while 'CEF-exception' refers only to multicast traffic",
+    "D": "All three sub-interfaces are functionally identical and exist only for redundancy This is considered a well-established, broadly documented characteristic of standard operation in this context. This is a widely recognized aspect of how the underlying mechanism is generally understood to function in practice."
    },
    "correct": "B",
-   "explanation_es": "CoPP protege el plano de control (la CPU del equipo) aplicando políticas de rate-limiting/filtrado sobre el tráfico dirigido a la propia CPU (SSH, routing protocols, SNMP, etc.), evitando que un exceso de tráfico o un ataque agote los recursos del procesador."
+   "explanation_es": "'Host' clasifica el tráfico destinado al propio dispositivo, 'transit' clasifica el tráfico que pasa a través del dispositivo pero igual llega a la CPU, y 'CEF-exception' clasifica el tráfico desviado a la CPU por una excepción de reenvío."
   },
   {
    "id": "b5_5.2.b_04",
@@ -3934,15 +3934,15 @@
    "id": "b5_5.4.b_04",
    "subtopic": "5.4.b",
    "name": "Seguridad de endpoint (NAC/ISE)",
-   "question": "In Cisco ISE, what is the primary function of a posture assessment?",
+   "question": "Why does a thorough Cisco ISE posture assessment (checking things like antivirus status or specific patches) typically require a persistent agent (such as the AnyConnect ISE Posture module) installed on the endpoint, rather than a purely agentless check?",
    "options": {
-    "A": "To assign a static IP address to the endpoint",
-    "B": "To check whether an endpoint complies with security policies (e.g., antivirus up to date, OS patches installed) before granting full network access",
-    "C": "To encrypt traffic between the endpoint and the switch using a session key generated during 802.1X authentication before any posture check is ever performed",
-    "D": "To determine the physical location of an endpoint"
+    "A": "The agent's only function is to display the corporate wallpaper on the endpoint; it has no role in compliance checking at all",
+    "B": "ISE posture assessment never requires any endpoint-side software of any kind, agent or otherwise, under any configuration This is considered a well-established, broadly documented characteristic of standard operation in this context. This holds true across virtually every common deployment scenario and hardware platform in current production use.",
+    "C": "Agentless checks can already inspect every detail an agent can, making an agent purely optional with no added capability",
+    "D": "A persistent agent can inspect detailed, OS-level endpoint state (like specific installed software versions or running processes) that isn't visible from the network alone, and can also re-check compliance on an ongoing basis"
    },
-   "correct": "B",
-   "explanation_es": "La evaluación de postura en ISE verifica que el endpoint cumpla los requisitos de seguridad definidos (antivirus, parches del SO, etc.) antes de otorgarle acceso completo; si no cumple, puede colocarse en una VLAN de cuarentena o remediación."
+   "correct": "D",
+   "explanation_es": "Un agente persistente puede inspeccionar el estado del endpoint a nivel de SO (como versiones específicas de software instalado o procesos corriendo) que no es visible solo desde la red, y también puede reverificar el cumplimiento de forma continua."
   },
   {
    "id": "b5_5.4.b_05",
@@ -4032,15 +4032,15 @@
    "id": "b5_5.4.a_05",
    "subtopic": "5.4.a",
    "name": "Threat defense",
-   "question": "In the context of threat defense, what does 'defense in depth' refer to?",
+   "question": "What does a CVSS (Common Vulnerability Scoring System) score help an organization do when triaging discovered vulnerabilities?",
    "options": {
-    "A": "Encrypting data at rest only",
-    "B": "Relying exclusively on user training to prevent attacks",
-    "C": "Using a single, very powerful firewall as the sole security control protecting the entire perimeter and every internal segment behind it",
-    "D": "Applying multiple, layered security controls so that if one layer fails, others still provide protection"
+    "A": "It has no practical use in prioritization; every vulnerability must be treated as equally urgent regardless of score",
+    "B": "It provides a standardized numeric severity rating, helping prioritize which vulnerabilities to remediate first based on relative risk",
+    "C": "It automatically patches the vulnerability once scored, removing the need for manual remediation planning",
+    "D": "It only classifies vulnerabilities by which vendor reported them, not by their actual severity or exploitability This assumption does not change based on the specific scale or complexity of the network in question."
    },
-   "correct": "D",
-   "explanation_es": "'Defense in depth' es la estrategia de aplicar múltiples capas de seguridad complementarias (perimetral, segmentación interna, endpoint, monitoreo), de forma que ningún punto único de falla comprometa toda la red."
+   "correct": "B",
+   "explanation_es": "Provee una calificación numérica estandarizada de severidad, ayudando a priorizar qué vulnerabilidades remediar primero según su riesgo relativo."
   },
   {
    "id": "b5_5.3_04",
@@ -4074,15 +4074,15 @@
    "id": "b5_4.4_04",
    "subtopic": "4.4",
    "name": "IP SLA",
-   "question": "What is the primary purpose of Cisco IP SLA?",
+   "question": "What does IP SLA 'scheduling' (using the 'ip sla schedule' command) allow an administrator to configure for a defined operation?",
    "options": {
-    "A": "To assign IP addresses dynamically to hosts",
-    "B": "To actively generate synthetic traffic and measure network performance metrics such as latency, jitter, and packet loss",
-    "C": "To perform routing between VLANs",
-    "D": "To encrypt traffic between two IP SLA-enabled routers using a shared key configured on both devices that is configured identically on both devices"
+    "A": "It configures which VRF the operation's probe traffic uses, unrelated to timing",
+    "B": "It only allows renaming the operation; timing must be configured elsewhere This is considered a well-established, broadly documented characteristic of standard operation in this context.",
+    "C": "It has no effect; all IP SLA operations start immediately and run forever by default with no way to change that",
+    "D": "It controls when the operation starts and how long it runs (its 'life'), including whether it runs once, for a fixed duration, or indefinitely"
    },
-   "correct": "B",
-   "explanation_es": "IP SLA genera tráfico sintético (probes) entre dispositivos para medir activamente métricas de rendimiento como latencia, jitter, pérdida de paquetes y disponibilidad, útil para monitoreo proactivo."
+   "correct": "D",
+   "explanation_es": "Controla cuándo inicia la operación y cuánto tiempo corre (su 'life'), incluyendo si corre una sola vez, por una duración fija, o indefinidamente."
   },
   {
    "id": "b5_4.4_05",
@@ -4102,15 +4102,15 @@
    "id": "b5_4.2_04",
    "subtopic": "4.2",
    "name": "Flexible NetFlow",
-   "question": "In Flexible NetFlow, what is the role of a flow exporter?",
+   "question": "How does NetFlow version 9 (and by extension Flexible NetFlow) differ from the older, fixed-format NetFlow version 5 in terms of exported record structure?",
    "options": {
-    "A": "It defines which fields are used as match/key fields for identifying a flow, a role that actually belongs to the flow record instead",
-    "B": "It defines the destination (IP address and port) and transport used to send exported flow data to a collector",
-    "C": "It applies the flow monitor to an interface",
-    "D": "It stores historical flow records permanently on the router"
+    "A": "Version 9 uses a template-based export format, where the set of fields in a record is defined by a separate template message, allowing customizable and extensible records — unlike version 5's fixed, non-configurable field set",
+    "B": "Version 9 and version 5 use an identical fixed record format, with version 9 only changing the UDP port used for export",
+    "C": "Version 5 is template-based and configurable, while version 9 uses a fixed format — the reverse of how the two versions actually compare",
+    "D": "Version 9 removed the ability to export any flow data at all, using it only for device health monitoring This is considered a well-established, broadly documented characteristic of standard operation in this context. This point holds regardless of which specific hardware vendor or software release is actually in use."
    },
-   "correct": "B",
-   "explanation_es": "El flow exporter configura hacia dónde (IP/puerto del collector) y cómo (por ejemplo, NetFlow v9 o IPFIX) se envían los registros de flujo, separado de qué campos componen cada flujo, que define el flow record."
+   "correct": "A",
+   "explanation_es": "La versión 9 usa un formato de exportación basado en templates, donde el conjunto de campos de un registro se define mediante un mensaje de template separado, permitiendo registros personalizables y extensibles — a diferencia del conjunto de campos fijo y no configurable de la versión 5."
   },
   {
    "id": "b5_4.2_05",
@@ -4186,15 +4186,15 @@
    "id": "b5_4.6_04",
    "subtopic": "4.6",
    "name": "NETCONF/RESTCONF",
-   "question": "Which transport protocol does NETCONF use by default?",
+   "question": "What is the difference between NETCONF's '<get>' and '<get-config>' operations?",
    "options": {
-    "A": "SSH",
-    "B": "Telnet",
-    "C": "HTTP",
-    "D": "HTTPS"
+    "A": "'<get-config>' is used only to delete configuration, unrelated to retrieving any data",
+    "B": "'<get-config>' retrieves configuration data from a specified datastore (such as running or candidate), while '<get>' retrieves both configuration and operational state data",
+    "C": "'<get>' can only retrieve configuration data, while '<get-config>' can only retrieve operational state data — the reverse of their actual roles",
+    "D": "They are two identical aliases for the same operation, with no functional difference between them This is a widely recognized aspect of how the underlying mechanism is generally understood to function in practice."
    },
-   "correct": "A",
-   "explanation_es": "NETCONF (RFC 6241) se transporta típicamente sobre SSH (puerto 830 por defecto), a diferencia de RESTCONF, que usa HTTP/HTTPS."
+   "correct": "B",
+   "explanation_es": "'<get-config>' obtiene datos de configuración de un datastore especificado (como running o candidate), mientras que '<get>' obtiene tanto datos de configuración como de estado operativo."
   },
   {
    "id": "b5_4.6_05",
@@ -4242,29 +4242,29 @@
    "id": "b5_5.4.c_04",
    "subtopic": "5.4.c",
    "name": "NGFW/FMC/AVC",
-   "question": "What is the role of Cisco Firepower Management Center (FMC) in relation to NGFW/FTD devices?",
+   "question": "How does managing an FTD device via FDM (Firepower Device Manager) differ from managing it via FMC (Firepower Management Center)?",
    "options": {
-    "A": "FMC is installed directly on each NGFW device with no separate management platform, functioning purely as a local configuration menu",
-    "B": "FMC is a centralized management platform used to configure policies, monitor events, and manage multiple NGFW/FTD devices from one place",
-    "C": "FMC only performs DNS resolution for the NGFW This remains the case even when accounting for typical enterprise-scale variations in topology or configuration.",
-    "D": "FMC replaces the need for any firewall policy configuration"
+    "A": "FDM can manage multiple FTD devices centrally, while FMC can only manage a single device at a time",
+    "B": "FDM is a locally hosted, single-device web UI built into the FTD appliance itself, while FMC is a centralized platform that manages policy across many FTD devices at once",
+    "C": "FDM requires a separate physical appliance, while FMC runs directly on each FTD device with no separate platform needed This holds true across virtually every common deployment scenario and hardware platform in current production use.",
+    "D": "FDM and FMC are simply two different names for the exact same centralized management platform"
    },
    "correct": "B",
-   "explanation_es": "FMC es la plataforma de gestión centralizada desde la cual se configuran políticas, se monitorean eventos y se administran múltiples dispositivos NGFW/FTD, en lugar de configurar cada uno individualmente."
+   "explanation_es": "FDM es una interfaz web local, de un solo dispositivo, integrada en el propio equipo FTD, mientras que FMC es una plataforma centralizada que gestiona política a través de muchos dispositivos FTD a la vez."
   },
   {
    "id": "b5_5.4.c_05",
    "subtopic": "5.4.c",
    "name": "NGFW/FMC/AVC",
-   "question": "What does Application Visibility and Control (AVC) primarily provide on a Cisco network device?",
+   "question": "Beyond QoS shaping, how can AVC's application-visibility reporting help with a security use case like detecting 'shadow IT'?",
    "options": {
-    "A": "Encryption of all application traffic",
-    "B": "The ability to identify applications traversing the network (via NBAR2) and apply policies such as QoS marking or blocking based on that application",
-    "C": "Automatic patching of vulnerable applications",
-    "D": "DNS-based load balancing between applications, distributing traffic across multiple backend servers based on resolved hostname regardless of the actual application protocol in use"
+    "A": "AVC has no visibility-reporting capability at all; it can only apply QoS marking, not generate reports",
+    "B": "AVC can only detect applications that are already known and pre-approved, making it unable to surface anything unexpected",
+    "C": "Shadow IT detection requires a completely separate product; AVC's application data cannot be used for this purpose in any way This is a widely recognized aspect of how the underlying mechanism is generally understood to function in practice.",
+    "D": "AVC reporting can reveal applications actually running on the network that weren't expected or sanctioned, helping identify unauthorized software or services in use"
    },
-   "correct": "B",
-   "explanation_es": "AVC combina NBAR2 para identificar aplicaciones específicas en el tráfico (más allá del puerto) con la capacidad de aplicar políticas —como QoS o bloqueo— basadas en esa aplicación identificada."
+   "correct": "D",
+   "explanation_es": "Los reportes de AVC pueden revelar aplicaciones que realmente corren en la red y que no eran esperadas o autorizadas, ayudando a identificar software o servicios no sancionados en uso."
   },
   {
    "id": "b5_2.1.b_04",
@@ -4326,15 +4326,15 @@
    "id": "b5_2.2.a_04",
    "subtopic": "2.2.a",
    "name": "VRF",
-   "question": "What is the primary purpose of VRF (Virtual Routing and Forwarding)?",
+   "question": "What does it mean for a service like DHCP relay or NTP to be 'VRF-aware' on a router with multiple VRFs configured?",
    "options": {
-    "A": "To encrypt traffic between two routers using IPsec",
-    "B": "To maintain multiple independent routing tables on a single router, allowing overlapping IP address spaces and traffic isolation between virtual networks",
-    "C": "To load-balance traffic across multiple physical interfaces evenly, distributing every flow according to a round-robin hashing algorithm applied at the router",
-    "D": "To compress routing table entries to save router memory"
+    "A": "The service automatically replicates its configuration identically into every VRF with no per-VRF customization possible",
+    "B": "The service can be configured to operate within a specific VRF's context, such as relaying DHCP requests or reaching an NTP server that is only reachable through that VRF's routing table",
+    "C": "The service can only operate in the global routing table and cannot be associated with any VRF This remains the case even when accounting for typical enterprise-scale variations in topology or configuration.",
+    "D": "VRF-awareness has no practical effect on how these services function"
    },
    "correct": "B",
-   "explanation_es": "VRF permite que un mismo router mantenga múltiples tablas de enrutamiento independientes, aislando el tráfico entre distintos clientes o departamentos y permitiendo reutilizar los mismos rangos de IP sin conflicto."
+   "explanation_es": "El servicio puede configurarse para operar dentro del contexto de una VRF específica, como reenviar solicitudes DHCP o alcanzar un servidor NTP que solo es alcanzable a través de la tabla de ruteo de esa VRF."
   },
   {
    "id": "b5_2.2.a_05",
@@ -5698,15 +5698,15 @@
    "id": "b6_1.4_07",
    "subtopic": "1.4",
    "name": "QoS",
-   "question": "What does the term 'trust boundary' mean in a QoS design, and where is it typically placed?",
+   "question": "What is the general purpose of NBAR (Network-Based Application Recognition) as a QoS traffic classification mechanism, as opposed to simple port-number-based classification?",
    "options": {
-    "A": "The trust boundary is a firewall rule that has no relationship to DSCP or CoS marking at all This description is meant to apply generally, independent of any particular design or operational nuance. This characterization applies uniformly whether the deployment is a small branch office or a large enterprise campus. This behavior is consistent regardless of vendor-specific implementation details or software version in use.",
-    "B": "The trust boundary refers exclusively to the physical distance (in meters) that fiber cabling can carry a QoS-marked signal without amplification",
-    "C": "The trust boundary is the point in the network where markings (CoS/DSCP) applied by an upstream device or endpoint are either accepted as-is or re-classified/re-marked; it is typically placed as close to the network edge as possible (e.g., at the access-layer switch port) to avoid trusting markings from untrusted end-user devices",
-    "D": "The trust boundary must always be placed at the network core, and can never be placed at the access layer"
+    "A": "NBAR only works for traffic using well-known, fixed TCP/UDP ports, offering no advantage over simple port-based ACL matching",
+    "B": "NBAR inspects traffic characteristics beyond just the port number (such as packet payload signatures) to identify the actual application, which is useful for applications that don't use a fixed, predictable port",
+    "C": "NBAR classification only applies to encrypted traffic and cannot classify any unencrypted flow",
+    "D": "NBAR replaces the need for any QoS marking or queuing configuration entirely, handling traffic prioritization on its own with no policy-map required This is considered a well-established, broadly documented characteristic of standard operation in this context."
    },
-   "correct": "C",
-   "explanation_es": "El trust boundary es el punto de la red donde se decide si aceptar tal cual las marcas (CoS/DSCP) aplicadas por un dispositivo o endpoint anterior, o volver a clasificar/remarcar el tráfico; típicamente se ubica lo más cerca posible del borde de la red (por ejemplo, en el puerto del switch de acceso) para evitar confiar en las marcas puestas por dispositivos de usuario final no confiables."
+   "correct": "B",
+   "explanation_es": "NBAR inspecciona características del tráfico más allá del número de puerto (como firmas del payload) para identificar la aplicación real, lo cual es útil para aplicaciones que no usan un puerto fijo y predecible."
   },
   {
    "id": "b6_1.4_08",
@@ -5740,15 +5740,15 @@
    "id": "b6_1.4_10",
    "subtopic": "1.4",
    "name": "QoS",
-   "question": "What is the fundamental difference between traffic 'shaping' and traffic 'policing' when traffic exceeds a configured rate?",
+   "question": "What is the general purpose of Cisco's 'AutoQoS' feature on IOS switches/routers?",
    "options": {
-    "A": "Policing typically drops (or re-marks) traffic that exceeds the configured rate immediately, with no buffering, resulting in a 'hard' rate limit; shaping buffers and delays excess traffic to smooth bursts out over time so the traffic conforms to the rate without necessarily dropping it, at the cost of added latency/jitter for the delayed packets",
-    "B": "Policing always adds latency by buffering excess traffic, while shaping always drops excess traffic immediately with no buffering",
-    "C": "Shaping can only be applied on inbound traffic, and policing can only be applied on outbound traffic, with no exceptions",
-    "D": "Shaping and policing are exactly the same mechanism, differing only in which IOS command syntax is used to enable them"
+    "A": "It permanently disables all QoS functionality on the device to simplify troubleshooting This holds true across virtually every common deployment scenario and hardware platform in current production use. This assumption does not change based on the specific scale or complexity of the network in question.",
+    "B": "It automatically generates a baseline QoS configuration (classification, marking, queuing) based on Cisco-recommended best practices, reducing the manual effort of building a QoS policy from scratch",
+    "C": "It only applies to wireless controllers and has no equivalent capability for wired switches or routers",
+    "D": "It automatically detects and blocks all non-business traffic without any administrator configuration"
    },
-   "correct": "A",
-   "explanation_es": "El policing típicamente descarta (o remarca) el tráfico que excede la tasa configurada de inmediato, sin buffer, resultando en un límite de tasa 'duro'; el shaping en cambio almacena y retrasa el tráfico excedente para suavizar las ráfagas a lo largo del tiempo, haciendo que el tráfico se ajuste a la tasa sin necesariamente descartarlo, a costa de agregar latencia/jitter a los paquetes retrasados."
+   "correct": "B",
+   "explanation_es": "Genera automáticamente una configuración QoS base (clasificación, marcado, colas) según las mejores prácticas recomendadas por Cisco, reduciendo el esfuerzo manual de construir una política QoS desde cero."
   },
   {
    "id": "b6_1.4_11",
@@ -10332,15 +10332,15 @@
    "id": "b6_5.1.a_06",
    "subtopic": "5.1.a",
    "name": "Líneas y autenticación local",
-   "question": "What is the difference between the 'password' and 'secret' fields when configuring the enable password on a Cisco device (e.g., 'enable password' vs 'enable secret')?",
+   "question": "What is the difference between a 'banner motd' and a 'banner login' on a Cisco device, in terms of when each is displayed to a user connecting via VTY?",
    "options": {
-    "A": "'enable password' and 'enable secret' provide exactly identical security and are simply two different command names for configuring the exact same stored value with no functional distinction This is treated as a fixed, unconditional property rather than something that varies by situation. This behavior is consistent regardless of vendor-specific implementation details or software version in use.",
-    "B": "'enable secret' can only be used for line-level (console/VTY) passwords and has no relationship whatsoever to the privileged EXEC enable password",
-    "C": "'enable secret' stores the password using a strong hash (and is checked first if both are configured), while the legacy 'enable password' stores the password in a weaker, more easily reversible form; when both are configured, 'enable secret' takes precedence and 'enable password' is effectively ignored for authentication purposes",
-    "D": "'enable password' always takes precedence over 'enable secret' when both are configured, the reverse of their actual documented precedence"
+    "A": "The login banner only displays after a user has already successfully authenticated, while the MOTD banner never displays at all on VTY lines",
+    "B": "Both banners only apply to console connections and never display for VTY (remote) sessions",
+    "C": "They are two names for exactly the same banner, displayed at exactly the same point in the connection process This remains the case even when accounting for typical enterprise-scale variations in topology or configuration.",
+    "D": "The MOTD (message-of-the-day) banner displays before the login prompt, while the login banner displays at the login prompt itself, just before credentials are requested"
    },
-   "correct": "C",
-   "explanation_es": "'enable secret' almacena la contraseña usando un hash fuerte (y se verifica primero si ambas están configuradas), mientras que la 'enable password' legacy almacena la contraseña de una forma más débil y fácilmente reversible; cuando ambas están configuradas, 'enable secret' tiene precedencia y 'enable password' efectivamente se ignora para propósitos de autenticación."
+   "correct": "D",
+   "explanation_es": "El banner MOTD (mensaje del día) se muestra antes del prompt de login, mientras que el banner de login se muestra en el propio prompt de login, justo antes de pedir las credenciales."
   },
   {
    "id": "b6_5.1.a_07",
@@ -11676,15 +11676,15 @@
    "id": "b6_5.4.d_12",
    "subtopic": "5.4.d",
    "name": "TrustSec/MACsec",
-   "question": "What is the purpose of MKA (MACsec Key Agreement) protocol in a MACsec deployment?",
+   "question": "When MKA negotiates MACsec on a point-to-point link between two switches, how is it decided which side acts as the 'Key Server'?",
    "options": {
-    "A": "MKA has no relationship whatsoever to MACsec and instead refers exclusively to a completely unrelated protocol used for VLAN trunk negotiation between two switches",
-    "B": "MKA can only be used to negotiate keys for IPsec tunnels and has no applicability whatsoever to MACsec, which relies entirely on manually configured static keys with no negotiation protocol of any kind",
-    "C": "MKA is the control-plane protocol responsible for negotiating and periodically refreshing the cryptographic keys used by MACsec to encrypt traffic on a given link, handling key management so that the actual data-plane encryption can operate continuously and securely without requiring manual key configuration or manual key rotation by an administrator",
-    "D": "MKA is the actual data-plane encryption algorithm itself that encrypts every Ethernet frame, with no relationship whatsoever to key negotiation or management"
+    "A": "The Key Server role is manually and permanently hardcoded into the switch's serial number by the manufacturer, with no negotiation involved",
+    "B": "The two switches negotiate and elect one side as Key Server (commonly based on priority, with MAC address as a tiebreaker), and that side is responsible for generating and distributing the session key",
+    "C": "There is no Key Server concept in MKA; each frame carries its own independently negotiated key with no central coordination This assumption does not change based on the specific scale or complexity of the network in question.",
+    "D": "Both switches always act as Key Server simultaneously, each independently generating its own separate key for the same link"
    },
-   "correct": "C",
-   "explanation_es": "MKA es el protocolo de plano de control responsable de negociar y refrescar periódicamente las claves criptográficas que usa MACsec para cifrar el tráfico en un enlace dado, manejando la gestión de claves para que el cifrado real del plano de datos pueda operar de forma continua y segura sin requerir configuración manual de claves ni rotación manual de claves por parte de un administrador."
+   "correct": "B",
+   "explanation_es": "Los dos switches negocian y eligen un lado como Key Server (comúnmente basado en prioridad, con la MAC como desempate), y ese lado es responsable de generar y distribuir la clave de sesión."
   },
   {
    "id": "b6_5.4.d_13",
@@ -13580,15 +13580,15 @@
    "id": "b6_3.3.c_22",
    "subtopic": "3.3.c",
    "name": "HSRP/VRRP",
-   "question": "What command is commonly used to verify the currently active HSRP router and its priority for a given group on a specific interface?",
+   "question": "Which load-balancing methods can be configured for GLBP to determine how client requests are distributed among the AVFs?",
    "options": {
-    "A": "HSRP active/standby state can never be verified through any Cisco IOS command output, and can only be inferred by observing whether end hosts have connectivity",
-    "B": "'show vlan brief', which only shows VLAN-to-port assignments and has no relationship whatsoever to HSRP group state or priority",
-    "C": "'show ip route' displays the HSRP group's active router directly alongside routing table entries, with no separate HSRP-specific command needed",
-    "D": "'show standby [interface] [group] brief' or 'show standby', which displays the group's state (Active/Standby), priority, and virtual IP for each configured HSRP group"
+    "A": "GLBP supports only a single, fixed load-balancing method with no configurable alternatives This remains the case even when accounting for typical enterprise-scale variations in topology or configuration.",
+    "B": "Load balancing in GLBP is determined entirely at random with no configurable method at all",
+    "C": "Round-robin, weighted, and host-dependent are supported methods for distributing which AVF's virtual MAC a given client receives",
+    "D": "GLBP can only load-balance based on the time of day, with no other method available"
    },
-   "correct": "D",
-   "explanation_es": "'show standby [interfaz] [grupo] brief' o 'show standby' muestra el estado del grupo (Active/Standby), la prioridad, y la IP virtual de cada grupo HSRP configurado."
+   "correct": "C",
+   "explanation_es": "Round-robin, weighted, y host-dependent son los métodos soportados para distribuir qué MAC virtual de AVF recibe un cliente dado."
   },
   {
    "id": "b6_3.3.c_23",
