@@ -210,8 +210,9 @@
   /* --- question card --- */
   .q-meta {
     display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 14px;
+    margin-bottom: 14px; flex-wrap: wrap; gap: 8px;
   }
+  .badge-group { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
   .badge {
     font-family: "IBM Plex Mono", monospace;
     font-size: 0.7rem;
@@ -222,6 +223,17 @@
     color: var(--info);
     border: 1px solid transparent;
   }
+  .src-badge {
+    background: var(--surface-2);
+    color: var(--text-dim);
+  }
+  .multi-hint {
+    font-size: 0.72rem;
+    color: var(--accent);
+    margin: -8px 0 14px;
+    letter-spacing: 0.02em;
+  }
+  .option.selected { border-color: var(--accent); background: var(--accent-soft); }
   .q-progress {
     font-family: "IBM Plex Mono", monospace;
     font-size: 0.75rem;
@@ -428,7 +440,7 @@
 
 <script type="application/json" id="qbank-data">{
  "version": "2026-09-08_v4",
- "total": 1000,
+ "total": 1035,
  "questions": [
   {
    "id": "trustsec_01",
@@ -14429,6 +14441,557 @@
    },
    "correct": "C",
    "explanation_es": "Una red de campus grande típicamente tiene muchos servicios, aplicaciones, y tipos de endpoint interdependientes, algunos de los cuales podrían no estar inmediatamente listos o ser compatibles con el fabric; un período de coexistencia extendido le da a la organización tiempo para validar el comportamiento del fabric, migrar aplicaciones/servicios a un ritmo manejable, y mantener un respaldo hacia la red tradicional si surgen problemas inesperados, en lugar de forzar que cada dependencia se resuelva instantáneamente en un único momento de corte."
+  },
+  {
+   "id": "ip1_2.2.b_01",
+   "subtopic": "2.2.b",
+   "name": "GRE / IPsec / AH",
+   "source": "ipcisco.com",
+   "question": "Which two protocols make up the IPsec header options used to protect a packet? (Select two)",
+   "options": {
+    "A": "AH (Authentication Header)",
+    "B": "AES",
+    "C": "ESP (Encapsulating Security Payload)",
+    "D": "DES"
+   },
+   "correctSet": [
+    "A",
+    "C"
+   ],
+   "explanation_es": "AH (Authentication Header) y ESP (Encapsulating Security Payload) son los dos protocolos de cabecera de IPsec. AES y DES son algoritmos de cifrado usados dentro de ESP, no cabeceras de IPsec en sí."
+  },
+  {
+   "id": "ip1_2.2.b_02",
+   "subtopic": "2.2.b",
+   "name": "GRE / IPsec / AH",
+   "source": "ipcisco.com",
+   "question": "What IP protocol number is assigned to ESP (Encapsulating Security Payload)?",
+   "options": {
+    "A": "89",
+    "B": "51",
+    "C": "50",
+    "D": "47"
+   },
+   "correct": "C",
+   "explanation_es": "ESP usa el número de protocolo IP 50. AH usa el 51, GRE usa el 47, y OSPF usa el 89."
+  },
+  {
+   "id": "ip1_3.2.a_01",
+   "subtopic": "3.2.a",
+   "name": "EIGRP vs OSPF",
+   "source": "ipcisco.com",
+   "question": "Which factors does a router evaluate, in order, when choosing the best route to install in the routing table? (Select three)",
+   "options": {
+    "A": "Metric",
+    "B": "Router ID",
+    "C": "Prefix length (longest match)",
+    "D": "Administrative distance"
+   },
+   "correctSet": [
+    "A",
+    "C",
+    "D"
+   ],
+   "explanation_es": "El router primero prefiere la ruta con el prefijo más específico (longest match), luego, entre rutas con el mismo prefijo, la de menor distancia administrativa, y finalmente, entre rutas de la misma distancia administrativa, la de menor métrica. El Router ID solo se usa como desempate en casos muy específicos (p. ej. OSPF), no como criterio general de selección de ruta."
+  },
+  {
+   "id": "ip1_3.2.a_03",
+   "subtopic": "3.2.a",
+   "name": "EIGRP vs OSPF",
+   "source": "ipcisco.com",
+   "question": "In the output of 'show ip route', which code letter identifies a static route?",
+   "options": {
+    "A": "S",
+    "B": "D",
+    "C": "C",
+    "D": "O"
+   },
+   "correct": "A",
+   "explanation_es": "'S' identifica una ruta estática en la tabla de ruteo de Cisco IOS. 'C' es conectada, 'O' es OSPF, y 'D' es EIGRP."
+  },
+  {
+   "id": "ip1_3.2.a_04",
+   "subtopic": "3.2.a",
+   "name": "EIGRP vs OSPF",
+   "source": "ipcisco.com",
+   "question": "Which command correctly configures a static route to network 10.10.10.0/24 via next-hop 20.20.20.2?",
+   "options": {
+    "A": "route 10.10.10.0 255.255.255.0 20.20.20.2",
+    "B": "ip static-route 10.10.10.0 255.255.255.0 20.20.20.2",
+    "C": "ip route 10.10.10.0 255.255.255.0 20.20.20.2",
+    "D": "static route 10.10.10.0 255.255.255.0 20.20.20.2"
+   },
+   "correct": "C",
+   "explanation_es": "La sintaxis correcta en IOS es 'ip route <red> <máscara> <next-hop>', por lo que sería 'ip route 10.10.10.0 255.255.255.0 20.20.20.2'."
+  },
+  {
+   "id": "ip1_3.2.a_05",
+   "subtopic": "3.2.a",
+   "name": "EIGRP vs OSPF",
+   "source": "ipcisco.com",
+   "question": "If a router learns the same destination network via both OSPF and RIP, which route does it install by default?",
+   "options": {
+    "A": "Both routes, load-balanced equally",
+    "B": "The OSPF route, since OSPF's default administrative distance (110) is lower than RIP's (120)",
+    "C": "Neither route is installed until manually resolved",
+    "D": "The RIP route, since RIP has a lower administrative distance"
+   },
+   "correct": "B",
+   "explanation_es": "OSPF tiene distancia administrativa 110 por defecto, menor que la de RIP (120), así que el router prefiere e instala la ruta OSPF."
+  },
+  {
+   "id": "ip1_3.2.a_06",
+   "subtopic": "3.2.a",
+   "name": "EIGRP vs OSPF",
+   "source": "ipcisco.com",
+   "question": "Which of these are commonly cited advantages of static routing over dynamic routing protocols? (Select two)",
+   "options": {
+    "A": "It scales better than dynamic protocols on very large networks",
+    "B": "It requires essentially no extra bandwidth for route advertisements",
+    "C": "It automatically adapts to any topology change",
+    "D": "It consumes very little CPU and memory on the router"
+   },
+   "correctSet": [
+    "B",
+    "D"
+   ],
+   "explanation_es": "Las rutas estáticas no generan tráfico de actualización entre routers (bajo consumo de ancho de banda) y no requieren cálculos de un algoritmo de ruteo (bajo consumo de CPU/memoria). No se adaptan automáticamente a cambios de topología, y en redes grandes escalan peor que un protocolo dinámico."
+  },
+  {
+   "id": "ip1_3.2.a_07",
+   "subtopic": "3.2.a",
+   "name": "EIGRP vs OSPF",
+   "source": "ipcisco.com",
+   "question": "Which of these statements about EIGRP are correct? (Select three)",
+   "options": {
+    "A": "Its default IPv4 multicast address is 224.0.0.10",
+    "B": "Its default internal administrative distance is 90",
+    "C": "It uses Dijkstra's SPF algorithm to calculate paths",
+    "D": "It uses the DUAL algorithm to calculate loop-free paths"
+   },
+   "correctSet": [
+    "A",
+    "B",
+    "D"
+   ],
+   "explanation_es": "EIGRP usa el algoritmo DUAL (no SPF, que es de OSPF), su dirección multicast IPv4 por defecto es 224.0.0.10, y su distancia administrativa interna por defecto es 90 (170 es la distancia administrativa externa de EIGRP, no la interna)."
+  },
+  {
+   "id": "ip1_3.2.a_08",
+   "subtopic": "3.2.a",
+   "name": "EIGRP vs OSPF",
+   "source": "ipcisco.com",
+   "question": "Why is EIGRP sometimes described as having both distance-vector and link-state characteristics?",
+   "options": {
+    "A": "Because it floods the full network topology to every router just like OSPF does",
+    "B": "Because it only calculates hop count, exactly like RIP, with no link-state traits",
+    "C": "Because it only ever exchanges routes with directly connected neighbors, with no additional link-state-like behavior at all",
+    "D": "Because it maintains neighbor and topology tables and reacts quickly to changes via DUAL, behaving like a distance-vector protocol with some link-state-like traits"
+   },
+   "correct": "D",
+   "explanation_es": "EIGRP se describe a veces como un protocolo 'híbrido avanzado': funciona fundamentalmente como vector-distancia (solo intercambia rutas con vecinos directos), pero mantiene tablas de vecinos y topología y reacciona rápido a cambios mediante DUAL, características que recuerdan a un protocolo de estado de enlace."
+  },
+  {
+   "id": "ip1_3.2.a_09",
+   "subtopic": "3.2.a",
+   "name": "EIGRP vs OSPF",
+   "source": "ipcisco.com",
+   "question": "In the output of 'show ip route', what does the '>' symbol next to a route typically indicate?",
+   "options": {
+    "A": "That the route was learned via a default route",
+    "B": "That the route is currently the best route installed and used for forwarding",
+    "C": "That the route is pending validation",
+    "D": "That the route is a summarized route"
+   },
+   "correct": "B",
+   "explanation_es": "El símbolo '>' junto a una ruta en la tabla de ruteo de Cisco indica que esa es la ruta actualmente instalada y utilizada para reenviar tráfico hacia ese destino."
+  },
+  {
+   "id": "ip1_3.2.a_10",
+   "subtopic": "3.2.a",
+   "name": "EIGRP vs OSPF",
+   "source": "ipcisco.com",
+   "question": "What does it mean when an EIGRP route enters the 'Active' state in the topology table?",
+   "options": {
+    "A": "The route was just learned and is being validated for the first time",
+    "B": "The route is currently being used to forward traffic normally",
+    "C": "The route's successor and all feasible successors have failed, and the router is now actively querying neighbors for a new path",
+    "D": "The route has been manually marked as preferred by the administrator"
+   },
+   "correct": "C",
+   "explanation_es": "Una ruta EIGRP entra en estado 'Active' cuando su sucesor y todos sus sucesores factibles fallan, y el router debe enviar consultas (queries) a sus vecinos para encontrar una nueva ruta. Mientras está en ese proceso, la ruta se considera activa (en contraste con 'Passive', su estado normal y estable)."
+  },
+  {
+   "id": "ip1_3.2.a_11",
+   "subtopic": "3.2.a",
+   "name": "EIGRP vs OSPF",
+   "source": "ipcisco.com",
+   "question": "Which type of EIGRP packet is primarily responsible for carrying routing information used to build the topology and routing tables?",
+   "options": {
+    "A": "Hello packets",
+    "B": "Update packets",
+    "C": "Query packets",
+    "D": "Acknowledgment packets"
+   },
+   "correct": "B",
+   "explanation_es": "Los paquetes Update llevan la información de ruteo que EIGRP usa para construir las tablas de topología y de ruteo. Los paquetes Hello sirven para descubrir y mantener vecinos, no para transportar rutas."
+  },
+  {
+   "id": "ip1_3.2.a_12",
+   "subtopic": "3.2.a",
+   "name": "EIGRP vs OSPF",
+   "source": "ipcisco.com",
+   "question": "In a routing table entry like '10.10.20.0/24 [110/15] via 10.10.1.1', what does the second number (15) represent?",
+   "options": {
+    "A": "The metric",
+    "B": "The interface index",
+    "C": "The administrative distance",
+    "D": "The hop count limit"
+   },
+   "correct": "A",
+   "explanation_es": "En la notación '[AD/metric]' de Cisco IOS, el primer número (110) es la distancia administrativa y el segundo (15) es la métrica de la ruta para ese protocolo."
+  },
+  {
+   "id": "ip1_3.2.a_13",
+   "subtopic": "3.2.a",
+   "name": "EIGRP vs OSPF",
+   "source": "ipcisco.com",
+   "question": "Which command enables real-time debugging of EIGRP packets being sent and received on a Cisco router?",
+   "options": {
+    "A": "clear eigrp packets",
+    "B": "debug ip eigrp neighbors",
+    "C": "show eigrp packets",
+    "D": "debug eigrp packets"
+   },
+   "correct": "D",
+   "explanation_es": "'debug eigrp packets' habilita el debug en tiempo real de los paquetes EIGRP (Hello, Update, Query, etc.) enviados y recibidos por el router."
+  },
+  {
+   "id": "ip1_3.2.b_01",
+   "subtopic": "3.2.b",
+   "name": "OSPFv2/v3 config",
+   "source": "ipcisco.com",
+   "question": "Which type of OSPF router connects two or more OSPF areas together?",
+   "options": {
+    "A": "ABR (Area Border Router)",
+    "B": "DR (Designated Router)",
+    "C": "ASBR (Autonomous System Boundary Router)",
+    "D": "BDR (Backup Designated Router)"
+   },
+   "correct": "A",
+   "explanation_es": "El ABR (Area Border Router) es el router que tiene interfaces en más de un área OSPF, conectándolas entre sí."
+  },
+  {
+   "id": "ip1_3.2.b_02",
+   "subtopic": "3.2.b",
+   "name": "OSPFv2/v3 config",
+   "source": "ipcisco.com",
+   "question": "Which interface command sets the OSPF hello interval to 20 seconds?",
+   "options": {
+    "A": "ip ospf interval 20",
+    "B": "ip hello-interval ospf 20",
+    "C": "ospf hello time 20",
+    "D": "ip ospf hello-interval 20"
+   },
+   "correct": "D",
+   "explanation_es": "El comando de interfaz correcto es 'ip ospf hello-interval 20'. Al cambiarlo, normalmente también hay que ajustar el 'dead-interval' para que siga siendo consistente (por defecto 4x el hello)."
+  },
+  {
+   "id": "ip1_3.2.b_03",
+   "subtopic": "3.2.b",
+   "name": "OSPFv2/v3 config",
+   "source": "ipcisco.com",
+   "question": "If an interface's OSPF priority is set to 0, what effect does this have on DR/BDR election?",
+   "options": {
+    "A": "The router will never be elected DR or BDR on that segment",
+    "B": "The router is guaranteed to become the BDR on that segment",
+    "C": "The priority value has no effect on DR/BDR election at all",
+    "D": "The router is guaranteed to become the DR on that segment"
+   },
+   "correct": "A",
+   "explanation_es": "Una prioridad OSPF de 0 hace que el router quede excluido de la elección de DR/BDR en ese segmento: nunca será elegido como DR ni como BDR, aunque sigue participando como vecino normal (DROTHER)."
+  },
+  {
+   "id": "ip1_3.2.b_04",
+   "subtopic": "3.2.b",
+   "name": "OSPFv2/v3 config",
+   "source": "ipcisco.com",
+   "question": "During which state of OSPF neighbor establishment does DR/BDR election take place?",
+   "options": {
+    "A": "Full",
+    "B": "Exchange",
+    "C": "2-Way",
+    "D": "Exstart"
+   },
+   "correct": "C",
+   "explanation_es": "La elección de DR/BDR ocurre en el estado 2-Way, una vez que los routers se reconocen mutuamente como vecinos (bidireccionalidad confirmada), antes de pasar al intercambio de bases de datos (Exstart/Exchange)."
+  },
+  {
+   "id": "ip1_3.2.b_05",
+   "subtopic": "3.2.b",
+   "name": "OSPFv2/v3 config",
+   "source": "ipcisco.com",
+   "question": "What is OSPF's default administrative distance on a Cisco router?",
+   "options": {
+    "A": "100",
+    "B": "110",
+    "C": "90",
+    "D": "170"
+   },
+   "correct": "B",
+   "explanation_es": "OSPF tiene una distancia administrativa por defecto de 110 en dispositivos Cisco."
+  },
+  {
+   "id": "ip1_3.2.b_06",
+   "subtopic": "3.2.b",
+   "name": "OSPFv2/v3 config",
+   "source": "ipcisco.com",
+   "question": "Which of the following are accurate descriptions of OSPF? (Select three)",
+   "options": {
+    "A": "It supports a hierarchical, multi-area design",
+    "B": "It is a link-state routing protocol",
+    "C": "It uses Dijkstra's SPF algorithm to compute the shortest path",
+    "D": "It uses Cisco's proprietary DUAL algorithm"
+   },
+   "correctSet": [
+    "A",
+    "B",
+    "C"
+   ],
+   "explanation_es": "OSPF es un protocolo de estado de enlace que usa el algoritmo de Dijkstra (SPF) y soporta un diseño jerárquico de múltiples áreas. DUAL es de EIGRP, no de OSPF."
+  },
+  {
+   "id": "ip1_3.2.b_07",
+   "subtopic": "3.2.b",
+   "name": "OSPFv2/v3 config",
+   "source": "ipcisco.com",
+   "question": "Which of these router roles are specific to OSPF terminology? (Select three)",
+   "options": {
+    "A": "DR (Designated Router)",
+    "B": "Route Reflector",
+    "C": "ABR (Area Border Router)",
+    "D": "BDR (Backup Designated Router)"
+   },
+   "correctSet": [
+    "A",
+    "C",
+    "D"
+   ],
+   "explanation_es": "ABR, DR y BDR son roles definidos específicamente dentro de OSPF. El Route Reflector es en cambio un concepto de BGP, no de OSPF."
+  },
+  {
+   "id": "ip1_3.2.c_01",
+   "subtopic": "3.2.c",
+   "name": "eBGP",
+   "source": "ipcisco.com",
+   "question": "What is the correct order of BGP peer states from initial connection to a fully established session?",
+   "options": {
+    "A": "Idle, Connect, Active, OpenSent, OpenConfirm, Established",
+    "B": "Connect, Idle, Active, OpenSent, OpenConfirm, Established",
+    "C": "Idle, Active, Connect, OpenSent, OpenConfirm, Established",
+    "D": "Active, Connect, Idle, OpenSent, OpenConfirm, Established"
+   },
+   "correct": "A",
+   "explanation_es": "El orden correcto de los estados de una sesión BGP es: Idle, Connect, Active, OpenSent, OpenConfirm, Established."
+  },
+  {
+   "id": "ip1_3.2.c_02",
+   "subtopic": "3.2.c",
+   "name": "eBGP",
+   "source": "ipcisco.com",
+   "question": "Under 'router bgp 200', which command sets a weight of 150 for neighbor 1.2.1.2?",
+   "options": {
+    "A": "neighbor 1.2.1.2 weight 150",
+    "B": "set neighbor 1.2.1.2 weight 150",
+    "C": "weight neighbor 1.2.1.2 150",
+    "D": "match neighbor 1.2.1.2 weight 150"
+   },
+   "correct": "A",
+   "explanation_es": "El comando correcto, dentro del modo de configuración 'router bgp 200', es 'neighbor 1.2.1.2 weight 150'."
+  },
+  {
+   "id": "ip1_3.2.c_03",
+   "subtopic": "3.2.c",
+   "name": "eBGP",
+   "source": "ipcisco.com",
+   "question": "Which of the following are well-known BGP path attributes? (Select three)",
+   "options": {
+    "A": "Weight",
+    "B": "Origin",
+    "C": "AS-Path",
+    "D": "Local Preference"
+   },
+   "correctSet": [
+    "B",
+    "C",
+    "D"
+   ],
+   "explanation_es": "Origin, AS-Path y Local Preference son atributos 'well-known' de BGP (well-known mandatory los dos primeros, well-known discretionary Local Preference). Weight ni siquiera es un atributo BGP estándar: es un valor puramente local de Cisco IOS que nunca se anuncia a otros routers."
+  },
+  {
+   "id": "ip1_3.2.c_04",
+   "subtopic": "3.2.c",
+   "name": "eBGP",
+   "source": "ipcisco.com",
+   "question": "Which BGP peer state indicates that the session has fully converged and the peers are exchanging routing updates?",
+   "options": {
+    "A": "Established",
+    "B": "OpenConfirm",
+    "C": "2-Way",
+    "D": "OpenSent"
+   },
+   "correct": "A",
+   "explanation_es": "El estado 'Established' indica que la sesión BGP convergió completamente y los peers ya están intercambiando actualizaciones de ruteo. '2-Way' no es un estado de BGP, sino de OSPF."
+  },
+  {
+   "id": "ip1_3.2.c_05",
+   "subtopic": "3.2.c",
+   "name": "eBGP",
+   "source": "ipcisco.com",
+   "question": "What is the correct order (highest to lowest priority) of the main steps in Cisco's BGP best-path selection process?",
+   "options": {
+    "A": "Local Preference, Weight, AS-Path length, Locally Originated, Origin, MED",
+    "B": "AS-Path length, Weight, Local Preference, Origin, MED, Locally Originated",
+    "C": "MED, Origin, AS-Path length, Local Preference, Weight, Locally Originated",
+    "D": "Weight, Local Preference, Locally Originated, AS-Path length, Origin, MED"
+   },
+   "correct": "D",
+   "explanation_es": "El orden (de mayor a menor prioridad) del algoritmo de selección de mejor ruta de BGP en Cisco es: Weight (mayor), Local Preference (mayor), rutas originadas localmente, AS-Path (más corto), Origin (menor), y MED (menor)."
+  },
+  {
+   "id": "ip1_3.3.d_01",
+   "subtopic": "3.3.d",
+   "name": "Multicast",
+   "source": "ipcisco.com",
+   "question": "Which multicast address range is reserved for local-subnet-only traffic (link-local, not forwarded by routers)?",
+   "options": {
+    "A": "224.0.0.0 to 239.255.255.255",
+    "B": "224.0.1.0 to 224.0.1.255",
+    "C": "224.0.0.0 to 224.0.0.255",
+    "D": "233.0.0.0 to 233.251.255.255"
+   },
+   "correct": "C",
+   "explanation_es": "El rango 224.0.0.0 a 224.0.0.255 está reservado para tráfico multicast local al segmento (link-local), como Hellos de protocolos de ruteo; los routers no reenvían ese tráfico fuera del subnet."
+  },
+  {
+   "id": "ip1_3.3.d_02",
+   "subtopic": "3.3.d",
+   "name": "Multicast",
+   "source": "ipcisco.com",
+   "question": "Which global configuration command enables IGMP snooping on a Cisco switch?",
+   "options": {
+    "A": "ip igmp snooping",
+    "B": "ip snooping igmp",
+    "C": "igmp snooping start",
+    "D": "igmp snooping enable"
+   },
+   "correct": "A",
+   "explanation_es": "El comando global correcto es 'ip igmp snooping' (en muchos Catalyst viene habilitado por defecto, pero el comando explícito es ese)."
+  },
+  {
+   "id": "ip1_3.3.d_03",
+   "subtopic": "3.3.d",
+   "name": "Multicast",
+   "source": "ipcisco.com",
+   "question": "What is the IPv6 multicast address range, identified by its leading hex bits?",
+   "options": {
+    "A": "FEC0 to FEFF",
+    "B": "FF00 to FFFF",
+    "C": "FFFF to FFFF only",
+    "D": "FE80 to FEBF"
+   },
+   "correct": "B",
+   "explanation_es": "Las direcciones multicast IPv6 comienzan con el prefijo FF00::/8, es decir, el primer byte va de FF00 a FFFF. FE80 corresponde en cambio al rango de direcciones link-local unicast."
+  },
+  {
+   "id": "ip1_5.2.a_01",
+   "subtopic": "5.2.a",
+   "name": "ACLs",
+   "source": "ipcisco.com",
+   "question": "Which command correctly configures extended ACL 120 to permit only ICMP traffic from network 192.168.1.0/24 to host 2.2.2.2?",
+   "options": {
+    "A": "access-list 120 deny icmp 192.168.1.0 0.0.0.255 host 2.2.2.2",
+    "B": "access-list 120 permit icmp host 2.2.2.2 192.168.1.0 0.0.0.255",
+    "C": "access-list 120 permit icmp 192.168.1.0 0.0.0.255 host 2.2.2.2",
+    "D": "access-list 120 icmp 192.168.1.0 0.0.0.255 2.2.2.2"
+   },
+   "correct": "C",
+   "explanation_es": "La sintaxis correcta es 'access-list 120 permit icmp <origen> <wildcard> host <destino>', es decir: 'access-list 120 permit icmp 192.168.1.0 0.0.0.255 host 2.2.2.2'."
+  },
+  {
+   "id": "ip1_5.2.a_02",
+   "subtopic": "5.2.a",
+   "name": "ACLs",
+   "source": "ipcisco.com",
+   "question": "Which command correctly configures standard ACL 10 to deny all traffic from network 10.10.10.0/24?",
+   "options": {
+    "A": "access-list deny 10 10.10.10.0 0.0.0.255",
+    "B": "access-list 10 permit 10.10.10.0 0.0.0.255",
+    "C": "access-list 10 deny 10.10.10.0 255.255.255.0",
+    "D": "access-list 10 deny 10.10.10.0 0.0.0.255"
+   },
+   "correct": "D",
+   "explanation_es": "En una ACL estándar la sintaxis es 'access-list <número> deny <red> <wildcard>', usando wildcard mask (no máscara de subred), por lo que sería 'access-list 10 deny 10.10.10.0 0.0.0.255'."
+  },
+  {
+   "id": "ip1_6.1_01",
+   "subtopic": "6.1",
+   "name": "Python básico",
+   "source": "ipcisco.com",
+   "question": "Which Python code correctly prompts the user for input and stores it in variable x?",
+   "options": {
+    "A": "x == input(\"Enter your value: \")",
+    "B": "x = (\"Enter your value: \")",
+    "C": "input x = \"Enter your value: \"",
+    "D": "x = input(\"Enter your value: \")"
+   },
+   "correct": "D",
+   "explanation_es": "La forma correcta es 'x = input(\"Enter your value: \")', que llama a la función input() y asigna el resultado (lo que el usuario escriba) a la variable x."
+  },
+  {
+   "id": "ip1_6.1_02",
+   "subtopic": "6.1",
+   "name": "Python básico",
+   "source": "ipcisco.com",
+   "question": "Which line of Python code correctly prints 'Hello World!' to the console?",
+   "options": {
+    "A": "print \"Hello World!\"",
+    "B": "print(\"Hello World!\")",
+    "C": "echo(\"Hello World!\")",
+    "D": "print(Hello World!)"
+   },
+   "correct": "B",
+   "explanation_es": "En Python 3, la forma correcta es 'print(\"Hello World!\")', con el texto entre paréntesis y comillas."
+  },
+  {
+   "id": "ip1_6.1_03",
+   "subtopic": "6.1",
+   "name": "Python básico",
+   "source": "ipcisco.com",
+   "question": "Which Python condition correctly checks whether integer variable X is even?",
+   "options": {
+    "A": "if X % 2 == 0:",
+    "B": "if X %% 2 == 0:",
+    "C": "if X / 2 == 0:",
+    "D": "if X % 2 = 0:"
+   },
+   "correct": "A",
+   "explanation_es": "'if X % 2 == 0:' usa el operador módulo (%) para verificar si el resto de dividir X por 2 es cero, lo cual indica que X es par. '=' es asignación, no comparación, por lo que 'X % 2 = 0' sería un error de sintaxis."
+  },
+  {
+   "id": "ip1_6.1_04",
+   "subtopic": "6.1",
+   "name": "Python básico",
+   "source": "ipcisco.com",
+   "question": "Which Python code correctly assigns the string 'ABC' to variable String1 and then prints it?",
+   "options": {
+    "A": "print(String1)\\nString1 = 'ABC'",
+    "B": "String1 = 'ABC'\\nprint(String1)",
+    "C": "String1 == 'ABC'\\nprint(String1)",
+    "D": "String1 = ABC\\nprint(String1)"
+   },
+   "correct": "B",
+   "explanation_es": "Hay que encerrar el string entre comillas ('ABC', no ABC sin comillas, que Python interpretaría como un nombre de variable), asignarlo con '=', y luego imprimirlo con print(String1)."
   }
  ]
 }</script>
@@ -14840,29 +15403,36 @@
         alert("No hay preguntas disponibles para ese alcance todavía.");
         return;
       }
-      state.session = { queue: queue, idx: 0, answered: [], scope: scope, locked: false, chosenKey: null };
+      state.session = { queue: queue, idx: 0, answered: [], scope: scope, locked: false, chosenKey: null, chosenKeys: null, selected: [] };
       render();
     });
 
     return wrap;
   }
 
+  function isMulti(q) { return Array.isArray(q.correctSet); }
+
   function renderQuestion() {
     var s = state.session;
     var q = s.queue[s.idx];
+    var multi = isMulti(q);
+    var sourceBadge = q.source ? '<span class="badge mono src-badge">fuente: ' + q.source + '</span>' : '';
+    var hint = multi ? '<div class="multi-hint mono">Selecciona ' + q.correctSet.length + ' respuestas</div>' : '';
     var wrap = el(
       '<div class="panel">' +
         '<div class="q-meta">' +
-          '<span class="badge mono">' + q.subtopic + " &middot; " + q.name + '</span>' +
+          '<span class="badge-group"><span class="badge mono">' + q.subtopic + " &middot; " + q.name + '</span>' + sourceBadge + '</span>' +
           '<span class="q-progress">Q ' + (s.idx + 1) + " / " + s.queue.length + '</span>' +
         '</div>' +
         '<p class="q-text"></p>' +
+        hint +
         '<div class="options"></div>' +
         '<div class="explain" id="explain-box" style="display:none;">' +
           '<span class="explain-label">Explicación</span>' +
           '<span id="explain-text"></span>' +
         '</div>' +
         '<div class="q-actions">' +
+          (multi ? '<button class="btn primary" id="submit-multi-btn" style="display:none;">Confirmar respuesta</button>' : '') +
           '<button class="btn primary" id="next-btn" style="display:none;">Siguiente</button>' +
         '</div>' +
       '</div>'
@@ -14872,12 +15442,24 @@
     ["A", "B", "C", "D"].forEach(function (key) {
       var btn = el('<button class="option" type="button"><span class="key mono">' + key + '</span><span></span></button>');
       btn.querySelector("span:last-child").textContent = q.options[key];
-      btn.addEventListener("click", function () { answerQuestion(key); });
+      if (multi) {
+        if (!s.locked && s.selected && s.selected.indexOf(key) !== -1) btn.classList.add("selected");
+        btn.addEventListener("click", function () { toggleMultiOption(key); });
+      } else {
+        btn.addEventListener("click", function () { answerQuestion(key); });
+      }
       optWrap.appendChild(btn);
     });
 
+    if (multi && !s.locked) {
+      var submitBtn = wrap.querySelector("#submit-multi-btn");
+      submitBtn.style.display = "inline-block";
+      submitBtn.disabled = !(s.selected && s.selected.length > 0);
+      submitBtn.addEventListener("click", function () { submitMultiAnswer(); });
+    }
+
     if (s.locked) {
-      applyLockedState(wrap, q, s.chosenKey);
+      applyLockedState(wrap, q, multi ? s.chosenKeys : s.chosenKey, multi);
     }
 
     wrap.querySelector("#next-btn").addEventListener("click", function () {
@@ -14887,6 +15469,8 @@
         s.idx++;
         s.locked = false;
         s.chosenKey = null;
+        s.chosenKeys = null;
+        s.selected = [];
       }
       render();
     });
@@ -14894,18 +15478,47 @@
     return wrap;
   }
 
-  function applyLockedState(wrap, q, chosenKey) {
+  function toggleMultiOption(key) {
+    var s = state.session;
+    if (s.locked) return;
+    s.selected = s.selected || [];
+    var i = s.selected.indexOf(key);
+    if (i === -1) s.selected.push(key); else s.selected.splice(i, 1);
+    render();
+  }
+
+  function submitMultiAnswer() {
+    var s = state.session;
+    if (s.locked) return;
+    var q = s.queue[s.idx];
+    if (!s.selected || !s.selected.length) return;
+    var chosen = s.selected.slice().sort();
+    var correctSorted = q.correctSet.slice().sort();
+    var correct = chosen.length === correctSorted.length && chosen.every(function (k, i) { return k === correctSorted[i]; });
+    s.locked = true;
+    s.chosenKeys = chosen;
+    s.answered.push({ q: q, chosen: chosen.join(""), correct: correct });
+    recordAttempt(q, chosen.join(","), correct);
+    render();
+  }
+
+  function applyLockedState(wrap, q, chosenKeyOrKeys, multi) {
     var buttons = wrap.querySelectorAll(".option");
+    var correctSet = multi ? q.correctSet : [q.correct];
+    var chosenSet = multi ? (chosenKeyOrKeys || []) : [chosenKeyOrKeys];
     buttons.forEach(function (btn, i) {
       var key = ["A", "B", "C", "D"][i];
       btn.disabled = true;
-      if (key === q.correct) btn.classList.add("correct");
-      else if (key === chosenKey) btn.classList.add("incorrect");
+      btn.classList.remove("selected");
+      if (correctSet.indexOf(key) !== -1) btn.classList.add("correct");
+      else if (chosenSet.indexOf(key) !== -1) btn.classList.add("incorrect");
     });
     var box = wrap.querySelector("#explain-box");
     box.style.display = "block";
     wrap.querySelector("#explain-text").textContent = q.explanation_es;
     wrap.querySelector("#next-btn").style.display = "inline-block";
+    var submitBtn = wrap.querySelector("#submit-multi-btn");
+    if (submitBtn) submitBtn.style.display = "none";
   }
 
   function answerQuestion(key) {
