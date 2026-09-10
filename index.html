@@ -14467,6 +14467,12 @@
   };
   var BANK_TARGET_TOTAL = 1000;
   var TARGET_SCORE = 82.5;
+  // When set, progress syncs through this Google Apps Script Web App (backed by
+  // a Google Sheet) instead of Claude's own db or per-browser localStorage, so
+  // the same progress shows up on the Claude Artifact AND on GitHub Pages (or
+  // any other static host) with zero per-device setup.
+  var SHEETS_WEBAPP_URL = "";
+  var SHEETS_SECRET = "1ef8de26a45a53d60340bffcc803da6a";
 
   var raw = JSON.parse(document.getElementById("qbank-data").textContent);
   var ALL_QUESTIONS = raw.questions;
@@ -14526,6 +14532,16 @@
       correct: !!correct,
       ts: Date.now()
     };
+    if (SHEETS_WEBAPP_URL) {
+      state.attempts.push(rec);
+      render();
+      fetch(SHEETS_WEBAPP_URL, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({ secret: SHEETS_SECRET, attempts: [rec] })
+      }).catch(function () {});
+      return;
+    }
     if (db) {
       db.collection("attempts").add(rec).catch(function () {});
     } else {
@@ -14537,7 +14553,31 @@
     }
   }
 
+  async function loadFromSheets() {
+    var res = await fetch(SHEETS_WEBAPP_URL, { cache: "no-store" });
+    var data = await res.json();
+    state.attempts = (data.attempts || []).map(function (a) {
+      return {
+        questionId: a.questionId,
+        subtopic: a.subtopic,
+        domain: a.domain,
+        correct: !!a.correct,
+        ts: a.ts || 0
+      };
+    });
+    setDbStatus("live");
+    render();
+  }
+
   (async function initDb() {
+    if (SHEETS_WEBAPP_URL) {
+      try {
+        await loadFromSheets();
+        return;
+      } catch (e) {
+        // Sheets backend unreachable — fall through to Claude db / localStorage below
+      }
+    }
     try {
       db = await window.claude.use("db");
     } catch (e) { db = null; }
