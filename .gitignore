@@ -1,1 +1,15 @@
 .claude/launch.json
+extract_ocg_questions.py
+extract_toc.py
+extract_examcram.py
+filter_examcram.py
+fix_position_bias.py
+merge_batch_examcram1.py
+merge_batch_examcram2.py
+merge_batch_examcram3.py
+merge_batch_examcram4.py
+merge_batch_examcram5.py
+merge_batch_ch2_5.py
+rebalance_batch.py
+rebuild_html.py
+ocg_extract/

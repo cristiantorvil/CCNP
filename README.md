@@ -11,13 +11,13 @@ contenido de forma consistente.
 
 ## Archivos incluidos
 
-- `data/question_bank.json` — banco de preguntas actual (1035 preguntas,
+- `data/question_bank.json` — banco de preguntas actual (1056 preguntas,
   cobertura 49/49 subtemas del blueprint ENCOR 350-401 v1.2, distribuidas
   proporcionalmente al peso de cada dominio en el examen). Formato:
   ```json
   {
-    "version": "2026-09-08_v5",
-    "total": 1035,
+    "version": "2026-09-12_v12",
+    "total": 1093,
     "questions": [
       {
         "id": "trustsec_01",
@@ -57,13 +57,13 @@ contenido de forma consistente.
 
 | Dominio | Peso examen | Actual | % del banco |
 |---|---|---|---|
-| 1.0 Architecture | 15% | 150 | 14.5% |
-| 2.0 Virtualization | 10% | 103 | 10.0% |
-| 3.0 Infrastructure | 30% | 319 | 30.8% |
-| 4.0 Network Assurance | 10% | 106 | 10.2% |
-| 5.0 Security | 20% | 202 | 19.5% |
-| 6.0 Automation & AI | 15% | 155 | 15.0% |
-| **Total** | **100%** | **1035** | **100%** |
+| 1.0 Architecture | 15% | 158 | 14.5% |
+| 2.0 Virtualization | 10% | 111 | 10.2% |
+| 3.0 Infrastructure | 30% | 340 | 31.1% |
+| 4.0 Network Assurance | 10% | 111 | 10.2% |
+| 5.0 Security | 20% | 202 | 18.5% |
+| 6.0 Automation & AI | 15% | 171 | 15.6% |
+| **Total** | **100%** | **1093** | **100%** |
 
 Meta base de 1000 preguntas alcanzada 2026-09-08, con distribución por
 dominio dentro de ±0.8 puntos porcentuales del peso oficial del blueprint.
@@ -96,6 +96,16 @@ sin saber la materia:
    correcta. Resultado final, medido por dominio: los 6 dominios quedaron
    entre 25.2% y 25.8% de "correcta = más larga" (el azar puro da 25%), y
    0 frases con lenguaje absolutista en todo el banco.
+5. **Regresión del sesgo de posición (2026-09-12):** al revisar el banco de
+   nuevo (ya en 1056 preguntas, tras varias tandas agregadas desde el fix de
+   posición original en 286 preguntas) se encontró que el sesgo de posición
+   había vuelto a aparecer, concentrado en los dominios 1.0/3.0/4.0 (A
+   sobrerrepresentada 34-37% en vez de 25%) — el shuffle de 2026-09-08 nunca
+   se reaplicó a las tandas agregadas después. Corregido con un shuffle
+   determinístico (seed fija) sobre las 4 opciones de las 1056 preguntas del
+   banco completo, remapeando `correct`/`correctSet` sin tocar ningún texto.
+   Resultado: A/B/C/D quedaron entre 19% y 31% por dominio (antes hasta 37%/0%
+   en algunos), y 24.4%/25.5%/23.8%/26.3% a nivel banco completo.
 
 **Preguntas de fuente externa (2026-09-10):** 35 preguntas fueron adaptadas
 de dos quizzes de ipcisco.com que el usuario compartió, reescritas en
@@ -107,3 +117,52 @@ visibles como badge en la app. Se descartaron ~8 preguntas del material
 original por no alinear con el blueprint de ENCOR 350-401 (RIP/RIPng no es
 examinable, trivia de subnetting/EUI-64 es prerrequisito CCNA) o por errores
 irrecuperables en el enunciado.
+
+**Preguntas del libro Cisco Press OCG (2026-09-12, en curso):** se está
+extrayendo contenido de *CCNP and CCIE Enterprise Core ENCOR 350-401 Official
+Cert Guide, 2nd Ed (2023)* (Edgeworth/Garza Rios/Hucaby/Gooley), a partir de
+las quizzes "Do I Know This Already?" de cada capítulo (el libro no incluye
+"Review Questions" impresas por capítulo en esta edición; solo quedaron
+online). Mismo criterio que con ipcisco.com: preguntas reescritas en palabras
+propias (nunca copiadas del libro), verificadas contra conocimiento propio de
+ENCOR (no solo contra la respuesta del libro), y con sesgo de posición/
+longitud corregido en la misma tanda en que se agregan, no como parche
+posterior. Se decidió con el usuario no cubrir los 5 capítulos de Wireless
+(17-21) porque ninguno de los 49 subtemas trackeados (acá y en el tracker de
+Drive) tiene código para wireless, y se descarta el Capítulo 1 ("Packet
+Forwarding": dominios de colisión/broadcast, CEF) por ser contenido de nivel
+CCNA sin subtema de blueprint asociado — mismo criterio ya aplicado antes con
+RIP/EUI-64. Primer lote: 21 preguntas de los capítulos 2-5 (STP/RSTP/MST,
+VTP/DTP, EtherChannel — subtemas 3.1.a/b/c), marcadas con `"source": "Cisco
+Press ENCOR OCG 2nd Ed (2023)"`.
+
+**Preguntas del libro Exam Cram de Bacha (2026-09-12):** segunda fuente,
+*CCNP and CCIE Enterprise Core ENCOR 350-401 Exam Cram* (Bacha, Pearson
+2022) — 32 capítulos organizados directamente por dominio del blueprint.
+Extraídas sus secciones "Cram Quiz" (una por sección, con respuesta y
+justificación inmediatamente después) y "Review Questions" de fin de
+capítulo, filtrando el resto del texto narrativo antes de leerlas. Mismo
+criterio de siempre: reescritas en palabras propias, verificadas contra
+conocimiento propio de ENCOR, chequeadas contra el banco existente para
+evitar duplicar hechos ya cubiertos (varios temas de este libro — LISP/VXLAN,
+VRF-lite, AH/NAT, SPAN/RSPAN/ERSPAN, NetFlow, IP SLA responder — resultaron
+ya estar muy cubiertos por tandas anteriores y se descartaron por redundantes
+en vez de agregarse). Se agregaron 47 preguntas nuevas en 5 tandas cubriendo:
+Automatización (Python, JSON/XML, YANG, DNA Center APIs, códigos REST, EEM,
+orquestación agent/agentless — dominio 6.0), Arquitectura (SD-WAN, SD-Access,
+QoS — dominio 1.0), Virtualización (hypervisors, vSwitch, FlexVPN/NAT-T —
+dominio 2.0) y Network Assurance (SNMPv3, traceroute, DNA Center Assurance —
+dominio 4.0). Se descartó el Capítulo 21 (cloud IaaS/PaaS/SaaS) por el mismo
+motivo que Wireless: sin subtema de blueprint asociado en el esquema de 49
+subtemas. Marcadas con `"source": "CCNP ENCOR 350-401 Exam Cram (Bacha,
+2022)"`. Pendiente de este libro: capítulos 2-4 (IGP/BGP/IP Services), 6-11
+(Seguridad), 25 (Switching, alto riesgo de duplicar con OCG).
+
+**Regresión del sesgo de posición, otra vez (2026-09-12):** cada tanda nueva
+agregada en sesión reintroduce sesgo de posición local (ej. la primera tanda
+de este libro quedó 13 B / 3 D sobre 32) porque se escribe more rápido de lo
+que se verifica. Se corrigió reaplicando el shuffle determinístico de
+2026-09-12 (ver punto 5 arriba) sobre el banco completo (ahora 1093
+preguntas) después de cada tanda. **Nota para el futuro:** re-ejecutar este
+shuffle bank-wide después de agregar cualquier tanda nueva, no asumir que
+escribir con "buenas intenciones" de variar la posición alcanza.
