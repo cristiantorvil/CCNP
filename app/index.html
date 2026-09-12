@@ -15430,7 +15430,8 @@
     var s = state.session;
     var q = s.queue[s.idx];
     var multi = isMulti(q);
-    var sourceBadge = q.source ? '<span class="badge mono src-badge">fuente: ' + q.source + '</span>' : '';
+    var sourceLabel = q.source ? q.source : "banco propio (IA)";
+    var sourceBadge = '<span class="badge mono src-badge">fuente: ' + sourceLabel + '</span>';
     var hint = multi ? '<div class="multi-hint mono">Selecciona ' + q.correctSet.length + ' respuestas</div>' : '';
     var wrap = el(
       '<div class="panel">' +
