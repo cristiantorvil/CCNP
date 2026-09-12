@@ -47,7 +47,9 @@ contenido de forma consistente.
   desde cuál de las dos URLs se practique. El % por subtema y dominio es
   "preguntas acertadas alguna vez / total de preguntas que existen hoy para
   ese subtema en el banco" (cobertura), mostrado junto a la precisión sobre
-  lo efectivamente respondido.
+  lo efectivamente respondido. Después de responder, se puede calificar la
+  pregunta de 1 a 5 estrellas (guardado en la misma Sheet, pestaña
+  "ratings") para ir identificando preguntas mal planteadas con el uso real.
 - `CONTEXTO_PROYECTO.md` — objetivos, convenciones de trabajo, y errores
   conceptuales recurrentes a reforzar al generar más preguntas.
 
@@ -82,11 +84,18 @@ sin saber la materia:
    tiene relación alguna", "bajo ninguna circunstancia", identificable como
    falso sin conocer la materia (54.9% de las preguntas). Se corrigió
    eliminando ~1300 oraciones de relleno sin contenido (usadas para el punto
-   2) y suavizando el lenguaje absolutista del resto (→ 3.6%). Efecto
-   secundario conocido: el sesgo de longitud volvió a subir de 22.5% a ~80%
-   porque ese relleno era lo que balanceaba las longitudes — pendiente una
-   pasada de contenido real (no relleno) para volver a bajarlo sin
-   reintroducir el problema de lenguaje absolutista.
+   2) y suavizando el lenguaje absolutista del resto (→ 0%, ver punto 4).
+4. **Regresión del sesgo de longitud (2026-09-12)** — el usuario probó 10
+   preguntas del dominio 1.0 eligiendo siempre la opción más larga y sacó
+   10/10, confirmando que quitar el relleno del punto 3 había vuelto a subir
+   el sesgo de longitud a 84% en ese dominio (80% bancowide). Se corrigió
+   de fondo esta vez: 8 agentes en paralelo reescribieron ~546 distractores
+   (uno por dominio, ~75% de las preguntas con sesgo en cada uno) agregando
+   detalle técnico específico y genuino — no relleno genérico ni lenguaje
+   absolutista — hasta igualar o superar la longitud de la respuesta
+   correcta. Resultado final, medido por dominio: los 6 dominios quedaron
+   entre 25.2% y 25.8% de "correcta = más larga" (el azar puro da 25%), y
+   0 frases con lenguaje absolutista en todo el banco.
 
 **Preguntas de fuente externa (2026-09-10):** 35 preguntas fueron adaptadas
 de dos quizzes de ipcisco.com que el usuario compartió, reescritas en
