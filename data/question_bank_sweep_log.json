@@ -1,0 +1,1238 @@
+[
+ {
+  "id": "apicc_05",
+  "letter": "C",
+  "before": "Only export APIs for reporting, with no ability whatsoever to trigger any configuration change on a managed device, since the REST gateway is claimed to reject every POST and PUT verb",
+  "after": "Only export APIs for reporting, with no ability to trigger any configuration change on a managed device, since the REST gateway is claimed to reject every POST and PUT verb"
+ },
+ {
+  "id": "apicc_07",
+  "letter": "D",
+  "before": "ITSM tools cannot integrate with Catalyst Center in any way, since the platform exposes no event or notification API whatsoever",
+  "after": "ITSM tools cannot integrate with Catalyst Center in any way, since the platform exposes no event or notification API"
+ },
+ {
+  "id": "b2_2.3.a_01",
+  "letter": "B",
+  "before": "It performs no role in the LISP control plane whatsoever",
+  "after": "It performs no role in the LISP control plane"
+ },
+ {
+  "id": "b2_5.4.c_01",
+  "letter": "B",
+  "before": "An NGFW can only filter based on source/destination IP, just like a traditional firewall, with no additional application-layer visibility whatsoever added by any inspection engine",
+  "after": "An NGFW can only filter based on source/destination IP, just like a traditional firewall, with no additional application-layer visibility added by any inspection engine"
+ },
+ {
+  "id": "b3_3.1.c_03",
+  "letter": "D",
+  "before": "MST requires running a completely separate spanning tree for every single VLAN, just like PVST+ does, providing no CPU or control-plane savings whatsoever across a large campus",
+  "after": "MST requires running a completely separate spanning tree for every single VLAN, just like PVST+ does, providing no CPU or control-plane savings across a large campus"
+ },
+ {
+  "id": "b3_3.3.d_04",
+  "letter": "B",
+  "before": "It is used only within a single PIM-SM domain, never between domains, making it purely an intra-domain protocol with no role whatsoever across separate autonomous multicast networks",
+  "after": "It is used only within a single PIM-SM domain, never between domains, making it purely an intra-domain protocol with no role across separate autonomous multicast networks"
+ },
+ {
+  "id": "b3_5.4.b_02",
+  "letter": "A",
+  "before": "Only two roles exist: Supplicant and Authenticator, with no separate Authentication Server required in any 802.1X deployment whatsoever, regardless of vendor or RADIUS backend used, a claim contradicted by the 802.1X standard itself",
+  "after": "Only two roles exist: Supplicant and Authenticator, with no separate Authentication Server required in any 802.1X deployment, regardless of vendor or RADIUS backend used, a claim contradicted by the 802.1X standard itself"
+ },
+ {
+  "id": "b4_3.2.d_02",
+  "letter": "D",
+  "before": "'set ip default next-hop' overrides BGP routes only, having no effect whatsoever on static, connected, or any other type of route present in the routing table at the time the route-map is evaluated",
+  "after": "'set ip default next-hop' overrides BGP routes only, having no effect on static, connected, or any other type of route present in the routing table at the time the route-map is evaluated"
+ },
+ {
+  "id": "b6_1.1.a_11",
+  "letter": "C",
+  "before": "A deployment that uses on-premises infrastructure with no connection whatsoever to any public cloud provider",
+  "after": "A deployment that uses on-premises infrastructure with no connection to any public cloud provider"
+ },
+ {
+  "id": "b6_1.1.a_14",
+  "letter": "A",
+  "before": "CVDs eliminate the need for any site-specific customization or planning whatsoever",
+  "after": "CVDs eliminate the need for any site-specific customization or planning"
+ },
+ {
+  "id": "b6_1.1.a_23",
+  "letter": "A",
+  "before": "On-premises infrastructure requires no operational staff or maintenance whatsoever once installed",
+  "after": "On-premises infrastructure requires no operational staff or maintenance once installed"
+ },
+ {
+  "id": "b6_1.1.b_11",
+  "letter": "C",
+  "before": "This configuration is purely cosmetic and provides no operational benefit whatsoever",
+  "after": "This configuration is purely cosmetic and provides no operational benefit"
+ },
+ {
+  "id": "b6_1.1.b_12",
+  "letter": "B",
+  "before": "VRRP is a Cisco-only proprietary protocol with no IETF standardization whatsoever",
+  "after": "VRRP is a Cisco-only proprietary protocol with no IETF standardization"
+ },
+ {
+  "id": "b6_1.2.a_16",
+  "letter": "C",
+  "before": "WAN Edge routers can only exchange traffic via GRE tunnels with no encryption capability whatsoever",
+  "after": "WAN Edge routers can only exchange traffic via GRE tunnels with no encryption capability"
+ },
+ {
+  "id": "b6_1.2.b_13",
+  "letter": "C",
+  "before": "There is no risk whatsoever; DIA is always strictly safer than centralized internet access under every circumstance, because each branch firewall automatically inherits the same threat-intelligence feed and IPS signature set as the central data center edge without any separate licensing or update process.",
+  "after": "There is no risk; DIA is always strictly safer than centralized internet access under every circumstance, because each branch firewall automatically inherits the same threat-intelligence feed and IPS signature set as the central data center edge without any separate licensing or update process."
+ },
+ {
+  "id": "b6_1.2.b_14",
+  "letter": "A",
+  "before": "Centralized policy has no relationship to security segmentation whatsoever and only affects routing metrics",
+  "after": "Centralized policy has little relationship to security segmentation and only affects routing metrics"
+ },
+ {
+  "id": "b6_1.3.a_10",
+  "letter": "C",
+  "before": "A virtual network is simply another name for a VLAN, with no relationship to VRF or Layer 3 isolation at all",
+  "after": "A virtual network is simply another name for a VLAN, with little direct relationship to VRF or Layer 3 isolation"
+ },
+ {
+  "id": "b6_1.3.a_16",
+  "letter": "D",
+  "before": "Wireless traffic is always sent unencapsulated in plaintext directly onto the underlay with no VXLAN involvement whatsoever",
+  "after": "Wireless traffic is always sent unencapsulated in plaintext directly onto the underlay with no VXLAN involvement"
+ },
+ {
+  "id": "b6_1.4_14",
+  "letter": "D",
+  "before": "Jitter has no actual effect on voice or video quality whatsoever and is purely a theoretical concern with no practical impact, because modern codecs like G.711 and H.264 fully compensate for any variation in packet arrival time at the decoder without needing a jitter buffer, reconstructing a perfectly smooth playback stream internally regardless of how irregularly packets arrive",
+  "after": "Jitter has little actual effect on voice or video quality and is purely a theoretical concern with no practical impact, because modern codecs like G.711 and H.264 fully compensate for any variation in packet arrival time at the decoder without needing a jitter buffer, reconstructing a perfectly smooth playback stream internally regardless of how irregularly packets arrive"
+ },
+ {
+  "id": "b6_1.4_15",
+  "letter": "C",
+  "before": "Interactive video always uses the exact same EF marking as voice, with Cisco best practice making no distinction between the two traffic types whatsoever",
+  "after": "Interactive video always uses the exact same EF marking as voice, with Cisco best practice making no distinction between the two traffic types"
+ },
+ {
+  "id": "b6_1.4_25",
+  "letter": "B",
+  "before": "Exactly one single class, since Cisco best practice recommends treating all traffic identically with no differentiation whatsoever",
+  "after": "Exactly one single class, since Cisco best practice recommends treating all traffic identically with no differentiation"
+ },
+ {
+  "id": "b6_2.1.a_07",
+  "letter": "B",
+  "before": "The hypervisor only manages network connectivity and has no role in CPU or memory allocation whatsoever",
+  "after": "The hypervisor only manages network connectivity and has little role in CPU or memory allocation"
+ },
+ {
+  "id": "b6_2.1.b_13",
+  "letter": "C",
+  "before": "VM encapsulation has no relevance to disaster recovery whatsoever and only matters for day-to-day operational tasks",
+  "after": "VM encapsulation has little relevance to disaster recovery and only matters for day-to-day operational tasks"
+ },
+ {
+  "id": "b6_2.1.c_15",
+  "letter": "C",
+  "before": "vSwitches are only relevant to storage networking and play no role whatsoever in general data-plane traffic security",
+  "after": "vSwitches are only relevant to storage networking and play no role in general data-plane traffic security"
+ },
+ {
+  "id": "b6_2.2.b_10",
+  "letter": "B",
+  "before": "Plain IPsec tunnel mode fully supports every dynamic routing protocol natively with no limitation whatsoever, making GRE over IPsec functionally unnecessary in every case, since IPsec tunnel mode was extended in later IKEv2 revisions to include a built-in multicast-replication feature that duplicates OSPF and EIGRP hello packets across the security association without requiring any additional encapsulation layer such as GRE",
+  "after": "Plain IPsec tunnel mode fully supports every dynamic routing protocol natively with no limitation, making GRE over IPsec functionally unnecessary in every case, since IPsec tunnel mode was extended in later IKEv2 revisions to include a built-in multicast-replication feature that duplicates OSPF and EIGRP hello packets across the security association without requiring any additional encapsulation layer such as GRE"
+ },
+ {
+  "id": "b6_2.2.b_14",
+  "letter": "B",
+  "before": "Fragmentation concerns apply only to IPv6 tunnels and have no relevance whatsoever to IPv4-based GRE or IPsec tunnels",
+  "after": "Fragmentation concerns apply only to IPv6 tunnels and have no relevance to IPv4-based GRE or IPsec tunnels"
+ },
+ {
+  "id": "b6_2.3.a_07",
+  "letter": "A",
+  "before": "The map-cache is purely optional and provides no performance benefit whatsoever, since every single packet always triggers a fresh map-request regardless of prior lookups, a behavior intentionally chosen so that the mapping system always has the most current RLOC information rather than risking forwarding traffic based on an entry that may have become stale since it was first learned",
+  "after": "The map-cache is purely optional and provides no performance benefit, since every single packet always triggers a fresh map-request regardless of prior lookups, a behavior intentionally chosen so that the mapping system always has the most current RLOC information rather than risking forwarding traffic based on an entry that may have become stale since it was first learned"
+ },
+ {
+  "id": "b6_2.3.a_07",
+  "letter": "D",
+  "before": "The map-cache stores physical MAC addresses only and has no relationship to EID-to-RLOC mapping information at all",
+  "after": "The map-cache stores physical MAC addresses only and has little direct relationship to EID-to-RLOC mapping information"
+ },
+ {
+  "id": "b6_2.3.a_12",
+  "letter": "A",
+  "before": "In SD-Access, the Fabric Edge Node performs the Map-Server/Map-Resolver role, while the Fabric Control Plane node has no LISP-related function whatsoever, a design choice made so that the same switches handling wireless client onboarding at the access layer could also resolve EID-to-RLOC mappings locally without needing to query a separate control-plane device for every new host",
+  "after": "In SD-Access, the Fabric Edge Node performs the Map-Server/Map-Resolver role, while the Fabric Control Plane node has little LISP-related function, a design choice made so that the same switches handling wireless client onboarding at the access layer could also resolve EID-to-RLOC mappings locally without needing to query a separate control-plane device for every new host"
+ },
+ {
+  "id": "b6_2.3.a_13",
+  "letter": "D",
+  "before": "First-packet latency in LISP is caused by physical fiber-optic cable length and has no relationship to the map-request/map-reply process at all",
+  "after": "First-packet latency in LISP is caused by physical fiber-optic cable length and has little direct relationship to the map-request/map-reply process"
+ },
+ {
+  "id": "b6_3.1.a_19",
+  "letter": "C",
+  "before": "VLAN pruning has no effect on broadcast traffic or STP processing whatsoever and exists purely as a documentation/labeling convenience",
+  "after": "VLAN pruning has little effect on broadcast traffic or STP processing and exists purely as a documentation/labeling convenience"
+ },
+ {
+  "id": "b6_3.1.b_07",
+  "letter": "B",
+  "before": "It shows IP routing table entries and has no relationship to Layer 2 EtherChannel status at all",
+  "after": "It shows IP routing table entries and has little direct relationship to Layer 2 EtherChannel status"
+ },
+ {
+  "id": "b6_3.1.b_13",
+  "letter": "D",
+  "before": "STP has no interaction with EtherChannel bundles whatsoever and is automatically and permanently disabled the moment any EtherChannel is configured anywhere on the switch",
+  "after": "STP has little interaction with EtherChannel bundles and is automatically and permanently disabled the moment any EtherChannel is configured anywhere on the switch"
+ },
+ {
+  "id": "b6_3.1.b_15",
+  "letter": "D",
+  "before": "There is no such requirement; a member port can retain a fully independent IP address and simultaneously participate in a Layer 2 EtherChannel bundle with no conflict whatsoever — since copper Gigabit Ethernet ports are generally assumed to support a hybrid mode forwarding routed Layer 3 traffic on their own IP address while simultaneously bundling as a Layer 2 member, a capability fiber interfaces are believed to lack",
+  "after": "There is no such requirement; a member port can retain a fully independent IP address and simultaneously participate in a Layer 2 EtherChannel bundle with no conflict — since copper Gigabit Ethernet ports are generally assumed to support a hybrid mode forwarding routed Layer 3 traffic on their own IP address while simultaneously bundling as a Layer 2 member, a capability fiber interfaces are believed to lack"
+ },
+ {
+  "id": "b6_3.1.b_16",
+  "letter": "A",
+  "before": "Physical diversity of member links has no bearing on EtherChannel availability whatsoever, since all member links are logically treated identically regardless of which physical hardware they terminate on",
+  "after": "Physical diversity of member links has little bearing on EtherChannel availability, since all member links are logically treated identically regardless of which physical hardware they terminate on"
+ },
+ {
+  "id": "b6_3.1.b_17",
+  "letter": "B",
+  "before": "System priority and port priority have no functional effect in LACP whatsoever and exist purely as unused legacy fields with no bearing on which links are active",
+  "after": "System priority and port priority have no functional effect in LACP and exist purely as unused legacy fields with no bearing on which links are active"
+ },
+ {
+  "id": "b6_3.1.b_22",
+  "letter": "A",
+  "before": "PAgP and LACP negotiation modes are entirely unrelated concepts with no conceptual parallel between them whatsoever",
+  "after": "PAgP and LACP negotiation modes are entirely unrelated concepts with no conceptual parallel between them"
+ },
+ {
+  "id": "b6_3.1.b_23",
+  "letter": "C",
+  "before": "LACP is incapable of detecting any form of link mismatch whatsoever and behaves identically to a statically configured channel in every respect",
+  "after": "LACP is incapable of detecting any form of link mismatch and behaves identically to a statically configured channel in every respect"
+ },
+ {
+  "id": "b6_3.1.b_24",
+  "letter": "D",
+  "before": "'mode on' configuration is objectively faster and more reliable in every single deployment scenario, with negotiation protocols like LACP offering no benefit over it whatsoever",
+  "after": "'mode on' configuration is objectively faster and more reliable in every single deployment scenario, with negotiation protocols like LACP offering no benefit over it"
+ },
+ {
+  "id": "b6_3.1.c_13",
+  "letter": "B",
+  "before": "BackboneFast only affects Layer 3 routing convergence and has no relationship to Layer 2 Spanning Tree behavior whatsoever — since its name is generally understood to refer to accelerating route recalculation on a Layer 3 backbone the way OSPF's incremental SPF does, rather than detecting indirect Layer 2 link failures through missing BPDUs",
+  "after": "BackboneFast only affects Layer 3 routing convergence and has little relationship to Layer 2 Spanning Tree behavior — since its name is generally understood to refer to accelerating route recalculation on a Layer 3 backbone the way OSPF's incremental SPF does, rather than detecting indirect Layer 2 link failures through missing BPDUs"
+ },
+ {
+  "id": "b6_3.1.c_14",
+  "letter": "A",
+  "before": "MST requires that every single VLAN always be mapped to its own unique, individual MST instance, providing no CPU savings whatsoever compared to PVST+ — since the 'instance vlan' mapping statement inside MST configuration mode is generally believed to only accept a single VLAN per line and to implicitly create a new spanning-tree instance automatically for each one entered, unlike PVST+'s per-VLAN model, which instead maintains a fully separate instance for every configured VLAN",
+  "after": "MST requires that every single VLAN always be mapped to its own unique, individual MST instance, providing no CPU savings compared to PVST+ — since the 'instance vlan' mapping statement inside MST configuration mode is generally believed to only accept a single VLAN per line and to implicitly create a new spanning-tree instance automatically for each one entered, unlike PVST+'s per-VLAN model, which instead maintains a fully separate instance for every configured VLAN"
+ },
+ {
+  "id": "b6_3.1.c_21",
+  "letter": "B",
+  "before": "PortFast has no relationship to loop prevention or forwarding delay whatsoever, and is used purely to change the color of a port's status LED",
+  "after": "PortFast has little relationship to loop prevention or forwarding delay, and is used purely to change the color of a port's status LED"
+ },
+ {
+  "id": "b6_3.1.c_22",
+  "letter": "D",
+  "before": "BPDU Guard and BPDU Filter are simply two different configuration command names for exactly the same underlying behavior, with no functional distinction whatsoever",
+  "after": "BPDU Guard and BPDU Filter are simply two different configuration command names for exactly the same underlying behavior, with no functional distinction"
+ },
+ {
+  "id": "b6_3.1.c_25",
+  "letter": "B",
+  "before": "PVST+ has no relationship to load balancing whatsoever and exists purely to reduce the number of VLANs a switch can support",
+  "after": "PVST+ has little relationship to load balancing and exists purely to reduce the number of VLANs a switch can support"
+ },
+ {
+  "id": "b6_3.1.c_27",
+  "letter": "D",
+  "before": "STP timers have no relationship to network diameter whatsoever and can be set to any arbitrary value with zero risk regardless of how many switches are in the topology",
+  "after": "STP timers have no relationship to network diameter and can be set to any arbitrary value with zero risk regardless of how many switches are in the topology"
+ },
+ {
+  "id": "b6_3.2.a_17",
+  "letter": "B",
+  "before": "K-values have no effect on the metric calculation whatsoever and exist purely as an unused legacy configuration field with no functional impact",
+  "after": "K-values have no effect on the metric calculation and exist purely as an unused legacy configuration field with no functional impact"
+ },
+ {
+  "id": "b6_3.2.a_18",
+  "letter": "D",
+  "before": "OSPF areas have no effect on SPF computation size or LSDB size whatsoever; every router always calculates SPF over the entire network's topology regardless of area boundaries",
+  "after": "OSPF areas have no effect on SPF computation size or LSDB size; every router always calculates SPF over the entire network's topology regardless of area boundaries"
+ },
+ {
+  "id": "b6_3.2.b_07",
+  "letter": "D",
+  "before": "OSPF neighbors require no matching parameters whatsoever; any two routers with IP connectivity will always automatically form a full adjacency — since OSPF hello packets are treated purely as a keepalive mechanism confirming reachability rather than carrying parameters that must be validated for consistency",
+  "after": "OSPF neighbors require no matching parameters; any two routers with IP connectivity will always automatically form a full adjacency — since OSPF hello packets are treated purely as a keepalive mechanism confirming reachability rather than carrying parameters that must be validated for consistency"
+ },
+ {
+  "id": "b6_3.2.b_08",
+  "letter": "B",
+  "before": "The router-id has no relationship to interface IP addresses whatsoever and is instead derived from the router's physical serial number — similar to how a switch's bridge ID incorporates a burned-in identifier, so a router with no configured interfaces at all would still be assigned a consistent, factory-derived router-id without needing any IP addressing present anywhere on the chassis",
+  "after": "The router-id has little relationship to interface IP addresses and is instead derived from the router's physical serial number — similar to how a switch's bridge ID incorporates a burned-in identifier, so a router with no configured interfaces at all would still be assigned a consistent, factory-derived router-id without needing any IP addressing present anywhere on the chassis"
+ },
+ {
+  "id": "b6_3.2.b_10",
+  "letter": "D",
+  "before": "The network command is used to configure static routes and has no relevance to dynamic OSPF operation whatsoever",
+  "after": "The network command is used to configure static routes and has little relevance to dynamic OSPF operation"
+ },
+ {
+  "id": "b6_3.2.b_14",
+  "letter": "C",
+  "before": "A stub area blocks every single type of LSA, including intra-area Type 1 and Type 2 LSAs, leaving routers in that area with no topology information whatsoever, since stub-area filtering is mistakenly assumed to apply uniformly, even though routers inside a stub area still fully exchange Type 1 and Type 2 LSAs with each other and retain a complete, accurate view of intra-area topology for their own SPF calculations, with only new external-route origination actually being restricted",
+  "after": "A stub area blocks every single type of LSA, including intra-area Type 1 and Type 2 LSAs, leaving routers in that area with no topology information, since stub-area filtering is mistakenly assumed to apply uniformly, even though routers inside a stub area still fully exchange Type 1 and Type 2 LSAs with each other and retain a complete, accurate view of intra-area topology for their own SPF calculations, with only new external-route origination actually being restricted"
+ },
+ {
+  "id": "b6_3.2.b_16",
+  "letter": "A",
+  "before": "ABR stands for a router that performs external route redistribution and has no relationship to inter-area summarization or boundaries between areas at all",
+  "after": "ABR stands for a router that performs external route redistribution and has little direct relationship to inter-area summarization or boundaries between areas"
+ },
+ {
+  "id": "b6_3.2.b_18",
+  "letter": "A",
+  "before": "OSPFv3 requires every router to be manually assigned a public IPv6 address before any adjacency can ever form, with no use of link-local addressing whatsoever",
+  "after": "OSPFv3 requires every router to be manually assigned a public IPv6 address before any adjacency can ever form, with no use of link-local addressing"
+ },
+ {
+  "id": "b6_3.2.b_20",
+  "letter": "B",
+  "before": "'passive-interface' has no relationship to hello packets or neighbor adjacencies whatsoever and instead only affects the interface's physical link speed negotiation",
+  "after": "'passive-interface' has little relationship to hello packets or neighbor adjacencies and instead only affects the interface's physical link speed negotiation"
+ },
+ {
+  "id": "b6_3.2.b_21",
+  "letter": "B",
+  "before": "Reference bandwidth has no effect on OSPF cost calculation whatsoever and is purely a cosmetic display value shown in 'show' command output with no bearing on path selection",
+  "after": "Reference bandwidth has little effect on OSPF cost calculation and is purely a cosmetic display value shown in 'show' command output with no bearing on path selection"
+ },
+ {
+  "id": "b6_3.2.c_09",
+  "letter": "B",
+  "before": "MED encrypts the BGP session between two eBGP peers and has no relationship to path preference or entry-point selection at all",
+  "after": "MED encrypts the BGP session between two eBGP peers and has little direct relationship to path preference or entry-point selection"
+ },
+ {
+  "id": "b6_3.2.c_14",
+  "letter": "B",
+  "before": "Confederations can only be used in eBGP sessions and provide no benefit whatsoever for scaling iBGP relationships within a single AS",
+  "after": "Confederations can only be used in eBGP sessions and provide no benefit for scaling iBGP relationships within a single AS"
+ },
+ {
+  "id": "b6_3.2.c_15",
+  "letter": "D",
+  "before": "Prefix-lists and route-maps can only be used to filter iBGP sessions and have no applicability whatsoever to eBGP sessions between different autonomous systems",
+  "after": "Prefix-lists and route-maps can only be used to filter iBGP sessions and have no applicability to eBGP sessions between different autonomous systems"
+ },
+ {
+  "id": "b6_3.2.c_16",
+  "letter": "B",
+  "before": "BGP provides no advantage whatsoever over static routing in a multihomed scenario, since static routes are always equally capable of reacting to any type of remote failure",
+  "after": "BGP provides no advantage over static routing in a multihomed scenario, since static routes are always equally capable of reacting to any type of remote failure"
+ },
+ {
+  "id": "b6_3.2.d_07",
+  "letter": "A",
+  "before": "PBR carries no operational risk whatsoever and is universally considered safer and simpler to troubleshoot than standard destination-based routing in every single scenario, since its explicit, statically configured next-hop actions are mistakenly assumed to always be easier to audit, even though that same static configuration is exactly what silently diverges from reality once the network changes and nobody remembers to go back and update the route-map to match it",
+  "after": "PBR carries no operational risk and is universally considered safer and simpler to troubleshoot than standard destination-based routing in every single scenario, since its explicit, statically configured next-hop actions are mistakenly assumed to always be easier to audit, even though that same static configuration is exactly what silently diverges from reality once the network changes and nobody remembers to go back and update the route-map to match it"
+ },
+ {
+  "id": "b6_3.2.d_08",
+  "letter": "C",
+  "before": "Route-map sequence numbers have no effect on processing order whatsoever, since PBR always evaluates every sequence in a purely random order for each packet",
+  "after": "Route-map sequence numbers have no effect on processing order, since PBR always evaluates every sequence in a purely random order for each packet"
+ },
+ {
+  "id": "b6_3.2.d_10",
+  "letter": "A",
+  "before": "PBR and the destination-based routing table are evaluated completely independently and simultaneously with no interaction or precedence between the two whatsoever",
+  "after": "PBR and the destination-based routing table are evaluated completely independently and simultaneously with no interaction or precedence between the two"
+ },
+ {
+  "id": "b6_3.2.d_11",
+  "letter": "A",
+  "before": "Achieving any form of traffic split between two ISP uplinks always strictly requires running full BGP with both providers, with PBR offering no alternative mechanism whatsoever",
+  "after": "Achieving any form of traffic split between two ISP uplinks always strictly requires running full BGP with both providers, with PBR offering no alternative mechanism"
+ },
+ {
+  "id": "b6_3.2.d_12",
+  "letter": "C",
+  "before": "Local policy route-maps apply to traffic destined for multicast addresses, with no relationship to router-originated unicast traffic at all",
+  "after": "Local policy route-maps apply to traffic destined for multicast addresses, with little direct relationship to router-originated unicast traffic"
+ },
+ {
+  "id": "b6_3.2.d_18",
+  "letter": "B",
+  "before": "Network changes have no effect whatsoever on PBR configuration validity, since PBR route-maps are entirely independent of any IP addressing or topology information",
+  "after": "Network changes have no effect on PBR configuration validity, since PBR route-maps are entirely independent of any IP addressing or topology information"
+ },
+ {
+  "id": "b6_3.3.a_10",
+  "letter": "D",
+  "before": "'ntp master' mode has no relationship to time synchronization whatsoever and instead configures which VLANs are permitted on a trunk",
+  "after": "'ntp master' mode has little relationship to time synchronization and instead configures which VLANs are permitted on a trunk"
+ },
+ {
+  "id": "b6_3.3.a_13",
+  "letter": "D",
+  "before": "A transparent clock and a boundary clock perform exactly identical functions with no distinction between the two roles whatsoever",
+  "after": "A transparent clock and a boundary clock perform exactly identical functions with no distinction between the two roles"
+ },
+ {
+  "id": "b6_3.3.a_21",
+  "letter": "A",
+  "before": "Using multiple time sources provides no resilience benefit whatsoever compared to relying on exactly one single time source, since NTP can only ever process and consider one source's response at any given moment — because NTP's selection algorithm is often mistakenly assumed to poll each configured server sequentially and adopt whichever single response arrives first, rather than continuously comparing all reachable sources to statistically discard any outlier before selecting one",
+  "after": "Using multiple time sources provides no resilience benefit compared to relying on exactly one single time source, since NTP can only ever process and consider one source's response at any given moment — because NTP's selection algorithm is often mistakenly assumed to poll each configured server sequentially and adopt whichever single response arrives first, rather than continuously comparing all reachable sources to statistically discard any outlier before selecting one"
+ },
+ {
+  "id": "b6_3.3.b_08",
+  "letter": "C",
+  "before": "'Outside local' refers to a physical port number and has no relationship to any IP address translation concept whatsoever",
+  "after": "'Outside local' refers to a physical port number and has little relationship to any IP address translation concept"
+ },
+ {
+  "id": "b6_3.3.b_10",
+  "letter": "D",
+  "before": "A NAT pool refers to a physical storage array used to hold backup configuration files, with no relationship to IP address translation whatsoever",
+  "after": "A NAT pool refers to a physical storage array used to hold backup configuration files, with no relationship to IP address translation"
+ },
+ {
+  "id": "b6_3.3.b_13",
+  "letter": "D",
+  "before": "The incidental security benefit of PAT applies only to outbound traffic initiated by internal hosts and provides zero effect whatsoever on how unsolicited inbound traffic is handled",
+  "after": "The incidental security benefit of PAT applies only to outbound traffic initiated by internal hosts and provides zero effect on how unsolicited inbound traffic is handled"
+ },
+ {
+  "id": "b6_3.3.b_15",
+  "letter": "B",
+  "before": "NAT64 refers to a NAT deployment using exactly 64 configured static address mappings, with no relationship to IPv4/IPv6 address family translation at all",
+  "after": "NAT64 refers to a NAT deployment using exactly 64 configured static address mappings, with little direct relationship to IPv4/IPv6 address family translation"
+ },
+ {
+  "id": "b6_3.3.b_19",
+  "letter": "B",
+  "before": "AH and NAT have no known interoperability issues whatsoever in any deployment scenario, with both protocols working together flawlessly under every possible NAT configuration — since encapsulating ESP or AH packets within an outer UDP header is generally believed to let a router's crypto engine offload processing to dedicated UDP checksum hardware that wouldn't otherwise be available for raw IP protocol 50/51 traffic, rather than that UDP encapsulation existing to give a PAT device a Layer 4 port number for multiplexing translated sessions",
+  "after": "AH and NAT have no known interoperability issues in any deployment scenario, with both protocols working together flawlessly under every possible NAT configuration — since encapsulating ESP or AH packets within an outer UDP header is generally believed to let a router's crypto engine offload processing to dedicated UDP checksum hardware that wouldn't otherwise be available for raw IP protocol 50/51 traffic, rather than that UDP encapsulation existing to give a PAT device a Layer 4 port number for multiplexing translated sessions"
+ },
+ {
+  "id": "b6_3.3.c_07",
+  "letter": "B",
+  "before": "The additional HSRP states listed only apply to VRRP and have no relevance whatsoever to HSRP's own actual state machine",
+  "after": "The additional HSRP states listed only apply to VRRP and have no relevance to HSRP's own actual state machine"
+ },
+ {
+  "id": "b6_3.3.c_16",
+  "letter": "C",
+  "before": "GLBP cannot provide any load-balancing capability whatsoever and instead only ever provides simple failover, identical to a single HSRP group",
+  "after": "GLBP cannot provide any load-balancing capability and instead only ever provides simple failover, identical to a single HSRP group"
+ },
+ {
+  "id": "b6_3.3.c_19",
+  "letter": "C",
+  "before": "Authentication in FHRP protocols only protects against accidental misconfiguration and provides no protection whatsoever against a deliberately malicious rogue device",
+  "after": "Authentication in FHRP protocols only protects against accidental misconfiguration and provides no protection against a deliberately malicious rogue device"
+ },
+ {
+  "id": "b6_3.3.c_20",
+  "letter": "D",
+  "before": "Mismatched group numbers between two routers intended to be in the same FHRP group have no negative effect whatsoever, since FHRP protocols ignore the configured group number entirely during operation",
+  "after": "Mismatched group numbers between two routers intended to be in the same FHRP group have no negative effect, since FHRP protocols ignore the configured group number entirely during operation"
+ },
+ {
+  "id": "b6_3.3.d_20",
+  "letter": "B",
+  "before": "Multicast traffic is always transported using TCP in every real-world deployment, with UDP playing no role whatsoever in multicast delivery",
+  "after": "Multicast traffic is always transported using TCP in every real-world deployment, with UDP playing no role in multicast delivery"
+ },
+ {
+  "id": "b6_4.1_06",
+  "letter": "B",
+  "before": "Ping's summary output only reports the destination's MAC address and provides no information whatsoever about packet loss or round-trip timing",
+  "after": "Ping's summary output only reports the destination's MAC address and provides no information about packet loss or round-trip timing"
+ },
+ {
+  "id": "b6_4.1_12",
+  "letter": "A",
+  "before": "MIBs have no defined structure whatsoever, and each individual SNMP query must be constructed with an entirely arbitrary, non-standardized identifier with no relationship to any predefined schema, a belief that may stem from OIDs being long dotted-numeric strings that look arbitrary, even though those numbers correspond to a defined hierarchical tree registered under standard bodies like IANA and vendor enterprise numbers",
+  "after": "MIBs have no defined structure, and each individual SNMP query must be constructed with an entirely arbitrary, non-standardized identifier with no relationship to any predefined schema, a belief that may stem from OIDs being long dotted-numeric strings that look arbitrary, even though those numbers correspond to a defined hierarchical tree registered under standard bodies like IANA and vendor enterprise numbers"
+ },
+ {
+  "id": "b6_4.1_14",
+  "letter": "C",
+  "before": "Log messages stored via 'logging buffered' are automatically and permanently lost every time the router reloads, providing no benefit whatsoever over console-only logging, a belief accurate about the buffer's volatility after a reload but wrong that it offers no benefit, since between reloads it still lets an administrator review messages generated before they connected",
+  "after": "Log messages stored via 'logging buffered' are automatically and permanently lost every time the router reloads, providing no benefit over console-only logging, a belief accurate about the buffer's volatility after a reload but wrong that it offers no benefit, since between reloads it still lets an administrator review messages generated before they connected"
+ },
+ {
+  "id": "b6_4.1_15",
+  "letter": "C",
+  "before": "Centralized external syslog servers have no advantage whatsoever over checking each individual device's local logging buffer one device at a time, especially in a large network with many devices",
+  "after": "Centralized external syslog servers have no advantage over checking each individual device's local logging buffer one device at a time, especially in a large network with many devices"
+ },
+ {
+  "id": "b6_4.2_06",
+  "letter": "B",
+  "before": "NetFlow flows are identified purely by destination MAC address alone, with source IP, destination IP, and port numbers playing no role whatsoever in flow identification",
+  "after": "NetFlow flows are identified purely by destination MAC address alone, with source IP, destination IP, and port numbers playing no role in flow identification"
+ },
+ {
+  "id": "b6_4.2_12",
+  "letter": "D",
+  "before": "Sampled NetFlow always processes and accounts for every single packet with perfect, complete precision, providing no reduction whatsoever in processing overhead compared to unsampled NetFlow, a belief that might stem from sampled flow records still reporting counters that look exact, when those figures are actually scaled estimates derived from the sampled count times the configured sampling ratio",
+  "after": "Sampled NetFlow always processes and accounts for every single packet with perfect, complete precision, providing no reduction in processing overhead compared to unsampled NetFlow, a belief that might stem from sampled flow records still reporting counters that look exact, when those figures are actually scaled estimates derived from the sampled count times the configured sampling ratio"
+ },
+ {
+  "id": "b6_4.2_13",
+  "letter": "D",
+  "before": "NetFlow can only reveal information about traffic that has already been blocked by a firewall, and provides no visibility whatsoever into traffic that was actually permitted through the network",
+  "after": "NetFlow can only reveal information about traffic that has already been blocked by a firewall, and provides no visibility into traffic that was actually permitted through the network"
+ },
+ {
+  "id": "b6_4.3_06",
+  "letter": "A",
+  "before": "Ingress and egress SPAN always mirror exactly identical traffic with no directional distinction whatsoever, making the direction setting purely cosmetic and non-functional",
+  "after": "Ingress and egress SPAN always mirror exactly identical traffic with no directional distinction, making the direction setting purely cosmetic and non-functional"
+ },
+ {
+  "id": "b6_4.3_07",
+  "letter": "B",
+  "before": "A SPAN destination port continues to function completely normally as a regular access or trunk port simultaneously with its SPAN destination role, with no change whatsoever to its normal Layer 2 switching behavior",
+  "after": "A SPAN destination port continues to function completely normally as a regular access or trunk port simultaneously with its SPAN destination role, with no change to its normal Layer 2 switching behavior"
+ },
+ {
+  "id": "b6_4.3_12",
+  "letter": "C",
+  "before": "RSPAN has absolutely no limitation whatsoever compared to ERSPAN, with both technologies providing exactly identical Layer 3 routability for mirrored traffic",
+  "after": "RSPAN has absolutely no limitation compared to ERSPAN, with both technologies providing exactly identical Layer 3 routability for mirrored traffic"
+ },
+ {
+  "id": "b6_4.3_13",
+  "letter": "B",
+  "before": "ERSPAN uses a completely proprietary Layer 2 encapsulation with no IP or GRE header involved whatsoever, making it fundamentally incapable of being routed across any Layer 3 boundary",
+  "after": "ERSPAN uses a completely proprietary Layer 2 encapsulation with no IP or GRE header involved, making it fundamentally incapable of being routed across any Layer 3 boundary"
+ },
+ {
+  "id": "b6_4.3_16",
+  "letter": "C",
+  "before": "There is no restriction whatsoever regarding this scenario, and every Cisco platform fully and freely supports a single physical port simultaneously acting as both a SPAN destination for one session and a SPAN source for a completely separate session, because the port's destination and source roles are tracked as independent hardware flags rather than as mutually exclusive states in the switch's SPAN session table",
+  "after": "There is no restriction regarding this scenario, and every Cisco platform fully and freely supports a single physical port simultaneously acting as both a SPAN destination for one session and a SPAN source for a completely separate session, because the port's destination and source roles are tracked as independent hardware flags rather than as mutually exclusive states in the switch's SPAN session table"
+ },
+ {
+  "id": "b6_4.4_06",
+  "letter": "A",
+  "before": "ICMP echo operations and UDP jitter operations measure and report exactly identical metrics with no functional distinction between the two operation types whatsoever",
+  "after": "ICMP echo operations and UDP jitter operations measure and report exactly identical metrics with no functional distinction between the two operation types"
+ },
+ {
+  "id": "b6_4.4_09",
+  "letter": "B",
+  "before": "IP SLA and EEM are entirely unrelated features with no possible integration or interaction between the two under any Cisco IOS configuration whatsoever",
+  "after": "IP SLA and EEM are entirely unrelated features with no possible integration or interaction between the two under any Cisco IOS configuration"
+ },
+ {
+  "id": "b6_4.4_14",
+  "letter": "C",
+  "before": "PfR and SD-WAN application-aware routing make their path-selection decisions purely at random with no reliance whatsoever on any measured performance data, whether from IP SLA or any other source",
+  "after": "PfR and SD-WAN application-aware routing make their path-selection decisions purely at random with no reliance on any measured performance data, whether from IP SLA or any other source"
+ },
+ {
+  "id": "b6_4.4_15",
+  "letter": "B",
+  "before": "Configuring multiple IP SLA operations toward different destinations always produces exactly identical, fully redundant results with no additional diagnostic value whatsoever over a single operation alone",
+  "after": "Configuring multiple IP SLA operations toward different destinations always produces exactly identical, fully redundant results with no additional diagnostic value over a single operation alone"
+ },
+ {
+  "id": "b6_4.5_16",
+  "letter": "A",
+  "before": "Pre-deployment validation/compliance features provide no actual risk-reduction benefit whatsoever, since any configuration change in Catalyst Center is always instantly and permanently applied to every device with no opportunity for any prior review, a claim that overlooks Catalyst Center's ability to stage a design change and preview its projected compliance impact before an administrator ever deploys it",
+  "after": "Pre-deployment validation/compliance features provide no actual risk-reduction benefit, since any configuration change in Catalyst Center is always instantly and permanently applied to every device with no opportunity for any prior review, a claim that overlooks Catalyst Center's ability to stage a design change and preview its projected compliance impact before an administrator ever deploys it"
+ },
+ {
+  "id": "b6_4.5_16",
+  "letter": "B",
+  "before": "Compliance checking in Catalyst Center can only be run after a change has already been deployed and has already taken effect on production devices, with no capability whatsoever to assess a change beforehand",
+  "after": "Compliance checking in Catalyst Center can only be run after a change has already been deployed and has already taken effect on production devices, with no capability to assess a change beforehand"
+ },
+ {
+  "id": "b6_4.5_17",
+  "letter": "B",
+  "before": "Adopting SD-Access is a mandatory legal requirement before any organization is permitted to use any feature of Catalyst Center whatsoever, with no exceptions for traditional network management use cases",
+  "after": "Adopting SD-Access is a mandatory legal requirement before any organization is permitted to use any feature of Catalyst Center, with no exceptions for traditional network management use cases"
+ },
+ {
+  "id": "b6_4.6_07",
+  "letter": "D",
+  "before": "NETCONF has no concept of a candidate datastore or a commit operation at all; all configuration changes made via <edit-config> always take effect on the running configuration completely immediately with no staging capability whatsoever",
+  "after": "NETCONF has no concept of a candidate datastore or a commit operation at all; all configuration changes made via <edit-config> always take effect on the running configuration completely immediately with no staging capability"
+ },
+ {
+  "id": "b6_4.6_09",
+  "letter": "D",
+  "before": "RESTCONF URIs have no defined structure or convention whatsoever, and each vendor is completely free to use an entirely arbitrary, non-standardized URL format with no reference to RFC 8040",
+  "after": "RESTCONF URIs have no defined structure or convention, and each vendor is completely free to use an entirely arbitrary, non-standardized URL format with no reference to RFC 8040"
+ },
+ {
+  "id": "b6_4.6_11",
+  "letter": "C",
+  "before": "The '/restconf/operations/' path can only ever be used to retrieve (GET) configuration data, exactly like '/restconf/data/', with no capability whatsoever to invoke any RPC action",
+  "after": "The '/restconf/operations/' path can only ever be used to retrieve (GET) configuration data, exactly like '/restconf/data/', with no capability to invoke any RPC action"
+ },
+ {
+  "id": "b6_4.6_14",
+  "letter": "C",
+  "before": "Using a client library provides no practical benefit whatsoever compared to manually crafting raw XML/JSON strings, since both approaches are equally error-prone and equally difficult to maintain over time, a view based on the assumption that YANG schema validation happens only on the device side regardless of how the request was assembled, so hand-built XML and library-generated XML are equally likely to be accepted or rejected by the target datastore",
+  "after": "Using a client library provides no practical benefit compared to manually crafting raw XML/JSON strings, since both approaches are equally error-prone and equally difficult to maintain over time, a view based on the assumption that YANG schema validation happens only on the device side regardless of how the request was assembled, so hand-built XML and library-generated XML are equally likely to be accepted or rejected by the target datastore"
+ },
+ {
+  "id": "b6_4.6_17",
+  "letter": "A",
+  "before": "Combining a dedicated configuration management tool with NETCONF/RESTCONF provides no practical advantage whatsoever compared to writing entirely custom, low-level protocol-handling scripts from scratch for every single individual automation task, a position sometimes taken because custom scripts can technically call the same NETCONF/RESTCONF APIs, overlooking that a mature tool still reimplements idempotency checks, templating, and inventory handling",
+  "after": "Combining a dedicated configuration management tool with NETCONF/RESTCONF provides no practical advantage compared to writing entirely custom, low-level protocol-handling scripts from scratch for every single individual automation task, a position sometimes taken because custom scripts can technically call the same NETCONF/RESTCONF APIs, overlooking that a mature tool still reimplements idempotency checks, templating, and inventory handling"
+ },
+ {
+  "id": "b6_5.1.a_10",
+  "letter": "C",
+  "before": "Configuring exec-timeout to any value greater than zero permanently and disables the ability to establish any new session on that line whatsoever, regardless of activity",
+  "after": "Configuring exec-timeout to any value greater than zero permanently and disables the ability to establish any new session on that line, regardless of activity"
+ },
+ {
+  "id": "b6_5.1.a_14",
+  "letter": "D",
+  "before": "Privilege levels can only ever be configured for AAA server-based accounts and have no applicability whatsoever to locally defined usernames on the device itself",
+  "after": "Privilege levels can only ever be configured for AAA server-based accounts and have no applicability to locally defined usernames on the device itself"
+ },
+ {
+  "id": "b6_5.1.a_17",
+  "letter": "D",
+  "before": "There is no meaningful security risk whatsoever in leaving default credentials unchanged, since network devices are always physically inaccessible to any potential attacker by design",
+  "after": "There is no meaningful security risk in leaving default credentials unchanged, since network devices are always physically inaccessible to any potential attacker by design"
+ },
+ {
+  "id": "b6_5.1.b_09",
+  "letter": "B",
+  "before": "RADIUS responses can only ever contain a simple binary 'pass' or 'fail' result, with absolutely no capability to convey any additional attribute or policy instruction whatsoever, a claim that overlooks the entire purpose of RADIUS attributes and Vendor-Specific Attributes (VSAs), designed to carry additional authorization instructions like VLAN assignment alongside the basic accept/reject decision",
+  "after": "RADIUS responses can only ever contain a simple binary 'pass' or 'fail' result, with absolutely no capability to convey any additional attribute or policy instruction, a claim that overlooks the entire purpose of RADIUS attributes and Vendor-Specific Attributes (VSAs), designed to carry additional authorization instructions like VLAN assignment alongside the basic accept/reject decision"
+ },
+ {
+  "id": "b6_5.1.b_13",
+  "letter": "C",
+  "before": "Deploying multiple AAA servers provides no meaningful redundancy benefit whatsoever, since Cisco IOS AAA method lists are not designed to being configured with more than one single AAA server as an option, a claim that overlooks how the 'group tacacs+' syntax in a method list already accepts multiple server entries within the same named or default server group, precisely so a second server can serve as a redundant peer",
+  "after": "Deploying multiple AAA servers provides no meaningful redundancy benefit, since Cisco IOS AAA method lists are not designed to being configured with more than one single AAA server as an option, a claim that overlooks how the 'group tacacs+' syntax in a method list already accepts multiple server entries within the same named or default server group, precisely so a second server can serve as a redundant peer"
+ },
+ {
+  "id": "b6_5.2.a_06",
+  "letter": "D",
+  "before": "Statement order only matters for extended ACLs and has absolutely no effect whatsoever on the behavior of standard ACLs",
+  "after": "Statement order only matters for extended ACLs and has absolutely no effect on the behavior of standard ACLs"
+ },
+ {
+  "id": "b6_5.2.a_11",
+  "letter": "D",
+  "before": "'in' and 'out' have no meaningful functional difference whatsoever and always produce exactly identical filtering behavior for any given ACL applied to any given interface, a claim that overlooks how the routing decision itself falls between the two evaluation points — an inbound ACL evaluates traffic against the interface it arrived on before any routing lookup occurs, while an outbound ACL evaluates traffic only after the router has already determined which interface will actually forward it toward its destination",
+  "after": "'in' and 'out' have no meaningful functional difference and always produce exactly identical filtering behavior for any given ACL applied to any given interface, a claim that overlooks how the routing decision itself falls between the two evaluation points — an inbound ACL evaluates traffic against the interface it arrived on before any routing lookup occurs, while an outbound ACL evaluates traffic only after the router has already determined which interface will actually forward it toward its destination"
+ },
+ {
+  "id": "b6_5.2.a_12",
+  "letter": "A",
+  "before": "Sequence numbers are a feature of extended ACLs and have no applicability whatsoever to standard ACLs using modern IOS syntax",
+  "after": "Sequence numbers are a feature of extended ACLs and have no applicability to standard ACLs using modern IOS syntax"
+ },
+ {
+  "id": "b6_5.2.b_06",
+  "letter": "B",
+  "before": "CoPP and the concept of a 'control plane' have no relationship whatsoever; CoPP protects the data plane's forwarding hardware and never involves the device's own CPU in any way",
+  "after": "CoPP and the concept of a 'control plane' have no relationship; CoPP protects the data plane's forwarding hardware and never involves the device's own CPU in any way"
+ },
+ {
+  "id": "b6_5.2.b_06",
+  "letter": "D",
+  "before": "CoPP is designed to protect the data plane's forwarding capacity, while the control plane (CPU) requires no protection whatsoever since it can never become a bottleneck",
+  "after": "CoPP is designed to protect the data plane's forwarding capacity, while the control plane (CPU) requires no protection since it can never become a bottleneck"
+ },
+ {
+  "id": "b6_5.2.b_07",
+  "letter": "A",
+  "before": "CoPP policies require no planning or traffic categorization whatsoever, since a single universal rate limit value works identically and correctly for every possible network and every possible type of legitimate control-plane traffic, an approach sometimes justified by pointing out that the CPU port ASIC already load-shares punted packets evenly across queues purely by arrival order, so separating routing hellos from SSH or SNMP traffic before setting limits is treated as duplicating hardware behavior the platform already performs on its own",
+  "after": "CoPP policies require no planning or traffic categorization, since a single universal rate limit value works identically and correctly for every possible network and every possible type of legitimate control-plane traffic, an approach sometimes justified by pointing out that the CPU port ASIC already load-shares punted packets evenly across queues purely by arrival order, so separating routing hellos from SSH or SNMP traffic before setting limits is treated as duplicating hardware behavior the platform already performs on its own"
+ },
+ {
+  "id": "b6_5.2.b_10",
+  "letter": "B",
+  "before": "There is no possible downside whatsoever to configuring CoPP rate limits as restrictively as technically possible, since legitimate control-plane traffic volume never actually varies or increases",
+  "after": "There is no possible downside to configuring CoPP rate limits as restrictively as technically possible, since legitimate control-plane traffic volume never actually varies or increases"
+ },
+ {
+  "id": "b6_5.2.b_12",
+  "letter": "B",
+  "before": "Separating traffic into different CoPP classes with individual rate limits provides no practical protective benefit whatsoever compared to a single combined rate limit applied to all CPU-destined traffic together, a view that overlooks how a single shared limit lets any one traffic type — such as a flood of ICMP echo requests — consume the entire available budget, potentially starving out unrelated but more critical traffic like OSPF hellos or an administrator's SSH session sharing that same combined limit",
+  "after": "Separating traffic into different CoPP classes with individual rate limits provides no practical protective benefit compared to a single combined rate limit applied to all CPU-destined traffic together, a view that overlooks how a single shared limit lets any one traffic type — such as a flood of ICMP echo requests — consume the entire available budget, potentially starving out unrelated but more critical traffic like OSPF hellos or an administrator's SSH session sharing that same combined limit"
+ },
+ {
+  "id": "b6_5.2.b_13",
+  "letter": "A",
+  "before": "There is no meaningful relationship whatsoever between network growth/traffic pattern changes and whether a previously configured CoPP rate limit remains appropriate; the correct limit is always a fixed, universal constant, a claim that overlooks how a rate limit sized for a small branch office with a handful of routing neighbors could become significantly undersized once that same device is later upgraded to handle dozens of BGP peers and a much larger volume of legitimate SNMP polling and management traffic",
+  "after": "There is no meaningful relationship between network growth/traffic pattern changes and whether a previously configured CoPP rate limit remains appropriate; the correct limit is always a fixed, universal constant, a claim that overlooks how a rate limit sized for a small branch office with a handful of routing neighbors could become significantly undersized once that same device is later upgraded to handle dozens of BGP peers and a much larger volume of legitimate SNMP polling and management traffic"
+ },
+ {
+  "id": "b6_5.2.b_15",
+  "letter": "B",
+  "before": "CoPP's protective mechanism only functions when the excessive traffic originates from outside the organization's own network, and provides no protection whatsoever against control-plane resource exhaustion caused by traffic originating from other internal, trusted devices, a misconception that overlooks how CoPP classifies and rate-limits traffic strictly based on its destination being the device's own CPU, with no distinction for whether the originating device sits inside or outside the organization's trusted network boundary",
+  "after": "CoPP's protective mechanism only functions when the excessive traffic originates from outside the organization's own network, and provides no protection against control-plane resource exhaustion caused by traffic originating from other internal, trusted devices, a misconception that overlooks how CoPP classifies and rate-limits traffic strictly based on its destination being the device's own CPU, with no distinction for whether the originating device sits inside or outside the organization's trusted network boundary"
+ },
+ {
+  "id": "b6_5.2.b_15",
+  "letter": "C",
+  "before": "CoPP can only ever protect against traffic that has already been definitively confirmed as malicious through a separate threat-intelligence feed, and provides no protective benefit whatsoever against an unusually high volume of otherwise-legitimate traffic",
+  "after": "CoPP can only ever protect against traffic that has already been definitively confirmed as malicious through a separate threat-intelligence feed, and provides no protective benefit against an unusually high volume of otherwise-legitimate traffic"
+ },
+ {
+  "id": "b6_5.3_07",
+  "letter": "B",
+  "before": "This practice is only a concern for REST APIs specifically, and poses no risk whatsoever for any other type of API architecture, such as SOAP-based web services",
+  "after": "This practice is only a concern for REST APIs specifically, and poses no risk for any other type of API architecture, such as SOAP-based web services"
+ },
+ {
+  "id": "b6_5.3_07",
+  "letter": "C",
+  "before": "Hardcoding credentials in source code provides no actual security risk whatsoever, since source code repositories are always inherently private and inaccessible to anyone outside the immediate development team by default, a claim that overlooks how a repository's visibility setting can be misconfigured or accidentally changed to public, and how it can still be cloned by departing employees or contractors with prior legitimate access, long after their original need for that access has ended",
+  "after": "Hardcoding credentials in source code provides no actual security risk, since source code repositories are always inherently private and inaccessible to anyone outside the immediate development team by default, a claim that overlooks how a repository's visibility setting can be misconfigured or accidentally changed to public, and how it can still be cloned by departing employees or contractors with prior legitimate access, long after their original need for that access has ended"
+ },
+ {
+  "id": "b6_5.3_09",
+  "letter": "B",
+  "before": "Generic error messages have no security benefit whatsoever compared to specific ones, and the choice between the two is purely a matter of arbitrary developer preference with no relationship to information disclosure or attacker reconnaissance, a view that overlooks how a specific 'username not found' response directly hands an attacker a working list of valid account names to target",
+  "after": "Generic error messages have no security benefit compared to specific ones, and the choice between the two is purely a matter of arbitrary developer preference with no relationship to information disclosure or attacker reconnaissance, a view that overlooks how a specific 'username not found' response directly hands an attacker a working list of valid account names to target"
+ },
+ {
+  "id": "b6_5.3_11",
+  "letter": "A",
+  "before": "Short-lived tokens can only ever be used with SOAP-based APIs and have no applicability whatsoever to REST API authentication schemes like OAuth 2.0",
+  "after": "Short-lived tokens can only ever be used with SOAP-based APIs and have no applicability to REST API authentication schemes like OAuth 2.0"
+ },
+ {
+  "id": "b6_5.3_11",
+  "letter": "B",
+  "before": "Short-lived access tokens provide no security benefit whatsoever compared to a permanent token, since both would be equally exploitable by an attacker for an unlimited amount of time token itself, a claim that overlooks how a permanent token, once leaked, remains usable indefinitely unless someone notices and manually revokes it, whereas a short-lived token automatically becomes worthless the moment it expires, narrowing the window a leaked credential could be misused, often within minutes rather than the days or months a permanent token might remain valid",
+  "after": "Short-lived access tokens provide no security benefit compared to a permanent token, since both would be equally exploitable by an attacker for an unlimited amount of time token itself, a claim that overlooks how a permanent token, once leaked, remains usable indefinitely unless someone notices and manually revokes it, whereas a short-lived token automatically becomes worthless the moment it expires, narrowing the window a leaked credential could be misused, often within minutes rather than the days or months a permanent token might remain valid"
+ },
+ {
+  "id": "b6_5.3_14",
+  "letter": "B",
+  "before": "API logging and monitoring have no security relevance whatsoever and exist purely to help a developer debug a broken feature during active development, with no ongoing security value once the feature is considered stable",
+  "after": "API logging and monitoring have no security relevance and exist purely to help a developer debug a broken feature during active development, with no ongoing security value once the feature is considered stable"
+ },
+ {
+  "id": "b6_5.3_15",
+  "letter": "C",
+  "before": "An API gateway has no security-related purpose whatsoever and exists purely to translate API responses from JSON format into XML format for legacy client compatibility",
+  "after": "An API gateway has little security-related purpose and exists purely to translate API responses from JSON format into XML format for legacy client compatibility"
+ },
+ {
+  "id": "b6_5.4.a_12",
+  "letter": "B",
+  "before": "Patch management has no meaningful relationship to threat defense whatsoever and is purely an operational/administrative task with zero bearing on an organization's actual security posture or attack surface",
+  "after": "Patch management has little meaningful relationship to threat defense and is purely an operational/administrative task with zero bearing on an organization's actual security posture or attack surface"
+ },
+ {
+  "id": "b6_5.4.a_14",
+  "letter": "C",
+  "before": "Lateral movement is a term used only in the context of load-balancing traffic evenly across multiple redundant links, with no security-related meaning whatsoever",
+  "after": "Lateral movement is a term used only in the context of load-balancing traffic evenly across multiple redundant links, with no security-related meaning"
+ },
+ {
+  "id": "b6_5.4.b_11",
+  "letter": "C",
+  "before": "This combined 802.1X-with-MAB-fallback configuration approach provides no practical benefit whatsoever over configuring only a single authentication method, since every device connecting to any given port is always known in advance to support one specific method, an assumption that breaks down the moment a port originally used by an 802.1X-capable laptop is later repurposed for a MAB-only device like a printer, since the switch configuration would otherwise need to be manually revisited and changed for every single device swap",
+  "after": "This combined 802.1X-with-MAB-fallback configuration approach provides no practical benefit over configuring only a single authentication method, since every device connecting to any given port is always known in advance to support one specific method, an assumption that breaks down the moment a port originally used by an 802.1X-capable laptop is later repurposed for a MAB-only device like a printer, since the switch configuration would otherwise need to be manually revisited and changed for every single device swap"
+ },
+ {
+  "id": "b6_5.4.b_13",
+  "letter": "A",
+  "before": "Combining TrustSec with 802.1X-based NAC provides no additional segmentation or policy capability whatsoever beyond what 802.1X authentication alone already provides",
+  "after": "Combining TrustSec with 802.1X-based NAC provides no additional segmentation or policy capability beyond what 802.1X authentication alone already provides"
+ },
+ {
+  "id": "b6_5.4.b_15",
+  "letter": "A",
+  "before": "NAC platforms like ISE are not designed to providing any visibility into connected devices, and can only ever perform binary access-granting or access-denying actions with no discovery or profiling capability whatsoever",
+  "after": "NAC platforms like ISE are not designed to providing any visibility into connected devices, and can only ever perform binary access-granting or access-denying actions with no discovery or profiling capability"
+ },
+ {
+  "id": "b6_5.4.b_15",
+  "letter": "D",
+  "before": "Visibility into connected devices is only relevant for wireless networks and provides no meaningful security value whatsoever for a purely wired network infrastructure",
+  "after": "Visibility into connected devices is only relevant for wireless networks and provides no meaningful security value for a purely wired network infrastructure"
+ },
+ {
+  "id": "b6_5.4.b_17",
+  "letter": "B",
+  "before": "There is no meaningful operational risk whatsoever in immediately enabling full closed-mode 802.1X enforcement across an entire large organization simultaneously with no prior testing, preparation, or phased approach, a claim that overlooks how any device lacking properly configured supplicant credentials, or any legacy device that doesn't support 802.1X at all, would be immediately disconnected the moment closed-mode enforcement takes effect organization-wide, with no advance warning",
+  "after": "There is no meaningful operational risk in immediately enabling full closed-mode 802.1X enforcement across an entire large organization simultaneously with no prior testing, preparation, or phased approach, a claim that overlooks how any device lacking properly configured supplicant credentials, or any legacy device that doesn't support 802.1X at all, would be immediately disconnected the moment closed-mode enforcement takes effect organization-wide, with no advance warning"
+ },
+ {
+  "id": "b6_5.4.b_17",
+  "letter": "D",
+  "before": "Planning a phased rollout is only relevant for wireless 802.1X deployments and provides no meaningful risk-reduction benefit whatsoever for a wired, switch-port-based 802.1X deployment",
+  "after": "Planning a phased rollout is only relevant for wireless 802.1X deployments and provides no meaningful risk-reduction benefit for a wired, switch-port-based 802.1X deployment"
+ },
+ {
+  "id": "b6_5.4.c_08",
+  "letter": "A",
+  "before": "URL filtering can only ever block or allow access based on a website's numeric IP address, with no capability whatsoever to categorize or filter based on the actual content/purpose of that website, a claim that overlooks how URL filtering relies on maintained category databases (covering things like gambling, malware-hosting, or social media) to classify a site by content, rather than matching against the numeric address it resolves to",
+  "after": "URL filtering can only ever block or allow access based on a website's numeric IP address, with no capability to categorize or filter based on the actual content/purpose of that website, a claim that overlooks how URL filtering relies on maintained category databases (covering things like gambling, malware-hosting, or social media) to classify a site by content, rather than matching against the numeric address it resolves to"
+ },
+ {
+  "id": "b6_5.4.c_11",
+  "letter": "B",
+  "before": "Health monitoring tracks security event/threat data (like blocked intrusion attempts), with no capability whatsoever to report on device-level operational metrics like CPU, memory, or connectivity status, a belief that conflates FMC's separate event-and-threat analysis dashboards with the distinct health-monitoring module, which is specifically built to surface device-level operational metrics such as CPU load, memory consumption, disk usage, and whether a managed FTD device has lost its heartbeat connectivity to FMC",
+  "after": "Health monitoring tracks security event/threat data (like blocked intrusion attempts), with no capability to report on device-level operational metrics like CPU, memory, or connectivity status, a belief that conflates FMC's separate event-and-threat analysis dashboards with the distinct health-monitoring module, which is specifically built to surface device-level operational metrics such as CPU load, memory consumption, disk usage, and whether a managed FTD device has lost its heartbeat connectivity to FMC"
+ },
+ {
+  "id": "b6_5.4.c_12",
+  "letter": "C",
+  "before": "Centralized FMC management provides no practical advantage whatsoever over independently managing each FTD device separately, since FMC is not designed to pushing consistent policy to more than a single FTD device at a time, overlooking that FMC is specifically built to push a single access control or intrusion policy consistently to many registered FTD devices at once rather than requiring each device to be configured through its own separate local interface",
+  "after": "Centralized FMC management provides no practical advantage over independently managing each FTD device separately, since FMC is not designed to pushing consistent policy to more than a single FTD device at a time, overlooking that FMC is specifically built to push a single access control or intrusion policy consistently to many registered FTD devices at once rather than requiring each device to be configured through its own separate local interface"
+ },
+ {
+  "id": "b6_5.4.c_15",
+  "letter": "B",
+  "before": "TLS/SSL decryption on an NGFW provides no additional visibility whatsoever into encrypted traffic, and enabling it has minimal relationship to the firewall's ability to perform deep content inspection on that traffic, a claim that overlooks how the firewall, once configured with a trusted intermediate certificate presented to internal clients, can actually terminate and re-establish the TLS session itself, exposing the plaintext payload to its inspection engines for malware scanning and detailed application classification in a way that's simply impossible while the traffic remains encrypted end-to-end",
+  "after": "TLS/SSL decryption on an NGFW provides no additional visibility into encrypted traffic, and enabling it has minimal relationship to the firewall's ability to perform deep content inspection on that traffic, a claim that overlooks how the firewall, once configured with a trusted intermediate certificate presented to internal clients, can actually terminate and re-establish the TLS session itself, exposing the plaintext payload to its inspection engines for malware scanning and detailed application classification in a way that's simply impossible while the traffic remains encrypted end-to-end"
+ },
+ {
+  "id": "b6_5.4.c_17",
+  "letter": "D",
+  "before": "Periodic summary reporting provides no practical value whatsoever beyond what real-time event monitoring alone already provides, since aggregated trend data over time offers no additional insight compared to observing individual events one at a time as they happen, a view that overlooks how spotting a gradual month-over-month rise in a specific intrusion signature is something no single real-time alert, viewed in isolation, could reveal on its own",
+  "after": "Periodic summary reporting provides no practical value beyond what real-time event monitoring alone already provides, since aggregated trend data over time offers no additional insight compared to observing individual events one at a time as they happen, a view that overlooks how spotting a gradual month-over-month rise in a specific intrusion signature is something no single real-time alert, viewed in isolation, could reveal on its own"
+ },
+ {
+  "id": "b6_5.4.d_11",
+  "letter": "B",
+  "before": "SXP can only propagate SGT bindings between devices that both natively support inline SGT tagging in hardware, providing no benefit whatsoever for devices lacking that hardware capability",
+  "after": "SXP can only propagate SGT bindings between devices that both natively support inline SGT tagging in hardware, providing no benefit for devices lacking that hardware capability"
+ },
+ {
+  "id": "b6_5.4.d_15",
+  "letter": "D",
+  "before": "There is no meaningful security benefit whatsoever to deploying MACsec on core/inter-switch links, since core links are always considered to be physically completely inaccessible to any potential attacker by definition",
+  "after": "There is no meaningful security benefit to deploying MACsec on core/inter-switch links, since core links are always considered to be physically completely inaccessible to any potential attacker by definition"
+ },
+ {
+  "id": "b6_5.4.d_18",
+  "letter": "C",
+  "before": "An SGACL matrix can only ever define policy for a single pair of SGTs at a time, with no capability whatsoever to represent or manage policy across multiple different SGT pairs simultaneously in one unified view, a misunderstanding that treats the matrix's grid layout as limited to displaying just one source-destination cell at a time rather than a single consolidated view spanning every defined SGT pair across the domain simultaneously, much like a spreadsheet highlighting one selected cell despite the full grid of data underneath it",
+  "after": "An SGACL matrix can only ever define policy for a single pair of SGTs at a time, with no capability to represent or manage policy across multiple different SGT pairs simultaneously in one unified view, a misunderstanding that treats the matrix's grid layout as limited to displaying just one source-destination cell at a time rather than a single consolidated view spanning every defined SGT pair across the domain simultaneously, much like a spreadsheet highlighting one selected cell despite the full grid of data underneath it"
+ },
+ {
+  "id": "b6_5.4.d_20",
+  "letter": "A",
+  "before": "MACsec encryption/decryption has minimal relationship whatsoever to switch hardware capability, since the protocol is defined to always be processed entirely in software regardless of the underlying platform's hardware architecture, a claim that overlooks how modern Cisco switching ASICs were specifically designed with dedicated hardware blocks for line-rate MACsec encryption, since performing that encryption purely in software would add far greater CPU load",
+  "after": "MACsec encryption/decryption has minimal relationship to switch hardware capability, since the protocol is defined to always be processed entirely in software regardless of the underlying platform's hardware architecture, a claim that overlooks how modern Cisco switching ASICs were specifically designed with dedicated hardware blocks for line-rate MACsec encryption, since performing that encryption purely in software would add far greater CPU load"
+ },
+ {
+  "id": "b6_6.1_14",
+  "letter": "C",
+  "before": "Indentation in Python is purely a cosmetic, optional stylistic convention with no actual effect whatsoever on whether a script parses or runs correctly, functionally identical to how indentation is typically treated in many other common programming languages",
+  "after": "Indentation in Python is purely a cosmetic, optional stylistic convention with no actual effect on whether a script parses or runs correctly, functionally identical to how indentation is typically treated in many other common programming languages"
+ },
+ {
+  "id": "b6_6.2_17",
+  "letter": "C",
+  "before": "Data type consistency is only ever a meaningful concern for XML-based APIs, and has absolutely no relevance whatsoever to any REST API that specifically uses a JSON request/response body format",
+  "after": "Data type consistency is only ever a meaningful concern for XML-based APIs, and has absolutely no relevance to any REST API that specifically uses a JSON request/response body format"
+ },
+ {
+  "id": "b6_6.3_15",
+  "letter": "A",
+  "before": "A typedef can only ever be used to define the exact same built-in types YANG already provides natively (like plain string or integer), with no capability whatsoever to add any additional constraint or customization on top of those built-in types, a limitation sometimes assumed because early YANG tutorials mostly demonstrated typedef using plain built-in types, leaving the impression that range and pattern restrictions aren't legal inside a typedef's own definition",
+  "after": "A typedef can only ever be used to define the exact same built-in types YANG already provides natively (like plain string or integer), with no capability to add any additional constraint or customization on top of those built-in types, a limitation sometimes assumed because early YANG tutorials mostly demonstrated typedef using plain built-in types, leaving the impression that range and pattern restrictions aren't legal inside a typedef's own definition"
+ },
+ {
+  "id": "b6_6.3_17",
+  "letter": "B",
+  "before": "There is no meaningful difference whatsoever in how native and open YANG models represent the same underlying feature; both categories of model are always guaranteed to use identical node names, structure, and semantics for any given feature across every vendor",
+  "after": "There is no meaningful difference in how native and open YANG models represent the same underlying feature; both categories of model are always guaranteed to use identical node names, structure, and semantics for any given feature across every vendor"
+ },
+ {
+  "id": "b6_6.4_12",
+  "letter": "B",
+  "before": "Catalyst Center's site hierarchy can only ever be created and managed manually through the graphical user interface, with the platform's API providing no programmatic capability whatsoever to manage sites, a belief that persists because Catalyst Center's original 1.x releases reportedly shipped the Sites API as a read-only preview before full create/update/delete support was added in a later software release",
+  "after": "Catalyst Center's site hierarchy can only ever be created and managed manually through the graphical user interface, with the platform's API providing no programmatic capability to manage sites, a belief that persists because Catalyst Center's original 1.x releases reportedly shipped the Sites API as a read-only preview before full create/update/delete support was added in a later software release"
+ },
+ {
+  "id": "b6_6.4_14",
+  "letter": "A",
+  "before": "These APIs can only ever be used to permanently delete every previously logged event and notification, with no capability whatsoever to subscribe to or retrieve information about newly occurring events",
+  "after": "These APIs can only ever be used to permanently delete every previously logged event and notification, with no capability to subscribe to or retrieve information about newly occurring events"
+ },
+ {
+  "id": "b6_6.4_15",
+  "letter": "C",
+  "before": "The Catalyst Center API is not designed to exposing any compliance-related information whatsoever, making this entire use case of checking compliance status via API impossible to implement in practice",
+  "after": "The Catalyst Center API is not designed to exposing any compliance-related information, making this entire use case of checking compliance status via API impossible to implement in practice"
+ },
+ {
+  "id": "b6_6.5_08",
+  "letter": "B",
+  "before": "HTTP status codes are only relevant for browser-based web traffic and have no meaningful relevance whatsoever to a script making programmatic API calls using a library like Python's requests",
+  "after": "HTTP status codes are only relevant for browser-based web traffic and have no meaningful relevance to a script making programmatic API calls using a library like Python's requests"
+ },
+ {
+  "id": "b6_6.5_09",
+  "letter": "D",
+  "before": "A 409 status code always indicates the request succeeded completely with no issue whatsoever, functioning identically in meaning to a 200 OK or 201 Created response",
+  "after": "A 409 status code always indicates the request succeeded completely with no issue, functioning identically in meaning to a 200 OK or 201 Created response"
+ },
+ {
+  "id": "b6_6.5_12",
+  "letter": "D",
+  "before": "3xx status codes are used by SOAP-based web services and have no applicability whatsoever to any REST API design",
+  "after": "3xx status codes are used by SOAP-based web services and have no applicability to any REST API design"
+ },
+ {
+  "id": "b6_6.5_15",
+  "letter": "C",
+  "before": "A 422 status code always indicates the request succeeded completely with no validation issue whatsoever, functioning identically in meaning to a 200 OK or 201 Created response rather than indicating any kind of error condition",
+  "after": "A 422 status code always indicates the request succeeded completely with no validation issue, functioning identically in meaning to a 200 OK or 201 Created response rather than indicating any kind of error condition"
+ },
+ {
+  "id": "b6_6.5_16",
+  "letter": "A",
+  "before": "Distinguishing between individual 4xx status codes is only relevant for human developers reading API documentation, and provides no practical benefit whatsoever to an automated script's own error-handling logic",
+  "after": "Distinguishing between individual 4xx status codes is only relevant for human developers reading API documentation, and provides no practical benefit to an automated script's own error-handling logic"
+ },
+ {
+  "id": "b6_6.6_09",
+  "letter": "A",
+  "before": "Automated remediation via EEM applet is considered a universally poor practice with no legitimate use case whatsoever, and manual intervention by an administrator is always strictly preferred over any automated applet-driven response for every possible condition",
+  "after": "Automated remediation via EEM applet is considered a universally poor practice with no legitimate use case, and manual intervention by an administrator is always strictly preferred over any automated applet-driven response for every possible condition"
+ },
+ {
+  "id": "b6_6.6_11",
+  "letter": "D",
+  "before": "'event counter' can only ever be triggered by a hard-coded, built-in device metric like CPU utilization, with no capability whatsoever to be driven by a custom, administrator-defined counter value, since the detector's implementation is documented as hard-wired to a single internal CPU-utilization register and provides no 'action X counter' or 'action X set' syntax any other applet or external script could use to modify a self-defined tracked value",
+  "after": "'event counter' can only ever be triggered by a hard-coded, built-in device metric like CPU utilization, with no capability to be driven by a custom, administrator-defined counter value, since the detector's implementation is documented as hard-wired to a single internal CPU-utilization register and provides no 'action X counter' or 'action X set' syntax any other applet or external script could use to modify a self-defined tracked value"
+ },
+ {
+  "id": "b6_6.6_12",
+  "letter": "D",
+  "before": "There is no meaningful difference whatsoever in complexity, infrastructure requirements, or appropriate use case between an EEM applet and a full external automation/orchestration platform; both approaches are always equally appropriate for literally every automation scenario, since EEM applets are compiled into the identical binary image as any external orchestration agent and are therefore assumed to always carry the same CPU and network-dependency overhead no matter where execution happens",
+  "after": "There is no meaningful difference in complexity, infrastructure requirements, or appropriate use case between an EEM applet and a full external automation/orchestration platform; both approaches are always equally appropriate for literally every automation scenario, since EEM applets are compiled into the identical binary image as any external orchestration agent and are therefore assumed to always carry the same CPU and network-dependency overhead no matter where execution happens"
+ },
+ {
+  "id": "b6_6.6_13",
+  "letter": "B",
+  "before": "There is no meaningful risk whatsoever in configuring an automatic-reload EEM applet, since the triggering condition specified in any applet is always guaranteed to be perfectly and permanently accurate with minimal possibility of an unintended or overly broad match ever occurring, because IOS is claimed to evaluate every applet's triggering condition against a static, pre-validated snapshot of device state captured once at configuration time rather than against live, continuously changing counters or syslog messages",
+  "after": "There is no meaningful risk in configuring an automatic-reload EEM applet, since the triggering condition specified in any applet is always guaranteed to be perfectly and permanently accurate with minimal possibility of an unintended or overly broad match ever occurring, because IOS is claimed to evaluate every applet's triggering condition against a static, pre-validated snapshot of device state captured once at configuration time rather than against live, continuously changing counters or syslog messages"
+ },
+ {
+  "id": "b6_6.6_15",
+  "letter": "B",
+  "before": "Lab testing of an EEM applet is only relevant if that applet's action includes sending an email notification, and provides no meaningful risk-reduction value whatsoever for any applet whose action instead modifies configuration or restarts a process",
+  "after": "Lab testing of an EEM applet is only relevant if that applet's action includes sending an email notification, and provides no meaningful risk-reduction value for any applet whose action instead modifies configuration or restarts a process"
+ },
+ {
+  "id": "b6_6.6_17",
+  "letter": "D",
+  "before": "Every single EEM applet, -related configuration, is always executed with the exact same fixed, unconfigurable permission level with no ability whatsoever to adjust or bypass any authorization check",
+  "after": "Every single EEM applet, -related configuration, is always executed with the exact same fixed, unconfigurable permission level with no ability to adjust or bypass any authorization check"
+ },
+ {
+  "id": "b6_6.7_11",
+  "letter": "C",
+  "before": "Once an Ansible module is invoked within a playbook, it always and unconditionally applies the exact same fixed configuration to every target device, with no ability whatsoever to pass different parameters to customize its behavior per device or per invocation, since the Ansible engine is documented as compiling each module into a fixed argument template the first time a playbook runs, after which those values can no longer be overridden by 'vars' or per-host inventory data on later runs",
+  "after": "Once an Ansible module is invoked within a playbook, it always and unconditionally applies the exact same fixed configuration to every target device, with no ability to pass different parameters to customize its behavior per device or per invocation, since the Ansible engine is documented as compiling each module into a fixed argument template the first time a playbook runs, after which those values can no longer be overridden by 'vars' or per-host inventory data on later runs"
+ },
+ {
+  "id": "b6_6.7_15",
+  "letter": "D",
+  "before": "Agentless tools have no reachability requirement whatsoever and can fully configure any device from a completely blank, network-unreachable factory-default state with zero prior connectivity or bootstrapping ever needed",
+  "after": "Agentless tools have no reachability requirement and can fully configure any device from a completely blank, network-unreachable factory-default state with zero prior connectivity or bootstrapping ever needed"
+ },
+ {
+  "id": "b6_6.7_16",
+  "letter": "C",
+  "before": "Combining Ansible with a source control system provides no practical benefit whatsoever compared to running only undocumented, ad-hoc automation commands with no persistent record, version history, or change-tracking capability",
+  "after": "Combining Ansible with a source control system provides no practical benefit compared to running only undocumented, ad-hoc automation commands with no persistent record, version history, or change-tracking capability"
+ },
+ {
+  "id": "b6_6.8_08",
+  "letter": "D",
+  "before": "HEAD can only ever be used to retrieve the response body of a resource, with absolutely no capability whatsoever to retrieve or convey any response header information about that resource",
+  "after": "HEAD can only ever be used to retrieve the response body of a resource, with absolutely no capability to retrieve or convey any response header information about that resource"
+ },
+ {
+  "id": "b6_6.8_10",
+  "letter": "C",
+  "before": "There is no common convention whatsoever mapping HTTP methods to CRUD operations; each individual API is assumed to always use a completely arbitrary, unpredictable, and non-standardized mapping between HTTP methods and CRUD actions with zero cross-API consistency, since the HTTP specification itself is claimed to define GET as the only method any compliant server may expose for a CRUD-capable resource",
+  "after": "There is no common convention mapping HTTP methods to CRUD operations; each individual API is assumed to always use a completely arbitrary, unpredictable, and non-standardized mapping between HTTP methods and CRUD actions with zero cross-API consistency, since the HTTP specification itself is claimed to define GET as the only method any compliant server may expose for a CRUD-capable resource"
+ },
+ {
+  "id": "b6_6.8_15",
+  "letter": "B",
+  "before": "Restricting allowed HTTP methods on an endpoint provides no meaningful security or design benefit whatsoever, since every endpoint in any well-designed REST API is expected to always support every single possible HTTP method",
+  "after": "Restricting allowed HTTP methods on an endpoint provides no meaningful security or design benefit, since every endpoint in any well-designed REST API is expected to always support every single possible HTTP method"
+ },
+ {
+  "id": "b6_6.8_16",
+  "letter": "D",
+  "before": "A 405 response indicates the request succeeded completely with no issue whatsoever, functioning identically in meaning to a 200 OK response rather than signaling any kind of method-related error condition",
+  "after": "A 405 response indicates the request succeeded completely with no issue, functioning identically in meaning to a 200 OK response rather than signaling any kind of method-related error condition"
+ },
+ {
+  "id": "b6_6.8_17",
+  "letter": "A",
+  "before": "Request body format and required fields are only relevant for GET requests specifically, and have no meaningful relevance whatsoever to POST, PUT, or PATCH requests, which are assumed to never actually require any specific body structure at all",
+  "after": "Request body format and required fields are only relevant for GET requests specifically, and have no meaningful relevance to POST, PUT, or PATCH requests, which are assumed to never actually require any specific body structure at all"
+ },
+ {
+  "id": "b6_6.9_13",
+  "letter": "A",
+  "before": "Standard HTTP status codes provide no practical benefit whatsoever for RESTCONF client development, since every developer would need to learn an entirely new set of codes regardless of whether RESTCONF reused standard HTTP codes or invented its own custom scheme",
+  "after": "Standard HTTP status codes provide no practical benefit for RESTCONF client development, since every developer would need to learn an entirely new set of codes regardless of whether RESTCONF reused standard HTTP codes or invented its own custom scheme"
+ },
+ {
+  "id": "b6_6.9_14",
+  "letter": "B",
+  "before": "YANG Patch can only ever be used to perform a single edit operation identical to a plain PATCH request, providing no additional granularity or capability whatsoever beyond what a standard PATCH request already offers",
+  "after": "YANG Patch can only ever be used to perform a single edit operation identical to a plain PATCH request, providing no additional granularity or capability beyond what a standard PATCH request already offers"
+ },
+ {
+  "id": "b6_3.1.a_24",
+  "letter": "B",
+  "before": "There is no downside whatsoever; VLANs are designed specifically to scale without any limit across an arbitrarily large Layer 2 footprint, since STP's loop-prevention mechanism is mistakenly assumed to also cap the size of the underlying broadcast domain it protects",
+  "after": "There is no downside; VLANs are designed specifically to scale without any limit across an arbitrarily large Layer 2 footprint, since STP's loop-prevention mechanism is mistakenly assumed to also cap the size of the underlying broadcast domain it protects"
+ },
+ {
+  "id": "b6_3.1.a_27",
+  "letter": "B",
+  "before": "'Active' and 'forwarding' are exactly synonymous terms with no distinction whatsoever, so a VLAN can never be reported as active without also being reported as forwarding on the exact same trunk",
+  "after": "'Active' and 'forwarding' are exactly synonymous terms with no distinction, so a VLAN can never be reported as active without also being reported as forwarding on the exact same trunk"
+ },
+ {
+  "id": "b6_3.2.a_25",
+  "letter": "B",
+  "before": "Metric differences between paths have no bearing whatsoever on which routing protocol might be preferred in a given WAN design",
+  "after": "Metric differences between paths have no bearing on which routing protocol might be preferred in a given WAN design"
+ },
+ {
+  "id": "b6_3.2.c_27",
+  "letter": "D",
+  "before": "Maximum-prefix limits have no protective purpose whatsoever and exist purely to artificially restrict a legitimate peer from ever advertising more than a single prefix in total",
+  "after": "Maximum-prefix limits have no protective purpose and exist purely to artificially restrict a legitimate peer from ever advertising more than a single prefix in total"
+ },
+ {
+  "id": "b6_3.3.c_24",
+  "letter": "A",
+  "before": "VRRP has no equivalent concept to HSRP's Active/Standby roles at all; VRRP instead relies on a fundamentally different mechanism with no comparable role-based terminology whatsoever",
+  "after": "VRRP has no equivalent concept to HSRP's Active/Standby roles at all; VRRP instead relies on a fundamentally different mechanism with no comparable role-based terminology"
+ },
+ {
+  "id": "b6_3.3.c_26",
+  "letter": "B",
+  "before": "HSRP failover is always instantaneous with zero possible connectivity impact whatsoever, specific failure scenario involved",
+  "after": "HSRP failover is always instantaneous with zero possible connectivity impact, specific failure scenario involved"
+ },
+ {
+  "id": "b6_3.3.c_27",
+  "letter": "B",
+  "before": "Timer configuration only matters for VRRP and has absolutely no relevance whatsoever to HSRP, which is described as being fundamentally incapable of using any configurable hello or hold timer at all",
+  "after": "Timer configuration only matters for VRRP and has absolutely no relevance to HSRP, which is described as being fundamentally incapable of using any configurable hello or hold timer at all"
+ },
+ {
+  "id": "b6_3.3.c_27",
+  "letter": "D",
+  "before": "A mismatched timer configuration between group members always and immediately prevents the FHRP group from forming at all, refusing to elect any Active/Master router whatsoever until the mismatch is corrected — since HSRP and VRRP are considered to validate timer agreement during the initial hello exchange, the same way OSPF validates hello/dead interval consistency before adjacency",
+  "after": "A mismatched timer configuration between group members always and immediately prevents the FHRP group from forming at all, refusing to elect any Active/Master router until the mismatch is corrected — since HSRP and VRRP are considered to validate timer agreement during the initial hello exchange, the same way OSPF validates hello/dead interval consistency before adjacency"
+ },
+ {
+  "id": "b6_3.3.d_24",
+  "letter": "C",
+  "before": "Multicast delivery of software updates provides no bandwidth or time efficiency benefit whatsoever compared to sending a fully separate unicast copy of the same update to every single individual recipient device — since the source server is generally assumed to still generate one full outbound copy per recipient, with multicast only affecting how those already-duplicated streams are addressed",
+  "after": "Multicast delivery of software updates provides no bandwidth or time efficiency benefit compared to sending a fully separate unicast copy of the same update to every single individual recipient device — since the source server is generally assumed to still generate one full outbound copy per recipient, with multicast only affecting how those already-duplicated streams are addressed"
+ },
+ {
+  "id": "b6_3.3.d_25",
+  "letter": "C",
+  "before": "IGMP joins have no security implications whatsoever, since multicast traffic is always automatically restricted at the network layer to only the specific host(s) that legitimately originated the underlying application session, as though the network implicitly authenticated a receiver's right to join a group the same way a unicast connection restricts delivery to its own negotiated endpoint",
+  "after": "IGMP joins have no security implications, since multicast traffic is always automatically restricted at the network layer to only the specific host(s) that legitimately originated the underlying application session, as though the network implicitly authenticated a receiver's right to join a group the same way a unicast connection restricts delivery to its own negotiated endpoint"
+ },
+ {
+  "id": "b6_3.3.d_26",
+  "letter": "B",
+  "before": "There is no relationship whatsoever between PIM and how multicast data traffic is actually forwarded through the network; PIM handles an entirely unrelated function like device inventory management",
+  "after": "There is no relationship between PIM and how multicast data traffic is actually forwarded through the network; PIM handles an entirely unrelated function like device inventory management"
+ },
+ {
+  "id": "b6_3.3.d_27",
+  "letter": "C",
+  "before": "IGMP snooping configuration only matters on the very first switch closest to the multicast source, and has absolutely no relevance whatsoever to any switch further downstream toward the actual receivers, since group membership state is mistakenly assumed to propagate automatically through every downstream switch, even though each Layer 2 switch independently snoops the IGMP messages crossing its own ports and must be correctly configured on its own to avoid unnecessary flooding",
+  "after": "IGMP snooping configuration only matters on the very first switch closest to the multicast source, and has absolutely no relevance to any switch further downstream toward the actual receivers, since group membership state is mistakenly assumed to propagate automatically through every downstream switch, even though each Layer 2 switch independently snoops the IGMP messages crossing its own ports and must be correctly configured on its own to avoid unnecessary flooding"
+ },
+ {
+  "id": "b6_5.1.a_19",
+  "letter": "C",
+  "before": "There is no meaningful reason whatsoever to limit the number of VTY sessions, since a Cisco device's CPU and memory resources are assumed to be infinite and unaffected by any number of simultaneous management connections, a claim that overlooks how each open VTY session consumes a real, finite share of the device's own limited processing and memory resources",
+  "after": "There is no meaningful reason to limit the number of VTY sessions, since a Cisco device's CPU and memory resources are assumed to be infinite and unaffected by any number of simultaneous management connections, a claim that overlooks how each open VTY session consumes a real, finite share of the device's own limited processing and memory resources"
+ },
+ {
+  "id": "b6_5.1.a_19",
+  "letter": "D",
+  "before": "VTY line limits only affect wireless management sessions and have no relevance whatsoever to wired SSH/Telnet-based device management access",
+  "after": "VTY line limits only affect wireless management sessions and have no relevance to wired SSH/Telnet-based device management access"
+ },
+ {
+  "id": "b6_5.1.a_21",
+  "letter": "D",
+  "before": "Layered protection from combining these two controls provides no meaningful security benefit whatsoever compared to using only a single one of the two controls alone",
+  "after": "Layered protection from combining these two controls provides no meaningful security benefit compared to using only a single one of the two controls alone"
+ },
+ {
+  "id": "b6_5.1.b_19",
+  "letter": "A",
+  "before": "Cisco IOS AAA configuration technically requires that the exact same single server group always be used identically for authentication, authorization, and accounting, with no ability whatsoever to configure different server groups for different AAA functions",
+  "after": "Cisco IOS AAA configuration technically requires that the exact same single server group always be used identically for authentication, authorization, and accounting, with no ability to configure different server groups for different AAA functions"
+ },
+ {
+  "id": "b6_5.1.b_19",
+  "letter": "D",
+  "before": "There is no practical architectural reason an organization would ever want to route authentication and accounting traffic to different sets of servers; doing so provides no benefit whatsoever in any real-world deployment",
+  "after": "There is no practical architectural reason an organization would ever want to route authentication and accounting traffic to different sets of servers; doing so provides no benefit in any real-world deployment"
+ },
+ {
+  "id": "b6_5.1.b_22",
+  "letter": "C",
+  "before": "There is no meaningful risk whatsoever in deploying an untested fallback authentication method, since the primary AAA server is assumed to always remain permanently reachable with minimal possibility of any outage or connectivity loss ever occurring, an assumption that overlooks routine causes of AAA server outages such as a WAN link failure, a server maintenance window, or a misconfigured shared secret that silently breaks reachability",
+  "after": "There is no meaningful risk in deploying an untested fallback authentication method, since the primary AAA server is assumed to always remain permanently reachable with minimal possibility of any outage or connectivity loss ever occurring, an assumption that overlooks routine causes of AAA server outages such as a WAN link failure, a server maintenance window, or a misconfigured shared secret that silently breaks reachability"
+ },
+ {
+  "id": "b6_5.2.b_18",
+  "letter": "B",
+  "before": "SNMP and routing protocol traffic must always be treated as functionally and technically identical by CoPP, with no ability whatsoever to define separate classes or rate limits for the two distinct traffic categories, a misunderstanding that overlooks CoPP's class-map matching flexibility, which lets an administrator define entirely separate traffic classes — one matching SNMP's UDP port 161/162 traffic and another matching routing protocol traffic like OSPF or BGP — each with its own independently tuned policer rate",
+  "after": "SNMP and routing protocol traffic must always be treated as functionally and technically identical by CoPP, with no ability to define separate classes or rate limits for the two distinct traffic categories, a misunderstanding that overlooks CoPP's class-map matching flexibility, which lets an administrator define entirely separate traffic classes — one matching SNMP's UDP port 161/162 traffic and another matching routing protocol traffic like OSPF or BGP — each with its own independently tuned policer rate"
+ },
+ {
+  "id": "b6_5.2.b_20",
+  "letter": "C",
+  "before": "There is no meaningful risk whatsoever in applying a newly configured CoPP policy directly during peak production hours with zero prior testing, since CoPP policies are assumed to always be perfectly and automatically tuned correctly on the very first attempt with no possibility of any misconfiguration, an assumption that ignores how a mistyped rate value or an unaccounted-for traffic burst could immediately begin dropping real management or routing traffic",
+  "after": "There is no meaningful risk in applying a newly configured CoPP policy directly during peak production hours with zero prior testing, since CoPP policies are assumed to always be perfectly and automatically tuned correctly on the very first attempt with no possibility of any misconfiguration, an assumption that ignores how a mistyped rate value or an unaccounted-for traffic burst could immediately begin dropping real management or routing traffic"
+ },
+ {
+  "id": "b6_5.2.b_20",
+  "letter": "D",
+  "before": "Testing during a maintenance window is only relevant for a CoPP policy protecting a single specific traffic class like SSH, and provides no meaningful benefit whatsoever for a policy protecting routing protocol or other broader traffic categories",
+  "after": "Testing during a maintenance window is only relevant for a CoPP policy protecting a single specific traffic class like SSH, and provides no meaningful benefit for a policy protecting routing protocol or other broader traffic categories"
+ },
+ {
+  "id": "b6_5.2.b_22",
+  "letter": "D",
+  "before": "CoPP is only relevant for internal core routers and provides no meaningful protective benefit whatsoever for an internet-facing edge router that's actually exposed to untrusted external traffic",
+  "after": "CoPP is only relevant for internal core routers and provides no meaningful protective benefit for an internet-facing edge router that's actually exposed to untrusted external traffic"
+ },
+ {
+  "id": "b6_5.3_20",
+  "letter": "B",
+  "before": "Webhook signatures have no security relevance whatsoever and exist purely to specify which programming language the receiving application's endpoint was written in",
+  "after": "Webhook signatures have no security relevance and exist purely to specify which programming language the receiving application's endpoint was written in"
+ },
+ {
+  "id": "b6_5.4.a_21",
+  "letter": "A",
+  "before": "Once an organization has conducted a single tabletop exercise one time, further exercises provide no additional value whatsoever regardless of how much time has passed or how much the organization's infrastructure or team has changed since that first exercise",
+  "after": "Once an organization has conducted a single tabletop exercise one time, further exercises provide no additional value regardless of how much time has passed or how much the organization's infrastructure or team has changed since that first exercise"
+ },
+ {
+  "id": "b6_5.4.a_21",
+  "letter": "D",
+  "before": "Tabletop exercises have no practical value whatsoever compared to only relying on a documented incident response plan that's never actually been tested or walked through in any way before a real incident occurs",
+  "after": "Tabletop exercises have no practical value compared to only relying on a documented incident response plan that's never actually been tested or walked through in any way before a real incident occurs"
+ },
+ {
+  "id": "b6_5.4.b_20",
+  "letter": "C",
+  "before": "Posture compliance is only ever checked exactly once, at the moment of initial connection, with ISE having no capability whatsoever to reassess an endpoint's compliance status at any later point during that same ongoing session, a claim that overlooks ISE's periodic reassessment (PRA) feature, designed to re-check an already-connected endpoint's posture at configurable intervals so drift like an outdated antivirus can still be caught mid-session",
+  "after": "Posture compliance is only ever checked exactly once, at the moment of initial connection, with ISE having no capability to reassess an endpoint's compliance status at any later point during that same ongoing session, a claim that overlooks ISE's periodic reassessment (PRA) feature, designed to re-check an already-connected endpoint's posture at configurable intervals so drift like an outdated antivirus can still be caught mid-session"
+ },
+ {
+  "id": "b6_5.4.c_18",
+  "letter": "B",
+  "before": "An intrusion event is generated only when traffic is permitted with no inspection whatsoever, and is never generated in response to any actual signature match",
+  "after": "An intrusion event is generated only when traffic is permitted with no inspection, and is never generated in response to any actual signature match"
+ },
+ {
+  "id": "b6_5.4.c_19",
+  "letter": "B",
+  "before": "Tuning an intrusion policy always and disables every single rule in the entire rule set, leaving the policy with zero active detection capability whatsoever regardless of the specific tuning performed",
+  "after": "Tuning an intrusion policy always and disables every single rule in the entire rule set, leaving the policy with zero active detection capability regardless of the specific tuning performed"
+ },
+ {
+  "id": "b6_5.4.c_21",
+  "letter": "C",
+  "before": "Top attackers/targets views are only relevant for wireless network traffic, and provide no meaningful analytical value whatsoever for wired network traffic passing through an FTD device",
+  "after": "Top attackers/targets views are only relevant for wireless network traffic, and provide no meaningful analytical value for wired network traffic passing through an FTD device"
+ },
+ {
+  "id": "b6_5.4.c_21",
+  "letter": "D",
+  "before": "These summary views provide no practical analytical value whatsoever beyond what a flat chronological event list alone already provides, since an analyst is assumed to always be able to just as easily identify significant patterns by manually scrolling through every individual event one at a time, an assumption that overlooks how quickly manual review becomes impractical once event volume exceeds what a human can scan",
+  "after": "These summary views provide no practical analytical value beyond what a flat chronological event list alone already provides, since an analyst is assumed to always be able to just as easily identify significant patterns by manually scrolling through every individual event one at a time, an assumption that overlooks how quickly manual review becomes impractical once event volume exceeds what a human can scan"
+ },
+ {
+  "id": "b6_5.4.c_22",
+  "letter": "B",
+  "before": "Applying different policies per zone provides no meaningful security benefit whatsoever, since every zone on a device is assumed to always carry traffic with exactly identical risk characteristics and legitimate use cases",
+  "after": "Applying different policies per zone provides no meaningful security benefit, since every zone on a device is assumed to always carry traffic with exactly identical risk characteristics and legitimate use cases"
+ },
+ {
+  "id": "b6_5.4.d_24",
+  "letter": "B",
+  "before": "There is no meaningful benefit whatsoever to observing SGT classification and traffic patterns before enabling SGACL enforcement; jumping directly to full enforcement with no prior observation period carries no additional risk in any deployment scenario",
+  "after": "There is no meaningful benefit to observing SGT classification and traffic patterns before enabling SGACL enforcement; jumping directly to full enforcement with no prior observation period carries no additional risk in any deployment scenario"
+ },
+ {
+  "id": "b6_1.3.b_17",
+  "letter": "C",
+  "before": "Fusion routers are only relevant for wireless SD-Access deployments and have no applicability whatsoever to interoperability with a wired traditional campus network",
+  "after": "Fusion routers are only relevant for wireless SD-Access deployments and have no applicability to interoperability with a wired traditional campus network"
+ },
+ {
+  "id": "b6_1.3.b_18",
+  "letter": "C",
+  "before": "An incremental migration strategy provides no practical benefit whatsoever compared to a single simultaneous enterprise-wide cutover, since both approaches are assumed to carry exactly identical risk and resource requirements, and Cisco's fabric provisioning tools are assumed to parallelize every site's conversion automatically regardless of staffing availability, requiring no additional maintenance windows",
+  "after": "An incremental migration strategy provides no practical benefit compared to a single simultaneous enterprise-wide cutover, since both approaches are assumed to carry exactly identical risk and resource requirements, and Cisco's fabric provisioning tools are assumed to parallelize every site's conversion automatically regardless of staffing availability, requiring no additional maintenance windows"
+ },
+ {
+  "id": "b6_1.3.b_20",
+  "letter": "A",
+  "before": "Coexistence periods are only relevant for data center network migrations and have no applicability whatsoever to a campus network migration to SD-Access",
+  "after": "Coexistence periods are only relevant for data center network migrations and have no applicability to a campus network migration to SD-Access"
+ },
+ {
+  "id": "b6_1.3.b_20",
+  "letter": "B",
+  "before": "Extended coexistence between SD-Access and a traditional campus network provides no practical benefit whatsoever compared to an instantaneous, single-moment cutover, since every dependency and application is assumed to always be immediately compatible with the fabric with zero validation needed, and Cisco's fabric onboarding wizard automatically remediates any incompatible application or legacy protocol dependency the moment a switch is converted into fabric mode, without requiring any administrator review of application compatibility beforehand.",
+  "after": "Extended coexistence between SD-Access and a traditional campus network provides no practical benefit compared to an instantaneous, single-moment cutover, since every dependency and application is assumed to always be immediately compatible with the fabric with zero validation needed, and Cisco's fabric onboarding wizard automatically remediates any incompatible application or legacy protocol dependency the moment a switch is converted into fabric mode, without requiring any administrator review of application compatibility beforehand."
+ }
+]
