@@ -11,13 +11,13 @@ contenido de forma consistente.
 
 ## Archivos incluidos
 
-- `data/question_bank.json` — banco de preguntas actual (1467 preguntas,
+- `data/question_bank.json` — banco de preguntas actual (1464 preguntas,
   cobertura 49/49 subtemas del blueprint ENCOR 350-401 v1.2, distribuidas
   proporcionalmente al peso de cada dominio en el examen). Formato:
   ```json
   {
-    "version": "2026-09-13_v18",
-    "total": 1467,
+    "version": "2026-09-13_v20",
+    "total": 1464,
     "questions": [
       {
         "id": "trustsec_01",
@@ -62,13 +62,13 @@ contenido de forma consistente.
 
 | Dominio | Peso examen | Actual | % del banco |
 |---|---|---|---|
-| 1.0 Architecture | 15% | 222 | 15.1% |
+| 1.0 Architecture | 15% | 222 | 15.2% |
 | 2.0 Virtualization | 10% | 147 | 10.0% |
-| 3.0 Infrastructure | 30% | 440 | 30.0% |
-| 4.0 Network Assurance | 10% | 166 | 11.3% |
-| 5.0 Security | 20% | 263 | 17.9% |
+| 3.0 Infrastructure | 30% | 439 | 30.0% |
+| 4.0 Network Assurance | 10% | 164 | 11.2% |
+| 5.0 Security | 20% | 263 | 18.0% |
 | 6.0 Automation & AI | 15% | 229 | 15.6% |
-| **Total** | **100%** | **1467** | **100%** |
+| **Total** | **100%** | **1464** | **100%** |
 
 Meta base de 1000 preguntas alcanzada 2026-09-08, con distribución por
 dominio dentro de ±0.8 puntos porcentuales del peso oficial del blueprint.
@@ -212,6 +212,24 @@ tercer pase de corrección de sesgo de longitud/lenguaje absolutista del
 correcta visiblemente más larga y distractores con frases tipo "mistakenly
 assumed"/"absolutely identical in every respect". El usuario pidió
 eliminarlas directamente en vez de reescribirlas. Banco: 1469 → 1449.
+**Segunda ronda de triage por calificación (2026-09-13):** revisando de
+nuevo las calificaciones (backend intermitente ese día — ver nota de
+estabilidad más abajo), aparecieron 3 preguntas nuevas con 1 estrella
+(eliminadas) y 24 con 2 estrellas (reescritas con el mismo criterio:
+distractores balanceados en longitud, sin lenguaje absolutista). Quedó en
+6/24 = 25% "correcta = más larga" en el subconjunto reescrito, alineado con
+el ~25% esperado por azar. Banco: 1467 → 1464 (−3 eliminadas, +0 netas de
+las reescritas ya que solo cambian contenido, no cantidad).
+
+**Nota de estabilidad del backend (2026-09-13):** el Google Apps Script Web
+App que guarda intentos/calificaciones (`SHEETS_WEBAPP_URL` en
+`app/index.html`) mostró comportamiento intermitente (a veces 404, a veces
+200, a veces sin responder) durante esta sesión, causando que los
+porcentajes de la app cayeran a 0% momentáneamente al no poder cargar el
+historial. No es un bug del código de la app — es infraestructura del lado
+de Google Apps Script fuera de este repo. Si vuelve a pasar, revisar
+Extensions → Apps Script en la Sheet → Deploy → Manage deployments.
+
 **Regla ajustada (2026-09-13):** el usuario refinó la política — las de
 **1 estrella se eliminan**, pero las de **2 estrellas se reescriben** (no
 se borran). Se revirtió la eliminación de las 18 preguntas de 2 estrellas
