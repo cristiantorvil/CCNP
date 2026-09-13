@@ -22272,7 +22272,7 @@
         return '<div class="subtopic-row">' +
           '<span class="code">' + sub + '</span>' +
           '<span class="name">' + SUBTOPIC_META[sub].name + '</span>' +
-          '<span class="frac">' + w.answered + "/" + w.total + '</span>' +
+          '<span class="frac" title="correctas/respondidas/total del banco">' + w.correct + "/" + w.answered + "/" + w.total + '</span>' +
           '<span class="pill info" title="Preguntas respondidas al menos una vez, sobre el total del banco para este subtema">' + covLabel + '</span>' +
           '<span class="pill ' + pctClass(ansPct) + '" title="Precisión sobre las preguntas contestadas (' + w.correctAttempts + '/' + w.attemptsCount + ')">' + ansLabel + '</span>' +
         '</div>';
