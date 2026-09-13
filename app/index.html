@@ -21829,14 +21829,17 @@
     var bankTotal = meta ? meta.count : 0;
     var list = state.attempts.filter(function (a) { return a.subtopic === subtopic; });
     var masteredIds = {};
+    var answeredIds = {};
     var lastTs = 0;
     var correctAttempts = 0;
     list.forEach(function (a) {
+      answeredIds[a.questionId] = true;
       if (a.correct) { masteredIds[a.questionId] = true; correctAttempts++; }
       if (a.ts > lastTs) lastTs = a.ts;
     });
     return {
       correct: Object.keys(masteredIds).length,
+      answered: Object.keys(answeredIds).length,
       total: bankTotal,
       attemptsCount: list.length,
       correctAttempts: correctAttempts,
@@ -21846,15 +21849,17 @@
 
   function domainStats(domain) {
     var subtopics = Object.keys(SUBTOPIC_META).filter(function (s) { return SUBTOPIC_META[s].domain === domain; });
-    var correct = 0, total = 0, attemptsCount = 0, correctAttempts = 0;
+    var correct = 0, answered = 0, total = 0, attemptsCount = 0, correctAttempts = 0;
     subtopics.forEach(function (s) {
       var w = subtopicStats(s);
-      correct += w.correct; total += w.total; attemptsCount += w.attemptsCount; correctAttempts += w.correctAttempts;
+      correct += w.correct; answered += w.answered; total += w.total; attemptsCount += w.attemptsCount; correctAttempts += w.correctAttempts;
     });
     return {
       correct: correct,
+      answered: answered,
       total: total,
       pct: total ? (100 * correct / total) : null,
+      answeredCoveragePct: total ? (100 * answered / total) : null,
       answeredPct: attemptsCount ? (100 * correctAttempts / attemptsCount) : null,
       bankCount: total,
       attemptsCount: attemptsCount,
@@ -21863,11 +21868,15 @@
     };
   }
 
+  // Headline score: percentage of the bank answered at least once (not
+  // accuracy) — how far through the bank you've gone, weighted by domain
+  // exam weight. Mastery (correct/total) is still shown per domain/subtopic
+  // below; accuracy (correct/answered) is the secondary gauge.
   function overallScore() {
     var sum = 0;
     Object.keys(DOMAIN_META).forEach(function (d) {
       var ds = domainStats(d);
-      var pct = ds.pct === null ? 0 : ds.pct;
+      var pct = ds.answeredCoveragePct === null ? 0 : ds.answeredCoveragePct;
       sum += pct * (DOMAIN_META[d].weight / 100);
     });
     return sum;
@@ -22026,7 +22035,7 @@
           '</div>' +
           '<button class="btn primary" id="start-session">Empezar sesión</button>' +
           '<div class="quick-score">' +
-            'Score estimado actual: <b>' + score.toFixed(1) + '%</b>' +
+            'Preguntas respondidas: <b>' + score.toFixed(1) + '%</b>' +
             '<span>&middot; meta ' + TARGET_SCORE + '%</span>' +
             '<span>&middot; ' + totalAttempts + ' respuestas registradas</span>' +
           '</div>' +
@@ -22269,15 +22278,15 @@
     var overall = el(
       '<div class="panel overall-card">' +
         '<div>' +
-          '<div class="gauge" style="color:' + pctColorVar(score) + ';" title="Sobre el total de preguntas del banco">' + score.toFixed(1) + '%</div>' +
-          '<div class="gauge-sub">meta ' + TARGET_SCORE + '% &middot; ' +
+          '<div class="gauge" style="color:' + pctColorVar(score) + ';" title="Preguntas respondidas al menos una vez, sobre el total del banco">' + score.toFixed(1) + '%</div>' +
+          '<div class="gauge-sub">respondidas &middot; meta ' + TARGET_SCORE + '% &middot; ' +
             (delta >= 0 ? "+" + delta.toFixed(1) + " sobre la meta" : delta.toFixed(1) + " para la meta") +
           '</div>' +
         '</div>' +
         '<div class="gauge-bar-track"><div class="gauge-bar-fill" style="width:' + Math.min(100, score) + '%; background:' + pctColorVar(score) + ';"></div></div>' +
-        '<div class="gauge-secondary" title="Sobre las preguntas contestadas">' +
+        '<div class="gauge-secondary" title="Precisión: aciertos sobre preguntas contestadas">' +
           '<div class="gauge-secondary-pct" style="color:' + pctColorVar(ans ? ans.pct : null) + ';">' + (ans ? ans.pct.toFixed(1) + "%" : "—") + '</div>' +
-          '<div class="gauge-sub">' + (ans ? "sobre respondidas &middot; " + ans.correct + "/" + ans.total : "sobre respondidas &middot; sin intentos aún") + '</div>' +
+          '<div class="gauge-sub">' + (ans ? "precisión &middot; " + ans.correct + "/" + ans.total : "precisión &middot; sin intentos aún") + '</div>' +
         '</div>' +
       '</div>'
     );
