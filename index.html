@@ -405,6 +405,7 @@
   .pill.warn { background: var(--accent-soft); color: var(--accent); }
   .pill.bad { background: var(--bad-soft); color: var(--bad); }
   .pill.flat { background: var(--surface-2); color: var(--text-dim); }
+  .pill.info { background: var(--info-soft); color: var(--info); }
 
   .domain-bar-track {
     height: 6px; border-radius: 4px; background: var(--surface-2);
@@ -22296,27 +22297,26 @@
     Object.keys(DOMAIN_META).sort().forEach(function (d) {
       var meta = DOMAIN_META[d];
       var ds = domainStats(d);
-      var pct = ds.pct;
-      var isWeak = pct === null || pct < 70;
+      var covPct = ds.answeredCoveragePct;
+      var domAnsPct = ds.answeredPct;
+      var isWeak = domAnsPct === null || domAnsPct < 70;
 
       var details = document.createElement("details");
       details.className = "domain";
       if (isWeak) details.open = true;
 
-      var domAnsPct = ds.answeredPct;
-
       var subRowsHtml = ds.subtopics.slice().sort(subtopicCompare).map(function (sub) {
         var w = subtopicStats(sub);
-        var bankPct = w.total ? (100 * w.correct / w.total) : null;
+        var covSubPct = w.total ? (100 * w.answered / w.total) : null;
         var ansPct = w.attemptsCount ? (100 * w.correctAttempts / w.attemptsCount) : null;
-        var bankLabel = bankPct === null ? "—" : bankPct.toFixed(0) + "%";
+        var covLabel = covSubPct === null ? "—" : covSubPct.toFixed(0) + "%";
         var ansLabel = ansPct === null ? "—" : ansPct.toFixed(0) + "%";
         return '<div class="subtopic-row">' +
           '<span class="code">' + sub + '</span>' +
           '<span class="name">' + SUBTOPIC_META[sub].name + '</span>' +
-          '<span class="frac">' + w.correct + "/" + w.total + '</span>' +
-          '<span class="pill ' + pctClass(bankPct) + '" title="Sobre el total de preguntas del banco">' + bankLabel + '</span>' +
-          '<span class="pill ' + pctClass(ansPct) + '" title="Sobre las preguntas contestadas (' + w.correctAttempts + '/' + w.attemptsCount + ')">' + ansLabel + '</span>' +
+          '<span class="frac">' + w.answered + "/" + w.total + '</span>' +
+          '<span class="pill info" title="Preguntas respondidas al menos una vez, sobre el total del banco para este subtema">' + covLabel + '</span>' +
+          '<span class="pill ' + pctClass(ansPct) + '" title="Precisión sobre las preguntas contestadas (' + w.correctAttempts + '/' + w.attemptsCount + ')">' + ansLabel + '</span>' +
         '</div>';
       }).join("");
 
@@ -22326,11 +22326,11 @@
             '<span class="chev mono">&#9656;</span>' +
             '<span class="domain-title">' + d + '.0 ' + meta.name + '</span>' +
             '<span class="domain-weight">peso ' + meta.weight + '%</span>' +
-            '<span class="domain-pct" style="color:' + pctColorVar(pct) + ';" title="Sobre el total de preguntas del banco">' + (pct === null ? "—" : pct.toFixed(0) + "%") + '</span>' +
-            '<span class="pill ' + pctClass(domAnsPct) + '" title="Sobre las preguntas contestadas (' + ds.correctAttempts + '/' + ds.attemptsCount + ')">' + (domAnsPct === null ? "—" : domAnsPct.toFixed(0) + "%") + '</span>' +
+            '<span class="domain-pct" style="color:var(--info);" title="Preguntas respondidas al menos una vez, sobre el total del banco">' + (covPct === null ? "—" : covPct.toFixed(0) + "%") + '</span>' +
+            '<span class="pill ' + pctClass(domAnsPct) + '" title="Precisión sobre las preguntas contestadas (' + ds.correctAttempts + '/' + ds.attemptsCount + ')">' + (domAnsPct === null ? "—" : domAnsPct.toFixed(0) + "%") + '</span>' +
           '</div>' +
-          '<div class="domain-bar-track"><div class="domain-bar-fill" style="width:' + (pct === null ? 0 : Math.min(100, pct)) + '%; background:' + pctColorVar(pct) + ';"></div></div>' +
-          '<div class="domain-sub">banco: ' + ds.bankCount + ' preguntas &middot; ' + ds.attemptsCount + ' intentos registrados &middot; <span class="mono">%banco</span> = acertadas/total del banco, <span class="mono">%resp.</span> = acertadas/contestadas</div>' +
+          '<div class="domain-bar-track"><div class="domain-bar-fill" style="width:' + (covPct === null ? 0 : Math.min(100, covPct)) + '%; background:var(--info);"></div></div>' +
+          '<div class="domain-sub">banco: ' + ds.bankCount + ' preguntas &middot; ' + ds.attemptsCount + ' intentos registrados &middot; <span class="mono">%banco</span> = respondidas/total del banco, <span class="mono">%resp.</span> = precisión (acertadas/contestadas)</div>' +
         '</summary>' +
         '<div class="subtopic-list">' + subRowsHtml + '</div>';
       grid.appendChild(details);
@@ -22341,7 +22341,7 @@
       '<div class="panel" style="margin-top:16px;">' +
         '<h2 class="section-title">Cobertura del banco</h2>' +
         '<div class="domain-sub" style="font-size:0.8rem;">' + ALL_QUESTIONS.length + ' / ' + BANK_TARGET_TOTAL + ' preguntas totales &middot; cada dominio y subtema muestra dos porcentajes: ' +
-          '<b style="color:var(--text);">%banco</b> = preguntas acertadas alguna vez sobre el total que existe hoy para ese tema en el banco, y ' +
+          '<b style="color:var(--info);">%banco</b> = preguntas respondidas alguna vez sobre el total que existe hoy para ese tema en el banco, y ' +
           '<b style="color:var(--text);">%resp.</b> = aciertos sobre el total de veces que has respondido preguntas de ese tema (precisión en tus intentos)</div>' +
       '</div>'
     );
