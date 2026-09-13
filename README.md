@@ -36,7 +36,12 @@ contenido de forma consistente.
   reescritas en palabras propias, nunca copiadas literalmente — y visibles
   como un badge en la app; `correctSet` (array de letras, ej. `["A","D"]`,
   reemplaza a `correct`) marca preguntas de selección múltiple ("select two/
-  three"), el formato real que usa Cisco además de opción única.
+  three"), el formato real que usa Cisco además de opción única. El objeto
+  `options` no está limitado a 4 llaves: preguntas verdadero/falso usan solo
+  `{"A":..., "B":...}` y algunas de selección múltiple usan hasta 6
+  (`A`-`F`), reflejando los formatos reales que aparecen en el examen. La
+  app renderiza dinámicamente el número de opciones que tenga cada pregunta
+  (ver `renderQuestion`/`applyLockedState` en el JS), no asume siempre 4.
 - `app/index.html` (Artifact) e `index.html` (raíz, GitHub Pages) — misma app,
   dos despliegues. El banco va embebido directamente en el HTML, así que
   **cada vez que se agregan preguntas a `data/question_bank.json` hay que
@@ -197,3 +202,19 @@ nunca copiar texto del libro). Se agregaron 376 preguntas nuevas (1093 →
 - Se reaplicó el shuffle determinístico de posición (seed fija) sobre el
   banco completo (1469 preguntas) tras el merge, quedando A 26.7%/B 26.0%/
   C 23.0%/D 24.3% a nivel banco completo.
+
+**Corrección: preservar formatos verdadero/falso y selección múltiple
+extendida (2026-09-13):** el usuario aclaró que el examen real de CCNP sí
+incluye preguntas verdadero/falso (2 opciones) y preguntas de selección
+múltiple con más de 4 opciones entre las que elegir — el paso de "corrección
+de esquema" del punto anterior había forzado esas 29 preguntas a 4 opciones
+por error, asumiendo incorrectamente que el formato fijo de 4 opciones era
+un requisito del banco. Se revirtieron las 29 preguntas a su formato
+original (23 verdadero/falso de 2 opciones, 6 de selección múltiple con 5-6
+opciones), y se actualizó la app (`app/index.html` e `index.html`) para
+renderizar dinámicamente el número real de opciones de cada pregunta en vez
+de asumir siempre A-D fijo (antes hardcodeado en `renderQuestion` y
+`applyLockedState`). Se verificó en navegador que el render y el marcado de
+correcto/incorrecto funcionan bien con 2 opciones. Se re-ejecutó el shuffle
+de posición con una versión generalizada que soporta cualquier cantidad de
+opciones (no solo 4).
