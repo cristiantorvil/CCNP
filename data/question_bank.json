@@ -1,6 +1,6 @@
 {
- "version": "2026-09-13_v15",
- "total": 1469,
+ "version": "2026-09-13_v16",
+ "total": 1449,
  "questions": [
   {
    "id": "trustsec_01",
@@ -631,20 +631,6 @@
    },
    "correct": "A",
    "explanation_es": "'Forged Transmits' es una política de seguridad del vSwitch que, cuando está habilitada (rechazando), bloquea que una VM envíe tramas con una dirección MAC de origen distinta a la configurada en su vNIC. Si se deshabilita, permite ese comportamiento (potencialmente malicioso)."
-  },
-  {
-   "id": "vswitch_06",
-   "subtopic": "2.1.c",
-   "name": "vSwitch/OVS",
-   "question": "How does a vSwitch typically learn which VM (virtual port) is associated with a given source MAC address?",
-   "options": {
-    "A": "By querying an external DNS server for MAC-to-port mapping records",
-    "B": "Dynamically, similar to a physical switch, by examining the source MAC address of frames received from each virtual port",
-    "C": "Through static configuration only, requiring an administrator to manually map every VM's MAC address to a specific virtual port before it can pass traffic",
-    "D": "vSwitches do not perform any MAC learning at all, since every VM's MAC must be manually configured"
-   },
-   "correct": "B",
-   "explanation_es": "Al igual que un switch físico, el vSwitch aprende dinámicamente qué puerto virtual corresponde a cada dirección MAC observando las tramas recibidas desde cada puerto y registrando la MAC de origen."
   },
   {
    "id": "vswitch_07",
@@ -2789,20 +2775,6 @@
    "explanation_es": "Las ACLs nombradas (named ACLs) permiten agregar o eliminar entradas individuales de forma más flexible (usando números de secuencia), sin tener que recrear toda la lista, además de que el nombre puede ser descriptivo del propósito de la ACL, facilitando su identificación y mantenimiento frente a una ACL puramente numerada."
   },
   {
-   "id": "b3_5.2.b_02",
-   "subtopic": "5.2.b",
-   "name": "CoPP",
-   "question": "How does CoPP typically classify and treat different types of traffic destined to the control plane?",
-   "options": {
-    "A": "CoPP cannot distinguish between different types of control-plane traffic",
-    "B": "It applies a single identical policy to all traffic destined to the control plane, with no classification of routing protocols, management traffic, or anything else at all regardless of source or protocol type, ignoring the class-map matching criteria entirely",
-    "C": "It only classifies traffic based on the physical interface, never by traffic type",
-    "D": "It classifies traffic into different classes (e.g., critical/routing protocols, normal management traffic, undesirable/malicious traffic) and applies a different policy (permit, rate-limit, or drop) to each class"
-   },
-   "correct": "D",
-   "explanation_es": "CoPP típicamente clasifica el tráfico destinado al plano de control en distintas clases (por ejemplo, tráfico crítico como protocolos de enrutamiento, tráfico de gestión normal, y tráfico indeseable o potencialmente malicioso), aplicando una política diferenciada a cada clase (permitir, limitar la tasa, o descartar), en lugar de tratar todo el tráfico hacia la CPU de forma idéntica."
-  },
-  {
    "id": "b3_5.3_02",
    "subtopic": "5.3",
    "name": "Seguridad de REST API",
@@ -2829,34 +2801,6 @@
    },
    "correct": "B",
    "explanation_es": "El principio de menor privilegio (least privilege) establece que a un cliente de API o usuario se le deben otorgar solo los permisos/scopes mínimos necesarios para cumplir su función prevista, en lugar de otorgar acceso amplio o administrativo por defecto, reduciendo el impacto potencial si esas credenciales son comprometidas."
-  },
-  {
-   "id": "b3_5.4.a_02",
-   "subtopic": "5.4.a",
-   "name": "Threat defense",
-   "question": "What is the general purpose of a threat intelligence feed in a network security architecture?",
-   "options": {
-    "A": "It provides continuously updated information about known indicators of compromise (IoCs), malicious IPs/domains, and emerging threats, which security tools use to improve detection accuracy",
-    "B": "It replaces the need for any firewall or IPS",
-    "C": "It provides only historical data with no relevance to current threats, making it unsuitable for any real-time detection use case in a modern security operations center",
-    "D": "It is used for billing and licensing purposes"
-   },
-   "correct": "A",
-   "explanation_es": "Un feed de inteligencia de amenazas provee información continuamente actualizada sobre indicadores de compromiso conocidos (IoCs), direcciones IP/dominios maliciosos y amenazas emergentes, que las herramientas de seguridad (firewalls, IPS, etc.) utilizan para mejorar la precisión de la detección frente a amenazas actuales."
-  },
-  {
-   "id": "b3_5.4.a_03",
-   "subtopic": "5.4.a",
-   "name": "Threat defense",
-   "question": "What is the core idea behind the 'zero trust' security model?",
-   "options": {
-    "A": "No user, device, or system should be automatically trusted based solely on network location; every access request should be continuously verified regardless of whether it originates inside or outside the traditional network perimeter",
-    "B": "Zero trust means disabling all authentication mechanisms",
-    "C": "Zero trust only applies to external/internet-facing traffic, never internal traffic",
-    "D": "Once a device is inside the corporate network, it should be fully trusted with no further verification, regardless of its identity, patch level, or behavior for the remainder of its connected session, overlooking zero trust's call for ongoing re-verification after a device joins the network"
-   },
-   "correct": "A",
-   "explanation_es": "El modelo de zero trust (confianza cero) parte de la idea de que ningún usuario, dispositivo o sistema debe confiarse automáticamente solo por estar dentro del perímetro tradicional de la red; cada solicitud de acceso debe verificarse de forma continua, sin importar si el origen es interno o externo, reduciendo el riesgo de movimiento lateral tras una brecha."
   },
   {
    "id": "b3_5.4.b_02",
@@ -3503,20 +3447,6 @@
    "explanation_es": "GET es un método seguro (no debería modificar el estado del servidor) e idempotente, usado para leer un recurso. Crear un recurso, que puede devolver 201 Created, es responsabilidad típica de POST."
   },
   {
-   "id": "b5_5.4.b_04",
-   "subtopic": "5.4.b",
-   "name": "Seguridad de endpoint (NAC/ISE)",
-   "question": "Why does a thorough Cisco ISE posture assessment (checking things like antivirus status or specific patches) typically require a persistent agent (such as the AnyConnect ISE Posture module) installed on the endpoint, rather than a purely agentless check?",
-   "options": {
-    "A": "The agent's only function is to display the corporate wallpaper on the endpoint; it has no role in compliance checking at all",
-    "B": "A persistent agent can inspect detailed, OS-level endpoint state (like specific installed software versions or running processes) that isn't visible from the network alone, and can also re-check compliance on an ongoing basis",
-    "C": "ISE posture assessment never requires any endpoint-side software, agent or otherwise, under any configuration",
-    "D": "Agentless checks can already inspect every detail an agent can, making an agent purely optional with no added capability"
-   },
-   "correct": "B",
-   "explanation_es": "Un agente persistente puede inspeccionar el estado del endpoint a nivel de SO (como versiones específicas de software instalado o procesos corriendo) que no es visible solo desde la red, y también puede reverificar el cumplimiento de forma continua."
-  },
-  {
    "id": "b5_5.4.b_05",
    "subtopic": "5.4.b",
    "name": "Seguridad de endpoint (NAC/ISE)",
@@ -3585,20 +3515,6 @@
    },
    "correct": "A",
    "explanation_es": "Toda ACL de Cisco tiene una sentencia implícita de 'deny all' al final (aunque no se muestre en la configuración), por lo que el tráfico que no coincide explícitamente con un 'permit' se descarta."
-  },
-  {
-   "id": "b5_5.4.a_04",
-   "subtopic": "5.4.a",
-   "name": "Threat defense",
-   "question": "What is the primary advantage of a Next-Generation Firewall (NGFW) compared to a traditional stateful firewall?",
-   "options": {
-    "A": "NGFW cannot perform stateful inspection",
-    "B": "NGFW only filters based on source/destination IP and port, exactly like a traditional firewall, with no additional capability added at all",
-    "C": "NGFW is only used for wireless networks",
-    "D": "NGFW adds capabilities like application awareness and integrated intrusion prevention on top of traditional stateful filtering"
-   },
-   "correct": "D",
-   "explanation_es": "Un NGFW mantiene la inspección con estado tradicional pero suma capacidades como reconocimiento de aplicaciones (más allá del puerto) y prevención de intrusiones (IPS) integrada, no solo filtrado por IP/puerto."
   },
   {
    "id": "b5_5.4.a_05",
@@ -4049,20 +3965,6 @@
    "explanation_es": "El ratio de oversubscription compara el ancho de banda total disponible hacia los downlinks (por ejemplo, hacia los servidores o el access) contra el ancho de banda de los uplinks hacia la capa siguiente. Un ratio de 3:1, por ejemplo, significa que si los tres downlinks estuvieran saturados simultáneamente, el uplink no podría cursar todo ese tráfico sin congestión."
   },
   {
-   "id": "b6_1.1.a_09",
-   "subtopic": "1.1.a",
-   "name": "Diseños de red (2-tier/3-tier/fabric/cloud)",
-   "question": "In network design, what does a 'modular' or 'building block' approach (e.g., separate blocks for campus, data center, WAN edge) primarily achieve?",
-   "options": {
-    "A": "It guarantees that no additional hardware will ever need to be purchased as the network grows, since each modular block is designed with unlimited port capacity that scales automatically through software licensing alone",
-    "B": "It isolates failures and complexity within each functional block, and allows each block to be scaled, upgraded, or troubleshot independently without redesigning the entire network",
-    "C": "It removes the need for any routing between the different blocks of the network",
-    "D": "It requires every block to use an identical IP addressing scheme with no variation allowed"
-   },
-   "correct": "B",
-   "explanation_es": "El enfoque modular (por bloques funcionales) contiene las fallas y la complejidad dentro de cada bloque (campus, data center, WAN, etc.), permitiendo escalar, actualizar o diagnosticar cada uno de forma independiente sin tener que rediseñar toda la red — un principio central del diseño jerárquico de Cisco."
-  },
-  {
    "id": "b6_1.1.a_10",
    "subtopic": "1.1.a",
    "name": "Diseños de red (2-tier/3-tier/fabric/cloud)",
@@ -4383,20 +4285,6 @@
    },
    "correct": "D",
    "explanation_es": "Distribuir el rol Active entre distintos routers para distintas VLANs permite repartir la carga de tráfico de uplink entre varios dispositivos/rutas, en lugar de concentrar todo el reenvío en un solo equipo — una técnica común para aprovechar mejor el ancho de banda disponible en un diseño con dos routers de distribución."
-  },
-  {
-   "id": "b6_1.1.b_12",
-   "subtopic": "1.1.b",
-   "name": "Alta disponibilidad (SSO/FHRP)",
-   "question": "In terms of standardization, which of these statements about VRRP is correct?",
-   "options": {
-    "A": "VRRP was created by the IEEE for use within 802.1Q trunk negotiation",
-    "B": "VRRP is a Cisco-only proprietary protocol with no IETF standardization",
-    "C": "VRRP was defined by an IETF RFC (originally RFC 2338, later RFC 3768 and RFC 5798) specifically to provide an open, multi-vendor alternative to Cisco's proprietary HSRP",
-    "D": "VRRP has never been documented in any RFC and exists only as informal vendor documentation, having originated purely as an internal Cisco whitepaper that competing vendors later adopted informally"
-   },
-   "correct": "C",
-   "explanation_es": "VRRP fue definido por el IETF (originalmente RFC 2338, luego RFC 3768 y RFC 5798) específicamente para ofrecer una alternativa abierta y multi-vendor al HSRP propietario de Cisco, permitiendo interoperabilidad de redundancia de gateway entre equipos de distintos fabricantes."
   },
   {
    "id": "b6_1.1.b_13",
@@ -6989,20 +6877,6 @@
    "explanation_es": "UplinkFast permitía que un switch de capa de acceso con un uplink de respaldo bloqueado transicionara rápidamente ese enlace de respaldo a forwarding si su uplink activo fallaba, saltándose el retraso normal de listening/learning; RSTP logra una capacidad de conmutación rápida similar (y generalmente más rápida/general) de forma nativa a través de su rol de puerto alternate y el mecanismo de proposal/agreement, sin necesitar una función legacy separada."
   },
   {
-   "id": "b6_3.1.c_18",
-   "subtopic": "3.1.c",
-   "name": "STP/RSTP/MST, root guard, BPDU guard",
-   "question": "Why is it generally recommended to manually set the STP root bridge priority (rather than relying on default priorities and letting the election happen arbitrarily) on the intended core/distribution switches in a campus design?",
-   "options": {
-    "A": "Root bridge priority can only be configured on switches that are physically the very last ones added to the network, with no ability to configure it on any pre-existing switch, since the 'spanning-tree vlan priority' command is mistakenly assumed to only take effect during a switch's initial boot-up provisioning rather than being applicable and recalculated live on any switch already participating in the spanning tree",
-    "B": "Manually and predictably setting a lower priority on the intended root switch(es) ensures the STP topology's root is a deliberately chosen, well-connected, high-capacity device rather than whichever switch happens to have the lowest default priority/MAC address, which could otherwise end up being an underpowered access-layer switch poorly suited to be the root of the topology",
-    "C": "Setting root bridge priority manually is prohibited by the 802.1D and 802.1w standards and will cause the switch to reject the configuration",
-    "D": "Manually setting root bridge priority has no actual effect on which switch becomes the root; the election always ignores configured priority and uses only the MAC address"
-   },
-   "correct": "B",
-   "explanation_es": "Fijar de forma manual y predecible una prioridad más baja en el/los switch(es) destinado(s) a ser root asegura que la raíz de la topología STP sea un dispositivo deliberadamente elegido, bien conectado y de alta capacidad, en lugar de cualquier switch que resulte tener la prioridad/MAC más baja por defecto, lo cual de otro modo podría terminar siendo un switch de acceso de bajo poder poco adecuado para ser la raíz de la topología."
-  },
-  {
    "id": "b6_3.1.c_19",
    "subtopic": "3.1.c",
    "name": "STP/RSTP/MST, root guard, BPDU guard",
@@ -7395,20 +7269,6 @@
    "explanation_es": "Especifica qué interfaces (identificadas porque su dirección IP cae dentro del rango de red/wildcard-mask especificado) deben participar en el proceso OSPF, tanto habilitando que formen adyacencias a través de ellas como haciendo que su(s) red(es) conectada(s) se anuncien en OSPF."
   },
   {
-   "id": "b6_3.2.b_11",
-   "subtopic": "3.2.b",
-   "name": "OSPFv2/v3 config",
-   "question": "What does the OSPF interface 'network type' (e.g., broadcast, point-to-point, non-broadcast, point-to-multipoint) control?",
-   "options": {
-    "A": "OSPF network type controls which VLAN ID is assigned to that interface, with little direct relationship to DR/BDR election or neighbor discovery",
-    "B": "The network type determines behaviors such as whether DR/BDR election occurs on that interface, whether neighbors must be manually configured (as on some non-broadcast media), and certain default timer values; setting the correct network type for the actual underlying media (or intentionally overriding it, such as configuring a point-to-point network type on a subnet that only has two routers to skip unnecessary DR/BDR election) is an important part of OSPF interface configuration",
-    "C": "Network type only affects the color used to display the interface in a network management GUI, with zero effect on actual OSPF protocol behavior",
-    "D": "Every OSPF network type behaves in an absolutely identical way in every respect, making the concept of different network types purely a naming convention with no functional distinction, since DR/BDR election and neighbor discovery are mistakenly assumed to always occur the same way regardless of the underlying Layer 2 media type or the number of routers sharing that segment, when in fact broadcast and non-broadcast multi-access media trigger DR/BDR election while point-to-point media generally does not"
-   },
-   "correct": "B",
-   "explanation_es": "El tipo de red determina comportamientos como si ocurre elección de DR/BDR en esa interfaz, si los vecinos deben configurarse manualmente (como en algunos medios non-broadcast), y ciertos valores de temporizador por defecto; configurar el tipo de red correcto para el medio subyacente real (o anularlo intencionalmente, como configurar un tipo point-to-point en una subred que solo tiene dos routers para saltarse la elección innecesaria de DR/BDR) es una parte importante de la configuración de interfaz OSPF."
-  },
-  {
    "id": "b6_3.2.b_12",
    "subtopic": "3.2.b",
    "name": "OSPFv2/v3 config",
@@ -7773,20 +7633,6 @@
    "explanation_es": "Reenvía el tráfico coincidente directamente por la interfaz especificada (útil principalmente para interfaces tipo punto a punto donde no hace falta una búsqueda de next-hop IP); si esa interfaz está caída, PBR generalmente cae de vuelta al enrutamiento normal basado en destino para ese tráfico en lugar de descartarlo silenciosamente, ya que 'set interface' por sí solo no garantiza un next-hop válido de la forma en que sí lo hace 'set ip next-hop' con una dirección específica."
   },
   {
-   "id": "b6_3.2.d_06",
-   "subtopic": "3.2.d",
-   "name": "Policy-based routing",
-   "question": "Why might an organization use PBR to route certain traffic (e.g., a specific application or a guest subnet) through a security appliance or specific inspection path, while allowing other traffic to follow the normal destination-based routing table?",
-   "options": {
-    "A": "PBR disables the ability to reach any destination not explicitly listed in its route-map, making it unsuitable for selectively redirecting only some traffic",
-    "B": "PBR can only ever be applied to every single packet on the router with no ability to selectively match specific traffic types, making this targeted-inspection use case not supported — since a route-map's match clauses are generally assumed usable only for filtering redistribution between protocols, leaving PBR no equivalent mechanism to select traffic for inspection regardless of its source",
-    "C": "Forcing specific traffic through a security appliance can only be accomplished using a dedicated physical cable for every single flow, with PBR playing no role in that design at all",
-    "D": "PBR allows the organization to selectively force only the traffic matching specific criteria (like a source subnet or application signature) through a particular next hop (such as a firewall/IPS appliance) for mandatory inspection, without needing to redesign the entire network's destination-based routing just to insert that inspection point for one category of traffic"
-   },
-   "correct": "D",
-   "explanation_es": "PBR le permite a la organización forzar selectivamente solo el tráfico que coincide con criterios específicos (como una subred origen o una firma de aplicación) a través de un next-hop en particular (como un firewall/IPS) para inspección obligatoria, sin necesitar rediseñar todo el enrutamiento basado en destino de la red solo para insertar ese punto de inspección para una categoría de tráfico."
-  },
-  {
    "id": "b6_3.2.d_07",
    "subtopic": "3.2.d",
    "name": "Policy-based routing",
@@ -8095,20 +7941,6 @@
    "explanation_es": "Un transparent clock no termina y vuelve a originar el intercambio de sincronización PTP como sí lo hace un boundary clock; en cambio, mide y corrige el tiempo de residencia (el tiempo que un mensaje PTP pasa transitando por ese switch/dispositivo en particular) ajustando un campo de corrección dentro del propio mensaje PTP, permitiendo que los dispositivos downstream compensen el retraso introducido por ese dispositivo intermedio sin que el transparent clock actúe como su propio punto de jerarquía maestro/esclavo."
   },
   {
-   "id": "b6_3.3.a_14",
-   "subtopic": "3.3.a",
-   "name": "NTP/PTP",
-   "question": "In what type of environment or use case is PTP's sub-microsecond time synchronization accuracy typically required, as opposed to NTP's millisecond-level accuracy being sufficient?",
-   "options": {
-    "A": "Environments such as financial trading platforms (which may have regulatory requirements for precise transaction timestamping), industrial automation/motion control systems, telecommunications synchronization (e.g., for certain cellular backhaul standards), and some scientific/measurement applications commonly require PTP's much tighter accuracy, whereas typical enterprise IT log correlation and general business applications are usually well served by NTP's millisecond-level accuracy",
-    "B": "PTP's higher precision provides no meaningful practical benefit in any real-world use case compared to NTP, making the choice between the two purely a matter of arbitrary preference — since even applications like high-frequency financial trading timestamping or cellular backhaul synchronization are generally assumed to tolerate the same millisecond-level jitter that ordinary enterprise log correlation tolerates, with PTP's sub-microsecond accuracy considered a theoretical specification rarely mattering in practice",
-    "C": "NTP's millisecond-level accuracy is always technically superior to PTP's sub-microsecond accuracy in every conceivable use case, the reverse of their actual relative precision",
-    "D": "PTP is required in every single network deployment regardless of application, with NTP considered obsolete and unsuitable for any meaningful case"
-   },
-   "correct": "A",
-   "explanation_es": "Entornos como plataformas de trading financiero (que pueden tener requisitos regulatorios de marcado de tiempo preciso de transacciones), sistemas de automatización industrial/control de movimiento, sincronización de telecomunicaciones (por ejemplo, para ciertos estándares de backhaul celular), y algunas aplicaciones científicas/de medición suelen requerir la precisión mucho más ajustada de PTP, mientras que la correlación de logs de TI empresarial típica y las aplicaciones de negocio generales suelen estar bien servidas por la precisión de milisegundos de NTP."
-  },
-  {
    "id": "b6_3.3.a_15",
    "subtopic": "3.3.a",
    "name": "NTP/PTP",
@@ -8205,34 +8037,6 @@
    },
    "correct": "A",
    "explanation_es": "Depender de múltiples fuentes diversas reduce el riesgo de que un solo punto de falla (como que un servidor se caiga, esté mal configurado, o provea tiempo incorrecto por una falla local) interrumpa la sincronización de tiempo para toda la organización, y también permite que el algoritmo de detección de valores atípicos de NTP identifique y rechace de forma más confiable cualquier fuente que empiece a proveer tiempo inexacto, ya que puede compararse contra varias otras fuentes independientes."
-  },
-  {
-   "id": "b6_3.3.b_07",
-   "subtopic": "3.3.b",
-   "name": "NAT/PAT",
-   "question": "What are the four types of addresses used in Cisco NAT terminology (inside local, inside global, outside local, outside global), and what does the 'inside global' address specifically represent?",
-   "options": {
-    "A": "'Inside global' and 'inside local' are simply two interchangeable names for the exact same single address, with translation not actually changing any address value at all, since NAT is mistakenly assumed to only relabel an address for logging purposes rather than actually rewriting the packet header",
-    "B": "'Inside global' represents an outside host's address as seen from the inside network, with no relationship to the inside host's own translated address",
-    "C": "'Inside global' represents the translated (typically public/routable) address of an inside host as it appears to devices on the outside network, distinguishing it from 'inside local' (the real, often private, address of that same host as seen on the inside network)",
-    "D": "'Inside global' refers to the physical MAC address of the NAT router's inside-facing interface, unrelated to any IP address translation concept"
-   },
-   "correct": "C",
-   "explanation_es": "'Inside global' representa la dirección traducida (típicamente pública/enrutable) de un host interno tal como la ve un dispositivo en la red externa, distinguiéndose de 'inside local' (la dirección real, a menudo privada, de ese mismo host tal como se ve en la red interna)."
-  },
-  {
-   "id": "b6_3.3.b_08",
-   "subtopic": "3.3.b",
-   "name": "NAT/PAT",
-   "question": "What does the 'outside local' address represent in Cisco NAT terminology, and in what scenario does it differ from the 'outside global' address of the same outside host?",
-   "options": {
-    "A": "'Outside local' is only used in IPv6 NAT deployments and has no equivalent concept or meaning in any IPv4 NAT scenario",
-    "B": "'Outside local' and 'outside global' always refer to the exact same value in every single NAT deployment, with the distinction between the two terms serving no practical purpose in any scenario",
-    "C": "'Outside local' refers to a physical port number and has little relationship to any IP address translation concept",
-    "D": "'Outside local' is how an outside host's address appears from the inside network's perspective, which differs from 'outside global' (the outside host's real address as seen from the outside network itself) specifically in scenarios where the outside address is also being translated (for example, in some overlapping-address or bidirectional NAT designs), rather than in the more common case where only the inside address is translated"
-   },
-   "correct": "D",
-   "explanation_es": "'Outside local' es cómo se ve la dirección de un host externo desde la perspectiva de la red interna, lo cual difiere de 'outside global' (la dirección real del host externo tal como se ve desde la propia red externa) específicamente en escenarios donde la dirección externa también se está traduciendo (por ejemplo, en algunos diseños de NAT bidireccional o de direcciones superpuestas), en lugar del caso más común donde solo se traduce la dirección interna."
   },
   {
    "id": "b6_3.3.b_09",
@@ -8627,20 +8431,6 @@
    "explanation_es": "La redundancia basada en SSO (dentro de un único chasis lógico, como un stack o supervisoras redundantes) puede potencialmente dar un failover más rápido y fluido que una transición completa de HSRP de Active a Standby entre dos chasis separados, ya que SSO ya mantiene sincronizado el estado del plano de control de antemano; HSRP entre chasis separados sigue agregando valor como una capa más amplia de redundancia entre dispositivos físicamente distintos, pero las características y mecanismos de failover difieren entre ambas capas de redundancia."
   },
   {
-   "id": "b6_3.3.d_07",
-   "subtopic": "3.3.d",
-   "name": "Multicast",
-   "question": "What IP address range is reserved for IPv4 multicast addressing, and what does this range represent within the broader IPv4 address space?",
-   "options": {
-    "A": "IPv4 multicast uses the exact same address range as private RFC 1918 addressing, with no separate reserved range distinguishing multicast traffic from ordinary private unicast addressing",
-    "B": "224.0.0.0 through 239.255.255.255 (Class D address space) is reserved for IPv4 multicast group addresses, representing a portion of the address space set aside specifically for one-to-many/many-to-many multicast communication rather than traditional unicast host addressing",
-    "C": "IPv4 multicast addressing is limited to the single address 255.255.255.255, with no broader range of addresses available for different multicast groups",
-    "D": "There is no reserved address range for IPv4 multicast at all; any regular unicast address can be used interchangeably for multicast group communication without any special designation"
-   },
-   "correct": "B",
-   "explanation_es": "El rango 224.0.0.0 a 239.255.255.255 (espacio de direcciones Clase D) está reservado para direcciones de grupo multicast IPv4, representando una porción del espacio de direcciones apartada específicamente para comunicación multicast uno-a-muchos/muchos-a-muchos en lugar de direccionamiento de host unicast tradicional."
-  },
-  {
    "id": "b6_3.3.d_08",
    "subtopic": "3.3.d",
    "name": "Multicast",
@@ -8835,20 +8625,6 @@
    },
    "correct": "A",
    "explanation_es": "Como las verificaciones RPF dependen de la tabla de enrutamiento unicast (o específica de MRIB) para determinar la interfaz de entrada esperada para una fuente multicast dada, un enrutamiento unicast inconsistente o asimétrico (donde el camino usado para alcanzar una fuente difiere de lo que sugeriría la propia tabla de enrutamiento del router) puede causar que tráfico multicast legítimo falle la verificación RPF y se descarte, así que los despliegues de multicast generalmente se benefician de tener un enrutamiento unicast consistente y bien entendido hacia cada fuente multicast activa."
-  },
-  {
-   "id": "b6_4.1_06",
-   "subtopic": "4.1",
-   "name": "Diagnóstico (debug/traceroute/ping/SNMP/syslog)",
-   "question": "What information does the 'ping' command's summary output (packet loss percentage, round-trip min/avg/max times) help an engineer quickly assess about a path to a destination?",
-   "options": {
-    "A": "Ping's summary output only reports the destination's MAC address and provides no information about packet loss or round-trip timing",
-    "B": "The round-trip time statistics reported by ping are always identical regardless of actual network conditions, making them useless for diagnosing latency issues, a view based on ICMP echo requests often being queued similarly by intermediate routers, which can make round-trip times look consistent on lightly loaded paths even though they still vary under congestion",
-    "C": "Packet loss percentage gives a quick indication of basic reachability/reliability issues along the path, while the round-trip time statistics give a rough sense of latency and its variability, together providing a fast first-pass health check before diving into more detailed tools like traceroute or packet captures",
-    "D": "Ping can only ever report a binary 'reachable' or 'unreachable' result, with no additional statistics about loss percentage or timing available"
-   },
-   "correct": "C",
-   "explanation_es": "El porcentaje de pérdida de paquetes da una indicación rápida de problemas básicos de alcanzabilidad/confiabilidad a lo largo del camino, mientras que las estadísticas de tiempo de ida y vuelta dan una idea aproximada de la latencia y su variabilidad, juntas ofreciendo un chequeo de salud rápido de primera pasada antes de profundizar con herramientas más detalladas como traceroute o capturas de paquetes."
   },
   {
    "id": "b6_4.1_07",
@@ -9565,20 +9341,6 @@
    "explanation_es": "Especificar la interfaz de origen asegura que el probe de IP SLA realmente atraviese el camino/enlace específico que el administrador pretende probar (especialmente importante en un router multihomed con varios caminos de salida posibles), ya que dejar que el router elija una dirección de origen automáticamente según su búsqueda normal en la tabla de enrutamiento podría no ejercitar el enlace o camino específico que el administrador realmente quiere monitorear."
   },
   {
-   "id": "b6_4.5_06",
-   "subtopic": "4.5",
-   "name": "Catalyst Center",
-   "question": "What is the general purpose of Catalyst Center's 'Design' workflow area, as one of the platform's core functional workflows?",
-   "options": {
-    "A": "The Design workflow can only be used after every single device has already been fully provisioned and deployed, making it a purely retrospective/reporting-only feature rather than a planning tool used beforehand, a misunderstanding that may come from Design also displaying hierarchy maps of onboarded devices, mistaken for its primary function rather than defining pools and templates ahead of provisioning",
-    "B": "The Design workflow lets an administrator define the network's intended hierarchy (sites, buildings, floors), global settings (like IP address pools, SSIDs, and common device credentials), and templates, essentially establishing the blueprint that later workflows (like Policy and Provision) build upon when actually deploying configuration to devices",
-    "C": "The Design workflow is used to create graphic wallpaper images displayed on the login screen, with little direct relationship to any actual network configuration or site hierarchy",
-    "D": "Design workflow functionality is limited to configuring wireless SSIDs, with absolutely no capability to define site hierarchy, IP pools, or any other network design element"
-   },
-   "correct": "B",
-   "explanation_es": "El flujo de trabajo Design le permite a un administrador definir la jerarquía prevista de la red (sitios, edificios, pisos), ajustes globales (como pools de direcciones IP, SSIDs, y credenciales comunes de dispositivos), y plantillas, esencialmente estableciendo el plano sobre el cual construyen luego otros flujos de trabajo (como Policy y Provision) al desplegar configuración real a los dispositivos."
-  },
-  {
    "id": "b6_4.5_07",
    "subtopic": "4.5",
    "name": "Catalyst Center",
@@ -10069,20 +9831,6 @@
    "explanation_es": "Las credenciales por defecto de las plataformas de dispositivos de red comunes suelen estar ampliamente publicadas/conocidas (en documentación, foros online, o herramientas de escaneo automatizado), así que un dispositivo dejado con credenciales por defecto sin cambiar — aunque sea brevemente durante la configuración inicial — podría ser descubierto y comprometido por un atacante o escáner automatizado antes de que un administrador tenga la oportunidad de aplicar credenciales propias y únicas."
   },
   {
-   "id": "b6_5.1.b_06",
-   "subtopic": "5.1.b",
-   "name": "AAA (TACACS+/RADIUS)",
-   "question": "What are the three functions represented by the 'AAA' acronym, and what does each generally address?",
-   "options": {
-    "A": "Authentication and Authorization are simply two different names for the exact same function, with Accounting being the only actual distinct function among the three",
-    "B": "AAA stands for three unrelated functions: Antenna, Amplifier, and Attenuator, with little direct relationship to authentication, authorization, or accounting of network access",
-    "C": "AAA functions can only ever be provided by a single specific vendor's proprietary hardware appliance, with no open protocol (TACACS+ or RADIUS) available to implement any of the three functions, a misunderstanding that overlooks how RADIUS is an open IETF standard implementable by many vendors' AAA server software, not a feature locked to one manufacturer's hardware",
-    "D": "Authentication (verifying who a user is, typically via credentials), Authorization (determining what that authenticated user is permitted to do), and Accounting (recording what the user actually did, for auditing/billing purposes) — three related but distinct functions that together govern and log access to network resources"
-   },
-   "correct": "D",
-   "explanation_es": "Authentication (verificar quién es un usuario, típicamente vía credenciales), Authorization (determinar qué está permitido hacer ese usuario ya autenticado), y Accounting (registrar qué hizo realmente el usuario, para auditoría/facturación) — tres funciones relacionadas pero distintas que juntas gobiernan y registran el acceso a recursos de red."
-  },
-  {
    "id": "b6_5.1.b_07",
    "subtopic": "5.1.b",
    "name": "AAA (TACACS+/RADIUS)",
@@ -10403,20 +10151,6 @@
    },
    "correct": "D",
    "explanation_es": "Como una ACL estándar solo puede hacer match en la dirección IP de origen del paquete, no tiene forma de diferenciar entre distintas aplicaciones/servicios (como HTTP vs. SSH) provenientes de ese mismo origen, ya que distinguir por protocolo y número de puerto (información de Capa 4) requiere los campos de coincidencia adicionales que solo provee una ACL extendida."
-  },
-  {
-   "id": "b6_5.2.b_06",
-   "subtopic": "5.2.b",
-   "name": "CoPP",
-   "question": "Why is CoPP generally described as protecting the 'control plane' specifically, as opposed to protecting the 'data plane' of a router or switch?",
-   "options": {
-    "A": "The control plane and data plane are simply two different names referring to exactly the same physical hardware component on a router or switch, with no functional distinction between the two planes at all, a misconception that overlooks how the control plane's CPU-based software processing and the data plane's dedicated forwarding ASICs are physically distinct hardware resources with very different processing capacities, a gap that shows clearly when a flood of CPU-destined packets makes the device sluggish even as ASIC-forwarded transit traffic keeps moving at full line rate",
-    "B": "The data plane (forwarding traffic through the device from one interface to another) is typically handled by dedicated, high-speed forwarding hardware (ASICs) that can handle very high traffic volumes, whereas the control plane (the device's own CPU, handling things like routing protocol processing, SSH sessions, and SNMP) has comparatively limited processing capacity and is much more vulnerable to being overwhelmed by excessive traffic destined to the CPU itself, which is exactly the resource CoPP is designed to protect",
-    "C": "CoPP and the concept of a 'control plane' have no relationship; CoPP protects the data plane's forwarding hardware and never involves the device's own CPU in any way",
-    "D": "CoPP is designed to protect the data plane's forwarding capacity, while the control plane (CPU) requires no protection since it can never become a bottleneck"
-   },
-   "correct": "B",
-   "explanation_es": "El plano de datos (reenviar tráfico a través del dispositivo de una interfaz a otra) típicamente lo maneja hardware de reenvío dedicado y de alta velocidad (ASICs) que puede manejar volúmenes de tráfico muy altos, mientras que el plano de control (la propia CPU del dispositivo, manejando cosas como procesamiento de protocolos de enrutamiento, sesiones SSH, y SNMP) tiene capacidad de procesamiento comparativamente limitada y es mucho más vulnerable a ser saturado por tráfico excesivo destinado a la propia CPU — exactamente el recurso que CoPP está diseñado para proteger."
   },
   {
    "id": "b6_5.2.b_07",
@@ -10893,20 +10627,6 @@
    },
    "correct": "A",
    "explanation_es": "Defensa en profundidad significa depender de múltiples capas de protección independientes y complementarias (como la segmentación de red limitando quién puede siquiera alcanzar el servidor, un firewall basado en host restringiendo aún más qué puertos/protocolos específicos se aceptan en ese servidor, software de seguridad de endpoint detectando actividad local sospechosa, y control de acceso estricto limitando quién puede autenticarse) de forma que si una sola capa falla o es evadida, las demás capas sigan dando protección significativa, en lugar de que la seguridad del servidor dependa enteramente de la efectividad de un único control."
-  },
-  {
-   "id": "b6_5.4.b_06",
-   "subtopic": "5.4.b",
-   "name": "Seguridad de endpoint (NAC/ISE)",
-   "question": "What is the difference between 'closed mode' and 'monitor mode' when deploying 802.1X on a switch port, particularly during an initial rollout?",
-   "options": {
-    "A": "Closed mode and monitor mode are simply two different names referring to exactly the same 802.1X enforcement behavior, with no meaningful distinction in whether unauthenticated traffic is actually blocked or merely observed, a claim that overlooks the difference in their default port behavior: closed mode restricts the port to only EAP traffic until authentication succeeds, while monitor mode leaves the port open to all traffic, purely logging what the enforcement decision would have been, letting administrators validate policy correctness before actually switching enforcement on",
-    "B": "Monitor mode can only ever be used on wireless access points and has little applicability to wired 802.1X-enabled switch ports",
-    "C": "In closed mode, only EAP/802.1X traffic is allowed until authentication succeeds, with all other traffic blocked, providing full enforcement; monitor mode allows all traffic to pass regardless of authentication outcome while still logging what the authentication result would have been, letting an administrator observe and validate what would happen under full enforcement before actually turning on the traffic-blocking behavior of closed mode, reducing the risk of accidentally locking out legitimate devices during initial deployment",
-    "D": "Monitor mode always actively blocks all traffic on the port regardless of authentication outcome, while closed mode always passively logs without blocking anything, the reverse of their actual typical respective behaviors"
-   },
-   "correct": "C",
-   "explanation_es": "En closed mode, solo se permite tráfico EAP/802.1X hasta que la autenticación tenga éxito, con todo el demás tráfico bloqueado, dando aplicación completa; monitor mode permite pasar todo el tráfico sin importar el resultado de autenticación mientras sigue registrando cuál habría sido ese resultado, permitiendo que un administrador observe y valide qué pasaría bajo aplicación completa antes de realmente activar el comportamiento de bloqueo de tráfico del closed mode, reduciendo el riesgo de bloquear accidentalmente dispositivos legítimos durante el despliegue inicial."
   },
   {
    "id": "b6_5.4.b_07",

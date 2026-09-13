@@ -11,13 +11,13 @@ contenido de forma consistente.
 
 ## Archivos incluidos
 
-- `data/question_bank.json` — banco de preguntas actual (1469 preguntas,
+- `data/question_bank.json` — banco de preguntas actual (1449 preguntas,
   cobertura 49/49 subtemas del blueprint ENCOR 350-401 v1.2, distribuidas
   proporcionalmente al peso de cada dominio en el examen). Formato:
   ```json
   {
-    "version": "2026-09-12_v14",
-    "total": 1469,
+    "version": "2026-09-13_v16",
+    "total": 1449,
     "questions": [
       {
         "id": "trustsec_01",
@@ -62,13 +62,13 @@ contenido de forma consistente.
 
 | Dominio | Peso examen | Actual | % del banco |
 |---|---|---|---|
-| 1.0 Architecture | 15% | 222 | 15.1% |
-| 2.0 Virtualization | 10% | 147 | 10.0% |
-| 3.0 Infrastructure | 30% | 442 | 30.1% |
-| 4.0 Network Assurance | 10% | 166 | 11.3% |
-| 5.0 Security | 20% | 263 | 17.9% |
-| 6.0 Automation & AI | 15% | 229 | 15.6% |
-| **Total** | **100%** | **1469** | **100%** |
+| 1.0 Architecture | 15% | 220 | 15.2% |
+| 2.0 Virtualization | 10% | 146 | 10.1% |
+| 3.0 Infrastructure | 30% | 435 | 30.0% |
+| 4.0 Network Assurance | 10% | 164 | 11.3% |
+| 5.0 Security | 20% | 255 | 17.6% |
+| 6.0 Automation & AI | 15% | 229 | 15.8% |
+| **Total** | **100%** | **1449** | **100%** |
 
 Meta base de 1000 preguntas alcanzada 2026-09-08, con distribución por
 dominio dentro de ±0.8 puntos porcentuales del peso oficial del blueprint.
@@ -202,6 +202,20 @@ nunca copiar texto del libro). Se agregaron 376 preguntas nuevas (1093 →
 - Se reaplicó el shuffle determinístico de posición (seed fija) sobre el
   banco completo (1469 preguntas) tras el merge, quedando A 26.7%/B 26.0%/
   C 23.0%/D 24.3% a nivel banco completo.
+
+**Eliminación de preguntas mal calificadas (2026-09-13):** el usuario
+calificó 144 preguntas con el sistema de 1-5 estrellas de la app (guardado
+en la Google Sheet, pestaña "ratings"). Se revisaron las 20 con 1-2
+estrellas: en su mayoría venían del lote `b6_` (OCG, cargado antes del
+tercer pase de corrección de sesgo de longitud/lenguaje absolutista del
+2026-09-12) y mantenían el patrón que se suponía ya corregido — respuesta
+correcta visiblemente más larga y distractores con frases tipo "mistakenly
+assumed"/"absolutely identical in every respect". El usuario pidió
+eliminarlas directamente en vez de reescribirlas. Banco: 1469 → 1449.
+**Regla permanente establecida:** de ahora en más, cualquier pregunta que
+el usuario califique con 1 o 2 estrellas debe eliminarse del banco (no
+reescribirse) la próxima vez que se revisen las calificaciones — no hace
+falta pedirlo de nuevo cada vez.
 
 **Corrección: preservar formatos verdadero/falso y selección múltiple
 extendida (2026-09-13):** el usuario aclaró que el examen real de CCNP sí
