@@ -11,13 +11,13 @@ contenido de forma consistente.
 
 ## Archivos incluidos
 
-- `data/question_bank.json` — banco de preguntas actual (1056 preguntas,
+- `data/question_bank.json` — banco de preguntas actual (1469 preguntas,
   cobertura 49/49 subtemas del blueprint ENCOR 350-401 v1.2, distribuidas
   proporcionalmente al peso de cada dominio en el examen). Formato:
   ```json
   {
-    "version": "2026-09-12_v12",
-    "total": 1093,
+    "version": "2026-09-12_v14",
+    "total": 1469,
     "questions": [
       {
         "id": "trustsec_01",
@@ -57,13 +57,13 @@ contenido de forma consistente.
 
 | Dominio | Peso examen | Actual | % del banco |
 |---|---|---|---|
-| 1.0 Architecture | 15% | 158 | 14.5% |
-| 2.0 Virtualization | 10% | 111 | 10.2% |
-| 3.0 Infrastructure | 30% | 340 | 31.1% |
-| 4.0 Network Assurance | 10% | 111 | 10.2% |
-| 5.0 Security | 20% | 202 | 18.5% |
-| 6.0 Automation & AI | 15% | 171 | 15.6% |
-| **Total** | **100%** | **1093** | **100%** |
+| 1.0 Architecture | 15% | 222 | 15.1% |
+| 2.0 Virtualization | 10% | 147 | 10.0% |
+| 3.0 Infrastructure | 30% | 442 | 30.1% |
+| 4.0 Network Assurance | 10% | 166 | 11.3% |
+| 5.0 Security | 20% | 263 | 17.9% |
+| 6.0 Automation & AI | 15% | 229 | 15.6% |
+| **Total** | **100%** | **1469** | **100%** |
 
 Meta base de 1000 preguntas alcanzada 2026-09-08, con distribución por
 dominio dentro de ±0.8 puntos porcentuales del peso oficial del blueprint.
@@ -166,3 +166,34 @@ que se verifica. Se corrigió reaplicando el shuffle determinístico de
 preguntas) después de cada tanda. **Nota para el futuro:** re-ejecutar este
 shuffle bank-wide después de agregar cualquier tanda nueva, no asumir que
 escribir con "buenas intenciones" de variar la posición alcanza.
+
+**Extracción completa de ambos libros (2026-09-12):** a pedido explícito del
+usuario ("agrega todas las preguntas de ambos libros"), se procesaron todos
+los capítulos restantes de ambos libros que no se habían tocado aún —
+excluyendo siempre Wireless (sin subtema trackeado en este proyecto) y los
+capítulos sin subtema de blueprint asociado (OCG "Packet Forwarding",
+Exam Cram "On-Premises vs. Cloud" y "Switching" a nivel CCNA). Esto incluyó
+capítulos ya cubiertos parcialmente antes (por ejemplo, EIGRP/OSPF/BGP,
+seguridad, virtualización), agregando preguntas adicionales aunque el tema ya
+tuviera cobertura — decisión explícita del usuario de priorizar completitud
+por encima de evitar solapamiento temático. Se usaron 12 agentes en paralelo
+(uno por área temática: IGP, BGP, Multicast, QoS, IP Services, Overlay/VRF/
+LISP/VXLAN, Arquitectura/SD-WAN/SD-Access, Network Assurance, Seguridad,
+Virtualización, y dos de Automatización) para extraer y reescribir cada
+pregunta de las secciones "Do I Know This Already?"/"Cram Quiz"/"Review
+Questions" de los capítulos asignados, cada uno hacia el mismo criterio de
+siempre (reescritura propia, verificación contra conocimiento real de ENCOR,
+nunca copiar texto del libro). Se agregaron 376 preguntas nuevas (1093 →
+1469). Control de calidad post-extracción antes del merge:
+- Verificación de esquema (4 opciones A-D exactas, `correct`/`correctSet`
+  válido) sobre las 376 preguntas; se encontraron y corrigieron 22 preguntas
+  mal formadas (14 de tipo verdadero/falso con solo 2 opciones en vez de 4, y
+  6 preguntas de selección múltiple con 5-6 opciones en vez de 4) generadas
+  por los agentes pese a la instrucción explícita del formato.
+- Verificación de tildes en español: 2 de los 12 lotes (Multicast y
+  Overlay/VRF/GRE/LISP/VXLAN) resultaron con texto en español sistemáticamente
+  sin acentuar; se corrigieron manualmente todas las palabras afectadas.
+- Sin colisiones de ID contra el banco existente ni duplicados internos.
+- Se reaplicó el shuffle determinístico de posición (seed fija) sobre el
+  banco completo (1469 preguntas) tras el merge, quedando A 26.7%/B 26.0%/
+  C 23.0%/D 24.3% a nivel banco completo.
