@@ -16,7 +16,7 @@ contenido de forma consistente.
   proporcionalmente al peso de cada dominio en el examen). Formato:
   ```json
   {
-    "version": "2026-09-13_v20",
+    "version": "2026-09-13_v22",
     "total": 1464,
     "questions": [
       {
@@ -212,6 +212,46 @@ tercer pase de corrección de sesgo de longitud/lenguaje absolutista del
 correcta visiblemente más larga y distractores con frases tipo "mistakenly
 assumed"/"absolutely identical in every respect". El usuario pidió
 eliminarlas directamente en vez de reescribirlas. Banco: 1469 → 1449.
+**Limpieza masiva de lenguaje absolutista, todo el banco (2026-09-13):** a
+pedido explícito del usuario ("revisa todo el banco para eliminar esas
+respuestas absolutistas que obviamente no son posibles"), se auditó el
+banco completo (1464 preguntas) con un detector de frases tipo "no
+relationship at all", "little relationship", "exclusively", "the exact
+same", "always automatically", "purely cosmetic", "mistakenly assumed",
+"the reverse of", "does not exist", "fundamentally incapable", "in every
+respect/case/scenario", entre otras — el mismo patrón de "obviamente
+falso por el tono" que ya se había atacado antes (ver punto 3 del
+2026-09-08) pero que había reaparecido con fuerza en un lote específico.
+Resultado de la auditoría: **517 de 1464 preguntas (35.3%)** tenían al
+menos un distractor con este problema, concentradas casi enteramente en
+el lote `b6_` (461 de 709 preguntas de ese lote, 65%) — el lote más
+grande y más antiguo del banco, generado antes de que esta disciplina
+estuviera bien establecida en el proyecto.
+
+Se procesó con **9 agentes en paralelo**, cada uno recibiendo ~58
+preguntas con sus distractores problemáticos ya identificados
+automáticamente, con instrucción de reescribir *solo* esas opciones para
+que sigan siendo incorrectas pero por un motivo técnico específico y
+verosímil (no por su tono), sin tocar la pregunta, la respuesta correcta,
+ni las demás opciones. Cada salida se validó automáticamente antes de
+fusionar: mismo set de IDs y de llaves de opciones que el archivo
+original, ninguna opción no marcada fue alterada, y un re-escaneo
+confirmó que el lenguaje absolutista había desaparecido de las opciones
+reescritas (con algunos falsos positivos del detector revisados a mano —
+frases como "exclusively" o "the exact same" usadas de forma natural
+dentro de una afirmación técnica específica, no como descarte vacío).
+Resultado final: **23 de 1464 (1.6%)** siguen coincidiendo con el
+detector, todas revisadas manualmente y aceptadas como afirmaciones
+técnicas específicas (aunque incorrectas), no como descartes obvios.
+
+**Nota pendiente:** el sesgo de longitud bank-wide subió a 37.8%
+"correcta = más larga" (4 opciones) tras esta limpieza, por encima del
+~25% ideal — probablemente porque varios agentes alargaron distractores
+que habían quedado demasiado cortos tras quitarles el lenguaje
+absolutista, sin siempre alargar también la opción correcta en la misma
+proporción. Queda pendiente una pasada de rebalanceo de longitud si se
+quiere volver a bajar esa cifra al rango histórico (~25-30%).
+
 **Segunda ronda de triage por calificación (2026-09-13):** revisando de
 nuevo las calificaciones (backend intermitente ese día — ver nota de
 estabilidad más abajo), aparecieron 3 preguntas nuevas con 1 estrella
