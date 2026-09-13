@@ -430,12 +430,14 @@
     flex: 1 1 auto; min-width: 0;
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   }
-  .subtopic-row .frac {
+  .frac {
     font-family: "IBM Plex Mono", monospace;
     font-size: 0.76rem;
     color: var(--text-dim);
-    flex: 0 0 auto;
     white-space: nowrap;
+  }
+  .subtopic-row .frac {
+    flex: 0 0 auto;
   }
 
   .empty-note {
@@ -22234,6 +22236,12 @@
     var ans = overallAnsweredScore();
     var container = document.createElement("div");
 
+    var grandCorrect = 0, grandAnswered = 0, grandTotal = 0;
+    Object.keys(DOMAIN_META).forEach(function (d) {
+      var ds0 = domainStats(d);
+      grandCorrect += ds0.correct; grandAnswered += ds0.answered; grandTotal += ds0.total;
+    });
+
     var overall = el(
       '<div class="panel overall-card">' +
         '<div>' +
@@ -22241,6 +22249,7 @@
           '<div class="gauge-sub">respondidas &middot; meta ' + TARGET_SCORE + '% &middot; ' +
             (delta >= 0 ? "+" + delta.toFixed(1) + " sobre la meta" : delta.toFixed(1) + " para la meta") +
           '</div>' +
+          '<div class="gauge-sub frac" title="correctas/respondidas/total del banco">' + grandCorrect + "/" + grandAnswered + "/" + grandTotal + '</div>' +
         '</div>' +
         '<div class="gauge-bar-track"><div class="gauge-bar-fill" style="width:' + Math.min(100, score) + '%; background:' + pctColorVar(score) + ';"></div></div>' +
         '<div class="gauge-secondary" title="Precisión: aciertos sobre preguntas contestadas">' +
@@ -22284,6 +22293,7 @@
             '<span class="chev mono">&#9656;</span>' +
             '<span class="domain-title">' + d + '.0 ' + meta.name + '</span>' +
             '<span class="domain-weight">peso ' + meta.weight + '%</span>' +
+            '<span class="frac" title="correctas/respondidas/total del banco">' + ds.correct + "/" + ds.answered + "/" + ds.total + '</span>' +
             '<span class="domain-pct" style="color:var(--info);" title="Preguntas respondidas al menos una vez, sobre el total del banco">' + (covPct === null ? "—" : covPct.toFixed(0) + "%") + '</span>' +
             '<span class="pill ' + pctClass(domAnsPct) + '" title="Precisión sobre las preguntas contestadas (' + ds.correctAttempts + '/' + ds.attemptsCount + ')">' + (domAnsPct === null ? "—" : domAnsPct.toFixed(0) + "%") + '</span>' +
           '</div>' +
