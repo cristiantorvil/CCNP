@@ -21370,7 +21370,6 @@
     "5": { name: "Security", weight: 20 },
     "6": { name: "Automation and AI", weight: 15 }
   };
-  var BANK_TARGET_TOTAL = 1000;
   var TARGET_SCORE = 82.5;
   // When set, progress syncs through this Google Apps Script Web App (backed by
   // a Google Sheet) instead of Claude's own db or per-browser localStorage, so
@@ -22042,7 +22041,7 @@
     var bankNote = el(
       '<div class="panel" style="margin-top:16px;">' +
         '<h2 class="section-title">Cobertura del banco</h2>' +
-        '<div class="domain-sub" style="font-size:0.8rem;">' + ALL_QUESTIONS.length + ' / ' + BANK_TARGET_TOTAL + ' preguntas totales &middot; cada dominio y subtema muestra dos porcentajes: ' +
+        '<div class="domain-sub" style="font-size:0.8rem;">' + ALL_QUESTIONS.length + ' preguntas totales &middot; cada dominio y subtema muestra dos porcentajes: ' +
           '<b style="color:var(--info);">%banco</b> = preguntas respondidas alguna vez sobre el total que existe hoy para ese tema en el banco, y ' +
           '<b style="color:var(--text);">%resp.</b> = aciertos sobre el total de veces que has respondido preguntas de ese tema (precisión en tus intentos)</div>' +
       '</div>'
