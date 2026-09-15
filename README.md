@@ -11,13 +11,13 @@ contenido de forma consistente.
 
 ## Archivos incluidos
 
-- `data/question_bank.json` — banco de preguntas actual (1464 preguntas,
+- `data/question_bank.json` — banco de preguntas actual (1445 preguntas,
   cobertura 49/49 subtemas del blueprint ENCOR 350-401 v1.2, distribuidas
   proporcionalmente al peso de cada dominio en el examen). Formato:
   ```json
   {
-    "version": "2026-09-13_v22",
-    "total": 1464,
+    "version": "2026-09-14_v26",
+    "total": 1445,
     "questions": [
       {
         "id": "trustsec_01",
@@ -62,13 +62,13 @@ contenido de forma consistente.
 
 | Dominio | Peso examen | Actual | % del banco |
 |---|---|---|---|
-| 1.0 Architecture | 15% | 222 | 15.2% |
-| 2.0 Virtualization | 10% | 147 | 10.0% |
-| 3.0 Infrastructure | 30% | 439 | 30.0% |
-| 4.0 Network Assurance | 10% | 164 | 11.2% |
-| 5.0 Security | 20% | 263 | 18.0% |
-| 6.0 Automation & AI | 15% | 229 | 15.6% |
-| **Total** | **100%** | **1464** | **100%** |
+| 1.0 Architecture | 15% | 212 | 14.7% |
+| 2.0 Virtualization | 10% | 147 | 10.2% |
+| 3.0 Infrastructure | 30% | 434 | 30.0% |
+| 4.0 Network Assurance | 10% | 164 | 11.3% |
+| 5.0 Security | 20% | 259 | 17.9% |
+| 6.0 Automation & AI | 15% | 229 | 15.8% |
+| **Total** | **100%** | **1445** | **100%** |
 
 Meta base de 1000 preguntas alcanzada 2026-09-08, con distribución por
 dominio dentro de ±0.8 puntos porcentuales del peso oficial del blueprint.
@@ -212,6 +212,27 @@ tercer pase de corrección de sesgo de longitud/lenguaje absolutista del
 correcta visiblemente más larga y distractores con frases tipo "mistakenly
 assumed"/"absolutely identical in every respect". El usuario pidió
 eliminarlas directamente en vez de reescribirlas. Banco: 1469 → 1449.
+**Regla de calificaciones ajustada otra vez, tercera ronda (2026-09-14):**
+al revisar una tercera tanda de calificaciones nuevas (6 de 1★, 25 de 2★,
+todas del lote `b6_` de nuevo), el usuario refinó la regla una vez más:
+**1★ se elimina** (sin cambios), pero **2★ ahora también se elimina en
+vez de reescribirse** — con la salvedad de que **la mitad de las
+preguntas eliminadas se reemplazan** por preguntas nuevas, escritas en un
+formato más parecido al de las preguntas de fuente externa (OCG/Exam
+Cram/ipcisco.com): directas, sin el estilo "meta-comentario" verboso
+característico del lote `banco propio (IA)` (frases tipo "a
+misconception that overlooks..." o "since X is mistakenly assumed to...")
+que ha sido la causa raíz de los sesgos de longitud y lenguaje absolutista
+detectados repetidamente en ese lote. Las preguntas nuevas no llevan
+`source` (no vienen de un libro real), pero sí siguen la disciplina de
+redacción directa/concisa de esas fuentes. Se eliminaron las 6+25=31
+preguntas de baja calificación y se agregaron 12 nuevas (IDs `r3_*`) en
+subtemas variados (CoPP, AAA, NGFW/AVC, ACLs, seguridad REST API, eBGP,
+EtherChannel, Multicast, APIs Catalyst Center, diseño de red, QoS, VRF).
+Banco: 1464 → 1445. **Regla permanente actualizada:** 1★ = eliminar; 2★ =
+eliminar, reemplazando aproximadamente la mitad por preguntas nuevas de
+estilo directo/conciso (no reescribir en el lugar como antes).
+
 **Limpieza masiva de lenguaje absolutista, todo el banco (2026-09-13):** a
 pedido explícito del usuario ("revisa todo el banco para eliminar esas
 respuestas absolutistas que obviamente no son posibles"), se auditó el
