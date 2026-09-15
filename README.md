@@ -11,13 +11,13 @@ contenido de forma consistente.
 
 ## Archivos incluidos
 
-- `data/question_bank.json` — banco de preguntas actual (1424 preguntas,
+- `data/question_bank.json` — banco de preguntas actual (1421 preguntas,
   cobertura 49/49 subtemas del blueprint ENCOR 350-401 v1.2, distribuidas
   proporcionalmente al peso de cada dominio en el examen). Formato:
   ```json
   {
-    "version": "2026-09-14_v27",
-    "total": 1424,
+    "version": "2026-09-15_v28",
+    "total": 1421,
     "questions": [
       {
         "id": "trustsec_01",
@@ -62,13 +62,13 @@ contenido de forma consistente.
 
 | Dominio | Peso examen | Actual | % del banco |
 |---|---|---|---|
-| 1.0 Architecture | 15% | 211 | 14.8% |
+| 1.0 Architecture | 15% | 210 | 14.8% |
 | 2.0 Virtualization | 10% | 146 | 10.3% |
-| 3.0 Infrastructure | 30% | 427 | 30.0% |
+| 3.0 Infrastructure | 30% | 425 | 29.9% |
 | 4.0 Network Assurance | 10% | 158 | 11.1% |
 | 5.0 Security | 20% | 253 | 17.8% |
 | 6.0 Automation & AI | 15% | 229 | 16.1% |
-| **Total** | **100%** | **1424** | **100%** |
+| **Total** | **100%** | **1421** | **100%** |
 
 Meta base de 1000 preguntas alcanzada 2026-09-08, con distribución por
 dominio dentro de ±0.8 puntos porcentuales del peso oficial del blueprint.
@@ -284,6 +284,18 @@ banco actual) pero ya no inflan la cobertura (`%banco`). Verificado en
 vivo tras el fix: `3.1.a` → 96% (21/25/26), `1.1.b` → 83% (19/19/23),
 ningún subtema por encima de 100%. Cambio solo en el JS de
 `app/index.html`/`index.html`; no requirió tocar `question_bank.json`.
+
+**Cuarta ronda de triage por calificación (2026-09-15):** revisando qué
+preguntas se habían calificado desde la última pasada (comparando la
+Sheet de ratings contra el banco actual para descartar calificaciones
+ya procesadas cuyas preguntas ya fueron eliminadas), aparecieron 6
+preguntas nuevas con 2 estrellas — ninguna con 1 estrella — todas del
+lote `b6_` (SD-WAN componentes ×2, QoS ×1, EtherChannel ×3), con el
+mismo patrón de siempre: respuesta correcta visiblemente más larga y
+distractores con lenguaje tipo "reserved solely for", "a rename that
+took effect company-wide", "generally assumed to hard-code". Se
+eliminaron las 6 y se agregaron 3 nuevas (IDs `r5_*`) en estilo
+directo/conciso, una por cada subtema afectado. Banco: 1424 → 1421.
 
 **Limpieza masiva de lenguaje absolutista, todo el banco (2026-09-13):** a
 pedido explícito del usuario ("revisa todo el banco para eliminar esas
