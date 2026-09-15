@@ -265,6 +265,26 @@ de intentos bajo el subtema 1.1.a, inflando en +2/+2 sus valores de
 subtema). No se limpiaron en este pase por ser una edición directa
 sobre datos de la Sheet, fuera del alcance de esta tarea.
 
+**Bug encontrado y corregido: cobertura por encima de 100% (2026-09-15):**
+tras las sucesivas rondas de eliminación de preguntas mal calificadas,
+Cris reportó "hay porcentajes sobre el 100%" en la app. Causa: `subtopicStats`
+contaba cada `questionId` distinto alguna vez respondido para ese subtema,
+sin verificar que la pregunta siguiera existiendo en el banco actual — un
+intento antiguo contra una pregunta ya eliminada seguía sumando al
+numerador (`respondidas`/`correctas`), y como varios subtemas perdieron
+más preguntas de las que ganaron (p. ej. `3.1.a` y `1.1.b`, con varias de
+sus preguntas `b6_*` eliminadas en las rondas de calificación), el
+numerador terminó superando el denominador (`total` del banco actual):
+`3.1.a` llegó a 119% y `1.1.b` a 104%. Corregido agregando un set
+`VALID_IDS` (todos los ids que existen hoy en `ALL_QUESTIONS`) y
+filtrando por él antes de contar una pregunta como respondida/acertada
+en `subtopicStats` — los intentos contra preguntas ya eliminadas se
+siguen contando para la precisión histórica (`%resp.`, que no depende del
+banco actual) pero ya no inflan la cobertura (`%banco`). Verificado en
+vivo tras el fix: `3.1.a` → 96% (21/25/26), `1.1.b` → 83% (19/19/23),
+ningún subtema por encima de 100%. Cambio solo en el JS de
+`app/index.html`/`index.html`; no requirió tocar `question_bank.json`.
+
 **Limpieza masiva de lenguaje absolutista, todo el banco (2026-09-13):** a
 pedido explícito del usuario ("revisa todo el banco para eliminar esas
 respuestas absolutistas que obviamente no son posibles"), se auditó el

@@ -21085,6 +21085,14 @@
   var raw = JSON.parse(document.getElementById("qbank-data").textContent);
   var ALL_QUESTIONS = raw.questions;
 
+  // Attempts/ratings persist in the Sheet even after a question is later
+  // deleted from the bank (e.g. ratings-triage cleanup). VALID_IDS lets
+  // subtopicStats ignore those "ghost" ids so coverage never counts a
+  // question that no longer exists — without this, a subtopic that lost
+  // more questions than it gained could show >100% coverage.
+  var VALID_IDS = {};
+  ALL_QUESTIONS.forEach(function (q) { VALID_IDS[q.id] = true; });
+
   var SUBTOPIC_META = {};
   ALL_QUESTIONS.forEach(function (q) {
     if (!SUBTOPIC_META[q.subtopic]) {
@@ -21231,9 +21239,11 @@
     var lastTs = 0;
     var correctAttempts = 0;
     list.forEach(function (a) {
-      answeredIds[a.questionId] = true;
-      if (a.correct) { masteredIds[a.questionId] = true; correctAttempts++; }
       if (a.ts > lastTs) lastTs = a.ts;
+      correctAttempts += a.correct ? 1 : 0;
+      if (!VALID_IDS[a.questionId]) return; // question since deleted from the bank
+      answeredIds[a.questionId] = true;
+      if (a.correct) { masteredIds[a.questionId] = true; }
     });
     return {
       correct: Object.keys(masteredIds).length,
