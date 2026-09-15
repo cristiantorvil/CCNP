@@ -11,13 +11,13 @@ contenido de forma consistente.
 
 ## Archivos incluidos
 
-- `data/question_bank.json` — banco de preguntas actual (1445 preguntas,
+- `data/question_bank.json` — banco de preguntas actual (1424 preguntas,
   cobertura 49/49 subtemas del blueprint ENCOR 350-401 v1.2, distribuidas
   proporcionalmente al peso de cada dominio en el examen). Formato:
   ```json
   {
-    "version": "2026-09-14_v26",
-    "total": 1445,
+    "version": "2026-09-14_v27",
+    "total": 1424,
     "questions": [
       {
         "id": "trustsec_01",
@@ -62,13 +62,13 @@ contenido de forma consistente.
 
 | Dominio | Peso examen | Actual | % del banco |
 |---|---|---|---|
-| 1.0 Architecture | 15% | 212 | 14.7% |
-| 2.0 Virtualization | 10% | 147 | 10.2% |
-| 3.0 Infrastructure | 30% | 434 | 30.0% |
-| 4.0 Network Assurance | 10% | 164 | 11.3% |
-| 5.0 Security | 20% | 259 | 17.9% |
-| 6.0 Automation & AI | 15% | 229 | 15.8% |
-| **Total** | **100%** | **1445** | **100%** |
+| 1.0 Architecture | 15% | 211 | 14.8% |
+| 2.0 Virtualization | 10% | 146 | 10.3% |
+| 3.0 Infrastructure | 30% | 427 | 30.0% |
+| 4.0 Network Assurance | 10% | 158 | 11.1% |
+| 5.0 Security | 20% | 253 | 17.8% |
+| 6.0 Automation & AI | 15% | 229 | 16.1% |
+| **Total** | **100%** | **1424** | **100%** |
 
 Meta base de 1000 preguntas alcanzada 2026-09-08, con distribución por
 dominio dentro de ±0.8 puntos porcentuales del peso oficial del blueprint.
@@ -232,6 +232,38 @@ EtherChannel, Multicast, APIs Catalyst Center, diseño de red, QoS, VRF).
 Banco: 1464 → 1445. **Regla permanente actualizada:** 1★ = eliminar; 2★ =
 eliminar, reemplazando aproximadamente la mitad por preguntas nuevas de
 estilo directo/conciso (no reescribir en el lugar como antes).
+
+**Aplicación retroactiva de la regla actual a las 42 preguntas de 2★ de
+las rondas 1 y 2 (2026-09-14):** las 18 preguntas de la primera ronda y
+las 24 de la segunda habían sido *reescritas en el lugar* bajo la regla
+anterior ("2★ = reescribir"), antes de que el usuario la corrigiera por
+última vez a "2★ = eliminar + reemplazar la mitad". Para que las 67
+preguntas de 2★ tratadas en total durante el proyecto sigan una sola
+regla consistente, se eliminaron esas 42 y se agregaron 21 preguntas
+nuevas (IDs `r4_*`) en el mismo estilo directo/conciso, cubriendo una
+muestra representativa de los subtemas afectados (AAA, CoPP, threat
+defense, NAC/ISE, diagnóstico, diseño de red, vSwitch, Catalyst Center,
+alta disponibilidad, NTP/PTP, NAT/PAT, policy-based routing, multicast,
+EEM, líneas/autenticación local, NETCONF/RESTCONF, trunking 802.1Q,
+Flexible NetFlow, IP SLA, SPAN/RSPAN/ERSPAN, APIs Catalyst Center).
+Banco: 1445 → 1424. Se reaplicó el shuffle determinístico de posición
+sobre el banco completo tras el cambio (A 26.6%/B 24.2%/C 25.1%/D
+24.2% a nivel banco completo, sobre las 1362 preguntas de respuesta
+única; `correctSet` de selección múltiple excluido de este conteo por
+letra) y se verificaron manualmente los
+valores de cobertura/precisión (correctas/respondidas/total) a nivel de
+subtema, dominio y total general contra un cálculo independiente en
+Python sobre los datos reales de la Google Sheet — coinciden
+exactamente con lo que muestra la app en vivo, y la suma de los
+subtemas de cada dominio cuadra con el total de ese dominio, así como
+la suma de los 6 dominios cuadra con el total general (493/587/1424).
+
+**Nota pendiente (sin resolver):** dos registros de prueba
+(`__test__`, `__browser_test__`) quedaron guardados en la Google Sheet
+de intentos bajo el subtema 1.1.a, inflando en +2/+2 sus valores de
+`correct`/`answered` (impacto mínimo, ~1 punto porcentual en ese
+subtema). No se limpiaron en este pase por ser una edición directa
+sobre datos de la Sheet, fuera del alcance de esta tarea.
 
 **Limpieza masiva de lenguaje absolutista, todo el banco (2026-09-13):** a
 pedido explícito del usuario ("revisa todo el banco para eliminar esas
