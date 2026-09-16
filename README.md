@@ -11,13 +11,15 @@ contenido de forma consistente.
 
 ## Archivos incluidos
 
-- `data/question_bank.json` — banco de preguntas actual (1421 preguntas,
+- `data/question_bank.json` — banco de preguntas actual (996 preguntas,
   cobertura 49/49 subtemas del blueprint ENCOR 350-401 v1.2, distribuidas
-  proporcionalmente al peso de cada dominio en el examen). Formato:
+  proporcionalmente al peso de cada dominio en el examen, con algo de
+  desviación en el dominio 5 tras la purga de 2026-09-16 — ver changelog).
+  Formato:
   ```json
   {
-    "version": "2026-09-15_v28",
-    "total": 1421,
+    "version": "2026-09-16_v29",
+    "total": 996,
     "questions": [
       {
         "id": "trustsec_01",
@@ -62,16 +64,25 @@ contenido de forma consistente.
 
 | Dominio | Peso examen | Actual | % del banco |
 |---|---|---|---|
-| 1.0 Architecture | 15% | 210 | 14.8% |
-| 2.0 Virtualization | 10% | 146 | 10.3% |
-| 3.0 Infrastructure | 30% | 425 | 29.9% |
-| 4.0 Network Assurance | 10% | 158 | 11.1% |
-| 5.0 Security | 20% | 253 | 17.8% |
-| 6.0 Automation & AI | 15% | 229 | 16.1% |
-| **Total** | **100%** | **1421** | **100%** |
+| 1.0 Architecture | 15% | 173 | 17.4% |
+| 2.0 Virtualization | 10% | 119 | 11.9% |
+| 3.0 Infrastructure | 30% | 285 | 28.6% |
+| 4.0 Network Assurance | 10% | 105 | 10.5% |
+| 5.0 Security | 20% | 146 | 14.7% |
+| 6.0 Automation & AI | 15% | 168 | 16.9% |
+| **Total** | **100%** | **996** | **100%** |
+
+La distribución por dominio se desvió del blueprint tras la purga de
+calidad de 2026-09-16 (ver changelog) — Security quedó 5.3 puntos por
+debajo de su peso oficial (20%) porque ahí se concentraron varias de las
+preguntas de peor calidad eliminadas. Sigue pendiente una eventual pasada
+de contenido nuevo en Security si se quiere recuperar la proporción
+exacta; por ahora las 146 preguntas restantes en ese dominio son de
+calidad más consistente que antes de la purga.
 
 Meta base de 1000 preguntas alcanzada 2026-09-08, con distribución por
-dominio dentro de ±0.8 puntos porcentuales del peso oficial del blueprint.
+dominio dentro de ±0.8 puntos porcentuales del peso oficial del blueprint
+(cifra histórica, ver nota arriba sobre la desviación post-purga).
 Todos los 49 subtemas tienen cobertura proporcional a su dominio. Se
 agregaron 35 preguntas adicionales el 2026-09-10 (ver abajo).
 
@@ -296,6 +307,67 @@ distractores con lenguaje tipo "reserved solely for", "a rename that
 took effect company-wide", "generally assumed to hard-code". Se
 eliminaron las 6 y se agregaron 3 nuevas (IDs `r5_*`) en estilo
 directo/conciso, una por cada subtema afectado. Banco: 1424 → 1421.
+
+**Gran purga de calidad, solo preguntas de IA (2026-09-16):** a pedido
+explícito del usuario ("necesito hacer una gran purga y eliminar una
+gran cantidad de preguntas hechas por ia que sean de mala calidad...
+quiero reducir el total al menos a 1000. Las preguntas no de ia
+dejalas intactas"), con el criterio de selección dejado a discreción
+de Claude Code. Metodología:
+- **Universo protegido:** las 469 preguntas con campo `source` (OCG,
+  Exam Cram, ipcisco.com — es decir, "sacadas de internet" en las
+  propias palabras del usuario) quedaron completamente fuera de
+  consideración, sin tocar ni una.
+- **Universo candidato:** las 952 preguntas sin `source` (generadas por
+  IA). De ahí, el lote `b6_` (639 preguntas, el más grande y más
+  antiguo del banco, generado antes de que existiera la disciplina
+  anti-sesgo del proyecto) se identificó como el objetivo casi
+  exclusivo: es el lote que, ronda tras ronda de calificación, sigue
+  apareciendo como origen de las preguntas peor puntuadas (ver rondas
+  1-4 arriba), así que concentrar la purga ahí evita tocar lotes más
+  nuevos (`b2_`-`b5_`, `r3_`-`r5_`, `trustsec_`, `yang_`, `restconf_`,
+  `vxlan_`, `apicc_`, `vswitch_`) que no muestran ese patrón.
+- **Score de calidad programático** por pregunta (no "a ojo"): +3 por
+  cada frase absolutista detectada en los distractores (mismo detector
+  de la limpieza de 2026-09-13, extendido con frases nuevas vistas en
+  rondas recientes: "reserved solely for", "generally assumed to
+  hard-code", "permanently and irreversibly", etc.), +2 por frase de
+  meta-comentario ("a common misconception", "it is worth noting"),
+  +2 por relleno genérico, +2 por sesgo de longitud extremo (correcta
+  >1.6× el promedio de los distractores), +1 por explicación en español
+  demasiado corta (<35 caracteres), +1 por opciones excesivamente
+  extensas (>900 caracteres combinados) — más un desempate continuo por
+  longitud total dentro de un mismo puntaje categórico.
+- **Excepción por calificación directa:** 20 preguntas que puntuaban mal
+  en el score automático tenían 4-5 estrellas puestas por el propio
+  usuario — se excluyeron de la purga sin excepción (el juicio directo
+  del usuario prevalece sobre la heurística) y se reemplazaron con las
+  siguientes candidatas peor puntuadas de la cola.
+- **Piso de cobertura por subtema:** ningún subtema quedó con menos de
+  10 preguntas totales tras la purga (se validó programáticamente antes
+  de ejecutar; 7 candidatas adicionales del lote `b6_` se salvaron por
+  esta razón).
+- Verificación manual de una muestra (la peor puntuada, una del límite
+  de corte, y una del lote conservado con puntaje 0) confirmó que el
+  score correlaciona bien con calidad real — incluso las del límite de
+  corte, aunque no dispararan el detector de frases exactas, mostraban
+  el mismo patrón de distractor absolutista con redacción ligeramente
+  distinta ("no valid use for", "not supported to ever install any",
+  "functionally and technically identical").
+
+Resultado: se eliminaron 425 preguntas del lote `b6_` (de 639 originales
+quedan 214). Banco: 1421 → 996. Se reaplicó el shuffle de posición y se
+reconstruyeron ambos HTML. **Efecto colateral positivo:** el sesgo de
+longitud bank-wide (pendiente desde 2026-09-13, ver
+`feedback_mc_question_bias.md`) bajó de 38.3% a 27.5% "correcta = más
+larga", quedando dentro del rango ~25-30% esperado por azar — las
+preguntas `b6_` peor puntuadas resultaron ser, en gran parte, las mismas
+que inflaban ese sesgo, así que la purga lo corrigió como subproducto sin
+una pasada de rebalanceo dedicada. **Efecto colateral negativo:** la
+distribución por dominio se desvió del blueprint (ver tabla de cobertura
+arriba), sobre todo en Security (20% → 14.7%), porque ahí se concentró
+parte de la purga; queda pendiente si se quiere corregir con contenido
+nuevo.
 
 **Limpieza masiva de lenguaje absolutista, todo el banco (2026-09-13):** a
 pedido explícito del usuario ("revisa todo el banco para eliminar esas
