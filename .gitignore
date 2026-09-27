@@ -12,4 +12,10 @@ merge_batch_examcram5.py
 merge_batch_ch2_5.py
 rebalance_batch.py
 rebuild_html.py
+add_learncisco_batch.py
+shorten_pilot_batch.py
+rebalance_pilot_length.py
+rebalance_pilot_length2.py
+shorten_domain1_batch.py
+rebalance_domain1_length.py
 ocg_extract/

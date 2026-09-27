@@ -11,15 +11,15 @@ contenido de forma consistente.
 
 ## Archivos incluidos
 
-- `data/question_bank.json` — banco de preguntas actual (996 preguntas,
+- `data/question_bank.json` — banco de preguntas actual (1035 preguntas,
   cobertura 49/49 subtemas del blueprint ENCOR 350-401 v1.2, distribuidas
   proporcionalmente al peso de cada dominio en el examen, con algo de
   desviación en el dominio 5 tras la purga de 2026-09-16 — ver changelog).
   Formato:
   ```json
   {
-    "version": "2026-09-16_v29",
-    "total": 996,
+    "version": "2026-09-27_v30",
+    "total": 1035,
     "questions": [
       {
         "id": "trustsec_01",
@@ -64,13 +64,13 @@ contenido de forma consistente.
 
 | Dominio | Peso examen | Actual | % del banco |
 |---|---|---|---|
-| 1.0 Architecture | 15% | 173 | 17.4% |
-| 2.0 Virtualization | 10% | 119 | 11.9% |
-| 3.0 Infrastructure | 30% | 285 | 28.6% |
-| 4.0 Network Assurance | 10% | 105 | 10.5% |
-| 5.0 Security | 20% | 146 | 14.7% |
-| 6.0 Automation & AI | 15% | 168 | 16.9% |
-| **Total** | **100%** | **996** | **100%** |
+| 1.0 Architecture | 15% | 176 | 17.0% |
+| 2.0 Virtualization | 10% | 122 | 11.8% |
+| 3.0 Infrastructure | 30% | 304 | 29.4% |
+| 4.0 Network Assurance | 10% | 111 | 10.7% |
+| 5.0 Security | 20% | 152 | 14.7% |
+| 6.0 Automation & AI | 15% | 170 | 16.4% |
+| **Total** | **100%** | **1035** | **100%** |
 
 La distribución por dominio se desvió del blueprint tras la purga de
 calidad de 2026-09-16 (ver changelog) — Security quedó 5.3 puntos por
@@ -453,3 +453,64 @@ de asumir siempre A-D fijo (antes hardcodeado en `renderQuestion` y
 correcto/incorrecto funcionan bien con 2 opciones. Se re-ejecutó el shuffle
 de posición con una versión generalizada que soporta cualquier cantidad de
 opciones (no solo 4).
+
+**Test de LearnCisco.net agregado (2026-09-27):** Cris pasó un archivo
+`ENCOR TEST.odt` con 55 preguntas de un test de práctica de
+learncisco.net (sin clave de respuestas ni explicaciones). Se procesaron
+con el mismo criterio que ipcisco.com/OCG/Exam Cram: texto reescrito en
+palabras propias (nunca copiado literal), respuesta correcta determinada
+y verificada contra conocimiento real de ENCOR (no solo asumida), y
+chequeo de duplicados contra el banco existente antes de fusionar. De las
+55 originales se descartaron 16: 3 duplicados internos del propio test
+(TCAM, "switch logging level", TrustSec — cada uno aparecía dos veces),
+3 sin subtema de blueprint asociado (TCAM interno, movilidad de WLC
+inalámbrico ×2, PPDIOO), 1 que dependía de una figura/tabla incrustada
+que no sobrevivió la extracción de texto (troubleshooting de VTP), y 5
+que resultaron ser duplicados de hechos ya cubiertos por preguntas
+existentes (puerto UDP de LISP data-plane, tipo de cifrado de `service
+password-encryption`, lenguaje de Chef, definición de "virtual switch",
+comando `ip access-group`, y el estado 2-Way de OSPF en redes
+broadcast). Se agregaron las 39 restantes (`lc_*`), marcadas `"source":
+"learncisco.net"`, con el shuffle de posición aplicado solo a esas 39
+preguntas nuevas (A 12/B 5/C 6/D 9 de 32 preguntas de respuesta única).
+Verificado en navegador: pregunta de opción única y de selección
+múltiple del lote ambas renderizan y califican correctamente. Banco:
+996 → 1035.
+
+**Piloto de acortamiento de preguntas de IA (2026-09-27):** Cris notó
+que sus preguntas propias son cortas (como las de learncisco.net) pero
+las mías (IA) son "larguísimas", y pidió un piloto antes de aplicarlo
+a las 527. Se reescribieron 18 preguntas de los subtemas 4.1/4.2/4.3
+(lotes `b2_`/`b3_`/`b5_`/`b6_`, los anteriores a la disciplina de
+estilo directo de 2026-09-14 — los lotes `r3_`/`r4_`/`r5_` ya estaban
+en formato conciso y se dejaron sin tocar). Primer intento: 51.7% más
+corto, pero midiendo el resultado se encontró que la opción correcta
+había quedado como la más larga en 17/18 preguntas — el mismo sesgo de
+longitud que el proyecto ya había corregido varias veces antes,
+reintroducido sin querer al escribir la versión corta con más
+completitud que los distractores. Se corrigió en una segunda pasada
+alargando un distractor por pregunta con detalle técnico genuino
+(mismo método de 2026-09-12), sin tocar la respuesta correcta,
+quedando en 4/18 (22.2%, cerca del ~25% esperado por azar) y 50.2% más
+corto que el original. Verificado en navegador. **Pendiente de
+decisión con Cris:** si se aplica al resto del banco (~509 preguntas
+IA restantes en lotes `b2_`-`b6_`), aplicar esta misma disciplina de
+dos pasadas (acortar, después medir y corregir sesgo de longitud) en
+vez de asumir que la primera pasada ya es suficiente.
+
+**Dominio 1 (Architecture) completo (2026-09-27):** tras el piloto,
+Cris pidió aplicar el acortamiento a "todas las preguntas de IA del
+punto 1" — las 95 preguntas de dominio 1 en lotes `b2_`/`b3_`/`b5_`/`b6_`
+(quedan sin tocar `r3_`/`r4_`/`r5_`, ya en estilo directo). Mismo
+proceso de dos pasadas que el piloto: primera pasada 46.4% más corto,
+pero con la respuesta correcta como la más larga en 86/95 (90.5%) —
+una confirmación a mayor escala de que escribir la versión corta con
+más completitud que los distractores es un hábito difícil de evitar
+incluso sabiendo del problema. Segunda pasada: se extendió un
+distractor por pregunta con detalle técnico genuino en 79 preguntas,
+lo cual sobre-corrigió a 8.4% (el patrón inverso — "la correcta nunca
+es la más larga" — es igual de explotable); se revirtieron 16 de esas
+79 extensiones a su texto de la primera pasada para volver a subir el
+número, quedando en **24/95 (25.3%)**, alineado con el ~25% esperado
+por azar. Verificado en navegador. Banco: sin cambio en total de
+preguntas (sigue en 1035), solo se reescribió el texto de las 95.
