@@ -444,6 +444,25 @@
     color: var(--text-dim); font-size: 0.88rem; text-align: center; padding: 30px 10px;
   }
 
+  /* --- mistakes view --- */
+  .mistake-list { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
+  .mistake-row {
+    border: 1px solid var(--border); border-radius: 9px; background: var(--surface-2);
+  }
+  .mistake-row > summary {
+    list-style: none; cursor: pointer;
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    padding: 12px 14px;
+  }
+  .mistake-row > summary::-webkit-details-marker { display: none; }
+  .mistake-q {
+    flex: 1 1 260px; min-width: 0; font-size: 0.9rem; line-height: 1.4;
+  }
+  .mistake-body {
+    padding: 0 14px 14px; display: flex; flex-direction: column; gap: 10px;
+  }
+  .mistake-correct { font-size: 0.88rem; }
+
   footer.foot {
     text-align: center; color: var(--text-dim); font-size: 0.72rem;
     margin-top: 28px; font-family: "IBM Plex Mono", monospace;
@@ -15060,6 +15079,7 @@
       <span class="mono" id="db-status" style="font-size:0.72rem; color: var(--text-dim);"><span class="status-dot" id="db-dot"></span><span id="db-label">conectando…</span></span>
       <nav class="tabs">
         <button id="tab-practice" class="active">Practice</button>
+        <button id="tab-mistakes">Mistakes</button>
         <button id="tab-progress">Progress</button>
       </nav>
     </div>
@@ -15100,6 +15120,9 @@
   // more questions than it gained could show >100% coverage.
   var VALID_IDS = {};
   ALL_QUESTIONS.forEach(function (q) { VALID_IDS[q.id] = true; });
+
+  var QUESTIONS_BY_ID = {};
+  ALL_QUESTIONS.forEach(function (q) { QUESTIONS_BY_ID[q.id] = q; });
 
   var SUBTOPIC_META = {};
   ALL_QUESTIONS.forEach(function (q) {
@@ -15970,6 +15993,118 @@
     return container;
   }
 
+  // Per-question wrong/total counts from the attempts history, restricted
+  // to questions still active in the bank (same VALID_IDS/hiddenIds rule
+  // as coverage) so a deleted or ratings-hidden question can't show up as
+  // a "common mistake" you can no longer even practice.
+  function questionMistakeStats() {
+    var byId = {};
+    state.attempts.forEach(function (a) {
+      if (!VALID_IDS[a.questionId] || state.hiddenIds[a.questionId]) return;
+      var e = byId[a.questionId];
+      if (!e) { e = byId[a.questionId] = { wrong: 0, total: 0, lastTs: -1, lastCorrect: null }; }
+      e.total++;
+      if (!a.correct) e.wrong++;
+      if (a.ts >= e.lastTs) { e.lastTs = a.ts; e.lastCorrect = a.correct; }
+    });
+    return byId;
+  }
+
+  function renderMistakes() {
+    var stats = questionMistakeStats();
+    var missedIds = Object.keys(stats).filter(function (id) { return stats[id].wrong > 0 && QUESTIONS_BY_ID[id]; });
+
+    if (!missedIds.length) {
+      return el('<div class="panel empty-note">Todavía no hay errores registrados. A medida que practiques, las preguntas que más se te compliquen van a ir apareciendo acá.</div>');
+    }
+
+    var bySubtopic = {};
+    missedIds.forEach(function (id) {
+      var q = QUESTIONS_BY_ID[id];
+      var s = bySubtopic[q.subtopic] || (bySubtopic[q.subtopic] = { wrong: 0, name: SUBTOPIC_META[q.subtopic] ? SUBTOPIC_META[q.subtopic].name : "" });
+      s.wrong += stats[id].wrong;
+    });
+    var subtopicRows = Object.keys(bySubtopic)
+      .sort(function (a, b) { return bySubtopic[b].wrong - bySubtopic[a].wrong; })
+      .slice(0, 8)
+      .map(function (s) {
+        return '<div class="summary-row"><span class="mono">' + s + " " + bySubtopic[s].name + '</span><span class="mono">' + bySubtopic[s].wrong + ' fallos</span></div>';
+      }).join("");
+
+    var ranked = missedIds.map(function (id) {
+      return { id: id, q: QUESTIONS_BY_ID[id], stat: stats[id] };
+    }).sort(function (a, b) {
+      if (b.stat.wrong !== a.stat.wrong) return b.stat.wrong - a.stat.wrong;
+      var ra = a.stat.wrong / a.stat.total, rb = b.stat.wrong / b.stat.total;
+      if (rb !== ra) return rb - ra;
+      return b.stat.total - a.stat.total;
+    });
+
+    // Prefer showing recurring mistakes (missed more than once) once you
+    // have enough history — a single miss isn't a pattern yet.
+    var recurring = ranked.filter(function (r) { return r.stat.wrong >= 2; });
+    var shown = (recurring.length ? recurring : ranked).slice(0, 30);
+
+    var rowsHtml = shown.map(function (r) {
+      var q = r.q;
+      var lastPill = r.stat.lastCorrect === false
+        ? '<span class="pill bad">última vez: fallada</span>'
+        : '<span class="pill good">última vez: acertada</span>';
+      return '<details class="mistake-row">' +
+        '<summary>' +
+          '<span class="badge mono">' + q.subtopic + '</span>' +
+          '<span class="mistake-q"></span>' +
+          '<span class="pill bad">' + r.stat.wrong + '/' + r.stat.total + ' fallos</span>' +
+        '</summary>' +
+        '<div class="mistake-body">' +
+          '<div class="mistake-correct"><b>Respuesta correcta:</b> <span class="mistake-correct-text"></span></div>' +
+          '<div class="explain"><span class="explain-label">Explicación</span><span class="mistake-explain-text"></span></div>' +
+          lastPill +
+        '</div>' +
+      '</details>';
+    }).join("");
+
+    var wrap = el(
+      '<div>' +
+        '<div class="panel">' +
+          '<h2 class="section-title">Subtemas con más errores</h2>' +
+          '<div style="max-width:460px;">' + subtopicRows + '</div>' +
+        '</div>' +
+        '<div class="panel" style="margin-top:16px;">' +
+          '<div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:6px;">' +
+            '<h2 class="section-title" style="margin:0;">' + (recurring.length ? "Errores recurrentes (2+ fallos)" : "Preguntas falladas") + '</h2>' +
+            '<button class="btn primary" id="drill-mistakes-btn">Practicar estas ' + shown.length + '</button>' +
+          '</div>' +
+          '<div class="mistake-list"></div>' +
+        '</div>' +
+      '</div>'
+    );
+
+    // Text content set via textContent (not baked into the HTML string
+    // above) so question/option/explanation text is never interpreted as
+    // markup — same reason renderQuestion does it this way.
+    var listEl = wrap.querySelector(".mistake-list");
+    listEl.innerHTML = rowsHtml;
+    var rows = listEl.querySelectorAll(".mistake-row");
+    shown.forEach(function (r, i) {
+      var row = rows[i];
+      row.querySelector(".mistake-q").textContent = r.q.question;
+      var multi = isMulti(r.q);
+      var correctText = multi
+        ? r.q.correctSet.map(function (k) { return k + ") " + r.q.options[k]; }).join(" · ")
+        : r.q.correct + ") " + r.q.options[r.q.correct];
+      row.querySelector(".mistake-correct-text").textContent = correctText;
+      row.querySelector(".mistake-explain-text").textContent = r.q.explanation_es;
+    });
+
+    wrap.querySelector("#drill-mistakes-btn").addEventListener("click", function () {
+      state.session = { queue: shown.map(function (r) { return r.q; }), idx: 0, answered: [], scope: { type: "drill-mistakes" }, locked: false, chosenKey: null, chosenKeys: null, selected: [], examMode: false };
+      switchTab("practice");
+    });
+
+    return wrap;
+  }
+
   function render() {
     app.innerHTML = "";
     if (state.view === "practice") {
@@ -15983,16 +16118,17 @@
       }
     } else if (state.view === "summary") {
       app.appendChild(renderSummary());
+    } else if (state.view === "mistakes") {
+      app.appendChild(renderMistakes());
     } else if (state.view === "progress") {
       app.appendChild(renderProgress());
     }
   }
 
   function switchTab(name) {
-    state.view = name === "progress" ? "progress" : (state.session ? "practice" : "practice");
-    if (name === "practice" && !state.session) state.view = "practice";
-    if (name === "progress") state.view = "progress";
+    state.view = name;
     document.getElementById("tab-practice").classList.toggle("active", name === "practice");
+    document.getElementById("tab-mistakes").classList.toggle("active", name === "mistakes");
     document.getElementById("tab-progress").classList.toggle("active", name === "progress");
     render();
   }
@@ -16000,6 +16136,9 @@
   document.getElementById("tab-practice").addEventListener("click", function () {
     if (state.view === "summary") { state.session = null; }
     switchTab("practice");
+  });
+  document.getElementById("tab-mistakes").addEventListener("click", function () {
+    switchTab("mistakes");
   });
   document.getElementById("tab-progress").addEventListener("click", function () {
     switchTab("progress");
