@@ -18,4 +18,6 @@ rebalance_pilot_length.py
 rebalance_pilot_length2.py
 shorten_domain1_batch.py
 rebalance_domain1_length.py
+shorten_domain2_batch.py
+rebalance_domain2_length.py
 ocg_extract/

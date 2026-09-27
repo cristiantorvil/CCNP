@@ -514,3 +514,13 @@ es la más larga" — es igual de explotable); se revirtieron 16 de esas
 número, quedando en **24/95 (25.3%)**, alineado con el ~25% esperado
 por azar. Verificado en navegador. Banco: sin cambio en total de
 preguntas (sigue en 1035), solo se reescribió el texto de las 95.
+
+**Dominio 2 (Virtualization) completo (2026-09-27):** mismo proceso
+sobre las 71 preguntas de IA de dominio 2 en lotes `vswitch_`/`vxlan_`/
+`b2_`/`b3_`/`b5_`/`b6_` (quedan intactas `r3_`/`r4_`, ya concisas).
+46.0% más corto en total. Sesgo de longitud: primera pasada 88.7%
+(63/71) con la correcta como más larga; se corrigió en dos rondas
+adicionales (48 distractores extendidos, luego 13 más de ajuste fino)
+hasta **18/71 (25.4%)**. Verificado en navegador y directamente contra
+el JSON embebido en el HTML. Banco: sigue en 1035 preguntas, solo texto
+reescrito.
