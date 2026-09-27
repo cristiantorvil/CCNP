@@ -15116,8 +15116,32 @@
     view: "practice",
     dbMode: "connecting", // connecting | live | local
     attempts: [],
-    session: null // { queue: [q,...], idx, answered: [{q, chosen, correct}], scope, startedAt }
+    ratings: {}, // questionId -> { rating, ts } (latest rating only)
+    hiddenIds: {}, // questionId -> true, when its latest rating is 1-2 stars
+    session: null // { queue: [q,...], idx, answered: [{q, chosen, correct}], scope, startedAt, examMode }
   };
+
+  // A 1-2 star rating hides a question from future sessions and from the
+  // coverage denominator immediately, without waiting for a manual purge of
+  // question_bank.json — the physical delete/replace-half triage still
+  // happens later in batch, this just stops it from being served meanwhile.
+  function activeQuestions() {
+    return ALL_QUESTIONS.filter(function (q) { return !state.hiddenIds[q.id]; });
+  }
+
+  function recomputeHidden() {
+    var hidden = {};
+    Object.keys(state.ratings).forEach(function (id) {
+      if (state.ratings[id].rating <= 2) hidden[id] = true;
+    });
+    state.hiddenIds = hidden;
+    Object.keys(SUBTOPIC_META).forEach(function (s) { SUBTOPIC_META[s].count = 0; });
+    ALL_QUESTIONS.forEach(function (q) {
+      if (hidden[q.id]) return;
+      SUBTOPIC_META[q.subtopic].count++;
+    });
+    document.getElementById("bank-total-foot").textContent = ALL_QUESTIONS.length - Object.keys(hidden).length;
+  }
 
   var db = null;
   var LOCAL_KEY = "encor_attempts_fallback_v1";
@@ -15189,6 +15213,14 @@
         ts: a.ts || 0
       };
     });
+    var ratingsMap = {};
+    (data.ratings || []).forEach(function (r) {
+      if (!ratingsMap[r.questionId] || ratingsMap[r.questionId].ts < (r.ts || 0)) {
+        ratingsMap[r.questionId] = { rating: r.rating, ts: r.ts || 0 };
+      }
+    });
+    state.ratings = ratingsMap;
+    recomputeHidden();
     setDbStatus("live");
     render();
   }
@@ -15250,6 +15282,7 @@
       if (a.ts > lastTs) lastTs = a.ts;
       correctAttempts += a.correct ? 1 : 0;
       if (!VALID_IDS[a.questionId]) return; // question since deleted from the bank
+      if (state.hiddenIds[a.questionId]) return; // question hidden by a 1-2 star rating
       answeredIds[a.questionId] = true;
       if (a.correct) { masteredIds[a.questionId] = true; }
     });
@@ -15346,10 +15379,38 @@
     return map;
   }
 
+  function lastResultMap() {
+    var map = {};
+    state.attempts.forEach(function (a) {
+      if (!map[a.questionId] || map[a.questionId].ts < a.ts) map[a.questionId] = { ts: a.ts, correct: a.correct };
+    });
+    return map;
+  }
+
+  // A question counts as "pending" (not yet mastered) if it has never been
+  // answered, or its most recent attempt was wrong — this is what "answer
+  // everything correctly eventually" actually means per-question.
+  function isPending(q, lastResults) {
+    var r = lastResults[q.id];
+    return !r || r.correct === false;
+  }
+
+  function pendingCountFor(subtopic, lastResults) {
+    var n = 0;
+    activeQuestions().forEach(function (q) {
+      if (q.subtopic === subtopic && isPending(q, lastResults)) n++;
+    });
+    return n;
+  }
+
   function buildSession(scope, count) {
-    var pool = ALL_QUESTIONS.filter(function (q) {
-      if (scope.type === "domain") return q.subtopic.split(".")[0] === scope.domain;
-      if (scope.type === "subtopic") return q.subtopic === scope.subtopic;
+    var lastResults = lastResultMap();
+    var pool = activeQuestions().filter(function (q) {
+      if (scope.type === "domain" && q.subtopic.split(".")[0] !== scope.domain) return false;
+      if (scope.type === "subtopic" && q.subtopic !== scope.subtopic) return false;
+      if (scope.status === "unanswered" && lastResults[q.id]) return false;
+      if (scope.status === "incorrect" && !(lastResults[q.id] && lastResults[q.id].correct === false)) return false;
+      if (scope.status === "pending" && !isPending(q, lastResults)) return false;
       return true;
     });
     var bySubtopic = {};
@@ -15398,6 +15459,65 @@
     return chosen;
   }
 
+  // Simulated exam: samples proportionally by official blueprint domain
+  // weight (like the real exam's question mix), across the whole active
+  // bank regardless of scope/status filters or per-subtopic weakness —
+  // unlike "Auto" study sessions, it does not bias toward weak subtopics.
+  function buildExamSession(count) {
+    var pool = activeQuestions();
+    var lastMap = lastAnsweredMap();
+    var byDomain = {};
+    pool.forEach(function (q) {
+      var d = q.subtopic.split(".")[0];
+      (byDomain[d] = byDomain[d] || []).push(q);
+    });
+    var domains = Object.keys(DOMAIN_META);
+    var totalWeight = domains.reduce(function (sum, d) { return sum + DOMAIN_META[d].weight; }, 0);
+    var quota = {};
+    domains.forEach(function (d) { quota[d] = Math.round(count * DOMAIN_META[d].weight / totalWeight); });
+    var drift = count - domains.reduce(function (s, d) { return s + quota[d]; }, 0);
+    var byWeightDesc = domains.slice().sort(function (a, b) { return DOMAIN_META[b].weight - DOMAIN_META[a].weight; });
+    var di = 0;
+    while (drift !== 0 && byWeightDesc.length) {
+      var d0 = byWeightDesc[di % byWeightDesc.length];
+      quota[d0] += drift > 0 ? 1 : -1;
+      drift += drift > 0 ? -1 : 1;
+      di++;
+    }
+
+    var chosen = [];
+    var chosenIds = {};
+    domains.forEach(function (d) {
+      var arr = (byDomain[d] || []).slice().sort(function (a, b) {
+        var la = lastMap[a.id] || 0, lb = lastMap[b.id] || 0;
+        return la - lb;
+      });
+      var n = Math.min(quota[d], arr.length);
+      for (var i = 0; i < n; i++) {
+        chosen.push(arr[i]);
+        chosenIds[arr[i].id] = true;
+      }
+    });
+
+    if (chosen.length < count) {
+      var remaining = pool.filter(function (q) { return !chosenIds[q.id]; }).sort(function (a, b) {
+        var la = lastMap[a.id] || 0, lb = lastMap[b.id] || 0;
+        return la - lb;
+      });
+      var need = count - chosen.length;
+      for (var j = 0; j < need && j < remaining.length; j++) {
+        chosen.push(remaining[j]);
+        chosenIds[remaining[j].id] = true;
+      }
+    }
+
+    for (var k = chosen.length - 1; k > 0; k--) {
+      var r = Math.floor(Math.random() * (k + 1));
+      var tmp = chosen[k]; chosen[k] = chosen[r]; chosen[r] = tmp;
+    }
+    return chosen;
+  }
+
   // ---------- rendering ----------
   var app = document.getElementById("app");
 
@@ -15408,11 +15528,13 @@
   }
 
   function renderPracticeSetup() {
+    var lastResults = lastResultMap();
     var domainOptions = Object.keys(DOMAIN_META).map(function (d) {
       return '<option value="' + d + '">' + d + ".0 " + DOMAIN_META[d].name + "</option>";
     }).join("");
     var subtopicOptions = Object.keys(SUBTOPIC_META).sort().map(function (s) {
-      return '<option value="' + s + '">' + s + " " + SUBTOPIC_META[s].name + "</option>";
+      var pend = pendingCountFor(s, lastResults);
+      return '<option value="' + s + '">' + s + " " + SUBTOPIC_META[s].name + " (" + pend + " pend.)</option>";
     }).join("");
 
     var score = overallScore();
@@ -15423,6 +15545,15 @@
         '<div class="panel">' +
           '<h2 class="section-title">Nueva sesión</h2>' +
           '<div class="field-row">' +
+            '<div class="field">' +
+              '<label>Modo</label>' +
+              '<select id="session-mode">' +
+                '<option value="study">Estudio (feedback inmediato)</option>' +
+                '<option value="exam">Examen simulado (feedback al final)</option>' +
+              '</select>' +
+            '</div>' +
+          '</div>' +
+          '<div class="field-row" id="study-fields">' +
             '<div class="field">' +
               '<label>Alcance</label>' +
               '<select id="scope-type">' +
@@ -15440,12 +15571,31 @@
               '<select id="scope-subtopic">' + subtopicOptions + '</select>' +
             '</div>' +
             '<div class="field">' +
+              '<label>Estado</label>' +
+              '<select id="scope-status">' +
+                '<option value="all">Todas</option>' +
+                '<option value="pending">Pendientes (no respondidas o falladas)</option>' +
+                '<option value="unanswered">Solo no respondidas</option>' +
+                '<option value="incorrect">Solo falladas (última vez)</option>' +
+              '</select>' +
+            '</div>' +
+            '<div class="field">' +
               '<label>Preguntas</label>' +
               '<select id="scope-count">' +
                 '<option value="5">5</option>' +
                 '<option value="10" selected>10</option>' +
                 '<option value="15">15</option>' +
                 '<option value="25">25</option>' +
+              '</select>' +
+            '</div>' +
+          '</div>' +
+          '<div class="field-row" id="exam-fields" style="display:none;">' +
+            '<div class="field">' +
+              '<label>Preguntas</label>' +
+              '<select id="exam-count">' +
+                '<option value="90" selected>90</option>' +
+                '<option value="100">100</option>' +
+                '<option value="110">110</option>' +
               '</select>' +
             '</div>' +
           '</div>' +
@@ -15464,18 +15614,33 @@
       wrap.querySelector("#scope-subtopic-field").style.display = e.target.value === "subtopic" ? "flex" : "none";
     });
 
+    wrap.querySelector("#session-mode").addEventListener("change", function (e) {
+      var isExam = e.target.value === "exam";
+      wrap.querySelector("#study-fields").style.display = isExam ? "none" : "flex";
+      wrap.querySelector("#exam-fields").style.display = isExam ? "flex" : "none";
+    });
+
     wrap.querySelector("#start-session").addEventListener("click", function () {
-      var type = wrap.querySelector("#scope-type").value;
-      var scope = { type: type };
-      if (type === "domain") scope.domain = wrap.querySelector("#scope-domain").value;
-      if (type === "subtopic") scope.subtopic = wrap.querySelector("#scope-subtopic").value;
-      var count = parseInt(wrap.querySelector("#scope-count").value, 10);
-      var queue = buildSession(scope, count);
+      var examMode = wrap.querySelector("#session-mode").value === "exam";
+      var scope, queue;
+      if (examMode) {
+        var examCount = parseInt(wrap.querySelector("#exam-count").value, 10);
+        scope = { type: "exam" };
+        queue = buildExamSession(examCount);
+      } else {
+        var type = wrap.querySelector("#scope-type").value;
+        scope = { type: type };
+        if (type === "domain") scope.domain = wrap.querySelector("#scope-domain").value;
+        if (type === "subtopic") scope.subtopic = wrap.querySelector("#scope-subtopic").value;
+        scope.status = wrap.querySelector("#scope-status").value;
+        var count = parseInt(wrap.querySelector("#scope-count").value, 10);
+        queue = buildSession(scope, count);
+      }
       if (!queue.length) {
-        alert("No hay preguntas disponibles para ese alcance todavía.");
+        alert("No hay preguntas disponibles para ese alcance y estado todavía.");
         return;
       }
-      state.session = { queue: queue, idx: 0, answered: [], scope: scope, locked: false, chosenKey: null, chosenKeys: null, selected: [] };
+      state.session = { queue: queue, idx: 0, answered: [], scope: scope, locked: false, chosenKey: null, chosenKeys: null, selected: [], examMode: examMode };
       render();
     });
 
@@ -15580,6 +15745,7 @@
   }
 
   function applyLockedState(wrap, q, chosenKeyOrKeys, multi) {
+    var examMode = !!state.session.examMode;
     var buttons = wrap.querySelectorAll(".option");
     var correctSet = multi ? q.correctSet : [q.correct];
     var chosenSet = multi ? (chosenKeyOrKeys || []) : [chosenKeyOrKeys];
@@ -15587,15 +15753,28 @@
       var key = Object.keys(q.options)[i];
       btn.disabled = true;
       btn.classList.remove("selected");
+      if (examMode) {
+        if (chosenSet.indexOf(key) !== -1) btn.classList.add("selected");
+        return;
+      }
       if (correctSet.indexOf(key) !== -1) btn.classList.add("correct");
       else if (chosenSet.indexOf(key) !== -1) btn.classList.add("incorrect");
     });
-    var box = wrap.querySelector("#explain-box");
-    box.style.display = "block";
-    wrap.querySelector("#explain-text").textContent = q.explanation_es;
-    wrap.querySelector("#next-btn").style.display = "inline-block";
     var submitBtn = wrap.querySelector("#submit-multi-btn");
     if (submitBtn) submitBtn.style.display = "none";
+    wrap.querySelector("#next-btn").style.display = "inline-block";
+    var box = wrap.querySelector("#explain-box");
+    if (examMode) {
+      // Real exam conditions: no per-question reveal — correctness and
+      // explanations only show up in the final summary, and rating a
+      // question mid-exam doesn't make sense either.
+      box.style.display = "none";
+      var rateBox = wrap.querySelector("#rate-box");
+      if (rateBox) rateBox.style.display = "none";
+      return;
+    }
+    box.style.display = "block";
+    wrap.querySelector("#explain-text").textContent = q.explanation_es;
     renderRateBox(wrap, q);
   }
 
@@ -15623,6 +15802,8 @@
     s.rated = s.rated || {};
     s.rated[q.id] = rating;
     renderRateBox(wrap, q);
+    state.ratings[q.id] = { rating: rating, ts: Date.now() };
+    recomputeHidden();
     if (SHEETS_WEBAPP_URL) {
       fetch(SHEETS_WEBAPP_URL, {
         method: "POST",
@@ -15660,6 +15841,11 @@
       return '<div class="summary-row"><span class="mono">' + sub + " " + r.name + '</span><span class="mono">' + r.correct + "/" + r.total + '</span></div>';
     }).join("");
 
+    var missedQuestions = s.answered.filter(function (a) { return !a.correct; }).map(function (a) { return a.q; });
+    var reviewBtn = missedQuestions.length
+      ? '<button class="btn ghost" id="review-missed-btn">Repasar ' + missedQuestions.length + ' falladas</button>'
+      : "";
+
     var wrap = el(
       '<div class="panel" style="text-align:center;">' +
         '<h2 class="section-title">Sesión completa</h2>' +
@@ -15668,6 +15854,7 @@
         '<div style="text-align:left; max-width:420px; margin: 0 auto 20px;">' + rows + '</div>' +
         '<div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">' +
           '<button class="btn primary" id="new-session-btn">Nueva sesión</button>' +
+          reviewBtn +
           '<button class="btn ghost" id="view-progress-btn">Ver progreso</button>' +
         '</div>' +
       '</div>'
@@ -15677,6 +15864,13 @@
       state.view = "practice";
       render();
     });
+    if (missedQuestions.length) {
+      wrap.querySelector("#review-missed-btn").addEventListener("click", function () {
+        state.session = { queue: missedQuestions, idx: 0, answered: [], scope: { type: "review-missed" }, locked: false, chosenKey: null, chosenKeys: null, selected: [], examMode: false };
+        state.view = "practice";
+        render();
+      });
+    }
     wrap.querySelector("#view-progress-btn").addEventListener("click", function () {
       state.session = null;
       state.view = "progress";
@@ -15689,6 +15883,7 @@
     var score = overallScore();
     var delta = score - TARGET_SCORE;
     var ans = overallAnsweredScore();
+    var lastResultsForProgress = lastResultMap();
     var container = document.createElement("div");
 
     var grandCorrect = 0, grandAnswered = 0, grandTotal = 0;
@@ -15733,10 +15928,12 @@
         var ansPct = w.attemptsCount ? (100 * w.correctAttempts / w.attemptsCount) : null;
         var covLabel = covSubPct === null ? "—" : covSubPct.toFixed(0) + "%";
         var ansLabel = ansPct === null ? "—" : ansPct.toFixed(0) + "%";
+        var pendCount = pendingCountFor(sub, lastResultsForProgress);
         return '<div class="subtopic-row">' +
           '<span class="code">' + sub + '</span>' +
           '<span class="name">' + SUBTOPIC_META[sub].name + '</span>' +
           '<span class="frac" title="correctas/respondidas/total del banco">' + w.correct + "/" + w.answered + "/" + w.total + '</span>' +
+          '<span class="pill flat" title="Preguntas no respondidas o falladas la última vez, de este subtema">' + pendCount + ' pend.</span>' +
           '<span class="pill info" title="Preguntas respondidas al menos una vez, sobre el total del banco para este subtema">' + covLabel + '</span>' +
           '<span class="pill ' + pctClass(ansPct) + '" title="Precisión sobre las preguntas contestadas (' + w.correctAttempts + '/' + w.attemptsCount + ')">' + ansLabel + '</span>' +
         '</div>';
