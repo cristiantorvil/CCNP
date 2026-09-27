@@ -524,3 +524,12 @@ adicionales (48 distractores extendidos, luego 13 más de ajuste fino)
 hasta **18/71 (25.4%)**. Verificado en navegador y directamente contra
 el JSON embebido en el HTML. Banco: sigue en 1035 preguntas, solo texto
 reescrito.
+
+**Dominio 3 (Infrastructure) completo (2026-09-27):** el más grande de
+los tres hechos hasta ahora — 126 preguntas de IA en lotes `b2_`/`b3_`/
+`b4_`/`b6_` (quedan intactas `r3_`/`r4_`/`r5_`). 49.6% más corto en
+total. Sesgo de longitud: primera pasada 81.0% (102/126), corregido en
+dos rondas adicionales (70 distractores extendidos, luego 24 más de
+ajuste fino) hasta **40/126 (31.7%)**, dentro del rango 19-31% ya
+observado históricamente en el proyecto. Verificado en navegador y
+contra el JSON embebido. Banco: sigue en 1035 preguntas.
