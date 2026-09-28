@@ -1448,43 +1448,43 @@
    "id": "b2_4.4_01",
    "subtopic": "4.4",
    "name": "IP SLA",
-   "question": "What is the primary purpose of Cisco IP SLA (Service Level Agreement)?",
+   "question": "What's the primary purpose of Cisco IP SLA?",
    "options": {
     "A": "To replace the need for routing protocols",
-    "B": "To actively generate synthetic traffic and measure network performance metrics such as latency, jitter, and packet loss between two points",
-    "C": "To provide QoS marking for all traffic on an interface, replacing the need to configure any class-maps or policy-maps manually, since IP SLA operation types can mark a DSCP value on probe packets",
+    "B": "To actively generate synthetic traffic and measure metrics like latency, jitter, and packet loss",
+    "C": "It provides QoS marking for all traffic on an interface, replacing the need to configure any class-maps manually at all",
     "D": "To perform Layer 2 loop detection"
    },
    "correct": "B",
-   "explanation_es": "IP SLA genera tráfico sintético de prueba de forma activa entre dos puntos de la red y mide métricas de desempeño como latencia, jitter y pérdida de paquetes, permitiendo monitorear proactivamente el estado del servicio (por ejemplo, para validar SLAs o disparar acciones como cambios de ruta ante degradación)."
+   "explanation_es": "IP SLA genera tráfico sintético de prueba de forma activa y mide métricas de desempeño como latencia, jitter y pérdida de paquetes, permitiendo monitorear proactivamente el estado del servicio."
   },
   {
    "id": "b2_4.5_01",
    "subtopic": "4.5",
    "name": "Catalyst Center",
-   "question": "Which of the following best describes the core role of Cisco Catalyst Center (formerly DNA Center) in an enterprise network?",
+   "question": "What best describes Catalyst Center's core role in an enterprise network?",
    "options": {
-    "A": "It provides centralized, intent-based network configuration, monitoring (Assurance), and management, including AI-powered workflows for troubleshooting and optimization",
-    "B": "It is a Layer 2 switch used only in the access layer",
-    "C": "It is a wireless-only management platform",
-    "D": "It functions only as a syslog collector with no configuration capabilities, similar to a basic logging server used purely for archival purposes with no dashboard or workflow automation"
+    "A": "Centralized, intent-based configuration, monitoring (Assurance), and AI-powered troubleshooting",
+    "B": "A Layer 2 switch used only in the access layer",
+    "C": "A wireless-only management platform",
+    "D": "It functions only as a syslog collector with no configuration capability, similar to a basic archival logging server"
    },
    "correct": "A",
-   "explanation_es": "Catalyst Center centraliza la configuración de red basada en intención (intent-based), el monitoreo y aseguramiento (Assurance) de la red, y añade flujos de trabajo potenciados por IA para troubleshooting y optimización proactiva, tanto para infraestructura cableada como inalámbrica."
+   "explanation_es": "Catalyst Center centraliza la configuración basada en intención, el monitoreo y aseguramiento (Assurance) de la red, y añade flujos de trabajo con IA para troubleshooting y optimización proactiva."
   },
   {
    "id": "b2_4.6_01",
    "subtopic": "4.6",
    "name": "NETCONF/RESTCONF",
-   "question": "Which of these are core NETCONF operations used to retrieve and modify device configuration?",
+   "question": "Which are core NETCONF operations to retrieve and modify device config?",
    "options": {
-    "A": "<get-config> to retrieve configuration data and <edit-config> to modify configuration data within a target datastore",
+    "A": "<get-config> retrieves config; <edit-config> modifies it within a target datastore",
     "B": "SELECT and UPDATE, borrowed from SQL",
     "C": "Only HTTP GET and POST, since NETCONF is HTTP-based",
-    "D": "NETCONF has no defined operations; it is purely a transport mechanism with no standardized RPC calls defined in its specification"
+    "D": "NETCONF has no defined operations at all; it's purely a transport mechanism with no standardized RPC calls in its spec"
    },
    "correct": "A",
-   "explanation_es": "NETCONF define operaciones RPC específicas como <get-config> para recuperar la configuración de un datastore, y <edit-config> para modificarla; estas operaciones se intercambian en mensajes XML sobre una sesión persistente, típicamente sobre SSH, a diferencia de RESTCONF que usa verbos HTTP."
+   "explanation_es": "NETCONF define operaciones RPC como <get-config> para recuperar la configuración de un datastore y <edit-config> para modificarla, intercambiadas en XML sobre una sesión persistente, típicamente vía SSH."
   },
   {
    "id": "b2_5.1.a_01",
@@ -2582,15 +2582,15 @@
    "id": "b3_4.4_02",
    "subtopic": "4.4",
    "name": "IP SLA",
-   "question": "What is the purpose of an IP SLA 'responder' configured on the target device of a probe?",
+   "question": "What's the purpose of an IP SLA 'responder' on the target device?",
    "options": {
-    "A": "It improves measurement accuracy (especially for jitter and latency) by timestamping the probe packets on the target device itself, rather than relying solely on round-trip estimates from the source",
+    "A": "It timestamps probe packets on the target itself, improving jitter/latency accuracy",
     "B": "It blocks all IP SLA probes from reaching that device",
-    "C": "It is required only for ICMP-based operations, never for UDP-based ones",
-    "D": "It converts the target device into an IP SLA source itself, allowing it to originate its own independent probes toward other devices on the network without any additional configuration"
+    "C": "It's required only for ICMP operations, never UDP-based ones",
+    "D": "It converts the target into an IP SLA source, originating its own probes"
    },
    "correct": "A",
-   "explanation_es": "El IP SLA Responder, configurado en el dispositivo destino de la prueba, mejora la precisión de la medición (especialmente para jitter y latencia) al marcar con timestamp los paquetes de prueba en el propio dispositivo destino, en lugar de depender únicamente de estimaciones basadas en el tiempo de ida y vuelta medido solo desde el origen."
+   "explanation_es": "El IP SLA Responder mejora la precisión de la medición (especialmente jitter y latencia) al marcar con timestamp los paquetes de prueba en el propio dispositivo destino."
   },
   {
    "id": "b3_4.4_03",
@@ -2610,29 +2610,29 @@
    "id": "b3_4.5_02",
    "subtopic": "4.5",
    "name": "Catalyst Center",
-   "question": "How does Catalyst Center's Assurance capability typically obtain near-real-time visibility into network and client health, as opposed to relying solely on periodic polling?",
+   "question": "How does Catalyst Center Assurance get near-real-time visibility, versus periodic polling alone?",
    "options": {
-    "A": "By leveraging telemetry streaming from network devices and clients, in addition to traditional data collection methods, to provide more timely insight than polling alone",
-    "B": "By requiring the administrator to manually run 'show' commands on every device and paste the output into a spreadsheet for later analysis into a spreadsheet for later manual analysis",
-    "C": "By disabling all monitoring capabilities on the managed devices",
+    "A": "By leveraging telemetry streaming from devices and clients, alongside traditional collection",
+    "B": "By requiring an admin to manually run show commands and paste output into a spreadsheet",
+    "C": "By disabling all monitoring on the managed devices",
     "D": "By relying on SNMP polling every 24 hours"
    },
    "correct": "A",
-   "explanation_es": "Catalyst Center Assurance aprovecha el streaming de telemetría desde los dispositivos de red y clientes (además de métodos de recolección más tradicionales), lo que permite una visibilidad mucho más cercana al tiempo real sobre la salud de la red y de los clientes, comparado con depender únicamente de polling periódico tradicional."
+   "explanation_es": "Assurance aprovecha el streaming de telemetría desde dispositivos y clientes, además de métodos de recolección tradicionales, dando visibilidad más cercana al tiempo real que el polling periódico."
   },
   {
    "id": "b3_4.5_03",
    "subtopic": "4.5",
    "name": "Catalyst Center",
-   "question": "What does Cisco Catalyst Center's Plug and Play (PnP) capability enable?",
+   "question": "What does Catalyst Center's Plug and Play (PnP) enable?",
    "options": {
     "A": "It replaces the need for any IP addressing on new devices",
-    "B": "It is used only for wireless access points, never for switches or routers",
-    "C": "Zero-touch or near-zero-touch onboarding of new network devices, which automatically contact Catalyst Center upon first boot to receive their configuration and software image",
-    "D": "It disables all automatic configuration, requiring fully manual setup for every new device added to the network, one device at a time by an on-site engineer by an on-site engineer every time"
+    "B": "It's used only for wireless APs, never switches or routers",
+    "C": "Zero-touch onboarding — new devices contact Catalyst Center on first boot for config and image",
+    "D": "It disables all automatic configuration, requiring fully manual setup for every new device added by an on-site engineer"
    },
    "correct": "C",
-   "explanation_es": "Plug and Play (PnP) permite el onboarding de nuevos dispositivos de red con mínima o nula intervención manual: los dispositivos nuevos, al arrancar por primera vez, contactan automáticamente a Catalyst Center para recibir su configuración inicial e imagen de software correspondiente, simplificando el despliegue a gran escala."
+   "explanation_es": "PnP permite el onboarding de nuevos dispositivos con mínima intervención manual: al arrancar por primera vez, contactan automáticamente a Catalyst Center para recibir su configuración e imagen de software."
   },
   {
    "id": "b3_4.6_02",
@@ -2640,27 +2640,27 @@
    "name": "NETCONF/RESTCONF",
    "question": "Over which transport and default port does NETCONF typically operate?",
    "options": {
-    "A": "SSH, using the dedicated 'netconf' SSH subsystem, typically on TCP port 830",
-    "B": "HTTP on port 80, exactly like RESTCONF uses by default in most deployments, though RESTCONF typically runs over HTTPS on port 443",
+    "A": "SSH, via a dedicated 'netconf' subsystem, typically on TCP port 830",
+    "B": "HTTP on port 80, exactly like RESTCONF uses by default in most deployments and platforms",
     "C": "UDP on port 161, the same as SNMP",
     "D": "Plain unencrypted Telnet on port 23"
    },
    "correct": "A",
-   "explanation_es": "NETCONF típicamente opera sobre SSH, utilizando un subsistema SSH dedicado llamado 'netconf', normalmente en el puerto TCP 830, estableciendo una sesión persistente y segura para el intercambio de mensajes RPC en XML."
+   "explanation_es": "NETCONF típicamente opera sobre SSH, usando un subsistema dedicado llamado 'netconf', normalmente en el puerto TCP 830, para una sesión persistente y segura de mensajes RPC en XML."
   },
   {
    "id": "b3_4.6_03",
    "subtopic": "4.6",
    "name": "NETCONF/RESTCONF",
-   "question": "Which of these correctly reflects an advantage of NETCONF's transaction-based approach using candidate/running datastores over RESTCONF's typical single-datastore model?",
+   "question": "What's an advantage of NETCONF's candidate/running datastore approach over RESTCONF's typical single-datastore model?",
    "options": {
-    "A": "There is no meaningful difference between the two approaches",
+    "A": "There's no meaningful difference between the two approaches",
     "B": "NETCONF has no concept of validating changes before applying them",
-    "C": "RESTCONF can optionally stage changes in a candidate datastore similar to NETCONF, but unlike NETCONF it provides no explicit validate operation to check those changes before the commit is applied",
-    "D": "NETCONF's candidate datastore allows a set of changes to be staged and validated before an explicit commit is applied to the running configuration, supporting more controlled, transactional configuration changes"
+    "C": "RESTCONF also stages changes in a candidate datastore, just without an explicit validate operation",
+    "D": "NETCONF's candidate datastore lets changes be staged and validated before an explicit commit to running"
    },
    "correct": "D",
-   "explanation_es": "El uso del datastore 'candidate' en NETCONF permite preparar y validar un conjunto de cambios antes de aplicarlos formalmente (commit) a la configuración en ejecución (running), soportando un flujo de cambios más controlado y transaccional; RESTCONF, en cambio, opera típicamente de forma directa sobre un único datastore equivalente a running, sin ese paso intermedio de candidate/commit."
+   "explanation_es": "El datastore 'candidate' de NETCONF permite preparar y validar un conjunto de cambios antes de aplicarlos (commit) a la configuración en ejecución, un flujo más controlado que el modelo directo de RESTCONF."
   },
   {
    "id": "b3_5.1.a_02",
@@ -3520,12 +3520,12 @@
    "id": "b5_4.4_04",
    "subtopic": "4.4",
    "name": "IP SLA",
-   "question": "What does IP SLA 'scheduling' (using the 'ip sla schedule' command) allow an administrator to configure for a defined operation?",
+   "question": "What does IP SLA 'scheduling' (ip sla schedule) let an admin configure?",
    "options": {
-    "A": "It configures which VRF the operation's probe traffic uses, unrelated to timing",
-    "B": "It controls when the operation starts and how long it runs (its 'life'), including whether it runs once, for a fixed duration, or indefinitely",
-    "C": "It has no effect; all IP SLA operations start immediately and run forever by default with no way to change that, though an operation without an explicit life value still eventually stops on its own",
-    "D": "It only allows renaming the operation; timing must be configured elsewhere"
+    "A": "Which VRF the operation's probe traffic uses, unrelated to timing",
+    "B": "When the operation starts and how long it runs (its 'life') — once, fixed duration, or indefinitely",
+    "C": "It has no effect; all IP SLA operations start immediately and run forever by default with no way to change that",
+    "D": "Only renaming the operation; timing must be configured elsewhere"
    },
    "correct": "B",
    "explanation_es": "Controla cuándo inicia la operación y cuánto tiempo corre (su 'life'), incluyendo si corre una sola vez, por una duración fija, o indefinidamente."
@@ -3534,15 +3534,15 @@
    "id": "b5_4.4_05",
    "subtopic": "4.4",
    "name": "IP SLA",
-   "question": "How can IP SLA be combined with object tracking to improve network resiliency?",
+   "question": "How can IP SLA combine with object tracking to improve resiliency?",
    "options": {
     "A": "IP SLA replaces the need for a routing protocol entirely",
-    "B": "IP SLA automatically reconfigures BGP neighbor relationships whenever a monitored path degrades below a defined threshold whenever a monitored path degrades in quality",
-    "C": "IP SLA cannot be combined with any other feature",
-    "D": "A 'track' object can monitor an IP SLA operation and trigger actions like removing a static route from the routing table if the tracked path fails"
+    "B": "IP SLA automatically reconfigures BGP neighbor relationships whenever a monitored path degrades below a defined threshold",
+    "C": "IP SLA can't be combined with any other feature",
+    "D": "A 'track' object can monitor an IP SLA operation and trigger actions like removing a static route on failure"
    },
    "correct": "D",
-   "explanation_es": "Un objeto 'track' puede monitorear el estado de una operación de IP SLA (por ejemplo, alcanzabilidad de un gateway) y, si falla, disparar acciones automáticas como retirar una ruta estática, logrando una conmutación por falla más rápida."
+   "explanation_es": "Un objeto 'track' puede monitorear el estado de una operación de IP SLA y, si falla, disparar acciones automáticas como retirar una ruta estática, logrando una conmutación por falla más rápida."
   },
   {
    "id": "b5_4.2_04",
@@ -3632,15 +3632,15 @@
    "id": "b5_4.6_04",
    "subtopic": "4.6",
    "name": "NETCONF/RESTCONF",
-   "question": "What is the difference between NETCONF's '<get>' and '<get-config>' operations?",
+   "question": "What's the difference between NETCONF's '<get>' and '<get-config>' operations?",
    "options": {
-    "A": "'<get>' retrieves configuration data only from the candidate datastore, while '<get-config>' retrieves both configuration and operational state data from the running datastore",
-    "B": "They are two identical aliases for the same operation, with no functional difference between them",
-    "C": "'<get-config>' retrieves configuration data from a specified datastore (such as running or candidate), while '<get>' retrieves both configuration and operational state data",
-    "D": "'<get-config>' is used only to delete configuration, unrelated to retrieving any data"
+    "A": "'<get>' retrieves config only from candidate; '<get-config>' retrieves config and state from running",
+    "B": "They're identical aliases with no functional difference",
+    "C": "'<get-config>' retrieves config from a specified datastore; '<get>' retrieves both config and operational state",
+    "D": "'<get-config>' is used only to delete configuration"
    },
    "correct": "C",
-   "explanation_es": "'<get-config>' obtiene datos de configuración de un datastore especificado (como running o candidate), mientras que '<get>' obtiene tanto datos de configuración como de estado operativo."
+   "explanation_es": "'<get-config>' obtiene datos de configuración de un datastore especificado (running o candidate), mientras que '<get>' obtiene tanto configuración como estado operativo."
   },
   {
    "id": "b5_4.6_05",
@@ -3674,15 +3674,15 @@
    "id": "b5_4.5_05",
    "subtopic": "4.5",
    "name": "Catalyst Center",
-   "question": "What does the Catalyst Center 'Path Trace' tool do?",
+   "question": "What does Catalyst Center's 'Path Trace' tool do?",
    "options": {
     "A": "It only shows historical CPU utilization graphs",
-    "B": "It automatically remediates any configuration errors found and can even suggest likely root causes for connectivity problems along that path automatically",
-    "C": "It is used for wireless site surveys",
-    "D": "It simulates and traces the actual path a packet would take between two endpoints, showing each hop and potential issues along the way"
+    "B": "It automatically remediates any configuration errors found and suggests likely root causes for connectivity problems",
+    "C": "It's used for wireless site surveys",
+    "D": "It simulates and traces the actual path a packet takes between two endpoints, hop by hop"
    },
    "correct": "D",
-   "explanation_es": "Path Trace traza la ruta real (hop por hop) que seguiría o está siguiendo el tráfico entre un origen y un destino, mostrando el estado de cada salto y ayudando a identificar dónde ocurre un problema."
+   "explanation_es": "Path Trace traza la ruta real (hop por hop) que seguiría o está siguiendo el tráfico entre origen y destino, mostrando el estado de cada salto y ayudando a identificar dónde ocurre un problema."
   },
   {
    "id": "b5_5.4.c_04",
@@ -5718,71 +5718,71 @@
    "id": "b6_4.5_12",
    "subtopic": "4.5",
    "name": "Catalyst Center",
-   "question": "What does Catalyst Center's 'Discovery' feature do, and how does it typically populate the platform's device inventory?",
+   "question": "What does Catalyst Center's 'Discovery' feature do, and how does it populate device inventory?",
    "options": {
-    "A": "Discovery primarily scans for endpoint devices such as laptops and IP phones connected to the access layer, cataloging their MAC addresses and connected switchports, rather than being the mechanism used to add the actual managed switches, routers, and wireless controllers themselves into Catalyst Center's inventory",
-    "B": "Catalyst Center's Discovery feature can only ever add a single device at a time and has little capability to discover multiple devices through CDP neighbor relationships or an IP range scan",
-    "C": "Discovery refers to a physical process of an engineer walking the building with a handheld scanner to photograph each device, with no software-based, network-driven discovery capability",
-    "D": "Discovery uses protocols/credentials (such as CDP-based discovery starting from a seed device, or a defined IP address range) to find devices on the network and add them into Catalyst Center's inventory, automating what would otherwise be a manual process of individually adding each device's IP address and credentials one at a time"
+    "A": "It scans for endpoints like laptops/phones, not the switches/routers/WLCs themselves",
+    "B": "It can only add a single device at a time, with no CDP or IP-range scan capability",
+    "C": "It's a physical process of an engineer walking the building with a handheld scanner",
+    "D": "It uses CDP from a seed device or an IP range to find and add devices automatically"
    },
    "correct": "D",
-   "explanation_es": "Discovery usa protocolos/credenciales (como descubrimiento basado en CDP a partir de un dispositivo semilla, o un rango de direcciones IP definido) para encontrar dispositivos en la red y agregarlos al inventario de Catalyst Center, automatizando lo que de otro modo sería un proceso manual de agregar individualmente la IP y credenciales de cada dispositivo uno por uno."
+   "explanation_es": "Discovery usa protocolos/credenciales (CDP desde un dispositivo semilla, o un rango de IP) para encontrar dispositivos y agregarlos al inventario, automatizando lo que sería un proceso manual uno por uno."
   },
   {
    "id": "b6_4.5_15",
    "subtopic": "4.5",
    "name": "Catalyst Center",
-   "question": "What is the general purpose of Catalyst Center's 'Software Image Management' (SWIM) capability?",
+   "question": "What's the general purpose of Catalyst Center's Software Image Management (SWIM)?",
    "options": {
-    "A": "SWIM is used to manage the compatibility matrix between hardware line cards and chassis models, verifying which physical modules are supported in a given chassis, rather than actually distributing or activating software images on the devices themselves",
-    "B": "Software Image Management in Catalyst Center only tracks license expiration dates and has little capability to actually distribute or upgrade any device's software image",
-    "C": "SWIM can distribute a golden image to multiple devices of the same family simultaneously, but the actual activation step (reloading the device onto the new image) must still be manually triggered device-by-device through the CLI rather than being managed from within the SWIM workflow itself",
-    "D": "SWIM helps an administrator centrally manage software images (importing, designating a 'golden' image for a device type, and distributing/upgrading devices to that image) across many devices from a single platform, rather than manually copying and activating a software image on each device one at a time via CLI/TFTP"
+    "A": "It manages hardware line-card/chassis compatibility, not actual image distribution",
+    "B": "It only tracks license expiration dates, with little upgrade capability",
+    "C": "SWIM can distribute a golden image to devices, but activation must still be manually triggered device-by-device through the CLI",
+    "D": "It centrally manages images — importing, designating a golden image, and upgrading many devices from one platform"
    },
    "correct": "D",
-   "explanation_es": "SWIM ayuda a un administrador a gestionar centralizadamente las imágenes de software (importando, designando una imagen 'golden' para un tipo de dispositivo, y distribuyendo/actualizando dispositivos hacia esa imagen) en muchos dispositivos desde una única plataforma, en lugar de copiar y activar manualmente una imagen de software en cada dispositivo uno por uno vía CLI/TFTP."
+   "explanation_es": "SWIM ayuda a gestionar centralizadamente las imágenes de software (importar, designar una imagen 'golden', y distribuir/actualizar dispositivos) desde una única plataforma, en vez de hacerlo manualmente por CLI/TFTP."
   },
   {
    "id": "b6_4.6_08",
    "subtopic": "4.6",
    "name": "NETCONF/RESTCONF",
-   "question": "What does NETCONF's '<validate>' operation allow a client to check, and why is this useful before actually committing a candidate configuration?",
+   "question": "What does NETCONF's '<validate>' operation check, and why is it useful before committing?",
    "options": {
-    "A": "<validate> is primarily used to verify that the NETCONF session's authentication credentials remain valid and haven't expired, rather than to check the syntactic or semantic correctness of the candidate configuration data itself",
-    "B": "The <validate> operation checks the candidate configuration's syntax against the YANG schema and then automatically schedules it to be committed at the next scheduled maintenance window, rather than requiring a separate, explicit <commit> operation to actually promote it into the running configuration",
-    "C": "NETCONF does not actually include any validate operation at all; configuration correctness can only ever be checked after a change has already been committed to the running configuration",
-    "D": "<validate> checks whether the candidate configuration is syntactically correct and consistent according to the relevant YANG model constraints (without actually applying it), allowing a client to catch configuration errors before committing, rather than discovering a problem only after the configuration has already taken effect on the running device"
+    "A": "<validate> is primarily used to verify the NETCONF session's authentication credentials remain valid, not the configuration data itself",
+    "B": "It checks syntax against YANG and auto-schedules the commit for the next maintenance window",
+    "C": "NETCONF doesn't actually include a validate operation at all",
+    "D": "It checks whether the candidate config is valid per the YANG model, without applying it, catching errors before commit"
    },
    "correct": "D",
-   "explanation_es": "<validate> verifica si la configuración candidate es sintácticamente correcta y consistente según las restricciones del modelo YANG relevante (sin realmente aplicarla), permitiendo que un cliente detecte errores de configuración antes de hacer commit, en lugar de descubrir un problema recién después de que la configuración ya tomó efecto en el dispositivo en ejecución."
+   "explanation_es": "<validate> verifica si la configuración candidate es sintáctica y semánticamente correcta según el modelo YANG (sin aplicarla), permitiendo detectar errores antes de hacer commit."
   },
   {
    "id": "b6_4.6_09",
    "subtopic": "4.6",
    "name": "NETCONF/RESTCONF",
-   "question": "What is the general structure of a RESTCONF URI for accessing a specific piece of configuration or operational data, based on RFC 8040's conventions?",
+   "question": "What's the general structure of a RESTCONF URI for a specific piece of config/operational data (RFC 8040)?",
    "options": {
-    "A": "RESTCONF URIs can only ever address an entire device's complete configuration as a single monolithic resource, with no ability to address a specific container, list entry, or individual leaf value, a belief that may arise from early example queries defaulting to the '/restconf/data/' root rather than a more specific path",
-    "B": "Every RESTCONF URI must always begin with '/api/v1/', a fixed prefix defined independently of RFC 8040 and unrelated to the '/restconf/data/' structure the standard actually defines",
-    "C": "A RESTCONF URI typically follows the pattern '/restconf/data/{module-name}:{container}/{list}={key}/...', combining the base RESTCONF root, the 'data' resource type, and a YANG-model-derived path identifying the specific module, container, and (if applicable) list entry being addressed by its key value",
-    "D": "RESTCONF URIs have no defined structure or convention, and each vendor is completely free to use an entirely arbitrary, non-standardized URL format with no reference to RFC 8040"
+    "A": "It can only ever address the entire device config as one monolithic resource, with no way to target a specific container or leaf",
+    "B": "Every URI must begin with '/api/v1/', unrelated to RFC 8040",
+    "C": "'/restconf/data/{module}:{container}/{list}={key}/...', combining the root, the data resource type, and a YANG-derived path",
+    "D": "URIs have no defined structure; each vendor uses an arbitrary format"
    },
    "correct": "C",
-   "explanation_es": "Una URI de RESTCONF típicamente sigue el patrón '/restconf/data/{nombre-de-módulo}:{contenedor}/{lista}={clave}/...', combinando la raíz base de RESTCONF, el tipo de recurso 'data', y una ruta derivada del modelo YANG que identifica el módulo, contenedor, y (si aplica) la entrada de lista específica siendo direccionada por su valor de clave."
+   "explanation_es": "Una URI de RESTCONF típicamente sigue el patrón '/restconf/data/{módulo}:{contenedor}/{lista}={clave}/...', combinando la raíz base, el recurso 'data', y una ruta derivada del modelo YANG."
   },
   {
    "id": "b6_4.6_11",
    "subtopic": "4.6",
    "name": "NETCONF/RESTCONF",
-   "question": "What is the purpose of the RESTCONF '/restconf/operations/{rpc-name}' URI structure, as distinct from the '/restconf/data/{...}' structure?",
+   "question": "What's the purpose of RESTCONF's '/restconf/operations/{rpc-name}', versus '/restconf/data/{...}'?",
    "options": {
-    "A": "'/restconf/operations/' is reserved specifically for vendor-proprietary maintenance actions like device reload or factory-reset, and does not extend to custom YANG-modeled 'rpc' statements that an administrator or third-party module might define",
-    "B": "The '/restconf/operations/' path is used to invoke a specific YANG-modeled RPC operation (an action, such as triggering a reboot or a clear-counters command, defined via a YANG 'rpc' statement) rather than to directly read or write configuration/state data the way the '/restconf/data/' path does for accessing data resources",
-    "C": "'/restconf/operations/' and '/restconf/data/' are simply two alternate, fully interchangeable URI prefixes referring to exactly the same functionality, with no meaningful distinction between invoking an RPC action and accessing a data resource",
-    "D": "The '/restconf/operations/' path is used with an HTTP GET request to retrieve a machine-readable list of all RPC operations a device supports, while actually invoking one of those listed RPCs still requires a separate call through the '/restconf/data/' path instead"
+    "A": "'/restconf/operations/' is reserved specifically for vendor-proprietary maintenance actions, and doesn't extend to custom YANG 'rpc' statements",
+    "B": "'/operations/' invokes a YANG-modeled RPC action (like a reboot or clear-counters); '/data/' reads/writes config or state",
+    "C": "They're interchangeable prefixes with no meaningful distinction",
+    "D": "'/operations/' only lists supported RPCs via GET; actually invoking one still requires '/data/'"
    },
    "correct": "B",
-   "explanation_es": "La ruta '/restconf/operations/' se usa para invocar una operación RPC específica modelada en YANG (una acción, como disparar un reinicio o un comando clear-counters, definida vía una sentencia 'rpc' de YANG) en lugar de leer o escribir directamente datos de configuración/estado como sí lo hace la ruta '/restconf/data/' para acceder a recursos de datos."
+   "explanation_es": "La ruta '/restconf/operations/' invoca una operación RPC modelada en YANG (una acción, como un reinicio o clear-counters), mientras que '/restconf/data/' se usa para leer o escribir datos de configuración/estado."
   },
   {
    "id": "b6_5.1.a_06",

@@ -533,3 +533,14 @@ dos rondas adicionales (70 distractores extendidos, luego 24 más de
 ajuste fino) hasta **40/126 (31.7%)**, dentro del rango 19-31% ya
 observado históricamente en el proyecto. Verificado en navegador y
 contra el JSON embebido. Banco: sigue en 1035 preguntas.
+
+**Dominio 4 (Network Assurance) completo (2026-09-27):** el más chico
+de los cuatro hechos hasta ahora — de las 39 preguntas de IA en total,
+22 ya venían resueltas del piloto original (subtemas 4.1/4.2/4.3), así
+que solo hicieron falta 17 preguntas nuevas en 4.4 (IP SLA), 4.5
+(Catalyst Center) y 4.6 (NETCONF/RESTCONF). Sesgo de longitud sobre
+esas 17: primera pasada 94.1% (16/17), corregido en una pasada (12
+distractores extendidos) hasta 3/17. Medido sobre el dominio completo
+(39 preguntas, incluyendo las ya arregladas del piloto): **9/39
+(23.1%)**, dentro del rango esperado. Verificado en navegador. Banco:
+sigue en 1035 preguntas.

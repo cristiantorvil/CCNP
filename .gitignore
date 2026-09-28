@@ -22,4 +22,5 @@ shorten_domain2_batch.py
 rebalance_domain2_length.py
 shorten_domain3_batch.py
 rebalance_domain3_length.py
+shorten_domain4_batch.py
 ocg_extract/
