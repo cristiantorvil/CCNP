@@ -1966,127 +1966,127 @@
    "id": "b2_5.1.a_01",
    "subtopic": "5.1.a",
    "name": "Líneas y autenticación local",
-   "question": "What is the difference between configuring a simple line password on a VTY line versus configuring local username-based authentication?",
+   "question": "What's the difference between a simple VTY line password and local username-based authentication?",
    "options": {
-    "A": "Line passwords are always more secure than username-based authentication, since they cannot be individually compromised or shared between multiple different users across an entire organization's device fleet, since a shared password can't be revoked for one person alone",
+    "A": "Line passwords are always more secure than username-based authentication, since they cannot be individually compromised",
     "B": "They provide identical security and auditability",
-    "C": "Local username authentication cannot be combined with AAA",
-    "D": "A line password authenticates anyone who knows the shared password with no per-user accountability; local username authentication requires individual credentials, providing per-user identification and accountability"
+    "C": "Local username authentication can't be combined with AAA",
+    "D": "A line password gives no per-user accountability; username auth requires individual credentials"
    },
    "correct": "D",
-   "explanation_es": "Una simple contraseña de línea (line password) autentica a cualquiera que la conozca, sin distinguir quién se conectó (sin accountability individual). La autenticación con usuario local (username/password) requiere credenciales individuales por persona, lo que permite identificar y auditar quién accedió, y es la base para integrarse luego con AAA."
+   "explanation_es": "Una contraseña de línea autentica a cualquiera que la conozca, sin distinguir quién se conectó; la autenticación con usuario local requiere credenciales individuales, permitiendo identificar y auditar el acceso."
   },
   {
    "id": "b2_5.1.b_01",
    "subtopic": "5.1.b",
    "name": "AAA (TACACS+/RADIUS)",
-   "question": "How does TACACS+ differ from RADIUS regarding the AAA functions of Authentication and Authorization?",
+   "question": "How does TACACS+ differ from RADIUS regarding Authentication and Authorization?",
    "options": {
-    "A": "RADIUS separates Authentication and Authorization, while TACACS+ combines them into one single unified process and packet exchange every single time a user logs into a network device",
-    "B": "Neither protocol distinguishes Authentication from Authorization",
-    "C": "TACACS+ does not support Authorization at all",
-    "D": "TACACS+ separates Authentication and Authorization into distinct processes/packets, offering more granular control; RADIUS combines Authentication and Authorization into a single process"
+    "A": "RADIUS separates them; TACACS+ combines them into one process",
+    "B": "Neither protocol distinguishes Authentication from Authorization in any meaningful, configurable way at all",
+    "C": "TACACS+ doesn't support Authorization at all",
+    "D": "TACACS+ separates them into distinct processes for granular control; RADIUS combines them"
    },
    "correct": "D",
-   "explanation_es": "TACACS+ separa la Autenticación y la Autorización en procesos/paquetes distintos, lo que permite un control más granular (por ejemplo, autorizar comandos específicos de forma independiente); RADIUS, en cambio, combina Autenticación y Autorización en un único proceso, lo que ofrece menos granularidad."
+   "explanation_es": "TACACS+ separa Autenticación y Autorización en procesos/paquetes distintos, permitiendo control más granular; RADIUS combina ambas en un único proceso, con menos granularidad."
   },
   {
    "id": "b2_5.1.b_02",
    "subtopic": "5.1.b",
    "name": "AAA (TACACS+/RADIUS)",
-   "question": "Which statement correctly describes a difference in what TACACS+ and RADIUS encrypt in their protocol exchanges?",
+   "question": "What's a key difference in what TACACS+ and RADIUS encrypt?",
    "options": {
-    "A": "TACACS+ encrypts the entire body of the packet, while RADIUS only encrypts the password field in the access-request packet",
-    "B": "RADIUS encrypts the entire packet, while TACACS+ only encrypts the password field in every single exchange between the client and the AAA server",
+    "A": "TACACS+ encrypts the entire packet body; RADIUS only encrypts the password field",
+    "B": "RADIUS encrypts the entire packet, while TACACS+ only encrypts the password field in every exchange",
     "C": "Both encrypt the entire packet identically",
     "D": "Neither protocol encrypts anything by default"
    },
    "correct": "A",
-   "explanation_es": "TACACS+ cifra todo el cuerpo del paquete en la comunicación entre el cliente AAA y el servidor, mientras que RADIUS por defecto solo cifra el campo de contraseña en el paquete Access-Request, dejando el resto de la información (como el nombre de usuario) sin cifrar."
+   "explanation_es": "TACACS+ cifra todo el cuerpo del paquete, mientras que RADIUS por defecto solo cifra el campo de contraseña, dejando el resto (como el username) sin cifrar."
   },
   {
    "id": "b2_5.2.a_01",
    "subtopic": "5.2.a",
    "name": "ACLs",
-   "question": "What is the primary functional difference between a standard ACL and an extended ACL on a Cisco device?",
+   "question": "What's the primary functional difference between a standard and extended ACL?",
    "options": {
-    "A": "A standard ACL can only match based on source IP address; an extended ACL can match based on source/destination IP, protocol, and port numbers, allowing much more granular filtering",
+    "A": "Standard matches source IP only; extended can match source/destination IP, protocol, and ports",
     "B": "Extended ACLs can only be applied outbound, never inbound",
-    "C": "They are functionally identical, differing only in numbering range",
-    "D": "A standard ACL can filter based on Layer 4 ports, while extended cannot filter on anything beyond the source IP address at all under any Cisco IOS software version currently in use on the device"
+    "C": "They're functionally identical, differing only in numbering range",
+    "D": "A standard ACL can filter based on Layer 4 ports, while extended cannot filter beyond the source IP under any IOS version"
    },
    "correct": "A",
-   "explanation_es": "Una ACL estándar solo puede filtrar tráfico basándose en la dirección IP de origen. Una ACL extendida puede filtrar basándose en dirección IP de origen y destino, protocolo (TCP/UDP/ICMP, etc.) y números de puerto, permitiendo un filtrado mucho más granular."
+   "explanation_es": "Una ACL estándar solo filtra por IP de origen. Una ACL extendida puede filtrar por IP origen/destino, protocolo y puertos, permitiendo un filtrado mucho más granular."
   },
   {
    "id": "b2_5.2.b_01",
    "subtopic": "5.2.b",
    "name": "CoPP",
-   "question": "What is the primary purpose of Control Plane Policing (CoPP)?",
+   "question": "What's the primary purpose of Control Plane Policing (CoPP)?",
    "options": {
-    "A": "To provide QoS marking for user data traffic, not control-plane traffic, since CoPP has no visibility into CPU-destined packets at all or configuration",
+    "A": "To provide QoS marking for user data traffic, since CoPP has no visibility into CPU-destined packets at all",
     "B": "To replace the need for any ACLs on the device",
-    "C": "To encrypt all traffic passing through the device's data plane",
-    "D": "To protect the device's control-plane CPU from being overwhelmed by excessive or malicious traffic destined to the route processor, by rate-limiting or filtering that traffic"
+    "C": "To encrypt all traffic passing through the data plane",
+    "D": "To protect the control-plane CPU from excessive/malicious traffic via rate-limiting or filtering"
    },
    "correct": "D",
-   "explanation_es": "CoPP protege la CPU del plano de control del dispositivo de ser sobrecargada por tráfico excesivo o malicioso destinado al procesador de rutas (por ejemplo, tráfico de gestión, protocolos de enrutamiento, o intentos de ataque), aplicando límites de tasa (rate-limiting) o filtrado específicamente a ese tráfico dirigido al propio dispositivo."
+   "explanation_es": "CoPP protege la CPU del plano de control de ser sobrecargada por tráfico excesivo o malicioso destinado al procesador de rutas, aplicando rate-limiting o filtrado a ese tráfico."
   },
   {
    "id": "b2_5.3_01",
    "subtopic": "5.3",
    "name": "Seguridad de REST API",
-   "question": "Why is token-based authentication (such as OAuth 2.0 bearer tokens) generally preferred over sending a username/password on every REST API call?",
+   "question": "Why is token-based auth (like OAuth 2.0 bearer tokens) preferred over sending username/password every call?",
    "options": {
-    "A": "Tokens can be scoped, time-limited, and revoked independently of the user's actual credentials, reducing the exposure of long-term credentials on every request",
+    "A": "Tokens can be scoped, time-limited, and revoked independently, reducing credential exposure",
     "B": "Tokens never expire, unlike passwords",
-    "C": "Sending username/password on every call is always more secure than tokens, since credentials never leave the client's own trusted network boundary",
-    "D": "Token-based authentication removes the need for HTTPS"
+    "C": "Sending username/password on every call is always more secure than tokens, since credentials never leave the client's network",
+    "D": "Token-based auth removes the need for HTTPS"
    },
    "correct": "A",
-   "explanation_es": "Los tokens (como los bearer tokens de OAuth 2.0) pueden tener alcance limitado (scopes), expirar después de cierto tiempo, y ser revocados de forma independiente, reduciendo la exposición de las credenciales de largo plazo del usuario en cada solicitud, a diferencia de enviar usuario/contraseña repetidamente."
+   "explanation_es": "Los tokens pueden tener alcance limitado, expirar, y ser revocados de forma independiente, reduciendo la exposición de credenciales de largo plazo en cada solicitud."
   },
   {
    "id": "b2_5.4.a_01",
    "subtopic": "5.4.a",
    "name": "Threat defense",
-   "question": "What does the security principle of 'defense in depth' refer to?",
+   "question": "What does 'defense in depth' refer to?",
    "options": {
     "A": "A specific Cisco product name",
-    "B": "Implementing multiple, layered security controls (e.g., firewalls, IPS, endpoint security, segmentation) so that if one layer fails, others still provide protection",
-    "C": "Only securing the network perimeter and trusting everything inside, which is exactly what defense in depth recommends as the most efficient approach, ignoring that a breached perimeter leaves internal systems exposed",
-    "D": "Relying on a single, very strong security control to protect the entire network"
+    "B": "Multiple layered security controls, so if one fails, others still protect",
+    "C": "Only securing the perimeter and trusting everything inside",
+    "D": "Relying on a single, very strong security control for the whole network"
    },
    "correct": "B",
-   "explanation_es": "Defense in depth (defensa en profundidad) es el principio de implementar múltiples capas de controles de seguridad (firewalls, IPS, seguridad de endpoint, segmentación, etc.) de forma que si una capa falla o es comprometida, las demás sigan brindando protección, en lugar de depender de un único control."
+   "explanation_es": "Defensa en profundidad es implementar múltiples capas de controles de seguridad de forma que si una falla, las demás sigan brindando protección, en lugar de depender de un único control."
   },
   {
    "id": "b2_5.4.b_01",
    "subtopic": "5.4.b",
    "name": "Seguridad de endpoint (NAC/ISE)",
-   "question": "What is the purpose of posture assessment in a NAC (Network Access Control) solution like Cisco ISE?",
+   "question": "What's the purpose of posture assessment in a NAC solution like ISE?",
    "options": {
     "A": "It only assigns an IP address to the endpoint",
-    "B": "It configures the RADIUS attributes returned in an Access-Accept message, which determine the endpoint's VLAN assignment but do not evaluate whether the endpoint's software version or patch level meets any compliance requirement",
-    "C": "It evaluates whether an endpoint meets defined security compliance criteria (e.g., updated antivirus, patches) before or after granting network access, potentially placing non-compliant devices into a restricted/remediation network",
+    "B": "It configures the RADIUS attributes returned in an Access-Accept, determining VLAN assignment without evaluating compliance",
+    "C": "It checks whether an endpoint meets compliance criteria before/after granting access, or places it in remediation",
     "D": "It replaces the need for 802.1X authentication"
    },
    "correct": "C",
-   "explanation_es": "El posture assessment evalúa si un endpoint cumple con criterios de seguridad definidos (antivirus actualizado, parches, cifrado de disco, etc.) antes o después de otorgar acceso a la red, y puede colocar a los dispositivos no conformes en una red restringida o de remediación hasta que cumplan los requisitos."
+   "explanation_es": "El posture assessment evalúa si un endpoint cumple criterios de seguridad definidos (antivirus, parches) antes o después de otorgar acceso, pudiendo colocar dispositivos no conformes en una red de remediación."
   },
   {
    "id": "b2_5.4.c_01",
    "subtopic": "5.4.c",
    "name": "NGFW/FMC/AVC",
-   "question": "What capability distinguishes a Next-Generation Firewall (NGFW) from a traditional stateful firewall?",
+   "question": "What capability distinguishes an NGFW from a traditional stateful firewall?",
    "options": {
-    "A": "An NGFW adds application awareness/visibility, integrated intrusion prevention (IPS), and user identity-based policy, going beyond simple port/protocol-based stateful filtering",
-    "B": "NGFWs cannot perform stateful inspection at all",
-    "C": "Traditional stateful firewalls already include full application-layer inspection",
-    "D": "An NGFW can only filter based on source/destination IP, just like a traditional firewall, with no additional application-layer visibility added by any inspection engine"
+    "A": "App awareness, integrated IPS, and identity-based policy, beyond port/protocol filtering",
+    "B": "NGFWs can't perform stateful inspection at all",
+    "C": "Traditional stateful firewalls already include full app-layer inspection",
+    "D": "An NGFW can only filter by source/destination IP, just like a traditional firewall"
    },
    "correct": "A",
-   "explanation_es": "Un NGFW agrega capacidades de conciencia de aplicación (identificar qué app genera el tráfico más allá del puerto), IPS integrado, y políticas basadas en identidad de usuario, yendo más allá del simple filtrado stateful basado en puerto/protocolo que ofrece un firewall tradicional."
+   "explanation_es": "Un NGFW agrega conciencia de aplicación, IPS integrado, y políticas basadas en identidad de usuario, yendo más allá del filtrado stateful basado en puerto/protocolo."
   },
   {
    "id": "b2_6.1_01",
@@ -3142,155 +3142,155 @@
    "id": "b3_5.1.a_02",
    "subtopic": "5.1.a",
    "name": "Líneas y autenticación local",
-   "question": "What is the key security difference between the 'enable password' and 'enable secret' commands on a Cisco device?",
+   "question": "What's the key security difference between 'enable password' and 'enable secret'?",
    "options": {
-    "A": "'enable password' is always more secure than 'enable secret', since it uses a stronger and more modern hashing algorithm by default on every current Cisco IOS release regardless of platform or software version",
+    "A": "'enable password' uses a stronger and more modern hashing algorithm by default on every current Cisco IOS release",
     "B": "Neither command has any impact on device security",
-    "C": "'enable secret' stores the password using a strong hash by default, while the older 'enable password' stores it in a much weaker, reversible/plaintext-like form; 'enable secret' should always be preferred",
-    "D": "They are identical in security, differing only in command syntax"
+    "C": "'enable secret' stores a strong hash by default; 'enable password' stores it weakly/reversibly",
+    "D": "They're identical in security, differing only in syntax"
    },
    "correct": "C",
-   "explanation_es": "'enable secret' almacena la contraseña usando un hash fuerte por defecto, mientras que el comando más antiguo 'enable password' la almacena de una forma mucho más débil (tipo 7, fácilmente reversible), por lo que 'enable secret' siempre debe preferirse; si ambos están configurados, 'enable secret' tiene prioridad."
+   "explanation_es": "'enable secret' almacena la contraseña con un hash fuerte por defecto; 'enable password' la almacena de forma mucho más débil (tipo 7, reversible), por lo que 'enable secret' siempre debe preferirse."
   },
   {
    "id": "b3_5.1.a_03",
    "subtopic": "5.1.a",
    "name": "Líneas y autenticación local",
-   "question": "Why is SSH generally preferred over Telnet for remote device management access?",
+   "question": "Why is SSH generally preferred over Telnet for remote management access?",
    "options": {
     "A": "Telnet encrypts sessions, and SSH does not",
-    "B": "SSH encrypts the entire session (including credentials), while Telnet transmits data, including usernames and passwords, in plaintext, making it vulnerable to eavesdropping",
-    "C": "SSH cannot be used for CLI access, only for file transfer",
-    "D": "SSH and Telnet both support optional session encryption, but Telnet enables it by default while SSH requires the administrator to explicitly generate a crypto key before encryption actually takes effect"
+    "B": "SSH encrypts the whole session including credentials; Telnet sends everything in plaintext",
+    "C": "SSH can't be used for CLI access, only file transfer",
+    "D": "SSH and Telnet both support optional session encryption, but Telnet enables it by default while SSH requires generating a key"
    },
    "correct": "B",
-   "explanation_es": "SSH cifra toda la sesión, incluyendo las credenciales de acceso, mientras que Telnet transmite todo en texto plano (incluyendo usuario y contraseña), haciéndolo vulnerable a ser interceptado (eavesdropping) por cualquiera con acceso a la ruta de red. Por eso SSH es el estándar recomendado para gestión remota."
+   "explanation_es": "SSH cifra toda la sesión, incluidas las credenciales; Telnet transmite todo en texto plano, haciéndolo vulnerable a interceptación. Por eso SSH es el estándar recomendado."
   },
   {
    "id": "b3_5.1.b_03",
    "subtopic": "5.1.b",
    "name": "AAA (TACACS+/RADIUS)",
-   "question": "Which transport protocol and port does TACACS+ use by default, as opposed to RADIUS?",
+   "question": "Which transport protocol and port does TACACS+ use by default, versus RADIUS?",
    "options": {
-    "A": "TACACS+ uses TCP port 49; RADIUS uses UDP ports 1812/1813 (authentication/accounting) — reflecting TACACS+'s reliance on TCP's connection-oriented delivery versus RADIUS's use of UDP",
+    "A": "TACACS+ uses TCP port 49; RADIUS uses UDP ports 1812/1813",
     "B": "TACACS+ uses HTTP as its transport",
-    "C": "TACACS+ uses UDP port 49 for faster, connectionless delivery of authentication requests, while RADIUS uses TCP ports 1812 and 1813 to guarantee reliable delivery of accounting records",
-    "D": "Both protocols use TCP port 49 by default, differing only in how they separate authentication from authorization within that single session"
+    "C": "TACACS+ uses UDP port 49; RADIUS uses TCP ports 1812/1813",
+    "D": "Both use TCP port 49 by default"
    },
    "correct": "A",
-   "explanation_es": "TACACS+ utiliza TCP en el puerto 49, aprovechando la entrega orientada a conexión de TCP; RADIUS utiliza UDP, típicamente en los puertos 1812 (autenticación/autorización) y 1813 (accounting), reflejando un enfoque más liviano pero sin las garantías de entrega de TCP."
+   "explanation_es": "TACACS+ usa TCP en el puerto 49; RADIUS usa UDP, típicamente en los puertos 1812 (autenticación) y 1813 (accounting)."
   },
   {
    "id": "b3_5.2.a_02",
    "subtopic": "5.2.a",
    "name": "ACLs",
-   "question": "What happens to a packet that does not match any explicit permit or deny statement in a Cisco ACL?",
+   "question": "What happens to a packet that matches no explicit statement in a Cisco ACL?",
    "options": {
     "A": "The packet causes the router to reboot",
     "B": "The ACL is automatically disabled",
-    "C": "It is always permitted by default if no explicit match occurs, since Cisco ACLs assume permit rather than deny at the end",
-    "D": "It is denied, due to the implicit 'deny any' at the end of every ACL, even though it is not visibly configured"
+    "C": "It's always permitted by default, since ACLs assume permit",
+    "D": "It's denied, due to the implicit 'deny any' at the end of every ACL"
    },
    "correct": "D",
-   "explanation_es": "Toda ACL de Cisco tiene un 'deny any' implícito al final, aunque no aparezca explícitamente en la configuración; cualquier paquete que no coincida con ninguna sentencia permit/deny explícita configurada será denegado por este comportamiento implícito por defecto."
+   "explanation_es": "Toda ACL de Cisco tiene un 'deny any' implícito al final; cualquier paquete que no coincida con ningún permit/deny explícito será denegado."
   },
   {
    "id": "b3_5.2.a_03",
    "subtopic": "5.2.a",
    "name": "ACLs",
-   "question": "What is a practical advantage of using named ACLs over numbered ACLs?",
+   "question": "What's a practical advantage of named ACLs over numbered ACLs?",
    "options": {
-    "A": "Numbered ACLs support far more entries than named ACLs, which is their only advantage over the more descriptive naming scheme used by named access lists on modern platforms",
-    "B": "Named ACLs allow individual entries to be added or removed (edited) more easily by line/sequence, and the name itself can be more descriptive of the ACL's purpose",
-    "C": "Named ACLs cannot be applied to any interface",
-    "D": "There is no functional difference between named and numbered ACLs"
+    "A": "Numbered ACLs support far more entries than named ACLs, which is their only real advantage over the naming scheme",
+    "B": "Named ACLs let entries be added/removed individually by sequence, and the name is descriptive",
+    "C": "Named ACLs can't be applied to any interface",
+    "D": "There's no functional difference between named and numbered ACLs"
    },
    "correct": "B",
-   "explanation_es": "Las ACLs nombradas (named ACLs) permiten agregar o eliminar entradas individuales de forma más flexible (usando números de secuencia), sin tener que recrear toda la lista, además de que el nombre puede ser descriptivo del propósito de la ACL, facilitando su identificación y mantenimiento frente a una ACL puramente numerada."
+   "explanation_es": "Las ACLs nombradas permiten agregar/eliminar entradas individuales por número de secuencia, y el nombre puede describir el propósito de la ACL, facilitando su mantenimiento."
   },
   {
    "id": "b3_5.3_02",
    "subtopic": "5.3",
    "name": "Seguridad de REST API",
-   "question": "Why is using HTTPS (TLS) essential for securing REST API communications, such as those with Cisco Catalyst Center?",
+   "question": "Why is HTTPS (TLS) essential for securing REST API communications?",
    "options": {
     "A": "HTTP and HTTPS provide identical security for API traffic",
     "B": "HTTPS eliminates the need for any authentication token",
-    "C": "HTTPS encrypts the data in transit between the client and the API server, protecting credentials, tokens, and payload data from being intercepted or tampered with over the network",
-    "D": "HTTPS is only relevant for browser-based access, not for API calls made by automated scripts or applications talking directly to a REST endpoint without any browser involved at all"
+    "C": "HTTPS encrypts data in transit, protecting credentials, tokens, and payload from interception",
+    "D": "HTTPS is only relevant for browser-based access, not for API calls made by automated scripts without any browser"
    },
    "correct": "C",
-   "explanation_es": "HTTPS (HTTP sobre TLS) cifra los datos en tránsito entre el cliente y el servidor de la API, protegiendo credenciales, tokens de autenticación y datos del payload de ser interceptados o manipulados por un atacante en la red, algo que HTTP plano no ofrece."
+   "explanation_es": "HTTPS cifra los datos en tránsito entre cliente y servidor, protegiendo credenciales, tokens y payload de ser interceptados o manipulados en la red."
   },
   {
    "id": "b3_5.3_03",
    "subtopic": "5.3",
    "name": "Seguridad de REST API",
-   "question": "What does the principle of 'least privilege' mean when applied to API access scopes/roles?",
+   "question": "What does 'least privilege' mean applied to API access scopes/roles?",
    "options": {
-    "A": "An API client or user should only be granted the minimum permissions/scopes necessary to perform its intended function, rather than broad or administrative access by default",
-    "B": "Least privilege only applies to human users, never to API service accounts",
-    "C": "It means API calls should always be rate-limited to one request per minute",
-    "D": "Every API client should be granted full administrative access by default for convenience, since revoking access later is always simple and low-risk regardless of how the client authenticates"
+    "A": "A client should only get the minimum permissions needed, not broad/admin access by default",
+    "B": "Least privilege only applies to human users, never to API service accounts or automated client credentials",
+    "C": "It means API calls should always be rate-limited to one per minute",
+    "D": "Every client should get full admin access by default for convenience"
    },
    "correct": "A",
-   "explanation_es": "El principio de menor privilegio (least privilege) establece que a un cliente de API o usuario se le deben otorgar solo los permisos/scopes mínimos necesarios para cumplir su función prevista, en lugar de otorgar acceso amplio o administrativo por defecto, reduciendo el impacto potencial si esas credenciales son comprometidas."
+   "explanation_es": "El principio de menor privilegio establece que a un cliente se le deben otorgar solo los permisos mínimos necesarios, en lugar de acceso amplio o administrativo por defecto."
   },
   {
    "id": "b3_5.4.b_02",
    "subtopic": "5.4.b",
    "name": "Seguridad de endpoint (NAC/ISE)",
-   "question": "In 802.1X port-based authentication, what are the three key roles involved?",
+   "question": "In 802.1X, what are the three key roles involved?",
    "options": {
-    "A": "Only two roles exist: Supplicant and Authenticator, with no separate Authentication Server required in any 802.1X deployment, regardless of vendor or RADIUS backend used, a claim contradicted by the 802.1X standard itself",
-    "B": "Supplicant (the client device requesting access), Authenticator (the switch/AP enforcing the port state), and Authentication Server (e.g., RADIUS server, which validates credentials)",
+    "A": "Only two roles exist: Supplicant and Authenticator, with no Authentication Server",
+    "B": "Supplicant (client), Authenticator (switch/AP), and Authentication Server (e.g. RADIUS)",
     "C": "Router, Switch, and Access Point, with no client-side role",
-    "D": "Client, Server, and Firewall — with no other roles defined"
+    "D": "Client, Server, and Firewall, with no other roles defined"
    },
    "correct": "B",
-   "explanation_es": "802.1X define tres roles clave: el Supplicant (el dispositivo cliente que solicita acceso a la red), el Authenticator (típicamente el switch o access point, que controla el estado del puerto según el resultado de la autenticación), y el Authentication Server (por ejemplo, un servidor RADIUS/ISE, que valida las credenciales del supplicant)."
+   "explanation_es": "802.1X define tres roles: el Supplicant (cliente que solicita acceso), el Authenticator (switch/AP que controla el puerto), y el Authentication Server (por ejemplo, RADIUS/ISE)."
   },
   {
    "id": "b3_5.4.b_03",
    "subtopic": "5.4.b",
    "name": "Seguridad de endpoint (NAC/ISE)",
-   "question": "What is the purpose of MAB (MAC Authentication Bypass) in a NAC deployment?",
+   "question": "What's the purpose of MAB (MAC Authentication Bypass) in a NAC deployment?",
    "options": {
-    "A": "It disables all authentication for devices matching a MAC address whitelist without any verification, bypassing every security check entirely regardless of the device's actual compliance posture",
-    "B": "It completely replaces 802.1X for all devices, including those capable of doing 802.1X",
-    "C": "It is used only for wireless guest networks, never for wired ports",
-    "D": "It allows devices that cannot perform 802.1X authentication (such as printers or IoT devices) to be authenticated based on their MAC address instead, as a fallback mechanism"
+    "A": "It disables all authentication for devices matching a MAC address whitelist without any verification of compliance posture",
+    "B": "It completely replaces 802.1X for all devices, even those capable of it",
+    "C": "It's used only for wireless guest networks, never wired ports",
+    "D": "It lets devices that can't do 802.1X (printers, IoT) authenticate via MAC address as fallback"
    },
    "correct": "D",
-   "explanation_es": "MAB (MAC Authentication Bypass) permite que dispositivos incapaces de realizar autenticación 802.1X (como impresoras, cámaras IP, o ciertos dispositivos IoT) sean autenticados basándose en su dirección MAC como mecanismo alternativo (fallback), en lugar de quedar completamente sin acceso o requerir excepciones manuales complejas."
+   "explanation_es": "MAB permite que dispositivos incapaces de hacer 802.1X (impresoras, cámaras IP, IoT) sean autenticados por su dirección MAC como mecanismo alternativo."
   },
   {
    "id": "b3_5.4.c_02",
    "subtopic": "5.4.c",
    "name": "NGFW/FMC/AVC",
-   "question": "What is the primary role of Cisco Firepower Management Center (FMC) in a Cisco NGFW deployment?",
+   "question": "What's the primary role of Cisco Firepower Management Center (FMC)?",
    "options": {
-    "A": "It only manages licensing, with no policy or monitoring capability for any connected Firepower device, despite FMC actually serving as the primary policy console for connected devices",
-    "B": "It is a hardware appliance that replaces the FTD firewall itself",
-    "C": "It provides centralized policy management, monitoring, and reporting for one or more Firepower Threat Defense (FTD) NGFW devices",
-    "D": "It is used for wireless controller management"
+    "A": "It only manages licensing, with no policy or monitoring capability for any connected Firepower device at all",
+    "B": "It's a hardware appliance that replaces the FTD firewall itself",
+    "C": "Centralized policy management, monitoring, and reporting for one or more FTD devices",
+    "D": "It's used for wireless controller management"
    },
    "correct": "C",
-   "explanation_es": "FMC (Firepower Management Center) provee gestión centralizada de políticas, monitoreo y reportes para uno o varios dispositivos NGFW Firepower Threat Defense (FTD), permitiendo administrar de forma consistente múltiples firewalls desde una única consola en lugar de configurarlos individualmente."
+   "explanation_es": "FMC provee gestión centralizada de políticas, monitoreo y reportes para uno o varios dispositivos NGFW FTD, desde una única consola."
   },
   {
    "id": "b3_5.4.c_03",
    "subtopic": "5.4.c",
    "name": "NGFW/FMC/AVC",
-   "question": "What does Application Visibility and Control (AVC) provide within a Cisco NGFW or router?",
+   "question": "What does Application Visibility and Control (AVC) provide in a Cisco NGFW/router?",
    "options": {
     "A": "AVC replaces the need for any firewall rules",
     "B": "AVC is used for physical cable diagnostics",
-    "C": "The ability to identify specific applications generating traffic (beyond just port/protocol) and apply granular policy (allow, block, QoS treatment) based on that application identity",
-    "D": "Only the ability to see interface bandwidth utilization, with no application-level detail beyond simple byte and packet counters per interface across the entire managed network, since AVC's DPI engine identifies the application behind a flow"
+    "C": "Identifying specific apps generating traffic and applying granular policy based on that identity",
+    "D": "Only the ability to see interface bandwidth utilization, with no application-level detail beyond simple byte counters"
    },
    "correct": "C",
-   "explanation_es": "AVC (Application Visibility and Control) permite identificar qué aplicación específica está generando cierto tráfico (más allá de simplemente el puerto/protocolo usado, ya que muchas apps modernas comparten puertos como 443), y aplicar políticas granulares (permitir, bloquear, dar cierto tratamiento de QoS) basadas en esa identidad de aplicación."
+   "explanation_es": "AVC permite identificar qué aplicación específica genera cierto tráfico (más allá del puerto/protocolo) y aplicar políticas granulares basadas en esa identidad."
   },
   {
    "id": "b3_6.1_02",
@@ -3716,29 +3716,29 @@
    "id": "b5_5.2.b_03",
    "subtopic": "5.2.b",
    "name": "CoPP",
-   "question": "On platforms that support fine-grained CoPP, what do the 'host', 'transit', and 'CEF-exception' control-plane sub-interfaces each classify?",
+   "question": "What do the 'host', 'transit', and 'CEF-exception' CoPP sub-interfaces each classify?",
    "options": {
-    "A": "'Host' classifies traffic destined to the device itself, 'transit' classifies traffic passing through the device that still reaches the CPU, and 'CEF-exception' classifies traffic punted to the CPU due to a forwarding exception",
-    "B": "All three sub-interfaces are functionally identical and exist only for redundancy",
-    "C": "These sub-interfaces classify traffic by physical port only, not by traffic type or destination",
-    "D": "'Host' and 'transit' both refer to traffic destined to the device itself, while 'CEF-exception' refers only to multicast traffic, a mix-up that overlooks how 'transit' refers to traffic merely passing through the device toward another destination while still reaching the CPU"
+    "A": "'Host' = traffic to the device itself; 'transit' = passing traffic that still reaches the CPU; 'CEF-exception' = traffic punted due to a forwarding exception",
+    "B": "All three are functionally identical, existing only for redundancy",
+    "C": "They classify traffic by physical port only, not type or destination",
+    "D": "'Host' and 'transit' both refer to traffic destined to the device itself, while 'CEF-exception' refers only to multicast traffic reaching the CPU"
    },
    "correct": "A",
-   "explanation_es": "'Host' clasifica el tráfico destinado al propio dispositivo, 'transit' clasifica el tráfico que pasa a través del dispositivo pero igual llega a la CPU, y 'CEF-exception' clasifica el tráfico desviado a la CPU por una excepción de reenvío."
+   "explanation_es": "'Host' clasifica el tráfico destinado al propio dispositivo, 'transit' el tráfico que pasa pero igual llega a la CPU, y 'CEF-exception' el desviado por una excepción de reenvío."
   },
   {
    "id": "b5_5.2.b_04",
    "subtopic": "5.2.b",
    "name": "CoPP",
-   "question": "In which direction does Control Plane Policing apply its policy?",
+   "question": "In which direction does CoPP apply its policy?",
    "options": {
     "A": "Only to transit traffic passing through the device",
     "B": "To traffic between two VLANs on the same switch",
     "C": "To traffic destined TO the device's control plane (the CPU itself)",
-    "D": "Only to traffic sourced by the device toward external hosts, never to traffic destined toward the CPU itself"
+    "D": "Only to traffic sourced by the device toward external hosts"
    },
    "correct": "C",
-   "explanation_es": "CoPP se aplica específicamente al tráfico destinado a la CPU del propio dispositivo (control plane), no al tráfico de tránsito que solo pasa por el plano de datos sin involucrar a la CPU."
+   "explanation_es": "CoPP se aplica específicamente al tráfico destinado a la CPU del propio dispositivo, no al tráfico de tránsito que solo pasa por el plano de datos."
   },
   {
    "id": "b5_5.2.b_05",
@@ -3749,10 +3749,10 @@
     "A": "A service-policy applied under the 'control-plane' context, using class-maps and a policy-map",
     "B": "QoS marking with 'mls qos trust'",
     "C": "A VACL (VLAN ACL) configuration",
-    "D": "An access-list applied directly to a physical interface with 'ip access-group', which is functionally identical to CoPP configuration"
+    "D": "An access-list applied directly to a physical interface with 'ip access-group', functionally identical to CoPP"
    },
    "correct": "A",
-   "explanation_es": "CoPP se configura definiendo class-maps para clasificar el tráfico, un policy-map con las acciones (police/drop), y aplicándolo con 'service-policy input <nombre>' bajo el contexto 'control-plane', que representa lógicamente a la CPU del dispositivo."
+   "explanation_es": "CoPP se configura con class-maps, un policy-map con las acciones, y 'service-policy input' bajo el contexto 'control-plane', que representa la CPU del dispositivo."
   },
   {
    "id": "b5_6.7_03",
@@ -3884,15 +3884,15 @@
    "id": "b5_5.4.b_05",
    "subtopic": "5.4.b",
    "name": "Seguridad de endpoint (NAC/ISE)",
-   "question": "Before 802.1X authentication completes, what kind of access does a switch port typically allow the connecting endpoint?",
+   "question": "Before 802.1X completes, what access does a switch port typically allow?",
    "options": {
     "A": "Trunk-level access to all VLANs",
     "B": "No traffic, including DHCP",
-    "C": "Full, unrestricted access to the network, exactly as if 802.1X authentication had already completed successfully on that switch port regardless of the connected device's identity",
-    "D": "Restricted access via a pre-authentication ACL, allowing only what's needed for the authentication process itself (e.g., DHCP, ISE communication)"
+    "C": "Full, unrestricted access to the network, exactly as if 802.1X authentication had already completed successfully",
+    "D": "Restricted access via a pre-authentication ACL, allowing only what's needed (DHCP, ISE)"
    },
    "correct": "D",
-   "explanation_es": "Antes de completarse la autenticación 802.1X, el puerto suele permitir un acceso restringido mediante una ACL de pre-autenticación, habilitando solo el tráfico necesario para el propio proceso (DHCP, DNS, comunicación con ISE), no acceso completo."
+   "explanation_es": "Antes de completarse 802.1X, el puerto suele permitir un acceso restringido mediante una ACL de pre-autenticación, habilitando solo el tráfico necesario para el proceso."
   },
   {
    "id": "b5_5.1.b_04",
@@ -3900,19 +3900,19 @@
    "name": "AAA (TACACS+/RADIUS)",
    "question": "Which statement correctly distinguishes TACACS+ from RADIUS?",
    "options": {
-    "A": "TACACS+ encrypts the entire packet body, while RADIUS encrypts only the password field",
-    "B": "TACACS+ encrypts only the password in the packet, while RADIUS encrypts the entire packet body",
+    "A": "TACACS+ encrypts the entire packet body; RADIUS encrypts only the password field",
+    "B": "TACACS+ encrypts only the password; RADIUS encrypts the entire packet body",
     "C": "Neither protocol encrypts any part of the packet",
     "D": "Both encrypt the entire packet identically"
    },
    "correct": "A",
-   "explanation_es": "TACACS+ cifra todo el cuerpo del paquete, mientras que RADIUS solo cifra el campo de contraseña, dejando el resto del paquete (como el username) sin cifrar."
+   "explanation_es": "TACACS+ cifra todo el cuerpo del paquete, mientras que RADIUS solo cifra el campo de contraseña, dejando el resto sin cifrar."
   },
   {
    "id": "b5_5.1.b_05",
    "subtopic": "5.1.b",
    "name": "AAA (TACACS+/RADIUS)",
-   "question": "Which AAA protocol separates authentication and authorization into distinct processes, making it well suited for granular per-command authorization on network devices?",
+   "question": "Which AAA protocol separates authentication and authorization, suited for granular per-command authorization?",
    "options": {
     "A": "LDAP",
     "B": "RADIUS",
@@ -3920,7 +3920,7 @@
     "D": "TACACS+"
    },
    "correct": "D",
-   "explanation_es": "TACACS+ separa claramente autenticación, autorización y accounting en procesos independientes, permitiendo un control granular como autorizar comandos individuales en el CLI — algo que RADIUS, al combinar autenticación y autorización, no maneja tan bien."
+   "explanation_es": "TACACS+ separa claramente autenticación, autorización y accounting, permitiendo autorizar comandos individuales en el CLI, algo que RADIUS maneja peor al combinar autenticación y autorización."
   },
   {
    "id": "b5_5.2.a_04",
@@ -3931,38 +3931,38 @@
     "A": "Source IP address only",
     "B": "Destination MAC address",
     "C": "VLAN tag",
-    "D": "Source and destination IP address plus Layer 4 port"
+    "D": "Source and destination IP plus Layer 4 port"
    },
    "correct": "A",
-   "explanation_es": "Las ACL estándar de IPv4 solo pueden filtrar según la dirección IP de origen. Para filtrar por IP destino, protocolo o puertos de Capa 4 se necesita una ACL extendida."
+   "explanation_es": "Las ACL estándar de IPv4 solo filtran por dirección IP de origen; filtrar por IP destino, protocolo o puertos requiere una ACL extendida."
   },
   {
    "id": "b5_5.2.a_05",
    "subtopic": "5.2.a",
    "name": "ACLs",
-   "question": "By default, what happens to a packet that matches no explicit statement in an ACL applied to an interface?",
+   "question": "By default, what happens to a packet matching no explicit ACL statement on an interface?",
    "options": {
-    "A": "It is queued until an administrator manually decides how to handle it during the next maintenance window",
-    "B": "It is denied, due to an implicit 'deny all' at the end of every ACL",
-    "C": "It is permitted, since ACLs default to permit",
-    "D": "It is forwarded using the next ACL in sequence"
+    "A": "It's queued until an admin manually decides during the next maintenance window",
+    "B": "It's denied, due to an implicit 'deny all' at the end of every ACL",
+    "C": "It's permitted, since ACLs default to permit",
+    "D": "It's forwarded using the next ACL in sequence"
    },
    "correct": "B",
-   "explanation_es": "Toda ACL de Cisco tiene una sentencia implícita de 'deny all' al final (aunque no se muestre en la configuración), por lo que el tráfico que no coincide explícitamente con un 'permit' se descarta."
+   "explanation_es": "Toda ACL de Cisco tiene un 'deny all' implícito al final; el tráfico que no coincide explícitamente con un permit se descarta."
   },
   {
    "id": "b5_5.4.a_05",
    "subtopic": "5.4.a",
    "name": "Threat defense",
-   "question": "What does a CVSS (Common Vulnerability Scoring System) score help an organization do when triaging discovered vulnerabilities?",
+   "question": "What does a CVSS score help an organization do when triaging vulnerabilities?",
    "options": {
-    "A": "It provides a standardized numeric severity rating, helping prioritize which vulnerabilities to remediate first based on relative risk",
-    "B": "It only classifies vulnerabilities by which vendor reported them, not by their actual severity or exploitability",
-    "C": "It has no practical use in prioritization; every vulnerability must be treated as equally urgent regardless of score, ignoring that CVSS scores exist to differentiate urgency",
-    "D": "It automatically patches the vulnerability once scored, removing the need for manual remediation planning"
+    "A": "Provides a standardized severity rating, helping prioritize remediation by relative risk",
+    "B": "Classifies vulnerabilities only by which vendor reported them",
+    "C": "It has no practical use in prioritization; every vulnerability must be treated as equally urgent regardless of score",
+    "D": "Automatically patches the vulnerability once scored"
    },
    "correct": "A",
-   "explanation_es": "Provee una calificación numérica estandarizada de severidad, ayudando a priorizar qué vulnerabilidades remediar primero según su riesgo relativo."
+   "explanation_es": "CVSS provee una calificación numérica estandarizada de severidad, ayudando a priorizar qué vulnerabilidades remediar primero según su riesgo relativo."
   },
   {
    "id": "b5_5.3_04",
@@ -4080,29 +4080,29 @@
    "id": "b5_5.1.a_04",
    "subtopic": "5.1.a",
    "name": "Líneas y autenticación local",
-   "question": "Which command creates a local username/password database entry for authentication on a Cisco device?",
+   "question": "Which command creates a local username/password database entry?",
    "options": {
     "A": "line vty 0 4",
     "B": "username admin password Cisco123",
     "C": "aaa new-model",
-    "D": "enable secret Cisco123, which also creates a full local username database entry automatically"
+    "D": "enable secret Cisco123, which also creates a username entry automatically"
    },
    "correct": "B",
-   "explanation_es": "El comando 'username <nombre> password <clave>' crea una entrada en la base de datos local de usuarios del dispositivo, usada para autenticación local en líneas configuradas con 'login local'."
+   "explanation_es": "'username <nombre> password <clave>' crea una entrada en la base de datos local de usuarios, usada para autenticación en líneas configuradas con 'login local'."
   },
   {
    "id": "b5_5.1.a_05",
    "subtopic": "5.1.a",
    "name": "Líneas y autenticación local",
-   "question": "What is the effect of the 'login local' command applied under 'line vty 0 4'?",
+   "question": "What's the effect of 'login local' applied under 'line vty 0 4'?",
    "options": {
     "A": "It disables authentication entirely for VTY lines",
-    "B": "It applies only to console line access, not VTY",
-    "C": "It requires users connecting via those VTY lines to authenticate using the local username database configured on the device",
-    "D": "It forces authentication through a RADIUS server, bypassing the local username database entirely regardless of configuration"
+    "B": "It applies only to console access, not VTY",
+    "C": "It requires VTY users to authenticate against the local username database",
+    "D": "It forces RADIUS authentication, bypassing the local database entirely"
    },
    "correct": "C",
-   "explanation_es": "'login local' bajo las líneas VTY indica que la autenticación debe validarse contra la base de datos local de usuarios (creada con 'username'), en lugar de usar solo una contraseña de línea genérica o un servidor AAA externo."
+   "explanation_es": "'login local' hace que la autenticación se valide contra la base de datos local de usuarios, en lugar de una simple contraseña de línea o un servidor AAA externo."
   },
   {
    "id": "b5_4.6_04",
@@ -4164,29 +4164,29 @@
    "id": "b5_5.4.c_04",
    "subtopic": "5.4.c",
    "name": "NGFW/FMC/AVC",
-   "question": "How does managing an FTD device via FDM (Firepower Device Manager) differ from managing it via FMC (Firepower Management Center)?",
+   "question": "How does managing an FTD via FDM differ from via FMC?",
    "options": {
-    "A": "FDM can manage multiple FTD devices centrally, while FMC can only manage a single device at a time",
-    "B": "FDM and FMC both run as separate centralized platforms capable of managing multiple FTD devices, differing mainly in licensing tier rather than in their overall scope of management",
-    "C": "FDM requires a separate physical appliance, while FMC runs directly on each FTD device with no separate platform needed, a description that reverses which of the two products actually needs its own dedicated platform",
-    "D": "FDM is a locally hosted, single-device web UI built into the FTD appliance itself, while FMC is a centralized platform that manages policy across many FTD devices at once"
+    "A": "FDM manages multiple FTDs centrally; FMC only manages one at a time",
+    "B": "FDM and FMC both run as separate centralized platforms managing multiple FTD devices, differing mainly in licensing tier",
+    "C": "FDM needs a separate appliance; FMC runs directly on the FTD device",
+    "D": "FDM is a local, single-device web UI on the FTD itself; FMC centrally manages many FTDs"
    },
    "correct": "D",
-   "explanation_es": "FDM es una interfaz web local, de un solo dispositivo, integrada en el propio equipo FTD, mientras que FMC es una plataforma centralizada que gestiona política a través de muchos dispositivos FTD a la vez."
+   "explanation_es": "FDM es una interfaz web local, de un solo dispositivo, integrada en el propio FTD; FMC es una plataforma centralizada que gestiona política en muchos dispositivos FTD a la vez."
   },
   {
    "id": "b5_5.4.c_05",
    "subtopic": "5.4.c",
    "name": "NGFW/FMC/AVC",
-   "question": "Beyond QoS shaping, how can AVC's application-visibility reporting help with a security use case like detecting 'shadow IT'?",
+   "question": "Beyond QoS, how can AVC help detect 'shadow IT'?",
    "options": {
     "A": "AVC can only detect applications that are already known and pre-approved, making it unable to surface anything unexpected",
-    "B": "AVC has no visibility-reporting capability at all; it can only apply QoS marking, not generate reports",
-    "C": "AVC reporting can reveal applications actually running on the network that weren't expected or sanctioned, helping identify unauthorized software or services in use",
-    "D": "Shadow IT detection requires a completely separate product; AVC's application data cannot be used for this purpose in any way, overlooking that AVC's per-flow data would surface an unsanctioned cloud app"
+    "B": "AVC has no visibility-reporting capability, only QoS marking",
+    "C": "AVC reporting can reveal unexpected/unsanctioned apps actually running on the network",
+    "D": "Shadow IT detection requires a completely separate product"
    },
    "correct": "C",
-   "explanation_es": "Los reportes de AVC pueden revelar aplicaciones que realmente corren en la red y que no eran esperadas o autorizadas, ayudando a identificar software o servicios no sancionados en uso."
+   "explanation_es": "Los reportes de AVC pueden revelar aplicaciones que corren en la red sin ser esperadas o autorizadas, ayudando a identificar software no sancionado en uso."
   },
   {
    "id": "b5_2.1.b_04",
@@ -6264,197 +6264,197 @@
    "id": "b6_5.1.a_06",
    "subtopic": "5.1.a",
    "name": "Líneas y autenticación local",
-   "question": "What is the difference between a 'banner motd' and a 'banner login' on a Cisco device, in terms of when each is displayed to a user connecting via VTY?",
+   "question": "What's the difference between 'banner motd' and 'banner login' on a Cisco device?",
    "options": {
-    "A": "The MOTD (message-of-the-day) banner displays before the login prompt, while the login banner displays at the login prompt itself, just before credentials are requested",
-    "B": "The login banner only displays after a user has already successfully authenticated, while the MOTD banner never displays at all on VTY lines, since the MOTD banner displays to every connecting user before any login prompt",
-    "C": "They are two names for exactly the same banner, displayed at exactly the same point in the connection process",
-    "D": "Both banners only apply to console connections and never display for VTY (remote) sessions"
+    "A": "MOTD displays before the login prompt; login banner displays at the prompt itself",
+    "B": "The login banner only displays after successful authentication; MOTD never displays",
+    "C": "They're two names for the same banner, shown at the same point",
+    "D": "Both only apply to console connections, never VTY"
    },
    "correct": "A",
-   "explanation_es": "El banner MOTD (mensaje del día) se muestra antes del prompt de login, mientras que el banner de login se muestra en el propio prompt de login, justo antes de pedir las credenciales."
+   "explanation_es": "El banner MOTD se muestra antes del prompt de login; el banner de login se muestra en el propio prompt, justo antes de pedir las credenciales."
   },
   {
    "id": "b6_5.1.a_08",
    "subtopic": "5.1.a",
    "name": "Líneas y autenticación local",
-   "question": "Why is local username-based authentication generally considered to provide better accountability than a single shared line password, from an auditing/troubleshooting perspective?",
+   "question": "Why does local username auth give better accountability than a shared line password?",
    "options": {
-    "A": "Local username authentication and a shared line password provide exactly identical accountability, since neither approach has any meaningful case to identifying which specific individual took a given action",
-    "B": "A shared line password provides equivalent individual accountability to username-based authentication as long as the syslog server also logs the source IP address of each session, since the combination of timestamp and source IP is sufficient on its own to uniquely identify which specific person initiated a given action",
-    "C": "With individual usernames, actions taken during a session (in syslog/AAA accounting records) can be attributed to a specific named user, whereas a shared line password provides no way to distinguish which of the multiple people who know that shared password actually performed a given action during any particular session",
-    "D": "Accountability has no relevance to authentication method choice in Cisco IOS device management, since syslog/AAA logging never records any information about which authentication method was used to establish a session, a claim that overlooks how AAA accounting and syslog records routinely capture the authenticated username tied to a session for exactly this tracing purpose"
+    "A": "Both provide identical accountability; neither can identify who took an action",
+    "B": "A shared line password provides equivalent individual accountability as long as syslog also logs the source IP of each session",
+    "C": "With usernames, actions in syslog/AAA records attribute to a specific person; a shared password can't distinguish who acted",
+    "D": "Accountability has no relevance to authentication method choice"
    },
    "correct": "C",
-   "explanation_es": "Con nombres de usuario individuales, las acciones realizadas durante una sesión (en registros de syslog/accounting de AAA) se pueden atribuir a un usuario nombrado específico, mientras que una contraseña de línea compartida no da forma de distinguir cuál de las varias personas que conocen esa contraseña compartida realmente realizó una acción dada durante una sesión en particular."
+   "explanation_es": "Con nombres de usuario individuales, las acciones se atribuyen a una persona específica en syslog/AAA; una contraseña compartida no distingue quién actuó realmente."
   },
   {
    "id": "b6_5.1.a_10",
    "subtopic": "5.1.a",
    "name": "Líneas y autenticación local",
-   "question": "What is the purpose of configuring an 'exec-timeout' on VTY and console lines?",
+   "question": "What's the purpose of configuring 'exec-timeout' on VTY/console lines?",
    "options": {
-    "A": "Configuring exec-timeout to any value greater than zero permanently and disables the ability to establish any new session on that line, regardless of activity",
-    "B": "exec-timeout has no security-related purpose and exists purely to control the color of the CLI prompt text displayed to the user",
-    "C": "It automatically disconnects an idle session after a configured period of inactivity, reducing the risk that an administrator who steps away from an unlocked, still-authenticated session leaves it available for someone else to use without re-authenticating",
-    "D": "'exec-timeout' controls how long a session is allowed to remain in the initial authentication phase before the login attempt itself times out, rather than governing how long an already-authenticated, idle session is permitted to sit inactive before being disconnected"
+    "A": "Any value greater than zero permanently disables new sessions on that line",
+    "B": "It has no security purpose, only controlling CLI prompt color",
+    "C": "It disconnects an idle session after inactivity, reducing risk from an unattended authenticated session",
+    "D": "'exec-timeout' controls how long the initial login attempt itself can take before that login attempt times out"
    },
    "correct": "C",
-   "explanation_es": "Desconecta automáticamente una sesión inactiva después de un período configurado de inactividad, reduciendo el riesgo de que un administrador que se aleja de una sesión desbloqueada y aún autenticada la deje disponible para que otra persona la use sin volver a autenticarse."
+   "explanation_es": "Desconecta automáticamente una sesión inactiva después de un período de inactividad, reduciendo el riesgo de que quede disponible sin volver a autenticarse."
   },
   {
    "id": "b6_5.1.a_13",
    "subtopic": "5.1.a",
    "name": "Líneas y autenticación local",
-   "question": "What role does a local username database typically play as a 'fallback' method when AAA authentication (via TACACS+/RADIUS) is configured as the primary method?",
+   "question": "What role does a local username database play as a 'fallback' when AAA is the primary method?",
    "options": {
-    "A": "When AAA is configured, the local username database is typically deleted entirely from the device's configuration, making any form of local fallback authentication not supported",
-    "B": "Local authentication can never be configured as any kind of fallback or backup method alongside AAA server-based authentication under any Cisco IOS AAA method-list configuration",
-    "C": "A local fallback method, once configured in the AAA method list, is checked in parallel alongside the primary AAA server on every login attempt, with whichever method responds first being the one actually used to authenticate the user, rather than local authentication being attempted only after the AAA server has failed to respond",
-    "D": "A properly configured AAA authentication method list can specify local authentication as a backup method to be used if the primary AAA server(s) are unreachable, ensuring that administrators can still gain access to manage the device even during an outage of the centralized AAA infrastructure, rather than being completely locked out"
+    "A": "The local database is typically deleted entirely once AAA is configured",
+    "B": "Local auth can never be a fallback alongside AAA server-based authentication",
+    "C": "A local fallback is checked in parallel with the AAA server; whichever responds first is used",
+    "D": "AAA method lists can specify local auth as backup if the primary AAA servers are unreachable"
    },
    "correct": "D",
-   "explanation_es": "Una lista de métodos de autenticación AAA correctamente configurada puede especificar la autenticación local como método de respaldo a usar si el/los servidor(es) AAA primario(s) son inalcanzables, asegurando que los administradores puedan seguir accediendo para gestionar el dispositivo aún durante una interrupción de la infraestructura AAA centralizada, en lugar de quedar completamente bloqueados."
+   "explanation_es": "Una lista de métodos AAA puede especificar la autenticación local como respaldo si los servidores AAA primarios son inalcanzables, evitando que el administrador quede bloqueado."
   },
   {
    "id": "b6_5.1.b_17",
    "subtopic": "5.1.b",
    "name": "AAA (TACACS+/RADIUS)",
-   "question": "What show command is commonly used on a Cisco IOS device to verify which AAA method lists are configured and, more generally, to troubleshoot AAA-related authentication issues along with debug commands?",
+   "question": "Which command(s) verify configured AAA method lists and help troubleshoot AAA issues?",
    "options": {
-    "A": "'show interfaces status' displays AAA method list configuration directly alongside interface link status, with no separate AAA-specific command or debug output ever needed",
-    "B": "AAA configuration and troubleshooting can never be verified through any Cisco IOS command output and can only be diagnosed by directly examining raw packet captures on the AAA server itself, a claim that overlooks both the running-config's own dedicated aaa section and the real-time debug output IOS provides during an actual authentication attempt",
-    "C": "'show running-config | section aaa' (to review the configured AAA method lists and server group definitions) combined with debug commands like 'debug aaa authentication' can help an administrator verify configuration correctness and observe the actual AAA exchange in real time when troubleshooting a login or authorization failure",
-    "D": "'show vlan brief' is the only command capable of displaying any AAA-related configuration or troubleshooting information on a Cisco IOS device"
+    "A": "'show interfaces status' shows AAA config alongside link status",
+    "B": "AAA configuration and troubleshooting can never be verified through any Cisco IOS command output or debug at all",
+    "C": "'show running-config | section aaa' plus 'debug aaa authentication' to review config and observe the live exchange",
+    "D": "'show vlan brief' is the only command showing AAA-related info"
    },
    "correct": "C",
-   "explanation_es": "'show running-config | section aaa' (para revisar las listas de métodos AAA configuradas y las definiciones de grupos de servidores) combinado con comandos debug como 'debug aaa authentication' puede ayudar a un administrador a verificar la corrección de la configuración y observar el intercambio AAA real en tiempo real al resolver una falla de login o autorización."
+   "explanation_es": "'show running-config | section aaa' (para revisar las listas de métodos) combinado con 'debug aaa authentication' ayuda a verificar la configuración y observar el intercambio AAA en tiempo real."
   },
   {
    "id": "b6_5.2.a_07",
    "subtopic": "5.2.a",
    "name": "ACLs",
-   "question": "What is the purpose of a 'wildcard mask' used in Cisco ACL configuration, and how does it conceptually differ from a standard subnet mask?",
+   "question": "What's a wildcard mask in ACL config, and how does it differ from a subnet mask?",
    "options": {
-    "A": "A wildcard mask determines which bits of the destination MAC address must match for a Layer 2 ACL entry, and has no bearing on how an IP ACL's address fields are evaluated, with IP address matching in standard and extended ACLs instead relying on the configured subnet mask value applied directly rather than an inverted wildcard pattern",
-    "B": "Wildcard masks can express a contiguous range of addresses but, unlike a subnet mask, cannot be applied to define an exact single host match, meaning the common 'host' keyword shortcut actually invokes a completely separate matching mechanism rather than a wildcard mask value of all zeros",
-    "C": "A wildcard mask and a standard subnet mask are functionally and logically completely identical, with 1s and 0s meaning exactly the same thing in both, and the two terms being fully interchangeable with no inverted logic involved",
-    "D": "A wildcard mask specifies which bits of an address must match exactly (a 0 bit) versus which bits are 'don't care' and may be any value (a 1 bit) for a match to occur, which is conceptually the inverse of a standard subnet mask (where a 1 bit typically indicates the network portion that must match); this inverted logic allows ACLs to express flexible matching patterns beyond simple contiguous subnet boundaries"
+    "A": "A wildcard mask determines which destination MAC address bits must match for a Layer 2 ACL entry only",
+    "B": "It can express a range but can't define an exact single-host match",
+    "C": "A wildcard mask and subnet mask are functionally identical, fully interchangeable",
+    "D": "It specifies which bits must match exactly (0) vs. don't-care bits (1) — the inverse logic of a subnet mask"
    },
    "correct": "D",
-   "explanation_es": "Una wildcard mask especifica qué bits de una dirección deben coincidir exactamente (un bit 0) versus qué bits son 'no importa' y pueden ser cualquier valor (un bit 1) para que ocurra una coincidencia, lo cual es conceptualmente el inverso de una máscara de subred estándar (donde un bit 1 típicamente indica la porción de red que debe coincidir); esta lógica invertida permite que las ACLs expresen patrones de coincidencia flexibles más allá de límites de subred contiguos simples."
+   "explanation_es": "Una wildcard mask especifica qué bits deben coincidir exactamente (0) y cuáles no importan (1), lo cual es conceptualmente el inverso de una máscara de subred estándar."
   },
   {
    "id": "b6_5.2.a_09",
    "subtopic": "5.2.a",
    "name": "ACLs",
-   "question": "What is the effect of the keyword 'host' used in an ACL statement (e.g., 'host 10.1.1.5'), and what wildcard mask does it functionally represent?",
+   "question": "What does the 'host' keyword in an ACL statement represent as a wildcard mask?",
    "options": {
-    "A": "'host' matches exactly one specific single address (equivalent to specifying that address with a wildcard mask of 0.0.0.0, where every bit must match exactly), providing a convenient shorthand for a statement intended to match traffic to/from only that one precise address rather than any broader range",
-    "B": "'host' matches every possible address in the entire address space, functionally identical to the keyword 'any' rather than restricting the match to a single specific address, a mix-up that likely comes from confusing the wildcard mask 0.0.0.0 with 255.255.255.255, the mask actually associated with the 'any' keyword's match-everything behavior",
-    "C": "'host' is functionally equivalent to a wildcard mask of 255.255.255.255, matching every possible address rather than requiring an exact single-address match",
-    "D": "The keyword 'host' can only be used in a standard ACL and is technically invalid/unsupported syntax within an extended ACL statement"
+    "A": "It matches exactly one address, equivalent to a wildcard mask of 0.0.0.0",
+    "B": "It matches every address, functionally identical to 'any'",
+    "C": "It's equivalent to a wildcard mask of 255.255.255.255, matching everything",
+    "D": "It can only be used in a standard ACL, invalid in an extended ACL"
    },
    "correct": "A",
-   "explanation_es": "'host' coincide con exactamente una única dirección específica (equivalente a especificar esa dirección con una wildcard mask de 0.0.0.0, donde cada bit debe coincidir exactamente), dando un atajo conveniente para una sentencia pensada para coincidir con tráfico hacia/desde solo esa dirección precisa en lugar de cualquier rango más amplio."
+   "explanation_es": "'host' coincide con exactamente una única dirección específica, equivalente a especificarla con una wildcard mask de 0.0.0.0, donde cada bit debe coincidir."
   },
   {
    "id": "b6_5.2.a_17",
    "subtopic": "5.2.a",
    "name": "ACLs",
-   "question": "Why does a Cisco standard ACL's limited matching capability (source address only) make it generally unsuitable for filtering traffic based on a specific application or service (like blocking only HTTP traffic while permitting everything else from the same source)?",
+   "question": "Why can't a standard ACL filter traffic by specific application (like blocking only HTTP)?",
    "options": {
-    "A": "Because a standard ACL can only match on the packet's source IP address, it has no ability to differentiate between different applications/services (like HTTP vs. SSH) coming from that same source, since distinguishing by protocol and port number (Layer 4 information) requires the additional matching fields that only an extended ACL provides",
-    "B": "Standard ACLs can match on protocol type (such as distinguishing TCP from UDP traffic) even though they cannot match on the specific destination port number, so a standard ACL can partially, though not completely, differentiate between different applications from the same source, a capability sometimes confused with the fuller port-level granularity that only extended ACLs actually provide",
-    "C": "Application-specific filtering by protocol/port is not supported using any type of Cisco ACL, whether standard or extended, and requires an entirely separate, unrelated firewall product instead",
-    "D": "Standard ACLs can match on destination port number just as effectively as extended ACLs, with the only actual difference between the two ACL types being their assigned numbering range"
+    "A": "It can only match source IP, with no way to distinguish protocol/port (Layer 4), which needs an extended ACL",
+    "B": "Standard ACLs can match on protocol type even though they cannot match on the specific destination port number",
+    "C": "No Cisco ACL type (standard or extended) supports app-specific filtering at all",
+    "D": "Standard ACLs can match destination port just as well as extended ACLs"
    },
    "correct": "A",
-   "explanation_es": "Como una ACL estándar solo puede hacer match en la dirección IP de origen del paquete, no tiene forma de diferenciar entre distintas aplicaciones/servicios (como HTTP vs. SSH) provenientes de ese mismo origen, ya que distinguir por protocolo y número de puerto (información de Capa 4) requiere los campos de coincidencia adicionales que solo provee una ACL extendida."
+   "explanation_es": "Como una ACL estándar solo hace match en la IP de origen, no puede diferenciar entre aplicaciones (como HTTP vs SSH); eso requiere los campos adicionales de una ACL extendida."
   },
   {
    "id": "b6_5.3_14",
    "subtopic": "5.3",
    "name": "Seguridad de REST API",
-   "question": "What is the purpose of API request/response 'logging and monitoring' from a security perspective, beyond general operational troubleshooting?",
+   "question": "What's the security value of API request/response logging, beyond operational troubleshooting?",
    "options": {
-    "A": "Detailed API access logs (recording who made which request, when, and what the outcome was) can help detect anomalous or suspicious usage patterns (such as an unusually high volume of failed authentication attempts, or access to sensitive endpoints from an unexpected source), supporting both proactive security monitoring and after-the-fact forensic investigation if a security incident is suspected",
-    "B": "API logging and monitoring have no security relevance and exist purely to help a developer debug a broken feature during active development, with no ongoing security value once the feature is considered stable",
-    "C": "Once API logs are generated, they provide zero investigative value for any subsequent security incident, since API log entries can never be correlated with any other data source such as network device syslog",
-    "D": "Logging every API request and response is mainly useful for billing and usage-metering purposes rather than for security purposes, since the level of detail typically captured in access logs (timestamp, endpoint, and response code) is generally considered insufficient to detect an anomalous authentication pattern or a targeted attack against a specific endpoint"
+    "A": "Detailed access logs can reveal anomalous patterns (failed auth spikes, unexpected access), supporting monitoring and forensics",
+    "B": "API logging has no security relevance, only helping debug during development",
+    "C": "API logs provide zero investigative value for a security incident",
+    "D": "Logging every API request is mainly useful for billing and usage-metering rather than for any security-monitoring purpose"
    },
    "correct": "A",
-   "explanation_es": "Los logs de acceso a la API detallados (registrando quién hizo qué solicitud, cuándo, y cuál fue el resultado) pueden ayudar a detectar patrones de uso anómalos o sospechosos (como un volumen inusualmente alto de intentos de autenticación fallidos, o acceso a endpoints sensibles desde un origen inesperado), apoyando tanto el monitoreo de seguridad proactivo como la investigación forense posterior si se sospecha un incidente de seguridad."
+   "explanation_es": "Los logs de acceso detallados pueden ayudar a detectar patrones anómalos o sospechosos, apoyando tanto el monitoreo proactivo como la investigación forense posterior."
   },
   {
    "id": "b6_5.4.b_10",
    "subtopic": "5.4.b",
    "name": "Seguridad de endpoint (NAC/ISE)",
-   "question": "What is the general purpose of 'multi-domain authentication' (MDA) host mode on a switch port, in the common scenario of an IP phone with a PC connected behind it?",
+   "question": "What's the purpose of multi-domain authentication (MDA) with an IP phone + PC on one port?",
    "options": {
-    "A": "MDA host mode is primarily intended for uplink ports connecting two switches together, and while it can technically be applied to an access port with a phone and PC attached, that specific phone-plus-PC scenario is more commonly handled using multi-host mode instead of MDA",
-    "B": "Multi-domain authentication allows the phone and PC to be placed into different VLANs, but both devices are still required to share a single common authentication method and identical authorization policy, since MDA does not support applying a distinct dACL or authorization result independently to each of the two domains",
-    "C": "Multi-domain authentication mode only permits devices from a single domain type (either voice or data, but never both simultaneously) to authenticate on the port, making it functionally identical to single-host mode in terms of how many concurrently authenticated devices are supported, a misunderstanding that overlooks how MDA's entire purpose is to explicitly support one authenticated device from each of the two separate domains concurrently on that same port",
-    "D": "MDA specifically allows exactly one authenticated device in the 'voice domain' (the IP phone) and one authenticated device in the 'data domain' (the PC) simultaneously on the same physical port, each potentially placed into a different VLAN (voice VLAN vs. data VLAN) with its own independent authentication/authorization, which is the common host mode used for the standard phone-plus-PC-daisy-chained deployment scenario"
+    "A": "MDA host mode is primarily intended for uplink ports between switches, not for a phone-plus-PC access port scenario",
+    "B": "MDA places phone/PC in different VLANs but forces them to share one auth method",
+    "C": "MDA only permits one domain type (voice OR data), same as single-host mode",
+    "D": "MDA allows one device in the voice domain and one in the data domain simultaneously, each with independent auth/VLAN"
    },
    "correct": "D",
-   "explanation_es": "MDA permite específicamente exactamente un dispositivo autenticado en el 'dominio de voz' (el teléfono IP) y un dispositivo autenticado en el 'dominio de datos' (la PC) simultáneamente en el mismo puerto físico, cada uno potencialmente colocado en una VLAN distinta (VLAN de voz vs. VLAN de datos) con su propia autenticación/autorización independiente, siendo el host mode común usado para el escenario estándar de despliegue de teléfono-con-PC-encadenada."
+   "explanation_es": "MDA permite exactamente un dispositivo autenticado en el dominio de voz (el teléfono) y uno en el dominio de datos (la PC) simultáneamente, cada uno con su propia VLAN y autenticación."
   },
   {
    "id": "b6_5.4.b_16",
    "subtopic": "5.4.b",
    "name": "Seguridad de endpoint (NAC/ISE)",
-   "question": "What does the term 'supplicant' refer to in the 802.1X three-party authentication model, and where does that software/component typically run?",
+   "question": "What does 'supplicant' refer to in the 802.1X model?",
    "options": {
-    "A": "The supplicant role is always performed by the switch or wireless access point (the authenticator), with no separate client-side software component involved anywhere in the 802.1X exchange, a mix-up that confuses the authenticator's role in relaying EAP frames between the supplicant and the authentication server with the supplicant's actual role of originating the endpoint's own credential exchange",
-    "B": "A supplicant is a piece of specialized physical hardware that must be manually inserted into a switch's expansion slot, rather than a software component running on the connecting endpoint",
-    "C": "The supplicant refers to the authentication server (like ISE) itself, rather than to any client-side software component running on the connecting endpoint device",
-    "D": "The supplicant is the client-side software component running on the connecting endpoint device itself (such as a laptop's built-in 802.1X client, or a dedicated supplicant application) that initiates the 802.1X authentication exchange with the authenticator (the switch/AP), presenting the endpoint's credentials to be validated by the authentication server"
+    "A": "The switch or AP (the authenticator) itself",
+    "B": "A supplicant is a piece of specialized physical hardware that must be manually inserted into a switch expansion slot",
+    "C": "The authentication server (like ISE)",
+    "D": "The client-side software on the endpoint that initiates the 802.1X exchange with the authenticator"
    },
    "correct": "D",
-   "explanation_es": "El supplicant es el componente de software del lado del cliente que corre en el propio dispositivo endpoint que se conecta (como el cliente 802.1X integrado de una laptop, o una aplicación supplicant dedicada) que inicia el intercambio de autenticación 802.1X con el authenticator (el switch/AP), presentando las credenciales del endpoint para que las valide el servidor de autenticación."
+   "explanation_es": "El supplicant es el componente de software del lado del cliente que corre en el endpoint que se conecta, iniciando el intercambio 802.1X con el authenticator."
   },
   {
    "id": "b6_5.4.c_10",
    "subtopic": "5.4.c",
    "name": "NGFW/FMC/AVC",
-   "question": "Why might identity-based policy (associating firewall rules with specific Active Directory users or groups, rather than only IP addresses) be valuable in an NGFW deployment?",
+   "question": "Why is identity-based policy (rules tied to AD users/groups, not just IPs) valuable in an NGFW?",
    "options": {
-    "A": "Identity-based policy can only ever be applied to a single specific user account across an entire organization, making it impossible to define policy for an entire group or department of users at once",
-    "B": "Identity-based policy allows access control decisions to follow the actual user regardless of which specific device or IP address they happen to be using at a given moment (particularly relevant in environments with DHCP-assigned addresses or where users move between devices), and allows policy to be expressed in more meaningful business terms (like 'the Finance group') rather than in terms of specific, potentially changing IP address ranges",
-    "C": "Identity-based policy has little practical advantage over pure IP-address-based policy, since a user's identity never has any relationship to which specific traffic they generate or which IP address they're currently using, a claim that overlooks how a DHCP-reassigned address or a user roaming between a laptop and a shared workstation would otherwise force an administrator to constantly rewrite IP-based rules just to keep policy accurate as addresses and device assignments shift",
-    "D": "Once identity-based policy is enabled, IP-address-based policy becomes entirely unusable and unconfigurable on that same NGFW device, forcing an all-or-nothing choice between the two approaches"
+    "A": "It can only ever apply to a single user account, never a group",
+    "B": "Policy follows the actual user regardless of device/IP, expressed in business terms like 'the Finance group'",
+    "C": "Identity-based policy has little practical advantage over pure IP-address-based policy in any DHCP or roaming-user scenario",
+    "D": "Enabling it makes IP-based policy entirely unusable on that device"
    },
    "correct": "B",
-   "explanation_es": "La política basada en identidad permite que las decisiones de control de acceso sigan al usuario real sin importar qué dispositivo o dirección IP específicos esté usando en un momento dado (particularmente relevante en entornos con direcciones asignadas por DHCP o donde los usuarios se mueven entre dispositivos), y permite expresar la política en términos de negocio más significativos (como 'el grupo de Finanzas') en lugar de en términos de rangos de IP específicos y potencialmente cambiantes."
+   "explanation_es": "La política basada en identidad sigue al usuario real sin importar el dispositivo o IP que use, y permite expresar la política en términos de negocio en vez de rangos de IP cambiantes."
   },
   {
    "id": "b6_5.4.c_17",
    "subtopic": "5.4.c",
    "name": "NGFW/FMC/AVC",
-   "question": "Why might an organization use FMC's reporting capability to generate periodic (e.g., weekly or monthly) summary reports of firewall/IPS activity, rather than relying solely on real-time event monitoring?",
+   "question": "Why use FMC's periodic summary reports rather than relying only on real-time event monitoring?",
    "options": {
-    "A": "Generating periodic summary reports typically disables FMC's real-time event monitoring capability entirely, forcing an administrator to choose between the two mutually exclusive monitoring approaches",
-    "B": "Periodic summary reports provide a higher-level, trend-oriented view of security activity over time (such as top blocked applications, most-triggered intrusion signatures, or overall traffic/threat volume trends) that's useful for management reporting, capacity/policy planning, and identifying longer-term patterns that might not be obvious when only looking at individual real-time events as they occur",
-    "C": "FMC's reporting capability can aggregate and summarize multiple events over a defined period, but each generated report is limited to covering a single managed FTD device at a time, rather than being able to summarize combined activity trends across every device FMC manages",
-    "D": "Periodic summary reporting provides no practical value beyond what real-time event monitoring alone already provides, since aggregated trend data over time offers no additional insight compared to observing individual events one at a time as they happen, a view that overlooks how spotting a gradual month-over-month rise in a specific intrusion signature is something no single real-time alert, viewed in isolation, could reveal on its own"
+    "A": "Generating reports disables real-time monitoring entirely",
+    "B": "Reports give a trend-oriented view over time (top blocked apps, signatures) useful for planning and spotting longer-term patterns",
+    "C": "FMC's reporting capability limits each generated report to covering a single managed FTD device at a time, never combining trends",
+    "D": "Reporting provides no value beyond real-time monitoring alone"
    },
    "correct": "B",
-   "explanation_es": "Los reportes periódicos de resumen dan una vista de más alto nivel y orientada a tendencias de la actividad de seguridad a lo largo del tiempo (como las aplicaciones más bloqueadas, las firmas de intrusión más disparadas, o tendencias generales de volumen de tráfico/amenazas) útil para reportes gerenciales, planificación de capacidad/política, e identificación de patrones de más largo plazo que podrían no ser obvios al mirar solo eventos individuales en tiempo real a medida que ocurren."
+   "explanation_es": "Los reportes periódicos dan una vista de más alto nivel y orientada a tendencias, útil para reportes gerenciales y para identificar patrones que no son obvios mirando eventos individuales."
   },
   {
    "id": "b6_5.4.d_12",
    "subtopic": "5.4.d",
    "name": "TrustSec/MACsec",
-   "question": "When MKA negotiates MACsec on a point-to-point link between two switches, how is it decided which side acts as the 'Key Server'?",
+   "question": "In MKA, how is it decided which side of a point-to-point link becomes the 'Key Server'?",
    "options": {
-    "A": "The Key Server role is manually and permanently hardcoded into the switch's serial number by the manufacturer, with no negotiation involved, a misconception rooted in confusing the elected MAC tiebreaker with a burned-in hardware identifier",
-    "B": "Both switches always act as Key Server simultaneously, each independently generating its own separate key for the same link",
-    "C": "The two switches negotiate and elect one side as Key Server (commonly based on priority, with MAC address as a tiebreaker), and that side is responsible for generating and distributing the session key",
-    "D": "There is no Key Server concept in MKA; each frame carries its own independently negotiated key with no central coordination"
+    "A": "It's permanently hardcoded into the switch's serial number by the manufacturer",
+    "B": "Both switches always act as Key Server simultaneously, each generating its own key",
+    "C": "The switches negotiate and elect one side (by priority, MAC as tiebreaker) to generate/distribute the session key",
+    "D": "There is no Key Server concept in MKA at all; each frame carries its own independently negotiated key with no coordination"
    },
    "correct": "C",
-   "explanation_es": "Los dos switches negocian y eligen un lado como Key Server (comúnmente basado en prioridad, con la MAC como desempate), y ese lado es responsable de generar y distribuir la clave de sesión."
+   "explanation_es": "Los dos switches negocian y eligen un lado como Key Server (por prioridad, con la MAC como desempate), responsable de generar y distribuir la clave de sesión."
   },
   {
    "id": "b6_6.1_06",
@@ -7146,197 +7146,197 @@
    "id": "b6_5.1.a_18",
    "subtopic": "5.1.a",
    "name": "Líneas y autenticación local",
-   "question": "What is the purpose of setting a 'login authentication' method list on the VTY lines that references AAA, rather than relying on the simpler 'login' (line-password-only) command?",
+   "question": "Why set a 'login authentication' method list referencing AAA on VTY lines, rather than plain 'login'?",
    "options": {
-    "A": "This command can only be applied to the console line and is technically invalid, unsupported syntax when applied to VTY lines",
-    "B": "'login authentication' and plain 'login' provide exactly identical authentication behavior with no meaningful distinction between checking a shared line password versus checking individual per-user credentials, a misunderstanding that overlooks how 'login authentication' invokes a named AAA method list while plain 'login' only checks the line's own password",
-    "C": "Configuring 'login authentication' always and disables password-based authentication entirely on that line, requiring a different, entirely non-password-based mechanism instead",
-    "D": "Referencing an AAA method list allows the VTY lines to use username-based authentication (local database and/or a AAA server) with its associated accountability and granular control, rather than the simpler 'login' command, which only checks a single shared line password with no per-user identity involved"
+    "A": "This command is invalid on VTY lines, only valid on console",
+    "B": "Both provide identical behavior, with no meaningful distinction",
+    "C": "Configuring 'login authentication' always disables password-based authentication entirely on that line",
+    "D": "It lets VTY use username-based auth (local/AAA) with accountability, instead of a single shared line password"
    },
    "correct": "D",
-   "explanation_es": "Referenciar una lista de métodos AAA le permite a las líneas VTY usar autenticación basada en nombre de usuario (base de datos local y/o un servidor AAA) con su responsabilidad y control granular asociados, en lugar del comando 'login' más simple, que solo verifica una única contraseña de línea compartida sin ninguna identidad por usuario involucrada."
+   "explanation_es": "Referenciar una lista de métodos AAA permite usar autenticación basada en usuario (local y/o AAA) con su responsabilidad asociada, en lugar del 'login' simple que solo verifica una contraseña compartida."
   },
   {
    "id": "b6_5.1.a_19",
    "subtopic": "5.1.a",
    "name": "Líneas y autenticación local",
-   "question": "Why might an organization configure a maximum number of simultaneous VTY sessions (via 'line vty 0 4' limiting to 5 sessions, for example) rather than allowing an unlimited number?",
+   "question": "Why configure a maximum number of simultaneous VTY sessions rather than unlimited?",
    "options": {
-    "A": "VTY line limits only affect wireless management sessions and have no relevance to wired SSH/Telnet-based device management access",
-    "B": "There is no meaningful reason to limit the number of VTY sessions, since a Cisco device's CPU and memory resources are assumed to be infinite and unaffected by any number of simultaneous management connections, a claim that overlooks how each open VTY session consumes a real, finite share of the device's own limited processing and memory resources",
-    "C": "Configuring a VTY session limit always and disables the ability for any administrator to ever connect to the device remotely again",
-    "D": "Limiting the number of concurrent management sessions reduces the risk of a device's limited CPU/memory resources being exhausted by an excessive number of simultaneous administrative connections, and can also make it harder for an attacker to open many simultaneous sessions as part of a resource-exhaustion or brute-force attempt"
+    "A": "VTY limits only affect wireless management sessions",
+    "B": "There is no meaningful reason to limit VTY sessions, since a device CPU and memory are assumed to be unaffected by connections",
+    "C": "A session limit always disables remote access entirely for every admin",
+    "D": "It reduces the risk of resource exhaustion and makes brute-force/DoS attempts harder"
    },
    "correct": "D",
-   "explanation_es": "Limitar la cantidad de sesiones de gestión concurrentes reduce el riesgo de que los recursos limitados de CPU/memoria de un dispositivo se agoten por una cantidad excesiva de conexiones administrativas simultáneas, y también puede dificultar que un atacante abra muchas sesiones simultáneas como parte de un intento de agotamiento de recursos o de fuerza bruta."
+   "explanation_es": "Limitar las sesiones concurrentes reduce el riesgo de agotar los recursos limitados del dispositivo y dificulta que un atacante abra muchas sesiones simultáneas."
   },
   {
    "id": "b6_5.1.a_20",
    "subtopic": "5.1.a",
    "name": "Líneas y autenticación local",
-   "question": "What is the purpose of an 'access-class' applied to the VTY lines, restricting which source addresses are permitted to even attempt a management connection?",
+   "question": "What's the purpose of an 'access-class' applied to VTY lines?",
    "options": {
-    "A": "An access-class references an ACL that restricts which source IP addresses are permitted to connect to the VTY lines at all, providing a network-layer access restriction (limiting management access to known, trusted management subnets) that applies before any authentication is even attempted",
-    "B": "An access-class applied to the VTY lines primarily limits the maximum number of simultaneous management sessions permitted on those lines, rather than filtering incoming connection attempts based on the source IP address of the device attempting to connect",
-    "C": "Configuring an access-class always and disables authentication entirely on the VTY lines, replacing username/password checking rather than adding an additional, complementary layer of restriction",
-    "D": "Access-class can only be applied to the console port and is technically invalid, unsupported configuration syntax when applied to VTY lines"
+    "A": "It references an ACL restricting which source IPs can even attempt to connect, before authentication",
+    "B": "An access-class applied to the VTY lines primarily limits the maximum number of simultaneous management sessions permitted",
+    "C": "It always disables authentication entirely on the VTY lines",
+    "D": "Access-class is only valid on the console port, not VTY"
    },
    "correct": "A",
-   "explanation_es": "Un access-class referencia una ACL que restringe qué direcciones IP de origen tienen permitido siquiera conectarse a las líneas VTY, dando una restricción de acceso a nivel de red (limitando el acceso de gestión a subredes de gestión conocidas y confiables) que se aplica antes de siquiera intentar cualquier autenticación."
+   "explanation_es": "Un access-class referencia una ACL que restringe qué IPs de origen pueden conectarse a las líneas VTY, una restricción de red aplicada antes de cualquier autenticación."
   },
   {
    "id": "b6_5.1.a_22",
    "subtopic": "5.1.a",
    "name": "Líneas y autenticación local",
-   "question": "What is the security rationale for disabling unused physical/logical management interfaces (such as the auxiliary port, if not actually needed) on a network device?",
+   "question": "What's the security rationale for disabling unused management interfaces (like an unneeded aux port)?",
    "options": {
-    "A": "Every enabled access method represents a potential attack surface; disabling an interface that isn't actually needed for legitimate operational purposes removes that specific avenue of potential unauthorized access entirely, following the general security principle of minimizing unnecessary exposed attack surface",
-    "B": "This practice is only relevant for interfaces carrying production data traffic, and has little relevance to a purely out-of-band management interface like the auxiliary port",
-    "C": "Every management interface on a device must always remain enabled at all times regardless of whether it's actually used, since Cisco IOS is described as not designed to disabling any interface once it has been initially configured, a misunderstanding that overlooks the 'shutdown' interface command, a standard, fully supported configuration option in Cisco IOS",
-    "D": "Disabling unused management interfaces has little security rationale and provides no meaningful reduction in a device's overall attack surface"
+    "A": "Every enabled access method is a potential attack surface; disabling unneeded ones removes that avenue",
+    "B": "This practice is only relevant for interfaces carrying production data traffic, not a purely out-of-band aux port",
+    "C": "Every management interface must always stay enabled regardless of use",
+    "D": "Disabling unused interfaces has no security rationale at all"
    },
    "correct": "A",
-   "explanation_es": "Cada método de acceso habilitado representa una superficie de ataque potencial; deshabilitar una interfaz que en realidad no se necesita para propósitos operativos legítimos elimina esa vía específica de acceso no autorizado potencial por completo, siguiendo el principio general de seguridad de minimizar la superficie de ataque expuesta innecesaria."
+   "explanation_es": "Cada método de acceso habilitado es una superficie de ataque potencial; deshabilitar los que no se necesitan elimina esa vía de acceso no autorizado."
   },
   {
    "id": "b6_5.1.b_18",
    "subtopic": "5.1.b",
    "name": "AAA (TACACS+/RADIUS)",
-   "question": "What does 'aaa authentication login default group tacacs+ local' configure, in terms of the order methods are attempted?",
+   "question": "What does 'aaa authentication login default group tacacs+ local' configure, in terms of order?",
    "options": {
-    "A": "This syntax is invalid and unsupported on any current Cisco IOS or IOS-XE release, since AAA method lists cannot reference more than one authentication method",
-    "B": "It configures the default login authentication method list to first attempt authentication against the TACACS+ server group, and if that server group is unreachable, to fall back to the local username database as a backup method",
-    "C": "This command causes the switch to check the local username database first on every login attempt, and only falls back to querying the TACACS+ server group if no matching entry is found in that local database",
-    "D": "The command causes both TACACS+ and local authentication to be checked simultaneously on every single login attempt, with the user needing to satisfy both methods at once rather than one serving as a fallback for the other, misreading the fallback syntax as a dual-credential check"
+    "A": "This syntax is invalid; method lists can't reference more than one method",
+    "B": "First try TACACS+; if unreachable, fall back to the local username database",
+    "C": "Check the local database first, only falling back to TACACS+ if not found",
+    "D": "Both TACACS+ and local are checked simultaneously, requiring both to pass"
    },
    "correct": "B",
-   "explanation_es": "Configura la lista de métodos de autenticación de login por defecto para primero intentar autenticación contra el grupo de servidores TACACS+, y si ese grupo de servidores es inalcanzable, caer de vuelta a la base de datos de usuarios local como método de respaldo."
+   "explanation_es": "Configura la lista para primero intentar autenticación contra TACACS+, y si ese grupo de servidores es inalcanzable, caer de vuelta a la base de datos local como respaldo."
   },
   {
    "id": "b6_5.2.a_18",
    "subtopic": "5.2.a",
    "name": "ACLs",
-   "question": "What command is commonly used to verify the contents and match counters of a configured ACL on a Cisco device?",
+   "question": "Which command verifies an ACL's contents and match counters?",
    "options": {
-    "A": "'show running-config' displays the ACL statements exactly as configured, but it does not track or display any running match counters showing how many packets have actually hit each individual statement",
-    "B": "'show ip route' displays ACL statement match counters directly alongside routing table entries, with no separate ACL-specific command needed",
-    "C": "'show access-lists [name/number]', which displays each configured statement along with a running count of how many packets have matched it, useful for confirming an ACL is actually being hit by the expected traffic",
-    "D": "ACL contents and match counters can never be viewed through any Cisco IOS command output, and can only be inferred by capturing packets on every interface, a claim that overlooks the dedicated show command built specifically to display exactly that information"
+    "A": "'show running-config' shows the ACL statements but not match counters",
+    "B": "'show ip route' shows ACL counters alongside routing entries",
+    "C": "'show access-lists [name/number]', showing each statement with a running match count",
+    "D": "ACL counters can never be viewed via CLI, only inferred from packet captures"
    },
    "correct": "C",
-   "explanation_es": "'show access-lists [nombre/número]' muestra cada sentencia configurada junto con un conteo acumulado de cuántos paquetes han coincidido con ella, útil para confirmar que una ACL realmente está siendo alcanzada por el tráfico esperado."
+   "explanation_es": "'show access-lists [nombre/número]' muestra cada sentencia con un conteo acumulado de paquetes coincidentes, útil para confirmar que la ACL realmente se está aplicando."
   },
   {
    "id": "b6_5.2.a_19",
    "subtopic": "5.2.a",
    "name": "ACLs",
-   "question": "Why might an administrator use the 'established' keyword in an extended ACL matching TCP traffic, and what does it actually check?",
+   "question": "What does the 'established' keyword in an extended TCP ACL actually check?",
    "options": {
-    "A": "Configuring 'established' causes the ACL to permit only the initial SYN segment of a new TCP connection while blocking every subsequent segment that belongs to that same session",
-    "B": "'established' matches TCP segments based on whether the source and destination port numbers fall within the ephemeral port range typically used by return traffic, rather than by inspecting any TCP flag bits directly",
-    "C": "The established keyword can only be used with UDP traffic and is technically invalid, unsupported syntax when applied to a TCP-matching ACL statement, a claim that overlooks how the 'established' keyword is documented specifically as a TCP-flag match and has no defined meaning at all when applied to a UDP-matching ACL statement, since UDP carries no such flags",
-    "D": "'established' matches TCP segments that have the ACK (or RST) flag set, which is commonly used to permit return traffic for connections that were initiated from the inside, without needing a stateful firewall — it's a simple heuristic (not true stateful inspection) that assumes a segment with ACK set belongs to an already-established session"
+    "A": "It permits only the initial SYN segment, blocking every later segment",
+    "B": "'established' matches TCP segments based on whether ports fall in the ephemeral range, rather than inspecting any flag bits",
+    "C": "It's invalid for TCP, only usable with UDP",
+    "D": "It matches segments with ACK (or RST) set, a simple heuristic for return traffic, not true stateful inspection"
    },
    "correct": "D",
-   "explanation_es": "'established' hace match con segmentos TCP que tienen el flag ACK (o RST) activo, comúnmente usado para permitir tráfico de retorno de conexiones iniciadas desde adentro, sin necesitar un firewall con estado — es una heurística simple (no inspección con estado real) que asume que un segmento con ACK activo pertenece a una sesión ya establecida."
+   "explanation_es": "'established' hace match con segmentos que tienen el flag ACK (o RST) activo, una heurística simple para permitir tráfico de retorno, no inspección con estado real."
   },
   {
    "id": "b6_5.2.a_20",
    "subtopic": "5.2.a",
    "name": "ACLs",
-   "question": "What is the effect of applying an ACL that contains only 'deny' statements and no explicit 'permit' statement of any kind to an interface?",
+   "question": "What's the effect of an ACL containing only 'deny' statements, no explicit 'permit', applied to an interface?",
    "options": {
-    "A": "An ACL with no permit statements has little effect when applied to an interface, behaving identically to having no ACL applied at all",
-    "B": "An ACL consisting solely of deny statements still evaluates each statement in order, but once it reaches the end of the list without a match, the router falls back to the interface's normal default forwarding behavior rather than applying any implicit action at all",
-    "C": "Cisco IOS technically prohibits configuring an ACL with only deny statements and no permit statement; such a configuration will always be rejected outright at the moment of entry",
-    "D": "Because of the implicit 'deny all' at the end of every ACL, an ACL with no explicit permit statement effectively blocks all traffic matching that ACL's applied direction/interface, since nothing would ever match a permit condition"
+    "A": "It has little effect, behaving as if no ACL were applied",
+    "B": "It still evaluates each statement in order, but falls back to the interface default forwarding once it reaches the end",
+    "C": "IOS rejects such a configuration outright at the moment of entry",
+    "D": "The implicit 'deny all' at the end blocks all matching traffic, since nothing matches a permit"
    },
    "correct": "D",
-   "explanation_es": "Por el 'deny all' implícito al final de cada ACL, una ACL sin ninguna sentencia permit explícita bloquea efectivamente todo el tráfico que coincida con la dirección/interfaz donde se aplicó esa ACL, ya que nada llegaría a coincidir con una condición permit."
+   "explanation_es": "Por el 'deny all' implícito al final de toda ACL, una lista sin ningún permit explícito bloquea efectivamente todo el tráfico que coincida con esa dirección/interfaz."
   },
   {
    "id": "b6_5.2.b_17",
    "subtopic": "5.2.b",
    "name": "CoPP",
-   "question": "What command is commonly used to view a CoPP policy's configuration and matched-traffic statistics once applied under the control-plane context?",
+   "question": "Which command views a CoPP policy's config and matched-traffic statistics?",
    "options": {
-    "A": "'show policy-map control-plane', which displays the policy-map applied to the control-plane and, per class, statistics showing how much traffic matched and what action was taken (transmitted, dropped, or rate-limited)",
-    "B": "'show running-config | section control-plane' displays the CoPP policy-map association under the control-plane context, but it does not include the per-class packet counters showing how much traffic actually matched each class",
-    "C": "CoPP policy configuration and statistics can never be viewed through any Cisco IOS command output, and can only be inferred by monitoring overall device CPU utilization, since CoPP's per-class counters are exposed directly through IOS show commands for exactly this purpose",
-    "D": "'show ip route' displays CoPP policy statistics directly alongside routing table entries, with no separate CoPP-specific command needed"
+    "A": "'show policy-map control-plane', showing per-class stats (matched, dropped, rate-limited)",
+    "B": "'show running-config | section control-plane' shows the policy but no per-class counters",
+    "C": "CoPP stats can never be viewed via CLI, only inferred from CPU utilization",
+    "D": "'show ip route' shows CoPP stats alongside routing entries"
    },
    "correct": "A",
-   "explanation_es": "'show policy-map control-plane' muestra el policy-map aplicado al control-plane y, por clase, estadísticas mostrando cuánto tráfico coincidió y qué acción se tomó (transmitido, descartado, o limitado en tasa)."
+   "explanation_es": "'show policy-map control-plane' muestra el policy-map aplicado y, por clase, estadísticas de cuánto tráfico coincidió y qué acción se tomó."
   },
   {
    "id": "b6_5.3_18",
    "subtopic": "5.3",
    "name": "Seguridad de REST API",
-   "question": "What does 'mutual TLS' (mTLS) provide in an API security context, beyond what standard one-way TLS already offers?",
+   "question": "What does mutual TLS (mTLS) add beyond standard one-way TLS?",
    "options": {
-    "A": "In standard one-way TLS, the client verifies the server's certificate but the server typically doesn't verify a client certificate; mTLS adds client-side certificate verification as well, so both parties cryptographically authenticate each other, providing stronger assurance of the client's identity than relying solely on an application-layer credential like a password or token",
-    "B": "mTLS eliminates the need for any meaningful case, relying purely on certificate exchange with no actual data confidentiality provided at all",
-    "C": "Mutual TLS and standard one-way TLS provide exactly identical security guarantees, with no meaningful distinction in whether the server also verifies a certificate presented by the client, a claim that overlooks how mTLS specifically adds a client certificate exchange and verification step during the TLS handshake itself, a step standard one-way TLS never performs since it only validates the server's certificate presented to the client",
-    "D": "Mutual TLS can only be used for browser-based web traffic and has little applicability to programmatic API-to-API authentication"
+    "A": "It adds client-side certificate verification too, so both parties authenticate each other cryptographically",
+    "B": "mTLS eliminates the need for any meaningful data confidentiality, relying purely on certificate exchange alone",
+    "C": "mTLS and one-way TLS provide identical security guarantees",
+    "D": "It only applies to browser traffic, not programmatic API-to-API auth"
    },
    "correct": "A",
-   "explanation_es": "En TLS unidireccional estándar, el cliente verifica el certificado del servidor pero el servidor típicamente no verifica un certificado de cliente; mTLS agrega también la verificación del lado del cliente, de forma que ambas partes se autentiquen criptográficamente entre sí, dando una garantía más fuerte de la identidad del cliente que depender únicamente de una credencial de capa de aplicación como una contraseña o token."
+   "explanation_es": "En TLS unidireccional el cliente verifica al servidor pero no al revés; mTLS agrega verificación del certificado del cliente también, autenticando a ambas partes."
   },
   {
    "id": "b6_5.4.b_18",
    "subtopic": "5.4.b",
    "name": "Seguridad de endpoint (NAC/ISE)",
-   "question": "What show command on a Cisco switch is commonly used to check the current 802.1X authentication status/session details of a specific interface?",
+   "question": "Which command checks the 802.1X authentication status/session details of a specific interface?",
    "options": {
-    "A": "'show interface <int> switchport' shows the port's current access or trunk VLAN assignment and administrative mode, but it does not report which 802.1X authentication method or session status is currently active on that port",
-    "B": "'show authentication sessions interface <int>' (or 'show dot1x interface <int>'), which displays the current authentication method, status, and assigned attributes (like VLAN or dACL) for sessions on that port",
-    "C": "802.1X authentication session status can never be verified through any Cisco IOS command output, and can only be inferred by checking the ISE server's own logs, a claim that overlooks the dedicated local show commands built specifically for this purpose",
-    "D": "'show ip route' displays 802.1X session status directly alongside routing table entries, with no separate authentication-specific command needed"
+    "A": "'show interface <int> switchport' shows VLAN and mode in detail, alongside the port's full trunking and native VLAN negotiation history",
+    "B": "'show authentication sessions interface <int>' (or 'show dot1x interface <int>'), showing method, status, and assigned attributes",
+    "C": "802.1X status can never be verified via CLI, only via ISE server logs",
+    "D": "'show ip route' shows 802.1X status alongside routing entries"
    },
    "correct": "B",
-   "explanation_es": "'show authentication sessions interface <int>' (o 'show dot1x interface <int>') muestra el método de autenticación actual, el estado, y los atributos asignados (como VLAN o dACL) para las sesiones de ese puerto."
+   "explanation_es": "'show authentication sessions interface <int>' (o 'show dot1x interface <int>') muestra el método de autenticación, el estado, y los atributos asignados (como VLAN o dACL) para ese puerto."
   },
   {
    "id": "b6_5.4.c_19",
    "subtopic": "5.4.c",
    "name": "NGFW/FMC/AVC",
-   "question": "Why might an organization tune (rather than accept the default configuration of) an intrusion policy's rule set for their specific environment?",
+   "question": "Why tune an intrusion policy's rule set instead of accepting the default?",
    "options": {
-    "A": "A default, broadly applicable rule set may include signatures for vulnerabilities/attacks not relevant to that organization's specific technology stack (generating unnecessary alert noise), while potentially not being specifically tuned for the applications and traffic patterns that are actually present, so tuning (disabling irrelevant rules, adjusting thresholds) helps focus detection on genuinely relevant threats and reduces false-positive alert volume",
-    "B": "Tuning an intrusion policy always and disables every single rule in the entire rule set, leaving the policy with zero active detection capability regardless of the specific tuning performed",
-    "C": "There is no meaningful reason an organization's specific environment or technology stack would ever warrant any tuning of a default intrusion policy rule set, since every organization is assumed to always have exactly identical traffic patterns and application usage, overlooking that FTD's inspected traffic mix, exposed applications, and OS/patch baseline genuinely differ across organizations, which is exactly why Cisco Talos periodically updates recommended rule sets per deployment profile",
-    "D": "Intrusion policy rule sets can never be tuned or customized in any way from their default, out-of-the-box configuration on any Cisco Firepower/FTD platform"
+    "A": "A default rule set may include irrelevant signatures (alert noise) while missing what's actually relevant; tuning focuses detection and cuts false positives",
+    "B": "Tuning always disables every rule in the set entirely",
+    "C": "There is no meaningful reason an organization would ever warrant tuning a default intrusion rule set for its own specific traffic and applications",
+    "D": "Rule sets can never be tuned from their default configuration"
    },
    "correct": "A",
-   "explanation_es": "Un conjunto de reglas por defecto y ampliamente aplicable puede incluir firmas para vulnerabilidades/ataques no relevantes a la pila tecnológica específica de esa organización (generando ruido de alertas innecesario), mientras potencialmente no está específicamente ajustado a las aplicaciones y patrones de tráfico que realmente están presentes, así que el ajuste (deshabilitando reglas irrelevantes, ajustando umbrales) ayuda a enfocar la detección en amenazas genuinamente relevantes y reduce el volumen de alertas de falsos positivos."
+   "explanation_es": "Un conjunto de reglas por defecto puede incluir firmas irrelevantes para esa organización (generando ruido) sin cubrir lo que sí es relevante; ajustarlo enfoca la detección y reduce falsos positivos."
   },
   {
    "id": "b6_5.4.c_21",
    "subtopic": "5.4.c",
    "name": "NGFW/FMC/AVC",
-   "question": "Why might FMC's dashboard prominently surface 'top attackers' and 'top targets' summary views, rather than only presenting a flat, chronological list of every individual security event?",
+   "question": "Why does FMC's dashboard surface 'top attackers'/'top targets' views, not just a flat event list?",
    "options": {
-    "A": "FMC's dashboard summary views like top attackers and top targets are generated only once per day during a scheduled reporting job, so an analyst investigating an event as it happens must still work from the flat, real-time chronological event list instead",
-    "B": "Top attackers/targets views are only relevant for wireless network traffic, and provide no meaningful analytical value for wired network traffic passing through an FTD device",
-    "C": "These summary views provide no practical analytical value beyond what a flat chronological event list alone already provides, since an analyst is assumed to always be able to just as easily identify significant patterns by manually scrolling through every individual event one at a time, an assumption that overlooks how quickly manual review becomes impractical once event volume exceeds what a human can scan",
-    "D": "Aggregated summary views (like top attackers/targets) help an analyst quickly identify which sources or destinations are involved in the most significant volume of security-relevant activity, surfacing patterns that might not be immediately obvious when scrolling through potentially thousands of individual, chronologically-ordered event log entries one at a time"
+    "A": "These views are generated only once a day, so real-time analysis still needs the flat list",
+    "B": "They're only relevant for wireless traffic, not wired",
+    "C": "These summary views provide no practical analytical value beyond what a flat chronological event list alone already gives",
+    "D": "Aggregated views help quickly spot significant patterns that aren't obvious scrolling through thousands of individual events"
    },
    "correct": "D",
-   "explanation_es": "Las vistas resumen agregadas (como top attackers/targets) ayudan a un analista a identificar rápidamente qué orígenes o destinos están involucrados en el mayor volumen de actividad relevante para la seguridad, revelando patrones que podrían no ser inmediatamente obvios al desplazarse por potencialmente miles de entradas de log de eventos individuales ordenadas cronológicamente una por una."
+   "explanation_es": "Las vistas resumen agregadas ayudan a identificar rápidamente qué orígenes o destinos concentran el mayor volumen de actividad relevante, revelando patrones no obvios evento por evento."
   },
   {
    "id": "b6_5.4.d_21",
    "subtopic": "5.4.d",
    "name": "TrustSec/MACsec",
-   "question": "What command is commonly used on a Cisco switch to verify whether MACsec is actually established and encrypting traffic on a given interface?",
+   "question": "Which command verifies whether MACsec is actually established and encrypting traffic on an interface?",
    "options": {
-    "A": "'show ip route' displays MACsec session status directly alongside routing table entries, with no separate MACsec-specific command needed",
-    "B": "'show macsec summary' (or 'show macsec interface <int>'), which displays the MACsec status, cipher suite, and key/session information for that interface, confirming whether encryption is actually active rather than simply configured",
-    "C": "MACsec status can never be verified through any Cisco IOS command output, and can only be inferred by physically inspecting the cable with a specialized optical tool, a claim that overlooks the dedicated show commands built specifically to display MACsec session and cipher status",
-    "D": "'show authentication sessions interface <int>' displays whether 802.1X authentication succeeded on that port, but it does not separately confirm whether the resulting MACsec encryption session itself is actually up and passing encrypted traffic"
+    "A": "'show ip route' shows MACsec status alongside routing entries",
+    "B": "'show macsec summary' (or 'show macsec interface <int>'), showing status, cipher suite, and key/session info",
+    "C": "MACsec status can never be verified via CLI, only by physically inspecting the cable",
+    "D": "'show authentication sessions interface <int>' confirms 802.1X success but not whether MACsec encryption itself is up"
    },
    "correct": "B",
-   "explanation_es": "'show macsec summary' (o 'show macsec interface <int>') muestra el estado de MACsec, el conjunto de cifrado, y la información de clave/sesión de esa interfaz, confirmando si el cifrado realmente está activo en lugar de solo configurado."
+   "explanation_es": "'show macsec summary' (o 'show macsec interface <int>') muestra el estado de MACsec, el cipher suite y la información de clave/sesión, confirmando si el cifrado realmente está activo."
   },
   {
    "id": "b6_1.3.b_19",

@@ -544,3 +544,13 @@ distractores extendidos) hasta 3/17. Medido sobre el dominio completo
 (39 preguntas, incluyendo las ya arregladas del piloto): **9/39
 (23.1%)**, dentro del rango esperado. Verificado en navegador. Banco:
 sigue en 1035 preguntas.
+
+**Dominio 5 (Security) completo (2026-09-27):** 63 preguntas de IA en
+lotes `b2_`/`b3_`/`b5_`/`b6_` (quedan intactas `r3_`/`r4_`/`trustsec_`
+— este último lote ya estaba en estilo directo/conciso desde su
+creación, no necesitó reescritura). 50.4% más corto en total. Sesgo de
+longitud: primera pasada 88.3% sobre el lote reescrito, corregido en
+tres rondas (38 distractores extendidos, luego 9 más, más una
+corrección manual de una pregunta omitida en el primer pase) hasta
+**20/63 (31.7%)**. Verificado en navegador. Banco: sigue en 1035
+preguntas.
