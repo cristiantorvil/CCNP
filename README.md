@@ -554,3 +554,20 @@ tres rondas (38 distractores extendidos, luego 9 más, más una
 corrección manual de una pregunta omitida en el primer pase) hasta
 **20/63 (31.7%)**. Verificado en navegador. Banco: sigue en 1035
 preguntas.
+
+**Dominio 6 (Automation and AI) completo (2026-09-27) — último de los
+seis:** 61 preguntas de IA reescritas en lotes `b2_`/`b3_`/`b5_`/`b6_`/
+`yang_`/`apicc_`/`restconf_` (quedan intactas `r3_`/`r4_`, ya concisas,
+y las preguntas de estos mismos lotes que ya venían cortas desde su
+creación, como `restconf_01-03/06/07` o `apicc_01/02/09/10`). 60.6% más
+corto en total. Sesgo de longitud: primera pasada 83.6% (51/61),
+corregido en dos rondas (33 distractores extendidos, luego 4 más de
+ajuste fino tras detectar empates/gaps insuficientes) hasta **19/61
+(31.1%)**, en el límite superior del rango 19-31% ya observado
+históricamente en el proyecto. Verificado en navegador (sesión de
+práctica en vivo sobre dominio 6, incluida una pregunta reescrita —
+`b6_6.1_15`, sobre `response.json()` — renderizada y calificada
+correctamente) y contra el JSON embebido. Banco: sigue en 1035
+preguntas. Con esto quedan completos los seis dominios del blueprint:
+todo el "banco propio (IA)" verboso fue reescrito para igualar el
+estilo directo de las preguntas basadas en fuentes reales.

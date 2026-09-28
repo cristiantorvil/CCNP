@@ -622,12 +622,12 @@
    "id": "yang_01",
    "subtopic": "6.3",
    "name": "YANG",
-   "question": "In YANG, what is the primary distinction between a 'list' and a 'leaf-list'?",
+   "question": "In YANG, what's the main distinction between a 'list' and a 'leaf-list'?",
    "options": {
     "A": "A 'list' can only hold strings; a 'leaf-list' can hold any type",
-    "B": "A 'list' contains multiple instances of complex data with one or more child nodes (potentially with keys); a 'leaf-list' contains multiple instances of a single simple leaf value",
-    "C": "A 'leaf-list' requires a key statement, while a 'list' never does",
-    "D": "A 'leaf-list' can contain nested container or list nodes as children, while a 'list' is restricted to holding only a single scalar leaf value and therefore never requires a key statement"
+    "B": "A 'list' holds multiple instances of complex data with child nodes; a 'leaf-list' holds instances of a single simple value",
+    "C": "A 'leaf-list' requires a key statement; a 'list' never does",
+    "D": "A 'leaf-list' can contain nested containers or other lists as children, while a 'list' is restricted to holding a single scalar leaf value without any child structure"
    },
    "correct": "B",
    "explanation_es": "Un 'list' agrupa múltiples instancias de una estructura de datos compleja (con uno o más nodos hijos, normalmente identificadas por una 'key'); un 'leaf-list' es simplemente una colección de valores simples de un único leaf, sin estructura interna adicional."
@@ -636,12 +636,12 @@
    "id": "yang_02",
    "subtopic": "6.3",
    "name": "YANG",
-   "question": "What is the main purpose of a YANG data model in network automation?",
+   "question": "What's the main purpose of a YANG data model in network automation?",
    "options": {
     "A": "To compress configuration files for storage",
-    "B": "To replace the CLI as the only way to configure a device, since YANG models make the command line interface completely obsolete on modern platforms, since YANG-capable platforms must disable CLI access entirely",
+    "B": "To replace the CLI entirely, since YANG-capable platforms must disable CLI access",
     "C": "To act as a routing protocol",
-    "D": "To provide a standardized, structured, and vendor-neutral (or vendor-specific) definition of configuration and operational data for programmatic access"
+    "D": "To provide a standardized, structured definition of config and operational data for programmatic access"
    },
    "correct": "D",
    "explanation_es": "YANG es un lenguaje de modelado de datos que define de forma estructurada y estandarizada cómo se representan los datos de configuración y estado operativo de un dispositivo, permitiendo el acceso programático consistente vía NETCONF/RESTCONF."
@@ -678,12 +678,12 @@
    "id": "yang_05",
    "subtopic": "6.3",
    "name": "YANG",
-   "question": "Which of the following is a key benefit of using YANG models compared to screen-scraping CLI output for automation?",
+   "question": "What's a key benefit of YANG models compared to screen-scraping CLI output for automation?",
    "options": {
     "A": "YANG eliminates the need for any authentication",
     "B": "YANG only works with SNMP",
-    "C": "YANG provides a structured, machine-readable schema with defined data types, reducing parsing errors compared to unstructured CLI text",
-    "D": "YANG requires more bandwidth than CLI scraping in all cases, since every YANG-encoded message carries a full schema definition inline, since every leaf must resend its full type definition"
+    "C": "YANG provides a structured, machine-readable schema with defined data types, reducing parsing errors",
+    "D": "YANG requires significantly more bandwidth than CLI scraping in all cases, since every encoded message must carry its full schema definition inline with each request"
    },
    "correct": "C",
    "explanation_es": "El beneficio central de YANG es que define un esquema estructurado con tipos de datos definidos, lo cual es mucho más confiable de procesar de forma programática que hacer 'screen-scraping' de salidas de CLI que pueden cambiar de formato entre versiones."
@@ -734,11 +734,11 @@
    "id": "yang_09",
    "subtopic": "6.3",
    "name": "YANG",
-   "question": "Which statement about YANG data modeling and vendor interoperability is accurate?",
+   "question": "Which statement about YANG modeling and vendor interoperability is accurate?",
    "options": {
-    "A": "Native YANG models guarantee full interoperability across all vendors",
-    "B": "OpenConfig/IETF models aim to provide a common, vendor-neutral schema, while native models are vendor-specific and may differ significantly between platforms",
-    "C": "YANG models are identical regardless of whether they are native or open, since all vendors are required to converge on one single unified schema, a claim repeated because both reuse one canonical XPath syntax",
+    "A": "Native YANG models guarantee full interoperability across vendors",
+    "B": "OpenConfig/IETF models aim for a common vendor-neutral schema; native models are vendor-specific and can vary significantly",
+    "C": "YANG models are identical regardless of native or open, since all vendors converge on one schema",
     "D": "Only IETF models can be used with NETCONF"
    },
    "correct": "B",
@@ -748,11 +748,11 @@
    "id": "yang_10",
    "subtopic": "6.3",
    "name": "YANG",
-   "question": "A YANG leaf-list named 'dns-server' contains the values '8.8.8.8' and '1.1.1.1'. If you needed to instead model each DNS server with both an IP address and a description, which construct would be more appropriate?",
+   "question": "A leaf-list 'dns-server' has values '8.8.8.8' and '1.1.1.1'. To model each entry with both an IP and a description, what's more appropriate?",
    "options": {
     "A": "Use a container with no children",
-    "B": "Use a 'list' with a key (e.g., the IP) and child leafs for the IP and description, since leaf-list only supports single simple values",
-    "C": "Keep using leaf-list, since it already supports multiple attributes per entry including nested key-value pairs and descriptions",
+    "B": "Use a 'list' with a key (e.g. the IP) and child leafs for IP and description",
+    "C": "Keep using leaf-list, since it already supports multiple attributes per entry, including nested key-value pairs and free-text descriptions",
     "D": "Use a single leaf with a comma-separated string"
    },
    "correct": "B",
@@ -804,11 +804,11 @@
    "id": "apicc_04",
    "subtopic": "6.4",
    "name": "APIs Catalyst Center",
-   "question": "How do Cisco SD-WAN Manager (vManage) APIs differ in purpose from Catalyst Center APIs, at a high level?",
+   "question": "How do SD-WAN Manager (vManage) APIs differ in purpose from Catalyst Center APIs?",
    "options": {
-    "A": "SD-WAN Manager APIs focus on managing and monitoring the SD-WAN fabric (templates, policies, device onboarding), while Catalyst Center APIs focus on the campus/branch enterprise network (intent-based provisioning, assurance)",
+    "A": "vManage APIs manage the SD-WAN fabric (templates, policies, onboarding); Catalyst Center APIs manage the campus/branch network (intent-based provisioning, assurance)",
     "B": "They are functionally identical and interchangeable",
-    "C": "Catalyst Center has no APIs related to network provisioning at all, focusing on read-only reporting and dashboards for administrators who need historical data for compliance audits across the entire enterprise campus and branch network",
+    "C": "Catalyst Center has no provisioning APIs at all, offering only read-only reporting and dashboards for historical compliance audits across the enterprise",
     "D": "SD-WAN Manager APIs are SOAP-only"
    },
    "correct": "A",
@@ -818,12 +818,12 @@
    "id": "apicc_05",
    "subtopic": "6.4",
    "name": "APIs Catalyst Center",
-   "question": "Which Catalyst Center API capability allows you to trigger provisioning of a network intent, such as applying a template to a device?",
+   "question": "Which Catalyst Center API capability lets you trigger provisioning of a network intent, like applying a template?",
    "options": {
-    "A": "Only export APIs for reporting, with no ability to trigger any configuration change on a managed device, since the REST gateway is claimed to reject every POST and PUT verb",
+    "A": "Only export APIs for reporting, with no ability to change device configuration",
     "B": "Assurance-only read APIs",
     "C": "Only APIs for user management",
-    "D": "Intent APIs that support both GET (read) and POST/PUT (create/update) operations for network configuration and provisioning"
+    "D": "Intent APIs, supporting both GET and POST/PUT for configuration and provisioning"
    },
    "correct": "D",
    "explanation_es": "Las Intent APIs de Catalyst Center soportan tanto operaciones de lectura (GET) como de escritura (POST/PUT) para desencadenar acciones de provisioning e intención sobre la red, no solo consultas."
@@ -832,12 +832,12 @@
    "id": "apicc_08",
    "subtopic": "6.4",
    "name": "APIs Catalyst Center",
-   "question": "Which of these is an advantage of using Catalyst Center APIs over configuring devices individually via CLI?",
+   "question": "What's an advantage of Catalyst Center APIs over configuring devices individually via CLI?",
    "options": {
     "A": "APIs require more manual steps per device than CLI",
-    "B": "APIs allow centralized, intent-based, and repeatable automation across many devices at once, reducing manual per-device configuration",
-    "C": "APIs typically require a persistent TLS session to be re-established for each individual configuration call, which can make small one-off changes on a single device slower than an equivalent CLI session already logged in",
-    "D": "APIs cannot scale beyond a single device"
+    "B": "Centralized, intent-based, repeatable automation across many devices at once",
+    "C": "APIs require re-establishing a TLS session for each call, slower than an existing CLI session",
+    "D": "APIs can't scale beyond a single device"
    },
    "correct": "B",
    "explanation_es": "El principal beneficio es la automatización centralizada y basada en intención, aplicable de forma repetible a muchos dispositivos a la vez, reduciendo la configuración manual dispositivo por dispositivo."
@@ -916,12 +916,12 @@
    "id": "restconf_04",
    "subtopic": "6.9",
    "name": "RESTCONF",
-   "question": "RESTCONF and NETCONF both use YANG data models, but what is a key architectural difference between them?",
+   "question": "RESTCONF and NETCONF both use YANG models. What's a key architectural difference?",
    "options": {
-    "A": "RESTCONF cannot use YANG models, only NETCONF can",
-    "B": "They are exactly the same protocol with different names",
-    "C": "NETCONF is limited to editing the candidate datastore and cannot commit changes to the running configuration directly, while RESTCONF operates only against the running datastore and offers no commit-based workflow",
-    "D": "RESTCONF uses HTTP(S) with a stateless request/response model, while NETCONF uses a session-based protocol typically over SSH with an RPC-based XML exchange"
+    "A": "RESTCONF can't use YANG models, only NETCONF can",
+    "B": "They're exactly the same protocol with different names",
+    "C": "NETCONF is limited to editing the candidate datastore and can never commit changes to the running configuration directly, while RESTCONF has no commit workflow at all",
+    "D": "RESTCONF uses HTTP(S) with a stateless request/response model; NETCONF uses a session-based protocol over SSH with RPC-based XML"
    },
    "correct": "D",
    "explanation_es": "RESTCONF opera sobre HTTP(S) de forma stateless (sin sesión persistente), usando verbos HTTP estándar; NETCONF establece una sesión persistente (típicamente sobre SSH) e intercambia mensajes RPC en XML. Ambos pueden usar los mismos modelos YANG subyacentes."
@@ -972,11 +972,11 @@
    "id": "restconf_08",
    "subtopic": "6.9",
    "name": "RESTCONF",
-   "question": "Which datastore does RESTCONF operate against, in contrast to NETCONF's separate running/candidate/startup datastores?",
+   "question": "Which datastore does RESTCONF operate against, unlike NETCONF's separate running/candidate/startup datastores?",
    "options": {
     "A": "RESTCONF only supports the startup datastore",
-    "B": "RESTCONF operates directly against a single conceptual 'running' datastore, without a separate candidate datastore commit model",
-    "C": "RESTCONF requires a candidate datastore for every operation, exactly the same way NETCONF's commit-based workflow always does, the same commit-based workflow NETCONF itself always uses",
+    "B": "RESTCONF operates directly against a single conceptual 'running' datastore, with no candidate commit model",
+    "C": "RESTCONF requires a candidate datastore for every single operation, exactly the same commit-based workflow that NETCONF itself always relies on",
     "D": "RESTCONF has no concept of a datastore"
    },
    "correct": "B",
@@ -991,7 +991,7 @@
     "A": "2xx (Success)",
     "B": "1xx (Informational)",
     "C": "4xx (Client Error), such as 400 Bad Request",
-    "D": "3xx (Redirection) always, since RESTCONF redirects every malformed request to a documentation page describing the correct schema"
+    "D": "3xx (Redirection), redirecting to a documentation page"
    },
    "correct": "C",
    "explanation_es": "Un error del cliente, como un JSON malformado o que no valida contra el esquema YANG, típicamente resulta en un código 4xx, como 400 Bad Request, indicando que el problema está en la solicitud enviada."
@@ -1000,12 +1000,12 @@
    "id": "restconf_10",
    "subtopic": "6.9",
    "name": "RESTCONF",
-   "question": "Which of the following correctly reflects the RESTCONF URI structure for accessing configuration data under the base path?",
+   "question": "Which correctly reflects the RESTCONF URI structure for accessing configuration data?",
    "options": {
-    "A": "/restconf/data/{...} is used to access data resources (config and state), and /restconf/operations/{rpc-name} is used to invoke RPC operations",
+    "A": "/restconf/data/{...} accesses data resources (config and state); /restconf/operations/{rpc-name} invokes RPC operations",
     "B": "Data and operations both use /restconf/yang-library/",
-    "C": "/restconf/data/{...} is reserved exclusively for invoking YANG RPC operations, while /restconf/operations/{rpc-name} is used to read and write configuration and operational state data resources under the base path",
-    "D": "There is no distinction; everything uses /restconf/rpc/"
+    "C": "/restconf/data/{...} is reserved exclusively for invoking RPC operations, while /restconf/operations/{rpc-name} is used to read and write configuration and operational state data",
+    "D": "There's no distinction; everything uses /restconf/rpc/"
    },
    "correct": "A",
    "explanation_es": "En RESTCONF, '/restconf/data/{...}' se usa para acceder a recursos de datos (configuración y estado), mientras que '/restconf/operations/{rpc-name}' se usa para invocar operaciones RPC definidas en el modelo YANG."
@@ -2092,12 +2092,12 @@
    "id": "b2_6.1_01",
    "subtopic": "6.1",
    "name": "Python básico",
-   "question": "In Python, what is the key structural difference between a 'list' and a 'dictionary' (dict)?",
+   "question": "What's the key difference between a Python 'list' and a 'dictionary'?",
    "options": {
-    "A": "A list is an ordered collection of items accessed by numeric index; a dictionary is a collection of key-value pairs accessed by a unique key",
-    "B": "A dictionary cannot store more than one value",
-    "C": "They are functionally identical data structures with different syntax, since Python internally represents every list as a dictionary with numeric keys",
-    "D": "A list can only store strings, while a dictionary can store any type"
+    "A": "A list is ordered and indexed by position; a dict stores key-value pairs indexed by key",
+    "B": "A dictionary can only hold one value",
+    "C": "They are the same structure, just different syntax",
+    "D": "A list can only store strings, while a dict can store any type of value including nested lists and other dicts"
    },
    "correct": "A",
    "explanation_es": "Una 'list' en Python es una colección ordenada de elementos, accesibles por índice numérico (ej. lista[0]); un 'dict' es una colección de pares clave-valor, accesibles por una clave única (ej. diccionario['nombre']), similar conceptualmente a un objeto JSON."
@@ -2120,12 +2120,12 @@
    "id": "b2_6.5_01",
    "subtopic": "6.5",
    "name": "Códigos de respuesta REST API",
-   "question": "When interpreting an API response, what does an HTTP status code in the 5xx range generally indicate, as opposed to a 4xx code?",
+   "question": "What does a 5xx HTTP status code generally indicate, versus a 4xx code?",
    "options": {
-    "A": "4xx and 5xx codes mean the same thing",
-    "B": "5xx codes indicate the request was processed successfully but the response body could not be generated in the requested format, requiring the client to resend the request with a different Accept header",
-    "C": "5xx codes always mean the request succeeded",
-    "D": "A 5xx code indicates a server-side error (the server failed to fulfill a valid request), whereas a 4xx code indicates a client-side error (the request itself was invalid or unauthorized)"
+    "A": "4xx and 5xx mean the same thing",
+    "B": "5xx means the response format was wrong and must be requested again",
+    "C": "5xx always means the request succeeded",
+    "D": "5xx is a server-side error; 4xx is a client-side error"
    },
    "correct": "D",
    "explanation_es": "Un código en el rango 5xx indica un error del lado del servidor (el servidor no pudo cumplir una solicitud que en principio era válida, ej. 500 Internal Server Error), mientras que un código 4xx indica un error del lado del cliente (la solicitud en sí era inválida, mal formada, o no autorizada, ej. 400, 401, 404)."
@@ -2134,12 +2134,12 @@
    "id": "b2_6.5_02",
    "subtopic": "6.5",
    "name": "Códigos de respuesta REST API",
-   "question": "When an API call to Catalyst Center returns a 202 Accepted status with a taskId in the payload, what does this typically indicate?",
+   "question": "An API call to Catalyst Center returns 202 Accepted with a taskId. What does this mean?",
    "options": {
-    "A": "The request was accepted for asynchronous processing, and the client should poll the task status endpoint using the returned taskId to check completion",
-    "B": "202 indicates the request completed synchronously and the taskId is only included for logging purposes, so the client does not need to poll any status endpoint before assuming the operation has finished",
+    "A": "The request was accepted for async processing; poll the taskId to check completion",
+    "B": "202 means the request completed synchronously and the taskId is just for logging",
     "C": "The request failed and must be resent immediately",
-    "D": "The taskId is used only for billing purposes"
+    "D": "The taskId is only used for billing"
    },
    "correct": "A",
    "explanation_es": "Un código 202 Accepted en Catalyst Center indica que la solicitud fue aceptada para procesamiento asíncrono (por ejemplo, una tarea de provisioning que toma tiempo); el cliente debe usar el taskId devuelto para consultar el endpoint de estado de tareas y verificar cuándo (y cómo) se completó la operación."
@@ -2148,12 +2148,12 @@
    "id": "b2_6.6_01",
    "subtopic": "6.6",
    "name": "EEM applets",
-   "question": "Which EEM (Embedded Event Manager) event detector would you use to trigger an applet based on CPU utilization crossing a defined threshold?",
+   "question": "Which EEM event detector triggers on CPU utilization crossing a threshold?",
    "options": {
-    "A": "event cpu, which monitors CPU utilization against a configured threshold, or the equivalent resource-based event detector for that purpose",
-    "B": "event snmp, watching a specific OID",
-    "C": "event none, which never triggers automatically",
-    "D": "event cli, matching a specific command entered by a user before or after it is executed on the device by any locally or remotely connected administrator"
+    "A": "event cpu",
+    "B": "event snmp",
+    "C": "event none",
+    "D": "event cli"
    },
    "correct": "A",
    "explanation_es": "Para disparar un applet EEM basado en el uso de CPU superando un umbral, se utiliza un detector de eventos orientado a recursos como 'event cpu' (o el detector de recursos correspondiente), que monitorea la utilización de CPU y dispara la acción configurada cuando se cruza el umbral definido. 'event cli' se usa para disparar en base a un comando ingresado, no en base a CPU."
@@ -2162,12 +2162,12 @@
    "id": "b2_6.7_01",
    "subtopic": "6.7",
    "name": "Orquestación agent vs agentless",
-   "question": "What is the key architectural difference between agent-based orchestration tools (like Chef or Puppet) and agentless tools (like Ansible)?",
+   "question": "What's the key architectural difference between agent-based tools (Chef, Puppet) and agentless tools (Ansible)?",
    "options": {
-    "A": "They are functionally identical in terms of architecture",
-    "B": "Agent-based tools cannot be used to manage network devices",
-    "C": "Agentless tools always require more installed software than agent-based tools, since every managed node needs its own dedicated local automation runtime installed and continuously running in the background at all times, regardless of whether any automation task is currently executing",
-    "D": "Agent-based tools require software installed and running on the managed node to communicate with the central server; agentless tools typically connect to managed nodes over standard protocols (like SSH) without requiring persistent installed software"
+    "A": "They are architecturally identical",
+    "B": "Agent-based tools can't manage network devices",
+    "C": "Agentless tools always require more installed software, since every managed node needs its own dedicated automation runtime running continuously",
+    "D": "Agent-based tools need software installed on the managed node; agentless tools connect over standard protocols like SSH"
    },
    "correct": "D",
    "explanation_es": "Las herramientas basadas en agente (como Chef o Puppet) requieren que un software (agente) esté instalado y corriendo en el nodo gestionado para comunicarse con el servidor central; las herramientas agentless (como Ansible) típicamente se conectan a los nodos gestionados usando protocolos estándar (como SSH) sin requerir la instalación de software persistente en el nodo."
@@ -3310,12 +3310,12 @@
    "id": "b3_6.2_02",
    "subtopic": "6.2",
    "name": "JSON",
-   "question": "Which of these data types is NOT natively supported directly by the JSON specification?",
+   "question": "Which data type is NOT natively supported by the JSON specification?",
    "options": {
     "A": "Strings",
     "B": "Numbers",
-    "C": "Boolean values (true/false), since JSON only natively supports strings and numbers as primitive data types",
-    "D": "Comments (JSON has no native syntax for comments within the document)"
+    "C": "Booleans",
+    "D": "Comments"
    },
    "correct": "D",
    "explanation_es": "JSON no soporta comentarios de forma nativa dentro del documento; a diferencia de YAML u otros formatos, no existe una sintaxis estándar para agregar comentarios en un archivo JSON válido. Sí soporta strings, números, booleanos, null, objetos y arreglos."
@@ -3324,12 +3324,12 @@
    "id": "b3_6.5_03",
    "subtopic": "6.5",
    "name": "Códigos de respuesta REST API",
-   "question": "What is the key difference between an HTTP 401 Unauthorized and a 403 Forbidden response?",
+   "question": "What's the difference between HTTP 401 and 403?",
    "options": {
-    "A": "401 indicates the request lacks valid authentication credentials (or they were rejected); 403 indicates the client is authenticated but does not have permission to access the requested resource",
-    "B": "401 and 403 mean exactly the same thing and are used interchangeably",
-    "C": "403 indicates the credentials were invalid or expired, while 401 indicates the client authenticated successfully but lacks permission for the requested resource, so a script receiving a 401 should simply refresh its stored token",
-    "D": "Both codes only apply to POST requests, never to GET requests"
+    "A": "401 means missing/invalid credentials; 403 means authenticated but not authorized",
+    "B": "They mean exactly the same thing",
+    "C": "403 means invalid credentials; 401 means authenticated but lacking permission",
+    "D": "Both only apply to POST requests"
    },
    "correct": "A",
    "explanation_es": "401 Unauthorized indica que la solicitud carece de credenciales de autenticación válidas (o fueron rechazadas) — el cliente no está autenticado correctamente. 403 Forbidden indica que el cliente SÍ está autenticado, pero no tiene permiso para acceder al recurso solicitado — es un problema de autorización, no de autenticación."
@@ -3338,12 +3338,12 @@
    "id": "b3_6.5_04",
    "subtopic": "6.5",
    "name": "Códigos de respuesta REST API",
-   "question": "When interpreting a paginated JSON response from an API (such as Catalyst Center's Intent APIs), what is a typical purpose of metadata fields often included in the response envelope?",
+   "question": "In a paginated JSON API response, what's the typical purpose of metadata fields in the response envelope?",
    "options": {
     "A": "To encrypt the response body",
     "B": "To store the API's licensing key",
-    "C": "To specify which programming language the client must use when parsing the JSON response body returned by the server for that endpoint, regardless of the client's own platform",
-    "D": "To indicate details such as whether more results exist beyond the current page, so the client knows whether to make additional requests to retrieve the full dataset"
+    "C": "To specify which programming language the client must use when parsing the response body, regardless of the client's own platform",
+    "D": "To indicate whether more results exist, so the client knows whether to request additional pages"
    },
    "correct": "D",
    "explanation_es": "En respuestas paginadas, los metadatos incluidos (por ejemplo, indicadores de si hay más resultados disponibles) le indican al cliente si debe realizar solicitudes adicionales para obtener el conjunto de datos completo, en lugar de asumir que la primera página contiene todos los resultados."
@@ -3352,12 +3352,12 @@
    "id": "b3_6.6_02",
    "subtopic": "6.6",
    "name": "EEM applets",
-   "question": "What is a common 'action' type used within an EEM applet once a defined event triggers it?",
+   "question": "What's a common 'action' type in an EEM applet once its event triggers?",
    "options": {
-    "A": "EEM applets can only reboot the device as their sole possible action, with no ability to run any other CLI command or generate any log message or configuration, because IOS rejects any 'action X cli command' line if entered",
-    "B": "Actions such as 'action X cli command' (to execute a CLI command) or 'action X syslog' (to generate a syslog message), used to automate a remediation or notification step",
-    "C": "EEM applets cannot perform any actions, only detect events",
-    "D": "Actions in EEM are limited to sending SNMP traps only"
+    "A": "EEM applets can only reboot the device",
+    "B": "action X cli command or action X syslog, to run a command or log a message",
+    "C": "EEM applets cannot perform any actions",
+    "D": "Actions in EEM applets are limited strictly to sending SNMP traps, with no ability to run a CLI command or generate a log message"
    },
    "correct": "B",
    "explanation_es": "Una vez que un evento definido dispara un applet EEM, se pueden configurar distintas acciones, como 'action X cli command' (para ejecutar un comando de CLI de forma automática) o 'action X syslog' (para generar un mensaje de syslog), permitiendo automatizar pasos de remediación, notificación, o recolección de datos de diagnóstico sin intervención manual."
@@ -3366,12 +3366,12 @@
    "id": "b3_6.7_02",
    "subtopic": "6.7",
    "name": "Orquestación agent vs agentless",
-   "question": "Why do agentless automation tools (like Ansible) tend to be particularly well-suited for managing network devices (routers, switches) compared to agent-based tools?",
+   "question": "Why are agentless tools like Ansible well-suited for managing network devices?",
    "options": {
-    "A": "Most network devices do not support running third-party software agents, so agentless tools that connect via standard protocols (SSH, NETCONF, RESTCONF) fit naturally without requiring vendor support for an installed agent",
-    "B": "There is no practical difference between agent-based and agentless approaches for network devices, since both require exactly the same amount of vendor support and installed software on every single managed device in the network",
-    "C": "Agent-based tools are always faster and simpler to use on network devices than agentless tools",
-    "D": "Network devices always have full support for running any third-party agent software natively"
+    "A": "Most network devices can't run third-party agents; agentless tools connect via standard protocols instead",
+    "B": "There's no practical difference for network devices",
+    "C": "Agent-based tools are always faster and simpler on network devices",
+    "D": "Network devices always fully support third-party agents"
    },
    "correct": "A",
    "explanation_es": "La mayoría de los dispositivos de red (routers, switches) no soportan la instalación de agentes de software de terceros como sí lo hacen los servidores; por eso las herramientas agentless (como Ansible), que se conectan usando protocolos estándar (SSH, NETCONF, RESTCONF) sin requerir un agente instalado, encajan naturalmente mejor para la automatización de infraestructura de red."
@@ -3380,12 +3380,12 @@
    "id": "b3_6.8_02",
    "subtopic": "6.8",
    "name": "Métodos HTTP",
-   "question": "What does it mean for the HTTP PUT method to be 'idempotent', and how does this compare to POST?",
+   "question": "What does it mean for PUT to be idempotent, compared to POST?",
    "options": {
-    "A": "Sending the same PUT request multiple times results in the same final state (the resource is simply replaced with the same content each time); POST is generally NOT idempotent, since repeating it may create multiple new resources",
-    "B": "PUT is never idempotent, while POST always is",
-    "C": "Idempotency in HTTP refers only to whether a method's response can be cached by an intermediary proxy, which is why GET and PUT are both considered idempotent while a POST response is never eligible for caching",
-    "D": "Both PUT and POST are always non-idempotent by definition"
+    "A": "Repeating the same PUT produces the same final state; POST is generally not idempotent, since repeating it can create multiple resources",
+    "B": "PUT is never idempotent; POST always is",
+    "C": "Idempotency only refers to whether a response can be cached by an intermediary proxy, which is why GET and PUT are both considered idempotent while a POST response never is",
+    "D": "Both PUT and POST are always non-idempotent"
    },
    "correct": "A",
    "explanation_es": "Que PUT sea idempotente significa que enviar la misma solicitud PUT múltiples veces produce el mismo estado final (el recurso queda reemplazado con el mismo contenido cada vez, sin efectos adicionales acumulativos). POST generalmente NO es idempotente, ya que repetir la misma solicitud POST puede crear múltiples recursos nuevos (por ejemplo, múltiples entradas duplicadas) en lugar de producir el mismo resultado."
@@ -3590,9 +3590,9 @@
    "id": "b5_6.1_03",
    "subtopic": "6.1",
    "name": "Python básico",
-   "question": "Which Python data type is immutable and therefore commonly used as a dictionary key?",
+   "question": "Which Python data type is immutable and commonly used as a dict key?",
    "options": {
-    "A": "dict, since dictionaries are the only built-in Python type that can never be modified after creation",
+    "A": "dict",
     "B": "list",
     "C": "tuple",
     "D": "set"
@@ -3632,12 +3632,12 @@
    "id": "b5_6.2_03",
    "subtopic": "6.2",
    "name": "JSON",
-   "question": "How must a JSON boolean value be written, and how does this differ from Python's boolean literals?",
+   "question": "How must a JSON boolean be written, versus Python's boolean literals?",
    "options": {
-    "A": "JSON booleans must be lowercase ('true'/'false'), while Python's native booleans are capitalized ('True'/'False') — a library like json.loads() handles the conversion between the two automatically",
-    "B": "JSON has no boolean type at all; booleans must be represented as the strings '1' and '0'",
-    "C": "JSON booleans must be capitalized exactly like Python's ('True'/'False'), with no difference between the two, a mix-up that arises because Python's 'json' module accepts either capitalization as a convenience when encoding custom objects",
-    "D": "JSON booleans must be written in all uppercase ('TRUE'/'FALSE') to be considered valid"
+    "A": "JSON uses lowercase (true/false); Python uses capitalized (True/False) — json.loads() converts automatically",
+    "B": "JSON has no boolean type at all; booleans must instead be represented as the plain strings '1' and '0' by convention",
+    "C": "JSON booleans must be capitalized exactly like Python's",
+    "D": "JSON booleans must be written in all uppercase"
    },
    "correct": "A",
    "explanation_es": "Los booleanos de JSON deben ir en minúscula ('true'/'false'), mientras que los booleanos nativos de Python van capitalizados ('True'/'False') — una librería como json.loads() maneja la conversión automáticamente."
@@ -3663,7 +3663,7 @@
    "question": "Which JSON structure correctly represents an array of two interface objects?",
    "options": {
     "A": "{\"interfaces\": [{\"name\": \"Gi0/1\", \"status\": \"up\"}, {\"name\": \"Gi0/2\", \"status\": \"down\"}]}",
-    "B": "{\"interfaces\": {\"Gi0/1\": \"up\", \"Gi0/2\": \"down\"}}, which is exactly equivalent to an array of interface objects in JSON",
+    "B": "{\"interfaces\": {\"Gi0/1\": \"up\", \"Gi0/2\": \"down\"}}",
     "C": "{\"interfaces\": [\"Gi0/1\", \"up\", \"Gi0/2\", \"down\"]}",
     "D": "{\"interfaces\": (\"Gi0/1\": \"up\", \"Gi0/2\": \"down\")}"
    },
@@ -3772,12 +3772,12 @@
    "id": "b5_6.7_04",
    "subtopic": "6.7",
    "name": "Orquestación agent vs agentless",
-   "question": "What is a key operational advantage of an agentless automation approach for network devices?",
+   "question": "What's a key operational advantage of agentless automation for network devices?",
    "options": {
-    "A": "It guarantees real-time push notifications from every managed device",
-    "B": "It avoids installing, updating, and maintaining agent software on each device — useful since many network devices cannot run third-party agents",
-    "C": "It typically completes large-scale changes faster than agent-based tools because connections to each device in the batch can be established and torn down in parallel, rather than relying on a persistent agent process on every device",
-    "D": "It eliminates the need for any credentials to connect to devices"
+    "A": "It guarantees real-time push notifications from every device",
+    "B": "It avoids installing and maintaining agent software — useful since many devices can't run third-party agents",
+    "C": "It always completes large-scale changes faster than agent-based tools, since connections to each device can be opened and closed in parallel",
+    "D": "It eliminates the need for any credentials"
    },
    "correct": "B",
    "explanation_es": "Muchos dispositivos de red no pueden ejecutar software de terceros como un agente; el enfoque agentless evita esa necesidad, conectándose bajo demanda (SSH/API) sin instalar ni mantener nada persistente en el dispositivo."
@@ -3786,11 +3786,11 @@
    "id": "b5_6.7_05",
    "subtopic": "6.7",
    "name": "Orquestación agent vs agentless",
-   "question": "In an agent-based orchestration model (e.g., Puppet), what role does the agent play on the managed node?",
+   "question": "In an agent-based model like Puppet, what role does the agent play on the managed node?",
    "options": {
-    "A": "It only functions during initial provisioning and is then uninstalled",
-    "B": "It only serves as a passive log collector with no configuration capability, forwarding events to a central server without ever applying any changes",
-    "C": "It runs persistently, periodically pulling configuration from a central server and applying it locally",
+    "A": "It only runs during initial provisioning, then is uninstalled",
+    "B": "It only passively collects logs, with no configuration capability, forwarding events to a central server without ever applying changes",
+    "C": "It runs persistently, periodically pulling and applying configuration from a central server",
     "D": "It replaces the need for a central server entirely"
    },
    "correct": "C",
@@ -3800,12 +3800,12 @@
    "id": "b5_6.6_03",
    "subtopic": "6.6",
    "name": "EEM applets",
-   "question": "What is the primary purpose of Cisco Embedded Event Manager (EEM)?",
+   "question": "What's the primary purpose of Cisco EEM?",
    "options": {
     "A": "To replace SNMP entirely",
     "B": "To encrypt configuration files",
-    "C": "To detect an event on a device (CLI command, syslog message, CPU threshold, etc.) and automatically trigger a defined action in response",
-    "D": "To provide a GUI for network monitoring, replacing the need for any CLI-based scripting or event detection logic entirely across every supported Cisco IOS platform"
+    "C": "To detect an event on a device and automatically trigger a defined action in response",
+    "D": "To provide a GUI for network monitoring, replacing CLI scripting entirely"
    },
    "correct": "C",
    "explanation_es": "EEM permite definir applets que combinan un evento disparador (event detector) con una acción automática a ejecutar en respuesta, como enviar un email, correr un comando o generar un log."
@@ -3828,12 +3828,12 @@
    "id": "b5_6.6_05",
    "subtopic": "6.6",
    "name": "EEM applets",
-   "question": "An EEM applet is configured with 'event syslog pattern \"%LINK-3-UPDOWN\"' and an action to send an email. What triggers this applet?",
+   "question": "An EEM applet has 'event syslog pattern \"%LINK-3-UPDOWN\"' with an action to send email. What triggers it?",
    "options": {
-    "A": "An SNMP trap received from another device",
+    "A": "An SNMP trap from another device",
     "B": "A scheduled timer",
-    "C": "The router generating a syslog message matching that pattern, such as an interface changing state",
-    "D": "A manual CLI command entered by the administrator immediately before the applet is configured on the device"
+    "C": "The router generating a matching syslog message, such as an interface state change",
+    "D": "A manual CLI command entered right before the applet is configured on the device by an administrator"
    },
    "correct": "C",
    "explanation_es": "'event syslog' dispara el applet cuando el dispositivo genera internamente un mensaje de syslog que coincide con el patrón indicado, en este caso un cambio de estado de una interfaz."
@@ -3872,10 +3872,10 @@
    "name": "Métodos HTTP",
    "question": "Which statement about the HTTP GET method is correct?",
    "options": {
-    "A": "GET should be safe and idempotent, retrieving a representation of a resource without side effects on the server",
-    "B": "GET is used to create new resources on the server",
-    "C": "GET requires a request body containing the resource data",
-    "D": "GET is the only method that can return a 201 Created status, since every other HTTP method is forbidden from creating new resources"
+    "A": "GET should be safe and idempotent, retrieving a resource without side effects",
+    "B": "GET is used to create new resources",
+    "C": "GET requires a request body with the resource data",
+    "D": "GET is the only method that can return 201 Created"
    },
    "correct": "A",
    "explanation_es": "GET es un método seguro (no debería modificar el estado del servidor) e idempotente, usado para leer un recurso. Crear un recurso, que puede devolver 201 Created, es responsabilidad típica de POST."
@@ -4348,9 +4348,9 @@
    "name": "Códigos de respuesta REST API",
    "question": "What does an HTTP 204 No Content response typically indicate?",
    "options": {
-    "A": "The request succeeded, but there is no content to return in the response body (common after a successful DELETE)",
+    "A": "The request succeeded, but there's no content to return (common after a successful DELETE)",
     "B": "The request failed due to a client error",
-    "C": "The requested resource was permanently moved to a new URL that the client must follow for all future requests, generated by the same framework middleware",
+    "C": "The resource was permanently moved to a new URL that the client must follow for all future requests",
     "D": "The server is temporarily unavailable"
    },
    "correct": "A",
@@ -6460,12 +6460,12 @@
    "id": "b6_6.1_06",
    "subtopic": "6.1",
    "name": "Python básico",
-   "question": "What does the following Python code print?\n\nfor i in range(3):\n    print(i)",
+   "question": "What does this print?\n\nfor i in range(3):\n    print(i)",
    "options": {
-    "A": "3 (printed only once, since range(3) returns only the single value 3 rather than a sequence)",
-    "B": "1 2 3 (each on its own line, since range(3) is assumed to start counting from 1 rather than 0)",
-    "C": "0 1 2 (each on its own line, since range(3) generates the sequence 0, 1, 2, and the loop iterates once per value in that sequence)",
-    "D": "0 1 2 3 (each on its own line, since range(3) is assumed to include the value 3 itself)"
+    "A": "3",
+    "B": "1 2 3",
+    "C": "0 1 2",
+    "D": "0 1 2 3"
    },
    "correct": "C",
    "explanation_es": "range(3) genera la secuencia 0, 1, 2 (comienza en 0 por defecto y no incluye el valor final 3), y el loop itera una vez por cada valor de esa secuencia, imprimiendo 0, luego 1, luego 2, cada uno en su propia línea."
@@ -6474,12 +6474,12 @@
    "id": "b6_6.1_07",
    "subtopic": "6.1",
    "name": "Python básico",
-   "question": "What is the purpose of a Python 'try/except' block?",
+   "question": "What's the purpose of a Python 'try/except' block?",
    "options": {
-    "A": "A try/except block generally prevents any error from ever occurring in the enclosed code, making error handling logic within the except block entirely unreachable and unnecessary, the same way wrapping a division in try/except is sometimes mistakenly believed to prevent a ZeroDivisionError from occurring at all",
-    "B": "The 'except' section of a try/except block executes every single time the code runs, regardless of whether any error actually occurred in the try section",
-    "C": "A try/except block in Python can only catch an error that occurs inside a function call made within the try section, and cannot catch an error raised directly by a bare arithmetic expression or variable assignment written inline in the try block itself",
-    "D": "It allows a script to attempt to execute a block of code (the 'try' section) and gracefully handle a specific type of error/exception if one occurs (in the 'except' section), rather than the script crashing/terminating abruptly the moment an unhandled error is encountered"
+    "A": "It prevents any error from ever occurring in the enclosed code",
+    "B": "The 'except' section runs every single time the code executes, regardless of whether any error actually occurred in the try section",
+    "C": "It can only catch errors from a function call, not a bare expression",
+    "D": "It lets a script attempt code in 'try' and gracefully handle an error in 'except', instead of crashing"
    },
    "correct": "D",
    "explanation_es": "Permite que un script intente ejecutar un bloque de código (la sección 'try') y maneje de forma controlada un tipo específico de error/excepción si ocurre (en la sección 'except'), en lugar de que el script se caiga/termine abruptamente en el momento en que se encuentra un error sin manejar."
@@ -6488,12 +6488,12 @@
    "id": "b6_6.1_08",
    "subtopic": "6.1",
    "name": "Python básico",
-   "question": "What does the Python 'import' statement (e.g., 'import requests') allow a script to do?",
+   "question": "What does the Python 'import' statement (e.g., 'import requests') allow?",
    "options": {
-    "A": "A Python script can import a third-party library like 'requests' only if that library is explicitly listed in a 'requirements.txt' file located in the exact same directory as the script; without that file present, the import statement fails even if the package is already installed in the environment",
-    "B": "The 'import' statement's main effect is to change the script's current working directory to the location of the imported module, which is why relative file paths used elsewhere in the script may unexpectedly resolve relative to the module's own folder rather than the script's folder",
-    "C": "It loads an external module/library (such as the 'requests' library for making HTTP calls) into the current script's namespace, making the functions and classes defined in that module available for the script to use, rather than requiring the script to reimplement that functionality itself from scratch",
-    "D": "Using 'import' requires the interpreter to re-download the module's source code from the Python Package Index (PyPI) every time the script runs, even for a module that's already installed locally in the current environment"
+    "A": "It only works if the library is explicitly listed in a requirements.txt file located in the exact same directory as the script",
+    "B": "It changes the script's working directory to the imported module's location",
+    "C": "It loads an external module into the script's namespace, making its functions/classes available",
+    "D": "It re-downloads the module's source from PyPI every time the script runs"
    },
    "correct": "C",
    "explanation_es": "Carga un módulo/librería externo (como la librería 'requests' para hacer llamadas HTTP) al namespace del script actual, dejando disponibles para usar las funciones y clases definidas en ese módulo, en lugar de requerir que el script reimplemente esa funcionalidad desde cero por su cuenta."
@@ -6502,12 +6502,12 @@
    "id": "b6_6.1_09",
    "subtopic": "6.1",
    "name": "Python básico",
-   "question": "What is the difference between a Python 'list' and a Python 'tuple', beyond just tuples being written with parentheses instead of square brackets?",
+   "question": "Beyond syntax, what's the difference between a Python 'list' and a 'tuple'?",
    "options": {
-    "A": "A tuple can have individual elements reassigned after creation as long as it was created using the tuple() constructor rather than parentheses syntax, while a list created with square-bracket syntax cannot have its individual elements reassigned once defined",
-    "B": "A list is mutable (its contents can be changed/added/removed after creation), while a tuple is immutable (once created, its contents cannot be modified), which also makes a tuple hashable and therefore usable as a dictionary key or a set element, unlike a list",
-    "C": "Tuples can only ever store numeric values, while lists can store any data type, making tuples fundamentally more restrictive in what they can contain than the bracket-style difference alone would suggest",
-    "D": "Both lists and tuples support the same built-in methods, such as .append() and .remove(), with a tuple's parentheses syntax simply being converted internally into the same mutable list object once the script runs, so code that modifies a tuple in place executes without error just as it would on a list"
+    "A": "A tuple created with tuple() can have elements reassigned; one created with parentheses cannot",
+    "B": "A list is mutable; a tuple is immutable, which also makes it hashable and usable as a dict key",
+    "C": "Tuples can only store numeric values",
+    "D": "Both support the same methods, like .append() and .remove()"
    },
    "correct": "B",
    "explanation_es": "Una lista es mutable (su contenido se puede cambiar/agregar/quitar después de crearla), mientras que una tupla es inmutable (una vez creada, su contenido no se puede modificar), lo cual también la hace hasheable y por lo tanto utilizable como clave de diccionario o elemento de un set, a diferencia de una lista."
@@ -6516,12 +6516,12 @@
    "id": "b6_6.1_10",
    "subtopic": "6.1",
    "name": "Python básico",
-   "question": "What does the following Python code print?\n\nmy_list = [1, 2, 3]\nmy_list.append(4)\nprint(my_list)",
+   "question": "What does this print?\n\nmy_list = [1, 2, 3]\nmy_list.append(4)\nprint(my_list)",
    "options": {
-    "A": "[1, 2, 3, 4] (since .append() adds the given value to the end of the existing list, modifying it in place)",
-    "B": "An error is raised, since Python lists are assumed to be a fixed size once created and cannot have any additional element appended to them",
-    "C": "[1, 2, 3] (assuming .append() has no actual effect on the list and the appended value is simply discarded)",
-    "D": "[4, 1, 2, 3] (assuming .append() always inserts the new value at the beginning of the list rather than the end)"
+    "A": "[1, 2, 3, 4]",
+    "B": "An error, since lists can't have elements appended",
+    "C": "[1, 2, 3], since append() has no effect",
+    "D": "[4, 1, 2, 3]"
    },
    "correct": "A",
    "explanation_es": ".append() agrega el valor dado al final de la lista existente, modificándola en el lugar; por eso my_list pasa de [1, 2, 3] a [1, 2, 3, 4] tras llamar a my_list.append(4)."
@@ -6530,12 +6530,12 @@
    "id": "b6_6.1_11",
    "subtopic": "6.1",
    "name": "Python básico",
-   "question": "What is the purpose of Python's f-strings (formatted string literals, e.g., f\"Interface {name} is {status}\")?",
+   "question": "What's the purpose of Python f-strings (e.g., f\"Interface {name} is {status}\")?",
    "options": {
-    "A": "Once a value is embedded in an f-string using curly braces, that value becomes permanently and irreversibly fixed at that point, with the string literal no longer able to reflect any subsequent change to the underlying variable, even before the string itself is actually created, meaning the variable effectively becomes a hard-coded literal at that point in the script's execution",
-    "B": "F-strings can only ever embed a maximum of a single variable per string literal, making it not supported to include more than one dynamic value within the same formatted string",
-    "C": "F-strings allow variable values (and even expressions) to be directly embedded within a string literal using curly braces, providing a concise, readable way to build a formatted string that incorporates dynamic values, rather than needing to manually concatenate multiple separate string and variable pieces together with '+' operators",
-    "D": "F-strings require the script file itself to be saved using UTF-8 encoding, and will raise a SyntaxError at parse time if the script is saved in a different encoding, even when the embedded expressions themselves contain no non-ASCII characters"
+    "A": "Embedded values become permanently and irreversibly fixed at that point, unable to reflect any later change to the underlying variable",
+    "B": "F-strings can only embed a single variable per string",
+    "C": "They let variables and expressions be embedded directly in a string using curly braces, avoiding manual concatenation",
+    "D": "F-strings require the script file to be saved as UTF-8"
    },
    "correct": "C",
    "explanation_es": "Los f-strings permiten incrustar directamente valores de variables (e incluso expresiones) dentro de un literal de cadena usando llaves, dando una forma concisa y legible de armar una cadena formateada que incorpora valores dinámicos, en lugar de necesitar concatenar manualmente varias piezas separadas de cadena y variable con operadores '+'."
@@ -6544,12 +6544,12 @@
    "id": "b6_6.1_12",
    "subtopic": "6.1",
    "name": "Python básico",
-   "question": "What does Python's 'for key, value in my_dict.items():' loop construct allow a script to do when iterating over a dictionary?",
+   "question": "What does 'for key, value in my_dict.items():' allow when iterating a dictionary?",
    "options": {
-    "A": "Using '.items()' in a for loop generally deletes every key-value pair from the dictionary as it iterates, leaving the dictionary empty once the loop finishes",
-    "B": "'.items()' returns the dictionary's key-value pairs as a plain Python list of tuples that is completely disconnected from the original dictionary once created, meaning a later change made to the source dictionary won't be reflected in a view object obtained from an earlier call to '.items()'",
-    "C": "It iterates over the dictionary, giving access to both the key and its corresponding value together on each iteration (unpacked into the two loop variables), rather than only getting the keys (as a plain 'for key in my_dict:' loop would) and having to separately look up each value using that key inside the loop body",
-    "D": "This construct can only ever be used to iterate over a Python list, and is technically invalid, unsupported syntax when used on an actual dictionary object"
+    "A": "It deletes every key-value pair as it iterates",
+    "B": "'.items()' returns a list disconnected from the original dict",
+    "C": "It gives access to both key and value together on each iteration, instead of only keys",
+    "D": "It can only be used on a list, not a dict"
    },
    "correct": "C",
    "explanation_es": "Itera sobre el diccionario, dando acceso tanto a la clave como a su valor correspondiente juntos en cada iteración (desempaquetados en las dos variables del loop), en lugar de solo obtener las claves (como haría un loop simple 'for key in my_dict:') y tener que buscar por separado cada valor usando esa clave dentro del cuerpo del loop."
@@ -6558,12 +6558,12 @@
    "id": "b6_6.1_15",
    "subtopic": "6.1",
    "name": "Python básico",
-   "question": "What does calling 'response.json()' typically do when 'response' is an object returned by the Python 'requests' library after an HTTP call to a REST API?",
+   "question": "What does 'response.json()' do on a 'requests' library response object?",
    "options": {
-    "A": "'.json()' primarily validates that the response's 'Content-Type' header is explicitly set to 'application/json', and silently returns None for the parsed data if that header is missing or set to a different value, even when the response body itself contains syntactically valid JSON text",
-    "B": "'.json()' can only be called on a response that used the HTTP POST method, and will always raise an error if called on a response resulting from an HTTP GET request",
-    "C": "It parses the HTTP response body (assuming it's actually JSON-formatted text) and converts it into a native Python data structure (such as a dict or list), allowing the script to work with the API response's data programmatically using normal Python syntax rather than having to manually parse the raw JSON text string itself",
-    "D": "Calling '.json()' re-reads the response data directly from the original TCP socket connection each time it's called, meaning invoking '.json()' a second time on the same response object after that connection has already closed will silently return an empty result rather than raising an error"
+    "A": "It primarily validates that the Content-Type header is explicitly set to application/json, silently returning None otherwise",
+    "B": "It can only be called on a POST response, never a GET response",
+    "C": "It parses the HTTP response body as JSON and converts it into a native Python data structure",
+    "D": "It re-reads the data from the original TCP socket each time it's called"
    },
    "correct": "C",
    "explanation_es": "Parsea el cuerpo de la respuesta HTTP (asumiendo que realmente es texto con formato JSON) y lo convierte en una estructura de datos nativa de Python (como un dict o una lista), permitiendo que el script trabaje con los datos de la respuesta de la API programáticamente usando sintaxis normal de Python en lugar de tener que parsear manualmente la cadena de texto JSON cruda."
@@ -6572,12 +6572,12 @@
    "id": "b6_6.1_17",
    "subtopic": "6.1",
    "name": "Python básico",
-   "question": "What does the following Python code print?\n\ndef greet(name=\"world\"):\n    return f\"Hello, {name}!\"\n\nprint(greet())",
+   "question": "What does this print?\n\ndef greet(name=\"world\"):\n    return f\"Hello, {name}!\"\n\nprint(greet())",
    "options": {
-    "A": "Hello, world! (since the function call 'greet()' provides no argument, Python uses the default value \"world\" defined in the function signature for the 'name' parameter)",
-    "B": "Hello, ! (with nothing filled in, assuming a missing argument leaves the f-string placeholder completely empty rather than falling back to the default value), confusing it with an unrelated templating engine's behavior",
-    "C": "Hello, name! (printing the literal word 'name' rather than substituting either the default value or any passed-in argument)",
-    "D": "An error is raised, since the function is assumed to require an argument to be explicitly passed every single time it's called, signature"
+    "A": "Hello, world!",
+    "B": "Hello, !",
+    "C": "Hello, name!",
+    "D": "An error, since the function requires an argument"
    },
    "correct": "A",
    "explanation_es": "Como la llamada 'greet()' no provee ningún argumento, Python usa el valor por defecto \"world\" definido en la firma de la función para el parámetro 'name', así que la función retorna \"Hello, world!\" y eso es lo que se imprime."
@@ -6586,12 +6586,12 @@
    "id": "b6_6.2_07",
    "subtopic": "6.2",
    "name": "JSON",
-   "question": "Which of the following data types are natively supported as JSON values (according to the JSON specification)?",
+   "question": "Which data types are natively supported as JSON values?",
    "options": {
-    "A": "JSON natively supports exactly one single data type (string) for every value, with numbers, booleans, and nested objects/arrays all being technically invalid according to the JSON specification, a claim sometimes wrongly attributed to an early draft, even though every published version has always defined these as native types",
-    "B": "Only numbers and strings are valid JSON value types; boolean values and null are not part of the JSON specification and cannot legally appear anywhere in a valid JSON document",
-    "C": "JSON has a dedicated native 'date' data type built directly into the specification, distinct from and in addition to the string type, specifically for representing timestamps",
-    "D": "String, number, boolean (true/false), null, object, and array are the native JSON value types; there is no separate native type for something like a date/timestamp, which is typically represented as a formatted string by convention rather than as its own distinct JSON data type"
+    "A": "Only string is a native type; numbers, booleans, and nested objects/arrays are technically invalid according to the specification",
+    "B": "Only numbers and strings; booleans and null aren't valid JSON",
+    "C": "JSON has a dedicated native 'date' type",
+    "D": "String, number, boolean, null, object, and array — there's no separate 'date' type"
    },
    "correct": "D",
    "explanation_es": "String, número, booleano (true/false), null, objeto, y array son los tipos de valor JSON nativos; no existe un tipo nativo separado para algo como una fecha/timestamp, que típicamente se representa como un string formateado por convención en lugar de ser su propio tipo de dato JSON distinto."
@@ -6600,12 +6600,12 @@
    "id": "b6_6.2_10",
    "subtopic": "6.2",
    "name": "JSON",
-   "question": "What is the purpose of the Python 'json.dumps()' function, as the counterpart to 'json.loads()'?",
+   "question": "What's the purpose of Python's 'json.dumps()', as the counterpart to 'json.loads()'?",
    "options": {
-    "A": "'json.dumps()' sends a JSON payload directly over the network to a remote API endpoint, functioning as a network transmission function rather than a local string-serialization function",
-    "B": "'json.dumps()' and 'json.loads()' perform exactly identical operations, with no meaningful distinction between converting a Python structure to a JSON string versus converting a JSON string into a Python structure, even though the two functions actually sit on opposite ends of the JSON pipeline",
-    "C": "'json.dumps()' writes the resulting JSON-formatted output directly to a file on disk whose name is derived from the Python variable being serialized, rather than returning that JSON text as an in-memory string value the calling code can use however it needs, such as passing it directly to a requests.post() call",
-    "D": "'json.dumps()' converts (serializes) a native Python data structure (like a dict or list) into a JSON-formatted string, the inverse operation of 'json.loads()' which parses (deserializes) a JSON-formatted string into a native Python data structure"
+    "A": "It sends a JSON payload directly over the network to a remote API endpoint, functioning as a transmission function",
+    "B": "It performs exactly the same operation as json.loads()",
+    "C": "It writes JSON output directly to a file on disk",
+    "D": "It serializes a Python data structure into a JSON-formatted string — the inverse of json.loads()"
    },
    "correct": "D",
    "explanation_es": "'json.dumps()' convierte (serializa) una estructura de datos nativa de Python (como un dict o una lista) en una cadena con formato JSON, la operación inversa de 'json.loads()', que parsea (deserializa) una cadena con formato JSON hacia una estructura de datos nativa de Python."
@@ -6614,12 +6614,12 @@
    "id": "b6_6.2_13",
    "subtopic": "6.2",
    "name": "JSON",
-   "question": "Why might a network automation script need to explicitly handle a 'KeyError' (or use a safer lookup method like dict.get()) when working with JSON data parsed from an API response?",
+   "question": "Why might a script need to handle 'KeyError' (or use dict.get()) with JSON parsed from an API response?",
    "options": {
-    "A": "Not every JSON response is guaranteed to contain every key the script might expect (a field might be optional, absent under certain conditions, or the API's response structure might have changed), so directly accessing a dictionary key that doesn't actually exist in that particular parsed response would raise a KeyError and potentially crash the script unless handled defensively (such as using .get() with a default value, or a try/except block)",
-    "B": "A KeyError when working with parsed JSON data typically only occurs due to a dropped or corrupted network connection during the original API response transfer, rather than being related to a key simply being legitimately absent from an otherwise complete and successfully received JSON response",
-    "C": "A KeyError can only ever occur when working with a JSON array, and is not supported to encounter when accessing keys within a JSON object that's been parsed into a Python dictionary",
-    "D": "Once an API's documentation lists a field as part of its response schema, that field is guaranteed by the JSON specification itself to always be present and non-null in every response the API returns, since JSON parsers are required to validate every response against the documented schema before the calling script receives the parsed data"
+    "A": "Not every response is guaranteed to contain every expected key, so accessing a missing key directly raises KeyError",
+    "B": "KeyError only occurs due to a dropped network connection",
+    "C": "KeyError can only occur with a JSON array, never a JSON object",
+    "D": "A documented field is guaranteed by the JSON spec itself to always be present and non-null in every response returned"
    },
    "correct": "A",
    "explanation_es": "No todas las respuestas JSON garantizan contener cada clave que el script podría esperar (un campo podría ser opcional, estar ausente bajo ciertas condiciones, o la estructura de respuesta de la API podría haber cambiado), así que acceder directamente a una clave de diccionario que no existe realmente en esa respuesta parseada en particular lanzaría un KeyError y potencialmente haría fallar el script a menos que se maneje defensivamente (como usando .get() con un valor por defecto, o un bloque try/except)."
@@ -6628,12 +6628,12 @@
    "id": "b6_6.2_14",
    "subtopic": "6.2",
    "name": "JSON",
-   "question": "What is the purpose of a 'JSON Schema' as a separate, related concept from JSON itself?",
+   "question": "What's the purpose of a 'JSON Schema', as a concept separate from JSON itself?",
    "options": {
-    "A": "Once a JSON Schema is defined for a given document type, that schema automatically and permanently prevents any future JSON document conforming to it from ever being modified or updated in any way",
-    "B": "A JSON Schema must always be embedded as a special reserved top-level key directly within the same JSON document it describes, rather than existing as a separate, standalone document that a validator loads independently to check the target JSON against",
-    "C": "A JSON Schema mainly defines how a JSON document should be compressed and physically stored on disk, such as which binary encoding to use, rather than describing the logical structure, data types, or required fields a conforming JSON document must contain",
-    "D": "A JSON Schema is a formal, machine-readable document that describes the expected structure, data types, and constraints a JSON document should conform to (such as which fields are required, and what type each field's value must be), allowing that expected structure to be validated programmatically, similar in spirit to how a YANG model defines the expected structure of NETCONF/RESTCONF data"
+    "A": "It permanently prevents any conforming document from ever being modified",
+    "B": "It must be embedded as a reserved key inside the same JSON document it describes",
+    "C": "It mainly defines how a document is compressed and stored on disk",
+    "D": "It's a formal document describing the expected structure, types, and constraints a JSON document must conform to — similar in spirit to a YANG model"
    },
    "correct": "D",
    "explanation_es": "Un JSON Schema es un documento formal y legible por máquina que describe la estructura, tipos de datos, y restricciones esperadas que debería cumplir un documento JSON (como qué campos son requeridos, y qué tipo debe tener el valor de cada campo), permitiendo validar esa estructura esperada de forma programática, de forma conceptualmente similar a cómo un modelo YANG define la estructura esperada de los datos de NETCONF/RESTCONF."
@@ -6642,12 +6642,12 @@
    "id": "b6_6.3_12",
    "subtopic": "6.3",
    "name": "YANG",
-   "question": "What does the YANG 'mandatory' statement (applied to a leaf or other data node) enforce?",
+   "question": "What does the YANG 'mandatory' statement enforce on a leaf?",
    "options": {
-    "A": "It specifies that a value for that particular data node must be present/configured for the containing configuration to be considered valid, causing validation to fail if that mandatory node is left unconfigured, ensuring critical configuration elements are never accidentally omitted",
-    "B": "Marking a node as 'mandatory' means a default value is automatically and permanently assigned to that node the first time the module is loaded, and that default value can never afterward be overridden by an administrator's own explicit configuration",
-    "C": "The 'mandatory' statement mainly affects which fields are shown by default versus hidden behind an 'advanced settings' toggle in a management GUI built against that YANG model, rather than actually causing validation to fail if the value is left unconfigured on the underlying device",
-    "D": "'mandatory' can only be applied to an entire YANG module as a whole, and cannot be applied to an individual leaf or other specific data node within that module"
+    "A": "That a value must be present/configured for the containing configuration to be valid",
+    "B": "A default value is permanently assigned and can never be overridden",
+    "C": "It mainly affects whether a field shows by default versus hidden behind an 'advanced settings' toggle in a GUI",
+    "D": "It can only be applied to an entire module, not a single leaf"
    },
    "correct": "A",
    "explanation_es": "Especifica que debe estar presente/configurado un valor para ese nodo de dato en particular para que la configuración que lo contiene se considere válida, haciendo que la validación falle si ese nodo obligatorio queda sin configurar, asegurando que nunca se omitan accidentalmente elementos de configuración críticos."
@@ -6656,12 +6656,12 @@
    "id": "b6_6.3_13",
    "subtopic": "6.3",
    "name": "YANG",
-   "question": "What is the purpose of a YANG 'grouping' statement, and how does it typically improve the maintainability of a YANG model?",
+   "question": "What's the purpose of a YANG 'grouping' statement?",
    "options": {
-    "A": "Once a grouping is defined, it is automatically and immediately instantiated everywhere in the model with no need for an explicit 'uses' statement to actually reference it anywhere",
-    "B": "YANG groupings can only ever contain a single leaf node each, making them functionally equivalent to a plain leaf statement rather than a reusable collection of multiple nodes",
-    "C": "A grouping's node definitions are copied into a model only at the moment the module is compiled by a YANG compiler, so any later edit made to the original grouping definition after that initial compilation will not propagate to locations that already used a 'uses' statement referencing it earlier in the same compilation pass",
-    "D": "A grouping defines a reusable collection of data nodes that can be referenced ('used') in multiple places within the same model (or even imported into other models), avoiding the need to repeatedly redefine the same set of nodes in every location where that same structure is needed, similar in spirit to a reusable function or template in general programming"
+    "A": "It's automatically and immediately instantiated everywhere in the model, with no need for an explicit 'uses' statement anywhere",
+    "B": "A grouping can only contain a single leaf node",
+    "C": "Its nodes are copied in only at compile time; later edits don't propagate",
+    "D": "It defines a reusable set of nodes referenced via 'uses' in multiple places, avoiding repeated redefinition"
    },
    "correct": "D",
    "explanation_es": "Un grouping define una colección reutilizable de nodos de dato que se puede referenciar ('usar') en múltiples lugares dentro del mismo modelo (o incluso importar en otros modelos), evitando la necesidad de redefinir repetidamente el mismo conjunto de nodos en cada lugar donde se necesite esa misma estructura, de forma conceptualmente similar a una función o plantilla reutilizable en programación general."
@@ -6670,12 +6670,12 @@
    "id": "b6_6.5_06",
    "subtopic": "6.5",
    "name": "Códigos de respuesta REST API",
-   "question": "What does an HTTP 400 Bad Request status code typically indicate about an API request?",
+   "question": "What does an HTTP 400 Bad Request typically indicate?",
    "options": {
-    "A": "HTTP 400 always indicates that the request succeeded completely and the server is simply confirming successful processing, identical in meaning to a 200 OK response",
-    "B": "The server could not process the request because the client sent something the server considers malformed or invalid (such as invalid JSON syntax, a missing required field, or a value that fails validation), indicating a problem with how the client constructed the request itself rather than a server-side failure",
-    "C": "400 status codes are always caused by a server-side hardware failure, with the client's own request always assumed to have been perfectly well-formed regardless of what a 400 response indicates, much like how a 503 Service Unavailable specifically points to server-side infrastructure trouble such as a failed power supply or overheating CPU",
-    "D": "A 400 status code indicates that the server itself experienced an unexpected internal fault while attempting to process an otherwise well-formed and valid request, a meaning that's actually more specifically associated with the 500 Internal Server Error status code rather than 400"
+    "A": "The request succeeded completely, same as 200 OK",
+    "B": "The server couldn't process the request because the client sent something malformed or invalid",
+    "C": "400 is always caused by a server-side hardware failure",
+    "D": "The server had an unexpected internal fault on an otherwise valid request"
    },
    "correct": "B",
    "explanation_es": "El servidor no pudo procesar la solicitud porque el cliente envió algo que el servidor considera malformado o inválido (como sintaxis JSON inválida, un campo requerido faltante, o un valor que falla la validación), indicando un problema con cómo el cliente construyó la solicitud en sí en lugar de una falla del lado del servidor."
@@ -6684,12 +6684,12 @@
    "id": "b6_6.5_07",
    "subtopic": "6.5",
    "name": "Códigos de respuesta REST API",
-   "question": "What is the difference between an HTTP 500 (Internal Server Error) and a 503 (Service Unavailable) response, both of which fall in the 5xx server-error range?",
+   "question": "What's the difference between HTTP 500 and 503, both server errors?",
    "options": {
-    "A": "503 always indicates a permanent, unrecoverable failure that will never succeed no matter how many times the request is retried, while 500 always indicates a temporary condition that's guaranteed to resolve itself automatically, since the HTTP specification is claimed to define the numeric suffix itself (0 versus 3) as encoding the server's own confidence that a retry will eventually succeed, rather than describing the duration, cause, or recoverability of the underlying problem being reported to the client",
-    "B": "A 500 status code indicates a client-side problem with how the request was formatted, identical in meaning to a 400 Bad Request, rather than indicating any server-side error condition",
-    "C": "500 and 503 status codes are simply two different numeric labels for exactly the same condition, with no meaningful distinction in what each one specifically indicates about the nature of the server-side problem",
-    "D": "A 500 generally indicates an unexpected error occurred on the server while processing the request (often an unhandled exception in the server's own code), while a 503 more specifically indicates the server is temporarily unable to handle the request (such as being overloaded or undergoing maintenance), which can sometimes include a 'Retry-After' hint suggesting the client should retry later, rather than the request being fundamentally invalid or permanently failing"
+    "A": "503 is always permanent; 500 is always temporary",
+    "B": "500 indicates a client-side formatting problem identical in meaning to a 400 Bad Request, rather than any server-side condition",
+    "C": "500 and 503 mean exactly the same thing",
+    "D": "500 indicates an unexpected server error (often an unhandled exception); 503 means the server is temporarily unable to handle the request, sometimes with a Retry-After hint"
    },
    "correct": "D",
    "explanation_es": "Un 500 generalmente indica que ocurrió un error inesperado en el servidor al procesar la solicitud (a menudo una excepción no manejada en el propio código del servidor), mientras que un 503 indica más específicamente que el servidor está temporalmente incapaz de manejar la solicitud (como estar sobrecargado o en mantenimiento), lo cual a veces puede incluir una indicación 'Retry-After' sugiriendo que el cliente reintente más tarde, en lugar de que la solicitud sea fundamentalmente inválida o falle permanentemente."
@@ -6698,12 +6698,12 @@
    "id": "b6_6.5_09",
    "subtopic": "6.5",
    "name": "Códigos de respuesta REST API",
-   "question": "What does an HTTP 409 Conflict status code typically indicate about the state of the targeted resource relative to the request being made?",
+   "question": "What does an HTTP 409 Conflict typically indicate?",
    "options": {
-    "A": "A 409 status code always indicates the request succeeded completely with no issue, functioning identically in meaning to a 200 OK or 201 Created response",
-    "B": "The request could not be completed because it conflicts with the current state of the target resource (for example, attempting to create a resource with a name/identifier that already exists, or a concurrent modification conflict), indicating the client may need to retrieve the current state and resolve the conflict before retrying",
-    "C": "409 indicates that the client lacks valid authentication credentials entirely, which is actually the meaning more specifically associated with a 401 Unauthorized response rather than 409, a confusion that arises because both 401 and 409 can be returned for a POST attempting to create a resource, making some engineers assume the two codes describe the same credential failure",
-    "D": "A 409 response always indicates that the client's authentication token has expired and must be refreshed before the request can be retried, a meaning that's actually more specifically associated with a 401 Unauthorized response rather than 409"
+    "A": "The request succeeded completely with no issue, functioning identically in meaning to a 200 OK or 201 Created response",
+    "B": "The request conflicts with the resource's current state, e.g. creating a resource with a name that already exists",
+    "C": "The client lacks valid authentication credentials",
+    "D": "The client's token has expired and must be refreshed"
    },
    "correct": "B",
    "explanation_es": "La solicitud no pudo completarse porque entra en conflicto con el estado actual del recurso destino (por ejemplo, intentar crear un recurso con un nombre/identificador que ya existe, o un conflicto de modificación concurrente), indicando que el cliente podría necesitar obtener el estado actual y resolver el conflicto antes de reintentar."
@@ -6712,12 +6712,12 @@
    "id": "b6_6.5_14",
    "subtopic": "6.5",
    "name": "Códigos de respuesta REST API",
-   "question": "What is the general purpose of implementing 'exponential backoff' when an automation script encounters a retriable error (such as a 503 or 429 status code) from an API?",
+   "question": "What's the purpose of 'exponential backoff' when a script hits a retriable error (503/429)?",
    "options": {
-    "A": "Exponential backoff primarily controls how many additional diagnostic fields are appended to the body of each subsequent retry request, growing the payload size with each attempt, rather than actually controlling how long the client waits between one retry attempt and the next",
-    "B": "Exponential backoff increases the delay between retry attempts only up to a small fixed number of retries, typically two or three, after which the client is expected to immediately resume retrying at the original, un-delayed interval rather than continuing to lengthen the wait on any further attempt",
-    "C": "Exponential backoff progressively increases the delay between successive retry attempts (rather than retrying immediately and repeatedly at a constant, rapid interval), which reduces the risk of the client's repeated rapid retries themselves contributing to or worsening the server's load/congestion problem, giving the server a genuine opportunity to recover before being hit with another retry attempt",
-    "D": "Implementing exponential backoff generally prevents a script from ever retrying a failed request more than a single time total, regardless of how many retries might otherwise have been configured or desired"
+    "A": "It controls how many diagnostic fields are added to each retry request's body",
+    "B": "It increases delay only for the first few retries, then resumes the original interval",
+    "C": "It progressively increases the delay between retries, reducing the risk that rapid retries worsen the server's load",
+    "D": "It prevents a script from ever retrying more than once total"
    },
    "correct": "C",
    "explanation_es": "El exponential backoff aumenta progresivamente el retraso entre intentos de reintento sucesivos (en lugar de reintentar inmediata y repetidamente a un intervalo constante y rápido), lo cual reduce el riesgo de que los reintentos rápidos y repetidos del propio cliente contribuyan a o empeoren el problema de carga/congestión del servidor, dándole al servidor una oportunidad genuina de recuperarse antes de recibir otro intento de reintento."
@@ -6726,12 +6726,12 @@
    "id": "b6_6.5_17",
    "subtopic": "6.5",
    "name": "Códigos de respuesta REST API",
-   "question": "What is the purpose of the HTTP 'Retry-After' response header, sometimes included alongside a 429 or 503 status code?",
+   "question": "What's the purpose of the HTTP 'Retry-After' header, sometimes sent with 429 or 503?",
    "options": {
-    "A": "Once a 'Retry-After' header is included in a response, the client is technically prohibited from ever retrying that same request again making the header's name a contradiction of its actual documented purpose",
-    "B": "'Retry-After' provides an explicit hint (either as a number of seconds or a specific date/time) telling the client how long it should wait before making another attempt, giving the client concrete, server-provided guidance rather than having to guess an appropriate retry delay on its own",
-    "C": "The 'Retry-After' header can only ever appear alongside a 2xx success status code, and is technically invalid, nonsensical syntax when included alongside any 4xx or 5xx error status code",
-    "D": "'Retry-After' specifies the maximum total number of retry attempts a client is permitted to make before the server will permanently ban that client's IP address, rather than actually indicating how much time the client should wait before its very next retry attempt"
+    "A": "It prohibits the client from ever retrying that request again",
+    "B": "It tells the client how long to wait before retrying, as seconds or a specific time",
+    "C": "It can only appear alongside a 2xx success code",
+    "D": "It specifies the maximum total number of retry attempts permitted before the server permanently bans that client's IP address"
    },
    "correct": "B",
    "explanation_es": "'Retry-After' provee una indicación explícita (ya sea como una cantidad de segundos o una fecha/hora específica) diciéndole al cliente cuánto debería esperar antes de hacer otro intento, dándole al cliente una guía concreta provista por el servidor en lugar de tener que adivinar un retraso de reintento apropiado por su cuenta."
@@ -6740,12 +6740,12 @@
    "id": "b6_6.6_07",
    "subtopic": "6.6",
    "name": "EEM applets",
-   "question": "What does the EEM 'event interface' detector allow an applet to trigger on, as distinct from 'event syslog'?",
+   "question": "What does the EEM 'event interface' detector trigger on, as distinct from 'event syslog'?",
    "options": {
-    "A": "The 'event interface' detector can only be applied to physical interfaces and is not supported for use with any logical interface type, such as a subinterface, port-channel, or SVI, when monitoring for a threshold condition",
-    "B": "'event interface' requires that a corresponding syslog message must have already been generated first before this event detector can ever trigger, making it entirely dependent on and secondary to 'event syslog' rather than an independent monitoring mechanism, a misunderstanding that arises because both detectors can legitimately react to the same link-flap condition in practice",
-    "C": "'event interface' and 'event syslog' are functionally and technically identical event detectors, triggering under exactly the same conditions with no meaningful distinction in what each one actually monitors",
-    "D": "'event interface' triggers based on a specific interface-level counter or condition (such as an interface's error rate or utilization crossing a defined threshold) being monitored directly, rather than waiting for that same underlying condition to happen to also generate a matching syslog message that 'event syslog' would need to pattern-match against"
+    "A": "It can only be applied to physical interfaces, not logical ones",
+    "B": "It requires that a matching syslog message must have already been generated first before this event detector can ever independently trigger on its own",
+    "C": "It's functionally identical to 'event syslog'",
+    "D": "It triggers directly on an interface-level counter or condition crossing a threshold, without needing a matching syslog message"
    },
    "correct": "D",
    "explanation_es": "'event interface' dispara basándose en un contador o condición a nivel de interfaz específico (como la tasa de errores o utilización de una interfaz cruzando un umbral definido) monitoreado directamente, en lugar de esperar a que esa misma condición subyacente también genere un mensaje de syslog coincidente contra el cual 'event syslog' necesitaría hacer pattern-matching."
@@ -6754,12 +6754,12 @@
    "id": "b6_6.6_09",
    "subtopic": "6.6",
    "name": "EEM applets",
-   "question": "Why might an EEM applet be used to automatically execute a remediation command (like re-enabling a port that was err-disabled) rather than requiring an administrator to manually intervene every single time that specific, well-understood condition occurs?",
+   "question": "Why might an EEM applet automatically remediate a condition (e.g., re-enabling an err-disabled port) instead of requiring manual intervention?",
    "options": {
-    "A": "EEM applets are not designed to executing any actual configuration-changing command as a response action, and can only ever generate a passive log message or send an email notification without ever being able to directly remediate a condition",
-    "B": "For a condition with a well-understood, predictable, and safe remediation (such as automatically re-enabling a port after a defined cooldown period, similar to what err-disable auto-recovery already does natively), an EEM applet can reduce the operational burden on administrators and reduce the time-to-resolution compared to waiting for a human to notice the condition and manually apply the same well-known fix",
-    "C": "Automated remediation via EEM applet is considered a universally poor practice with no legitimate use case, and manual intervention by an administrator is always strictly preferred over any automated applet-driven response for every possible condition",
-    "D": "Using an EEM applet for automated remediation generally eliminates any meaningful case for human oversight of the device going forward, making ongoing human monitoring unnecessary for any condition once any EEM applet has been configured on that device"
+    "A": "EEM applets can't execute configuration-changing commands, only log or email",
+    "B": "For a well-understood, safe remediation, an applet reduces operational burden and time-to-resolution versus waiting for a human",
+    "C": "Automated remediation is universally poor practice with no legitimate use case",
+    "D": "It eliminates any need for human oversight of the device going forward"
    },
    "correct": "B",
    "explanation_es": "Para una condición con una remediación bien entendida, predecible y segura (como volver a habilitar automáticamente un puerto después de un período de enfriamiento definido, similar a lo que ya hace nativamente la recuperación automática de err-disable), un applet de EEM puede reducir la carga operativa sobre los administradores y reducir el tiempo de resolución comparado con esperar a que un humano note la condición y aplique manualmente ese mismo arreglo bien conocido."
@@ -6768,12 +6768,12 @@
    "id": "b6_6.6_10",
    "subtopic": "6.6",
    "name": "EEM applets",
-   "question": "What does the 'maxrun' parameter configured on an EEM applet control?",
+   "question": "What does the 'maxrun' parameter on an EEM applet control?",
    "options": {
-    "A": "'maxrun' can only ever be configured with a value of zero, making any meaningful execution time limit not supported to define for any EEM applet",
-    "B": "Configuring 'maxrun' generally prevents the applet from ever actually executing at all, regardless of whether its triggering event condition has actually occurred",
-    "C": "'maxrun' controls the maximum number of times the same applet is permitted to be triggered within a single 24-hour period, after which any further occurrence of the triggering event is simply ignored, rather than actually limiting how long any single execution of the applet's actions is allowed to run",
-    "D": "'maxrun' sets a maximum execution time limit for the applet's action(s), after which the applet is forcibly terminated if it hasn't completed, helping prevent a misbehaving or unexpectedly long-running applet action from consuming excessive device resources or hanging indefinitely"
+    "A": "It can only be configured as zero",
+    "B": "It generally prevents the applet from ever executing",
+    "C": "The maximum number of times the same applet is permitted to trigger within a single 24-hour period",
+    "D": "A maximum execution time for the applet's actions, after which it's forcibly terminated"
    },
    "correct": "D",
    "explanation_es": "'maxrun' fija un límite máximo de tiempo de ejecución para la(s) acción(es) del applet, tras el cual el applet se termina forzosamente si no ha terminado, ayudando a prevenir que una acción de applet mal comportada o inesperadamente larga consuma recursos excesivos del dispositivo o quede colgada indefinidamente."
@@ -6782,12 +6782,12 @@
    "id": "b6_6.6_14",
    "subtopic": "6.6",
    "name": "EEM applets",
-   "question": "What does the EEM 'event track' detector allow an applet to be triggered by, leveraging the same object-tracking mechanism used elsewhere (such as with FHRP or PBR)?",
+   "question": "What can the EEM 'event track' detector trigger on, reusing the same object-tracking mechanism as HSRP or PBR?",
    "options": {
-    "A": "Configuring 'event track' on an EEM applet requires that tracked object to be dedicated exclusively to that applet going forward, meaning the same tracked object number can no longer also be referenced by an HSRP group or PBR route-map at the same time without the EEM applet's own tracking taking precedence and overriding the other feature's use of it, so administrators are expected to reserve a separate range of tracked object numbers specifically for EEM use to avoid this kind of conflict",
-    "B": "'event track' is a completely separate object-tracking mechanism implemented independently within EEM itself, and cannot actually reference or reuse the same tracked object numbers already configured for use by features like HSRP or PBR elsewhere on the device",
-    "C": "'event track' triggers an applet based on a change in the state of a tracked object (such as an IP SLA-monitored path becoming unreachable, or an interface's tracked line-protocol state changing), allowing EEM automation to react to the exact same kind of condition changes that features like HSRP interface tracking or PBR route tracking also rely on, reusing that common tracking infrastructure rather than needing a completely separate, EEM-specific mechanism to detect the same kind of condition",
-    "D": "The 'event track' detector can only ever be used in combination with EIGRP-specific events, and is technically incompatible with being associated with any IP SLA-based or interface-based tracked object"
+    "A": "A tracked object used by 'event track' can no longer be referenced by HSRP or PBR at the same time",
+    "B": "'event track' is a separate mechanism that can't reuse tracked objects from HSRP or PBR",
+    "C": "A change in a tracked object's state, such as an IP SLA path becoming unreachable, reusing the same tracking infrastructure as HSRP/PBR",
+    "D": "It can only be used with EIGRP-specific events"
    },
    "correct": "C",
    "explanation_es": "'event track' dispara un applet basándose en un cambio de estado de un objeto rastreado (como un camino monitoreado por IP SLA que se vuelve inalcanzable, o el estado de line-protocol rastreado de una interfaz cambiando), permitiendo que la automatización de EEM reaccione al mismo tipo de cambios de condición de los que también dependen funciones como el tracking de interfaz de HSRP o el tracking de ruta de PBR, reutilizando esa infraestructura de tracking común en lugar de necesitar un mecanismo completamente separado y específico de EEM para detectar el mismo tipo de condición."
@@ -6796,12 +6796,12 @@
    "id": "b6_6.7_09",
    "subtopic": "6.7",
    "name": "Orquestación agent vs agentless",
-   "question": "What is the purpose of an Ansible 'playbook', as the primary unit of automation logic in the tool?",
+   "question": "What's the purpose of an Ansible 'playbook'?",
    "options": {
-    "A": "Playbooks in Ansible must always be written in a compiled programming language like C++ or Java, rather than in the YAML-based syntax the tool actually uses",
-    "B": "A playbook is a YAML-formatted file that defines an ordered set of tasks to be executed against a specified set of hosts, describing the desired configuration/state to achieve, serving as the declarative or procedural definition of 'what should happen' that Ansible then executes against the targeted managed nodes",
-    "C": "A playbook's defined tasks are compiled into a fixed, unchangeable sequence the very first time that playbook is executed against any host, meaning any later edit made to the playbook's own YAML file will not actually take effect on subsequent runs unless the entire Ansible installation itself is reinstalled",
-    "D": "An Ansible playbook can only ever define a single individual task, making it not supported to define more than one ordered task within the same playbook file"
+    "A": "Playbooks must be written in a compiled language like C++ or Java",
+    "B": "A YAML file defining an ordered set of tasks to run against a set of hosts, describing the desired state",
+    "C": "Tasks are compiled into a fixed, unchangeable sequence the very first time the playbook runs against any host, with later edits ignored",
+    "D": "A playbook can only define a single task"
    },
    "correct": "B",
    "explanation_es": "Un playbook es un archivo con formato YAML que define un conjunto ordenado de tareas a ejecutar contra un conjunto especificado de hosts, describiendo la configuración/estado deseado a lograr, sirviendo como la definición declarativa o procedimental de 'qué debería pasar' que Ansible luego ejecuta contra los nodos gestionados apuntados."
@@ -6810,12 +6810,12 @@
    "id": "b6_6.8_06",
    "subtopic": "6.8",
    "name": "Métodos HTTP",
-   "question": "What does it mean for an HTTP method to be 'safe', as HTTP specifications describe GET and HEAD as being?",
+   "question": "What does it mean for an HTTP method to be 'safe', as GET and HEAD are described?",
    "options": {
-    "A": "A 'safe' method is one whose request must be authenticated before the server will process it, while an 'unsafe' method is one a server will generally process without requiring prior authentication, since access-control documentation sometimes uses 'safe' to describe a request that already passed an authentication check rather than HTTP's own formal 'safe method' term defined specifically for GET and HEAD.",
-    "B": "A 'safe' method is not expected to cause any meaningful change in the state of the server/resource — it's intended purely for retrieval, meaning a client (or an intermediary like a cache or proxy) can generally assume that simply making a safe request has no meaningful side effect on the server, unlike a method such as POST or DELETE which is expected to change server state as its normal, intended purpose",
-    "C": "Every single HTTP method, including POST, PUT, and DELETE, is considered 'safe' according to the HTTP specification, with GET and HEAD holding no special distinction from any other method in this regard",
-    "D": "A 'safe' HTTP method is one whose request and response are automatically compressed by the server to reduce bandwidth, a labeling convention separate from whether the method is expected to modify server-side resource state."
+    "A": "A 'safe' method is one whose request must be authenticated before the server will process it, unlike an 'unsafe' method",
+    "B": "It's not expected to change server state — it's for retrieval only, unlike POST or DELETE",
+    "C": "Every method, including POST and DELETE, is considered 'safe'",
+    "D": "A 'safe' method has its request/response automatically compressed"
    },
    "correct": "B",
    "explanation_es": "No se espera que un método 'safe' cause ningún cambio significativo en el estado del servidor/recurso — está pensado puramente para recuperación, lo que significa que un cliente (o un intermediario como un caché o proxy) generalmente puede asumir que simplemente hacer una solicitud safe no tiene efecto secundario significativo en el servidor, a diferencia de un método como POST o DELETE, del cual se espera que cambie el estado del servidor como su propósito normal y pretendido."
@@ -6824,12 +6824,12 @@
    "id": "b6_6.8_10",
    "subtopic": "6.8",
    "name": "Métodos HTTP",
-   "question": "What is the general REST API design convention regarding which HTTP method maps to each CRUD (Create, Read, Update, Delete) operation?",
+   "question": "What's the general convention mapping HTTP methods to CRUD operations?",
    "options": {
-    "A": "PATCH is conventionally used for the Create operation, POST is reserved specifically for partial updates, and PUT conventionally handles the Delete operation instead of a full resource replacement.",
-    "B": "The conventional mapping uses GET for all four CRUD operations (Create, Read, Update, and Delete), with no distinction made between the different HTTP methods for any of those four distinct actions",
-    "C": "A common convention maps Create to POST, Read to GET, Update to PUT (full replace) or PATCH (partial update), and Delete to DELETE — providing a widely recognized, predictable pattern that helps API consumers infer the general purpose of an operation from its HTTP method alone, even before reading detailed documentation for a specific new endpoint",
-    "D": "There is no common convention mapping HTTP methods to CRUD operations; each individual API is assumed to always use a completely arbitrary, unpredictable, and non-standardized mapping between HTTP methods and CRUD actions with zero cross-API consistency, since the HTTP specification itself is claimed to define GET as the only method any compliant server may expose for a CRUD-capable resource"
+    "A": "PATCH for Create, POST for partial updates, PUT for Delete",
+    "B": "GET maps to all four CRUD operations",
+    "C": "Create→POST, Read→GET, Update→PUT/PATCH, Delete→DELETE",
+    "D": "There's no common convention; each API uses an arbitrary mapping"
    },
    "correct": "C",
    "explanation_es": "Una convención común mapea Create a POST, Read a GET, Update a PUT (reemplazo completo) o PATCH (actualización parcial), y Delete a DELETE — dando un patrón ampliamente reconocido y predecible que ayuda a los consumidores de la API a inferir el propósito general de una operación solo a partir de su método HTTP, incluso antes de leer documentación detallada de un endpoint nuevo específico."
@@ -6838,12 +6838,12 @@
    "id": "b6_6.8_16",
    "subtopic": "6.8",
    "name": "Métodos HTTP",
-   "question": "What does the term 'method not allowed' (associated with the HTTP 405 status code) indicate, and how does it relate to a resource that does exist but doesn't support the specific method that was attempted?",
+   "question": "What does HTTP 405 'Method Not Allowed' indicate about a resource that exists but doesn't support the attempted method?",
    "options": {
-    "A": "A 405 status code indicates that the request's Content-Type header didn't match a format the server accepts, rather than signaling anything about which specific HTTP method was used.",
-    "B": "A 405 response indicates the request succeeded completely with no issue, functioning identically in meaning to a 200 OK response rather than signaling any kind of method-related error condition",
-    "C": "A 405 response indicates that the targeted resource does exist and is reachable, but the specific HTTP method used in the request (such as attempting a DELETE on a resource that only supports GET and PUT) is not supported for that resource, which is a more specific and informative signal than a generic 404 (which would suggest the resource itself doesn't exist at all)",
-    "D": "A 405 status code indicates the resource exists but requires authentication before any method can be attempted against it, typically accompanied by a WWW-Authenticate header specifying the expected credential scheme — a meaning more specifically associated with 401 Unauthorized than with 405, since both codes can appear when a client's initial request lacks valid credentials for a protected resource."
+    "A": "The Content-Type header didn't match an accepted format",
+    "B": "The request succeeded, same as 200 OK",
+    "C": "The resource exists and is reachable, but the specific method used isn't supported for it — more specific than a generic 404",
+    "D": "The resource requires authentication before any method can be attempted"
    },
    "correct": "C",
    "explanation_es": "Una respuesta 405 indica que el recurso destino existe y es alcanzable, pero el método HTTP específico usado en la solicitud (como intentar un DELETE en un recurso que solo soporta GET y PUT) no está soportado para ese recurso, lo cual es una señal más específica e informativa que un 404 genérico (que sugeriría que el propio recurso no existe en absoluto)."
@@ -6852,12 +6852,12 @@
    "id": "b6_6.9_13",
    "subtopic": "6.9",
    "name": "RESTCONF",
-   "question": "What does RESTCONF's reliance on standard HTTP status codes (rather than a completely custom, RESTCONF-specific error-reporting scheme) provide as a practical benefit for client development?",
+   "question": "What benefit does RESTCONF's reliance on standard HTTP status codes provide for client development?",
    "options": {
-    "A": "Since RESTCONF reuses the same well-understood HTTP status code semantics that developers are already broadly familiar with from working with countless other REST APIs (like 404 for not found, 401 for unauthorized, 400/422 for invalid input), a client library or developer doesn't need to learn an entirely new, RESTCONF-specific error-code scheme from scratch, easing the general learning curve and enabling reuse of existing HTTP-handling logic/tooling",
-    "B": "RESTCONF actually uses a completely custom, proprietary error-code numbering scheme entirely unrelated to standard HTTP status codes, making this description of it reusing standard HTTP codes fundamentally inaccurate",
-    "C": "Standard HTTP status codes provide no practical benefit for RESTCONF client development, since every developer would need to learn an entirely new set of codes regardless of whether RESTCONF reused standard HTTP codes or invented its own custom scheme",
-    "D": "RESTCONF's use of HTTP status codes is limited to the 2xx success range, with the protocol relying on some other undocumented mechanism entirely separate from HTTP status codes to report any kind of error condition"
+    "A": "Developers already know these codes from other REST APIs, easing the learning curve and enabling reuse of existing HTTP tooling",
+    "B": "RESTCONF actually uses a completely custom, proprietary error-code numbering scheme entirely unrelated to standard HTTP status codes",
+    "C": "Standard HTTP codes provide no practical benefit over a custom scheme",
+    "D": "RESTCONF only uses the 2xx range for errors"
    },
    "correct": "A",
    "explanation_es": "Como RESTCONF reutiliza la misma semántica de códigos de estado HTTP bien entendida con la que los desarrolladores ya están ampliamente familiarizados por trabajar con incontables otras APIs REST (como 404 para no encontrado, 401 para no autorizado, 400/422 para entrada inválida), una librería cliente o un desarrollador no necesita aprender un esquema de códigos de error completamente nuevo y específico de RESTCONF desde cero, facilitando la curva de aprendizaje general y permitiendo reutilizar lógica/herramientas de manejo de HTTP ya existentes."
