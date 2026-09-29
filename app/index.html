@@ -325,7 +325,7 @@
   }
   .gauge {
     font-family: "IBM Plex Mono", monospace;
-    font-size: 2.6rem;
+    font-size: 1.5rem;
     font-weight: 600;
     font-variant-numeric: tabular-nums;
   }
@@ -336,7 +336,7 @@
   }
   .gauge-secondary-pct {
     font-family: "IBM Plex Mono", monospace;
-    font-size: 1.5rem;
+    font-size: 2.6rem;
     font-weight: 600;
     font-variant-numeric: tabular-nums;
   }
@@ -389,7 +389,7 @@
   .domain-pct {
     font-family: "IBM Plex Mono", monospace;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 0.8rem;
     min-width: 58px;
     text-align: right;
   }
@@ -406,6 +406,10 @@
   .pill.bad { background: var(--bad-soft); color: var(--bad); }
   .pill.flat { background: var(--surface-2); color: var(--text-dim); }
   .pill.info { background: var(--info-soft); color: var(--info); }
+  /* Precisión (accuracy) reads as the more prominent number wherever it's
+     shown alongside a "respondidas"/coverage figure, per Cris's preference
+     that coverage never look more important than accuracy. */
+  .pill.precision { font-size: 0.92rem; font-weight: 700; padding: 3px 10px; }
 
   .domain-bar-track {
     height: 6px; border-radius: 4px; background: var(--surface-2);
@@ -15771,11 +15775,18 @@
     });
     state.hiddenIds = hidden;
     Object.keys(SUBTOPIC_META).forEach(function (s) { SUBTOPIC_META[s].count = 0; });
+    // Count active questions directly off ALL_QUESTIONS (not
+    // ALL_QUESTIONS.length - hidden.length) — `hidden` can include ids rated
+    // 1-2 stars for questions since removed from the bank entirely, and
+    // subtracting those "ghost" ids a second time here would understate the
+    // active total that every other count on this page already uses.
+    var activeCount = 0;
     ALL_QUESTIONS.forEach(function (q) {
       if (hidden[q.id]) return;
       SUBTOPIC_META[q.subtopic].count++;
+      activeCount++;
     });
-    document.getElementById("bank-total-foot").textContent = ALL_QUESTIONS.length - Object.keys(hidden).length;
+    document.getElementById("bank-total-foot").textContent = activeCount;
   }
 
   var db = null;
@@ -15908,7 +15919,14 @@
   function subtopicStats(subtopic) {
     var meta = SUBTOPIC_META[subtopic];
     var bankTotal = meta ? meta.count : 0;
-    var list = state.attempts.filter(function (a) { return a.subtopic === subtopic; });
+    // Ghost (since-deleted) and ratings-hidden questions are excluded up
+    // front, so attemptsCount/correctAttempts (precisión) are scoped to the
+    // same active-bank set as answered/correct (cobertura) below — otherwise
+    // stale attempts on questions that no longer exist skew accuracy without
+    // affecting coverage.
+    var list = state.attempts.filter(function (a) {
+      return a.subtopic === subtopic && VALID_IDS[a.questionId] && !state.hiddenIds[a.questionId];
+    });
     var masteredIds = {};
     var answeredIds = {};
     var lastTs = 0;
@@ -15916,8 +15934,6 @@
     list.forEach(function (a) {
       if (a.ts > lastTs) lastTs = a.ts;
       correctAttempts += a.correct ? 1 : 0;
-      if (!VALID_IDS[a.questionId]) return; // question since deleted from the bank
-      if (state.hiddenIds[a.questionId]) return; // question hidden by a 1-2 star rating
       answeredIds[a.questionId] = true;
       if (a.correct) { masteredIds[a.questionId] = true; }
     });
@@ -15966,14 +15982,17 @@
     return sum;
   }
 
-  // Global accuracy across every attempt ever recorded (not weighted by
-  // domain exam weight, unlike overallScore): correct answers / answers
-  // given so far. null when nothing has been answered yet.
+  // Global accuracy across every attempt still relevant today (not weighted
+  // by domain exam weight, unlike overallScore): correct answers / answers
+  // given so far, scoped to the same active-bank set as coverage (ghost and
+  // ratings-hidden questions excluded). null when nothing has been answered
+  // yet.
   function overallAnsweredScore() {
-    var total = state.attempts.length;
+    var relevant = state.attempts.filter(function (a) { return VALID_IDS[a.questionId] && !state.hiddenIds[a.questionId]; });
+    var total = relevant.length;
     if (!total) return null;
     var correct = 0;
-    state.attempts.forEach(function (a) { if (a.correct) correct++; });
+    relevant.forEach(function (a) { if (a.correct) correct++; });
     return { pct: 100 * correct / total, correct: correct, total: total };
   }
 
@@ -16570,7 +16589,7 @@
           '<span class="frac" title="correctas/respondidas/total del banco">' + w.correct + "/" + w.answered + "/" + w.total + '</span>' +
           '<span class="pill flat" title="Preguntas no respondidas o falladas la última vez, de este subtema">' + pendCount + ' pend.</span>' +
           '<span class="pill info" title="Preguntas respondidas al menos una vez, sobre el total del banco para este subtema">' + covLabel + '</span>' +
-          '<span class="pill ' + pctClass(ansPct) + '" title="Precisión sobre las preguntas contestadas (' + w.correctAttempts + '/' + w.attemptsCount + ')">' + ansLabel + '</span>' +
+          '<span class="pill precision ' + pctClass(ansPct) + '" title="Precisión sobre las preguntas contestadas (' + w.correctAttempts + '/' + w.attemptsCount + ')">' + ansLabel + '</span>' +
         '</div>';
       }).join("");
 
@@ -16582,7 +16601,7 @@
             '<span class="domain-weight">peso ' + meta.weight + '%</span>' +
             '<span class="frac" title="correctas/respondidas/total del banco">' + ds.correct + "/" + ds.answered + "/" + ds.total + '</span>' +
             '<span class="domain-pct" style="color:var(--info);" title="Preguntas respondidas al menos una vez, sobre el total del banco">' + (covPct === null ? "—" : covPct.toFixed(0) + "%") + '</span>' +
-            '<span class="pill ' + pctClass(domAnsPct) + '" title="Precisión sobre las preguntas contestadas (' + ds.correctAttempts + '/' + ds.attemptsCount + ')">' + (domAnsPct === null ? "—" : domAnsPct.toFixed(0) + "%") + '</span>' +
+            '<span class="pill precision ' + pctClass(domAnsPct) + '" title="Precisión sobre las preguntas contestadas (' + ds.correctAttempts + '/' + ds.attemptsCount + ')">' + (domAnsPct === null ? "—" : domAnsPct.toFixed(0) + "%") + '</span>' +
           '</div>' +
           '<div class="domain-bar-track"><div class="domain-bar-fill" style="width:' + (covPct === null ? 0 : Math.min(100, covPct)) + '%; background:var(--info);"></div></div>' +
           '<div class="domain-sub">banco: ' + ds.bankCount + ' preguntas &middot; ' + ds.attemptsCount + ' intentos registrados &middot; <span class="mono">%banco</span> = respondidas/total del banco, <span class="mono">%resp.</span> = precisión (acertadas/contestadas)</div>' +
@@ -16595,7 +16614,7 @@
     var bankNote = el(
       '<div class="panel" style="margin-top:16px;">' +
         '<h2 class="section-title">Cobertura del banco</h2>' +
-        '<div class="domain-sub" style="font-size:0.8rem;">' + ALL_QUESTIONS.length + ' preguntas totales &middot; cada dominio y subtema muestra dos porcentajes: ' +
+        '<div class="domain-sub" style="font-size:0.8rem;">' + activeQuestions().length + ' preguntas activas &middot; cada dominio y subtema muestra dos porcentajes: ' +
           '<b style="color:var(--info);">%banco</b> = preguntas respondidas alguna vez sobre el total que existe hoy para ese tema en el banco, y ' +
           '<b style="color:var(--text);">%resp.</b> = aciertos sobre el total de veces que has respondido preguntas de ese tema (precisión en tus intentos)</div>' +
       '</div>'

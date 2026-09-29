@@ -571,3 +571,27 @@ correctamente) y contra el JSON embebido. Banco: sigue en 1035
 preguntas. Con esto quedan completos los seis dominios del blueprint:
 todo el "banco propio (IA)" verboso fue reescrito para igualar el
 estilo directo de las preguntas basadas en fuentes reales.
+
+**Fix de contadores en la pestaña Progreso (2026-09-29):** Cris notó
+números inconsistentes — el pie de página decía "942 preguntas en el
+banco" mientras la propia pestaña Progreso sumaba 1026 y la nota de
+cobertura decía 1035. Causa raíz: `recomputeHidden()` restaba del total
+*todas* las preguntas alguna vez calificadas 1-2★ (93), incluyendo 84
+"fantasma" que ya habían sido eliminadas del banco en triages
+anteriores — restándolas de nuevo entendía el banco activo de menos.
+Corregido para contar directamente las preguntas activas (1026,
+coincide ahora en las tres partes). Bug relacionado: `subtopicStats()`
+y `overallAnsweredScore()` calculaban precisión (aciertos/contestadas)
+sobre *todos* los intentos históricos, incluyendo 207 de 959 intentos
+(~22%) sobre preguntas ya eliminadas del banco o de datos de prueba
+(`__test__`) — inconsistente con cobertura/dominio, que sí excluye esas
+preguntas fantasma. Ahora ambas métricas usan el mismo filtro
+(pregunta vigente y no oculta por rating). Efecto visible: precisión
+global bajó de 76.1% a 72.4% al remover intentos obsoletos/de prueba
+del cálculo — un número más realista, no un regreso. También: la
+pestaña ahora muestra el % de precisión visualmente más grande que el
+% de respondidas/cobertura en las tres vistas (general, dominio,
+subtema), a pedido de Cris. `index.html` (deploy GitHub Pages)
+sincronizado con `app/index.html` (antes solo se sincronizaba el JSON
+del banco vía `rebuild_html.py`, no cambios de JS/CSS). Verificado en
+navegador contra los datos reales de la Sheet de progreso.
