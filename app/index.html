@@ -15931,28 +15931,41 @@
     var answeredIds = {};
     var lastTs = 0;
     var correctAttempts = 0;
+    // Precisión is keyed on each question's MOST RECENT attempt, not every
+    // attempt ever made — otherwise a question you got wrong once, then
+    // learned and now always get right, permanently drags accuracy down
+    // even after it's fully mastered and has 0 pending. lastCorrectByQ
+    // tracks that latest correct/incorrect per question.
+    var lastTsByQ = {};
+    var lastCorrectByQ = {};
     list.forEach(function (a) {
       if (a.ts > lastTs) lastTs = a.ts;
       correctAttempts += a.correct ? 1 : 0;
       answeredIds[a.questionId] = true;
       if (a.correct) { masteredIds[a.questionId] = true; }
+      if (!(a.questionId in lastTsByQ) || a.ts >= lastTsByQ[a.questionId]) {
+        lastTsByQ[a.questionId] = a.ts;
+        lastCorrectByQ[a.questionId] = a.correct;
+      }
     });
+    var lastCorrectCount = Object.keys(lastCorrectByQ).filter(function (id) { return lastCorrectByQ[id]; }).length;
     return {
       correct: Object.keys(masteredIds).length,
       answered: Object.keys(answeredIds).length,
       total: bankTotal,
       attemptsCount: list.length,
       correctAttempts: correctAttempts,
+      lastCorrectCount: lastCorrectCount,
       lastTs: lastTs
     };
   }
 
   function domainStats(domain) {
     var subtopics = Object.keys(SUBTOPIC_META).filter(function (s) { return SUBTOPIC_META[s].domain === domain; });
-    var correct = 0, answered = 0, total = 0, attemptsCount = 0, correctAttempts = 0;
+    var correct = 0, answered = 0, total = 0, attemptsCount = 0, correctAttempts = 0, lastCorrectCount = 0;
     subtopics.forEach(function (s) {
       var w = subtopicStats(s);
-      correct += w.correct; answered += w.answered; total += w.total; attemptsCount += w.attemptsCount; correctAttempts += w.correctAttempts;
+      correct += w.correct; answered += w.answered; total += w.total; attemptsCount += w.attemptsCount; correctAttempts += w.correctAttempts; lastCorrectCount += w.lastCorrectCount;
     });
     return {
       correct: correct,
@@ -15960,10 +15973,14 @@
       total: total,
       pct: total ? (100 * correct / total) : null,
       answeredCoveragePct: total ? (100 * answered / total) : null,
-      answeredPct: attemptsCount ? (100 * correctAttempts / attemptsCount) : null,
+      // Precisión: of the questions you've answered, was your MOST RECENT
+      // attempt on each one correct? (not accuracy across every attempt
+      // ever made — see subtopicStats).
+      answeredPct: answered ? (100 * lastCorrectCount / answered) : null,
       bankCount: total,
       attemptsCount: attemptsCount,
       correctAttempts: correctAttempts,
+      lastCorrectCount: lastCorrectCount,
       subtopics: subtopics
     };
   }
@@ -15982,18 +15999,25 @@
     return sum;
   }
 
-  // Global accuracy across every attempt still relevant today (not weighted
-  // by domain exam weight, unlike overallScore): correct answers / answers
-  // given so far, scoped to the same active-bank set as coverage (ghost and
-  // ratings-hidden questions excluded). null when nothing has been answered
-  // yet.
+  // Global accuracy (not weighted by domain exam weight, unlike
+  // overallScore): of every question you've ever answered (active bank
+  // only — ghost and ratings-hidden questions excluded), was your most
+  // recent attempt on it correct? Same last-attempt-per-question logic as
+  // subtopicStats/domainStats, so this always matches their weighted sum.
+  // null when nothing has been answered yet.
   function overallAnsweredScore() {
     var relevant = state.attempts.filter(function (a) { return VALID_IDS[a.questionId] && !state.hiddenIds[a.questionId]; });
-    var total = relevant.length;
-    if (!total) return null;
-    var correct = 0;
-    relevant.forEach(function (a) { if (a.correct) correct++; });
-    return { pct: 100 * correct / total, correct: correct, total: total };
+    if (!relevant.length) return null;
+    var lastTsByQ = {}, lastCorrectByQ = {};
+    relevant.forEach(function (a) {
+      if (!(a.questionId in lastTsByQ) || a.ts >= lastTsByQ[a.questionId]) {
+        lastTsByQ[a.questionId] = a.ts;
+        lastCorrectByQ[a.questionId] = a.correct;
+      }
+    });
+    var ids = Object.keys(lastCorrectByQ);
+    var correct = ids.filter(function (id) { return lastCorrectByQ[id]; }).length;
+    return { pct: 100 * correct / ids.length, correct: correct, total: ids.length };
   }
 
   function subtopicCompare(a, b) {
@@ -16556,7 +16580,7 @@
           '<div class="gauge-sub frac" title="correctas/respondidas/total del banco">' + grandCorrect + "/" + grandAnswered + "/" + grandTotal + '</div>' +
         '</div>' +
         '<div class="gauge-bar-track"><div class="gauge-bar-fill" style="width:' + Math.min(100, score) + '%; background:' + pctColorVar(score) + ';"></div></div>' +
-        '<div class="gauge-secondary" title="Precisión: aciertos sobre preguntas contestadas">' +
+        '<div class="gauge-secondary" title="Precisión: % de preguntas contestadas cuya respuesta más reciente fue correcta">' +
           '<div class="gauge-secondary-pct" style="color:' + pctColorVar(ans ? ans.pct : null) + ';">' + (ans ? ans.pct.toFixed(1) + "%" : "—") + '</div>' +
           '<div class="gauge-sub">' + (ans ? "precisión &middot; " + ans.correct + "/" + ans.total : "precisión &middot; sin intentos aún") + '</div>' +
         '</div>' +
@@ -16579,7 +16603,7 @@
       var subRowsHtml = ds.subtopics.slice().sort(subtopicCompare).map(function (sub) {
         var w = subtopicStats(sub);
         var covSubPct = w.total ? (100 * w.answered / w.total) : null;
-        var ansPct = w.attemptsCount ? (100 * w.correctAttempts / w.attemptsCount) : null;
+        var ansPct = w.answered ? (100 * w.lastCorrectCount / w.answered) : null;
         var covLabel = covSubPct === null ? "—" : covSubPct.toFixed(0) + "%";
         var ansLabel = ansPct === null ? "—" : ansPct.toFixed(0) + "%";
         var pendCount = pendingCountFor(sub, lastResultsForProgress);
@@ -16589,7 +16613,7 @@
           '<span class="frac" title="correctas/respondidas/total del banco">' + w.correct + "/" + w.answered + "/" + w.total + '</span>' +
           '<span class="pill flat" title="Preguntas no respondidas o falladas la última vez, de este subtema">' + pendCount + ' pend.</span>' +
           '<span class="pill info" title="Preguntas respondidas al menos una vez, sobre el total del banco para este subtema">' + covLabel + '</span>' +
-          '<span class="pill precision ' + pctClass(ansPct) + '" title="Precisión sobre las preguntas contestadas (' + w.correctAttempts + '/' + w.attemptsCount + ')">' + ansLabel + '</span>' +
+          '<span class="pill precision ' + pctClass(ansPct) + '" title="Precisión: última respuesta correcta en (' + w.lastCorrectCount + '/' + w.answered + ') preguntas contestadas">' + ansLabel + '</span>' +
         '</div>';
       }).join("");
 
@@ -16601,10 +16625,10 @@
             '<span class="domain-weight">peso ' + meta.weight + '%</span>' +
             '<span class="frac" title="correctas/respondidas/total del banco">' + ds.correct + "/" + ds.answered + "/" + ds.total + '</span>' +
             '<span class="domain-pct" style="color:var(--info);" title="Preguntas respondidas al menos una vez, sobre el total del banco">' + (covPct === null ? "—" : covPct.toFixed(0) + "%") + '</span>' +
-            '<span class="pill precision ' + pctClass(domAnsPct) + '" title="Precisión sobre las preguntas contestadas (' + ds.correctAttempts + '/' + ds.attemptsCount + ')">' + (domAnsPct === null ? "—" : domAnsPct.toFixed(0) + "%") + '</span>' +
+            '<span class="pill precision ' + pctClass(domAnsPct) + '" title="Precisión: última respuesta correcta en (' + ds.lastCorrectCount + '/' + ds.answered + ') preguntas contestadas">' + (domAnsPct === null ? "—" : domAnsPct.toFixed(0) + "%") + '</span>' +
           '</div>' +
           '<div class="domain-bar-track"><div class="domain-bar-fill" style="width:' + (covPct === null ? 0 : Math.min(100, covPct)) + '%; background:var(--info);"></div></div>' +
-          '<div class="domain-sub">banco: ' + ds.bankCount + ' preguntas &middot; ' + ds.attemptsCount + ' intentos registrados &middot; <span class="mono">%banco</span> = respondidas/total del banco, <span class="mono">%resp.</span> = precisión (acertadas/contestadas)</div>' +
+          '<div class="domain-sub">banco: ' + ds.bankCount + ' preguntas &middot; ' + ds.attemptsCount + ' intentos registrados &middot; <span class="mono">%banco</span> = respondidas/total del banco, <span class="mono">%resp.</span> = precisión (última respuesta correcta/contestadas)</div>' +
         '</summary>' +
         '<div class="subtopic-list">' + subRowsHtml + '</div>';
       grid.appendChild(details);
@@ -16616,7 +16640,7 @@
         '<h2 class="section-title">Cobertura del banco</h2>' +
         '<div class="domain-sub" style="font-size:0.8rem;">' + activeQuestions().length + ' preguntas activas &middot; cada dominio y subtema muestra dos porcentajes: ' +
           '<b style="color:var(--info);">%banco</b> = preguntas respondidas alguna vez sobre el total que existe hoy para ese tema en el banco, y ' +
-          '<b style="color:var(--text);">%resp.</b> = aciertos sobre el total de veces que has respondido preguntas de ese tema (precisión en tus intentos)</div>' +
+          '<b style="color:var(--text);">%resp.</b> = de las preguntas de ese tema que respondiste, en cuántas tu intento más reciente fue correcto (precisión actual, no arrastra errores ya corregidos)</div>' +
       '</div>'
     );
     container.appendChild(bankNote);

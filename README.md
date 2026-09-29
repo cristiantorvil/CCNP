@@ -595,3 +595,22 @@ subtema), a pedido de Cris. `index.html` (deploy GitHub Pages)
 sincronizado con `app/index.html` (antes solo se sincronizaba el JSON
 del banco vía `rebuild_html.py`, no cambios de JS/CSS). Verificado en
 navegador contra los datos reales de la Sheet de progreso.
+
+**Precisión redefinida a "último intento", no historial completo
+(2026-09-29):** Cris reportó un caso concreto — subtema 3.1.a (Trunking
+802.1Q) mostraba 19/19/19 y 0 pendientes (dominado por completo) pero
+la precisión seguía en 90%, porque el cálculo anterior promediaba
+*todos* los intentos históricos (37/41), arrastrando para siempre 4
+errores ya corregidos hace semanas. Cambiado en `subtopicStats()`,
+`domainStats()` y `overallAnsweredScore()` (misma lógica en las tres,
+como pidió Cris) para que precisión mida, de las preguntas contestadas,
+en cuántas el intento *más reciente* fue correcto — así coincide
+conceptualmente con "pendientes" (que ya usaba esa misma noción de
+último intento) y una vez dominado un tema por completo, su precisión
+sube a 100% igual que su cobertura. Tooltips y el texto explicativo de
+"Cobertura del banco" actualizados para describir la nueva definición.
+Verificado con un reemplazo local de `localStorage` que reproduce el
+patrón real de 3.1.a (4 preguntas falladas una vez y luego acertadas),
+confirmando 100% donde antes daba 90% — no se pudo verificar contra la
+Sheet en vivo por rate-limiting temporal tras varias consultas seguidas
+durante el diagnóstico anterior.
